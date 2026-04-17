@@ -28,3 +28,5 @@ class ErrorCode(StrEnum):
     INVALID_COMPRESSION_REQUEST = "invalid_compression_request"
     INVALID_MEMORY_ENTRY = "invalid_memory_entry"
     INVALID_MEMORY_SELECTION = "invalid_memory_selection"
+    INVALID_SOURCE_ADAPTER_INPUT = "invalid_source_adapter_input"
+    UNSUPPORTED_DOCUMENT_CLASS = "unsupported_document_class"

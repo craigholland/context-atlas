@@ -75,6 +75,7 @@
     - codes should be stable once referenced by higher layers or tests
     - prefer semantic identifiers over incidental implementation wording
     - source-registration and retrieval-request failures should get stable codes here before adapters raise them
+    - filesystem adapter path/front-matter failures should also land here as stable source-adapter or document-class errors
 - `errors/exceptions.py`:
   - responsibility: defines domain exception classes built on stable codes and direct message constants
   - defines:
@@ -196,6 +197,7 @@
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
+- The current error/message surface now also covers filesystem source-adapter validation and unsupported document-class failures for the ontology-aware docs adapter.
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
 - The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
 - The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
@@ -205,6 +207,7 @@
 - `services/`: future orchestration code should consume `ContextPacket`, `ContextTrace`, `ContextBudget`, and related decision artifacts rather than inventing parallel packet state.
 - `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
 - `adapters/`: future adapter translation boundaries may log with domain `LogMessage` constants, but provider-specific payload wording must stay out of domain messages.
+- `adapters/`: filesystem document adapters may classify ontology meaning, but they should still surface that meaning through canonical source fields and domain-owned codes/messages.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 - `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
 - `services/`: service orchestration may now include retained memory entries in canonical packets, but service-layer filtering should still consume domain-owned packet and decision semantics rather than redefining them.

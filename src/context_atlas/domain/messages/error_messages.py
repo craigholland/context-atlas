@@ -28,6 +28,8 @@ class ErrorMessage:
     INVALID_COMPRESSION_REQUEST = "Invalid compression request: %s"
     INVALID_MEMORY_ENTRY = "Invalid memory entry: %s"
     INVALID_MEMORY_SELECTION = "Invalid memory selection: %s"
+    INVALID_SOURCE_ADAPTER_INPUT = "Invalid source adapter input: %s"
+    UNSUPPORTED_DOCUMENT_CLASS = "Unsupported document class: %s"
 
 
 __all__ = ["ErrorMessage"]

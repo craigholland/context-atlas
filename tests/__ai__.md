@@ -53,6 +53,8 @@
   - `MemoryPolicyTests`: verifies canonical memory entries, starter retention behavior, and trace visibility
 - `test_context_assembly_service.py`:
   - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
+- `test_filesystem_document_adapter.py`:
+  - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -136,6 +138,17 @@
   - invariants:
     - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
     - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
+- `test_filesystem_document_adapter.py`:
+  - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
+  - defines:
+    - `FilesystemDocumentSourceAdapterTests`: filesystem adapter test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove documentation ontology classes map into canonical source authority and durability fields
+    - tests should prove classified source provenance remains visible enough to influence downstream packet traces
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -145,6 +158,7 @@
 - The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
 - The suite now also covers canonical memory entries and starter retention policy behavior.
 - The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
+- The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
@@ -166,5 +180,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_lexical_retrieval, tests.test_memory_policy"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy"
 ```

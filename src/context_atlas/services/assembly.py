@@ -265,6 +265,8 @@ class ContextAssemblyService:
                     retrieved_candidate_count=len(gathered_candidates),
                     ranked_candidate_count=ranking_outcome.included_count,
                     selected_memory_count=len(selected_memory_entries),
+                    selected_candidates=ranking_outcome.ranked_candidates,
+                    selected_memory_entries=selected_memory_entries,
                     budget=active_budget,
                     ranking_outcome=ranking_outcome,
                     memory_outcome=memory_outcome,
@@ -588,6 +590,8 @@ class ContextAssemblyService:
         retrieved_candidate_count: int,
         ranked_candidate_count: int,
         selected_memory_count: int,
+        selected_candidates: tuple[ContextCandidate, ...],
+        selected_memory_entries: tuple[ContextMemoryEntry, ...],
         budget: ContextBudget,
         ranking_outcome: CandidateRankingOutcome,
         memory_outcome: MemorySelectionOutcome,
@@ -604,6 +608,29 @@ class ContextAssemblyService:
             "budget_total_tokens": str(budget.total_tokens),
             "budget_slot_count": str(len(budget.slots)),
             "compression_present": str(compression_outcome is not None).lower(),
+            "selected_source_classes": ",".join(
+                self._ordered_unique(
+                    candidate.source.source_class.value
+                    for candidate in selected_candidates
+                )
+            ),
+            "selected_source_collectors": ",".join(
+                self._ordered_unique(
+                    candidate.source.provenance.collector or ""
+                    for candidate in selected_candidates
+                )
+            ),
+            "selected_memory_source_classes": ",".join(
+                self._ordered_unique(
+                    entry.source.source_class.value for entry in selected_memory_entries
+                )
+            ),
+            "selected_memory_collectors": ",".join(
+                self._ordered_unique(
+                    entry.source.provenance.collector or ""
+                    for entry in selected_memory_entries
+                )
+            ),
         }
         metadata.update(
             self._prefix_metadata("ranking", ranking_outcome.trace.metadata)
@@ -672,6 +699,19 @@ class ContextAssemblyService:
         """Prefix trace-metadata keys so stage-level values remain unambiguous."""
 
         return {f"{prefix}_{key}": value for key, value in metadata.items()}
+
+    def _ordered_unique(self, values: Iterable[str]) -> tuple[str, ...]:
+        """Return non-empty values once in first-seen order."""
+
+        ordered: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            normalized = value.strip()
+            if not normalized or normalized in seen:
+                continue
+            ordered.append(normalized)
+            seen.add(normalized)
+        return tuple(ordered)
 
 
 __all__ = ["CandidateRetriever", "ContextAssemblyService"]
