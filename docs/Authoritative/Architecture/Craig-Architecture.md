@@ -79,6 +79,16 @@ Craig Architecture draws inspiration from a number of well-known architectural t
 
 However, it intentionally extends those ideas into the AI-assisted development era, where architecture must guide both humans and automated contributors.
 
+## A Note about Philosophy vs Implementation
+
+Craig Architecture is defined first and foremost as a philosophy. It expresses a set of beliefs about how software systems should be structured, how they should evolve over time, and how both human engineers and AI contributors should interact with that structure.
+
+This core document defines those beliefs and invariants at a high level. It is intentionally language-agnostic and avoids prescribing one universal set of tools, file layouts, or enforcement mechanisms. Its purpose is to establish a shared understanding of good architectural direction, not to dictate one mandatory implementation for every repository.
+
+The supplementary documents do not redefine the philosophy. They translate it into concrete working patterns such as AI collaboration guidance, local contract structure, language-specific implementation defaults, and example enforcement mechanisms. These are reference operationalizations of the philosophy, not the only valid ways it can be realized in practice.
+
+Different implementations are possible, but the underlying expectation remains consistent: if the philosophy matters, it should become explicit, inspectable, and at least partly enforceable within the codebase rather than remaining implicit intent.
+
 ## Non-Negotiable Invariant
 
 Craig Architecture allows provisional responsibility placement during exploration.
