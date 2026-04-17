@@ -44,7 +44,6 @@ This plan assumes the following conversion posture:
 - Existing Atlas governance surface:
   - repo-level [`.env.example`](../../.env.example)
   - [`src/context_atlas/domain/errors/`](../../src/context_atlas/domain/errors/)
-  - [`src/context_atlas/domain/events/`](../../src/context_atlas/domain/events/)
   - [`src/context_atlas/domain/messages/`](../../src/context_atlas/domain/messages/)
   - [`src/context_atlas/infrastructure/config/`](../../src/context_atlas/infrastructure/config/)
   - [`src/context_atlas/infrastructure/logging/`](../../src/context_atlas/infrastructure/logging/)
@@ -60,7 +59,7 @@ This plan assumes the following conversion posture:
 ### Cross-Cutting Rules For Every PR
 
 - Reusable error text should not be introduced inline. Add stable error codes and message templates under `domain/errors` and `domain/messages`.
-- Important lifecycle logging should not be introduced inline. Add stable event identifiers and log message templates under `domain/events` and `domain/messages`, then emit them through `infrastructure/logging`.
+- Important lifecycle logging should not be introduced inline. Add stable log message constants under `domain/messages`, keep their event names stable, and emit them through `infrastructure/logging`.
 - New runtime defaults should only become environment knobs when they are real supported settings. When that happens, update all of:
   - `infrastructure/config/settings.py`
   - `infrastructure/config/environment.py`
@@ -97,7 +96,7 @@ Create the first durable Atlas-native domain model for context assembly so later
 **Cross-cutting updates**
 
 - Extend `domain/errors` and `domain/messages` with validation and invariant errors for the new models.
-- Extend `domain/events` with starter assembly lifecycle events such as `ASSEMBLY_STARTED`, `ASSEMBLY_COMPLETED`, and `PACKET_CREATED`.
+- Extend `domain/messages` with starter assembly lifecycle messages such as `ASSEMBLY_STARTED`, `ASSEMBLY_COMPLETED`, and `PACKET_CREATED`, each carrying stable event names.
 - Update `src/context_atlas/domain/__ai__.md` and `src/context_atlas/__ai__.md` to reflect the new domain surface.
 
 **Verification**
@@ -124,7 +123,7 @@ Expand the existing config and logging foundation so subsequent functional PRs c
 
 - Add new settings parsing in `infrastructure/config/environment.py`.
 - Add corresponding keys to `.env.example`.
-- Add log event ids and templates for:
+- Add stable log message constants for:
   - candidate gathering
   - candidate ranking
   - budget allocation
@@ -135,7 +134,7 @@ Expand the existing config and logging foundation so subsequent functional PRs c
 **Verification**
 
 - Tests for new env parsing, defaults, and invalid values.
-- Tests for structured logging emission using stable event identifiers.
+- Tests for structured logging emission using direct `LogMessage` constants and stable event-name fields.
 
 ### PR 3: Source Registry And Lexical Retrieval Starter Slice
 
@@ -153,7 +152,7 @@ Rebuild the useful retrieval concepts from `context-engine` without importing it
 **Cross-cutting updates**
 
 - Add source-ingestion and retrieval-related error codes and messages.
-- Add retrieval lifecycle events and log templates.
+- Add retrieval lifecycle log message constants and event-name fields.
 - Create `src/context_atlas/adapters/__ai__.md` in this PR if `adapters/` gains real retrieval implementations.
 - Update `src/context_atlas/__ai__.md` with the new adapter boundary and allowed imports.
 
@@ -177,14 +176,14 @@ Replace the prototype's in-orchestrator reranking with explicit ranking and deci
 
 **Cross-cutting updates**
 
-- Extend `domain/events` and `domain/messages` for `CANDIDATES_RANKED`, `CANDIDATES_DEDUPED`, and `DECISIONS_RECORDED`.
+- Extend `domain/messages` for `CANDIDATES_RANKED`, `CANDIDATES_DEDUPED`, and `DECISIONS_RECORDED`, keeping their event names stable.
 - Add domain errors for invalid ranking inputs or malformed decision state.
 - Update `domain/__ai__.md`, `adapters/__ai__.md`, and any new `services/__ai__.md` if services start orchestrating ranking.
 
 **Verification**
 
 - Tests for deterministic ranking order, tie behavior, deduplication rules, and trace contents.
-- Logging assertions that emitted events use stable identifiers and avoid inline message text.
+- Logging assertions that emitted records use stable event-name fields and avoid inline message text.
 
 ### PR 5: Budget Allocation And Compression Policy Slice
 
@@ -206,7 +205,7 @@ Turn `context-engine`'s budget accounting and compression ideas into Atlas-nativ
 
 - Add new `.env.example` keys only if default budget/compression values are now actually runtime-configurable.
 - Extend config parsing and settings models to match.
-- Add budget and compression error codes, events, and messages.
+- Add budget and compression error codes plus direct message/logging constants.
 - Create `src/context_atlas/rendering/__ai__.md` if derived packet renderers land in this PR.
 
 **Verification**
@@ -237,7 +236,7 @@ Translate the useful memory concepts from `context-engine` into Atlas-native mem
   - short-term count
   - decay rate
   - dedup threshold
-- Extend errors, events, and message templates for memory selection and rejection.
+- Extend errors plus direct message/logging constants for memory selection and rejection.
 - Update `domain/__ai__.md`, `infrastructure/__ai__.md`, and `services/__ai__.md` if memory orchestration crosses those boundaries.
 
 **Verification**
@@ -262,7 +261,7 @@ Deliver the first real Atlas assembly path that integrates sources, ranking, bud
 
 - Create `src/context_atlas/services/__ai__.md` if it does not already exist.
 - Update package-root `__ai__.md` to reflect the now-real service orchestration boundary.
-- Expand logging events/messages for full assembly start, finish, and failure paths.
+- Expand direct log message constants for full assembly start, finish, and failure paths, keeping their event names stable.
 
 **Verification**
 
@@ -290,7 +289,7 @@ Add the first clearly Atlas-specific source adapter so the system proves it is m
 
 **Cross-cutting updates**
 
-- Add classification-related error codes, events, and messages.
+- Add classification-related error codes and direct message/logging constants.
 - Add adapter-specific config defaults only if a stable runtime need exists, such as a governed docs root.
 - Update `.env.example` only for real supported knobs, not speculative future controls.
 - Update `adapters/__ai__.md` with the new adapter boundary and responsibilities.
@@ -317,7 +316,7 @@ This order is deliberate:
 
 - It moves from canonical structures to policy implementations to orchestration.
 - It introduces runtime knobs only when there is real backing behavior.
-- It makes `domain/errors`, `domain/events`, `domain/messages`, `infrastructure/config`, and `infrastructure/logging` foundational rather than cleanup work.
+- It makes `domain/errors`, `domain/messages`, `infrastructure/config`, and `infrastructure/logging` foundational rather than cleanup work.
 - It uses local `__ai__.md` files as active contracts as soon as a folder becomes semantically meaningful.
 
 ## Risks And Unknowns
