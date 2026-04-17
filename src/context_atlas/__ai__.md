@@ -83,6 +83,7 @@
 
 ## Known Gaps / Future-State Notes
 - `services/`, `adapters/`, and `rendering/` currently exist as structural placeholders and do not yet carry first implementation slices.
+- `services/` and `rendering/` remain mostly structural placeholders, but `adapters/` now holds the first lexical retrieval slice.
 - The package root does not yet define a curated broader public API beyond `__version__`.
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
 
@@ -92,6 +93,7 @@
 - `infrastructure/`: runtime config and logging may depend on domain identifiers and message templates, but domain code must not depend on infrastructure implementation.
 - `infrastructure/`: supported `.env.example` keys should remain a thin mirror of real config loader behavior, not speculative future controls.
 - `services/`: future service orchestration should depend on domain semantics and inward-owned contracts rather than importing concrete adapter or infrastructure implementations.
+- `adapters/`: retrieval/source-ingestion implementations may translate external or stored source material into canonical `ContextSource`/`ContextCandidate` artifacts, but must keep that translation logic out of `domain/`.
 - `rendering/`: derived renderers may consume canonical packet/decision/trace artifacts, but must not become the source of canonical semantics.
 
 ## Verification Contract

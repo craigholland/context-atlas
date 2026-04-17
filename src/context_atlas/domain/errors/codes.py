@@ -20,3 +20,5 @@ class ErrorCode(StrEnum):
     INVALID_TRACE_IDENTIFIER = "invalid_trace_identifier"
     INVALID_PACKET_IDENTIFIER = "invalid_packet_identifier"
     EMPTY_PACKET_QUERY = "empty_packet_query"
+    DUPLICATE_SOURCE_IDENTIFIER = "duplicate_source_identifier"
+    INVALID_RETRIEVAL_REQUEST = "invalid_retrieval_request"

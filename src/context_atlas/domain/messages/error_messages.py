@@ -25,6 +25,8 @@ class ErrorMessageTemplate:
     INVALID_TRACE_IDENTIFIER = "Context trace identifier must not be empty."
     INVALID_PACKET_IDENTIFIER = "Context packet identifier must not be empty."
     EMPTY_PACKET_QUERY = "Context packet query must not be empty."
+    DUPLICATE_SOURCE_IDENTIFIER = "Context source '%s' is already registered."
+    INVALID_RETRIEVAL_REQUEST = "Invalid retrieval request: %s"
 
 
 _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
@@ -43,6 +45,8 @@ _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
         ErrorCode.INVALID_TRACE_IDENTIFIER: ErrorMessageTemplate.INVALID_TRACE_IDENTIFIER,
         ErrorCode.INVALID_PACKET_IDENTIFIER: ErrorMessageTemplate.INVALID_PACKET_IDENTIFIER,
         ErrorCode.EMPTY_PACKET_QUERY: ErrorMessageTemplate.EMPTY_PACKET_QUERY,
+        ErrorCode.DUPLICATE_SOURCE_IDENTIFIER: ErrorMessageTemplate.DUPLICATE_SOURCE_IDENTIFIER,
+        ErrorCode.INVALID_RETRIEVAL_REQUEST: ErrorMessageTemplate.INVALID_RETRIEVAL_REQUEST,
     }
 )
 
