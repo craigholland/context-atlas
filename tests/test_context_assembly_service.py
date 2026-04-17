@@ -274,6 +274,88 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertIn("compression", decision_source_ids)
         self.assertIn("memory-drop", decision_source_ids)
 
+    def test_short_term_memory_survives_tight_memory_slot_budget(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "memory": MemorySettings(
+                        short_term_count=1,
+                        decay_rate=0.0,
+                        dedup_threshold=0.75,
+                    )
+                }
+            ),
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-old",
+                source=ContextSource(
+                    source_id="memory-old-source",
+                    content=(
+                        "Older long-term guidance about authoritative packet assembly "
+                        "and memory governance that should remain eligible but lose "
+                        "to the short-term keep window when only one entry fits."
+                    ),
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=100.0,
+                importance=1.1,
+            ),
+            ContextMemoryEntry(
+                entry_id="memory-recent",
+                source=ContextSource(
+                    source_id="memory-recent-source",
+                    content="Recent keep note.",
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=149.0,
+                importance=0.7,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=128,
+                slots=(
+                    ContextBudgetSlot(
+                        "memory",
+                        token_limit=4,
+                        mode=ContextBudgetSlotMode.FIXED,
+                    ),
+                    ContextBudgetSlot(
+                        "documents",
+                        token_limit=128,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+            now_epoch_seconds=150.0,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in packet.selected_memory_entries),
+            ("memory-recent",),
+        )
+        memory_old_decisions = [
+            decision
+            for decision in packet.trace.decisions
+            if decision.source_id == "memory-old"
+        ]
+        self.assertTrue(memory_old_decisions)
+        self.assertTrue(
+            any(
+                "out_of_budget"
+                in tuple(reason.value for reason in decision.reason_codes)
+                for decision in memory_old_decisions
+            )
+        )
+
     def test_service_uses_direct_log_message_constants(self) -> None:
         self.assertEqual(
             LogMessage.ASSEMBLY_FAILED,
