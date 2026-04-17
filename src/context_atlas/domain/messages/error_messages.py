@@ -15,6 +15,16 @@ class ErrorMessageTemplate:
     DOCUMENT_NO_CONTENT = "Document '%s' has empty content."
     INVALID_CONFIGURATION = "Invalid configuration: %s"
     MISSING_REQUIRED_SETTING = "Required setting '%s' is missing."
+    EMPTY_SOURCE_IDENTIFIER = "Context source identifier must not be empty."
+    EMPTY_SOURCE_CONTENT = "Context source '%s' has empty content."
+    INVALID_CANDIDATE_STATE = "Invalid context candidate state: %s"
+    INVALID_BUDGET_TOTAL = "Invalid context budget total: %s"
+    INVALID_BUDGET_SLOT = "Invalid context budget slot '%s': %s"
+    DUPLICATE_BUDGET_SLOT_NAME = "Context budget slot '%s' is defined more than once."
+    INVALID_ASSEMBLY_DECISION = "Invalid context assembly decision: %s"
+    INVALID_TRACE_IDENTIFIER = "Context trace identifier must not be empty."
+    INVALID_PACKET_IDENTIFIER = "Context packet identifier must not be empty."
+    EMPTY_PACKET_QUERY = "Context packet query must not be empty."
 
 
 _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
@@ -23,6 +33,16 @@ _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
         ErrorCode.DOCUMENT_NO_CONTENT: ErrorMessageTemplate.DOCUMENT_NO_CONTENT,
         ErrorCode.INVALID_CONFIGURATION: ErrorMessageTemplate.INVALID_CONFIGURATION,
         ErrorCode.MISSING_REQUIRED_SETTING: ErrorMessageTemplate.MISSING_REQUIRED_SETTING,
+        ErrorCode.EMPTY_SOURCE_IDENTIFIER: ErrorMessageTemplate.EMPTY_SOURCE_IDENTIFIER,
+        ErrorCode.EMPTY_SOURCE_CONTENT: ErrorMessageTemplate.EMPTY_SOURCE_CONTENT,
+        ErrorCode.INVALID_CANDIDATE_STATE: ErrorMessageTemplate.INVALID_CANDIDATE_STATE,
+        ErrorCode.INVALID_BUDGET_TOTAL: ErrorMessageTemplate.INVALID_BUDGET_TOTAL,
+        ErrorCode.INVALID_BUDGET_SLOT: ErrorMessageTemplate.INVALID_BUDGET_SLOT,
+        ErrorCode.DUPLICATE_BUDGET_SLOT_NAME: ErrorMessageTemplate.DUPLICATE_BUDGET_SLOT_NAME,
+        ErrorCode.INVALID_ASSEMBLY_DECISION: ErrorMessageTemplate.INVALID_ASSEMBLY_DECISION,
+        ErrorCode.INVALID_TRACE_IDENTIFIER: ErrorMessageTemplate.INVALID_TRACE_IDENTIFIER,
+        ErrorCode.INVALID_PACKET_IDENTIFIER: ErrorMessageTemplate.INVALID_PACKET_IDENTIFIER,
+        ErrorCode.EMPTY_PACKET_QUERY: ErrorMessageTemplate.EMPTY_PACKET_QUERY,
     }
 )
 

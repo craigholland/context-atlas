@@ -46,7 +46,7 @@
 - `__init__.py`:
   - `__version__`: package version marker for the standalone library namespace
 - `domain/`:
-  - semantic core for error codes, log events, messages, and future canonical models
+  - semantic core for error codes, log events, messages, and canonical domain artifacts
 - `infrastructure/`:
   - runtime configuration and logging implementation details for the current bootstrap
 
@@ -61,7 +61,7 @@
     - keep the package root lightweight
     - do not turn `__init__.py` into a service locator or broad re-export barrel
 - `domain/`:
-  - responsibility: holds semantic core contracts and future canonical models
+  - responsibility: holds semantic core contracts and canonical domain artifacts
   - used_by:
     - `services/`
     - `infrastructure/`
@@ -69,6 +69,7 @@
   - invariants:
     - inward-most project layer
     - may remain small early, but must stay dependency-clean
+    - canonical packet, budget, source, decision, and trace artifacts should live here rather than in outer layers
 - `infrastructure/`:
   - responsibility: holds runtime configuration and logging implementation details
   - used_by:
@@ -83,7 +84,8 @@
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
 
 ## Cross-Folder Contracts
-- `domain/`: semantic codes, events, and message templates defined there are stable contracts for higher layers and must not import outward.
+- `domain/`: semantic codes, events, message templates, and canonical domain artifacts defined there are stable contracts for higher layers and must not import outward.
+- `domain/`: canonical source, candidate, budget, packet, and trace artifacts should be consumed inward-out, not redefined in `services/` or `rendering/`.
 - `infrastructure/`: runtime config and logging may depend on domain identifiers and message templates, but domain code must not depend on infrastructure implementation.
 - `services/`: future service orchestration should depend on domain semantics and inward-owned contracts rather than importing concrete adapter or infrastructure implementations.
 - `rendering/`: derived renderers may consume canonical packet/decision/trace artifacts, but must not become the source of canonical semantics.
