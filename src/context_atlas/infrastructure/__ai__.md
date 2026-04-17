@@ -22,6 +22,7 @@
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
 - Demonstrates how infrastructure may depend on domain identifiers and templates while preserving inward dependency direction.
 - Carries the first supported runtime defaults for early assembly behavior and the structured observability helpers that later services will reuse.
+- Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 
 ## Architectural Rules
 - This folder is an outer layer and may depend on `context_atlas.domain`, but domain code must never import its concrete implementations.
@@ -45,7 +46,7 @@
   - `ContextAtlasSettings`: top-level runtime settings model
   - `LoggingSettings`: logging configuration model
   - `AssemblySettings`: runtime defaults for early assembly behavior
-  - `CompressionStrategy`: supported compression-strategy names for runtime defaults
+  - `CompressionStrategy`: domain-owned compression-strategy names re-exported for runtime settings
   - `load_settings_from_env`: environment-backed settings loader
 - `logging`:
   - `configure_logger`: package logger setup helper
@@ -59,11 +60,11 @@
   - defines:
     - `LoggingSettings`: logger configuration model
     - `AssemblySettings`: default assembly-budget/retrieval/compression settings
-    - `CompressionStrategy`: supported starter compression strategy names
     - `ContextAtlasSettings`: top-level infrastructure settings container
   - invariants:
     - keep settings focused on runtime/config concerns
     - do not move domain policy toggles here without an explicit architectural decision
+    - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
 - `config/environment.py`:
   - responsibility: loads settings from environment variables
   - defines:
@@ -103,6 +104,7 @@
 - The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain event ids.
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
+- Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors, events, and message templates, but must never require domain code to import infrastructure implementation modules.

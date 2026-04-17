@@ -3,18 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import StrEnum
 
 from ...domain.errors import ConfigurationError, ErrorCode
 from ...domain.events import LogEvent
-
-
-class CompressionStrategy(StrEnum):
-    """Supported starter compression strategies for runtime defaults."""
-
-    TRUNCATE = "truncate"
-    SENTENCE = "sentence"
-    EXTRACTIVE = "extractive"
+from ...domain.models import CompressionStrategy
 
 
 @dataclass(frozen=True, slots=True)

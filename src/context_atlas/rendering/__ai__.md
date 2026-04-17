@@ -1,0 +1,71 @@
+# __ai__.md - Folder Summary
+
+## Last Verified (CI)
+- commit: 00f5ed5518d18fc1d03c8394e95eef41bab0c31f
+- timestamp_utc: 2026-04-17T19:51:13Z
+- verified_by: local
+- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
+
+## Scope
+- folder: src/context_atlas/rendering
+- included:
+  - "__init__.py"
+  - "*.py"
+- excluded:
+  - "__pycache__/**"
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+
+## Purpose
+- Holds derived output renderers for Context Atlas artifacts.
+- Provides the first minimal packet renderer without turning prompt-ready text into the canonical storage model.
+
+## Architectural Rules
+- Rendering may depend on `context_atlas.domain`, but canonical packet, budget, decision, and compression semantics must remain defined there.
+- Renderers should be pure formatting/derivation code, not hidden orchestration or policy engines.
+
+## Allowed Dependencies
+- may depend on:
+  - Python standard library
+  - `context_atlas.domain`
+  - sibling modules within `context_atlas.rendering`
+- must not depend on:
+  - `context_atlas.adapters`
+  - `context_atlas.infrastructure`
+  - `context_atlas.services`
+
+## Public API / Key Exports
+- `render_packet_context`:
+  - derived text renderer for canonical packets
+
+## File Index
+- `__init__.py`:
+  - responsibility: exposes the small rendering surface
+- `context.py`:
+  - responsibility: derives renderable text from canonical packet artifacts
+  - invariants:
+    - prefer structured compression results when available
+    - do not mutate packet state during rendering
+
+## Known Gaps / Future-State Notes
+- Rendering is intentionally minimal until the assembly service lands.
+
+## Cross-Folder Contracts
+- `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
+
+## Verification Contract
+```yaml
+steps:
+  - name: compile_rendering
+    run: |
+      py -3 -m compileall src/context_atlas/rendering
+
+  - name: unit_tests
+    run: |
+      py -3 -m pytest tests/test_budget_and_compression.py
+
+  - name: import_sanity
+    run: |
+      $env:PYTHONPATH='src'
+      py -3 -c "from context_atlas.rendering import render_packet_context"
+```
