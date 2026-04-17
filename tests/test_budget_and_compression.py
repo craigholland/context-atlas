@@ -70,16 +70,16 @@ class BudgetAndCompressionTests(unittest.TestCase):
         budget = ContextBudget(
             total_tokens=1000,
             slots=(
-                ContextBudgetSlot("system", token_limit=200),
-                ContextBudgetSlot("history", token_limit=250),
+                ContextBudgetSlot(slot_name="system", token_limit=200),
+                ContextBudgetSlot(slot_name="history", token_limit=250),
                 ContextBudgetSlot(
-                    "memory",
+                    slot_name="memory",
                     token_limit=400,
                     mode=ContextBudgetSlotMode.ELASTIC,
                     priority=5,
                 ),
                 ContextBudgetSlot(
-                    "docs",
+                    slot_name="docs",
                     token_limit=600,
                     mode=ContextBudgetSlotMode.ELASTIC,
                     priority=10,
@@ -115,7 +115,8 @@ class BudgetAndCompressionTests(unittest.TestCase):
 
     def test_budget_allocation_rejects_unknown_slot_requests(self) -> None:
         budget = ContextBudget(
-            total_tokens=128, slots=(ContextBudgetSlot("docs", 128),)
+            total_tokens=128,
+            slots=(ContextBudgetSlot(slot_name="docs", token_limit=128),),
         )
 
         with self.assertRaises(ContextAtlasError) as context:

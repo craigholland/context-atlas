@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Mapping
+
+from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from .base import CanonicalDomainModel
 
 
 class ContextSourceClass(StrEnum):
@@ -44,14 +44,7 @@ class ContextSourceDurability(StrEnum):
     ARCHIVAL = "archival"
 
 
-def _freeze_mapping(raw_mapping: Mapping[str, str]) -> Mapping[str, str]:
-    """Return an immutable copy of a string-keyed mapping."""
-
-    return MappingProxyType(dict(raw_mapping))
-
-
-@dataclass(frozen=True, slots=True)
-class ContextSourceProvenance:
+class ContextSourceProvenance(CanonicalDomainModel):
     """Describe how a source entered the system."""
 
     source_uri: str | None = None
@@ -59,14 +52,27 @@ class ContextSourceProvenance:
     version: str | None = None
     captured_at_utc: str | None = None
     checksum: str | None = None
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+    def model_post_init(self, __context: object) -> None:
+        if self.source_uri is not None:
+            object.__setattr__(self, "source_uri", self.source_uri.strip() or None)
+        if self.collector is not None:
+            object.__setattr__(self, "collector", self.collector.strip() or None)
+        if self.version is not None:
+            object.__setattr__(self, "version", self.version.strip() or None)
+        if self.captured_at_utc is not None:
+            object.__setattr__(
+                self,
+                "captured_at_utc",
+                self.captured_at_utc.strip() or None,
+            )
+        if self.checksum is not None:
+            object.__setattr__(self, "checksum", self.checksum.strip() or None)
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
 
-@dataclass(frozen=True, slots=True)
-class ContextSource:
+class ContextSource(CanonicalDomainModel):
     """Canonical source artifact for Context Atlas."""
 
     source_id: str
@@ -75,12 +81,12 @@ class ContextSource:
     source_class: ContextSourceClass = ContextSourceClass.OTHER
     authority: ContextSourceAuthority = ContextSourceAuthority.ADVISORY
     durability: ContextSourceDurability = ContextSourceDurability.WORKING
-    provenance: ContextSourceProvenance = field(default_factory=ContextSourceProvenance)
+    provenance: ContextSourceProvenance = Field(default_factory=ContextSourceProvenance)
     tags: tuple[str, ...] = ()
     intended_uses: tuple[str, ...] = ()
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_source_id = self.source_id.strip()
         if not normalized_source_id:
             raise ContextAtlasError(code=ErrorCode.EMPTY_SOURCE_IDENTIFIER)
@@ -96,22 +102,29 @@ class ContextSource:
         object.__setattr__(self, "source_id", normalized_source_id)
         object.__setattr__(self, "content", normalized_content)
         object.__setattr__(self, "title", normalized_title or None)
-        object.__setattr__(self, "tags", tuple(self.tags))
-        object.__setattr__(self, "intended_uses", tuple(self.intended_uses))
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(
+            self,
+            "tags",
+            tuple(tag.strip() for tag in self.tags if tag.strip()),
+        )
+        object.__setattr__(
+            self,
+            "intended_uses",
+            tuple(use.strip() for use in self.intended_uses if use.strip()),
+        )
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
 
-@dataclass(frozen=True, slots=True)
-class ContextCandidate:
+class ContextCandidate(CanonicalDomainModel):
     """A candidate source paired with optional scoring metadata."""
 
     source: ContextSource
     score: float | None = None
     rank: int | None = None
     signals: tuple[str, ...] = ()
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if self.score is not None and not math.isfinite(self.score):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_CANDIDATE_STATE,
@@ -123,8 +136,12 @@ class ContextCandidate:
                 message_args=("rank must be >= 1 when provided",),
             )
 
-        object.__setattr__(self, "signals", tuple(self.signals))
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(
+            self,
+            "signals",
+            tuple(signal.strip() for signal in self.signals if signal.strip()),
+        )
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
 
 __all__ = [

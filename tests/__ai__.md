@@ -22,6 +22,7 @@
 - Provides end-to-end orchestration coverage now that the first real assembly service has landed.
 - Verifies that env-backed runtime defaults and structured observability helpers stay aligned with the documented repo surface.
 - Verifies that the repo's direct message-constant pattern and Pydantic-backed config surface stay stable as the package evolves.
+- Verifies that canonical domain artifacts now follow the frozen Pydantic modeling standard rather than a mixed constructor pattern.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -75,6 +76,7 @@
     - `context_atlas.domain`
   - invariants:
     - tests should verify structured artifacts remain canonical and machine-usable
+    - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
 - `test_config_observability.py`:
   - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
@@ -161,6 +163,7 @@
 - The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
 - The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
+- The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts

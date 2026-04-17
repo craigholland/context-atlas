@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import unittest
 
+from pydantic import ValidationError
+
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.domain.models import (
@@ -79,8 +81,8 @@ class DomainModelTests(unittest.TestCase):
     def test_context_budget_validates_fixed_slot_reservations_and_duplicates(
         self,
     ) -> None:
-        fixed_history = ContextBudgetSlot("history", token_limit=200)
-        fixed_docs = ContextBudgetSlot("docs", token_limit=400)
+        fixed_history = ContextBudgetSlot(slot_name="history", token_limit=200)
+        fixed_docs = ContextBudgetSlot(slot_name="docs", token_limit=400)
 
         budget = ContextBudget(total_tokens=800, slots=(fixed_history, fixed_docs))
         self.assertEqual(budget.reserved_tokens, 600)
@@ -89,7 +91,10 @@ class DomainModelTests(unittest.TestCase):
         with self.assertRaises(ContextAtlasError) as duplicate_context:
             ContextBudget(
                 total_tokens=800,
-                slots=(fixed_history, ContextBudgetSlot("history", token_limit=100)),
+                slots=(
+                    fixed_history,
+                    ContextBudgetSlot(slot_name="history", token_limit=100),
+                ),
             )
 
         self.assertEqual(
@@ -114,9 +119,9 @@ class DomainModelTests(unittest.TestCase):
         budget = ContextBudget(
             total_tokens=300,
             slots=(
-                ContextBudgetSlot("system", token_limit=120),
+                ContextBudgetSlot(slot_name="system", token_limit=120),
                 ContextBudgetSlot(
-                    "docs",
+                    slot_name="docs",
                     token_limit=300,
                     mode=ContextBudgetSlotMode.ELASTIC,
                 ),
@@ -188,6 +193,36 @@ class DomainModelTests(unittest.TestCase):
             packet.trace.decisions[0].reason_codes[0],
             InclusionReasonCode.DIRECT_MATCH,
         )
+
+    def test_canonical_models_support_pydantic_validation_and_dump(self) -> None:
+        source = ContextSource.model_validate(
+            {
+                "source_id": "  source-validated  ",
+                "content": "  validated content  ",
+                "source_class": ContextSourceClass.AUTHORITATIVE,
+                "metadata": {"scope": "validated"},
+                "provenance": {
+                    "source_uri": "  docs/Authoritative/Identity/Context-Atlas-Charter.md  ",
+                },
+            }
+        )
+
+        self.assertEqual(source.source_id, "source-validated")
+        self.assertEqual(source.content, "validated content")
+        self.assertEqual(
+            source.provenance.source_uri,
+            "docs/Authoritative/Identity/Context-Atlas-Charter.md",
+        )
+        self.assertEqual(source.model_dump()["metadata"]["scope"], "validated")
+
+    def test_canonical_models_are_frozen(self) -> None:
+        source = ContextSource(source_id="source-1", content="locked")
+
+        with self.assertRaises(ValidationError):
+            source.source_id = "changed"
+
+        with self.assertRaises(TypeError):
+            source.metadata["scope"] = "identity"
 
     def test_new_domain_events_and_templates_are_registered(self) -> None:
         self.assertEqual(
