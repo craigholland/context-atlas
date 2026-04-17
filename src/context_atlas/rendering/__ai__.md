@@ -19,6 +19,7 @@
 ## Purpose
 - Holds derived output renderers for Context Atlas artifacts.
 - Provides the first minimal packet renderer without turning prompt-ready text into the canonical storage model.
+- Renders both retained memory and candidate/compression content from canonical packet state.
 
 ## Architectural Rules
 - Rendering may depend on `context_atlas.domain`, but canonical packet, budget, decision, and compression semantics must remain defined there.
@@ -45,10 +46,12 @@
   - responsibility: derives renderable text from canonical packet artifacts
   - invariants:
     - prefer structured compression results when available
+    - retained memory should render from canonical packet state rather than a parallel service-only string field
     - do not mutate packet state during rendering
 
 ## Known Gaps / Future-State Notes
-- Rendering is intentionally minimal until the assembly service lands.
+- Rendering is intentionally minimal even now that the assembly service has landed.
+- Richer packet sections or role-specific renderers can arrive later, but they should still derive from canonical packet state.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
@@ -62,7 +65,7 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_budget_and_compression.py
+      py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py
 
   - name: import_sanity
     run: |

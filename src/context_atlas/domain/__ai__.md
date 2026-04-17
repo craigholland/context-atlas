@@ -23,6 +23,7 @@
 - Holds the current semantic core for Context Atlas.
 - Provides stable machine-facing identifiers and human-facing message constants for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
+- Keeps packet state canonical even as packets begin carrying both ranked source candidates and retained memory entries.
 - Carries the starter log message surface that infrastructure logging can reuse without inventing local semantics.
 - Carries deterministic ranking, deduplication, memory-retention, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
 
@@ -127,6 +128,7 @@
     - `ContextDecisionAction`
   - footguns:
     - do not add prompt-ready string rendering fields here as canonical state
+    - packet item counts should reflect canonical included artifacts, not just one source family
 - `models/reason_codes.py`:
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:
@@ -205,6 +207,7 @@
 - `adapters/`: future adapter translation boundaries may log with domain `LogMessage` constants, but provider-specific payload wording must stay out of domain messages.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 - `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
+- `services/`: service orchestration may now include retained memory entries in canonical packets, but service-layer filtering should still consume domain-owned packet and decision semantics rather than redefining them.
 
 ## Verification Contract
 ```yaml

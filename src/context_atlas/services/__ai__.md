@@ -1,0 +1,89 @@
+# __ai__.md - Folder Summary
+
+## Last Verified (CI)
+- commit: 462cf0d4a7182f8bfae3f4d31ec8d8d6b29a2fa2
+- timestamp_utc: 2026-04-17T21:05:00Z
+- verified_by: local
+- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
+
+## Scope
+- folder: src/context_atlas/services
+- included:
+  - "__init__.py"
+  - "*.py"
+- excluded:
+  - "__pycache__/**"
+  - "**/__pycache__/**"
+  - "**/*.pyc"
+
+## Purpose
+- Holds service-layer orchestration for Context Atlas workflows.
+- Composes retrieval, ranking, memory selection, budget allocation, compression, and packet finalization into canonical packet outputs.
+- Keeps orchestration logic out of `domain/` while also refusing to let concrete adapter or infrastructure mechanics define system behavior.
+
+## Architectural Rules
+- Services may depend on `context_atlas.domain`, but must not import `context_atlas.adapters`, `context_atlas.infrastructure`, or `context_atlas.rendering`.
+- Services orchestrate stage sequencing and canonical artifact assembly; deterministic ranking, budgeting, compression, and memory-selection rules should remain inward in `domain/`.
+- Services may depend on inward-safe contracts such as retriever protocols, but should not instantiate or import concrete adapter implementations directly.
+- Services should emit stable domain-owned log messages through injected loggers rather than inventing inline semantic strings.
+
+## Allowed Dependencies
+- may depend on:
+  - Python standard library
+  - `context_atlas.domain`
+  - sibling modules within `context_atlas.services`
+- must not depend on:
+  - `context_atlas.adapters`
+  - `context_atlas.infrastructure`
+  - `context_atlas.rendering`
+
+## Public API / Key Exports
+- `ContextAssemblyService`:
+  - starter orchestration service for building canonical `ContextPacket` artifacts
+- `CandidateRetriever`:
+  - inward-safe retrieval contract consumed by the service layer
+
+## File Index
+- `__init__.py`:
+  - responsibility: exposes the intentionally small service surface
+- `assembly.py`:
+  - responsibility: sequences retrieval, ranking, memory, budget, compression, and packet finalization
+  - defines:
+    - `CandidateRetriever`
+    - `ContextAssemblyService`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+    - `context_atlas.domain.policies`
+  - invariants:
+    - orchestration should produce canonical packets and traces, not prompt-first strings
+    - packet assembly should stay explainable through structured trace metadata and decisions
+    - service defaults should remain thin until real downstream usage proves broader knobs are necessary
+
+## Known Gaps / Future-State Notes
+- The current service is a starter orchestration path over in-memory retrieval plus starter policies.
+- Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
+
+## Cross-Folder Contracts
+- `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.
+- `adapters/`: retrieval implementations may satisfy `CandidateRetriever`, but service code must stay adapter-agnostic.
+- `infrastructure/`: outer-layer factories may assemble this service with runtime settings and logger setup, but service code must remain inward-safe.
+- `rendering/`: rendering may derive text from packets produced here, but rendering must not become an alternate orchestration path.
+
+## Verification Contract
+```yaml
+steps:
+  - name: compile_services
+    run: |
+      py -3 -m compileall src/context_atlas/services
+
+  - name: unit_tests
+    run: |
+      py -3 -m pytest tests/test_context_assembly_service.py
+
+  - name: import_sanity
+    run: |
+      $env:PYTHONPATH='src'
+      py -3 -c "from context_atlas.services import CandidateRetriever, ContextAssemblyService"
+```

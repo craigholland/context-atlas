@@ -19,6 +19,7 @@
 - Holds automated tests for the standalone Context Atlas package.
 - Verifies bootstrap contracts and guards early architectural seams from silent drift.
 - Provides the first executable safety net for domain and infrastructure bootstrap behavior.
+- Provides end-to-end orchestration coverage now that the first real assembly service has landed.
 - Verifies that env-backed runtime defaults and structured observability helpers stay aligned with the documented repo surface.
 - Verifies that the repo's direct message-constant pattern and Pydantic-backed config surface stay stable as the package evolves.
 
@@ -50,6 +51,8 @@
   - `BudgetAndCompressionTests`: verifies budget allocation, compression policy, and derived rendering behavior
 - `test_memory_policy.py`:
   - `MemoryPolicyTests`: verifies canonical memory entries, starter retention behavior, and trace visibility
+- `test_context_assembly_service.py`:
+  - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -121,6 +124,18 @@
   - invariants:
     - tests should prove short-term retention, decay sensitivity, deduplication, and query boosts remain deterministic
     - memory decisions should stay visible in structured traces rather than collapsing into opaque prompt strings
+- `test_context_assembly_service.py`:
+  - responsibility: verifies the starter service orchestration and settings-driven infrastructure factory
+  - defines:
+    - `ContextAssemblyServiceTests`: end-to-end assembly test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+    - `context_atlas.rendering`
+  - invariants:
+    - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
+    - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -129,6 +144,7 @@
 - The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
 - The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
 - The suite now also covers canonical memory entries and starter retention policy behavior.
+- The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
@@ -150,5 +166,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval, tests.test_memory_policy"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_lexical_retrieval, tests.test_memory_policy"
 ```

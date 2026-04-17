@@ -21,6 +21,7 @@ class ErrorMessage:
     INVALID_PACKET_IDENTIFIER = "Context packet identifier must not be empty."
     EMPTY_PACKET_QUERY = "Context packet query must not be empty."
     DUPLICATE_SOURCE_IDENTIFIER = "Context source '%s' is already registered."
+    INVALID_ASSEMBLY_REQUEST = "Invalid assembly request: %s"
     INVALID_RETRIEVAL_REQUEST = "Invalid retrieval request: %s"
     INVALID_RANKING_REQUEST = "Invalid ranking request: %s"
     INVALID_BUDGET_ALLOCATION = "Invalid budget allocation: %s"

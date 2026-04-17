@@ -85,6 +85,10 @@ class LogMessage:
         "ASSEMBLY_COMPLETED",
         "Context assembly completed: trace_id=%s, selected_candidates=%d",
     )
+    ASSEMBLY_FAILED = _NamedLogMessage(
+        "ASSEMBLY_FAILED",
+        "Context assembly failed: trace_id=%s, error=%s",
+    )
     PACKET_CREATED = _NamedLogMessage(
         "PACKET_CREATED",
         "Context packet created: packet_id=%s, selected_candidates=%d",

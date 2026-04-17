@@ -30,6 +30,7 @@
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
 - `domain/` is the semantic core and must not depend on `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
 - `services/` orchestrates workflows and may depend on `domain/` but must not let provider or framework vocabulary define application behavior.
+- `services/` is now a real orchestration layer and should stay focused on sequencing canonical stages rather than growing policy logic of its own.
 - `infrastructure/` and `adapters/` are outer concerns; they may depend inward, but inward layers must not import their concrete implementations.
 - `rendering/` is for derived outputs only and must not become the canonical home of packet, decision, or trace semantics.
 - Empty layer folders are intentional placeholders; do not collapse their responsibilities into unrelated packages just because the current bootstrap is small.
@@ -53,6 +54,8 @@
   - early assembly and memory default settings plus structured observability helpers
 - `rendering/`:
   - derived text/rendering helpers for canonical packets and transformations
+- `services/`:
+  - orchestration for end-to-end packet assembly from retrieval through packet finalization
 
 ## File Index
 - `__init__.py`:
@@ -75,6 +78,14 @@
     - may remain small early, but must stay dependency-clean
     - canonical packet, budget, source, decision, and trace artifacts should live here rather than in outer layers
     - pure ranking, deduplication, memory-retention, and decision-recording policy logic may live here when it is deterministic and dependency-light
+- `services/`:
+  - responsibility: orchestrates retrieval, ranking, budgeting, compression, memory inclusion, and packet finalization
+  - used_by:
+    - outer composition boundaries such as `context_atlas.infrastructure`
+  - invariants:
+    - may depend on `domain/` only
+    - should consume inward-safe contracts rather than importing concrete adapters or infrastructure helpers
+    - should produce canonical packets and traces rather than prompt-ready strings
 - `infrastructure/`:
   - responsibility: holds runtime configuration and logging implementation details
   - used_by:
@@ -85,8 +96,8 @@
     - operator-facing assembly defaults should stay narrow until real services prove they are worth stabilizing
 
 ## Known Gaps / Future-State Notes
-- `services/` remains mostly a structural placeholder and does not yet carry the first orchestration slice.
-- `adapters/` and `rendering/` now hold their first real slices, but their public surfaces should stay intentionally narrow until the assembly service lands.
+- `services/` now carries the first real orchestration slice, but richer provider-backed composition and persistence are still intentionally deferred.
+- `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
 - The package root does not yet define a curated broader public API beyond `__version__`.
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
 
@@ -98,6 +109,7 @@
 - `infrastructure/`: supported `.env.example` keys should remain a thin mirror of real config loader behavior, not speculative future controls.
 - `infrastructure/`: starter assembly and memory defaults should stay operator-facing and limited until a real assembly service proves broader tuning is necessary.
 - `services/`: future service orchestration should depend on domain semantics and inward-owned contracts rather than importing concrete adapter or infrastructure implementations.
+- `services/`: orchestration may now assemble packets from retrieval, budget, compression, and memory slices, but those stage rules should continue to harden inward in `domain/`.
 - `adapters/`: retrieval/source-ingestion implementations may translate external or stored source material into canonical `ContextSource`/`ContextCandidate` artifacts, but must keep that translation logic out of `domain/`.
 - `rendering/`: derived renderers may consume canonical packet/decision/trace artifacts, but must not become the source of canonical semantics.
 - `rendering/`: derived renderers may consume canonical compression artifacts, but those artifacts must stay attached to packets rather than being replaced by raw strings.
@@ -120,5 +132,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure"
+      py -3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure, context_atlas.services"
 ```

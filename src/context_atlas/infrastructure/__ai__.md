@@ -22,6 +22,7 @@
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
 - Demonstrates how infrastructure may depend on domain identifiers and messages while preserving inward dependency direction.
 - Carries the first supported runtime defaults for early assembly and memory behavior plus the structured observability helpers that later services will reuse.
+- Provides the starter composition boundary for wiring validated settings and logger setup into the real assembly service.
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 - Uses Pydantic/Pydantic Settings for validated runtime configuration instead of unconstrained dataclasses.
 
@@ -36,6 +37,7 @@
 - may depend on:
   - Python standard library
   - `context_atlas.domain`
+  - `context_atlas.services`
   - sibling modules within `context_atlas.infrastructure`
 - must not depend on:
   - imports that cause `context_atlas.domain` to depend back on infrastructure
@@ -55,6 +57,8 @@
   - `get_logger`: package or child logger accessor
   - `log_message`: structured logging helper keyed by direct `LogMessage` constants
   - `log_assembly_stage_message`: helper for emitting assembly-stage messages with consistent trace fields
+- `assembly`:
+  - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into a usable assembly service
 
 ## File Index
 - `config/settings.py`:
@@ -100,18 +104,32 @@
     - `context_atlas.domain.messages`
   - footguns:
     - prefer direct `LogMessage` constants plus structured fields over ad hoc inline message strings
+- `assembly.py`:
+  - responsibility: wires validated runtime settings and logger setup into the starter assembly service
+  - defines:
+    - `build_starter_context_assembly_service`
+  - depends_on:
+    - `context_atlas.domain.policies`
+    - `context_atlas.infrastructure.config`
+    - `context_atlas.infrastructure.logging`
+    - `context_atlas.services`
+  - invariants:
+    - keep this as an outer composition boundary, not a second orchestration layer
+    - starter settings should influence service defaults through constructor wiring rather than through hidden globals
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
 - The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain message names.
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
+- The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.
 - `services/`: future services should receive infrastructure capabilities through inward-safe contracts or composition boundaries, not by letting services become logger/config factories.
+- `services/`: the starter assembly factory is the current composition boundary for injecting runtime settings and logger setup into the assembly service.
 - `adapters/`: future adapters may rely on infrastructure helpers for runtime concerns, but translation-heavy provider code should remain outside generic config/logging helpers.
 - repo root: supported env-backed assembly and memory defaults must stay mirrored in `.env.example`.
 - package root `context_atlas/`: root-level imports may expose infrastructure helpers selectively, but should not re-export enough internals to blur the layer boundary.
@@ -125,10 +143,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
+      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```
