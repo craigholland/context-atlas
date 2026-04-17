@@ -28,6 +28,8 @@ class ErrorMessageTemplate:
     DUPLICATE_SOURCE_IDENTIFIER = "Context source '%s' is already registered."
     INVALID_RETRIEVAL_REQUEST = "Invalid retrieval request: %s"
     INVALID_RANKING_REQUEST = "Invalid ranking request: %s"
+    INVALID_BUDGET_ALLOCATION = "Invalid budget allocation: %s"
+    INVALID_COMPRESSION_REQUEST = "Invalid compression request: %s"
 
 
 _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
@@ -49,6 +51,8 @@ _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
         ErrorCode.DUPLICATE_SOURCE_IDENTIFIER: ErrorMessageTemplate.DUPLICATE_SOURCE_IDENTIFIER,
         ErrorCode.INVALID_RETRIEVAL_REQUEST: ErrorMessageTemplate.INVALID_RETRIEVAL_REQUEST,
         ErrorCode.INVALID_RANKING_REQUEST: ErrorMessageTemplate.INVALID_RANKING_REQUEST,
+        ErrorCode.INVALID_BUDGET_ALLOCATION: ErrorMessageTemplate.INVALID_BUDGET_ALLOCATION,
+        ErrorCode.INVALID_COMPRESSION_REQUEST: ErrorMessageTemplate.INVALID_COMPRESSION_REQUEST,
     }
 )
 

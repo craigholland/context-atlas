@@ -23,3 +23,5 @@ class ErrorCode(StrEnum):
     DUPLICATE_SOURCE_IDENTIFIER = "duplicate_source_identifier"
     INVALID_RETRIEVAL_REQUEST = "invalid_retrieval_request"
     INVALID_RANKING_REQUEST = "invalid_ranking_request"
+    INVALID_BUDGET_ALLOCATION = "invalid_budget_allocation"
+    INVALID_COMPRESSION_REQUEST = "invalid_compression_request"

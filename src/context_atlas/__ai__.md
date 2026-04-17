@@ -51,6 +51,8 @@
 - `infrastructure/`:
   - runtime configuration and logging implementation details for the current bootstrap
   - early assembly-default settings and structured observability helpers
+- `rendering/`:
+  - derived text/rendering helpers for canonical packets and transformations
 
 ## File Index
 - `__init__.py`:
@@ -83,8 +85,8 @@
     - operator-facing assembly defaults should stay narrow until real services prove they are worth stabilizing
 
 ## Known Gaps / Future-State Notes
-- `services/`, `adapters/`, and `rendering/` currently exist as structural placeholders and do not yet carry first implementation slices.
-- `services/` and `rendering/` remain mostly structural placeholders, but `adapters/` now holds the first lexical retrieval slice.
+- `services/` remains mostly a structural placeholder and does not yet carry the first orchestration slice.
+- `adapters/` and `rendering/` now hold their first real slices, but their public surfaces should stay intentionally narrow until the assembly service lands.
 - The package root does not yet define a curated broader public API beyond `__version__`.
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
 
@@ -97,6 +99,7 @@
 - `services/`: future service orchestration should depend on domain semantics and inward-owned contracts rather than importing concrete adapter or infrastructure implementations.
 - `adapters/`: retrieval/source-ingestion implementations may translate external or stored source material into canonical `ContextSource`/`ContextCandidate` artifacts, but must keep that translation logic out of `domain/`.
 - `rendering/`: derived renderers may consume canonical packet/decision/trace artifacts, but must not become the source of canonical semantics.
+- `rendering/`: derived renderers may consume canonical compression artifacts, but those artifacts must stay attached to packets rather than being replaced by raw strings.
 
 ## Verification Contract
 ```yaml

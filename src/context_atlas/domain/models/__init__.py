@@ -21,6 +21,7 @@ from .sources import (
     ContextSourceDurability,
     ContextSourceProvenance,
 )
+from .transformations import CompressionResult, CompressionStrategy
 
 __all__ = [
     "AuthorityPrecedenceReasonCode",
@@ -38,6 +39,8 @@ __all__ = [
     "ContextSourceDurability",
     "ContextSourceProvenance",
     "ContextTrace",
+    "CompressionResult",
+    "CompressionStrategy",
     "ExclusionReasonCode",
     "InclusionReasonCode",
 ]

@@ -7,9 +7,9 @@ import os
 from ...domain.errors import ConfigurationError, ErrorCode
 from ...domain.events import LogEvent
 from ...domain.messages import get_log_message
+from ...domain.models import CompressionStrategy
 from .settings import (
     AssemblySettings,
-    CompressionStrategy,
     ContextAtlasSettings,
     LoggingSettings,
 )

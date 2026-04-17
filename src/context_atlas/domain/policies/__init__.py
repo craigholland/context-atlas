@@ -1,5 +1,13 @@
 """Deterministic policy contracts and starter implementations for Context Atlas."""
 
+from .budgeting import (
+    BudgetAllocation,
+    BudgetAllocationOutcome,
+    BudgetRequest,
+    ContextBudgetAllocationPolicy,
+    StarterBudgetAllocationPolicy,
+)
+from .compression import CompressionOutcome, CompressionPolicy, StarterCompressionPolicy
 from .ranking import (
     CandidateRankingOutcome,
     CandidateRankingPolicy,
@@ -7,7 +15,15 @@ from .ranking import (
 )
 
 __all__ = [
+    "BudgetAllocation",
+    "BudgetAllocationOutcome",
+    "BudgetRequest",
     "CandidateRankingOutcome",
     "CandidateRankingPolicy",
+    "CompressionOutcome",
+    "CompressionPolicy",
+    "ContextBudgetAllocationPolicy",
+    "StarterBudgetAllocationPolicy",
+    "StarterCompressionPolicy",
     "StarterCandidateRankingPolicy",
 ]

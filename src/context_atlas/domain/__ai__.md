@@ -61,10 +61,12 @@
 - `models`:
   - canonical source, candidate, budget, packet, decision, and trace artifacts
   - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
+  - canonical compression result and strategy artifacts
 - `policies`:
   - `CandidateRankingPolicy`: ranking-policy contract
   - `StarterCandidateRankingPolicy`: starter deterministic ranking/deduplication implementation
   - `CandidateRankingOutcome`: ranked-candidate plus trace result artifact
+  - budget allocation and compression policy contracts plus starter implementations
 
 ## File Index
 - `errors/codes.py`:
@@ -142,6 +144,13 @@
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:
     - reason codes should stay machine-stable even as heuristics evolve
+- `models/transformations.py`:
+  - responsibility: defines canonical compression/transformation artifacts
+  - defines:
+    - `CompressionStrategy`
+    - `CompressionResult`
+  - invariants:
+    - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
 - `policies/ranking.py`:
   - responsibility: ranks candidates, deduplicates them, and records structured decisions
   - defines:
@@ -154,6 +163,27 @@
   - invariants:
     - ranking should stay deterministic for identical inputs
     - deduplication should record explicit exclusion decisions rather than silently dropping candidates
+- `policies/budgeting.py`:
+  - responsibility: allocates token demand across fixed and elastic slots
+  - defines:
+    - `BudgetRequest`
+    - `BudgetAllocation`
+    - `BudgetAllocationOutcome`
+    - `ContextBudgetAllocationPolicy`
+    - `StarterBudgetAllocationPolicy`
+  - invariants:
+    - slot-allocation reductions should be visible through structured decisions
+    - duplicate or unknown slot requests should fail explicitly
+- `policies/compression.py`:
+  - responsibility: compresses candidate content into structured compression results
+  - defines:
+    - `CompressionOutcome`
+    - `CompressionPolicy`
+    - `StarterCompressionPolicy`
+    - `estimate_tokens`
+  - invariants:
+    - fallback behavior should remain explicit in metadata and trace
+    - compressed text is a transformation artifact, not the canonical packet itself
 
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
@@ -162,6 +192,7 @@
 - The current event/message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current error/event/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
+- The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
@@ -179,10 +210,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_candidate_ranking.py tests/test_domain_models.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterCandidateRankingPolicy"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy"
 ```

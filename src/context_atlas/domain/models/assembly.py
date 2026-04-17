@@ -17,6 +17,7 @@ from .reason_codes import (
     InclusionReasonCode,
 )
 from .sources import ContextCandidate
+from .transformations import CompressionResult
 
 ContextReasonCode = (
     InclusionReasonCode
@@ -108,6 +109,7 @@ class ContextPacket:
     selected_candidates: tuple[ContextCandidate, ...] = ()
     budget: ContextBudget | None = None
     trace: ContextTrace | None = None
+    compression_result: CompressionResult | None = None
     metadata: Mapping[str, str] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
