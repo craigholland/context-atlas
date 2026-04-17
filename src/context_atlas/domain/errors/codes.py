@@ -22,3 +22,4 @@ class ErrorCode(StrEnum):
     EMPTY_PACKET_QUERY = "empty_packet_query"
     DUPLICATE_SOURCE_IDENTIFIER = "duplicate_source_identifier"
     INVALID_RETRIEVAL_REQUEST = "invalid_retrieval_request"
+    INVALID_RANKING_REQUEST = "invalid_ranking_request"

@@ -14,6 +14,7 @@
   - "events/**/*.py"
   - "messages/**/*.py"
   - "models/**/*.py"
+  - "policies/**/*.py"
 - excluded:
   - "__pycache__/**"
   - "**/__pycache__/**"
@@ -24,12 +25,14 @@
 - Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
 - Carries the starter assembly-stage event identifiers and message templates that infrastructure logging can reuse without inventing local semantics.
+- Carries deterministic ranking, deduplication, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
 - Code here should represent semantic meaning, not runtime environment mechanics.
 - Error codes, event identifiers, and centralized message templates belong here because they are cross-layer semantic contracts, not logging/config implementation details.
 - Canonical source, budget, packet, decision, and trace artifacts belong here rather than in `services/` or `rendering/`.
+- Deterministic ranking and decision-recording policies belong here when they can remain pure and dependency-light.
 - Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
 - Do not move environment loading, logger setup, provider DTOs, or persistence shapes into this folder just because they are utility-like.
 
@@ -58,6 +61,10 @@
 - `models`:
   - canonical source, candidate, budget, packet, decision, and trace artifacts
   - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
+- `policies`:
+  - `CandidateRankingPolicy`: ranking-policy contract
+  - `StarterCandidateRankingPolicy`: starter deterministic ranking/deduplication implementation
+  - `CandidateRankingOutcome`: ranked-candidate plus trace result artifact
 
 ## File Index
 - `errors/codes.py`:
@@ -135,6 +142,18 @@
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:
     - reason codes should stay machine-stable even as heuristics evolve
+- `policies/ranking.py`:
+  - responsibility: ranks candidates, deduplicates them, and records structured decisions
+  - defines:
+    - `CandidateRankingPolicy`
+    - `StarterCandidateRankingPolicy`
+    - `CandidateRankingOutcome`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.models`
+  - invariants:
+    - ranking should stay deterministic for identical inputs
+    - deduplication should record explicit exclusion decisions rather than silently dropping candidates
 
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
@@ -142,10 +161,12 @@
 - The distinction between domain events and future richer audit projections is still intentionally thin.
 - The current event/message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current error/event/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
+- The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
 - `services/`: future orchestration code should consume `ContextPacket`, `ContextTrace`, `ContextBudget`, and related decision artifacts rather than inventing parallel packet state.
+- `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
 - `adapters/`: future adapter translation boundaries may log with domain `LogEvent` identifiers, but provider-specific payload wording must stay out of domain templates.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 
@@ -158,10 +179,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_domain_models.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_candidate_ranking.py tests/test_domain_models.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import ContextSource, ContextBudget, ContextPacket"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterCandidateRankingPolicy"
 ```

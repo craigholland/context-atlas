@@ -27,6 +27,8 @@ class LogMessageTemplate:
     MEMORY_SELECTED = "Memory selected: trace_id=%s, memory_entries=%d"
     SOURCE_REGISTERED = "Source registered: source_id=%s, total_sources=%d"
     RETRIEVAL_COMPLETED = "Retrieval completed: mode=%s, query=%s, candidate_count=%d"
+    CANDIDATES_DEDUPED = "Candidates deduped: trace_id=%s, removed_candidates=%d"
+    DECISIONS_RECORDED = "Decisions recorded: trace_id=%s, decision_count=%d"
     ASSEMBLY_STARTED = "Context assembly started: trace_id=%s, query=%s"
     ASSEMBLY_COMPLETED = (
         "Context assembly completed: trace_id=%s, selected_candidates=%d"
@@ -48,6 +50,8 @@ _LOG_MESSAGES: Mapping[LogEvent, str] = MappingProxyType(
         LogEvent.MEMORY_SELECTED: LogMessageTemplate.MEMORY_SELECTED,
         LogEvent.SOURCE_REGISTERED: LogMessageTemplate.SOURCE_REGISTERED,
         LogEvent.RETRIEVAL_COMPLETED: LogMessageTemplate.RETRIEVAL_COMPLETED,
+        LogEvent.CANDIDATES_DEDUPED: LogMessageTemplate.CANDIDATES_DEDUPED,
+        LogEvent.DECISIONS_RECORDED: LogMessageTemplate.DECISIONS_RECORDED,
         LogEvent.ASSEMBLY_STARTED: LogMessageTemplate.ASSEMBLY_STARTED,
         LogEvent.ASSEMBLY_COMPLETED: LogMessageTemplate.ASSEMBLY_COMPLETED,
         LogEvent.PACKET_CREATED: LogMessageTemplate.PACKET_CREATED,

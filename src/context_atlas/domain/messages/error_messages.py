@@ -27,6 +27,7 @@ class ErrorMessageTemplate:
     EMPTY_PACKET_QUERY = "Context packet query must not be empty."
     DUPLICATE_SOURCE_IDENTIFIER = "Context source '%s' is already registered."
     INVALID_RETRIEVAL_REQUEST = "Invalid retrieval request: %s"
+    INVALID_RANKING_REQUEST = "Invalid ranking request: %s"
 
 
 _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
@@ -47,6 +48,7 @@ _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
         ErrorCode.EMPTY_PACKET_QUERY: ErrorMessageTemplate.EMPTY_PACKET_QUERY,
         ErrorCode.DUPLICATE_SOURCE_IDENTIFIER: ErrorMessageTemplate.DUPLICATE_SOURCE_IDENTIFIER,
         ErrorCode.INVALID_RETRIEVAL_REQUEST: ErrorMessageTemplate.INVALID_RETRIEVAL_REQUEST,
+        ErrorCode.INVALID_RANKING_REQUEST: ErrorMessageTemplate.INVALID_RANKING_REQUEST,
     }
 )
 
