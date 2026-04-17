@@ -1,0 +1,29 @@
+# Copy this file next to your adapted `check_import_boundaries.py` script and
+# replace the example package names with your real app package/module names.
+#
+# `source_root` should point at the app-local src/ directory from the repository root.
+source_root = "apps/example_app/src"
+
+[[rule]]
+# Domain code should not depend on delivery frameworks or outer implementation details.
+target_prefix = "example_app.domain"
+forbidden_prefixes = [
+  "fastapi",
+  "starlette",
+  "example_app.interface",
+  "example_app.infrastructure",
+]
+
+[[rule]]
+# Core orchestration should not import request/response transport objects directly.
+target_prefix = "example_app.services.core"
+forbidden_prefixes = [
+  "example_app.interface.api",
+]
+
+[[rule]]
+# Delivery code should not depend on persistence models as if they were the public API.
+target_prefix = "example_app.interface"
+forbidden_prefixes = [
+  "example_app.infrastructure.models",
+]

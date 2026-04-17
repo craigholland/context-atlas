@@ -1,0 +1,126 @@
+# Copy this file into `.github/workflows/` and adapt it to one app at a time.
+#
+# Purpose:
+#   Show how a normal application CI workflow can include architecture-adjacent
+#   checks such as import-boundary validation and `__ai__.md` freshness checks.
+#
+# This example assumes:
+#   - a monorepo with one Python app under `apps/example_app`
+#   - helper scripts copied into a root-level `scripts/` directory
+#   - an app-local `pyproject.toml`
+
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      # Replace this path filter with the app you want this workflow to govern.
+      - "apps/example_app/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "apps/example_app/**"
+      - ".github/workflows/ci.yml"
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.12"
+  APP_ROOT: "apps/example_app"
+  SCRIPT_ROOT: "scripts"
+
+jobs:
+  app:
+    name: App (lint, typecheck, tests, architecture checks)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set diff range
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+          fi
+
+          if [ -z "${BASE}" ] || [ "${BASE}" = "0000000000000000000000000000000000000000" ]; then
+            if git rev-parse "${HEAD}^" >/dev/null 2>&1; then
+              BASE="$(git rev-parse "${HEAD}^")"
+            else
+              BASE="${HEAD}"
+            fi
+          fi
+
+          echo "base_sha=${BASE}" >> "$GITHUB_OUTPUT"
+          echo "head_sha=${HEAD}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "${{ env.PYTHON_VERSION }}"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Cache Poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+          key: ${{ runner.os }}-poetry-${{ hashFiles(format('{0}/poetry.lock', env.APP_ROOT)) }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install dependencies
+        working-directory: ${{ env.APP_ROOT }}
+        run: poetry install
+
+      - name: Ruff (lint)
+        working-directory: ${{ env.APP_ROOT }}
+        run: poetry run ruff check .
+
+      - name: Ruff (format check)
+        working-directory: ${{ env.APP_ROOT }}
+        run: poetry run ruff format --check .
+
+      - name: Mypy
+        working-directory: ${{ env.APP_ROOT }}
+        run: poetry run mypy src
+
+      - name: Import boundary checks
+        working-directory: ${{ env.APP_ROOT }}
+        run: |
+          poetry run python "${{ github.workspace }}/${{ env.SCRIPT_ROOT }}/check_import_boundaries.py" \
+            --repo-root "${{ github.workspace }}" \
+            --config "${{ github.workspace }}/${{ env.SCRIPT_ROOT }}/import_boundary_rules.example.toml"
+
+      - name: Pytest
+        working-directory: ${{ env.APP_ROOT }}
+        run: poetry run pytest
+
+      - name: Check AI documentation freshness
+        run: |
+          python "${{ env.SCRIPT_ROOT }}/check_ai_docs.py" \
+            --repo-root . \
+            --base "${{ steps.diff.outputs.base_sha }}" \
+            --head "${{ steps.diff.outputs.head_sha }}" \
+            --owner-file "__ai__.md" \
+            --governed-root "${{ env.APP_ROOT }}/src" \
+            --governed-root "${{ env.APP_ROOT }}/tests" \
+            --governed-root "${{ env.APP_ROOT }}/scripts" \
+            --debug

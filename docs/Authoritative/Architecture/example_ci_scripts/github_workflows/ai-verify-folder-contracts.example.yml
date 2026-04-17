@@ -1,0 +1,96 @@
+# Copy this file into `.github/workflows/` and adapt the placeholders below.
+#
+# Purpose:
+#   Validate the structure of affected `__ai__.md` files and then execute the
+#   folder-level Verification Contract steps declared inside those files.
+#
+# Why two phases?
+#   1. `validate_ai_docs.py` catches malformed or incomplete local guidance early.
+#   2. `ai_verify_contracts.py` executes the declared contract steps for the
+#      nearest affected owner files.
+
+name: Verify __ai__.md folder contracts
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.12"
+  OWNER_FILENAME: "__ai__.md"
+  # Replace this with the path where you copied the example helper scripts.
+  SCRIPT_ROOT: "scripts"
+
+jobs:
+  verify-ai-contracts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set diff range
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+          fi
+
+          if [ -z "${BASE}" ] || [ "${BASE}" = "0000000000000000000000000000000000000000" ]; then
+            if git rev-parse "${HEAD}^" >/dev/null 2>&1; then
+              BASE="$(git rev-parse "${HEAD}^")"
+            else
+              BASE="${HEAD}"
+            fi
+          fi
+
+          echo "base_sha=${BASE}" >> "$GITHUB_OUTPUT"
+          echo "head_sha=${HEAD}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "${{ env.PYTHON_VERSION }}"
+
+      # Add additional setup steps here if your Verification Contract commands
+      # depend on package managers such as Poetry, pip-tools, npm, pnpm, etc.
+      #
+      # Example:
+      # - name: Install backend dependencies
+      #   run: |
+      #     cd apps/example_app
+      #     poetry install --with dev --no-interaction
+
+      - name: Validate __ai__.md structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "${{ env.SCRIPT_ROOT }}/validate_ai_docs.py" \
+            --repo-root . \
+            --base "${{ steps.diff.outputs.base_sha }}" \
+            --head "${{ steps.diff.outputs.head_sha }}" \
+            --owner-file "${{ env.OWNER_FILENAME }}"
+
+      - name: Run folder contract verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "${{ env.SCRIPT_ROOT }}/ai_verify_contracts.py" \
+            --repo-root . \
+            --base "${{ steps.diff.outputs.base_sha }}" \
+            --head "${{ steps.diff.outputs.head_sha }}" \
+            --owner-file "${{ env.OWNER_FILENAME }}"

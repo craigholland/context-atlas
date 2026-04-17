@@ -1,0 +1,114 @@
+# Copy this file into `.github/workflows/` and adapt the commented placeholders below.
+#
+# Purpose:
+#   Keep the "Last Verified (CI)" block in the nearest owning `__ai__.md` files
+#   synchronized with the most recent CI-verified commit.
+#
+# Important limits:
+#   - This workflow updates metadata only.
+#   - It does not prove that the prose in an `__ai__.md` file is semantically correct.
+#   - It intentionally skips diffs that only touch `__ai__.md` files to avoid self-trigger loops.
+
+name: ai-last-verified
+
+on:
+  push:
+    branches:
+      # Replace with the branch you treat as your integration or canon branch.
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  PYTHON_VERSION: "3.12"
+  OWNER_FILENAME: "__ai__.md"
+  # Replace this with the path where you copied the example helper scripts.
+  SCRIPT_ROOT: "scripts"
+
+jobs:
+  update-last-verified:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set diff range
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # On normal pushes GitHub gives us an explicit "before" SHA.
+          # On manual runs we fall back to HEAD^ when possible.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+          else
+            HEAD="$(git rev-parse HEAD)"
+            if git rev-parse HEAD^ >/dev/null 2>&1; then
+              BASE="$(git rev-parse HEAD^)"
+            else
+              BASE="${HEAD}"
+            fi
+          fi
+
+          # First pushes and rewritten history can produce an empty/all-zero base SHA.
+          # Fall back to HEAD^ when possible; otherwise use HEAD (meaning "no diff").
+          if [ -z "${BASE}" ] || [ "${BASE}" = "0000000000000000000000000000000000000000" ]; then
+            if git rev-parse "${HEAD}^" >/dev/null 2>&1; then
+              BASE="$(git rev-parse "${HEAD}^")"
+            else
+              BASE="${HEAD}"
+            fi
+          fi
+
+          echo "base_sha=${BASE}" >> "$GITHUB_OUTPUT"
+          echo "head_sha=${HEAD}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "${{ env.PYTHON_VERSION }}"
+
+      - name: Update Last Verified metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "${{ env.SCRIPT_ROOT }}/update_last_verified.py" \
+            --repo-root . \
+            --base "${{ steps.diff.outputs.base_sha }}" \
+            --head "${{ steps.diff.outputs.head_sha }}" \
+            --owner-file "${{ env.OWNER_FILENAME }}"
+
+      - name: Check for changes
+        id: changed
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit changes
+        if: steps.changed.outputs.has_changes == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore(ai): update Last Verified metadata"
+
+      - name: Push changes
+        if: steps.changed.outputs.has_changes == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Replace with the branch this workflow should write back to.
+          branch: main
