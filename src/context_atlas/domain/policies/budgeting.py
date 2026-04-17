@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..models.base import CanonicalDomainModel
 from ..models import (
     BudgetPressureReasonCode,
     ContextAssemblyDecision,
@@ -30,14 +30,13 @@ class ContextBudgetAllocationPolicy(Protocol):
         """Allocate token requests across fixed and elastic slots."""
 
 
-@dataclass(frozen=True, slots=True)
-class BudgetRequest:
+class BudgetRequest(CanonicalDomainModel):
     """Requested token demand for a named budget slot."""
 
     slot_name: str
     requested_tokens: int
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_name = self.slot_name.strip()
         if not normalized_name:
             raise ContextAtlasError(
@@ -54,8 +53,7 @@ class BudgetRequest:
         object.__setattr__(self, "slot_name", normalized_name)
 
 
-@dataclass(frozen=True, slots=True)
-class BudgetAllocation:
+class BudgetAllocation(CanonicalDomainModel):
     """Actual allocation outcome for a single slot."""
 
     slot_name: str
@@ -64,14 +62,58 @@ class BudgetAllocation:
     was_reduced: bool
     mode: ContextBudgetSlotMode
 
+    def model_post_init(self, __context: object) -> None:
+        normalized_name = self.slot_name.strip()
+        if not normalized_name:
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=("slot_name must not be empty",),
+            )
+        if self.requested_tokens < 0:
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=(
+                    f"requested_tokens for '{normalized_name}' must be >= 0",
+                ),
+            )
+        if self.allocated_tokens < 0:
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=(
+                    f"allocated_tokens for '{normalized_name}' must be >= 0",
+                ),
+            )
+        if self.allocated_tokens > self.requested_tokens:
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=(
+                    f"allocated_tokens for '{normalized_name}' must be <= requested_tokens",
+                ),
+            )
+        if self.was_reduced != (self.allocated_tokens < self.requested_tokens):
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=(
+                    f"was_reduced for '{normalized_name}' must match the allocation delta",
+                ),
+            )
 
-@dataclass(frozen=True, slots=True)
-class BudgetAllocationOutcome:
+        object.__setattr__(self, "slot_name", normalized_name)
+
+
+class BudgetAllocationOutcome(CanonicalDomainModel):
     """Structured result of a budget allocation pass."""
 
     allocations: tuple[BudgetAllocation, ...]
     trace: ContextTrace
     remaining_tokens: int
+
+    def model_post_init(self, __context: object) -> None:
+        if self.remaining_tokens < 0:
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_BUDGET_ALLOCATION,
+                message_args=("remaining_tokens must be >= 0",),
+            )
 
     @property
     def total_allocated_tokens(self) -> int:
@@ -80,7 +122,6 @@ class BudgetAllocationOutcome:
         return sum(allocation.allocated_tokens for allocation in self.allocations)
 
 
-@dataclass(frozen=True, slots=True)
 class StarterBudgetAllocationPolicy:
     """Starter policy for fixed and elastic slot allocation."""
 
@@ -117,7 +158,8 @@ class StarterBudgetAllocationPolicy:
 
         for slot in budget.slots:
             request = request_by_slot.get(
-                slot.slot_name, BudgetRequest(slot.slot_name, 0)
+                slot.slot_name,
+                BudgetRequest(slot_name=slot.slot_name, requested_tokens=0),
             )
             if slot.mode is not ContextBudgetSlotMode.FIXED:
                 continue
@@ -146,7 +188,8 @@ class StarterBudgetAllocationPolicy:
         )
         for slot in elastic_slots:
             request = request_by_slot.get(
-                slot.slot_name, BudgetRequest(slot.slot_name, 0)
+                slot.slot_name,
+                BudgetRequest(slot_name=slot.slot_name, requested_tokens=0),
             )
             allocated_tokens = min(
                 request.requested_tokens, slot.token_limit, remaining_tokens

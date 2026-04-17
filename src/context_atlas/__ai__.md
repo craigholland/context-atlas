@@ -26,6 +26,7 @@
 - Provides the top-level dependency and public-surface rules that all nested layer packages must follow.
 - Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly and memory runtime knobs.
 - Makes it explicit that canonical domain artifacts now standardize on frozen Pydantic models inside the `context_atlas` namespace.
+- Makes it explicit that public policy inputs, outputs, and configurable starter policies now follow the same validated-model direction.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -36,6 +37,7 @@
 - `rendering/` is for derived outputs only and must not become the canonical home of packet, decision, or trace semantics.
 - Empty layer folders are intentional placeholders; do not collapse their responsibilities into unrelated packages just because the current bootstrap is small.
 - Non-trivial canonical data artifacts should favor frozen Pydantic models over mixed dataclass/Pydantic patterns so validation and constructor semantics stay predictable across the package.
+- Non-trivial public policy surfaces should avoid dataclass-era positional construction assumptions for the same reason.
 
 ## Allowed Dependencies
 - may depend on:
@@ -105,6 +107,7 @@
 - The package root does not yet define a curated broader public API beyond `__version__`.
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
+- The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
 ## Cross-Folder Contracts
 - `domain/`: semantic codes, events, message templates, and canonical domain artifacts defined there are stable contracts for higher layers and must not import outward.

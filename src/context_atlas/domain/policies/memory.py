@@ -8,6 +8,7 @@ import time
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..models.base import CanonicalDomainModel
 from ..models import (
     ContextAssemblyDecision,
     ContextDecisionAction,
@@ -35,8 +36,7 @@ class MemoryRetentionPolicy(Protocol):
         """Return retained memory entries plus a structured decision trace."""
 
 
-@dataclass(frozen=True, slots=True)
-class MemorySelectionOutcome:
+class MemorySelectionOutcome(CanonicalDomainModel):
     """Structured result of a memory-selection policy invocation."""
 
     selected_entries: tuple[ContextMemoryEntry, ...]
@@ -49,8 +49,7 @@ class MemorySelectionOutcome:
         return len(self.selected_entries)
 
 
-@dataclass(frozen=True, slots=True)
-class StarterMemoryRetentionPolicy:
+class StarterMemoryRetentionPolicy(CanonicalDomainModel):
     """Starter retention policy inspired by the context-engine memory prototype."""
 
     short_term_count: int = 4
@@ -59,7 +58,7 @@ class StarterMemoryRetentionPolicy:
     min_effective_score: float = _DEFAULT_MINIMUM_EFFECTIVE_SCORE
     query_boost_weight: float = _DEFAULT_QUERY_BOOST_WEIGHT
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if self.short_term_count < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,

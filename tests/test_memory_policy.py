@@ -174,6 +174,23 @@ class MemoryPolicyTests(unittest.TestCase):
             tuple(reason.value for reason in boosted_decision.reason_codes),
         )
 
+    def test_memory_policy_validates_configuration_inputs(self) -> None:
+        with self.assertRaises(ContextAtlasError) as invalid_short_term_count:
+            StarterMemoryRetentionPolicy(short_term_count=0)
+
+        self.assertEqual(
+            invalid_short_term_count.exception.code,
+            ErrorCode.INVALID_MEMORY_SELECTION,
+        )
+
+        with self.assertRaises(ContextAtlasError) as invalid_decay_rate:
+            StarterMemoryRetentionPolicy(decay_rate=-0.1)
+
+        self.assertEqual(
+            invalid_decay_rate.exception.code,
+            ErrorCode.INVALID_MEMORY_SELECTION,
+        )
+
     def test_memory_trace_can_be_attached_to_a_canonical_packet(self) -> None:
         entries = (
             _memory_entry(

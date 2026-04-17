@@ -7,6 +7,7 @@ import math
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..models.base import CanonicalDomainModel
 from ..models import (
     AuthorityPrecedenceReasonCode,
     ContextAssemblyDecision,
@@ -49,8 +50,7 @@ class CandidateRankingPolicy(Protocol):
         """Return ranked candidates plus a structured decision trace."""
 
 
-@dataclass(frozen=True, slots=True)
-class CandidateRankingOutcome:
+class CandidateRankingOutcome(CanonicalDomainModel):
     """Structured output of a ranking policy invocation."""
 
     ranked_candidates: tuple[ContextCandidate, ...]
@@ -63,14 +63,13 @@ class CandidateRankingOutcome:
         return len(self.ranked_candidates)
 
 
-@dataclass(frozen=True, slots=True)
-class StarterCandidateRankingPolicy:
+class StarterCandidateRankingPolicy(CanonicalDomainModel):
     """Starter ranking policy combining candidate score and authority priority."""
 
     minimum_score: float = _DEFAULT_MINIMUM_SCORE
     deduplicate_by_content: bool = True
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if not math.isfinite(self.minimum_score):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_RANKING_REQUEST,
