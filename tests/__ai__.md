@@ -43,6 +43,8 @@
   - `ConfigAndObservabilityTests`: verifies env-backed assembly defaults and structured assembly-stage logging helpers
 - `test_lexical_retrieval.py`:
   - `LexicalRetrievalTests`: verifies in-memory source registration and lexical retrieval behavior
+- `test_candidate_ranking.py`:
+  - `CandidateRankingTests`: verifies ranking, deduplication, and decision-trace behavior
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -83,11 +85,23 @@
   - invariants:
     - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
     - empty-query and invalid-request behavior should stay explicit and deterministic
+- `test_candidate_ranking.py`:
+  - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
+  - defines:
+    - `CandidateRankingTests`: ranking-policy test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove ranking remains deterministic for identical inputs
+    - exclusion decisions should be trace-visible rather than silent side effects
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
 - The suite now also covers env-backed assembly defaults and the assembly-stage observability surface.
 - The suite now also covers lexical source registration and keyword/TF-IDF retrieval ranking.
+- The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -108,5 +122,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_candidate_ranking, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval"
 ```

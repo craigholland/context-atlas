@@ -16,6 +16,8 @@ class LogEvent(StrEnum):
     MEMORY_SELECTED = "memory_selected"
     SOURCE_REGISTERED = "source_registered"
     RETRIEVAL_COMPLETED = "retrieval_completed"
+    CANDIDATES_DEDUPED = "candidates_deduped"
+    DECISIONS_RECORDED = "decisions_recorded"
     ASSEMBLY_STARTED = "assembly_started"
     ASSEMBLY_COMPLETED = "assembly_completed"
     PACKET_CREATED = "packet_created"
