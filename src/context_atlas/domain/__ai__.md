@@ -25,7 +25,7 @@
 - Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
 - Carries the starter assembly-stage event identifiers and message templates that infrastructure logging can reuse without inventing local semantics.
-- Carries deterministic ranking, deduplication, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
+- Carries deterministic ranking, deduplication, memory-retention, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
@@ -62,11 +62,12 @@
   - canonical source, candidate, budget, packet, decision, and trace artifacts
   - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
   - canonical compression result and strategy artifacts
+  - canonical retained-memory entry artifacts
 - `policies`:
   - `CandidateRankingPolicy`: ranking-policy contract
   - `StarterCandidateRankingPolicy`: starter deterministic ranking/deduplication implementation
   - `CandidateRankingOutcome`: ranked-candidate plus trace result artifact
-  - budget allocation and compression policy contracts plus starter implementations
+  - budget allocation, compression, and memory-retention policy contracts plus starter implementations
 
 ## File Index
 - `errors/codes.py`:
@@ -151,6 +152,13 @@
     - `CompressionResult`
   - invariants:
     - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
+- `models/memory.py`:
+  - responsibility: defines canonical retained-memory entry artifacts
+  - defines:
+    - `ContextMemoryEntry`
+  - invariants:
+    - memory entries should stay canonical structured artifacts rather than ad hoc transcript strings
+    - retention metadata should remain deterministic and dependency-light
 - `policies/ranking.py`:
   - responsibility: ranks candidates, deduplicates them, and records structured decisions
   - defines:
@@ -184,6 +192,15 @@
   - invariants:
     - fallback behavior should remain explicit in metadata and trace
     - compressed text is a transformation artifact, not the canonical packet itself
+- `policies/memory.py`:
+  - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
+  - defines:
+    - `MemoryRetentionPolicy`
+    - `MemorySelectionOutcome`
+    - `StarterMemoryRetentionPolicy`
+  - invariants:
+    - short-term inclusion, decay, deduplication, and query boosts should remain replaceable starter logic
+    - memory selection decisions should stay trace-visible rather than hidden in transcript strings
 
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
@@ -193,6 +210,7 @@
 - The current error/event/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
 - The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
+- The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
@@ -200,6 +218,7 @@
 - `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
 - `adapters/`: future adapter translation boundaries may log with domain `LogEvent` identifiers, but provider-specific payload wording must stay out of domain templates.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
+- `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
 
 ## Verification Contract
 ```yaml
@@ -210,10 +229,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py tests/test_memory_policy.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
 ```

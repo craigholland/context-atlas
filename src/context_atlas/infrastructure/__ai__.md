@@ -21,7 +21,7 @@
 - Holds outer-layer runtime implementations for Context Atlas.
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
 - Demonstrates how infrastructure may depend on domain identifiers and templates while preserving inward dependency direction.
-- Carries the first supported runtime defaults for early assembly behavior and the structured observability helpers that later services will reuse.
+- Carries the first supported runtime defaults for early assembly and memory behavior plus the structured observability helpers that later services will reuse.
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 
 ## Architectural Rules
@@ -46,6 +46,7 @@
   - `ContextAtlasSettings`: top-level runtime settings model
   - `LoggingSettings`: logging configuration model
   - `AssemblySettings`: runtime defaults for early assembly behavior
+  - `MemorySettings`: runtime defaults for starter memory retention behavior
   - `CompressionStrategy`: domain-owned compression-strategy names re-exported for runtime settings
   - `load_settings_from_env`: environment-backed settings loader
 - `logging`:
@@ -60,11 +61,13 @@
   - defines:
     - `LoggingSettings`: logger configuration model
     - `AssemblySettings`: default assembly-budget/retrieval/compression settings
+    - `MemorySettings`: starter memory-retention settings
     - `ContextAtlasSettings`: top-level infrastructure settings container
   - invariants:
     - keep settings focused on runtime/config concerns
     - do not move domain policy toggles here without an explicit architectural decision
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
+    - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
 - `config/environment.py`:
   - responsibility: loads settings from environment variables
   - defines:
@@ -105,12 +108,13 @@
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
+- Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors, events, and message templates, but must never require domain code to import infrastructure implementation modules.
 - `services/`: future services should receive infrastructure capabilities through inward-safe contracts or composition boundaries, not by letting services become logger/config factories.
 - `adapters/`: future adapters may rely on infrastructure helpers for runtime concerns, but translation-heavy provider code should remain outside generic config/logging helpers.
-- repo root: supported env-backed assembly defaults must stay mirrored in `.env.example`.
+- repo root: supported env-backed assembly and memory defaults must stay mirrored in `.env.example`.
 - package root `context_atlas/`: root-level imports may expose infrastructure helpers selectively, but should not re-export enough internals to blur the layer boundary.
 
 ## Verification Contract
@@ -127,5 +131,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_event, log_event"
+      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_event, log_event"
 ```

@@ -25,3 +25,5 @@ class ErrorCode(StrEnum):
     INVALID_RANKING_REQUEST = "invalid_ranking_request"
     INVALID_BUDGET_ALLOCATION = "invalid_budget_allocation"
     INVALID_COMPRESSION_REQUEST = "invalid_compression_request"
+    INVALID_MEMORY_ENTRY = "invalid_memory_entry"
+    INVALID_MEMORY_SELECTION = "invalid_memory_selection"

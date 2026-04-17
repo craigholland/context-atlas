@@ -8,6 +8,11 @@ from .budgeting import (
     StarterBudgetAllocationPolicy,
 )
 from .compression import CompressionOutcome, CompressionPolicy, StarterCompressionPolicy
+from .memory import (
+    MemoryRetentionPolicy,
+    MemorySelectionOutcome,
+    StarterMemoryRetentionPolicy,
+)
 from .ranking import (
     CandidateRankingOutcome,
     CandidateRankingPolicy,
@@ -23,7 +28,10 @@ __all__ = [
     "CompressionOutcome",
     "CompressionPolicy",
     "ContextBudgetAllocationPolicy",
+    "MemoryRetentionPolicy",
+    "MemorySelectionOutcome",
     "StarterBudgetAllocationPolicy",
     "StarterCompressionPolicy",
+    "StarterMemoryRetentionPolicy",
     "StarterCandidateRankingPolicy",
 ]

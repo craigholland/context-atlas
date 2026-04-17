@@ -12,7 +12,9 @@ class LogMessageTemplate:
     LOGGER_CONFIGURED = "Logger configured: name=%s, level=%s"
     SETTINGS_LOADED = (
         "Settings loaded: logger_name=%s, log_level=%s, default_total_budget=%d, "
-        "default_retrieval_top_k=%d, default_compression_strategy=%s"
+        "default_retrieval_top_k=%d, default_compression_strategy=%s, "
+        "memory_short_term_count=%d, memory_decay_rate=%.4f, "
+        "memory_dedup_threshold=%.2f"
     )
     COMPONENT_INITIALIZED = "Component initialized: name=%s"
     CANDIDATES_GATHERED = "Candidates gathered: trace_id=%s, candidate_count=%d"
@@ -25,6 +27,7 @@ class LogMessageTemplate:
         "compressed_chars=%d"
     )
     MEMORY_SELECTED = "Memory selected: trace_id=%s, memory_entries=%d"
+    MEMORY_REJECTED = "Memory rejected: trace_id=%s, source_id=%s, reason=%s"
     SOURCE_REGISTERED = "Source registered: source_id=%s, total_sources=%d"
     RETRIEVAL_COMPLETED = "Retrieval completed: mode=%s, query=%s, candidate_count=%d"
     CANDIDATES_DEDUPED = "Candidates deduped: trace_id=%s, removed_candidates=%d"
@@ -48,6 +51,7 @@ _LOG_MESSAGES: Mapping[LogEvent, str] = MappingProxyType(
         LogEvent.BUDGET_ALLOCATED: LogMessageTemplate.BUDGET_ALLOCATED,
         LogEvent.COMPRESSION_APPLIED: LogMessageTemplate.COMPRESSION_APPLIED,
         LogEvent.MEMORY_SELECTED: LogMessageTemplate.MEMORY_SELECTED,
+        LogEvent.MEMORY_REJECTED: LogMessageTemplate.MEMORY_REJECTED,
         LogEvent.SOURCE_REGISTERED: LogMessageTemplate.SOURCE_REGISTERED,
         LogEvent.RETRIEVAL_COMPLETED: LogMessageTemplate.RETRIEVAL_COMPLETED,
         LogEvent.CANDIDATES_DEDUPED: LogMessageTemplate.CANDIDATES_DEDUPED,
