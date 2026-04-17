@@ -23,6 +23,7 @@
 - Holds the current semantic core for Context Atlas.
 - Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
+- Carries the starter assembly-stage event identifiers and message templates that infrastructure logging can reuse without inventing local semantics.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
@@ -49,11 +50,11 @@
   - `ContextAtlasError`: base exception carrying a stable code and formatted message
   - `ConfigurationError`: configuration-specific exception type
 - `events`:
-  - `LogEvent`: stable event identifiers for meaningful operational events
+  - `LogEvent`: stable event identifiers for meaningful operational events, including assembly-stage observability markers
 - `messages`:
   - `format_error_message`: formats a stable error code using centralized templates
   - `get_error_message`: fetches the registered error template
-  - `get_log_message`: fetches the registered log-event template
+  - `get_log_message`: fetches the registered log-event template, including settings and assembly-stage messages
 - `models`:
   - canonical source, candidate, budget, packet, decision, and trace artifacts
   - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
@@ -82,6 +83,7 @@
     - `LogEvent`: string enum of meaningful system events
   - invariants:
     - event ids should be machine-stable even if message wording changes
+    - stage-level assembly event ids should be added here before any higher layer starts logging them
 - `messages/error_messages.py`:
   - responsibility: centralizes reusable human-facing error templates
   - defines:
@@ -97,6 +99,7 @@
     - `get_log_message`
   - invariants:
     - templates here are semantic contracts consumed by logging infrastructure
+    - expanded settings and stage-event wording should be updated here, not introduced inline in outer layers
 - `models/sources.py`:
   - responsibility: defines canonical source, provenance, and candidate artifacts
   - defines:
@@ -134,6 +137,7 @@
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current model set is canonical structure, not yet full policy behavior.
 - The distinction between domain events and future richer audit projections is still intentionally thin.
+- The current event/message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
