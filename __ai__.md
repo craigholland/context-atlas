@@ -12,6 +12,7 @@
   - "README.md"
   - "pyproject.toml"
   - ".gitignore"
+  - ".env.example"
   - "__ai__.md"
   - "__ai__.template.md"
   - ".githooks/**"
@@ -29,6 +30,7 @@
 - Defines repo-level operational rules that apply before recommending a push or merge.
 - Connects the local `__ai__.md` contract system to a single repo-wide preflight entrypoint.
 - Establishes hook and packaging expectations for the standalone Context Atlas library repo.
+- Keeps the tracked example environment surface aligned with supported runtime settings.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -49,6 +51,8 @@
   - project metadata, Python floor, and dev-tool declarations
 - `__ai__.template.md`:
   - baseline authoring template for local contract files
+- `.env.example`:
+  - tracked example environment surface for supported runtime knobs
 - `__ai__.md`:
   - repo-level operational contract for preflight and push readiness
 - `.githooks/pre-push`:
@@ -63,6 +67,10 @@
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:
     - changes here should be reflected intentionally in validator expectations and local owner files
+- `.env.example`:
+  - responsibility: makes the supported environment-backed runtime settings visible at the repo root
+  - invariants:
+    - keys here should reflect the actual environment surface supported by infrastructure config loaders
 - `__ai__.md`:
   - responsibility: states repo-wide operational rules before push or merge
   - invariants:
@@ -79,6 +87,7 @@
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
 - `src/context_atlas/`: preflight should prove repo readiness without redefining package-layer rules that belong to nearer owner files.
+- `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
 - `.github/workflows/`: CI should mirror the local preflight closely enough that GitHub failures are usually reproducible before push.
 
 ## Verification Contract

@@ -18,7 +18,14 @@ import subprocess
 from pathlib import Path
 
 DEFAULT_OWNER_FILENAME = "__ai__.md"
-DEFAULT_FALLBACK_BASE_REFS = ("origin/main", "main", "origin/master", "master")
+DEFAULT_FALLBACK_BASE_REFS = (
+    "origin/development",
+    "development",
+    "origin/main",
+    "main",
+    "origin/master",
+    "master",
+)
 
 
 def _run(cmd: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:

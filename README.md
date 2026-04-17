@@ -29,6 +29,10 @@ This repository is in architecture bootstrap. The initial focus is on authoritat
 - `tests/` for automated tests
 - `examples/` for usage examples and demonstrations
 
+## Runtime Knobs
+
+The tracked [`.env.example`](K:/keven/codex_repo/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
+
 ## License
 
 MPL-2.0
