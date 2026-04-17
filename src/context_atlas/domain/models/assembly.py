@@ -10,6 +10,7 @@ from typing import Mapping
 
 from ..errors import ContextAtlasError, ErrorCode
 from .budget import ContextBudget
+from .memory import ContextMemoryEntry
 from .reason_codes import (
     AuthorityPrecedenceReasonCode,
     BudgetPressureReasonCode,
@@ -107,6 +108,7 @@ class ContextPacket:
     packet_id: str
     query: str
     selected_candidates: tuple[ContextCandidate, ...] = ()
+    selected_memory_entries: tuple[ContextMemoryEntry, ...] = ()
     budget: ContextBudget | None = None
     trace: ContextTrace | None = None
     compression_result: CompressionResult | None = None
@@ -124,13 +126,18 @@ class ContextPacket:
         object.__setattr__(self, "packet_id", normalized_packet_id)
         object.__setattr__(self, "query", normalized_query)
         object.__setattr__(self, "selected_candidates", tuple(self.selected_candidates))
+        object.__setattr__(
+            self,
+            "selected_memory_entries",
+            tuple(self.selected_memory_entries),
+        )
         object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
 
     @property
     def item_count(self) -> int:
-        """Return the number of selected candidates in the packet."""
+        """Return the number of canonical items included in the packet."""
 
-        return len(self.selected_candidates)
+        return len(self.selected_candidates) + len(self.selected_memory_entries)
 
 
 __all__ = [
