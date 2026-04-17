@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import re
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..models.base import CanonicalDomainModel
 from ..models import (
     BudgetPressureReasonCode,
     CompressionResult,
@@ -33,23 +33,21 @@ class CompressionPolicy(Protocol):
         """Compress candidate content into a bounded structured result."""
 
 
-@dataclass(frozen=True, slots=True)
-class CompressionOutcome:
+class CompressionOutcome(CanonicalDomainModel):
     """Structured result of a compression-policy invocation."""
 
     compression_result: CompressionResult
     trace: ContextTrace
 
 
-@dataclass(frozen=True, slots=True)
-class StarterCompressionPolicy:
+class StarterCompressionPolicy(CanonicalDomainModel):
     """Starter compression policy inspired by the context-engine prototype."""
 
     strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
     chars_per_token: int = 4
     min_chunk_chars: int = 20
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if self.chars_per_token < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,

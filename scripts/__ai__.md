@@ -29,6 +29,7 @@
 - Diff-based scripts should prefer `development` first when discovering a comparison base, then fall back to `main` and older defaults when needed.
 - Avoid project-runtime imports from `src/context_atlas` unless a script truly needs them; most scripts here should operate on files, git state, and declared contracts.
 - `preflight.py` is the canonical local gate before push or merge; other scripts should support it rather than compete with it.
+- Small private dataclasses are acceptable here when they are local rule/config carriers for the script itself and not part of the package runtime surface.
 
 ## Allowed Dependencies
 - may depend on:
@@ -77,6 +78,8 @@
   - responsibility: enforces configured Python layer dependency rules
   - depends_on:
     - `import_boundary_rules.toml`
+  - invariants:
+    - `BoundaryRule` and `BoundaryConfig` may remain private dataclasses because they are script-local utility state, not package-facing validated models
 - `preflight.py`:
   - responsibility: runs the canonical local preflight before push or merge
   - depends_on:

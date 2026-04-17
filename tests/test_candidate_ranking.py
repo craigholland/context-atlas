@@ -6,6 +6,7 @@ import io
 import logging
 import unittest
 
+from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
     AuthorityPrecedenceReasonCode,
@@ -147,6 +148,15 @@ class CandidateRankingTests(unittest.TestCase):
         ]
         self.assertEqual(len(excluded_decisions), 2)
         self.assertEqual(outcome.trace.metadata["included_candidate_count"], "1")
+
+    def test_ranking_policy_validates_configuration_inputs(self) -> None:
+        with self.assertRaises(ContextAtlasError) as invalid_score:
+            StarterCandidateRankingPolicy(minimum_score=float("nan"))
+
+        self.assertEqual(
+            invalid_score.exception.code,
+            ErrorCode.INVALID_RANKING_REQUEST,
+        )
 
     def test_ranking_stage_events_have_stable_templates_and_fields(self) -> None:
         logger = logging.getLogger("context_atlas.tests.ranking")

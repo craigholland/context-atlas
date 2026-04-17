@@ -91,10 +91,10 @@ class BudgetAndCompressionTests(unittest.TestCase):
             budget,
             trace_id="trace-budget-1",
             requests=(
-                BudgetRequest("system", 180),
-                BudgetRequest("history", 240),
-                BudgetRequest("memory", 400),
-                BudgetRequest("docs", 600),
+                BudgetRequest(slot_name="system", requested_tokens=180),
+                BudgetRequest(slot_name="history", requested_tokens=240),
+                BudgetRequest(slot_name="memory", requested_tokens=400),
+                BudgetRequest(slot_name="docs", requested_tokens=600),
             ),
         )
 
@@ -112,6 +112,10 @@ class BudgetAndCompressionTests(unittest.TestCase):
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
             outcome.trace.decisions[-1].reason_codes,
         )
+        self.assertEqual(
+            outcome.model_dump()["allocations"][0]["slot_name"],
+            "system",
+        )
 
     def test_budget_allocation_rejects_unknown_slot_requests(self) -> None:
         budget = ContextBudget(
@@ -123,10 +127,24 @@ class BudgetAndCompressionTests(unittest.TestCase):
             StarterBudgetAllocationPolicy().allocate_budget(
                 budget,
                 trace_id="trace-budget-2",
-                requests=(BudgetRequest("unknown", 64),),
+                requests=(BudgetRequest(slot_name="unknown", requested_tokens=64),),
             )
 
         self.assertEqual(context.exception.code, ErrorCode.INVALID_BUDGET_ALLOCATION)
+
+    def test_budget_request_validates_name_and_requested_tokens(self) -> None:
+        with self.assertRaises(ContextAtlasError) as blank_name:
+            BudgetRequest(slot_name="   ", requested_tokens=1)
+
+        self.assertEqual(blank_name.exception.code, ErrorCode.INVALID_BUDGET_ALLOCATION)
+
+        with self.assertRaises(ContextAtlasError) as negative_request:
+            BudgetRequest(slot_name="docs", requested_tokens=-1)
+
+        self.assertEqual(
+            negative_request.exception.code,
+            ErrorCode.INVALID_BUDGET_ALLOCATION,
+        )
 
     def test_compression_policy_returns_structured_result(self) -> None:
         candidates = LexicalRetriever(
@@ -181,6 +199,23 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
             outcome.trace.decisions[-1].reason_codes,
+        )
+
+    def test_compression_policy_validates_configuration_inputs(self) -> None:
+        with self.assertRaises(ContextAtlasError) as invalid_chars:
+            StarterCompressionPolicy(chars_per_token=0)
+
+        self.assertEqual(
+            invalid_chars.exception.code,
+            ErrorCode.INVALID_COMPRESSION_REQUEST,
+        )
+
+        with self.assertRaises(ContextAtlasError) as invalid_chunk_size:
+            StarterCompressionPolicy(min_chunk_chars=0)
+
+        self.assertEqual(
+            invalid_chunk_size.exception.code,
+            ErrorCode.INVALID_COMPRESSION_REQUEST,
         )
 
     def test_packet_retains_structured_compression_metadata_when_rendered(self) -> None:

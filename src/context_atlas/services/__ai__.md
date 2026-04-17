@@ -25,6 +25,7 @@
 ## Architectural Rules
 - Services may depend on `context_atlas.domain`, but must not import `context_atlas.adapters`, `context_atlas.infrastructure`, or `context_atlas.rendering`.
 - Services orchestrate stage sequencing and canonical artifact assembly; deterministic ranking, budgeting, compression, and memory-selection rules should remain inward in `domain/`.
+- Services should assume public policy request/result objects are validated Pydantic models and should not reintroduce dataclass-era positional-construction assumptions at those boundaries.
 - Services may depend on inward-safe contracts such as retriever protocols, but should not instantiate or import concrete adapter implementations directly.
 - Services should emit stable domain-owned log messages through injected loggers rather than inventing inline semantic strings.
 
