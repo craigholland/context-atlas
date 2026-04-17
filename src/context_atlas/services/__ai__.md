@@ -20,6 +20,7 @@
 - Holds service-layer orchestration for Context Atlas workflows.
 - Composes retrieval, ranking, memory selection, budget allocation, compression, and packet finalization into canonical packet outputs.
 - Keeps orchestration logic out of `domain/` while also refusing to let concrete adapter or infrastructure mechanics define system behavior.
+- Surfaces selected source classification and provenance collectors in trace metadata so adapter-origin semantics remain inspectable downstream.
 
 ## Architectural Rules
 - Services may depend on `context_atlas.domain`, but must not import `context_atlas.adapters`, `context_atlas.infrastructure`, or `context_atlas.rendering`.
@@ -59,10 +60,12 @@
   - invariants:
     - orchestration should produce canonical packets and traces, not prompt-first strings
     - packet assembly should stay explainable through structured trace metadata and decisions
+    - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
 
 ## Known Gaps / Future-State Notes
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.
+- The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 
 ## Cross-Folder Contracts

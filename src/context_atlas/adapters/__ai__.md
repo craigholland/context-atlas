@@ -10,6 +10,7 @@
 - folder: src/context_atlas/adapters
 - included:
   - "__init__.py"
+  - "docs/**/*.py"
   - "retrieval/**/*.py"
 - excluded:
   - "__pycache__/**"
@@ -19,6 +20,7 @@
 ## Purpose
 - Holds adapter-layer implementations that translate external or storage-facing inputs into Atlas-native artifacts.
 - Provides the first retrieval-oriented adapter slice for turning registered `ContextSource` objects into raw `ContextCandidate` outputs.
+- Provides an ontology-aware filesystem document adapter for turning markdown docs into classified `ContextSource` artifacts.
 - Keeps lexical retrieval behavior outside the semantic core while still consuming domain-stable codes, messages, and canonical models.
 
 ## Architectural Rules
@@ -39,6 +41,8 @@
   - imports that cause `context_atlas.domain` to depend back on adapters
 
 ## Public API / Key Exports
+- `docs`:
+  - `FilesystemDocumentSourceAdapter`: loads markdown documents as classified Atlas sources
 - `retrieval`:
   - `InMemorySourceRegistry`: in-memory registry for canonical sources
   - `LexicalRetrievalMode`: supported keyword/TF-IDF retrieval modes
@@ -63,14 +67,27 @@
     - retrieval should return Atlas-native `ContextCandidate` artifacts, not prototype-specific DTOs
     - empty queries should fail soft with no candidates rather than inventing placeholder data
     - source registration should preserve stable source identifiers and reject duplicate ids
+- `docs/filesystem.py`:
+  - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
+  - defines:
+    - `FilesystemDocumentSourceAdapter`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+  - invariants:
+    - document classification should prefer explicit front matter over path inference when both are present
+    - inferred source authority/durability should follow the documentation ontology rather than flattening docs into generic tags
+    - provenance should preserve file identity and classification source so later traces can explain where a source came from
 
 ## Known Gaps / Future-State Notes
-- This folder currently contains only lexical retrieval; embeddings, filesystem/doc adapters, and provider-backed adapters can land later as separate slices.
+- This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
 - `domain/`: candidate reranking, deduplication, and decision tracing now harden inward there; adapters should stop at source registration and candidate production.
+- `domain/`: filesystem document adapters may classify source authority and durability, but those classifications should be expressed through canonical `ContextSource` fields rather than local enums or ad hoc tags.
 - `services/`: future services should orchestrate retrieval through inward-safe contracts rather than by embedding lexical scoring logic directly.
 - `infrastructure/`: adapters should not depend on infrastructure helpers unless a concrete runtime concern truly requires it.
 
@@ -83,10 +100,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_lexical_retrieval.py
+      py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.adapters import InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever"
+      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever"
 ```
