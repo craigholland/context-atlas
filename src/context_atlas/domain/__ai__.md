@@ -67,6 +67,7 @@
   - invariants:
     - codes should be stable once referenced by higher layers or tests
     - prefer semantic identifiers over incidental implementation wording
+    - source-registration and retrieval-request failures should get stable codes here before adapters raise them
 - `errors/exceptions.py`:
   - responsibility: defines domain exception classes built on stable codes and templates
   - defines:
@@ -84,6 +85,7 @@
   - invariants:
     - event ids should be machine-stable even if message wording changes
     - stage-level assembly event ids should be added here before any higher layer starts logging them
+    - source-ingestion and retrieval lifecycle events should be registered here before adapter code emits them
 - `messages/error_messages.py`:
   - responsibility: centralizes reusable human-facing error templates
   - defines:
@@ -92,6 +94,7 @@
     - `format_error_message`
   - footguns:
     - avoid turning this into a dumping ground for trivial one-off strings
+    - retrieval and source-registration errors should resolve through these templates rather than inline adapter text
 - `messages/log_messages.py`:
   - responsibility: centralizes reusable log templates keyed by stable event ids
   - defines:
@@ -138,6 +141,7 @@
 - The current model set is canonical structure, not yet full policy behavior.
 - The distinction between domain events and future richer audit projections is still intentionally thin.
 - The current event/message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
+- The current error/event/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.

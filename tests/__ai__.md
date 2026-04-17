@@ -41,6 +41,8 @@
   - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
 - `test_config_observability.py`:
   - `ConfigAndObservabilityTests`: verifies env-backed assembly defaults and structured assembly-stage logging helpers
+- `test_lexical_retrieval.py`:
+  - `LexicalRetrievalTests`: verifies in-memory source registration and lexical retrieval behavior
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -71,10 +73,21 @@
   - invariants:
     - tests should prove `.env.example`-backed settings remain parseable and validated
     - assertions should verify structured event fields rather than ad hoc log text alone
+- `test_lexical_retrieval.py`:
+  - responsibility: verifies PR 3 source registration and lexical retrieval behavior
+  - defines:
+    - `LexicalRetrievalTests`: lexical retrieval test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
+    - empty-query and invalid-request behavior should stay explicit and deterministic
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
 - The suite now also covers env-backed assembly defaults and the assembly-stage observability surface.
+- The suite now also covers lexical source registration and keyword/TF-IDF retrieval ranking.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -95,5 +108,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_config_observability, tests.test_domain_models"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval"
 ```

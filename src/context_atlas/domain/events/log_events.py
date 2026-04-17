@@ -14,6 +14,8 @@ class LogEvent(StrEnum):
     BUDGET_ALLOCATED = "budget_allocated"
     COMPRESSION_APPLIED = "compression_applied"
     MEMORY_SELECTED = "memory_selected"
+    SOURCE_REGISTERED = "source_registered"
+    RETRIEVAL_COMPLETED = "retrieval_completed"
     ASSEMBLY_STARTED = "assembly_started"
     ASSEMBLY_COMPLETED = "assembly_completed"
     PACKET_CREATED = "packet_created"
