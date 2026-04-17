@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Mapping
+
+from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from .base import CanonicalDomainModel
 
 
 class CompressionStrategy(StrEnum):
@@ -18,14 +18,7 @@ class CompressionStrategy(StrEnum):
     EXTRACTIVE = "extractive"
 
 
-def _freeze_mapping(raw_mapping: Mapping[str, str]) -> Mapping[str, str]:
-    """Return an immutable copy of a string-keyed mapping."""
-
-    return MappingProxyType(dict(raw_mapping))
-
-
-@dataclass(frozen=True, slots=True)
-class CompressionResult:
+class CompressionResult(CanonicalDomainModel):
     """Structured compression artifact retained as canonical packet metadata."""
 
     text: str
@@ -35,9 +28,9 @@ class CompressionResult:
     estimated_tokens_saved: int
     was_applied: bool = True
     source_ids: tuple[str, ...] = ()
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if self.original_chars < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
@@ -62,7 +55,7 @@ class CompressionResult:
             )
 
         object.__setattr__(self, "source_ids", tuple(self.source_ids))
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
     @property
     def compression_ratio(self) -> float:
@@ -71,3 +64,6 @@ class CompressionResult:
         if self.original_chars == 0:
             return 1.0
         return round(self.compressed_chars / self.original_chars, 3)
+
+
+__all__ = ["CompressionResult", "CompressionStrategy"]

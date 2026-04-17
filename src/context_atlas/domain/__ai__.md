@@ -23,6 +23,7 @@
 - Holds the current semantic core for Context Atlas.
 - Provides stable machine-facing identifiers and human-facing message constants for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
+- Establishes a frozen Pydantic standard for canonical source, candidate, budget, packet, decision, and trace artifacts.
 - Keeps packet state canonical even as packets begin carrying both ranked source candidates and retained memory entries.
 - Carries the starter log message surface that infrastructure logging can reuse without inventing local semantics.
 - Carries deterministic ranking, deduplication, memory-retention, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
@@ -32,6 +33,7 @@
 - Code here should represent semantic meaning, not runtime environment mechanics.
 - Error codes and centralized message constants belong here because they are cross-layer semantic contracts, not logging/config implementation details.
 - Canonical source, budget, packet, decision, and trace artifacts belong here rather than in `services/` or `rendering/`.
+- Non-trivial canonical artifacts in `models/` should use frozen Pydantic models with explicit domain validation instead of mixed dataclass and BaseModel patterns.
 - Deterministic ranking and decision-recording policies belong here when they can remain pure and dependency-light.
 - Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
 - Do not move environment loading, logger setup, provider DTOs, or persistence shapes into this folder just because they are utility-like.
@@ -111,6 +113,15 @@
   - invariants:
     - source identifiers and content must normalize cleanly
     - candidate scoring metadata must remain machine-usable and deterministic
+    - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
+- `models/base.py`:
+  - responsibility: provides shared frozen-model and immutable metadata helpers for canonical artifacts
+  - defines:
+    - `CanonicalDomainModel`
+    - `FrozenStringMap`
+  - invariants:
+    - helper code here should stay thin and model-focused rather than becoming a general utility bucket
+    - immutable metadata helpers should preserve canonical state without importing outer-layer libraries
 - `models/budget.py`:
   - responsibility: defines canonical budget and budget-slot artifacts
   - defines:
@@ -120,6 +131,7 @@
   - invariants:
     - fixed-slot reservations must not silently exceed total budget
     - slot names must stay unique within a single budget
+    - budget artifacts should reject invalid state during Pydantic model initialization rather than through later service checks
 - `models/assembly.py`:
   - responsibility: defines canonical assembly decisions, traces, and packets
   - defines:
@@ -195,6 +207,7 @@
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current model set is canonical structure, not yet full policy behavior.
+- The current canonical model set now uses frozen Pydantic artifacts with immutable metadata helpers; remaining dataclass-based policy/result artifacts are follow-up hardening work rather than the canonical pattern.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Mapping
+
+from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from .base import CanonicalDomainModel
 
 
 class ContextBudgetSlotMode(StrEnum):
@@ -17,14 +17,7 @@ class ContextBudgetSlotMode(StrEnum):
     ELASTIC = "elastic"
 
 
-def _freeze_mapping(raw_mapping: Mapping[str, str]) -> Mapping[str, str]:
-    """Return an immutable copy of a string-keyed mapping."""
-
-    return MappingProxyType(dict(raw_mapping))
-
-
-@dataclass(frozen=True, slots=True)
-class ContextBudgetSlot:
+class ContextBudgetSlot(CanonicalDomainModel):
     """A named budget slot inside a context budget."""
 
     slot_name: str
@@ -32,7 +25,7 @@ class ContextBudgetSlot:
     mode: ContextBudgetSlotMode = ContextBudgetSlotMode.FIXED
     priority: int = 100
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_name = self.slot_name.strip()
         if not normalized_name:
             raise ContextAtlasError(
@@ -53,26 +46,24 @@ class ContextBudgetSlot:
         object.__setattr__(self, "slot_name", normalized_name)
 
 
-@dataclass(frozen=True, slots=True)
-class ContextBudget:
+class ContextBudget(CanonicalDomainModel):
     """Top-level budget artifact for packet assembly."""
 
     total_tokens: int
     slots: tuple[ContextBudgetSlot, ...] = ()
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         if self.total_tokens < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_TOTAL,
                 message_args=("total tokens must be >= 1",),
             )
 
-        normalized_slots = tuple(self.slots)
         fixed_reserved_tokens = 0
         seen_slot_names: set[str] = set()
 
-        for slot in normalized_slots:
+        for slot in self.slots:
             if slot.slot_name in seen_slot_names:
                 raise ContextAtlasError(
                     code=ErrorCode.DUPLICATE_BUDGET_SLOT_NAME,
@@ -90,8 +81,7 @@ class ContextBudget:
                 ),
             )
 
-        object.__setattr__(self, "slots", normalized_slots)
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
     @property
     def reserved_tokens(self) -> int:

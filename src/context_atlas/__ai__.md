@@ -25,6 +25,7 @@
 - Establishes the Craig-style layer spine for the standalone library layout under `src/context_atlas/`.
 - Provides the top-level dependency and public-surface rules that all nested layer packages must follow.
 - Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly and memory runtime knobs.
+- Makes it explicit that canonical domain artifacts now standardize on frozen Pydantic models inside the `context_atlas` namespace.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -34,6 +35,7 @@
 - `infrastructure/` and `adapters/` are outer concerns; they may depend inward, but inward layers must not import their concrete implementations.
 - `rendering/` is for derived outputs only and must not become the canonical home of packet, decision, or trace semantics.
 - Empty layer folders are intentional placeholders; do not collapse their responsibilities into unrelated packages just because the current bootstrap is small.
+- Non-trivial canonical data artifacts should favor frozen Pydantic models over mixed dataclass/Pydantic patterns so validation and constructor semantics stay predictable across the package.
 
 ## Allowed Dependencies
 - may depend on:
@@ -49,6 +51,7 @@
   - `__version__`: package version marker for the standalone library namespace
 - `domain/`:
   - semantic core for error codes, log events, messages, canonical domain artifacts, and pure policy logic
+  - canonical artifacts now use frozen Pydantic models with explicit domain validation
 - `infrastructure/`:
   - runtime configuration and logging implementation details for the current bootstrap
   - early assembly and memory default settings plus structured observability helpers
@@ -77,6 +80,7 @@
     - inward-most project layer
     - may remain small early, but must stay dependency-clean
     - canonical packet, budget, source, decision, and trace artifacts should live here rather than in outer layers
+    - canonical artifacts should keep one validated constructor style so services/adapters/tests are not forced to guess between dataclass and Pydantic semantics
     - pure ranking, deduplication, memory-retention, and decision-recording policy logic may live here when it is deterministic and dependency-light
 - `services/`:
   - responsibility: orchestrates retrieval, ranking, budgeting, compression, memory inclusion, and packet finalization
@@ -100,6 +104,7 @@
 - `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
 - The package root does not yet define a curated broader public API beyond `__version__`.
 - Future migration work from `context-engine` should add `__ai__.md` files for subfolders once they gain enough local complexity to justify their own contracts.
+- The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 
 ## Cross-Folder Contracts
 - `domain/`: semantic codes, events, message templates, and canonical domain artifacts defined there are stable contracts for higher layers and must not import outward.

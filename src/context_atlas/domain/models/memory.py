@@ -3,22 +3,15 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
-from types import MappingProxyType
-from typing import Mapping
+
+from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from .base import CanonicalDomainModel
 from .sources import ContextSource
 
 
-def _freeze_mapping(raw_mapping: Mapping[str, str]) -> Mapping[str, str]:
-    """Return an immutable copy of a string-keyed mapping."""
-
-    return MappingProxyType(dict(raw_mapping))
-
-
-@dataclass(frozen=True, slots=True)
-class ContextMemoryEntry:
+class ContextMemoryEntry(CanonicalDomainModel):
     """Canonical retained-memory artifact for future packet assembly."""
 
     entry_id: str
@@ -26,9 +19,9 @@ class ContextMemoryEntry:
     recorded_at_epoch_seconds: float
     importance: float = 1.0
     last_accessed_at_epoch_seconds: float | None = None
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_entry_id = self.entry_id.strip()
         if not normalized_entry_id:
             raise ContextAtlasError(
@@ -68,7 +61,7 @@ class ContextMemoryEntry:
                 )
 
         object.__setattr__(self, "entry_id", normalized_entry_id)
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
     def age_seconds(self, *, now_epoch_seconds: float) -> float:
         """Return age at the provided clock instant, flooring negative drift to zero."""

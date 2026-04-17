@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
 from enum import StrEnum
-from types import MappingProxyType
-from typing import Mapping
+
+from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from .base import CanonicalDomainModel
 from .budget import ContextBudget
 from .memory import ContextMemoryEntry
 from .reason_codes import (
@@ -37,14 +37,7 @@ class ContextDecisionAction(StrEnum):
     DEFERRED = "deferred"
 
 
-def _freeze_mapping(raw_mapping: Mapping[str, str]) -> Mapping[str, str]:
-    """Return an immutable copy of a string-keyed mapping."""
-
-    return MappingProxyType(dict(raw_mapping))
-
-
-@dataclass(frozen=True, slots=True)
-class ContextAssemblyDecision:
+class ContextAssemblyDecision(CanonicalDomainModel):
     """Structured inclusion, exclusion, or transformation decision."""
 
     source_id: str
@@ -54,7 +47,7 @@ class ContextAssemblyDecision:
     candidate_score: float | None = None
     position: int | None = None
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_source_id = self.source_id.strip()
         if not normalized_source_id:
             raise ContextAtlasError(
@@ -83,26 +76,23 @@ class ContextAssemblyDecision:
             object.__setattr__(self, "explanation", self.explanation.strip() or None)
 
 
-@dataclass(frozen=True, slots=True)
-class ContextTrace:
+class ContextTrace(CanonicalDomainModel):
     """Canonical trace for a packet assembly attempt."""
 
     trace_id: str
     decisions: tuple[ContextAssemblyDecision, ...] = ()
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_trace_id = self.trace_id.strip()
         if not normalized_trace_id:
             raise ContextAtlasError(code=ErrorCode.INVALID_TRACE_IDENTIFIER)
 
         object.__setattr__(self, "trace_id", normalized_trace_id)
-        object.__setattr__(self, "decisions", tuple(self.decisions))
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
 
-@dataclass(frozen=True, slots=True)
-class ContextPacket:
+class ContextPacket(CanonicalDomainModel):
     """Canonical structured packet artifact produced by assembly."""
 
     packet_id: str
@@ -112,9 +102,9 @@ class ContextPacket:
     budget: ContextBudget | None = None
     trace: ContextTrace | None = None
     compression_result: CompressionResult | None = None
-    metadata: Mapping[str, str] = field(default_factory=dict)
+    metadata: dict[str, str] = Field(default_factory=dict)
 
-    def __post_init__(self) -> None:
+    def model_post_init(self, __context: object) -> None:
         normalized_packet_id = self.packet_id.strip()
         if not normalized_packet_id:
             raise ContextAtlasError(code=ErrorCode.INVALID_PACKET_IDENTIFIER)
@@ -125,13 +115,7 @@ class ContextPacket:
 
         object.__setattr__(self, "packet_id", normalized_packet_id)
         object.__setattr__(self, "query", normalized_query)
-        object.__setattr__(self, "selected_candidates", tuple(self.selected_candidates))
-        object.__setattr__(
-            self,
-            "selected_memory_entries",
-            tuple(self.selected_memory_entries),
-        )
-        object.__setattr__(self, "metadata", _freeze_mapping(self.metadata))
+        object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
     @property
     def item_count(self) -> int:

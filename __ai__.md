@@ -33,6 +33,7 @@
 - Keeps the tracked example environment surface aligned with supported runtime settings.
 - Makes the visible runtime knob surface reviewable at the repo root as assembly defaults, memory defaults, and observability settings begin to grow.
 - Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
+- Treats canonical domain artifacts as part of the visible package contract when the domain model standard shifts from starter dataclasses to frozen Pydantic models.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -41,6 +42,7 @@
 - The root owner file should express repo-wide operational rules and delegate folder-specific rules to nearer `__ai__.md` files rather than duplicating them.
 - When hardening slices materially change governed package or test contracts, this root owner file should still be updated alongside the nearer owner files so repo-level freshness checks remain honest.
 - The repo's logging/message surface is the direct `LogMessage` pattern with stable event-name fields; contributors should not reintroduce a separate `domain/events` layer unless the authoritative docs change first.
+- The repo's canonical domain-artifact standard is now frozen Pydantic models with explicit domain validation; contributors should not introduce new non-trivial dataclass artifacts without first updating the hardening plan and local owner files.
 
 ## Allowed Dependencies
 - may depend on:
@@ -77,6 +79,11 @@
   - invariants:
     - keys here should reflect the actual environment surface supported by infrastructure config loaders
     - assembly and memory default knobs should stay intentionally small and clearly operator-facing
+- `src/context_atlas/domain/models/*.py`:
+  - responsibility: define the canonical Pydantic-backed artifacts consumed across the package
+  - invariants:
+    - non-trivial canonical artifacts should remain frozen Pydantic models rather than drifting back to mixed constructor styles
+    - inner metadata maps should stay immutable so packet/source state remains trustworthy once assembled
 - `__ai__.md`:
   - responsibility: states repo-wide operational rules before push or merge
   - invariants:
@@ -91,6 +98,7 @@
 - The hook path still needs to be configured locally in each clone unless automation or contributor setup scripts do that explicitly.
 - The current feature branch is now in an implementation-hardening phase documented under `docs/Planning/Initial-Implementation-Hardening-PR-Plan.md`; follow-up slices should keep repo-level push rules aligned with those contract changes.
 - The original conversion plan has been aligned to the direct `LogMessage` surface so the branch roadmap no longer implies a separate event-enum package.
+- The current hardening phase now includes a Pydantic-first canonical-model standard; remaining non-trivial dataclasses outside the core model package should be treated as intentional follow-up debt until converted.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

@@ -175,12 +175,12 @@ class ContextAssemblyServiceTests(unittest.TestCase):
                 total_tokens=256,
                 slots=(
                     ContextBudgetSlot(
-                        "memory",
+                        slot_name="memory",
                         token_limit=64,
                         mode=ContextBudgetSlotMode.FIXED,
                     ),
                     ContextBudgetSlot(
-                        "documents",
+                        slot_name="documents",
                         token_limit=256,
                         mode=ContextBudgetSlotMode.ELASTIC,
                         priority=10,
@@ -247,12 +247,12 @@ class ContextAssemblyServiceTests(unittest.TestCase):
                 total_tokens=128,
                 slots=(
                     ContextBudgetSlot(
-                        "memory",
+                        slot_name="memory",
                         token_limit=2,
                         mode=ContextBudgetSlotMode.FIXED,
                     ),
                     ContextBudgetSlot(
-                        "documents",
+                        slot_name="documents",
                         token_limit=128,
                         mode=ContextBudgetSlotMode.ELASTIC,
                         priority=10,
@@ -323,12 +323,12 @@ class ContextAssemblyServiceTests(unittest.TestCase):
                 total_tokens=128,
                 slots=(
                     ContextBudgetSlot(
-                        "memory",
+                        slot_name="memory",
                         token_limit=4,
                         mode=ContextBudgetSlotMode.FIXED,
                     ),
                     ContextBudgetSlot(
-                        "documents",
+                        slot_name="documents",
                         token_limit=128,
                         mode=ContextBudgetSlotMode.ELASTIC,
                         priority=10,
