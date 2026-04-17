@@ -104,6 +104,32 @@ def main() -> int:
         cwd=repo_root,
     )
     _run_step(
+        "check-ai-docs-freshness",
+        [
+            sys.executable,
+            "scripts/check_ai_docs.py",
+            "--repo-root",
+            ".",
+            "--owner-file",
+            "__ai__.md",
+            "--governed-root",
+            "src/context_atlas",
+            "--governed-root",
+            "tests",
+            "--governed-root",
+            "scripts",
+            "--governed-root",
+            ".github/workflows",
+            "--suffix",
+            ".py",
+            "--suffix",
+            ".toml",
+            "--suffix",
+            ".yml",
+        ],
+        cwd=repo_root,
+    )
+    _run_step(
         "verify-ai-contracts",
         [
             sys.executable,
