@@ -8,7 +8,10 @@ from ...domain.events import LogEvent
 from .emit import log_event
 from ..config.settings import LoggingSettings
 
-DEFAULT_LOG_FORMAT = "%(asctime)s %(levelname)s %(name)s [%(event)s] %(message)s"
+DEFAULT_STRUCTURED_LOG_FORMAT = (
+    "%(asctime)s %(levelname)s %(name)s [%(event)s] %(message)s"
+)
+DEFAULT_PLAIN_LOG_FORMAT = "%(asctime)s %(levelname)s %(name)s %(message)s"
 
 
 class _EventFieldFilter(logging.Filter):
@@ -31,7 +34,13 @@ def configure_logger(settings: LoggingSettings | None = None) -> logging.Logger:
     if not logger.handlers:
         handler = logging.StreamHandler()
         handler.addFilter(_EventFieldFilter())
-        handler.setFormatter(logging.Formatter(DEFAULT_LOG_FORMAT))
+        handler.setFormatter(
+            logging.Formatter(
+                DEFAULT_STRUCTURED_LOG_FORMAT
+                if active_settings.structured_events
+                else DEFAULT_PLAIN_LOG_FORMAT
+            )
+        )
         logger.addHandler(handler)
 
     log_event(

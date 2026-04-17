@@ -21,6 +21,7 @@
 - Holds outer-layer runtime implementations for Context Atlas.
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
 - Demonstrates how infrastructure may depend on domain identifiers and templates while preserving inward dependency direction.
+- Carries the first supported runtime defaults for early assembly behavior and the structured observability helpers that later services will reuse.
 
 ## Architectural Rules
 - This folder is an outer layer and may depend on `context_atlas.domain`, but domain code must never import its concrete implementations.
@@ -43,17 +44,22 @@
 - `config`:
   - `ContextAtlasSettings`: top-level runtime settings model
   - `LoggingSettings`: logging configuration model
+  - `AssemblySettings`: runtime defaults for early assembly behavior
+  - `CompressionStrategy`: supported compression-strategy names for runtime defaults
   - `load_settings_from_env`: environment-backed settings loader
 - `logging`:
   - `configure_logger`: package logger setup helper
   - `get_logger`: package or child logger accessor
   - `log_event`: structured logging helper keyed by stable `LogEvent` identifiers
+  - `log_assembly_stage_event`: helper for emitting assembly-stage events with consistent trace fields
 
 ## File Index
 - `config/settings.py`:
   - responsibility: defines runtime settings models for infrastructure concerns
   - defines:
     - `LoggingSettings`: logger configuration model
+    - `AssemblySettings`: default assembly-budget/retrieval/compression settings
+    - `CompressionStrategy`: supported starter compression strategy names
     - `ContextAtlasSettings`: top-level infrastructure settings container
   - invariants:
     - keep settings focused on runtime/config concerns
@@ -69,6 +75,7 @@
     - `context_atlas.infrastructure.config.settings`
   - footguns:
     - avoid accreting unrelated config parsing for future adapters unless it remains clearly outer-layer
+    - only promote true operator-facing defaults into the env surface and `.env.example`
 - `logging/factory.py`:
   - responsibility: configures package loggers and default formatters
   - defines:
@@ -84,6 +91,7 @@
   - responsibility: emits structured log lines using stable event ids and centralized templates
   - defines:
     - `log_event`
+    - `log_assembly_stage_event`
   - depends_on:
     - `context_atlas.domain.events`
     - `context_atlas.domain.messages`
@@ -94,11 +102,13 @@
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
 - The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain event ids.
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
+- The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors, events, and message templates, but must never require domain code to import infrastructure implementation modules.
 - `services/`: future services should receive infrastructure capabilities through inward-safe contracts or composition boundaries, not by letting services become logger/config factories.
 - `adapters/`: future adapters may rely on infrastructure helpers for runtime concerns, but translation-heavy provider code should remain outside generic config/logging helpers.
+- repo root: supported env-backed assembly defaults must stay mirrored in `.env.example`.
 - package root `context_atlas/`: root-level imports may expose infrastructure helpers selectively, but should not re-export enough internals to blur the layer boundary.
 
 ## Verification Contract
@@ -110,10 +120,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure.config import load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_event"
+      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_event, log_event"
 ```

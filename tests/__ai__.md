@@ -19,6 +19,7 @@
 - Holds automated tests for the standalone Context Atlas package.
 - Verifies bootstrap contracts and guards early architectural seams from silent drift.
 - Provides the first executable safety net for domain and infrastructure bootstrap behavior.
+- Verifies that env-backed runtime defaults and structured observability helpers stay aligned with the documented repo surface.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -38,6 +39,8 @@
   - `BootstrapLayerTests`: verifies error/message centralization, config loading, and structured log events
 - `test_domain_models.py`:
   - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
+- `test_config_observability.py`:
+  - `ConfigAndObservabilityTests`: verifies env-backed assembly defaults and structured assembly-stage logging helpers
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -58,9 +61,20 @@
     - `context_atlas.domain`
   - invariants:
     - tests should verify structured artifacts remain canonical and machine-usable
+- `test_config_observability.py`:
+  - responsibility: verifies PR 2 configuration defaults and observability helpers
+  - defines:
+    - `ConfigAndObservabilityTests`: configuration/observability test suite
+  - depends_on:
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove `.env.example`-backed settings remain parseable and validated
+    - assertions should verify structured event fields rather than ad hoc log text alone
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
+- The suite now also covers env-backed assembly defaults and the assembly-stage observability surface.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -81,5 +95,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_domain_models"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_config_observability, tests.test_domain_models"
 ```

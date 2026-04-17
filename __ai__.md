@@ -31,6 +31,7 @@
 - Connects the local `__ai__.md` contract system to a single repo-wide preflight entrypoint.
 - Establishes hook and packaging expectations for the standalone Context Atlas library repo.
 - Keeps the tracked example environment surface aligned with supported runtime settings.
+- Makes the visible runtime knob surface reviewable at the repo root as assembly defaults and observability settings begin to grow.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -71,6 +72,7 @@
   - responsibility: makes the supported environment-backed runtime settings visible at the repo root
   - invariants:
     - keys here should reflect the actual environment surface supported by infrastructure config loaders
+    - assembly-default knobs should stay intentionally small and clearly operator-facing
 - `__ai__.md`:
   - responsibility: states repo-wide operational rules before push or merge
   - invariants:
@@ -88,6 +90,7 @@
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
 - `src/context_atlas/`: preflight should prove repo readiness without redefining package-layer rules that belong to nearer owner files.
 - `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
+- `src/context_atlas/infrastructure/`: assembly default settings and structured observability helpers should not grow new env knobs without updating the repo root surface.
 - `.github/workflows/`: CI should mirror the local preflight closely enough that GitHub failures are usually reproducible before push.
 
 ## Verification Contract

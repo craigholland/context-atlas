@@ -10,8 +10,21 @@ class LogMessageTemplate:
     """Centralized log message templates for reusable operational events."""
 
     LOGGER_CONFIGURED = "Logger configured: name=%s, level=%s"
-    SETTINGS_LOADED = "Settings loaded: logger_name=%s, log_level=%s"
+    SETTINGS_LOADED = (
+        "Settings loaded: logger_name=%s, log_level=%s, default_total_budget=%d, "
+        "default_retrieval_top_k=%d, default_compression_strategy=%s"
+    )
     COMPONENT_INITIALIZED = "Component initialized: name=%s"
+    CANDIDATES_GATHERED = "Candidates gathered: trace_id=%s, candidate_count=%d"
+    CANDIDATES_RANKED = "Candidates ranked: trace_id=%s, candidate_count=%d"
+    BUDGET_ALLOCATED = (
+        "Budget allocated: trace_id=%s, total_tokens=%d, remaining_tokens=%d"
+    )
+    COMPRESSION_APPLIED = (
+        "Compression applied: trace_id=%s, strategy=%s, original_chars=%d, "
+        "compressed_chars=%d"
+    )
+    MEMORY_SELECTED = "Memory selected: trace_id=%s, memory_entries=%d"
     ASSEMBLY_STARTED = "Context assembly started: trace_id=%s, query=%s"
     ASSEMBLY_COMPLETED = (
         "Context assembly completed: trace_id=%s, selected_candidates=%d"
@@ -26,6 +39,11 @@ _LOG_MESSAGES: Mapping[LogEvent, str] = MappingProxyType(
         LogEvent.LOGGER_CONFIGURED: LogMessageTemplate.LOGGER_CONFIGURED,
         LogEvent.SETTINGS_LOADED: LogMessageTemplate.SETTINGS_LOADED,
         LogEvent.COMPONENT_INITIALIZED: LogMessageTemplate.COMPONENT_INITIALIZED,
+        LogEvent.CANDIDATES_GATHERED: LogMessageTemplate.CANDIDATES_GATHERED,
+        LogEvent.CANDIDATES_RANKED: LogMessageTemplate.CANDIDATES_RANKED,
+        LogEvent.BUDGET_ALLOCATED: LogMessageTemplate.BUDGET_ALLOCATED,
+        LogEvent.COMPRESSION_APPLIED: LogMessageTemplate.COMPRESSION_APPLIED,
+        LogEvent.MEMORY_SELECTED: LogMessageTemplate.MEMORY_SELECTED,
         LogEvent.ASSEMBLY_STARTED: LogMessageTemplate.ASSEMBLY_STARTED,
         LogEvent.ASSEMBLY_COMPLETED: LogMessageTemplate.ASSEMBLY_COMPLETED,
         LogEvent.PACKET_CREATED: LogMessageTemplate.PACKET_CREATED,
