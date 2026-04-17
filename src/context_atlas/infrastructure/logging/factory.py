@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import logging
 
-from ...domain.events import LogEvent
-from .emit import log_event
+from ...domain.messages import LogMessage
+from .emit import log_message
 from ..config.settings import LoggingSettings
 
 DEFAULT_STRUCTURED_LOG_FORMAT = (
@@ -43,10 +43,10 @@ def configure_logger(settings: LoggingSettings | None = None) -> logging.Logger:
         )
         logger.addHandler(handler)
 
-    log_event(
+    log_message(
         logger,
         logging.INFO,
-        LogEvent.LOGGER_CONFIGURED,
+        LogMessage.LOGGER_CONFIGURED,
         logger.name,
         logging.getLevelName(logger.level),
     )

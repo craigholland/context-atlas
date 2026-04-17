@@ -11,7 +11,6 @@
 - included:
   - "__init__.py"
   - "errors/**/*.py"
-  - "events/**/*.py"
   - "messages/**/*.py"
   - "models/**/*.py"
   - "policies/**/*.py"
@@ -22,15 +21,15 @@
 
 ## Purpose
 - Holds the current semantic core for Context Atlas.
-- Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
+- Provides stable machine-facing identifiers and human-facing message constants for early error and logging contracts.
 - Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
-- Carries the starter assembly-stage event identifiers and message templates that infrastructure logging can reuse without inventing local semantics.
+- Carries the starter log message surface that infrastructure logging can reuse without inventing local semantics.
 - Carries deterministic ranking, deduplication, memory-retention, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
 - Code here should represent semantic meaning, not runtime environment mechanics.
-- Error codes, event identifiers, and centralized message templates belong here because they are cross-layer semantic contracts, not logging/config implementation details.
+- Error codes and centralized message constants belong here because they are cross-layer semantic contracts, not logging/config implementation details.
 - Canonical source, budget, packet, decision, and trace artifacts belong here rather than in `services/` or `rendering/`.
 - Deterministic ranking and decision-recording policies belong here when they can remain pure and dependency-light.
 - Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
@@ -52,12 +51,9 @@
   - `ErrorCode`: stable machine-facing error identifiers
   - `ContextAtlasError`: base exception carrying a stable code and formatted message
   - `ConfigurationError`: configuration-specific exception type
-- `events`:
-  - `LogEvent`: stable event identifiers for meaningful operational events, including assembly-stage observability markers
 - `messages`:
-  - `format_error_message`: formats a stable error code using centralized templates
-  - `get_error_message`: fetches the registered error template
-  - `get_log_message`: fetches the registered log-event template, including settings and assembly-stage messages
+  - `ErrorMessage`: direct error-message constants keyed by `ErrorCode.name`
+  - `LogMessage`: direct log-message constants that carry their own stable event names
 - `models`:
   - canonical source, candidate, budget, packet, decision, and trace artifacts
   - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
@@ -79,7 +75,7 @@
     - prefer semantic identifiers over incidental implementation wording
     - source-registration and retrieval-request failures should get stable codes here before adapters raise them
 - `errors/exceptions.py`:
-  - responsibility: defines domain exception classes built on stable codes and templates
+  - responsibility: defines domain exception classes built on stable codes and direct message constants
   - defines:
     - `ContextAtlasError`: base coded exception
     - `ConfigurationError`: configuration-specific exception type
@@ -88,30 +84,20 @@
     - `context_atlas.domain.messages`
   - footguns:
     - do not let exception types begin importing infrastructure config or logger implementations
-- `events/log_events.py`:
-  - responsibility: defines stable event identifiers for structured logging and future tracing
-  - defines:
-    - `LogEvent`: string enum of meaningful system events
-  - invariants:
-    - event ids should be machine-stable even if message wording changes
-    - stage-level assembly event ids should be added here before any higher layer starts logging them
-    - source-ingestion and retrieval lifecycle events should be registered here before adapter code emits them
 - `messages/error_messages.py`:
-  - responsibility: centralizes reusable human-facing error templates
+  - responsibility: centralizes reusable human-facing error messages
   - defines:
-    - `ErrorMessageTemplate`
-    - `get_error_message`
-    - `format_error_message`
+    - `ErrorMessage`
   - footguns:
     - avoid turning this into a dumping ground for trivial one-off strings
-    - retrieval and source-registration errors should resolve through these templates rather than inline adapter text
+    - retrieval and source-registration errors should resolve through these constants rather than inline adapter text
 - `messages/log_messages.py`:
-  - responsibility: centralizes reusable log templates keyed by stable event ids
+  - responsibility: centralizes reusable log messages keyed directly by class variable name
   - defines:
-    - `LogMessageTemplate`
-    - `get_log_message`
+    - `LogMessage`
   - invariants:
-    - templates here are semantic contracts consumed by logging infrastructure
+    - messages here are semantic contracts consumed by logging infrastructure
+    - each constant should carry a stable event name without needing a separate event enum or lookup table
     - expanded settings and stage-event wording should be updated here, not introduced inline in outer layers
 - `models/sources.py`:
   - responsibility: defines canonical source, provenance, and candidate artifacts
@@ -205,18 +191,18 @@
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current model set is canonical structure, not yet full policy behavior.
-- The distinction between domain events and future richer audit projections is still intentionally thin.
-- The current event/message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
-- The current error/event/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
+- The distinction between domain message constants and future richer audit projections is still intentionally thin.
+- The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
+- The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
 - The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
 - The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
 
 ## Cross-Folder Contracts
-- `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
+- `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.
 - `services/`: future orchestration code should consume `ContextPacket`, `ContextTrace`, `ContextBudget`, and related decision artifacts rather than inventing parallel packet state.
 - `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
-- `adapters/`: future adapter translation boundaries may log with domain `LogEvent` identifiers, but provider-specific payload wording must stay out of domain templates.
+- `adapters/`: future adapter translation boundaries may log with domain `LogMessage` constants, but provider-specific payload wording must stay out of domain messages.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 - `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
 
@@ -234,5 +220,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.messages import ErrorMessage, LogMessage; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
 ```

@@ -10,8 +10,7 @@ import re
 from typing import Iterable
 
 from ...domain.errors import ContextAtlasError, ErrorCode
-from ...domain.events import LogEvent
-from ...domain.messages import get_log_message
+from ...domain.messages import LogMessage
 from ...domain.models import ContextCandidate, ContextSource
 
 logger = logging.getLogger(__name__)
@@ -118,8 +117,8 @@ class InMemorySourceRegistry:
             )
 
         self._sources[source.source_id] = source
-        _emit_log_event(
-            LogEvent.SOURCE_REGISTERED,
+        _emit_log_message(
+            LogMessage.SOURCE_REGISTERED,
             source.source_id,
             len(self._sources),
             source_id=source.source_id,
@@ -170,8 +169,8 @@ class LexicalRetriever:
         else:
             candidates = self._tfidf_retrieve(query_tokens, top_k=top_k)
 
-        _emit_log_event(
-            LogEvent.RETRIEVAL_COMPLETED,
+        _emit_log_message(
+            LogMessage.RETRIEVAL_COMPLETED,
             self.mode.value,
             query,
             len(candidates),
@@ -248,17 +247,20 @@ class LexicalRetriever:
         return _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k)
 
 
-def _emit_log_event(
-    event: LogEvent,
+def _emit_log_message(
+    message: str,
     *message_args: object,
     **fields: object,
 ) -> None:
     """Emit a stable retrieval log line without inventing inline message text."""
 
     logger.info(
-        get_log_message(event),
+        message,
         *message_args,
-        extra={"event": event.value, **_normalize_log_fields(fields)},
+        extra={
+            "event": getattr(message, "event_name", "log"),
+            **_normalize_log_fields(fields),
+        },
     )
 
 

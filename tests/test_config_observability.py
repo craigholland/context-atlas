@@ -8,7 +8,7 @@ import os
 import unittest
 
 from context_atlas.domain.errors import ConfigurationError, ErrorCode
-from context_atlas.domain.events import LogEvent
+from context_atlas.domain.messages import LogMessage
 from context_atlas.infrastructure.config import (
     CompressionStrategy,
     load_settings_from_env,
@@ -16,7 +16,7 @@ from context_atlas.infrastructure.config import (
 from context_atlas.infrastructure.config.settings import LoggingSettings, MemorySettings
 from context_atlas.infrastructure.logging import (
     configure_logger,
-    log_assembly_stage_event,
+    log_assembly_stage_message,
 )
 
 
@@ -49,7 +49,7 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         self.assertEqual(settings.memory.short_term_count, 6)
         self.assertAlmostEqual(settings.memory.decay_rate, 0.0025)
         self.assertAlmostEqual(settings.memory.dedup_threshold, 0.81)
-        self.assertEqual(settings.last_loaded_event, LogEvent.SETTINGS_LOADED)
+        self.assertEqual(settings.last_loaded_message_name, "SETTINGS_LOADED")
         self.assertEqual(
             settings.last_loaded_message,
             "Settings loaded: logger_name=atlas.observability.tests, "
@@ -104,7 +104,7 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         assert formatter is not None
         self.assertNotIn("%(event)s", formatter._fmt)
 
-    def test_log_assembly_stage_event_emits_structured_fields(self) -> None:
+    def test_log_assembly_stage_message_emits_structured_fields(self) -> None:
         logger_name = "context_atlas.assembly.tests"
         logger = logging.getLogger(logger_name)
         logger.handlers.clear()
@@ -124,10 +124,10 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         )
         logger.handlers = [handler]
 
-        log_assembly_stage_event(
+        log_assembly_stage_message(
             logger,
             logging.INFO,
-            LogEvent.CANDIDATES_GATHERED,
+            LogMessage.CANDIDATES_GATHERED,
             trace_id="trace-2",
             message_args=("trace-2", 4),
             candidate_count=4,

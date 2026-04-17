@@ -20,14 +20,15 @@
 ## Purpose
 - Holds outer-layer runtime implementations for Context Atlas.
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
-- Demonstrates how infrastructure may depend on domain identifiers and templates while preserving inward dependency direction.
+- Demonstrates how infrastructure may depend on domain identifiers and messages while preserving inward dependency direction.
 - Carries the first supported runtime defaults for early assembly and memory behavior plus the structured observability helpers that later services will reuse.
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
+- Uses Pydantic/Pydantic Settings for validated runtime configuration instead of unconstrained dataclasses.
 
 ## Architectural Rules
 - This folder is an outer layer and may depend on `context_atlas.domain`, but domain code must never import its concrete implementations.
 - Keep runtime environment loading, settings models, logger factories, handlers, and emission helpers here rather than in the semantic core.
-- Infrastructure code may reuse stable domain error codes, exceptions, events, and message templates instead of inventing semantic strings locally.
+- Infrastructure code may reuse stable domain error codes, exceptions, and direct message constants instead of inventing semantic strings locally.
 - Do not let logger setup or config parsing become a backdoor for embedding business/domain policy.
 - If infrastructure grows persistence backends, audit stores, or memory stores later, they must continue to translate external/runtime details before they cross inward.
 
@@ -52,12 +53,12 @@
 - `logging`:
   - `configure_logger`: package logger setup helper
   - `get_logger`: package or child logger accessor
-  - `log_event`: structured logging helper keyed by stable `LogEvent` identifiers
-  - `log_assembly_stage_event`: helper for emitting assembly-stage events with consistent trace fields
+  - `log_message`: structured logging helper keyed by direct `LogMessage` constants
+  - `log_assembly_stage_message`: helper for emitting assembly-stage messages with consistent trace fields
 
 ## File Index
 - `config/settings.py`:
-  - responsibility: defines runtime settings models for infrastructure concerns
+  - responsibility: defines Pydantic runtime settings models for infrastructure concerns
   - defines:
     - `LoggingSettings`: logger configuration model
     - `AssemblySettings`: default assembly-budget/retrieval/compression settings
@@ -69,12 +70,11 @@
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
     - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
 - `config/environment.py`:
-  - responsibility: loads settings from environment variables
+  - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:
     - `load_settings_from_env`: environment-backed settings loader
   - depends_on:
     - `context_atlas.domain.errors`
-    - `context_atlas.domain.events`
     - `context_atlas.domain.messages`
     - `context_atlas.infrastructure.config.settings`
   - footguns:
@@ -86,32 +86,31 @@
     - `configure_logger`
     - `get_logger`
   - depends_on:
-    - `context_atlas.domain.events`
+    - `context_atlas.domain.messages`
     - `context_atlas.infrastructure.logging.emit`
     - `context_atlas.infrastructure.config.settings`
   - invariants:
     - logger setup belongs here, not in domain
 - `logging/emit.py`:
-  - responsibility: emits structured log lines using stable event ids and centralized templates
+  - responsibility: emits structured log lines using direct message constants and stable event names
   - defines:
-    - `log_event`
-    - `log_assembly_stage_event`
+    - `log_message`
+    - `log_assembly_stage_message`
   - depends_on:
-    - `context_atlas.domain.events`
     - `context_atlas.domain.messages`
   - footguns:
-    - prefer stable event ids plus structured fields over ad hoc inline message strings
+    - prefer direct `LogMessage` constants plus structured fields over ad hoc inline message strings
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
-- The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain event ids.
+- The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain message names.
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 
 ## Cross-Folder Contracts
-- `domain/`: infrastructure may consume domain-coded errors, events, and message templates, but must never require domain code to import infrastructure implementation modules.
+- `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.
 - `services/`: future services should receive infrastructure capabilities through inward-safe contracts or composition boundaries, not by letting services become logger/config factories.
 - `adapters/`: future adapters may rely on infrastructure helpers for runtime concerns, but translation-heavy provider code should remain outside generic config/logging helpers.
 - repo root: supported env-backed assembly and memory defaults must stay mirrored in `.env.example`.
@@ -131,5 +130,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_event, log_event"
+      py -3 -c "from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```

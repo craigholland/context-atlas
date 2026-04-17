@@ -32,6 +32,7 @@
 - Establishes hook and packaging expectations for the standalone Context Atlas library repo.
 - Keeps the tracked example environment surface aligned with supported runtime settings.
 - Makes the visible runtime knob surface reviewable at the repo root as assembly defaults, memory defaults, and observability settings begin to grow.
+- Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -64,6 +65,7 @@
   - responsibility: defines package metadata and repo-local developer tool dependencies
   - invariants:
     - Python floor here should match active CI and local preflight assumptions
+    - runtime validation libraries added here should correspond to real package behavior, not speculative future plans
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:

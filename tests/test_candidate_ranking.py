@@ -6,8 +6,7 @@ import io
 import logging
 import unittest
 
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import get_log_message
+from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
     AuthorityPrecedenceReasonCode,
     ContextDecisionAction,
@@ -17,7 +16,7 @@ from context_atlas.domain.models import (
     ExclusionReasonCode,
 )
 from context_atlas.domain.policies import StarterCandidateRankingPolicy
-from context_atlas.infrastructure.logging import log_assembly_stage_event
+from context_atlas.infrastructure.logging import log_assembly_stage_message
 from context_atlas.adapters import (
     InMemorySourceRegistry,
     LexicalRetrievalMode,
@@ -161,10 +160,10 @@ class CandidateRankingTests(unittest.TestCase):
         logger.setLevel(logging.INFO)
         logger.propagate = False
 
-        log_assembly_stage_event(
+        log_assembly_stage_message(
             logger,
             logging.INFO,
-            LogEvent.DECISIONS_RECORDED,
+            LogMessage.DECISIONS_RECORDED,
             trace_id="trace-ranking-4",
             message_args=("trace-ranking-4", 3),
             decision_count=3,
@@ -176,7 +175,7 @@ class CandidateRankingTests(unittest.TestCase):
             "Decisions recorded: trace_id=trace-ranking-4, decision_count=3",
         )
         self.assertEqual(
-            get_log_message(LogEvent.CANDIDATES_DEDUPED),
+            LogMessage.CANDIDATES_DEDUPED,
             "Candidates deduped: trace_id=%s, removed_candidates=%d",
         )
 

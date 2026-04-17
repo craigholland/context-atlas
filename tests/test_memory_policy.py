@@ -5,8 +5,7 @@ from __future__ import annotations
 import unittest
 
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import get_error_message, get_log_message
+from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.domain.models import (
     ContextDecisionAction,
     ContextMemoryEntry,
@@ -206,11 +205,11 @@ class MemoryPolicyTests(unittest.TestCase):
 
     def test_memory_error_and_log_templates_are_registered(self) -> None:
         self.assertEqual(
-            get_error_message(ErrorCode.INVALID_MEMORY_SELECTION),
+            ErrorMessage.INVALID_MEMORY_SELECTION,
             "Invalid memory selection: %s",
         )
         self.assertEqual(
-            get_log_message(LogEvent.MEMORY_REJECTED),
+            LogMessage.MEMORY_REJECTED,
             "Memory rejected: trace_id=%s, source_id=%s, reason=%s",
         )
 
