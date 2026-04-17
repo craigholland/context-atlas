@@ -5,8 +5,7 @@ from __future__ import annotations
 import unittest
 
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import get_log_message
+from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
     BudgetPressureReasonCode,
     CompressionStrategy,
@@ -217,11 +216,11 @@ class BudgetAndCompressionTests(unittest.TestCase):
 
     def test_budget_and_compression_templates_are_registered(self) -> None:
         self.assertEqual(
-            get_log_message(LogEvent.BUDGET_ALLOCATED),
+            LogMessage.BUDGET_ALLOCATED,
             "Budget allocated: trace_id=%s, total_tokens=%d, remaining_tokens=%d",
         )
         self.assertEqual(
-            get_log_message(LogEvent.COMPRESSION_APPLIED),
+            LogMessage.COMPRESSION_APPLIED,
             "Compression applied: trace_id=%s, strategy=%s, original_chars=%d, compressed_chars=%d",
         )
 

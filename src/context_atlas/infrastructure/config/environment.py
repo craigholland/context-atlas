@@ -1,13 +1,11 @@
-"""Environment-backed settings loaders for runtime infrastructure."""
+"""Pydantic-settings environment loader for Context Atlas."""
 
 from __future__ import annotations
 
-import os
-import math
+from pydantic import ValidationError, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from ...domain.errors import ConfigurationError, ErrorCode
-from ...domain.events import LogEvent
-from ...domain.messages import get_log_message
 from ...domain.models import CompressionStrategy
 from .settings import (
     AssemblySettings,
@@ -16,33 +14,67 @@ from .settings import (
     MemorySettings,
 )
 
-_VALID_LOG_LEVELS = frozenset(
-    {
-        "CRITICAL",
-        "ERROR",
-        "WARNING",
-        "INFO",
-        "DEBUG",
-        "NOTSET",
-    }
-)
+
+class EnvironmentSettings(BaseSettings):
+    """Validated flat environment surface for Context Atlas runtime settings."""
+
+    model_config = SettingsConfigDict(
+        env_prefix="CONTEXT_ATLAS_",
+        extra="ignore",
+        frozen=True,
+        case_sensitive=False,
+    )
+
+    logger_name: str = "context_atlas"
+    log_level: str = "INFO"
+    log_structured_events: bool = True
+    default_total_budget: int = 2048
+    default_retrieval_top_k: int = 5
+    default_compression_strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
+    memory_short_term_count: int = 4
+    memory_decay_rate: float = 0.001
+    memory_dedup_threshold: float = 0.72
+
+    @field_validator("logger_name")
+    @classmethod
+    def _validate_logger_name(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("LOGGER_NAME must not be empty")
+        return value.strip()
+
+    @field_validator("log_level")
+    @classmethod
+    def _normalize_log_level(cls, value: str) -> str:
+        return LoggingSettings(level=value).level
+
+    @field_validator("default_total_budget")
+    @classmethod
+    def _validate_total_budget(cls, value: int) -> int:
+        return AssemblySettings(default_total_budget=value).default_total_budget
+
+    @field_validator("default_retrieval_top_k")
+    @classmethod
+    def _validate_top_k(cls, value: int) -> int:
+        return AssemblySettings(default_retrieval_top_k=value).default_retrieval_top_k
+
+    @field_validator("memory_short_term_count")
+    @classmethod
+    def _validate_short_term_count(cls, value: int) -> int:
+        return MemorySettings(short_term_count=value).short_term_count
+
+    @field_validator("memory_decay_rate")
+    @classmethod
+    def _validate_decay_rate(cls, value: float) -> float:
+        return MemorySettings(decay_rate=value).decay_rate
+
+    @field_validator("memory_dedup_threshold")
+    @classmethod
+    def _validate_dedup_threshold(cls, value: float) -> float:
+        return MemorySettings(dedup_threshold=value).dedup_threshold
 
 
 def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettings:
-    """Load runtime settings from environment variables.
-
-    Supported variables:
-
-    - ``<prefix>LOGGER_NAME``
-    - ``<prefix>LOG_LEVEL``
-    - ``<prefix>LOG_STRUCTURED_EVENTS``
-    - ``<prefix>DEFAULT_TOTAL_BUDGET``
-    - ``<prefix>DEFAULT_RETRIEVAL_TOP_K``
-    - ``<prefix>DEFAULT_COMPRESSION_STRATEGY``
-    - ``<prefix>MEMORY_SHORT_TERM_COUNT``
-    - ``<prefix>MEMORY_DECAY_RATE``
-    - ``<prefix>MEMORY_DEDUP_THRESHOLD``
-    """
+    """Load validated runtime settings from environment variables."""
 
     if not prefix:
         raise ConfigurationError(
@@ -50,207 +82,41 @@ def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettin
             message_args=("environment prefix must not be empty",),
         )
 
-    defaults = LoggingSettings()
-    assembly_defaults = AssemblySettings()
-    memory_defaults = MemorySettings()
-    logger_name = os.getenv(f"{prefix}LOGGER_NAME", defaults.logger_name)
-    log_level = _read_log_level(
-        os.getenv(f"{prefix}LOG_LEVEL"),
-        default=defaults.level,
-    )
-    structured_events = _read_bool(
-        os.getenv(f"{prefix}LOG_STRUCTURED_EVENTS"),
-        default=defaults.structured_events,
-    )
-    default_total_budget = _read_int(
-        os.getenv(f"{prefix}DEFAULT_TOTAL_BUDGET"),
-        default=assembly_defaults.default_total_budget,
-        minimum=64,
-        setting_name=f"{prefix}DEFAULT_TOTAL_BUDGET",
-    )
-    default_retrieval_top_k = _read_int(
-        os.getenv(f"{prefix}DEFAULT_RETRIEVAL_TOP_K"),
-        default=assembly_defaults.default_retrieval_top_k,
-        minimum=1,
-        setting_name=f"{prefix}DEFAULT_RETRIEVAL_TOP_K",
-    )
-    default_compression_strategy = _read_compression_strategy(
-        os.getenv(f"{prefix}DEFAULT_COMPRESSION_STRATEGY"),
-        default=assembly_defaults.default_compression_strategy,
-        setting_name=f"{prefix}DEFAULT_COMPRESSION_STRATEGY",
-    )
-    memory_short_term_count = _read_int(
-        os.getenv(f"{prefix}MEMORY_SHORT_TERM_COUNT"),
-        default=memory_defaults.short_term_count,
-        minimum=1,
-        setting_name=f"{prefix}MEMORY_SHORT_TERM_COUNT",
-    )
-    memory_decay_rate = _read_float(
-        os.getenv(f"{prefix}MEMORY_DECAY_RATE"),
-        default=memory_defaults.decay_rate,
-        minimum=0.0,
-        maximum=None,
-        setting_name=f"{prefix}MEMORY_DECAY_RATE",
-    )
-    memory_dedup_threshold = _read_float(
-        os.getenv(f"{prefix}MEMORY_DEDUP_THRESHOLD"),
-        default=memory_defaults.dedup_threshold,
-        minimum=0.0,
-        maximum=1.0,
-        setting_name=f"{prefix}MEMORY_DEDUP_THRESHOLD",
-    )
-
-    settings = ContextAtlasSettings(
-        logging=LoggingSettings(
-            logger_name=logger_name,
-            level=log_level,
-            structured_events=structured_events,
-        ),
-        assembly=AssemblySettings(
-            default_total_budget=default_total_budget,
-            default_retrieval_top_k=default_retrieval_top_k,
-            default_compression_strategy=default_compression_strategy,
-        ),
-        memory=MemorySettings(
-            short_term_count=memory_short_term_count,
-            decay_rate=memory_decay_rate,
-            dedup_threshold=memory_dedup_threshold,
-        ),
-    )
-    settings.last_loaded_event = LogEvent.SETTINGS_LOADED
-    settings.last_loaded_message = get_log_message(LogEvent.SETTINGS_LOADED) % (
-        logger_name,
-        log_level,
-        default_total_budget,
-        default_retrieval_top_k,
-        default_compression_strategy.value,
-        memory_short_term_count,
-        memory_decay_rate,
-        memory_dedup_threshold,
-    )
-    return settings
-
-
-def _read_bool(raw_value: str | None, *, default: bool) -> bool:
-    """Interpret common truthy and falsy environment values."""
-
-    if raw_value is None:
-        return default
-
-    normalized = raw_value.strip().lower()
-    if normalized in {"1", "true", "yes", "on"}:
-        return True
-    if normalized in {"0", "false", "no", "off"}:
-        return False
-
-    raise ConfigurationError(
-        code=ErrorCode.INVALID_CONFIGURATION,
-        message_args=(f"invalid boolean value '{raw_value}'",),
-    )
-
-
-def _read_int(
-    raw_value: str | None,
-    *,
-    default: int,
-    minimum: int,
-    setting_name: str,
-) -> int:
-    """Read a positive integer setting with a minimum floor."""
-
-    if raw_value is None:
-        return default
-
     try:
-        value = int(raw_value.strip())
-    except ValueError as error:
+        env_settings = EnvironmentSettings(_env_prefix=prefix)  # type: ignore[call-arg]
+        logging_settings = LoggingSettings(
+            logger_name=env_settings.logger_name,
+            level=env_settings.log_level,
+            structured_events=env_settings.log_structured_events,
+        )
+        assembly_settings = AssemblySettings(
+            default_total_budget=env_settings.default_total_budget,
+            default_retrieval_top_k=env_settings.default_retrieval_top_k,
+            default_compression_strategy=env_settings.default_compression_strategy,
+        )
+        memory_settings = MemorySettings(
+            short_term_count=env_settings.memory_short_term_count,
+            decay_rate=env_settings.memory_decay_rate,
+            dedup_threshold=env_settings.memory_dedup_threshold,
+        )
+    except ValidationError as error:
         raise ConfigurationError(
             code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be an integer, got '{raw_value}'",),
+            message_args=(_format_validation_error(error),),
         ) from error
 
-    if value < minimum:
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be >= {minimum}, got {value}",),
-        )
-    return value
-
-
-def _read_float(
-    raw_value: str | None,
-    *,
-    default: float,
-    minimum: float,
-    maximum: float | None,
-    setting_name: str,
-) -> float:
-    """Read a bounded float setting while keeping user-facing errors explicit."""
-
-    if raw_value is None:
-        return default
-
-    try:
-        value = float(raw_value.strip())
-    except ValueError as error:
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be a float, got '{raw_value}'",),
-        ) from error
-
-    if not math.isfinite(value):
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be finite, got {raw_value}",),
-        )
-    if value < minimum:
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be >= {minimum}, got {value}",),
-        )
-    if maximum is not None and value > maximum:
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(f"{setting_name} must be <= {maximum}, got {value}",),
-        )
-    return value
-
-
-def _read_log_level(raw_value: str | None, *, default: str) -> str:
-    """Validate user-facing logging levels instead of silently coercing them."""
-
-    if raw_value is None:
-        return default
-
-    normalized = raw_value.strip().upper()
-    if normalized in _VALID_LOG_LEVELS:
-        return normalized
-
-    raise ConfigurationError(
-        code=ErrorCode.INVALID_CONFIGURATION,
-        message_args=(f"invalid log level '{raw_value}'",),
+    return ContextAtlasSettings.with_loaded_message(
+        logging=logging_settings,
+        assembly=assembly_settings,
+        memory=memory_settings,
     )
 
 
-def _read_compression_strategy(
-    raw_value: str | None,
-    *,
-    default: CompressionStrategy,
-    setting_name: str,
-) -> CompressionStrategy:
-    """Validate starter compression strategy names from the environment."""
+def _format_validation_error(error: ValidationError) -> str:
+    """Compress pydantic validation issues into one stable user-facing line."""
 
-    if raw_value is None:
-        return default
-
-    normalized = raw_value.strip().lower()
-    try:
-        return CompressionStrategy(normalized)
-    except ValueError as error:
-        allowed = ", ".join(strategy.value for strategy in CompressionStrategy)
-        raise ConfigurationError(
-            code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=(
-                f"{setting_name} must be one of [{allowed}], got '{raw_value}'",
-            ),
-        ) from error
+    details: list[str] = []
+    for issue in error.errors():
+        location = ".".join(str(part).upper() for part in issue["loc"])
+        details.append(f"{location}: {issue['msg']}")
+    return "; ".join(details)

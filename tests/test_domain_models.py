@@ -5,8 +5,7 @@ from __future__ import annotations
 import unittest
 
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import format_error_message, get_log_message
+from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.domain.models import (
     AuthorityPrecedenceReasonCode,
     ContextAssemblyDecision,
@@ -192,15 +191,15 @@ class DomainModelTests(unittest.TestCase):
 
     def test_new_domain_events_and_templates_are_registered(self) -> None:
         self.assertEqual(
-            get_log_message(LogEvent.ASSEMBLY_STARTED),
+            LogMessage.ASSEMBLY_STARTED,
             "Context assembly started: trace_id=%s, query=%s",
         )
         self.assertEqual(
-            get_log_message(LogEvent.PACKET_CREATED),
+            LogMessage.PACKET_CREATED,
             "Context packet created: packet_id=%s, selected_candidates=%d",
         )
         self.assertEqual(
-            format_error_message(ErrorCode.EMPTY_PACKET_QUERY),
+            ErrorMessage.EMPTY_PACKET_QUERY,
             "Context packet query must not be empty.",
         )
 

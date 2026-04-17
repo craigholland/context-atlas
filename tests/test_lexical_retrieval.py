@@ -10,8 +10,7 @@ from context_atlas.adapters import (
     LexicalRetriever,
 )
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import get_log_message
+from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
     ContextSource,
     ContextSourceAuthority,
@@ -105,11 +104,11 @@ class LexicalRetrievalTests(unittest.TestCase):
 
     def test_retrieval_events_and_templates_are_registered(self) -> None:
         self.assertEqual(
-            get_log_message(LogEvent.SOURCE_REGISTERED),
+            LogMessage.SOURCE_REGISTERED,
             "Source registered: source_id=%s, total_sources=%d",
         )
         self.assertEqual(
-            get_log_message(LogEvent.RETRIEVAL_COMPLETED),
+            LogMessage.RETRIEVAL_COMPLETED,
             "Retrieval completed: mode=%s, query=%s, candidate_count=%d",
         )
 

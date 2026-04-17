@@ -1,16 +1,6 @@
-"""Centralized message templates for stable errors and log events."""
+"""Centralized human-facing messages for Context Atlas."""
 
-from .error_messages import (
-    ErrorMessageTemplate,
-    format_error_message,
-    get_error_message,
-)
-from .log_messages import LogMessageTemplate, get_log_message
+from .error_messages import ErrorMessage
+from .log_messages import LogMessage
 
-__all__ = [
-    "ErrorMessageTemplate",
-    "LogMessageTemplate",
-    "format_error_message",
-    "get_error_message",
-    "get_log_message",
-]
+__all__ = ["ErrorMessage", "LogMessage"]

@@ -19,13 +19,13 @@
 ## Purpose
 - Holds adapter-layer implementations that translate external or storage-facing inputs into Atlas-native artifacts.
 - Provides the first retrieval-oriented adapter slice for turning registered `ContextSource` objects into raw `ContextCandidate` outputs.
-- Keeps lexical retrieval behavior outside the semantic core while still consuming domain-stable codes, events, messages, and canonical models.
+- Keeps lexical retrieval behavior outside the semantic core while still consuming domain-stable codes, messages, and canonical models.
 
 ## Architectural Rules
 - Adapters may depend on `context_atlas.domain`, but `context_atlas.domain` must never import adapter implementations.
 - Keep translation-heavy retrieval mechanics here rather than embedding tokenization or ranking implementation details into `domain/`.
 - Adapters may produce raw candidates, but deterministic reranking and decision-recording policy should stay inward in `context_atlas.domain`.
-- Adapter code should emit stable domain event ids and message templates rather than inventing inline semantic logger text.
+- Adapter code should emit stable domain message constants rather than inventing inline semantic logger text.
 - Do not let adapters import `context_atlas.infrastructure` by default just for convenience; prefer domain-stable contracts plus standard-library mechanics unless a specific outer dependency is justified.
 
 ## Allowed Dependencies
@@ -57,7 +57,6 @@
     - `LexicalRetriever`
   - depends_on:
     - `context_atlas.domain.errors`
-    - `context_atlas.domain.events`
     - `context_atlas.domain.messages`
     - `context_atlas.domain.models`
   - invariants:
@@ -70,7 +69,7 @@
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
 
 ## Cross-Folder Contracts
-- `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/event/message contracts, but may not redefine those semantics locally.
+- `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
 - `domain/`: candidate reranking, deduplication, and decision tracing now harden inward there; adapters should stop at source registration and candidate production.
 - `services/`: future services should orchestrate retrieval through inward-safe contracts rather than by embedding lexical scoring logic directly.
 - `infrastructure/`: adapters should not depend on infrastructure helpers unless a concrete runtime concern truly requires it.
