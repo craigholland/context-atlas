@@ -13,6 +13,7 @@
   - "errors/**/*.py"
   - "events/**/*.py"
   - "messages/**/*.py"
+  - "models/**/*.py"
 - excluded:
   - "__pycache__/**"
   - "**/__pycache__/**"
@@ -21,12 +22,13 @@
 ## Purpose
 - Holds the current semantic core for Context Atlas.
 - Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
-- Establishes the dependency-clean foundation that future source, packet, policy, and trace models should build on.
+- Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
 - Code here should represent semantic meaning, not runtime environment mechanics.
 - Error codes, event identifiers, and centralized message templates belong here because they are cross-layer semantic contracts, not logging/config implementation details.
+- Canonical source, budget, packet, decision, and trace artifacts belong here rather than in `services/` or `rendering/`.
 - Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
 - Do not move environment loading, logger setup, provider DTOs, or persistence shapes into this folder just because they are utility-like.
 
@@ -45,13 +47,16 @@
 - `errors`:
   - `ErrorCode`: stable machine-facing error identifiers
   - `ContextAtlasError`: base exception carrying a stable code and formatted message
-  - `ConfigurationError`: domain-level error for invalid runtime settings surfaced through stable codes
+  - `ConfigurationError`: configuration-specific exception type
 - `events`:
   - `LogEvent`: stable event identifiers for meaningful operational events
 - `messages`:
   - `format_error_message`: formats a stable error code using centralized templates
   - `get_error_message`: fetches the registered error template
   - `get_log_message`: fetches the registered log-event template
+- `models`:
+  - canonical source, candidate, budget, packet, decision, and trace artifacts
+  - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
 
 ## File Index
 - `errors/codes.py`:
@@ -92,15 +97,47 @@
     - `get_log_message`
   - invariants:
     - templates here are semantic contracts consumed by logging infrastructure
+- `models/sources.py`:
+  - responsibility: defines canonical source, provenance, and candidate artifacts
+  - defines:
+    - `ContextSource`
+    - `ContextSourceProvenance`
+    - `ContextCandidate`
+    - source classification/authority/durability enums
+  - invariants:
+    - source identifiers and content must normalize cleanly
+    - candidate scoring metadata must remain machine-usable and deterministic
+- `models/budget.py`:
+  - responsibility: defines canonical budget and budget-slot artifacts
+  - defines:
+    - `ContextBudget`
+    - `ContextBudgetSlot`
+    - `ContextBudgetSlotMode`
+  - invariants:
+    - fixed-slot reservations must not silently exceed total budget
+    - slot names must stay unique within a single budget
+- `models/assembly.py`:
+  - responsibility: defines canonical assembly decisions, traces, and packets
+  - defines:
+    - `ContextAssemblyDecision`
+    - `ContextTrace`
+    - `ContextPacket`
+    - `ContextDecisionAction`
+  - footguns:
+    - do not add prompt-ready string rendering fields here as canonical state
+- `models/reason_codes.py`:
+  - responsibility: defines starter structured reason-code enums for assembly decisions
+  - invariants:
+    - reason codes should stay machine-stable even as heuristics evolve
 
 ## Known Gaps / Future-State Notes
-- The domain currently covers only errors, events, and messages; future core models like sources, budgets, packets, decisions, and traces are expected to join this layer.
-- Some current names are intentionally bootstrap-oriented and may evolve as richer domain concepts harden.
-- The distinction between domain events and future audit/trace artifacts is not yet implemented beyond stable log-event identifiers.
+- Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
+- The current model set is canonical structure, not yet full policy behavior.
+- The distinction between domain events and future richer audit projections is still intentionally thin.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
-- `services/`: future orchestration code should raise or wrap domain-coded exceptions rather than scattering new semantic error strings.
+- `services/`: future orchestration code should consume `ContextPacket`, `ContextTrace`, `ContextBudget`, and related decision artifacts rather than inventing parallel packet state.
 - `adapters/`: future adapter translation boundaries may log with domain `LogEvent` identifiers, but provider-specific payload wording must stay out of domain templates.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 
@@ -113,10 +150,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_domain_models.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message; from context_atlas.domain.models import ContextSource, ContextBudget, ContextPacket"
 ```

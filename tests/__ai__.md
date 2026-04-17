@@ -36,6 +36,8 @@
 ## Public API / Key Exports
 - `test_bootstrap_layers.py`:
   - `BootstrapLayerTests`: verifies error/message centralization, config loading, and structured log events
+- `test_domain_models.py`:
+  - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -48,9 +50,17 @@
   - invariants:
     - tests should stay fast and deterministic
     - assertions should track centralized contracts rather than ad hoc inline strings
+- `test_domain_models.py`:
+  - responsibility: verifies canonical domain artifacts and their starter invariants
+  - defines:
+    - `DomainModelTests`: domain model test suite
+  - depends_on:
+    - `context_atlas.domain`
+  - invariants:
+    - tests should verify structured artifacts remain canonical and machine-usable
 
 ## Known Gaps / Future-State Notes
-- The current suite is intentionally small and bootstrap-focused.
+- The suite now covers both bootstrap contracts and the first canonical domain artifacts.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -71,5 +81,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_domain_models"
 ```
