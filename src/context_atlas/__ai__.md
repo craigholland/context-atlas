@@ -24,7 +24,7 @@
 - Defines the primary Python package namespace for Context Atlas.
 - Establishes the Craig-style layer spine for the standalone library layout under `src/context_atlas/`.
 - Provides the top-level dependency and public-surface rules that all nested layer packages must follow.
-- Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly-default runtime knobs.
+- Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly and memory runtime knobs.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -50,7 +50,7 @@
   - semantic core for error codes, log events, messages, canonical domain artifacts, and pure policy logic
 - `infrastructure/`:
   - runtime configuration and logging implementation details for the current bootstrap
-  - early assembly-default settings and structured observability helpers
+  - early assembly and memory default settings plus structured observability helpers
 - `rendering/`:
   - derived text/rendering helpers for canonical packets and transformations
 
@@ -74,7 +74,7 @@
     - inward-most project layer
     - may remain small early, but must stay dependency-clean
     - canonical packet, budget, source, decision, and trace artifacts should live here rather than in outer layers
-    - pure ranking, deduplication, and decision-recording policy logic may live here when it is deterministic and dependency-light
+    - pure ranking, deduplication, memory-retention, and decision-recording policy logic may live here when it is deterministic and dependency-light
 - `infrastructure/`:
   - responsibility: holds runtime configuration and logging implementation details
   - used_by:
@@ -96,6 +96,7 @@
 - `domain/`: deterministic ranking and decision policies should harden inward here instead of being embedded in adapters or later service orchestration.
 - `infrastructure/`: runtime config and logging may depend on domain identifiers and message templates, but domain code must not depend on infrastructure implementation.
 - `infrastructure/`: supported `.env.example` keys should remain a thin mirror of real config loader behavior, not speculative future controls.
+- `infrastructure/`: starter assembly and memory defaults should stay operator-facing and limited until a real assembly service proves broader tuning is necessary.
 - `services/`: future service orchestration should depend on domain semantics and inward-owned contracts rather than importing concrete adapter or infrastructure implementations.
 - `adapters/`: retrieval/source-ingestion implementations may translate external or stored source material into canonical `ContextSource`/`ContextCandidate` artifacts, but must keep that translation logic out of `domain/`.
 - `rendering/`: derived renderers may consume canonical packet/decision/trace artifacts, but must not become the source of canonical semantics.

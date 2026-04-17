@@ -10,6 +10,8 @@ class InclusionReasonCode(StrEnum):
     AUTHORITY_PRIORITY = "authority_priority"
     BUDGET_AVAILABLE = "budget_available"
     MEMORY_RETAINED = "memory_retained"
+    SHORT_TERM_PRIORITY = "short_term_priority"
+    QUERY_RELEVANCE = "query_relevance"
 
 
 class ExclusionReasonCode(StrEnum):
@@ -20,6 +22,7 @@ class ExclusionReasonCode(StrEnum):
     OUT_OF_BUDGET = "out_of_budget"
     LOWER_AUTHORITY = "lower_authority"
     EMPTY_CONTENT = "empty_content"
+    STALE_MEMORY = "stale_memory"
 
 
 class BudgetPressureReasonCode(StrEnum):

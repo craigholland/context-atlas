@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import math
 
 from ...domain.errors import ConfigurationError, ErrorCode
 from ...domain.events import LogEvent
@@ -43,11 +44,45 @@ class AssemblySettings:
             )
 
 
+@dataclass(frozen=True, slots=True)
+class MemorySettings:
+    """Runtime defaults for starter memory-retention behavior."""
+
+    short_term_count: int = 4
+    decay_rate: float = 0.001
+    dedup_threshold: float = 0.72
+
+    def __post_init__(self) -> None:
+        if self.short_term_count < 1:
+            raise ConfigurationError(
+                code=ErrorCode.INVALID_CONFIGURATION,
+                message_args=(
+                    f"short_term_count must be >= 1, got {self.short_term_count}",
+                ),
+            )
+        if not math.isfinite(self.decay_rate) or self.decay_rate < 0:
+            raise ConfigurationError(
+                code=ErrorCode.INVALID_CONFIGURATION,
+                message_args=(f"decay_rate must be >= 0, got {self.decay_rate}",),
+            )
+        if not math.isfinite(self.dedup_threshold) or not (
+            0.0 <= self.dedup_threshold <= 1.0
+        ):
+            raise ConfigurationError(
+                code=ErrorCode.INVALID_CONFIGURATION,
+                message_args=(
+                    "dedup_threshold must be in [0.0, 1.0], "
+                    f"got {self.dedup_threshold}",
+                ),
+            )
+
+
 @dataclass(slots=True)
 class ContextAtlasSettings:
     """Top-level runtime settings assembled by infrastructure loaders."""
 
     logging: LoggingSettings = field(default_factory=LoggingSettings)
     assembly: AssemblySettings = field(default_factory=AssemblySettings)
+    memory: MemorySettings = field(default_factory=MemorySettings)
     last_loaded_event: LogEvent | None = None
     last_loaded_message: str | None = None

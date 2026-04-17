@@ -47,6 +47,8 @@
   - `CandidateRankingTests`: verifies ranking, deduplication, and decision-trace behavior
 - `test_budget_and_compression.py`:
   - `BudgetAndCompressionTests`: verifies budget allocation, compression policy, and derived rendering behavior
+- `test_memory_policy.py`:
+  - `MemoryPolicyTests`: verifies canonical memory entries, starter retention behavior, and trace visibility
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -109,6 +111,15 @@
   - invariants:
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
+- `test_memory_policy.py`:
+  - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
+  - defines:
+    - `MemoryPolicyTests`: memory policy test suite
+  - depends_on:
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove short-term retention, decay sensitivity, deduplication, and query boosts remain deterministic
+    - memory decisions should stay visible in structured traces rather than collapsing into opaque prompt strings
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -116,6 +127,7 @@
 - The suite now also covers lexical source registration and keyword/TF-IDF retrieval ranking.
 - The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
 - The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
+- The suite now also covers canonical memory entries and starter retention policy behavior.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -136,5 +148,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_domain_models, tests.test_lexical_retrieval, tests.test_memory_policy"
 ```

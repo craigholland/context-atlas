@@ -6,6 +6,7 @@ from .settings import (
     AssemblySettings,
     ContextAtlasSettings,
     LoggingSettings,
+    MemorySettings,
 )
 
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "CompressionStrategy",
     "ContextAtlasSettings",
     "LoggingSettings",
+    "MemorySettings",
     "load_settings_from_env",
 ]

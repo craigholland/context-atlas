@@ -30,6 +30,8 @@ class ErrorMessageTemplate:
     INVALID_RANKING_REQUEST = "Invalid ranking request: %s"
     INVALID_BUDGET_ALLOCATION = "Invalid budget allocation: %s"
     INVALID_COMPRESSION_REQUEST = "Invalid compression request: %s"
+    INVALID_MEMORY_ENTRY = "Invalid memory entry: %s"
+    INVALID_MEMORY_SELECTION = "Invalid memory selection: %s"
 
 
 _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
@@ -53,6 +55,8 @@ _ERROR_MESSAGES: Mapping[ErrorCode, str] = MappingProxyType(
         ErrorCode.INVALID_RANKING_REQUEST: ErrorMessageTemplate.INVALID_RANKING_REQUEST,
         ErrorCode.INVALID_BUDGET_ALLOCATION: ErrorMessageTemplate.INVALID_BUDGET_ALLOCATION,
         ErrorCode.INVALID_COMPRESSION_REQUEST: ErrorMessageTemplate.INVALID_COMPRESSION_REQUEST,
+        ErrorCode.INVALID_MEMORY_ENTRY: ErrorMessageTemplate.INVALID_MEMORY_ENTRY,
+        ErrorCode.INVALID_MEMORY_SELECTION: ErrorMessageTemplate.INVALID_MEMORY_SELECTION,
     }
 )
 

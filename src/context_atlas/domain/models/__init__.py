@@ -7,6 +7,7 @@ from .assembly import (
     ContextTrace,
 )
 from .budget import ContextBudget, ContextBudgetSlot, ContextBudgetSlotMode
+from .memory import ContextMemoryEntry
 from .reason_codes import (
     AuthorityPrecedenceReasonCode,
     BudgetPressureReasonCode,
@@ -32,6 +33,7 @@ __all__ = [
     "ContextBudgetSlotMode",
     "ContextCandidate",
     "ContextDecisionAction",
+    "ContextMemoryEntry",
     "ContextPacket",
     "ContextSource",
     "ContextSourceAuthority",

@@ -13,7 +13,7 @@ from context_atlas.infrastructure.config import (
     CompressionStrategy,
     load_settings_from_env,
 )
-from context_atlas.infrastructure.config.settings import LoggingSettings
+from context_atlas.infrastructure.config.settings import LoggingSettings, MemorySettings
 from context_atlas.infrastructure.logging import (
     configure_logger,
     log_assembly_stage_event,
@@ -31,6 +31,9 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024",
             CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="7",
             CONTEXT_ATLAS_DEFAULT_COMPRESSION_STRATEGY="sentence",
+            CONTEXT_ATLAS_MEMORY_SHORT_TERM_COUNT="6",
+            CONTEXT_ATLAS_MEMORY_DECAY_RATE="0.0025",
+            CONTEXT_ATLAS_MEMORY_DEDUP_THRESHOLD="0.81",
         ):
             settings = load_settings_from_env()
 
@@ -43,12 +46,17 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             settings.assembly.default_compression_strategy,
             CompressionStrategy.SENTENCE,
         )
+        self.assertEqual(settings.memory.short_term_count, 6)
+        self.assertAlmostEqual(settings.memory.decay_rate, 0.0025)
+        self.assertAlmostEqual(settings.memory.dedup_threshold, 0.81)
         self.assertEqual(settings.last_loaded_event, LogEvent.SETTINGS_LOADED)
         self.assertEqual(
             settings.last_loaded_message,
             "Settings loaded: logger_name=atlas.observability.tests, "
             "log_level=WARNING, default_total_budget=1024, "
-            "default_retrieval_top_k=7, default_compression_strategy=sentence",
+            "default_retrieval_top_k=7, default_compression_strategy=sentence, "
+            "memory_short_term_count=6, memory_decay_rate=0.0025, "
+            "memory_dedup_threshold=0.81",
         )
 
     def test_invalid_integer_settings_raise_configuration_error(self) -> None:
@@ -66,6 +74,14 @@ class ConfigAndObservabilityTests(unittest.TestCase):
 
         self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
         self.assertIn("extractive", str(context.exception))
+
+    def test_invalid_memory_threshold_raises_configuration_error(self) -> None:
+        with _temporary_environment(CONTEXT_ATLAS_MEMORY_DEDUP_THRESHOLD="1.5"):
+            with self.assertRaises(ConfigurationError) as context:
+                load_settings_from_env()
+
+        self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
+        self.assertIn("MEMORY_DEDUP_THRESHOLD", str(context.exception))
 
     def test_configure_logger_uses_plain_formatter_when_structured_events_disabled(
         self,
@@ -123,6 +139,13 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             "candidates_gathered|trace-2|4|extractive|"
             "Candidates gathered: trace_id=trace-2, candidate_count=4",
         )
+
+    def test_memory_settings_defaults_are_exposed_through_context_settings(
+        self,
+    ) -> None:
+        settings = load_settings_from_env()
+
+        self.assertEqual(settings.memory, MemorySettings())
 
 
 class _temporary_environment:
