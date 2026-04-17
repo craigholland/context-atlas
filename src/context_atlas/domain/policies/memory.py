@@ -232,9 +232,12 @@ class StarterMemoryRetentionPolicy:
                 )
             )
 
-        selected_entries = tuple(
+        # The returned order is semantic priority order. The service layer consumes
+        # this sequence directly when trimming against the memory-slot budget, so
+        # the short-term keep window must remain first.
+        selected_entries = tuple(recent_entries) + tuple(
             scored_entry.entry for scored_entry in selected_long_term
-        ) + tuple(recent_entries)
+        )
         trace = ContextTrace(
             trace_id=trace_id,
             decisions=tuple(decisions),

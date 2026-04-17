@@ -80,7 +80,7 @@ class MemoryPolicyTests(unittest.TestCase):
 
         self.assertEqual(
             tuple(entry.entry_id for entry in outcome.selected_entries),
-            ("old-relevant", "recent-user", "recent-assistant"),
+            ("recent-user", "recent-assistant", "old-relevant"),
         )
         self.assertEqual(outcome.trace.metadata["selected_entry_count"], "3")
         self.assertEqual(outcome.trace.metadata["rejected_entry_count"], "1")
@@ -162,7 +162,7 @@ class MemoryPolicyTests(unittest.TestCase):
 
         self.assertEqual(
             tuple(entry.entry_id for entry in outcome.selected_entries),
-            ("query-match", "recent-anchor"),
+            ("recent-anchor", "query-match"),
         )
         boosted_decision = next(
             decision

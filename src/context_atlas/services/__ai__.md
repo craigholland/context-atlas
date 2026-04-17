@@ -62,6 +62,7 @@
     - packet assembly should stay explainable through structured trace metadata and decisions
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
+    - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
 
 ## Known Gaps / Future-State Notes
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.

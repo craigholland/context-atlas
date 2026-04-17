@@ -479,7 +479,12 @@ class ContextAssemblyService:
         *,
         max_tokens: int,
     ) -> tuple[tuple[ContextMemoryEntry, ...], tuple[ContextAssemblyDecision, ...]]:
-        """Trim retained memory entries to the available memory-slot budget."""
+        """Trim retained memory entries to the available memory-slot budget.
+
+        The incoming order is significant: domain memory-selection policies return
+        retained entries in priority order, so this pass should preserve that order
+        rather than re-ranking memory locally.
+        """
 
         if not selected_entries:
             return (), ()

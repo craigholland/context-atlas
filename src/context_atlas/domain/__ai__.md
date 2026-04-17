@@ -190,6 +190,7 @@
   - invariants:
     - short-term inclusion, decay, deduplication, and query boosts should remain replaceable starter logic
     - memory selection decisions should stay trace-visible rather than hidden in transcript strings
+    - retained entries should be returned in priority order so later budget trimming cannot evict the short-term keep window behind older long-term memory
 
 ## Known Gaps / Future-State Notes
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.

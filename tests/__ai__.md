@@ -138,6 +138,7 @@
   - invariants:
     - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
     - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
+    - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:
