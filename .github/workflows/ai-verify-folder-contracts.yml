@@ -1,0 +1,89 @@
+name: Verify __ai__.md Folder Contracts
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ai-contracts:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set diff range
+        id: diff
+        shell: pwsh
+        run: |
+          if ("${{ github.event_name }}" -eq "pull_request") {
+            $base = "${{ github.event.pull_request.base.sha }}"
+            $head = "${{ github.event.pull_request.head.sha }}"
+          }
+          else {
+            $base = "${{ github.event.before }}"
+            $head = "${{ github.sha }}"
+          }
+
+          if ([string]::IsNullOrWhiteSpace($base) -or $base -eq "0000000000000000000000000000000000000000") {
+            try {
+              $base = (git rev-parse "$head^").Trim()
+            }
+            catch {
+              $base = $head
+            }
+          }
+
+          "base_sha=$base" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "head_sha=$head" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install dev dependencies
+        shell: pwsh
+        run: |
+          py -3 -m pip install -e .[dev]
+
+      - name: Validate __ai__.md structure
+        shell: pwsh
+        run: |
+          python scripts/validate_ai_docs.py `
+            --repo-root . `
+            --base "${{ steps.diff.outputs.base_sha }}" `
+            --head "${{ steps.diff.outputs.head_sha }}" `
+            --owner-file "__ai__.md"
+
+      - name: Check __ai__.md freshness
+        shell: pwsh
+        run: |
+          python scripts/check_ai_docs.py `
+            --repo-root . `
+            --base "${{ steps.diff.outputs.base_sha }}" `
+            --head "${{ steps.diff.outputs.head_sha }}" `
+            --owner-file "__ai__.md" `
+            --governed-root "src/context_atlas" `
+            --governed-root "tests" `
+            --governed-root "scripts" `
+            --governed-root ".github/workflows" `
+            --suffix ".py" `
+            --suffix ".toml" `
+            --suffix ".yml"
+
+      - name: Run folder contract verification
+        shell: pwsh
+        run: |
+          python scripts/ai_verify_contracts.py `
+            --repo-root . `
+            --base "${{ steps.diff.outputs.base_sha }}" `
+            --head "${{ steps.diff.outputs.head_sha }}" `
+            --owner-file "__ai__.md"

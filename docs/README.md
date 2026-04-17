@@ -6,6 +6,8 @@ Before creating or editing project documents, start with [docs/Authoritative/Ont
 
 The canonical semantic definitions for the document classes now live in [docs/Authoritative/Ontology/Documentation-Ontology.md](./Authoritative/Ontology/Documentation-Ontology.md). That document defines what `Authoritative`, `Planning`, `Reviews`, `Exploratory`, and `Releases` actually mean, what they are safe to use for, and how they should interact when they disagree.
 
+The canonical definition of project mission, scope, and strategic boundaries now lives in [docs/Authoritative/Identity/Context-Atlas-Charter.md](./Authoritative/Identity/Context-Atlas-Charter.md). The project-specific operational model now lives in [docs/Authoritative/Identity/Context-Atlas-System-Model.md](./Authoritative/Identity/Context-Atlas-System-Model.md).
+
 The intended documentation ontology is:
 
 - `Authoritative` for binding project truth

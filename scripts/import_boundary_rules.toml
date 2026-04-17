@@ -1,0 +1,25 @@
+source_root = "src"
+
+[[rule]]
+target_prefix = "context_atlas.domain"
+forbidden_prefixes = [
+  "context_atlas.services",
+  "context_atlas.adapters",
+  "context_atlas.infrastructure",
+  "context_atlas.rendering",
+]
+
+[[rule]]
+target_prefix = "context_atlas.services"
+forbidden_prefixes = [
+  "context_atlas.adapters",
+  "context_atlas.infrastructure",
+  "context_atlas.rendering",
+]
+
+[[rule]]
+target_prefix = "context_atlas.rendering"
+forbidden_prefixes = [
+  "context_atlas.adapters",
+  "context_atlas.infrastructure",
+]

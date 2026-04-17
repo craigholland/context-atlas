@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+set -eu
+
+if command -v py >/dev/null 2>&1; then
+  py -3 scripts/preflight.py
+elif command -v python >/dev/null 2>&1; then
+  python scripts/preflight.py
+else
+  echo "[pre-push] Neither 'py' nor 'python' was found on PATH." >&2
+  exit 1
+fi

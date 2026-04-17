@@ -52,11 +52,35 @@ This document is subordinate to [Craig Architecture](./Craig-Architecture.md).
 
 If this document appears to conflict with the main Craig Architecture document, the main document governs unless an explicit exception is documented.
 
-### 2. Prefer Repo-Level Project Structure With App-Local `src/` Layout
+### 2. Prefer A Clear Separation Between Repository Structure And Python Package Structure
 
-Craig-style Python projects should usually separate repository-level project structure from app-level Python package structure.
+Craig-style Python projects should usually separate repository-level project structure from Python package structure.
 
-Typical repository shape:
+Two common repository shapes are acceptable.
+
+Standalone package or library shape:
+
+```text
+project_name/
+  docs/
+  src/
+    package_name/
+      domain/
+      services/
+      ports/
+      infrastructure/
+      adapters/
+      interface/
+  tests/
+  examples/
+  scripts/
+  .codex/
+  .github/
+  pyproject.toml
+  .gitignore
+```
+
+Multi-app project shape:
 
 ```text
 project_name/
@@ -91,9 +115,20 @@ project_name/
   docker-compose.yml
 ```
 
-In this model:
+In either model:
 
-- the repository root owns shared project concerns such as documentation, scripts, CI, Codex guidance, and top-level environment orchestration
+- the repository root owns shared project concerns such as documentation, scripts, CI, Codex guidance, and packaging metadata appropriate to the repository shape
+- the layer packages live inside a `src/` tree rather than directly at the repository root
+- the package structure should make layer boundaries and dependency direction easier to see
+
+In the standalone package shape:
+
+- the repository typically represents one primary Python package
+- `src/package_name/` owns the layer packages for that package
+- repository-root `tests/` and `examples/` support the package without becoming part of its runtime namespace
+
+In the multi-app shape:
+
 - the `/apps` directory owns the individual deployable or runnable applications within the project
 - each app owns its own Python packaging, tests, entrypoints, app-local environment configuration, and app-local `src/` tree
 - the layer packages live inside each app's `src/` directory, not at the repository root
@@ -108,28 +143,28 @@ When a project uses both `adapters/` and `infrastructure/` inside the same app, 
 - `adapters/` owns translation-heavy integrations with external providers, protocols, payloads, or SDK-facing boundary code
 - both remain outer-layer implementation details, and some smaller apps may reasonably collapse them together until the distinction becomes useful
 
-Not every app needs every subdirectory immediately, and exact names may vary. Some apps may colocate ports with `domain/` or `services/` rather than introducing a separate `ports/` package early.
+Not every package or app needs every subdirectory immediately, and exact names may vary. Some projects may colocate ports with `domain/` or `services/` rather than introducing a separate `ports/` package early.
 
 The important rule is that Python package structure should make dependency direction easier to preserve, not harder to see.
 
 If a layer does not yet have its own package, its responsibilities still exist and should be kept legible.
 
-The `src/` layout is preferred in part because it helps prevent accidental imports of application packages directly from the working tree without installation.
+The `src/` layout is preferred in part because it helps prevent accidental imports of Python packages directly from the working tree without installation.
 
-That makes local development, tests, packaging, and runtime imports behave more like the installed application rather than relying on repository-root path leakage. In practice, this catches missing packaging assumptions earlier and makes the architecture more legible to both humans and AI contributors.
+That makes local development, tests, packaging, and runtime imports behave more like the installed package or application rather than relying on repository-root path leakage. In practice, this catches missing packaging assumptions earlier and makes the architecture more legible to both humans and AI contributors.
 
-### 3. Each App Owns Its Own `pyproject.toml`
+### 3. Each Standalone Package Or App Owns Its Own `pyproject.toml`
 
-Each app under `/apps` should own its own `pyproject.toml`.
+Each standalone package or app should own its own `pyproject.toml`.
 
-That file should define the app's package metadata, dependencies, developer tooling, entrypoints, and verification-tool configuration for that app.
+That file should define the package metadata, dependencies, developer tooling, entrypoints where relevant, and verification-tool configuration for that package or app.
 
 Architecturally, `pyproject.toml` should usually describe:
 
-- the app's direct runtime dependencies
-- the app's development and verification tools
-- the app's package/build settings
-- the app's script or entrypoint definitions
+- the package's or app's direct runtime dependencies
+- the package's or app's development and verification tools
+- the package/build settings
+- the script or entrypoint definitions that belong to that package or app
 
 Cross-app dependencies should usually be avoided by default.
 
