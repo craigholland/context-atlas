@@ -4,6 +4,8 @@ This directory defines the initial document template model for Context Atlas.
 
 The goal is to keep project artifacts lightweight enough to author quickly while still making them structured enough for review, reuse, and future machine interpretation.
 
+The canonical semantic meaning of the document classes themselves now lives in [Documentation-Ontology.md](./Documentation-Ontology.md).
+
 ## Composition Model
 
 All downstream project documents should begin with the shared metadata block defined in [base_metadata.md](./base_metadata.md).
@@ -78,8 +80,11 @@ Different document classes serve different purposes:
 
 The shared metadata layer helps future humans and tools understand what a document is, how trustworthy it is, and how it should be used.
 
+This template directory handles structure. [Documentation-Ontology.md](./Documentation-Ontology.md) handles class meaning, trust, precedence, and safe-use semantics.
+
 ## Initial File Set
 
+- [Documentation-Ontology.md](./Documentation-Ontology.md): canonical semantic meanings for the document classes
 - [base_metadata.md](./base_metadata.md): shared front matter contract for all documents
 - [authoritative_content.md](./authoritative_content.md): body template for binding documents
 - [planning_content.md](./planning_content.md): body template for forward-looking execution documents
@@ -120,6 +125,6 @@ We should treat template versions as semver-like:
 
 ## Current Scope
 
-These templates are the initial ontology scaffold, not the final word.
+These templates remain part of the ontology scaffold, not the entire ontology by themselves.
 
-We should expect to refine them once the canonical Craig Architecture document, the documentation ontology document, and the project charter are written. At that point, we may decide to add class-specific templates for Reviews, Exploratory work, and Releases.
+The canonical class semantics are now defined in [Documentation-Ontology.md](./Documentation-Ontology.md). We should still expect to refine the templates further as the project charter and future class-specific document patterns are written.
