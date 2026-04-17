@@ -20,6 +20,7 @@
 - Verifies bootstrap contracts and guards early architectural seams from silent drift.
 - Provides the first executable safety net for domain and infrastructure bootstrap behavior.
 - Verifies that env-backed runtime defaults and structured observability helpers stay aligned with the documented repo surface.
+- Verifies that the repo's direct message-constant pattern and Pydantic-backed config surface stay stable as the package evolves.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -36,11 +37,11 @@
 
 ## Public API / Key Exports
 - `test_bootstrap_layers.py`:
-  - `BootstrapLayerTests`: verifies error/message centralization, config loading, and structured log events
+  - `BootstrapLayerTests`: verifies direct error/log message constants, config loading, and structured log output
 - `test_domain_models.py`:
   - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
 - `test_config_observability.py`:
-  - `ConfigAndObservabilityTests`: verifies env-backed assembly defaults and structured assembly-stage logging helpers
+  - `ConfigAndObservabilityTests`: verifies Pydantic-backed env defaults and structured assembly-stage logging helpers
 - `test_lexical_retrieval.py`:
   - `LexicalRetrievalTests`: verifies in-memory source registration and lexical retrieval behavior
 - `test_candidate_ranking.py`:
@@ -60,7 +61,7 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should stay fast and deterministic
-    - assertions should track centralized contracts rather than ad hoc inline strings
+    - assertions should track centralized message constants rather than ad hoc inline strings
 - `test_domain_models.py`:
   - responsibility: verifies canonical domain artifacts and their starter invariants
   - defines:
@@ -70,7 +71,7 @@
   - invariants:
     - tests should verify structured artifacts remain canonical and machine-usable
 - `test_config_observability.py`:
-  - responsibility: verifies PR 2 configuration defaults and observability helpers
+  - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
     - `ConfigAndObservabilityTests`: configuration/observability test suite
   - depends_on:
@@ -78,7 +79,7 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should prove `.env.example`-backed settings remain parseable and validated
-    - assertions should verify structured event fields rather than ad hoc log text alone
+    - assertions should verify structured event-name fields rather than ad hoc log text alone
 - `test_lexical_retrieval.py`:
   - responsibility: verifies PR 3 source registration and lexical retrieval behavior
   - defines:
@@ -128,6 +129,7 @@
 - The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
 - The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
 - The suite now also covers canonical memory entries and starter retention policy behavior.
+- The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
