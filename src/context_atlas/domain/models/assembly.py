@@ -181,10 +181,36 @@ class ContextPacket(CanonicalDomainModel):
         return len(self.selected_memory_entries)
 
     @property
+    def selected_source_ids(self) -> tuple[str, ...]:
+        """Return selected source identifiers in packet order."""
+
+        return tuple(
+            candidate.source.source_id for candidate in self.selected_candidates
+        )
+
+    @property
+    def selected_memory_entry_ids(self) -> tuple[str, ...]:
+        """Return selected memory entry identifiers in packet order."""
+
+        return tuple(entry.entry_id for entry in self.selected_memory_entries)
+
+    @property
     def has_compression(self) -> bool:
         """Return whether the packet includes a structured compression result."""
 
         return self.compression_result is not None
+
+    @property
+    def has_budget(self) -> bool:
+        """Return whether the packet carries canonical budget state."""
+
+        return self.budget is not None
+
+    @property
+    def has_trace(self) -> bool:
+        """Return whether the packet carries canonical trace state."""
+
+        return self.trace is not None
 
 
 __all__ = [
