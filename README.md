@@ -12,11 +12,13 @@ It exists to answer questions such as:
 
 ## Status
 
-This repository is in architecture bootstrap. The initial focus is on authoritative documentation, ontology, package boundaries, and thin implementation slices rather than feature breadth.
+This repository has completed its initial architecture and governance bootstrap. Context Atlas now has a first end-to-end starter implementation for canonical source modeling, retrieval, ranking, budgeting, compression, memory retention, packet assembly, and ontology-aware filesystem document ingestion.
+
+The current focus is implementation hardening rather than feature breadth: tightening model surfaces, standardizing validated Pydantic contracts, strengthening error and logging semantics, and continuing to refine the starter policies and adapter boundaries before broader expansion.
 
 ## Principles
 
-- Standalone and reusable, not an MAE submodule
+- Standalone and reusable
 - Provider-agnostic, while explicitly supporting Codex-powered systems
 - Craig Architecture from day one
 - Canonical structured packets before prompt rendering
@@ -28,6 +30,10 @@ This repository is in architecture bootstrap. The initial focus is on authoritat
 - `src/context_atlas/` for the package source
 - `tests/` for automated tests
 - `examples/` for usage examples and demonstrations
+
+## Runtime Knobs
+
+The tracked [`.env.example`](K:/keven/codex_repo/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
 
 ## License
 

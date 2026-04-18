@@ -11,8 +11,9 @@
 - included:
   - "__init__.py"
   - "errors/**/*.py"
-  - "events/**/*.py"
   - "messages/**/*.py"
+  - "models/**/*.py"
+  - "policies/**/*.py"
 - excluded:
   - "__pycache__/**"
   - "**/__pycache__/**"
@@ -20,14 +21,23 @@
 
 ## Purpose
 - Holds the current semantic core for Context Atlas.
-- Provides stable machine-facing identifiers and human-facing message templates for early error and logging contracts.
-- Establishes the dependency-clean foundation that future source, packet, policy, and trace models should build on.
+- Provides stable machine-facing identifiers and human-facing message constants for early error and logging contracts.
+- Establishes the dependency-clean foundation for canonical source, candidate, budget, packet, decision, and trace artifacts.
+- Establishes a frozen Pydantic standard for canonical source, candidate, budget, packet, decision, and trace artifacts.
+- Establishes the same validated-model direction for public policy inputs, outputs, and configurable starter policy objects.
+- Keeps packet state canonical even as packets begin carrying both ranked source candidates and retained memory entries.
+- Carries the starter log message surface that infrastructure logging can reuse without inventing local semantics.
+- Carries deterministic ranking, deduplication, memory-retention, and decision-trace policy logic that should not drift outward into adapters or later orchestration.
 
 ## Architectural Rules
 - This folder is the inward-most project layer and must not import from `services/`, `adapters/`, `infrastructure/`, or `rendering/`.
 - Code here should represent semantic meaning, not runtime environment mechanics.
-- Error codes, event identifiers, and centralized message templates belong here because they are cross-layer semantic contracts, not logging/config implementation details.
-- Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
+- Error codes and centralized message constants belong here because they are cross-layer semantic contracts, not logging/config implementation details.
+- Canonical source, budget, packet, decision, and trace artifacts belong here rather than in `services/` or `rendering/`.
+- Non-trivial canonical artifacts in `models/` should use frozen Pydantic models with explicit domain validation instead of mixed dataclass and BaseModel patterns.
+- Non-trivial public policy surfaces in `policies/` should also use validated Pydantic models when they shape orchestration inputs, outputs, or configurable behavior.
+- Deterministic ranking and decision-recording policies belong here when they can remain pure and dependency-light.
+- Base exceptions here should carry a validated Pydantic-backed payload, format through local domain message templates, and remain framework-neutral and dependency-light.
 - Do not move environment loading, logger setup, provider DTOs, or persistence shapes into this folder just because they are utility-like.
 
 ## Allowed Dependencies
@@ -44,14 +54,21 @@
 ## Public API / Key Exports
 - `errors`:
   - `ErrorCode`: stable machine-facing error identifiers
-  - `ContextAtlasError`: base exception carrying a stable code and formatted message
-  - `ConfigurationError`: domain-level error for invalid runtime settings surfaced through stable codes
-- `events`:
-  - `LogEvent`: stable event identifiers for meaningful operational events
+  - `ContextAtlasError`: base exception carrying a stable code and a validated payload
+  - `ConfigurationError`: configuration-specific exception type
 - `messages`:
-  - `format_error_message`: formats a stable error code using centralized templates
-  - `get_error_message`: fetches the registered error template
-  - `get_log_message`: fetches the registered log-event template
+  - `ErrorMessage`: direct error-message constants keyed by `ErrorCode.name`
+  - `LogMessage`: direct log-message constants that carry their own stable event names
+- `models`:
+  - canonical source, candidate, budget, packet, decision, and trace artifacts
+  - starter reason-code enums for inclusion, exclusion, budget pressure, and authority precedence
+  - canonical compression result and strategy artifacts
+  - canonical retained-memory entry artifacts
+- `policies`:
+  - `CandidateRankingPolicy`: ranking-policy contract
+  - `StarterCandidateRankingPolicy`: starter deterministic ranking/deduplication implementation
+  - `CandidateRankingOutcome`: ranked-candidate plus trace result artifact
+  - budget allocation, compression, and memory-retention policy contracts plus starter implementations
 
 ## File Index
 - `errors/codes.py`:
@@ -61,8 +78,10 @@
   - invariants:
     - codes should be stable once referenced by higher layers or tests
     - prefer semantic identifiers over incidental implementation wording
+    - source-registration and retrieval-request failures should get stable codes here before adapters raise them
+    - filesystem adapter path/front-matter failures should also land here as stable source-adapter or document-class errors
 - `errors/exceptions.py`:
-  - responsibility: defines domain exception classes built on stable codes and templates
+  - responsibility: defines domain exception classes built on stable codes and validated message payloads
   - defines:
     - `ContextAtlasError`: base coded exception
     - `ConfigurationError`: configuration-specific exception type
@@ -71,38 +90,153 @@
     - `context_atlas.domain.messages`
   - footguns:
     - do not let exception types begin importing infrastructure config or logger implementations
-- `events/log_events.py`:
-  - responsibility: defines stable event identifiers for structured logging and future tracing
-  - defines:
-    - `LogEvent`: string enum of meaningful system events
-  - invariants:
-    - event ids should be machine-stable even if message wording changes
 - `messages/error_messages.py`:
-  - responsibility: centralizes reusable human-facing error templates
+  - responsibility: centralizes reusable human-facing error messages
   - defines:
-    - `ErrorMessageTemplate`
-    - `get_error_message`
-    - `format_error_message`
+    - `ErrorMessage`
+  - invariants:
+    - message constants should stay grouped by their primary consuming surface so contributors can locate the right contract quickly
+    - within each consumer grouping, message constants should stay alphabetized for reviewability
   - footguns:
     - avoid turning this into a dumping ground for trivial one-off strings
+    - retrieval and source-registration errors should resolve through these constants rather than inline adapter text
 - `messages/log_messages.py`:
-  - responsibility: centralizes reusable log templates keyed by stable event ids
+  - responsibility: centralizes reusable log messages keyed directly by class variable name
   - defines:
-    - `LogMessageTemplate`
-    - `get_log_message`
+    - `LogMessage`
   - invariants:
-    - templates here are semantic contracts consumed by logging infrastructure
+    - messages here are semantic contracts consumed by logging infrastructure
+    - each constant should carry a stable event name without needing a separate event enum or lookup table
+    - expanded settings and stage-event wording should be updated here, not introduced inline in outer layers
+- `models/sources.py`:
+  - responsibility: defines canonical source, provenance, and candidate artifacts
+  - defines:
+    - `ContextSource`
+    - `ContextSourceProvenance`
+    - `ContextCandidate`
+    - source classification/authority/durability enums
+  - invariants:
+    - source identifiers and content must normalize cleanly
+    - candidate scoring metadata must remain machine-usable and deterministic
+    - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
+- `models/base.py`:
+  - responsibility: provides shared frozen-model and immutable metadata helpers for canonical artifacts
+  - defines:
+    - `CanonicalDomainModel`
+    - `FrozenStringMap`
+  - invariants:
+    - helper code here should stay thin and model-focused rather than becoming a general utility bucket
+    - immutable metadata helpers should preserve canonical state without importing outer-layer libraries
+- `models/budget.py`:
+  - responsibility: defines canonical budget and budget-slot artifacts
+  - defines:
+    - `ContextBudget`
+    - `ContextBudgetSlot`
+    - `ContextBudgetSlotMode`
+  - invariants:
+    - fixed-slot reservations must not silently exceed total budget
+    - slot names must stay unique within a single budget
+    - budget artifacts should reject invalid state during Pydantic model initialization rather than through later service checks
+- `models/assembly.py`:
+  - responsibility: defines canonical assembly decisions, traces, and packets
+  - defines:
+    - `ContextAssemblyDecision`
+    - `ContextTrace`
+    - `ContextPacket`
+    - `ContextDecisionAction`
+  - footguns:
+    - do not add prompt-ready string rendering fields here as canonical state
+    - packet item counts should reflect canonical included artifacts, not just one source family
+- `models/reason_codes.py`:
+  - responsibility: defines starter structured reason-code enums for assembly decisions
+  - invariants:
+    - reason codes should stay machine-stable even as heuristics evolve
+- `models/transformations.py`:
+  - responsibility: defines canonical compression/transformation artifacts
+  - defines:
+    - `CompressionStrategy`
+    - `CompressionResult`
+  - invariants:
+    - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
+- `models/memory.py`:
+  - responsibility: defines canonical retained-memory entry artifacts
+  - defines:
+    - `ContextMemoryEntry`
+  - invariants:
+    - memory entries should stay canonical structured artifacts rather than ad hoc transcript strings
+    - retention metadata should remain deterministic and dependency-light
+- `policies/ranking.py`:
+  - responsibility: ranks candidates, deduplicates them, and records structured decisions
+  - defines:
+    - `CandidateRankingPolicy`
+    - `StarterCandidateRankingPolicy`
+    - `CandidateRankingOutcome`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.models`
+  - invariants:
+    - ranking should stay deterministic for identical inputs
+    - deduplication should record explicit exclusion decisions rather than silently dropping candidates
+    - `_RankableCandidate` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
+- `policies/budgeting.py`:
+  - responsibility: allocates token demand across fixed and elastic slots
+  - defines:
+    - `BudgetRequest`
+    - `BudgetAllocation`
+    - `BudgetAllocationOutcome`
+    - `ContextBudgetAllocationPolicy`
+    - `StarterBudgetAllocationPolicy`
+  - invariants:
+    - slot-allocation reductions should be visible through structured decisions
+    - duplicate or unknown slot requests should fail explicitly
+    - `StarterBudgetAllocationPolicy` is intentionally a plain behavior class because it currently carries no structured configuration state of its own
+- `policies/compression.py`:
+  - responsibility: compresses candidate content into structured compression results
+  - defines:
+    - `CompressionOutcome`
+    - `CompressionPolicy`
+    - `StarterCompressionPolicy`
+    - `estimate_tokens`
+  - invariants:
+    - fallback behavior should remain explicit in metadata and trace
+    - compressed text is a transformation artifact, not the canonical packet itself
+    - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
+- `policies/memory.py`:
+  - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
+  - defines:
+    - `MemoryRetentionPolicy`
+    - `MemorySelectionOutcome`
+    - `StarterMemoryRetentionPolicy`
+  - invariants:
+    - short-term inclusion, decay, deduplication, and query boosts should remain replaceable starter logic
+    - memory selection decisions should stay trace-visible rather than hidden in transcript strings
+    - the short-term keep window should be returned newest-first so downstream budget trimming preserves recency priority
+    - retained entries should be returned in priority order so later budget trimming cannot evict the short-term keep window behind older long-term memory
+    - `_ScoredMemoryEntry` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
 
 ## Known Gaps / Future-State Notes
-- The domain currently covers only errors, events, and messages; future core models like sources, budgets, packets, decisions, and traces are expected to join this layer.
-- Some current names are intentionally bootstrap-oriented and may evolve as richer domain concepts harden.
-- The distinction between domain events and future audit/trace artifacts is not yet implemented beyond stable log-event identifiers.
+- Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
+- The current model set is canonical structure, not yet full policy behavior.
+- The current canonical model set now uses frozen Pydantic artifacts with immutable metadata helpers, and the public policy surface now follows the same validated-model direction.
+- The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
+- The distinction between domain message constants and future richer audit projections is still intentionally thin.
+- The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
+- The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
+- The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
+- The current error/message surface now also covers filesystem source-adapter validation and unsupported document-class failures for the ontology-aware docs adapter.
+- The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
+- The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
+- The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
 
 ## Cross-Folder Contracts
-- `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, `LogEvent`, and centralized message templates, but must not redefine those semantics locally.
-- `services/`: future orchestration code should raise or wrap domain-coded exceptions rather than scattering new semantic error strings.
-- `adapters/`: future adapter translation boundaries may log with domain `LogEvent` identifiers, but provider-specific payload wording must stay out of domain templates.
+- `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.
+- `services/`: future orchestration code should consume `ContextPacket`, `ContextTrace`, `ContextBudget`, and related decision artifacts rather than inventing parallel packet state.
+- `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
+- `adapters/`: future adapter translation boundaries may log with domain `LogMessage` constants, but provider-specific payload wording must stay out of domain messages.
+- `adapters/`: filesystem document adapters may classify ontology meaning, but they should still surface that meaning through canonical source fields and domain-owned codes/messages.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
+- `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
+- `services/`: service orchestration may now include retained memory entries in canonical packets, but service-layer filtering should still consume domain-owned packet and decision semantics rather than redefining them.
 
 ## Verification Contract
 ```yaml
@@ -113,10 +247,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_bootstrap_layers.py
+      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py tests/test_memory_policy.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.events import LogEvent; from context_atlas.domain.messages import format_error_message"
+      py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.messages import ErrorMessage, LogMessage; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
 ```

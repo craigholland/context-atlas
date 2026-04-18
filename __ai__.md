@@ -12,6 +12,7 @@
   - "README.md"
   - "pyproject.toml"
   - ".gitignore"
+  - ".env.example"
   - "__ai__.md"
   - "__ai__.template.md"
   - ".githooks/**"
@@ -29,12 +30,21 @@
 - Defines repo-level operational rules that apply before recommending a push or merge.
 - Connects the local `__ai__.md` contract system to a single repo-wide preflight entrypoint.
 - Establishes hook and packaging expectations for the standalone Context Atlas library repo.
+- Keeps the tracked example environment surface aligned with supported runtime settings.
+- Makes the visible runtime knob surface reviewable at the repo root as ranking, compression, memory, and observability defaults begin to grow.
+- Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
+- Treats canonical domain artifacts as part of the visible package contract when the domain model standard shifts from starter dataclasses to frozen Pydantic models.
+- Treats public policy request/result/configuration objects as part of the same modeling contract so the repo does not drift back to mixed boundary styles.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
 - The tracked pre-push hook under `.githooks/pre-push` is the preferred enforcement mechanism for local pushes.
 - Repo-root policy should stay thin: package/runtime behavior belongs in `src/`, enforcement logic in `scripts/`, and reusable architecture canon in `docs/`.
 - The root owner file should express repo-wide operational rules and delegate folder-specific rules to nearer `__ai__.md` files rather than duplicating them.
+- When hardening slices materially change governed package or test contracts, this root owner file should still be updated alongside the nearer owner files so repo-level freshness checks remain honest.
+- The repo's logging/message surface is the direct `LogMessage` pattern with stable event-name fields; contributors should not reintroduce a separate `domain/events` layer unless the authoritative docs change first.
+- The repo's canonical domain-artifact standard is now frozen Pydantic models with explicit domain validation; contributors should not introduce new non-trivial dataclass artifacts without first updating the hardening plan and local owner files.
+- The repo's public policy-surface standard is now also validated Pydantic models; the remaining dataclasses should be explicitly justified as private helpers or script-local records.
 
 ## Allowed Dependencies
 - may depend on:
@@ -49,6 +59,8 @@
   - project metadata, Python floor, and dev-tool declarations
 - `__ai__.template.md`:
   - baseline authoring template for local contract files
+- `.env.example`:
+  - tracked example environment surface for supported runtime knobs
 - `__ai__.md`:
   - repo-level operational contract for preflight and push readiness
 - `.githooks/pre-push`:
@@ -59,10 +71,21 @@
   - responsibility: defines package metadata and repo-local developer tool dependencies
   - invariants:
     - Python floor here should match active CI and local preflight assumptions
+    - runtime validation libraries added here should correspond to real package behavior, not speculative future plans
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:
     - changes here should be reflected intentionally in validator expectations and local owner files
+- `.env.example`:
+  - responsibility: makes the supported environment-backed runtime settings visible at the repo root
+  - invariants:
+    - keys here should reflect the actual environment surface supported by infrastructure config loaders
+    - assembly and memory default knobs should stay intentionally small and clearly operator-facing
+- `src/context_atlas/domain/models/*.py`:
+  - responsibility: define the canonical Pydantic-backed artifacts consumed across the package
+  - invariants:
+    - non-trivial canonical artifacts should remain frozen Pydantic models rather than drifting back to mixed constructor styles
+    - inner metadata maps should stay immutable so packet/source state remains trustworthy once assembled
 - `__ai__.md`:
   - responsibility: states repo-wide operational rules before push or merge
   - invariants:
@@ -75,10 +98,18 @@
 ## Known Gaps / Future-State Notes
 - The current root contract focuses on push readiness and repo governance rather than deeper release automation.
 - The hook path still needs to be configured locally in each clone unless automation or contributor setup scripts do that explicitly.
+- The current feature branch is now in an implementation-hardening phase documented under `docs/Planning/Initial-Implementation-Hardening-PR-Plan.md`; follow-up slices should keep repo-level push rules aligned with those contract changes.
+- The original conversion plan has been aligned to the direct `LogMessage` surface so the branch roadmap no longer implies a separate event-enum package.
+- The current hardening phase now includes a Pydantic-first canonical-model standard; remaining non-trivial dataclasses outside the core model package should be treated as intentional follow-up debt until converted.
+- The current hardening phase now also covers public policy surfaces; any remaining dataclasses should now be explainable as deliberate keeps rather than unfinished boundary work.
+- The current hardening phase now also covers outer composition of those policy surfaces; supported env/settings knobs should match the real starter policy constructors used by infrastructure factories.
+- The repo-root README should now describe the project as post-bootstrap: the architecture/governance foundation is in place and the current work is starter-implementation hardening rather than pure architectural setup.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
 - `src/context_atlas/`: preflight should prove repo readiness without redefining package-layer rules that belong to nearer owner files.
+- `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
+- `src/context_atlas/infrastructure/`: assembly and memory default settings plus structured observability helpers should not grow new env knobs without updating the repo root surface.
 - `.github/workflows/`: CI should mirror the local preflight closely enough that GitHub failures are usually reproducible before push.
 
 ## Verification Contract

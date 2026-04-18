@@ -19,6 +19,12 @@
 - Holds automated tests for the standalone Context Atlas package.
 - Verifies bootstrap contracts and guards early architectural seams from silent drift.
 - Provides the first executable safety net for domain and infrastructure bootstrap behavior.
+- Provides end-to-end orchestration coverage now that the first real assembly service has landed.
+- Verifies that env-backed runtime defaults and structured observability helpers stay aligned with the documented repo surface.
+- Verifies that the repo's direct message-constant pattern and Pydantic-backed config surface stay stable as the package evolves.
+- Verifies that canonical domain artifacts now follow the frozen Pydantic modeling standard rather than a mixed constructor pattern.
+- Verifies that public policy inputs, outputs, and configurable starter policies follow the same validated-model direction.
+- Verifies that infrastructure composition, adapters, and renderers can consume those immutable validated models without mutating them.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -35,7 +41,23 @@
 
 ## Public API / Key Exports
 - `test_bootstrap_layers.py`:
-  - `BootstrapLayerTests`: verifies error/message centralization, config loading, and structured log events
+  - `BootstrapLayerTests`: verifies direct error/log message constants, config loading, and structured log output
+- `test_domain_models.py`:
+  - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
+- `test_config_observability.py`:
+  - `ConfigAndObservabilityTests`: verifies Pydantic-backed env defaults and structured assembly-stage logging helpers
+- `test_lexical_retrieval.py`:
+  - `LexicalRetrievalTests`: verifies in-memory source registration and lexical retrieval behavior
+- `test_candidate_ranking.py`:
+  - `CandidateRankingTests`: verifies ranking, deduplication, and decision-trace behavior
+- `test_budget_and_compression.py`:
+  - `BudgetAndCompressionTests`: verifies budget allocation, compression policy, and derived rendering behavior
+- `test_memory_policy.py`:
+  - `MemoryPolicyTests`: verifies canonical memory entries, starter retention behavior, and trace visibility
+- `test_context_assembly_service.py`:
+  - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
+- `test_filesystem_document_adapter.py`:
+  - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -47,10 +69,109 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should stay fast and deterministic
-    - assertions should track centralized contracts rather than ad hoc inline strings
+    - assertions should track centralized message constants rather than ad hoc inline strings
+    - tests should prove the base coded exception now carries a validated payload rather than a dataclass-style surface
+- `test_domain_models.py`:
+  - responsibility: verifies canonical domain artifacts and their starter invariants
+  - defines:
+    - `DomainModelTests`: domain model test suite
+  - depends_on:
+    - `context_atlas.domain`
+  - invariants:
+    - tests should verify structured artifacts remain canonical and machine-usable
+    - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
+- `test_config_observability.py`:
+  - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
+  - defines:
+    - `ConfigAndObservabilityTests`: configuration/observability test suite
+  - depends_on:
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove `.env.example`-backed settings remain parseable and validated
+    - assertions should verify structured event-name fields rather than ad hoc log text alone
+- `test_lexical_retrieval.py`:
+  - responsibility: verifies PR 3 source registration and lexical retrieval behavior
+  - defines:
+    - `LexicalRetrievalTests`: lexical retrieval test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
+    - empty-query and invalid-request behavior should stay explicit and deterministic
+- `test_candidate_ranking.py`:
+  - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
+  - defines:
+    - `CandidateRankingTests`: ranking-policy test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove ranking remains deterministic for identical inputs
+    - exclusion decisions should be trace-visible rather than silent side effects
+- `test_budget_and_compression.py`:
+  - responsibility: verifies PR 5 budget/compression policies and packet rendering derivation
+  - defines:
+    - `BudgetAndCompressionTests`: budget/compression test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.rendering`
+  - invariants:
+    - tests should prove compression results remain structured even when rendered text is produced
+    - budget reductions and compression fallback should remain explicit and deterministic
+    - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
+- `test_memory_policy.py`:
+  - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
+  - defines:
+    - `MemoryPolicyTests`: memory policy test suite
+  - depends_on:
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove short-term retention, decay sensitivity, deduplication, and query boosts remain deterministic
+    - tests should prove the short-term retention window is ordered newest-first before downstream budget trimming occurs
+    - memory decisions should stay visible in structured traces rather than collapsing into opaque prompt strings
+- `test_context_assembly_service.py`:
+  - responsibility: verifies the starter service orchestration and settings-driven infrastructure factory
+  - defines:
+    - `ContextAssemblyServiceTests`: end-to-end assembly test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+    - `context_atlas.rendering`
+  - invariants:
+    - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
+    - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
+    - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
+- `test_filesystem_document_adapter.py`:
+  - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
+  - defines:
+    - `FilesystemDocumentSourceAdapterTests`: filesystem adapter test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove documentation ontology classes map into canonical source authority and durability fields
+    - tests should prove classified source provenance remains visible enough to influence downstream packet traces
 
 ## Known Gaps / Future-State Notes
-- The current suite is intentionally small and bootstrap-focused.
+- The suite now covers both bootstrap contracts and the first canonical domain artifacts.
+- The suite now also covers env-backed assembly defaults and the assembly-stage observability surface.
+- The suite now also covers lexical source registration and keyword/TF-IDF retrieval ranking.
+- The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
+- The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
+- The suite now also covers canonical memory entries and starter retention policy behavior.
+- The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
+- The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
+- The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
+- The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
+- The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
+- The suite now also covers the public policy-surface conversion to validated Pydantic models.
+- The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
@@ -71,5 +192,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy"
 ```

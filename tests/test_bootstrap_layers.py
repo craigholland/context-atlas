@@ -8,28 +8,34 @@ import os
 import unittest
 
 from context_atlas.domain.errors import ConfigurationError, ContextAtlasError, ErrorCode
-from context_atlas.domain.events import LogEvent
-from context_atlas.domain.messages import format_error_message
+from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.infrastructure.config import load_settings_from_env
 from context_atlas.infrastructure.config.settings import LoggingSettings
-from context_atlas.infrastructure.logging import configure_logger, log_event
+from context_atlas.infrastructure.logging import configure_logger, log_message
 
 
 class BootstrapLayerTests(unittest.TestCase):
     """Verify the initial shared contracts and infrastructure bootstrap."""
 
     def test_error_messages_are_centralized_and_formatted(self) -> None:
-        message = format_error_message(ErrorCode.DOCUMENT_NO_CONTENT, "notes.md")
+        message = ErrorMessage.DOCUMENT_NO_CONTENT % ("notes.md",)
 
         self.assertEqual(message, "Document 'notes.md' has empty content.")
 
     def test_context_atlas_error_uses_registered_template(self) -> None:
         error = ContextAtlasError(
             code=ErrorCode.DOCUMENT_NO_CONTENT,
-            message_args=("notes.md",),
+            message_args=["notes.md"],
         )
 
         self.assertEqual(str(error), "Document 'notes.md' has empty content.")
+        self.assertEqual(
+            error.model_dump(),
+            {
+                "code": ErrorCode.DOCUMENT_NO_CONTENT,
+                "message_args": ("notes.md",),
+            },
+        )
 
     def test_load_settings_from_env_reads_expected_variables(self) -> None:
         with _temporary_environment(
@@ -42,7 +48,7 @@ class BootstrapLayerTests(unittest.TestCase):
         self.assertEqual(settings.logging.logger_name, "atlas.tests")
         self.assertEqual(settings.logging.level, "DEBUG")
         self.assertFalse(settings.logging.structured_events)
-        self.assertEqual(settings.last_loaded_event, LogEvent.SETTINGS_LOADED)
+        self.assertEqual(settings.last_loaded_message_name, "SETTINGS_LOADED")
 
     def test_invalid_boolean_configuration_raises_configuration_error(self) -> None:
         with _temporary_environment(CONTEXT_ATLAS_LOG_STRUCTURED_EVENTS="sometimes"):
@@ -60,7 +66,12 @@ class BootstrapLayerTests(unittest.TestCase):
         handler.setFormatter(logging.Formatter("%(event)s|%(message)s"))
         logger.handlers = [handler]
 
-        log_event(logger, logging.INFO, LogEvent.COMPONENT_INITIALIZED, "bootstrap")
+        log_message(
+            logger,
+            logging.INFO,
+            LogMessage.COMPONENT_INITIALIZED,
+            "bootstrap",
+        )
 
         output = stream.getvalue().strip()
         self.assertEqual(
