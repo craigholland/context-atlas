@@ -42,7 +42,7 @@ class CompressionOutcome(CanonicalDomainModel):
 
 
 class StarterCompressionPolicy(CanonicalDomainModel):
-    """Starter compression policy inspired by the context-engine prototype."""
+    """Starter compression policy."""
 
     strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
     chars_per_token: int = 4

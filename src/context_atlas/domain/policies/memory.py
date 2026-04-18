@@ -51,7 +51,7 @@ class MemorySelectionOutcome(CanonicalDomainModel):
 
 
 class StarterMemoryRetentionPolicy(CanonicalDomainModel):
-    """Starter retention policy inspired by the context-engine memory prototype."""
+    """Starter retention policy."""
 
     short_term_count: int = 4
     decay_rate: float = 0.001
@@ -337,7 +337,7 @@ def _find_duplicate_entry(
 
 
 def _is_duplicate_content(content_a: str, content_b: str, *, threshold: float) -> bool:
-    """Apply starter duplicate detection inspired by context-engine memory."""
+    """Apply starter duplicate detection."""
 
     normalized_a = content_a.strip().lower()
     normalized_b = content_b.strip().lower()
