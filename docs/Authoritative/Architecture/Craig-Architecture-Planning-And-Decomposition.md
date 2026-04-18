@@ -146,7 +146,44 @@ As a rough guideline, an Epic should ideally stay within about `5` Stories.
 
 These limits encourage steady progress while preventing complexity from accumulating too quickly.
 
-### 6. Decomposition Sanity Checks
+### 6. Branch Naming Should Reflect Decomposition
+
+Craig Architecture prefers branch names that reflect the current decomposition level rather than vague work themes.
+
+When work is being executed through a planned `Epic -> Story -> Task -> Pull Request` hierarchy:
+
+- the long-lived feature branch should usually reflect the `Task`
+- the short-lived implementation branch for each PR slice should usually reflect the `Task` plus the specific PR slice
+
+Preferred feature-branch convention:
+
+```text
+feature/<Epic name>/<Story #>_<Task #>_<Task description>
+```
+
+Preferred PR-slice branch convention when branching from that feature branch:
+
+```text
+codex/<Task #><PR Char>_<PR description>
+```
+
+Examples:
+
+- `feature/mvp/3_2_product_surface`
+- `codex/2A_public_api_exports`
+- `codex/2B_trace_rendering`
+
+These names should stay concise, lowercase where practical, and formatted safely for shell, Git, and GitHub usage. Descriptions should communicate bounded intent rather than broad themes.
+
+The goal is not naming ceremony for its own sake.
+
+The goal is that a contributor should be able to infer:
+
+- which task a branch belongs to
+- whether a branch is the long-lived task branch or a short-lived PR slice
+- what bounded delivery unit the branch is meant to contain
+
+### 7. Decomposition Sanity Checks
 
 Before accepting a Story, Task, or PR plan, contributors should inspect the plan for shape risks rather than only counting how many slices exist.
 
@@ -163,7 +200,7 @@ These checks are not intended to create planning ceremony for its own sake.
 
 They exist because brittle implementation plans often reveal themselves before coding starts, especially when work is being decomposed for AI-assisted execution.
 
-### 7. Code Shape Governance
+### 8. Code Shape Governance
 
 Craig Architecture treats code shape as an architectural concern rather than a mere style preference.
 
