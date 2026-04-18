@@ -2,6 +2,8 @@
 
 This module exposes the supported starter flow without requiring callers to
 learn deeper package paths before the broader product surface has hardened.
+It is intentionally small: widening this surface should be driven by real
+golden-path usage, not convenience re-exporting.
 """
 
 from .adapters import (

@@ -38,18 +38,19 @@ The current supported MVP starter path is intentionally explicit.
 Prefer imports like:
 
 ```python
-from context_atlas.adapters import (
+from context_atlas.api import (
     FilesystemDocumentSourceAdapter,
     InMemorySourceRegistry,
-    LexicalRetrievalMode,
     LexicalRetriever,
+    build_starter_context_assembly_service,
+    load_settings_from_env,
+    render_packet_context,
 )
-from context_atlas.infrastructure import build_starter_context_assembly_service
-from context_atlas.infrastructure.config import ContextAtlasSettings, load_settings_from_env
-from context_atlas.rendering import render_packet_context
 ```
 
-The package root currently remains intentionally thin. Until a broader curated API surface is introduced, user-facing docs and examples should prefer these supported subpackage imports rather than deep internal module paths.
+The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
+
+See [examples/README.md](/context-atlas/examples/README.md) and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current golden-path smoke flow.
 
 ## Runtime Knobs
 
