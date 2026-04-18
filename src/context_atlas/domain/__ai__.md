@@ -94,6 +94,9 @@
   - responsibility: centralizes reusable human-facing error messages
   - defines:
     - `ErrorMessage`
+  - invariants:
+    - message constants should stay grouped by their primary consuming surface so contributors can locate the right contract quickly
+    - within each consumer grouping, message constants should stay alphabetized for reviewability
   - footguns:
     - avoid turning this into a dumping ground for trivial one-off strings
     - retrieval and source-registration errors should resolve through these constants rather than inline adapter text
