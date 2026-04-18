@@ -87,6 +87,7 @@
   - invariants:
     - keep the export set small and intentional
     - re-export only the starter flow pieces that are explicitly supported for MVP users
+    - examples should validate this module as the first import stop before they reach for stable subpackage paths
 - `domain/`:
   - responsibility: holds semantic core contracts and canonical domain artifacts
   - used_by:
@@ -121,6 +122,7 @@
 - `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
 - The package root still intentionally avoids broad direct exports even though `context_atlas.api` now provides a curated starter namespace.
 - The current curated API is intentionally small; later slices should only widen it when examples and real workflows prove additional exports deserve to stabilize.
+- The current curated API is now exercised by the starter smoke example under `examples/`, which should stay aligned with the supported starter flow.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
