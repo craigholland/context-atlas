@@ -200,6 +200,7 @@
   - invariants:
     - fallback behavior should remain explicit in metadata and trace
     - compressed text is a transformation artifact, not the canonical packet itself
+    - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
 - `policies/memory.py`:
   - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
   - defines:
@@ -209,6 +210,7 @@
   - invariants:
     - short-term inclusion, decay, deduplication, and query boosts should remain replaceable starter logic
     - memory selection decisions should stay trace-visible rather than hidden in transcript strings
+    - the short-term keep window should be returned newest-first so downstream budget trimming preserves recency priority
     - retained entries should be returned in priority order so later budget trimming cannot evict the short-term keep window behind older long-term memory
     - `_ScoredMemoryEntry` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
 

@@ -397,6 +397,71 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             )
         )
 
+    def test_newest_recent_memory_is_kept_first_under_tight_budget(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "memory": MemorySettings(
+                        short_term_count=2,
+                        decay_rate=0.0,
+                        dedup_threshold=0.75,
+                    )
+                }
+            ),
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-recent-older",
+                source=ContextSource(
+                    source_id="memory-recent-older-source",
+                    content="Older recent memory note.",
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=148.0,
+                importance=0.8,
+            ),
+            ContextMemoryEntry(
+                entry_id="memory-recent-newest",
+                source=ContextSource(
+                    source_id="memory-recent-newest-source",
+                    content="Newest recent memory note.",
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=149.0,
+                importance=0.7,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=128,
+                slots=(
+                    ContextBudgetSlot(
+                        slot_name="memory",
+                        token_limit=6,
+                        mode=ContextBudgetSlotMode.FIXED,
+                    ),
+                    ContextBudgetSlot(
+                        slot_name="documents",
+                        token_limit=128,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+            now_epoch_seconds=150.0,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in packet.selected_memory_entries),
+            ("memory-recent-newest",),
+        )
+
     def test_service_uses_direct_log_message_constants(self) -> None:
         self.assertEqual(
             LogMessage.ASSEMBLY_FAILED,

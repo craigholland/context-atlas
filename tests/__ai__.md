@@ -122,6 +122,7 @@
   - invariants:
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
+    - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
 - `test_memory_policy.py`:
   - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
   - defines:
@@ -130,6 +131,7 @@
     - `context_atlas.domain`
   - invariants:
     - tests should prove short-term retention, decay sensitivity, deduplication, and query boosts remain deterministic
+    - tests should prove the short-term retention window is ordered newest-first before downstream budget trimming occurs
     - memory decisions should stay visible in structured traces rather than collapsing into opaque prompt strings
 - `test_context_assembly_service.py`:
   - responsibility: verifies the starter service orchestration and settings-driven infrastructure factory
@@ -169,6 +171,7 @@
 - The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
+- The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts

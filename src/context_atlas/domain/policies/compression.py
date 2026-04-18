@@ -78,13 +78,8 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 ),
             )
 
-        valid_candidates = tuple(
-            candidate
-            for candidate in candidates
-            if len(candidate.source.content) >= self.min_chunk_chars
-        )
-        source_ids = tuple(candidate.source.source_id for candidate in valid_candidates)
-        if not valid_candidates:
+        candidate_tuple = tuple(candidates)
+        if not candidate_tuple:
             result = CompressionResult(
                 text="",
                 strategy_used=self.strategy,
@@ -112,7 +107,8 @@ class StarterCompressionPolicy(CanonicalDomainModel):
             )
             return CompressionOutcome(compression_result=result, trace=trace)
 
-        chunks = [candidate.source.content for candidate in valid_candidates]
+        source_ids = tuple(candidate.source.source_id for candidate in candidate_tuple)
+        chunks = [candidate.source.content for candidate in candidate_tuple]
         original_text = "\n\n".join(chunks)
         original_chars = len(original_text)
         max_chars = max_tokens * self.chars_per_token
@@ -146,11 +142,23 @@ class StarterCompressionPolicy(CanonicalDomainModel):
             )
             return CompressionOutcome(compression_result=result, trace=trace)
 
-        compressed_text, fallback_used = self._compress_chunks(
-            chunks,
-            query=query,
-            max_chars=max_chars,
-        )
+        compression_input = [
+            chunk for chunk in chunks if len(chunk) >= self.min_chunk_chars
+        ]
+        if not compression_input:
+            compressed_text = _truncate_chunks(chunks, max_chars=max_chars)
+            fallback_used = (
+                None
+                if self.strategy is CompressionStrategy.TRUNCATE
+                else CompressionStrategy.TRUNCATE
+            )
+        else:
+            compressed_text, fallback_used = self._compress_chunks(
+                compression_input,
+                query=query,
+                max_chars=max_chars,
+            )
+
         compressed_chars = len(compressed_text)
         estimated_tokens_saved = max(
             0,
@@ -160,6 +168,8 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         metadata = {"outcome": "compressed"}
         if fallback_used is not None:
             metadata["fallback_strategy"] = fallback_used.value
+        if not compression_input:
+            metadata["compression_scope"] = "all_candidates_below_min_chunk_chars"
 
         result = CompressionResult(
             text=compressed_text,

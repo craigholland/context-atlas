@@ -138,7 +138,15 @@ class StarterMemoryRetentionPolicy(CanonicalDomainModel):
                 ),
             )
 
-        recent_entries = ordered_entries[-self.short_term_count :]
+        recent_entries = tuple(
+            sorted(
+                ordered_entries[-self.short_term_count :],
+                key=lambda entry: (
+                    -entry.recorded_at_epoch_seconds,
+                    entry.entry_id,
+                ),
+            )
+        )
         long_term_entries = ordered_entries[: -len(recent_entries)]
 
         selected_long_term: list[_ScoredMemoryEntry] = []

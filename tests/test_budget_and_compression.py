@@ -218,6 +218,81 @@ class BudgetAndCompressionTests(unittest.TestCase):
             ErrorCode.INVALID_COMPRESSION_REQUEST,
         )
 
+    def test_compression_keeps_short_candidates_when_they_fit_budget(self) -> None:
+        short_registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="short-note",
+                    content="Atlas rules.",
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+            )
+        )
+        candidates = LexicalRetriever(
+            short_registry,
+            mode=LexicalRetrievalMode.KEYWORD,
+        ).retrieve("atlas rules", top_k=1)
+
+        outcome = StarterCompressionPolicy(min_chunk_chars=20).compress_candidates(
+            candidates,
+            trace_id="trace-compression-short-1",
+            max_tokens=8,
+            query="atlas rules",
+        )
+
+        self.assertFalse(outcome.compression_result.was_applied)
+        self.assertEqual(outcome.compression_result.text, "Atlas rules.")
+        self.assertEqual(outcome.compression_result.metadata["outcome"], "fits_budget")
+        self.assertEqual(outcome.compression_result.source_ids, ("short-note",))
+
+    def test_compression_truncates_short_candidates_instead_of_dropping_them(
+        self,
+    ) -> None:
+        short_registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="short-a",
+                    content="Atlas keeps short docs visible.",
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="short-b",
+                    content="Short snippets should not disappear.",
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        candidates = LexicalRetriever(
+            short_registry,
+            mode=LexicalRetrievalMode.KEYWORD,
+        ).retrieve("short docs atlas snippets", top_k=2)
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.EXTRACTIVE,
+            min_chunk_chars=100,
+        ).compress_candidates(
+            candidates,
+            trace_id="trace-compression-short-2",
+            max_tokens=4,
+            query="short docs atlas snippets",
+        )
+
+        self.assertTrue(outcome.compression_result.text)
+        self.assertEqual(
+            outcome.compression_result.metadata["compression_scope"],
+            "all_candidates_below_min_chunk_chars",
+        )
+        self.assertEqual(
+            outcome.compression_result.metadata["fallback_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertNotEqual(
+            outcome.compression_result.metadata["outcome"], "empty_input"
+        )
+
     def test_packet_retains_structured_compression_metadata_when_rendered(self) -> None:
         candidates = LexicalRetriever(
             self.registry,

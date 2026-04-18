@@ -80,13 +80,46 @@ class MemoryPolicyTests(unittest.TestCase):
 
         self.assertEqual(
             tuple(entry.entry_id for entry in outcome.selected_entries),
-            ("recent-user", "recent-assistant", "old-relevant"),
+            ("recent-assistant", "recent-user", "old-relevant"),
         )
         self.assertEqual(outcome.trace.metadata["selected_entry_count"], "3")
         self.assertEqual(outcome.trace.metadata["rejected_entry_count"], "1")
         self.assertIn(
             "short_term_priority",
             tuple(reason.value for reason in outcome.trace.decisions[0].reason_codes),
+        )
+
+    def test_memory_policy_orders_short_term_window_newest_first(self) -> None:
+        entries = (
+            _memory_entry(
+                "recent-older",
+                "Older recent memory entry.",
+                recorded_at=self.now - 30,
+                importance=0.9,
+            ),
+            _memory_entry(
+                "recent-newest",
+                "Newest recent memory entry.",
+                recorded_at=self.now - 5,
+                importance=0.8,
+            ),
+            _memory_entry(
+                "recent-middle",
+                "Middle recent memory entry.",
+                recorded_at=self.now - 15,
+                importance=0.85,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(short_term_count=3).select_memory(
+            entries,
+            trace_id="trace-memory-order-1",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-newest", "recent-middle", "recent-older"),
         )
 
     def test_memory_policy_deduplicates_against_recent_memory(self) -> None:
