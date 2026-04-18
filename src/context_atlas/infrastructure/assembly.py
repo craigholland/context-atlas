@@ -2,6 +2,8 @@
 
 This module defines the current MVP-facing assembly entrypoint that wires
 validated runtime settings and logging into the shared assembly service.
+The curated ``context_atlas.api`` surface re-exports this helper for callers
+who do not need to learn the deeper package layout yet.
 """
 
 from __future__ import annotations

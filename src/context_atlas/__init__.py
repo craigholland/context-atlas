@@ -1,19 +1,18 @@
 """Context Atlas package bootstrap.
 
-The package root intentionally remains thin for now.
+The package root intentionally remains thin while the product surface hardens.
 
 Current MVP-facing imports should normally come from:
 
-- ``context_atlas.infrastructure`` for the starter assembly entrypoint
-- ``context_atlas.infrastructure.config`` for validated settings loading
-- ``context_atlas.adapters`` for starter source/retrieval adapters
-- ``context_atlas.rendering`` for derived packet rendering
+- ``context_atlas.api`` for the supported starter flow
+- stable subpackage imports when docs intentionally need to show layer seams
 
-Until a broader curated API surface is introduced, user-facing guides should
-prefer those supported subpackage imports rather than deep internal module
-paths.
+User-facing guides should prefer the curated API over deep internal module
+paths unless they are explicitly teaching the architecture.
 """
 
-__all__ = ["__version__"]
+from . import api
+
+__all__ = ["__version__", "api"]
 
 __version__ = "0.1.0a0"
