@@ -22,6 +22,7 @@
 - Provides environment-backed settings loading and logger setup without pushing those concerns into the domain layer.
 - Demonstrates how infrastructure may depend on domain identifiers and messages while preserving inward dependency direction.
 - Carries the first supported runtime defaults for early assembly and memory behavior plus the structured observability helpers that later services will reuse.
+- Carries the supported runtime defaults for early assembly, ranking, compression, and memory behavior plus the structured observability helpers that later services will reuse.
 - Provides the starter composition boundary for wiring validated settings and logger setup into the real assembly service.
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 - Uses Pydantic/Pydantic Settings for validated runtime configuration instead of unconstrained dataclasses.
@@ -125,6 +126,7 @@
 - The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
+- The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

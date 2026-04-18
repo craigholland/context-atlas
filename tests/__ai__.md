@@ -24,6 +24,7 @@
 - Verifies that the repo's direct message-constant pattern and Pydantic-backed config surface stay stable as the package evolves.
 - Verifies that canonical domain artifacts now follow the frozen Pydantic modeling standard rather than a mixed constructor pattern.
 - Verifies that public policy inputs, outputs, and configurable starter policies follow the same validated-model direction.
+- Verifies that infrastructure composition, adapters, and renderers can consume those immutable validated models without mutating them.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.

@@ -24,6 +24,7 @@
 ## Architectural Rules
 - Rendering may depend on `context_atlas.domain`, but canonical packet, budget, decision, and compression semantics must remain defined there.
 - Renderers should be pure formatting/derivation code, not hidden orchestration or policy engines.
+- Renderers should not mutate packet or compression models; tests should be able to compare packet snapshots before and after rendering.
 
 ## Allowed Dependencies
 - may depend on:
@@ -52,6 +53,7 @@
 ## Known Gaps / Future-State Notes
 - Rendering is intentionally minimal even now that the assembly service has landed.
 - Richer packet sections or role-specific renderers can arrive later, but they should still derive from canonical packet state.
+- The current renderer is now explicitly exercised as a read-only view over frozen Pydantic packet artifacts.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.

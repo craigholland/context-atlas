@@ -29,6 +29,7 @@
 - Adapters may produce raw candidates, but deterministic reranking and decision-recording policy should stay inward in `context_atlas.domain`.
 - Adapter code should emit stable domain message constants rather than inventing inline semantic logger text.
 - Do not let adapters import `context_atlas.infrastructure` by default just for convenience; prefer domain-stable contracts plus standard-library mechanics unless a specific outer dependency is justified.
+- Adapters should treat canonical source/candidate artifacts as immutable validated models once constructed; translation should happen before model creation, not through later mutation.
 
 ## Allowed Dependencies
 - may depend on:
@@ -83,6 +84,7 @@
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
+- Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

@@ -112,6 +112,25 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertEqual(packet.selected_candidates[0].source.source_id, "charter")
         self.assertEqual(packet.metadata["ranked_candidate_count"], "1")
 
+    def test_factory_passes_ranking_threshold_into_policy_surface(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=128,
+                        default_retrieval_top_k=3,
+                        ranking_minimum_score=2.0,
+                    )
+                }
+            ),
+        )
+
+        packet = service.assemble(query="context model authoritative sources")
+
+        self.assertEqual(packet.selected_candidates, ())
+        self.assertEqual(packet.metadata["ranked_candidate_count"], "0")
+
     def test_assemble_applies_compression_when_budget_is_tight(self) -> None:
         service = build_starter_context_assembly_service(
             retriever=self.retriever,
@@ -199,6 +218,28 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             "system assembles a packet for a model",
             rendered,
         )
+
+    def test_rendering_does_not_mutate_canonical_packet_state(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=256,
+                        default_retrieval_top_k=2,
+                    )
+                }
+            ),
+        )
+
+        packet = service.assemble(query="authoritative packet assembly")
+        before = packet.model_dump()
+
+        rendered = render_packet_context(packet)
+        after = packet.model_dump()
+
+        self.assertTrue(rendered)
+        self.assertEqual(before, after)
 
     def test_assemble_trace_captures_stage_metadata_and_budget_rejections(self) -> None:
         service = build_starter_context_assembly_service(

@@ -31,7 +31,7 @@
 - Connects the local `__ai__.md` contract system to a single repo-wide preflight entrypoint.
 - Establishes hook and packaging expectations for the standalone Context Atlas library repo.
 - Keeps the tracked example environment surface aligned with supported runtime settings.
-- Makes the visible runtime knob surface reviewable at the repo root as assembly defaults, memory defaults, and observability settings begin to grow.
+- Makes the visible runtime knob surface reviewable at the repo root as ranking, compression, memory, and observability defaults begin to grow.
 - Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
 - Treats canonical domain artifacts as part of the visible package contract when the domain model standard shifts from starter dataclasses to frozen Pydantic models.
 - Treats public policy request/result/configuration objects as part of the same modeling contract so the repo does not drift back to mixed boundary styles.
@@ -102,6 +102,7 @@
 - The original conversion plan has been aligned to the direct `LogMessage` surface so the branch roadmap no longer implies a separate event-enum package.
 - The current hardening phase now includes a Pydantic-first canonical-model standard; remaining non-trivial dataclasses outside the core model package should be treated as intentional follow-up debt until converted.
 - The current hardening phase now also covers public policy surfaces; any remaining dataclasses should now be explainable as deliberate keeps rather than unfinished boundary work.
+- The current hardening phase now also covers outer composition of those policy surfaces; supported env/settings knobs should match the real starter policy constructors used by infrastructure factories.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
