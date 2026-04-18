@@ -7,6 +7,7 @@ import math
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from ..models.base import CanonicalDomainModel
 from ..models import (
     AuthorityPrecedenceReasonCode,
@@ -73,7 +74,7 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         if not math.isfinite(self.minimum_score):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_RANKING_REQUEST,
-                message_args=("minimum_score must be finite",),
+                message_args=(ErrorMessage.MINIMUM_SCORE_MUST_BE_FINITE,),
             )
 
     def rank_candidates(
@@ -88,7 +89,7 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         if limit is not None and limit < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_RANKING_REQUEST,
-                message_args=(f"limit must be >= 1, got {limit}",),
+                message_args=(ErrorMessage.LIMIT_MUST_BE_AT_LEAST_ONE % (limit,),),
             )
 
         ranked_input = sorted(

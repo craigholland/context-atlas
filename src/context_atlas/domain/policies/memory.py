@@ -8,6 +8,7 @@ import time
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from ..models.base import CanonicalDomainModel
 from ..models import (
     ContextAssemblyDecision,
@@ -62,29 +63,35 @@ class StarterMemoryRetentionPolicy(CanonicalDomainModel):
         if self.short_term_count < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("short_term_count must be >= 1",),
+                message_args=(ErrorMessage.SHORT_TERM_COUNT_MUST_BE_AT_LEAST_ONE,),
             )
         if not math.isfinite(self.decay_rate) or self.decay_rate < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("decay_rate must be finite and >= 0",),
+                message_args=(ErrorMessage.DECAY_RATE_MUST_BE_FINITE_AND_NON_NEGATIVE,),
             )
         if not math.isfinite(self.dedup_threshold) or not (
             0.0 <= self.dedup_threshold <= 1.0
         ):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("dedup_threshold must be in [0.0, 1.0]",),
+                message_args=(
+                    ErrorMessage.DEDUP_THRESHOLD_MUST_BE_WITHIN_UNIT_INTERVAL,
+                ),
             )
         if not math.isfinite(self.min_effective_score) or self.min_effective_score < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("min_effective_score must be finite and >= 0",),
+                message_args=(
+                    ErrorMessage.MIN_EFFECTIVE_SCORE_MUST_BE_FINITE_AND_NON_NEGATIVE,
+                ),
             )
         if not math.isfinite(self.query_boost_weight) or self.query_boost_weight < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("query_boost_weight must be finite and >= 0",),
+                message_args=(
+                    ErrorMessage.QUERY_BOOST_WEIGHT_MUST_BE_FINITE_AND_NON_NEGATIVE,
+                ),
             )
 
     def select_memory(
@@ -101,7 +108,9 @@ class StarterMemoryRetentionPolicy(CanonicalDomainModel):
         if not math.isfinite(active_now) or active_now < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_SELECTION,
-                message_args=("now_epoch_seconds must be finite and >= 0",),
+                message_args=(
+                    ErrorMessage.NOW_EPOCH_SECONDS_MUST_BE_FINITE_AND_NON_NEGATIVE,
+                ),
             )
 
         ordered_entries = tuple(

@@ -7,6 +7,7 @@ from enum import StrEnum
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
 
 
@@ -30,17 +31,26 @@ class ContextBudgetSlot(CanonicalDomainModel):
         if not normalized_name:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_SLOT,
-                message_args=("<unnamed>", "slot name must not be empty"),
+                message_args=(
+                    ErrorMessage.UNNAMED_BUDGET_SLOT,
+                    ErrorMessage.SLOT_NAME_MUST_NOT_BE_EMPTY,
+                ),
             )
         if self.token_limit < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_SLOT,
-                message_args=(normalized_name, "token limit must be >= 0"),
+                message_args=(
+                    normalized_name,
+                    ErrorMessage.TOKEN_LIMIT_MUST_BE_NON_NEGATIVE,
+                ),
             )
         if self.priority < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_SLOT,
-                message_args=(normalized_name, "priority must be >= 0"),
+                message_args=(
+                    normalized_name,
+                    ErrorMessage.PRIORITY_MUST_BE_NON_NEGATIVE,
+                ),
             )
 
         object.__setattr__(self, "slot_name", normalized_name)
@@ -57,7 +67,7 @@ class ContextBudget(CanonicalDomainModel):
         if self.total_tokens < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_TOTAL,
-                message_args=("total tokens must be >= 1",),
+                message_args=(ErrorMessage.TOTAL_TOKENS_MUST_BE_AT_LEAST_ONE,),
             )
 
         fixed_reserved_tokens = 0
@@ -77,7 +87,8 @@ class ContextBudget(CanonicalDomainModel):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_TOTAL,
                 message_args=(
-                    f"fixed slot reservations ({fixed_reserved_tokens}) exceed total tokens ({self.total_tokens})",
+                    ErrorMessage.FIXED_SLOT_RESERVATIONS_EXCEED_TOTAL
+                    % (fixed_reserved_tokens, self.total_tokens),
                 ),
             )
 

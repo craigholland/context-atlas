@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from ..models.base import CanonicalDomainModel
 from ..models import (
     BudgetPressureReasonCode,
@@ -41,13 +42,14 @@ class BudgetRequest(CanonicalDomainModel):
         if not normalized_name:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=("slot_name must not be empty",),
+                message_args=(ErrorMessage.SLOT_NAME_MUST_NOT_BE_EMPTY,),
             )
         if self.requested_tokens < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
                 message_args=(
-                    f"requested_tokens for '{normalized_name}' must be >= 0",
+                    ErrorMessage.REQUESTED_TOKENS_MUST_BE_NON_NEGATIVE
+                    % (normalized_name,),
                 ),
             )
         object.__setattr__(self, "slot_name", normalized_name)
@@ -67,34 +69,38 @@ class BudgetAllocation(CanonicalDomainModel):
         if not normalized_name:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=("slot_name must not be empty",),
+                message_args=(ErrorMessage.SLOT_NAME_MUST_NOT_BE_EMPTY,),
             )
         if self.requested_tokens < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
                 message_args=(
-                    f"requested_tokens for '{normalized_name}' must be >= 0",
+                    ErrorMessage.REQUESTED_TOKENS_MUST_BE_NON_NEGATIVE
+                    % (normalized_name,),
                 ),
             )
         if self.allocated_tokens < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
                 message_args=(
-                    f"allocated_tokens for '{normalized_name}' must be >= 0",
+                    ErrorMessage.ALLOCATED_TOKENS_MUST_BE_NON_NEGATIVE
+                    % (normalized_name,),
                 ),
             )
         if self.allocated_tokens > self.requested_tokens:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
                 message_args=(
-                    f"allocated_tokens for '{normalized_name}' must be <= requested_tokens",
+                    ErrorMessage.ALLOCATED_TOKENS_MUST_NOT_EXCEED_REQUESTED
+                    % (normalized_name,),
                 ),
             )
         if self.was_reduced != (self.allocated_tokens < self.requested_tokens):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
                 message_args=(
-                    f"was_reduced for '{normalized_name}' must match the allocation delta",
+                    ErrorMessage.WAS_REDUCED_MUST_MATCH_ALLOCATION_DELTA
+                    % (normalized_name,),
                 ),
             )
 
@@ -112,7 +118,7 @@ class BudgetAllocationOutcome(CanonicalDomainModel):
         if self.remaining_tokens < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=("remaining_tokens must be >= 0",),
+                message_args=(ErrorMessage.REMAINING_TOKENS_MUST_BE_NON_NEGATIVE,),
             )
 
     @property
@@ -139,9 +145,7 @@ class StarterBudgetAllocationPolicy:
         if len(request_by_slot) != len(request_tuple):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=(
-                    "duplicate budget requests for the same slot are not allowed",
-                ),
+                message_args=(ErrorMessage.DUPLICATE_BUDGET_REQUESTS_NOT_ALLOWED,),
             )
         slot_by_name = {slot.slot_name: slot for slot in budget.slots}
 
@@ -149,7 +153,9 @@ class StarterBudgetAllocationPolicy:
         if unknown_slots:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=(f"unknown budget slots: {', '.join(unknown_slots)}",),
+                message_args=(
+                    ErrorMessage.UNKNOWN_BUDGET_SLOTS % (", ".join(unknown_slots),),
+                ),
             )
 
         allocations: list[BudgetAllocation] = []

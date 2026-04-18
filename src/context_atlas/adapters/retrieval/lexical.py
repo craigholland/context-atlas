@@ -10,7 +10,7 @@ import re
 from typing import Iterable
 
 from ...domain.errors import ContextAtlasError, ErrorCode
-from ...domain.messages import LogMessage
+from ...domain.messages import ErrorMessage, LogMessage
 from ...domain.models import ContextCandidate, ContextSource
 
 logger = logging.getLogger(__name__)
@@ -157,7 +157,7 @@ class LexicalRetriever:
         if top_k < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_RETRIEVAL_REQUEST,
-                message_args=(f"top_k must be >= 1, got {top_k}",),
+                message_args=(ErrorMessage.TOP_K_MUST_BE_AT_LEAST_ONE % (top_k,),),
             )
 
         query_tokens = _tokenize(query)

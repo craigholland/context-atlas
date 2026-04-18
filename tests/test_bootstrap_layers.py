@@ -25,10 +25,17 @@ class BootstrapLayerTests(unittest.TestCase):
     def test_context_atlas_error_uses_registered_template(self) -> None:
         error = ContextAtlasError(
             code=ErrorCode.DOCUMENT_NO_CONTENT,
-            message_args=("notes.md",),
+            message_args=["notes.md"],
         )
 
         self.assertEqual(str(error), "Document 'notes.md' has empty content.")
+        self.assertEqual(
+            error.model_dump(),
+            {
+                "code": ErrorCode.DOCUMENT_NO_CONTENT,
+                "message_args": ("notes.md",),
+            },
+        )
 
     def test_load_settings_from_env_reads_expected_variables(self) -> None:
         with _temporary_environment(

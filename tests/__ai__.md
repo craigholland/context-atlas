@@ -70,6 +70,7 @@
   - invariants:
     - tests should stay fast and deterministic
     - assertions should track centralized message constants rather than ad hoc inline strings
+    - tests should prove the base coded exception now carries a validated payload rather than a dataclass-style surface
 - `test_domain_models.py`:
   - responsibility: verifies canonical domain artifacts and their starter invariants
   - defines:
@@ -165,6 +166,7 @@
 - The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
 - The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
+- The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.

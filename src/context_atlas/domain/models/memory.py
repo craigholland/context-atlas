@@ -7,6 +7,7 @@ import math
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
 from .sources import ContextSource
 
@@ -26,38 +27,44 @@ class ContextMemoryEntry(CanonicalDomainModel):
         if not normalized_entry_id:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_ENTRY,
-                message_args=("entry_id must not be empty",),
+                message_args=(ErrorMessage.ENTRY_ID_MUST_NOT_BE_EMPTY,),
             )
         if not math.isfinite(self.recorded_at_epoch_seconds):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_ENTRY,
-                message_args=("recorded_at_epoch_seconds must be finite",),
+                message_args=(ErrorMessage.RECORDED_AT_EPOCH_SECONDS_MUST_BE_FINITE,),
             )
         if self.recorded_at_epoch_seconds < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_ENTRY,
-                message_args=("recorded_at_epoch_seconds must be >= 0",),
+                message_args=(
+                    ErrorMessage.RECORDED_AT_EPOCH_SECONDS_MUST_BE_NON_NEGATIVE,
+                ),
             )
         if not math.isfinite(self.importance):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_ENTRY,
-                message_args=("importance must be finite",),
+                message_args=(ErrorMessage.IMPORTANCE_MUST_BE_FINITE,),
             )
         if self.importance < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_MEMORY_ENTRY,
-                message_args=("importance must be >= 0",),
+                message_args=(ErrorMessage.IMPORTANCE_MUST_BE_NON_NEGATIVE,),
             )
         if self.last_accessed_at_epoch_seconds is not None:
             if not math.isfinite(self.last_accessed_at_epoch_seconds):
                 raise ContextAtlasError(
                     code=ErrorCode.INVALID_MEMORY_ENTRY,
-                    message_args=("last_accessed_at_epoch_seconds must be finite",),
+                    message_args=(
+                        ErrorMessage.LAST_ACCESSED_AT_EPOCH_SECONDS_MUST_BE_FINITE,
+                    ),
                 )
             if self.last_accessed_at_epoch_seconds < 0:
                 raise ContextAtlasError(
                     code=ErrorCode.INVALID_MEMORY_ENTRY,
-                    message_args=("last_accessed_at_epoch_seconds must be >= 0",),
+                    message_args=(
+                        ErrorMessage.LAST_ACCESSED_AT_EPOCH_SECONDS_MUST_BE_NON_NEGATIVE,
+                    ),
                 )
 
         object.__setattr__(self, "entry_id", normalized_entry_id)

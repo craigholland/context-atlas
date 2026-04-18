@@ -37,7 +37,7 @@
 - Non-trivial canonical artifacts in `models/` should use frozen Pydantic models with explicit domain validation instead of mixed dataclass and BaseModel patterns.
 - Non-trivial public policy surfaces in `policies/` should also use validated Pydantic models when they shape orchestration inputs, outputs, or configurable behavior.
 - Deterministic ranking and decision-recording policies belong here when they can remain pure and dependency-light.
-- Base exceptions here may format messages through local domain message templates, but must remain framework-neutral and dependency-light.
+- Base exceptions here should carry a validated Pydantic-backed payload, format through local domain message templates, and remain framework-neutral and dependency-light.
 - Do not move environment loading, logger setup, provider DTOs, or persistence shapes into this folder just because they are utility-like.
 
 ## Allowed Dependencies
@@ -54,7 +54,7 @@
 ## Public API / Key Exports
 - `errors`:
   - `ErrorCode`: stable machine-facing error identifiers
-  - `ContextAtlasError`: base exception carrying a stable code and formatted message
+  - `ContextAtlasError`: base exception carrying a stable code and a validated payload
   - `ConfigurationError`: configuration-specific exception type
 - `messages`:
   - `ErrorMessage`: direct error-message constants keyed by `ErrorCode.name`
@@ -81,7 +81,7 @@
     - source-registration and retrieval-request failures should get stable codes here before adapters raise them
     - filesystem adapter path/front-matter failures should also land here as stable source-adapter or document-class errors
 - `errors/exceptions.py`:
-  - responsibility: defines domain exception classes built on stable codes and direct message constants
+  - responsibility: defines domain exception classes built on stable codes and validated message payloads
   - defines:
     - `ContextAtlasError`: base coded exception
     - `ConfigurationError`: configuration-specific exception type
@@ -213,7 +213,7 @@
 - Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current model set is canonical structure, not yet full policy behavior.
 - The current canonical model set now uses frozen Pydantic artifacts with immutable metadata helpers, and the public policy surface now follows the same validated-model direction.
-- The only remaining dataclasses in `domain/` should be either the coded exception type or private helper structs that do not act as serialization or package-boundary surfaces.
+- The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
