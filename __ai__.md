@@ -104,6 +104,7 @@
 - The current hardening phase now also covers public policy surfaces; any remaining dataclasses should now be explainable as deliberate keeps rather than unfinished boundary work.
 - The current hardening phase now also covers outer composition of those policy surfaces; supported env/settings knobs should match the real starter policy constructors used by infrastructure factories.
 - The repo-root README should now describe the project as post-bootstrap: the architecture/governance foundation is in place and the current work is starter-implementation hardening rather than pure architectural setup.
+- The repo-root README should not use absolute paths to the repo.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
