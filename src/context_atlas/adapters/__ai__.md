@@ -1,11 +1,10 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: b688100f1e7fcbf13e3f98d934e2f899eab7cda3
-- timestamp_utc: 2026-04-17T19:29:23Z
-- verified_by: local
-- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
-
+- commit: f109e073aa2b1b1ba9bb8058d4269708fb194af4
+- timestamp_utc: 2026-04-18T21:40:15Z
+- verified_by: ci
+- notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: src/context_atlas/adapters
 - included:
