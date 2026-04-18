@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-17
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-18
 owners: [core]
 tags: [architecture, ai-guidance, template, local-guidance]
 related:
@@ -116,7 +116,25 @@ Useful entries may include:
 - invariants
 - known footguns
 
-### 7. `Verification Contract` Must Be Runnable And Local To The Scope
+When relevant, the `File Index` should also surface code-shape warnings such as:
+
+- files that are already unusually large
+- modules that are at risk of becoming junk drawers
+- files that are likely hotspot files for future work
+
+### 7. Folder Scope Should Stay Cohesive Enough To Govern
+
+If a folder becomes too flat or mixes too many unrelated concerns, one local `__ai__.md` file often becomes broad, vague, and hard to maintain.
+
+Craig-style repositories should prefer splitting a folder by bounded concern before the local contract file becomes a sprawling exception list.
+
+Useful local notes may include:
+
+- folder split signals
+- known hotspot files
+- sub-concerns that should become subpackages later
+
+### 8. `Verification Contract` Must Be Runnable And Local To The Scope
 
 The `Verification Contract` section should describe executable checks that are meaningful for the governed folder.
 
@@ -131,7 +149,7 @@ A verification contract is not a wish list. It should describe commands or scrip
 
 The YAML step format used in the template is intentionally CI-like because it is familiar, easy to parse, and easy to translate into automation. It resembles GitHub Actions step syntax on purpose, but it is not a requirement that repositories use GitHub Actions literally as the execution engine.
 
-### 8. `Cross-Folder Contracts` Should Capture Real Boundary Assumptions
+### 9. `Cross-Folder Contracts` Should Capture Real Boundary Assumptions
 
 The `Cross-Folder Contracts` section should record important assumptions that one folder makes about another folder's behavior or boundary shape.
 
@@ -145,7 +163,7 @@ Examples:
 
 This section exists to make inter-folder assumptions reviewable before they silently turn into accidental architecture.
 
-### 9. Local Contracts May Tighten Global Guidance But Must Not Contradict It
+### 10. Local Contracts May Tighten Global Guidance But Must Not Contradict It
 
 Local `__ai__.md` files may refine or tighten guidance for a subsystem.
 
@@ -157,7 +175,7 @@ They must not contradict:
 
 If a subsystem needs an exception, that exception should be made explicit rather than implied by drift.
 
-### 10. Standard Baseline Template
+### 11. Standard Baseline Template
 
 The following is the baseline template Craig-style repositories should start from when creating a root `__ai__.template.md` or a new folder-level `__ai__.md` file:
 
@@ -210,11 +228,16 @@ The following is the baseline template Craig-style repositories should start fro
     - <rules that should always hold>
   - footguns:
     - <common pitfalls / gotchas>
+  - size_warning:
+    - <use when the file is approaching local complexity limits>
+  - shape_risks:
+    - <use when helper-sprawl, mixed responsibilities, or hotspot risk is emerging>
 
 ## Known Gaps / Future-State Notes
 - <intentional simplification in current implementation>
 - <future direction that is relevant to reading current code>
 - <areas where current runtime slice is narrower than the long-term architecture>
+- <folder split signals if this scope is becoming too broad to govern well with one local contract>
 
 ## Cross-Folder Contracts
 - services/: domain objects passed across this boundary must be plain domain types or dataclasses, not ORM models
@@ -249,6 +272,7 @@ steps:
 - Repository-specific refinements should preserve the recognizable section structure unless there is a clear reason to diverge.
 - Local `__ai__.md` files should be updated when a folder's responsibilities, dependency rules, public API, verification contract, or cross-folder assumptions have materially changed.
 - Stale local contract files should be treated as a failure state for the contract system, not as harmless documentation drift.
+- If one local contract file is becoming broad, exception-heavy, or vague because the folder is too flat, the preferred response is usually to split the folder rather than only enlarging the prose.
 
 ## Non-Goals
 

@@ -45,6 +45,8 @@
 - The repo's logging/message surface is the direct `LogMessage` pattern with stable event-name fields; contributors should not reintroduce a separate `domain/events` layer unless the authoritative docs change first.
 - The repo's canonical domain-artifact standard is now frozen Pydantic models with explicit domain validation; contributors should not introduce new non-trivial dataclass artifacts without first updating the hardening plan and local owner files.
 - The repo's public policy-surface standard is now also validated Pydantic models; the remaining dataclasses should be explicitly justified as private helpers or script-local records.
+- The authoritative Craig Architecture docs now explicitly treat decomposition depth, folder flatness, file size, and helper-sprawl as real architectural governance concerns, not just style preferences.
+- MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 
 ## Allowed Dependencies
 - may depend on:
@@ -105,6 +107,8 @@
 - The current hardening phase now also covers outer composition of those policy surfaces; supported env/settings knobs should match the real starter policy constructors used by infrastructure factories.
 - The repo-root README should now describe the project as post-bootstrap: the architecture/governance foundation is in place and the current work is starter-implementation hardening rather than pure architectural setup.
 - The repo-root README should not use absolute paths to the repo.
+- The current `codex/mvp-product-definition` branch is adding a planning stack under `docs/Planning/MVP/` that decomposes MVP work from an Epic document into Story docs and then into task-level PR plans.
+- The architecture canon now expects planning work to surface shape risks early, including duplicate file creation, hotspot files, folder flatness, large-file growth, and junk-drawer helper chains.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

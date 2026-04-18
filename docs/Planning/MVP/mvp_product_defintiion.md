@@ -59,6 +59,27 @@ The MVP should not feel like:
 - a docs-only retriever
 - a prototype hidden behind architecture documents
 
+### Epic Structure
+
+This document should be treated as an MVP Epic.
+
+The Epic consists of six Stories:
+
+- Story 1: Engine To Product Surface
+- Story 2: Shared Source Coverage
+- Story 3: Codex Repository Workflow
+- Story 4: Documents Plus Database Workflow
+- Story 5: Low-Code Workflow
+- Story 6: MVP Proof
+
+Each Story should be implemented as a Craig-style increment:
+
+- preserve inward dependency direction
+- keep domain artifacts canonical and provider-agnostic
+- use services for orchestration rather than policy ownership
+- keep adapters responsible for external translation and source-specific mechanics
+- keep prompt rendering and human-readable inspection as derived surfaces rather than canonical data
+
 ### Target Users
 
 The MVP should intentionally support three target users.
@@ -150,42 +171,81 @@ The MVP should ship with three concrete reference workflows.
 
 ## Sequencing
 
-`Phase 1: Engine To Product Surface`
+`Story 1: Engine To Product Surface`
 
-- stabilize public package exports
-- tighten the assembly entrypoints
-- produce a clear packet and trace inspection surface
-- harden examples so they feel like supported usage rather than exploratory snippets
+- Goal: make the current starter implementation feel like an intentional product surface instead of a collection of internal components.
+- Primary implementation areas:
+  - package exports under `src/context_atlas/`
+  - starter assembly entrypoints in `infrastructure/`
+  - packet and trace inspection helpers in `rendering/`
+  - example and setup guidance in `docs/` and `examples/`
+- Architectural intent:
+  - keep domain models canonical
+  - keep orchestration in `services/`
+  - keep human-readable packet and trace inspection in derived rendering surfaces
+- Expected outcome: a new user can identify the supported entrypoint, the supported runtime knobs, and the primary inspection path without reverse-engineering the package.
 
-`Phase 2: Shared Source Coverage`
+`Story 2: Shared Source Coverage`
 
-- keep the filesystem docs adapter as a first-class source path
-- add a structured-record adapter shape for relational or vector-derived records
-- ensure both source families converge into the same canonical source model
+- Goal: prove that Atlas governs more than one source family while preserving one canonical source model.
+- Primary implementation areas:
+  - retain and refine the filesystem docs adapter
+  - add a structured-record adapter shape for relational or vector-derived records
+  - ensure provenance, authority, and intended-use mapping remain canonical in `domain`
+- Architectural intent:
+  - adapters translate source families into `ContextSource`
+  - source-specific retrieval or parsing rules stay outward
+  - shared semantics stay inward
+- Expected outcome: documents and structured records can both become packet candidates through one common engine path.
 
-`Phase 3: Reference Workflow 1`
+`Story 3: Codex Repository Workflow`
 
-- build the flagship Codex-on-a-repository workflow
-- write the setup guide
-- produce at least one realistic end-to-end example
+- Goal: produce the flagship engineering workflow that shows Atlas improving repository-aware context for Codex.
+- Primary implementation areas:
+  - a concrete example flow for repo docs and related governed artifacts
+  - a setup guide for engineering use
+  - one realistic end-to-end example that outputs both rendered context and trace
+- Architectural intent:
+  - the workflow should consume the same core engine rather than a custom branch of logic
+  - any repo-specific wiring should stay at the outer composition boundary
+- Expected outcome: Context Atlas can be demonstrated as a useful Codex-facing pipeline component for real repository work.
 
-`Phase 4: Reference Workflow 2`
+`Story 4: Documents Plus Database Workflow`
 
-- build the technical chatbot-over-docs-plus-db workflow
-- validate mixed-source packet assembly
-- document the integration path clearly
+- Goal: prove that Atlas can sit in front of a chatbot-style pipeline that uses both documents and database-backed information.
+- Primary implementation areas:
+  - a structured-record adapter or record-ingestion contract
+  - one technical integration guide
+  - one example that mixes docs plus record-backed context in one packet
+- Architectural intent:
+  - Atlas should not become a database client framework
+  - database-specific access stays outward
+  - Atlas should accept already-fetched record payloads or adapter-fed records and govern them consistently
+- Expected outcome: a technical builder can understand how to use Atlas as a context-governance layer in a broader chatbot pipeline.
 
-`Phase 5: Reference Workflow 3`
+`Story 5: Low-Code Workflow`
 
-- create a low-code or low-configuration path
-- introduce presets or a simplified wrapper only after the shared engine and workflows are legible
-- keep the low-code surface honest about what Atlas is doing underneath
+- Goal: expose Atlas through a simplified configuration and preset path without creating a second engine.
+- Primary implementation areas:
+  - presets or profile-driven runtime configuration
+  - a low-code setup path with minimal Python wiring
+  - readable output that still preserves packet and trace inspection
+- Architectural intent:
+  - presets belong in outer configuration and composition surfaces, not in domain policy canon
+  - the simplified path must still use the same packet, trace, and assembly contracts as the other workflows
+- Expected outcome: a less-technical builder can reach a working Atlas flow through guided configuration rather than custom assembly code.
 
-`Phase 6: MVP Proof`
+`Story 6: MVP Proof`
 
-- compare Atlas-guided context versus naive baseline context
-- record packet differences, trace clarity, and practical usefulness
-- use those results to decide whether Atlas is ready to be presented as an MVP product
+- Goal: produce evidence that Atlas is behaving like a real reusable product component rather than an architectural demo.
+- Primary implementation areas:
+  - comparison workflows against naive context stuffing
+  - artifact capture for packet and trace output
+  - a documented assessment of usefulness, legibility, and correctness across at least two workflows
+- Architectural intent:
+  - proof should evaluate the shared engine, not bespoke demo logic
+  - evidence artifacts should remain inspectable and reproducible
+- Expected outcome: the project can make a grounded claim that Atlas has reached MVP status.
 
 ## Risks And Unknowns
 
@@ -219,3 +279,9 @@ The broader MVP effort is complete when:
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
 - [Documentation Ontology](../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Story 1 - Engine To Product Surface](./Stories/story_1_engine_to_product_surface.md)
+- [Story 2 - Shared Source Coverage](./Stories/story_2_shared_source_coverage.md)
+- [Story 3 - Codex Repository Workflow](./Stories/story_3_codex_repository_workflow.md)
+- [Story 4 - Documents Plus Database Workflow](./Stories/story_4_documents_plus_database_workflow.md)
+- [Story 5 - Low-Code Workflow](./Stories/story_5_low_code_workflow.md)
+- [Story 6 - MVP Proof](./Stories/story_6_mvp_proof.md)

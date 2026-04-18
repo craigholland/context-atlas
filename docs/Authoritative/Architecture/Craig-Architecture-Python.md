@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-17
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-18
 owners: [core]
 tags: [architecture, python, layering, dependency-injection, verification]
 related:
@@ -41,6 +41,7 @@ It covers:
 - public surfaces via `__init__.py`
 - framework leakage prevention
 - testing and verification expectations
+- folder cohesion, file size, and module-shape guidance
 
 This document does not override the main Craig Architecture philosophy. It translates that philosophy into Python-specific defaults and guidance.
 
@@ -375,7 +376,50 @@ The goal is not to create ceremony for its own sake. The goal is to avoid one un
 
 If a dependency is difficult to replace in tests, that is often evidence that the production wiring is too implicit.
 
-### 11. Verification Contracts Should Default To Ruff, MyPy, Pytest, And CI Contract Checks
+### 11. Split Folders Before Local Governance Becomes Vague
+
+Craig-style Python packages should keep folders cohesive enough that a nearby `__ai__.md` file can describe the folder's purpose, major files, and boundary rules without turning into a broad essay.
+
+Useful warning signs include:
+
+- a folder mixes multiple sub-concerns that would be easier to understand as subpackages
+- the local `File Index` is becoming mechanically exhaustive rather than selectively useful
+- the local `__ai__.md` needs many exceptions or special cases to describe one folder's behavior honestly
+- contributors regularly touch many unrelated files in the same folder because the folder has become a catch-all
+
+As a rough Python-specific heuristic, once a governed folder has around `7-10` real implementation files or starts mixing clearly different responsibilities, contributors should at least consider splitting it.
+
+This is a heuristic rather than a law. The important principle is that folder structure should remain governable and locally legible.
+
+### 12. Treat Large Files And Helper-Sprawl As Design Smells
+
+Craig-style Python code should prefer files that remain understandable in one focused pass.
+
+As rough Python-specific guidance:
+
+- `200-400` lines is usually healthy
+- `400-600` lines should trigger scrutiny
+- above roughly `600` lines should normally trigger deliberate decomposition unless there is a strong countervailing reason
+
+Line count alone is not the only signal. Shape matters too.
+
+Particularly important warning signs include:
+
+- many top-level private helper functions in one module
+- nested local helper functions that are doing more than one tightly local algorithm
+- helper chains where one unbound function mainly orchestrates more unbound functions deeper and deeper
+- modules whose real behavior is spread across a brittle private call graph rather than expressed through cohesive objects or submodules
+
+When these signs appear, the usual preferred response is to introduce a clearer concept:
+
+- a value object
+- a policy object
+- a focused service object
+- a smaller submodule
+
+Deep helper stacks are often a sign that the code is resisting its current file and module shape.
+
+### 13. Verification Contracts Should Default To Ruff, MyPy, Pytest, And CI Contract Checks
 
 The baseline Python verification contract for Craig-style repositories should usually include:
 
@@ -423,6 +467,8 @@ The preferred posture is:
 - Framework-specific models and runtime objects must not become the default domain vocabulary.
 - DI containers, if used, must remain outer-layer implementation details.
 - Circular import workarounds must not be used to hide unresolved ownership problems.
+- Folder structure must not become so flat that local governance files become broad and vague.
+- Large files and helper-sprawl must not be normalized as harmless style issues when they are really structural warnings.
 
 ## Non-Goals
 
