@@ -77,14 +77,6 @@ Produce grounded evidence that Context Atlas has moved from a core engine to an 
 - the project has a written recommendation on MVP readiness
 - the proof evaluates the real shared engine rather than isolated demo logic
 
-## Definition Of Done
-
-- the Story's scoped Tasks are either completed or intentionally deferred with the reason documented
-- all merged PR slices for the Story update the relevant local `__ai__.md` files in the same slice
-- the supported docs, examples, and runtime knobs stay aligned with the implemented surface
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- any deviations from Craig Architecture boundaries are documented explicitly rather than left implicit
-
 ## Related Artifacts
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)

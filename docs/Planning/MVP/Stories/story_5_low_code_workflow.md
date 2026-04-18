@@ -71,14 +71,6 @@ Create a simplified configuration and preset-driven path that lets a lower-code 
 - presets remain clearly outer-layer configuration rather than domain truth
 - the workflow reinforces Atlas as a reusable component rather than a separate low-code product
 
-## Definition Of Done
-
-- the Story's scoped Tasks are either completed or intentionally deferred with the reason documented
-- all merged PR slices for the Story update the relevant local `__ai__.md` files in the same slice
-- the supported docs, examples, and runtime knobs stay aligned with the implemented surface
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- any deviations from Craig Architecture boundaries are documented explicitly rather than left implicit
-
 ## Related Artifacts
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)

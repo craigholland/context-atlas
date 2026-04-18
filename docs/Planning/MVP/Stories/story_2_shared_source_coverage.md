@@ -79,14 +79,6 @@ Prove that Context Atlas governs multiple source families through one canonical 
 - mixed-source packet assembly works through the shared engine
 - the implementation preserves clear adapter-versus-domain responsibility
 
-## Definition Of Done
-
-- the Story's scoped Tasks are either completed or intentionally deferred with the reason documented
-- all merged PR slices for the Story update the relevant local `__ai__.md` files in the same slice
-- the supported docs, examples, and runtime knobs stay aligned with the implemented surface
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- any deviations from Craig Architecture boundaries are documented explicitly rather than left implicit
-
 ## Related Artifacts
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)

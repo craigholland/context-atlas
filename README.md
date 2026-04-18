@@ -31,27 +31,6 @@ The current focus is implementation hardening rather than feature breadth: tight
 - `tests/` for automated tests
 - `examples/` for usage examples and demonstrations
 
-## Supported MVP Entry Surface
-
-The current supported MVP starter path is intentionally explicit.
-
-Prefer imports like:
-
-```python
-from context_atlas.api import (
-    FilesystemDocumentSourceAdapter,
-    InMemorySourceRegistry,
-    LexicalRetriever,
-    build_starter_context_assembly_service,
-    load_settings_from_env,
-    render_packet_context,
-)
-```
-
-The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
-
-See [examples/README.md](/context-atlas/examples/README.md) and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current golden-path smoke flow.
-
 ## Runtime Knobs
 
 The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
