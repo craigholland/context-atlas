@@ -253,6 +253,26 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
                 any("Source classified" in message for message in captured.output)
             )
 
+    def test_adapter_outputs_immutable_canonical_source_metadata(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            docs_root = Path(temp_dir)
+            self._write_doc(
+                docs_root / "Authoritative" / "Charter.md",
+                """
+                # Charter
+
+                Context Atlas is a standalone context-governance engine.
+                """,
+            )
+
+            source = FilesystemDocumentSourceAdapter(docs_root).load_sources()[0]
+
+            with self.assertRaises(TypeError):
+                source.metadata["scope"] = "identity"
+
+            with self.assertRaises(TypeError):
+                source.provenance.metadata["collector"] = "override"
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

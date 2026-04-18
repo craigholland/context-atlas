@@ -28,15 +28,21 @@ def build_starter_context_assembly_service(
 
     return ContextAssemblyService(
         retriever=retriever,
-        ranking_policy=StarterCandidateRankingPolicy(),
+        ranking_policy=StarterCandidateRankingPolicy(
+            minimum_score=active_settings.assembly.ranking_minimum_score,
+        ),
         budget_policy=StarterBudgetAllocationPolicy(),
         compression_policy=StarterCompressionPolicy(
-            strategy=active_settings.assembly.default_compression_strategy
+            strategy=active_settings.assembly.default_compression_strategy,
+            chars_per_token=active_settings.assembly.compression_chars_per_token,
+            min_chunk_chars=active_settings.assembly.compression_min_chunk_chars,
         ),
         memory_policy=StarterMemoryRetentionPolicy(
             short_term_count=active_settings.memory.short_term_count,
             decay_rate=active_settings.memory.decay_rate,
             dedup_threshold=active_settings.memory.dedup_threshold,
+            min_effective_score=active_settings.memory.min_effective_score,
+            query_boost_weight=active_settings.memory.query_boost_weight,
         ),
         logger=active_logger,
         default_top_k=active_settings.assembly.default_retrieval_top_k,

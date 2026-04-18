@@ -31,9 +31,14 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024",
             CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="7",
             CONTEXT_ATLAS_DEFAULT_COMPRESSION_STRATEGY="sentence",
+            CONTEXT_ATLAS_RANKING_MINIMUM_SCORE="0.15",
+            CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN="5",
+            CONTEXT_ATLAS_COMPRESSION_MIN_CHUNK_CHARS="18",
             CONTEXT_ATLAS_MEMORY_SHORT_TERM_COUNT="6",
             CONTEXT_ATLAS_MEMORY_DECAY_RATE="0.0025",
             CONTEXT_ATLAS_MEMORY_DEDUP_THRESHOLD="0.81",
+            CONTEXT_ATLAS_MEMORY_MIN_EFFECTIVE_SCORE="0.22",
+            CONTEXT_ATLAS_MEMORY_QUERY_BOOST_WEIGHT="0.55",
         ):
             settings = load_settings_from_env()
 
@@ -46,17 +51,24 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             settings.assembly.default_compression_strategy,
             CompressionStrategy.SENTENCE,
         )
+        self.assertAlmostEqual(settings.assembly.ranking_minimum_score, 0.15)
+        self.assertEqual(settings.assembly.compression_chars_per_token, 5)
+        self.assertEqual(settings.assembly.compression_min_chunk_chars, 18)
         self.assertEqual(settings.memory.short_term_count, 6)
         self.assertAlmostEqual(settings.memory.decay_rate, 0.0025)
         self.assertAlmostEqual(settings.memory.dedup_threshold, 0.81)
+        self.assertAlmostEqual(settings.memory.min_effective_score, 0.22)
+        self.assertAlmostEqual(settings.memory.query_boost_weight, 0.55)
         self.assertEqual(settings.last_loaded_message_name, "SETTINGS_LOADED")
         self.assertEqual(
             settings.last_loaded_message,
             "Settings loaded: logger_name=atlas.observability.tests, "
             "log_level=WARNING, default_total_budget=1024, "
             "default_retrieval_top_k=7, default_compression_strategy=sentence, "
-            "memory_short_term_count=6, memory_decay_rate=0.0025, "
-            "memory_dedup_threshold=0.81",
+            "ranking_minimum_score=0.1500, compression_chars_per_token=5, "
+            "compression_min_chunk_chars=18, memory_short_term_count=6, "
+            "memory_decay_rate=0.0025, memory_dedup_threshold=0.81, "
+            "memory_min_effective_score=0.2200, memory_query_boost_weight=0.5500",
         )
 
     def test_invalid_integer_settings_raise_configuration_error(self) -> None:
@@ -82,6 +94,14 @@ class ConfigAndObservabilityTests(unittest.TestCase):
 
         self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
         self.assertIn("MEMORY_DEDUP_THRESHOLD", str(context.exception))
+
+    def test_invalid_extended_policy_setting_raises_configuration_error(self) -> None:
+        with _temporary_environment(CONTEXT_ATLAS_RANKING_MINIMUM_SCORE="nan"):
+            with self.assertRaises(ConfigurationError) as context:
+                load_settings_from_env()
+
+        self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
+        self.assertIn("RANKING_MINIMUM_SCORE", str(context.exception))
 
     def test_configure_logger_uses_plain_formatter_when_structured_events_disabled(
         self,
