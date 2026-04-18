@@ -252,7 +252,7 @@ class ContextAssemblyService:
 
             trace = ContextTrace(
                 trace_id=active_trace_id,
-                decisions=(
+                decisions=self._with_decision_positions(
                     ranking_outcome.trace.decisions
                     + memory_outcome.trace.decisions
                     + budget_outcome.trace.decisions
@@ -706,6 +706,17 @@ class ContextAssemblyService:
         """Prefix trace-metadata keys so stage-level values remain unambiguous."""
 
         return {f"{prefix}_{key}": value for key, value in metadata.items()}
+
+    def _with_decision_positions(
+        self,
+        decisions: tuple[ContextAssemblyDecision, ...],
+    ) -> tuple[ContextAssemblyDecision, ...]:
+        """Attach stable 1-based positions to trace decisions for inspection."""
+
+        return tuple(
+            decision.model_copy(update={"position": index})
+            for index, decision in enumerate(decisions, start=1)
+        )
 
     def _ordered_unique(self, values: Iterable[str]) -> tuple[str, ...]:
         """Return non-empty values once in first-seen order."""

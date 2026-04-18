@@ -21,6 +21,7 @@
 - Composes retrieval, ranking, memory selection, budget allocation, compression, and packet finalization into canonical packet outputs.
 - Keeps orchestration logic out of `domain/` while also refusing to let concrete adapter or infrastructure mechanics define system behavior.
 - Surfaces selected source classification and provenance collectors in trace metadata so adapter-origin semantics remain inspectable downstream.
+- Assigns stable 1-based decision positions so trace inspection surfaces can present an ordered assembly story without mutating trace state later.
 
 ## Architectural Rules
 - Services may depend on `context_atlas.domain`, but must not import `context_atlas.adapters`, `context_atlas.infrastructure`, or `context_atlas.rendering`.
@@ -64,10 +65,12 @@
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
+    - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it
 
 ## Known Gaps / Future-State Notes
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.
 - The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
+- The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 
 ## Cross-Folder Contracts

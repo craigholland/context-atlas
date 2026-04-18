@@ -42,6 +42,8 @@
   - derived text renderer for canonical packets
 - `render_packet_inspection`:
   - human-readable packet inspection renderer for canonical packet state
+- `render_trace_inspection`:
+  - human-readable trace inspection renderer for canonical trace state
 
 ## File Index
 - `__init__.py`:
@@ -57,6 +59,11 @@
   - invariants:
     - emphasize canonical packet state such as selected sources, memory, budget, and compression
     - remain a read-only formatter over canonical packet artifacts
+- `trace.py`:
+  - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos
+  - invariants:
+    - emphasize included, excluded, transformed, and deferred decisions plus trace metadata
+    - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes
 - Rendering is intentionally minimal even now that the assembly service has landed.
@@ -64,6 +71,7 @@
 - The current renderer is now explicitly exercised as a read-only view over frozen Pydantic packet artifacts.
 - Upcoming packet/trace inspectors should stay text-first and product-facing while continuing to derive from canonical packet/trace state rather than inventing parallel DTOs.
 - Packet inspection now has a first-class renderer; later trace inspection should align with it instead of inventing a different product vocabulary.
+- Trace inspection now also has a first-class renderer; packet and trace views should continue to feel like one inspection surface rather than two unrelated outputs.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
@@ -77,10 +85,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py
+      py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection"
+      py -3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
 ```
