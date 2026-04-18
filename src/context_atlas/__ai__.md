@@ -27,6 +27,7 @@
 - Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly and memory runtime knobs.
 - Makes it explicit that canonical domain artifacts now standardize on frozen Pydantic models inside the `context_atlas` namespace.
 - Makes it explicit that public policy inputs, outputs, and configurable starter policies now follow the same validated-model direction.
+- Makes it explicit that the current supported MVP surface is a small set of stable subpackage imports rather than a broad root-level barrel.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -38,6 +39,7 @@
 - Empty layer folders are intentional placeholders; do not collapse their responsibilities into unrelated packages just because the current bootstrap is small.
 - Non-trivial canonical data artifacts should favor frozen Pydantic models over mixed dataclass/Pydantic patterns so validation and constructor semantics stay predictable across the package.
 - Non-trivial public policy surfaces should avoid dataclass-era positional construction assumptions for the same reason.
+- The package root should stay intentionally thin until a curated public API is deliberately introduced; current user-facing guidance should prefer supported subpackage imports over deep internal modules.
 
 ## Allowed Dependencies
 - may depend on:
@@ -51,6 +53,7 @@
 ## Public API / Key Exports
 - `__init__.py`:
   - `__version__`: package version marker for the standalone library namespace
+  - package docstring: describes the current MVP-supported import surface
 - `domain/`:
   - semantic core for error codes, log events, messages, canonical domain artifacts, and pure policy logic
   - canonical artifacts now use frozen Pydantic models with explicit domain validation
@@ -105,6 +108,7 @@
 - `services/` now carries the first real orchestration slice, but richer provider-backed composition and persistence are still intentionally deferred.
 - `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
 - The package root does not yet define a curated broader public API beyond `__version__`.
+- The package root now documents the currently supported MVP import surface, but a broader curated API remains deferred to later Task 1.1 slices.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
