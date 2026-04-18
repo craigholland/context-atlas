@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-16
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-18
 owners: [core]
 tags: [architecture, philosophy, layering, clean-architecture, solid]
 related:
@@ -744,6 +744,24 @@ In general:
 
 This hierarchy helps the system evolve in units that are both architecturally meaningful and practically reviewable.
 
+## Guidance Depth By Level
+
+The decomposition hierarchy should also change the level of guidance as work moves closer to implementation.
+
+- `Epics` should remain primarily product-level.
+- `Stories` should translate product intent into architectural shape.
+- `Tasks` should translate architectural intent into implementation plans.
+- `Pull Requests` should translate task intent into concrete code changes.
+
+In practical terms:
+
+- `Epics` should usually define target users, desired outcomes, non-goals, and the major shared capabilities being pursued.
+- `Stories` should usually define which layers, modules, bounded concerns, or architectural seams are expected to move.
+- `Tasks` should usually define how that story will be implemented through sequenced PR slices while preserving architectural boundaries.
+- `Pull Requests` should usually define the concrete code-facing scope, including expected new files, expected existing files updated, and the local contract files that must change with the slice.
+
+If work is decomposed only by size and not by meaning, later implementation tends to become noisier, more brittle, and harder to govern.
+
 ## Suggested Scale Guidelines
 
 These are guidelines rather than rigid rules.
@@ -783,6 +801,68 @@ As a rough guideline, an Epic should ideally stay within about 5 Stories.
 
 These limits encourage steady progress while preventing complexity from accumulating too quickly.
 
+## Decomposition Sanity Checks
+
+Before accepting a Story, Task, or PR plan, contributors should inspect the plan for shape risks rather than only counting how many slices exist.
+
+Useful checks include:
+
+- whether the same file is being planned as a new creation in more than one PR
+- whether too many future PRs converge on one file, creating an obvious hotspot
+- whether the planned folder structure is becoming too flat for one useful local contract file
+- whether a planned change is likely to push a file toward an unreviewable size
+- whether a plan relies on growing helper chains instead of introducing missing concepts, objects, policies, or submodules
+- whether each planned PR identifies the local `__ai__.md` files that should be updated as part of the same slice
+
+These checks are not intended to create planning ceremony for its own sake.
+
+They exist because brittle implementation plans often reveal themselves before coding starts, especially when work is being decomposed for AI-assisted execution.
+
+## Code Shape Governance
+
+Craig Architecture treats code shape as an architectural concern rather than a mere style preference.
+
+Three recurring risks are especially important:
+
+- folders that become too flat and broad to govern well
+- files that become too large to understand in one focused pass
+- modules that devolve into junk drawers of loosely related helper functions
+
+### Folder Cohesion
+
+Folders should stay cohesive enough that a nearby local contract file can describe the folder's purpose, key files, and boundary rules without becoming vague or encyclopedic.
+
+If a folder starts mixing multiple sub-concerns, accumulating too many unrelated files, or requiring a sprawling local contract file full of exceptions, that is usually a signal that the folder should split.
+
+### File Reviewability
+
+Files should stay small enough to be reviewed, reasoned about, and evolved without forcing contributors to keep too much unrelated logic in working memory at once.
+
+Language supplements may define more concrete thresholds, but the philosophy-level rule is simple:
+
+- if a file is becoming hard to read in one focused review pass, it is probably becoming too large
+
+### Module Shape And Helper-Sprawl
+
+Craig Architecture strongly disfavors modules that become procedural junk drawers.
+
+Small pure helpers can be useful. The risk appears when:
+
+- a file accumulates many unbound helper functions with weak shared cohesion
+- nested helpers are used to hide complexity rather than express a genuinely local algorithm
+- top-level helpers call more helpers which call more helpers, creating a brittle private call graph
+
+When this happens, the usual architectural diagnosis is not "write better helper names."
+
+The more common diagnosis is that a missing concept should be introduced, such as:
+
+- a value object
+- a policy object
+- a service object
+- a submodule with a clearer bounded concern
+
+Code that is difficult to govern structurally is usually also difficult to evolve safely.
+
 ---
 
 # Evolutionary Development Philosophy
@@ -821,6 +901,9 @@ The preferred progression is:
 The philosophy attempts to reduce several common architectural problems:
 
 - large monolithic services accumulating unrelated logic
+- overly flat folders whose local contracts become broad and vague
+- large files that become difficult to review or refactor safely
+- junk-drawer modules built from deep helper chains instead of cohesive concepts
 - tight coupling between APIs and persistence layers
 - embedding business rules directly inside ORM models
 - infrastructure concerns leaking into core business logic
@@ -889,6 +972,7 @@ What distinguishes Craig Architecture is:
 - systems may be intentionally dirty during exploration, but only in forms that preserve future cleanup
 - dependency direction remains rigid even when responsibility placement is temporarily imperfect
 - local `__ai__.md` contracts and verification workflows make architectural intent more legible and enforceable in AI-assisted development
+- folder structure, file size, and module shape are treated as architectural concerns rather than merely stylistic concerns
 - architecture is expected to evolve as stable concepts emerge, clarify, and move into more appropriate homes over time
 
 It is not a strict framework but rather a target structure that systems should evolve toward deliberately.

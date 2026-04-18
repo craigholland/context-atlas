@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-16
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-18
 owners: [core]
 tags: [architecture, ai-guidance, ai-collaboration, repository-guidance]
 related:
@@ -157,6 +157,8 @@ This section translates the main Craig Architecture document into a practical wo
 - Determine whether the planned change is exploratory, exploitative, or a promotion from one to the other.
 - Check that the planned change preserves inward dependency direction.
 - Choose the smallest semantically meaningful slice that can carry the work forward.
+- Inspect the target folder for cohesion or flatness risk before adding more files to it.
+- Inspect likely target files for size and helper-sprawl risk before growing them further.
 
 The minimum architectural questions are:
 
@@ -164,6 +166,7 @@ The minimum architectural questions are:
 - Is this resource still exploratory, or has it become stable enough to exploit?
 - Am I moving code into the wrong home temporarily, or am I breaking dependency direction?
 - What would make this change harder to clean up later?
+- Is this plan creating future hotspot files or folders that will be harder to govern?
 
 #### While Making Changes
 
@@ -234,6 +237,20 @@ See `Canonical vs Derived Data` in [Craig Architecture](./Craig-Architecture.md)
 - Decompose work using the semantic hierarchy in the main document rather than arbitrary ticket slicing.
 - Prefer a bounded task over a sprawling implementation batch.
 
+When planning work at the PR level, include:
+
+- expected new files
+- expected existing files updated
+- the local `__ai__.md` files that should be updated with the same slice
+
+When reviewing a Task or PR plan, inspect for:
+
+- duplicate planned file creation
+- future hotspot files touched by too many slices
+- folder flatness risk
+- large-file risk
+- junk-drawer helper-sprawl risk
+
 See `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architecture.md).
 
 #### Respect Local Guidance
@@ -241,6 +258,7 @@ See `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architectur
 - Always read the nearest relevant `__ai__.md`.
 - Prefer the more local rule when it tightens the main architecture contract for a subsystem.
 - Surface explicit conflicts rather than resolving them silently.
+- If a folder has become too broad for one useful local contract file, treat folder splitting as a valid architectural response rather than only updating prose.
 
 ### 7. Architecture Review Signals For AI Contributors And Tools
 
@@ -343,6 +361,61 @@ Possible action:
 - Break the change into smaller PRs aligned with a single task.
 
 The goal of these signals is not to block development but to provide early warnings that architectural drift may be occurring. When such signals appear, contributors should consider whether a small refactor or restructuring step would help the system continue evolving toward the Craig Architecture end state.
+
+#### Folder Becoming Too Flat To Govern Locally
+
+If one folder begins accumulating many unrelated files or mixed concerns, the nearest `__ai__.md` often becomes broad, exception-heavy, or vague.
+
+Possible action:
+
+- split the folder by bounded concern
+- keep the local contract scoped to one coherent area
+
+Relevant main-doc anchors:
+
+- `Code Shape Governance -> Folder Cohesion`
+- `Project Decomposition Strategy`
+
+#### File Growing Beyond Reviewable Size
+
+If a file is becoming hard to understand in one focused pass, future changes to it become riskier for both humans and AI contributors.
+
+Possible action:
+
+- split the file by responsibility
+- extract a concept, submodule, or object before adding more behavior
+
+Relevant main-doc anchors:
+
+- `Code Shape Governance -> File Reviewability`
+- `Project Decomposition Strategy`
+
+#### Helper-Chain / Junk-Drawer Module
+
+If a module's behavior is spread across many unbound helpers, especially nested helpers or deep helper-call chains, the module may be missing clearer architectural concepts.
+
+Possible action:
+
+- introduce a value object, policy object, service object, or submodule
+- reduce helper depth and make responsibilities more explicit
+
+Relevant main-doc anchors:
+
+- `Code Shape Governance -> Module Shape And Helper-Sprawl`
+- `Layer Responsibilities`
+
+#### PR Plans Missing Code-Touch And Contract Expectations
+
+If a Task or PR plan does not identify which files are expected to be created, which files are expected to change, and which local `__ai__.md` files must be updated, the plan is often too vague for reliable execution.
+
+Possible action:
+
+- refine the plan to include code-touch scope and local contract updates before implementation starts
+
+Relevant main-doc anchors:
+
+- `Guidance Depth By Level`
+- `Decomposition Sanity Checks`
 
 ## Constraints
 
