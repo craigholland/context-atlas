@@ -27,6 +27,7 @@
 - Makes it explicit that infrastructure now carries both logging/config mechanics and the first small set of assembly and memory runtime knobs.
 - Makes it explicit that canonical domain artifacts now standardize on frozen Pydantic models inside the `context_atlas` namespace.
 - Makes it explicit that public policy inputs, outputs, and configurable starter policies now follow the same validated-model direction.
+- Makes it explicit that the current supported MVP surface is a curated `context_atlas.api` module plus a small set of stable subpackage imports rather than a broad root-level barrel.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -38,6 +39,7 @@
 - Empty layer folders are intentional placeholders; do not collapse their responsibilities into unrelated packages just because the current bootstrap is small.
 - Non-trivial canonical data artifacts should favor frozen Pydantic models over mixed dataclass/Pydantic patterns so validation and constructor semantics stay predictable across the package.
 - Non-trivial public policy surfaces should avoid dataclass-era positional construction assumptions for the same reason.
+- The package root should stay intentionally thin even after a curated public API is introduced; current user-facing guidance should prefer `context_atlas.api` for the starter flow and only reach for stable subpackage imports when architectural seams matter.
 
 ## Allowed Dependencies
 - may depend on:
@@ -51,6 +53,10 @@
 ## Public API / Key Exports
 - `__init__.py`:
   - `__version__`: package version marker for the standalone library namespace
+  - `api`: curated starter API namespace re-export
+  - package docstring: describes the current MVP-supported import surface
+- `api.py`:
+  - curated starter-facing exports for adapters, settings loading, assembly wiring, and rendering
 - `domain/`:
   - semantic core for error codes, log events, messages, canonical domain artifacts, and pure policy logic
   - canonical artifacts now use frozen Pydantic models with explicit domain validation
@@ -67,11 +73,21 @@
   - responsibility: defines the package root and current public version export
   - defines:
     - `__version__`: current package version string
+    - `api`: curated starter API namespace
   - depends_on:
-    - no project-local modules
+    - `context_atlas.api`
   - invariants:
     - keep the package root lightweight
     - do not turn `__init__.py` into a service locator or broad re-export barrel
+    - prefer curating starter exports through `api.py` rather than widening the package root directly
+- `api.py`:
+  - responsibility: curates the supported starter import surface without flattening the entire layer structure
+  - used_by:
+    - MVP-facing examples and guides
+  - invariants:
+    - keep the export set small and intentional
+    - re-export only the starter flow pieces that are explicitly supported for MVP users
+    - examples should validate this module as the first import stop before they reach for stable subpackage paths
 - `domain/`:
   - responsibility: holds semantic core contracts and canonical domain artifacts
   - used_by:
@@ -104,7 +120,9 @@
 ## Known Gaps / Future-State Notes
 - `services/` now carries the first real orchestration slice, but richer provider-backed composition and persistence are still intentionally deferred.
 - `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
-- The package root does not yet define a curated broader public API beyond `__version__`.
+- The package root still intentionally avoids broad direct exports even though `context_atlas.api` now provides a curated starter namespace.
+- The current curated API is intentionally small; later slices should only widen it when examples and real workflows prove additional exports deserve to stabilize.
+- The current curated API is now exercised by the starter smoke example under `examples/`, which should stay aligned with the supported starter flow.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
