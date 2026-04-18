@@ -21,7 +21,6 @@
 - Provides the first retrieval-oriented adapter slice for turning registered `ContextSource` objects into raw `ContextCandidate` outputs.
 - Provides an ontology-aware filesystem document adapter for turning markdown docs into classified `ContextSource` artifacts.
 - Keeps lexical retrieval behavior outside the semantic core while still consuming domain-stable codes, messages, and canonical models.
-- Makes it explicit that this package is part of the supported starter surface and may be re-exported through `context_atlas.api`.
 
 ## Architectural Rules
 - Adapters may depend on `context_atlas.domain`, but `context_atlas.domain` must never import adapter implementations.
@@ -51,7 +50,7 @@
 
 ## File Index
 - `__init__.py`:
-  - responsibility: exposes the supported starter adapter surface for package-local use and curated public re-export
+  - responsibility: exposes the starter retrieval adapter surface for package-local use
   - invariants:
     - keep adapter exports deliberate and small
 - `retrieval/lexical.py`:
@@ -85,7 +84,6 @@
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
 - Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
-- The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

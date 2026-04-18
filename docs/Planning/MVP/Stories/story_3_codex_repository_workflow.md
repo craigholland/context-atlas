@@ -73,14 +73,6 @@ Deliver the flagship workflow that shows Context Atlas improving repository-awar
 - packet and trace inspection are part of the workflow, not an afterthought
 - the workflow convincingly shows Atlas as a repo-aware pipeline component
 
-## Definition Of Done
-
-- the Story's scoped Tasks are either completed or intentionally deferred with the reason documented
-- all merged PR slices for the Story update the relevant local `__ai__.md` files in the same slice
-- the supported docs, examples, and runtime knobs stay aligned with the implemented surface
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- any deviations from Craig Architecture boundaries are documented explicitly rather than left implicit
-
 ## Related Artifacts
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
