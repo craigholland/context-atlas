@@ -25,6 +25,8 @@
 - Provides the starter composition boundary for wiring validated settings and logger setup into the real assembly service.
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 - Uses Pydantic/Pydantic Settings for validated runtime configuration instead of unconstrained dataclasses.
+- Makes it explicit that `build_starter_context_assembly_service` is the supported MVP starter composition entrypoint.
+- Makes it explicit that the curated `context_atlas.api` surface may re-export the starter composition helper without changing its role as an outer composition boundary.
 
 ## Architectural Rules
 - This folder is an outer layer and may depend on `context_atlas.domain`, but domain code must never import its concrete implementations.
@@ -58,7 +60,7 @@
   - `log_message`: structured logging helper keyed by direct `LogMessage` constants
   - `log_assembly_stage_message`: helper for emitting assembly-stage messages with consistent trace fields
 - `assembly`:
-  - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into a usable assembly service
+  - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into the supported starter assembly service
 
 ## File Index
 - `config/settings.py`:
@@ -116,6 +118,7 @@
   - invariants:
     - keep this as an outer composition boundary, not a second orchestration layer
     - starter settings should influence service defaults through constructor wiring rather than through hidden globals
+    - current MVP-facing docs should treat this helper as the supported starter entrypoint rather than reaching into deeper service wiring
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
@@ -126,6 +129,8 @@
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 - The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.
+- The current supported starter entry surface still lives here; a broader curated package-level API may later wrap or re-export it, but should not bypass this composition boundary semantically.
+- The current starter entry helper is now also re-exported through `context_atlas.api`; future API expansion should continue to preserve this module as the real composition boundary rather than moving wiring inward.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

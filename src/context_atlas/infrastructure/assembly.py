@@ -1,4 +1,10 @@
-"""Outer-layer assembly helpers that wire services to runtime settings."""
+"""Supported starter composition helpers for Context Atlas.
+
+This module defines the current MVP-facing assembly entrypoint that wires
+validated runtime settings and logging into the shared assembly service.
+The curated ``context_atlas.api`` surface re-exports this helper for callers
+who do not need to learn the deeper package layout yet.
+"""
 
 from __future__ import annotations
 
@@ -21,7 +27,12 @@ def build_starter_context_assembly_service(
     settings: ContextAtlasSettings | None = None,
     logger: logging.Logger | None = None,
 ) -> ContextAssemblyService:
-    """Build the starter assembly service from validated runtime settings."""
+    """Build the supported starter assembly service from validated settings.
+
+    This is the preferred composition boundary for the current MVP starter flow.
+    Callers should prefer this helper to hand-wiring policies from deeper
+    modules when they only need the supported default assembly path.
+    """
 
     active_settings = settings or ContextAtlasSettings()
     active_logger = logger or configure_logger(active_settings.logging)

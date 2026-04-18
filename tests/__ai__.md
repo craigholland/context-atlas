@@ -24,6 +24,7 @@
 - Verifies that canonical domain artifacts now follow the frozen Pydantic modeling standard rather than a mixed constructor pattern.
 - Verifies that public policy inputs, outputs, and configurable starter policies follow the same validated-model direction.
 - Verifies that infrastructure composition, adapters, and renderers can consume those immutable validated models without mutating them.
+- Verifies that the curated `context_atlas.api` starter surface remains importable and sufficient for MVP-facing examples.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -70,6 +71,7 @@
     - tests should stay fast and deterministic
     - assertions should track centralized message constants rather than ad hoc inline strings
     - tests should prove the base coded exception now carries a validated payload rather than a dataclass-style surface
+    - tests should prove the curated `context_atlas.api` surface exposes the supported starter flow without requiring deep imports
 - `test_domain_models.py`:
   - responsibility: verifies canonical domain artifacts and their starter invariants
   - defines:
@@ -171,6 +173,8 @@
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
+- The suite now also covers importability of the curated `context_atlas.api` starter namespace.
+- The example smoke script under `examples/` currently relies on that same curated namespace, so bootstrap coverage should keep guarding against accidental API drift.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts
