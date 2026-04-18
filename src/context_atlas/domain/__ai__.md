@@ -216,6 +216,7 @@
 - The only remaining dataclasses in `domain/` should be either the coded exception type or private helper structs that do not act as serialization or package-boundary surfaces.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
+- The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
 - The current error/message surface now also covers filesystem source-adapter validation and unsupported document-class failures for the ontology-aware docs adapter.
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
