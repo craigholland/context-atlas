@@ -27,6 +27,7 @@
 - Re-exports the domain-owned `CompressionStrategy` through infrastructure config so runtime defaults can stay aligned with canonical semantics.
 - Uses Pydantic/Pydantic Settings for validated runtime configuration instead of unconstrained dataclasses.
 - Makes it explicit that `build_starter_context_assembly_service` is the supported MVP starter composition entrypoint.
+- Makes it explicit that the curated `context_atlas.api` surface may re-export the starter composition helper without changing its role as an outer composition boundary.
 
 ## Architectural Rules
 - This folder is an outer layer and may depend on `context_atlas.domain`, but domain code must never import its concrete implementations.
@@ -130,6 +131,7 @@
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 - The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.
 - The current supported starter entry surface still lives here; a broader curated package-level API may later wrap or re-export it, but should not bypass this composition boundary semantically.
+- The current starter entry helper is now also re-exported through `context_atlas.api`; future API expansion should continue to preserve this module as the real composition boundary rather than moving wiring inward.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

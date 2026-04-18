@@ -7,8 +7,10 @@ import logging
 import os
 import unittest
 
+from context_atlas import api
 from context_atlas.domain.errors import ConfigurationError, ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import ErrorMessage, LogMessage
+from context_atlas.infrastructure import build_starter_context_assembly_service
 from context_atlas.infrastructure.config import load_settings_from_env
 from context_atlas.infrastructure.config.settings import LoggingSettings
 from context_atlas.infrastructure.logging import configure_logger, log_message
@@ -16,6 +18,16 @@ from context_atlas.infrastructure.logging import configure_logger, log_message
 
 class BootstrapLayerTests(unittest.TestCase):
     """Verify the initial shared contracts and infrastructure bootstrap."""
+
+    def test_curated_api_exposes_supported_starter_surface(self) -> None:
+        self.assertTrue(hasattr(api, "FilesystemDocumentSourceAdapter"))
+        self.assertTrue(hasattr(api, "LexicalRetriever"))
+        self.assertTrue(hasattr(api, "load_settings_from_env"))
+        self.assertTrue(hasattr(api, "render_packet_context"))
+        self.assertIs(
+            api.build_starter_context_assembly_service,
+            build_starter_context_assembly_service,
+        )
 
     def test_error_messages_are_centralized_and_formatted(self) -> None:
         message = ErrorMessage.DOCUMENT_NO_CONTENT % ("notes.md",)
