@@ -148,6 +148,7 @@
     - do not add prompt-ready string rendering fields here as canonical state
     - packet item counts should reflect canonical included artifacts, not just one source family
     - inspection-oriented helpers here should remain machine-usable summaries rather than presentation formatting
+    - packet-inspection renderers may consume packet summary properties from here, but human-readable section layout must stay in `rendering/`
 - `models/reason_codes.py`:
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:
