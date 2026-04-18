@@ -164,14 +164,14 @@ feature/<Epic name>/<Story #>_<Task #>_<Task description>
 Preferred PR-slice branch convention when branching from that feature branch:
 
 ```text
-codex/<Task #><PR Char>_<PR description>
+codex/<Story #>_<Task #><PR Char>_<PR description>
 ```
 
 Examples:
 
 - `feature/mvp/3_2_product_surface`
-- `codex/2A_public_api_exports`
-- `codex/2B_trace_rendering`
+- `codex/3_2A_public_api_exports`
+- `codex/3_2B_trace_rendering`
 
 These names should stay concise, lowercase where practical, and formatted safely for shell, Git, and GitHub usage. Descriptions should communicate bounded intent rather than broad themes.
 
