@@ -20,6 +20,7 @@
 - Holds derived output renderers for Context Atlas artifacts.
 - Provides the first minimal packet renderer without turning prompt-ready text into the canonical storage model.
 - Renders both retained memory and candidate/compression content from canonical packet state.
+- Owns the product-facing packet/trace inspection surfaces as derived read-only views over canonical artifacts.
 
 ## Architectural Rules
 - Rendering may depend on `context_atlas.domain`, but canonical packet, budget, decision, and compression semantics must remain defined there.
@@ -42,7 +43,7 @@
 
 ## File Index
 - `__init__.py`:
-  - responsibility: exposes the small rendering surface
+  - responsibility: exposes the small rendering and inspection surface
 - `context.py`:
   - responsibility: derives renderable text from canonical packet artifacts
   - invariants:
@@ -54,6 +55,7 @@
 - Rendering is intentionally minimal even now that the assembly service has landed.
 - Richer packet sections or role-specific renderers can arrive later, but they should still derive from canonical packet state.
 - The current renderer is now explicitly exercised as a read-only view over frozen Pydantic packet artifacts.
+- Upcoming packet/trace inspectors should stay text-first and product-facing while continuing to derive from canonical packet/trace state rather than inventing parallel DTOs.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
