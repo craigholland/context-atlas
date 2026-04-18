@@ -8,6 +8,7 @@ from enum import StrEnum
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
 
 
@@ -128,12 +129,12 @@ class ContextCandidate(CanonicalDomainModel):
         if self.score is not None and not math.isfinite(self.score):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_CANDIDATE_STATE,
-                message_args=("score must be finite when provided",),
+                message_args=(ErrorMessage.SCORE_MUST_BE_FINITE_WHEN_PROVIDED,),
             )
         if self.rank is not None and self.rank < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_CANDIDATE_STATE,
-                message_args=("rank must be >= 1 when provided",),
+                message_args=(ErrorMessage.RANK_MUST_BE_AT_LEAST_ONE_WHEN_PROVIDED,),
             )
 
         object.__setattr__(

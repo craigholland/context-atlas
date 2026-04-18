@@ -8,6 +8,7 @@ from enum import StrEnum
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
 from .budget import ContextBudget
 from .memory import ContextMemoryEntry
@@ -52,22 +53,26 @@ class ContextAssemblyDecision(CanonicalDomainModel):
         if not normalized_source_id:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_DECISION,
-                message_args=("source_id must not be empty",),
+                message_args=(ErrorMessage.ASSEMBLY_DECISION_SOURCE_ID_REQUIRED,),
             )
         if not self.reason_codes:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_DECISION,
-                message_args=("at least one reason code is required",),
+                message_args=(ErrorMessage.ASSEMBLY_DECISION_REASON_CODES_REQUIRED,),
             )
         if self.candidate_score is not None and not math.isfinite(self.candidate_score):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_DECISION,
-                message_args=("candidate_score must be finite when provided",),
+                message_args=(
+                    ErrorMessage.CANDIDATE_SCORE_MUST_BE_FINITE_WHEN_PROVIDED,
+                ),
             )
         if self.position is not None and self.position < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_DECISION,
-                message_args=("position must be >= 1 when provided",),
+                message_args=(
+                    ErrorMessage.POSITION_MUST_BE_AT_LEAST_ONE_WHEN_PROVIDED,
+                ),
             )
 
         object.__setattr__(self, "source_id", normalized_source_id)

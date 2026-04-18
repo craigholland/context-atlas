@@ -19,7 +19,7 @@ from pydantic import (
 )
 
 from ...domain.errors import ContextAtlasError, ErrorCode
-from ...domain.messages import LogMessage
+from ...domain.messages import ErrorMessage, LogMessage
 from ...domain.models import (
     ContextSource,
     ContextSourceAuthority,
@@ -151,12 +151,12 @@ class FilesystemDocumentSourceAdapter:
         if not root.exists():
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
-                message_args=(f"root path does not exist: {root}",),
+                message_args=(ErrorMessage.ROOT_PATH_DOES_NOT_EXIST % (root,),),
             )
         if not root.is_dir():
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
-                message_args=(f"root path is not a directory: {root}",),
+                message_args=(ErrorMessage.ROOT_PATH_IS_NOT_A_DIRECTORY % (root,),),
             )
         self._root = root
 
@@ -183,18 +183,23 @@ class FilesystemDocumentSourceAdapter:
         if not document_path.exists():
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
-                message_args=(f"document path does not exist: {document_path}",),
+                message_args=(
+                    ErrorMessage.DOCUMENT_PATH_DOES_NOT_EXIST % (document_path,),
+                ),
             )
         if not document_path.is_file():
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
-                message_args=(f"document path is not a file: {document_path}",),
+                message_args=(
+                    ErrorMessage.DOCUMENT_PATH_IS_NOT_A_FILE % (document_path,),
+                ),
             )
         if document_path.suffix.lower() not in _SUPPORTED_SUFFIXES:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
                 message_args=(
-                    f"unsupported document suffix '{document_path.suffix}' for {document_path}",
+                    ErrorMessage.UNSUPPORTED_DOCUMENT_SUFFIX
+                    % (document_path.suffix, document_path),
                 ),
             )
 
@@ -204,7 +209,8 @@ class FilesystemDocumentSourceAdapter:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
                 message_args=(
-                    f"document path '{document_path}' is outside adapter root '{self._root}'",
+                    ErrorMessage.DOCUMENT_PATH_OUTSIDE_ADAPTER_ROOT
+                    % (document_path, self._root),
                 ),
             ) from error
 
@@ -284,7 +290,8 @@ class FilesystemDocumentSourceAdapter:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
                 message_args=(
-                    f"invalid front matter in '{relative_path.as_posix()}': {error}",
+                    ErrorMessage.INVALID_FRONT_MATTER_IN_DOCUMENT
+                    % (relative_path.as_posix(), error),
                 ),
             ) from error
 

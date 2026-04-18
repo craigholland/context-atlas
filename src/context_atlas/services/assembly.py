@@ -8,7 +8,7 @@ from typing import Protocol
 from uuid import uuid4
 
 from ..domain.errors import ContextAtlasError, ErrorCode
-from ..domain.messages import LogMessage
+from ..domain.messages import ErrorMessage, LogMessage
 from ..domain.models import (
     BudgetPressureReasonCode,
     CompressionResult,
@@ -67,12 +67,12 @@ class ContextAssemblyService:
         if default_top_k < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=("default_top_k must be >= 1",),
+                message_args=(ErrorMessage.DEFAULT_TOP_K_MUST_BE_AT_LEAST_ONE,),
             )
         if default_total_budget < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=("default_total_budget must be >= 1",),
+                message_args=(ErrorMessage.DEFAULT_TOTAL_BUDGET_MUST_BE_AT_LEAST_ONE,),
             )
 
         self._retriever = retriever
@@ -102,14 +102,16 @@ class ContextAssemblyService:
         if not normalized_query:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=("query must not be empty",),
+                message_args=(ErrorMessage.QUERY_MUST_NOT_BE_EMPTY,),
             )
 
         active_top_k = self._default_top_k if top_k is None else top_k
         if active_top_k < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=(f"top_k must be >= 1, got {active_top_k}",),
+                message_args=(
+                    ErrorMessage.TOP_K_MUST_BE_AT_LEAST_ONE % (active_top_k,),
+                ),
             )
 
         active_trace_id = (
@@ -362,9 +364,7 @@ class ContextAssemblyService:
         if _DOCUMENT_SLOT_NAME not in slot_names:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=(
-                    "custom budgets must define a 'documents' slot or omit slots to use the starter defaults",
-                ),
+                message_args=(ErrorMessage.CUSTOM_BUDGET_REQUIRES_DOCUMENTS_SLOT,),
             )
         if include_memory and _MEMORY_SLOT_NAME not in slot_names:
             return ContextBudget(
@@ -692,7 +692,9 @@ class ContextAssemblyService:
         if not normalized:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
-                message_args=(f"{field_name} must not be blank when provided",),
+                message_args=(
+                    ErrorMessage.FIELD_MUST_NOT_BE_BLANK_WHEN_PROVIDED % (field_name,),
+                ),
             )
         return normalized
 

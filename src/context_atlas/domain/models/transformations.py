@@ -7,6 +7,7 @@ from enum import StrEnum
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
 
 
@@ -34,24 +35,24 @@ class CompressionResult(CanonicalDomainModel):
         if self.original_chars < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=("original_chars must be >= 0",),
+                message_args=(ErrorMessage.ORIGINAL_CHARS_MUST_BE_NON_NEGATIVE,),
             )
         if self.compressed_chars < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=("compressed_chars must be >= 0",),
+                message_args=(ErrorMessage.COMPRESSED_CHARS_MUST_BE_NON_NEGATIVE,),
             )
         if self.compressed_chars > self.original_chars:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=(
-                    "compressed_chars must be <= original_chars for canonical compression results",
-                ),
+                message_args=(ErrorMessage.COMPRESSED_CHARS_MUST_NOT_EXCEED_ORIGINAL,),
             )
         if self.estimated_tokens_saved < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=("estimated_tokens_saved must be >= 0",),
+                message_args=(
+                    ErrorMessage.ESTIMATED_TOKENS_SAVED_MUST_BE_NON_NEGATIVE,
+                ),
             )
 
         object.__setattr__(self, "source_ids", tuple(self.source_ids))

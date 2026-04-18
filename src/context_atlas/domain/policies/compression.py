@@ -6,6 +6,7 @@ import re
 from typing import Iterable, Protocol
 
 from ..errors import ContextAtlasError, ErrorCode
+from ..messages import ErrorMessage
 from ..models.base import CanonicalDomainModel
 from ..models import (
     BudgetPressureReasonCode,
@@ -51,12 +52,12 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         if self.chars_per_token < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=("chars_per_token must be >= 1",),
+                message_args=(ErrorMessage.CHARS_PER_TOKEN_MUST_BE_AT_LEAST_ONE,),
             )
         if self.min_chunk_chars < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=("min_chunk_chars must be >= 1",),
+                message_args=(ErrorMessage.MIN_CHUNK_CHARS_MUST_BE_AT_LEAST_ONE,),
             )
 
     def compress_candidates(
@@ -72,7 +73,9 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         if max_tokens < 1:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-                message_args=(f"max_tokens must be >= 1, got {max_tokens}",),
+                message_args=(
+                    ErrorMessage.MAX_TOKENS_MUST_BE_AT_LEAST_ONE % (max_tokens,),
+                ),
             )
 
         valid_candidates = tuple(
@@ -232,7 +235,10 @@ def estimate_tokens(text: str, *, chars_per_token: int = 4) -> int:
     if chars_per_token < 1:
         raise ContextAtlasError(
             code=ErrorCode.INVALID_COMPRESSION_REQUEST,
-            message_args=(f"chars_per_token must be >= 1, got {chars_per_token}",),
+            message_args=(
+                ErrorMessage.CHARS_PER_TOKEN_MUST_BE_AT_LEAST_ONE_GOT
+                % (chars_per_token,),
+            ),
         )
     return len(text) // chars_per_token
 

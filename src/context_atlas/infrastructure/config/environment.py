@@ -6,6 +6,7 @@ from pydantic import ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from ...domain.errors import ConfigurationError, ErrorCode
+from ...domain.messages import ErrorMessage
 from ...domain.models import CompressionStrategy
 from .settings import (
     AssemblySettings,
@@ -113,7 +114,7 @@ def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettin
     if not prefix:
         raise ConfigurationError(
             code=ErrorCode.INVALID_CONFIGURATION,
-            message_args=("environment prefix must not be empty",),
+            message_args=(ErrorMessage.ENVIRONMENT_PREFIX_MUST_NOT_BE_EMPTY,),
         )
 
     try:
