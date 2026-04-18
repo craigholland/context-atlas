@@ -13,6 +13,7 @@ owners: [core]
 tags: [architecture, python, layering, dependency-injection, verification]
 related:
   - ./Craig-Architecture.md
+  - ./Craig-Architecture-Planning-And-Decomposition.md
   - ./Craig-Architecture-AI-Guidance.md
   - ./Craig-Architecture-__ai__-Template.md
   - ../Ontology/README.md
@@ -480,6 +481,7 @@ The preferred posture is:
 ## Related Artifacts
 
 - [Craig Architecture](./Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 - [Craig Architecture - AI Guidance](./Craig-Architecture-AI-Guidance.md)
 - [Craig Architecture - __ai__.md Template](./Craig-Architecture-__ai__-Template.md)
 - [Ontology Templates](../Ontology/README.md)

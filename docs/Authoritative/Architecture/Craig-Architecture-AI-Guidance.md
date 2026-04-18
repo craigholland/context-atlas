@@ -13,6 +13,7 @@ owners: [core]
 tags: [architecture, ai-guidance, ai-collaboration, repository-guidance]
 related:
   - ./Craig-Architecture.md
+  - ./Craig-Architecture-Planning-And-Decomposition.md
   - ./Craig-Architecture-__ai__-Template.md
   - ./Craig-Architecture-Python.md
   - ../Ontology/README.md
@@ -57,12 +58,13 @@ Before modifying code in a Craig-style repository, AI contributors should orient
    - `Layer Responsibilities`
    - `Project Decomposition Strategy`
    - `Evolutionary Development Philosophy`
-2. Read the relevant language supplement when one exists for the code being changed, such as [Craig Architecture - Python](./Craig-Architecture-Python.md).
-3. Read the nearest local `__ai__.md` file for the folder being changed, then read parent `__ai__.md` files as needed.
-4. Read the local verification contract, if one exists.
-5. Read only the local files needed to understand the subsystem and the planned change.
+2. If the task involves planning, decomposition, or PR review, read [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md).
+3. Read the relevant language supplement when one exists for the code being changed, such as [Craig Architecture - Python](./Craig-Architecture-Python.md).
+4. Read the nearest local `__ai__.md` file for the folder being changed, then read parent `__ai__.md` files as needed.
+5. Read the local verification contract, if one exists.
+6. Read only the local files needed to understand the subsystem and the planned change.
 
-If local guidance is absent, the main [Craig Architecture](./Craig-Architecture.md) document and any relevant language supplement govern.
+If local guidance is absent, the main [Craig Architecture](./Craig-Architecture.md) document, the planning/decomposition supplement when relevant, and any relevant language supplement govern.
 
 ### 3. Repository AI Guidance Files
 
@@ -251,7 +253,7 @@ When reviewing a Task or PR plan, inspect for:
 - large-file risk
 - junk-drawer helper-sprawl risk
 
-See `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architecture.md).
+See [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md).
 
 #### Respect Local Guidance
 
@@ -262,7 +264,7 @@ See `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architectur
 
 ### 7. Architecture Review Signals For AI Contributors And Tools
 
-These signals are not independent architectural law. They are review prompts derived from the main [Craig Architecture](./Craig-Architecture.md) document.
+These signals are not independent architectural law. They are review prompts derived from the Craig Architecture canonical doc set, especially [Craig Architecture](./Craig-Architecture.md) and [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md).
 
 When these signals appear, AI contributors and automated reviewers should slow down, inspect boundary placement, and decide whether a small refactor or a documented exception is needed.
 
@@ -371,10 +373,10 @@ Possible action:
 - split the folder by bounded concern
 - keep the local contract scoped to one coherent area
 
-Relevant main-doc anchors:
+Relevant planning/decomposition anchors:
 
-- `Code Shape Governance -> Folder Cohesion`
-- `Project Decomposition Strategy`
+- `Code Shape Governance -> Folder Cohesion` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+- `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architecture.md)
 
 #### File Growing Beyond Reviewable Size
 
@@ -385,10 +387,10 @@ Possible action:
 - split the file by responsibility
 - extract a concept, submodule, or object before adding more behavior
 
-Relevant main-doc anchors:
+Relevant planning/decomposition anchors:
 
-- `Code Shape Governance -> File Reviewability`
-- `Project Decomposition Strategy`
+- `Code Shape Governance -> File Reviewability` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+- `Project Decomposition Strategy` in [Craig Architecture](./Craig-Architecture.md)
 
 #### Helper-Chain / Junk-Drawer Module
 
@@ -399,10 +401,10 @@ Possible action:
 - introduce a value object, policy object, service object, or submodule
 - reduce helper depth and make responsibilities more explicit
 
-Relevant main-doc anchors:
+Relevant planning/decomposition anchors:
 
-- `Code Shape Governance -> Module Shape And Helper-Sprawl`
-- `Layer Responsibilities`
+- `Code Shape Governance -> Module Shape And Helper-Sprawl` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+- `Layer Responsibilities` in [Craig Architecture](./Craig-Architecture.md)
 
 #### PR Plans Missing Code-Touch And Contract Expectations
 
@@ -412,10 +414,10 @@ Possible action:
 
 - refine the plan to include code-touch scope and local contract updates before implementation starts
 
-Relevant main-doc anchors:
+Relevant planning/decomposition anchors:
 
-- `Guidance Depth By Level`
-- `Decomposition Sanity Checks`
+- `Guidance Depth By Level` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+- `Decomposition Sanity Checks` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 
 ## Constraints
 
@@ -433,5 +435,6 @@ Relevant main-doc anchors:
 ## Related Artifacts
 
 - [Craig Architecture](./Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 - [Craig Architecture - __ai__.md Template](./Craig-Architecture-__ai__-Template.md)
 - [Ontology Templates](../Ontology/README.md)

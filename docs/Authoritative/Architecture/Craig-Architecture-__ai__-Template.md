@@ -13,6 +13,7 @@ owners: [core]
 tags: [architecture, ai-guidance, template, local-guidance]
 related:
   - ./Craig-Architecture.md
+  - ./Craig-Architecture-Planning-And-Decomposition.md
   - ./Craig-Architecture-AI-Guidance.md
   - ./Craig-Architecture-Python.md
   - ../Ontology/README.md
@@ -284,6 +285,7 @@ steps:
 ## Related Artifacts
 
 - [Craig Architecture](./Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 - [Craig Architecture - AI Guidance](./Craig-Architecture-AI-Guidance.md)
 - [Craig Architecture - Python](./Craig-Architecture-Python.md)
 - [Ontology Templates](../Ontology/README.md)
