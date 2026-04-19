@@ -26,7 +26,7 @@ Define the actual mixed-source workflow that a technical builder will use when a
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
