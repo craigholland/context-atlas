@@ -18,5 +18,7 @@ The smoke example demonstrates the supported MVP path:
 - load validated settings from the environment
 - ingest markdown docs with `FilesystemDocumentSourceAdapter`
 - retrieve candidates with the starter lexical retriever
-- assemble a packet through `build_starter_context_assembly_service`
-- render context and inspect trace metadata
+- assemble a `ContextPacket` through `build_starter_context_assembly_service`
+- render packet context and inspect the resulting packet/trace surfaces
+
+This sequence should stay aligned with the root `README.md` golden path. If examples start requiring extra hidden setup or deep internal imports, the example surface should be corrected before more product-facing guidance is added.
