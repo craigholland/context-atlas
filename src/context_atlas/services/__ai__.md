@@ -75,21 +75,9 @@
     - caller-supplied workflow metadata should remain visible in trace metadata so supported workflow examples can explain which outer path produced a packet
 
 ## Known Gaps / Future-State Notes
-- The current service is a starter orchestration path over in-memory retrieval plus starter policies.
-- The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
-- The current service now also surfaces selected source families in trace metadata while consuming collector and family information through domain-owned source helpers instead of raw provenance reach-through.
-- The current service now also surfaces stable source-family and collector count summaries in trace metadata so mixed-source workflows can prove coherence without walking selected candidates by hand.
-- The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
-- The current service should now also preserve caller-supplied workflow metadata in trace metadata so supported examples can prove which outer workflow path was used without adding parallel debug state.
-- Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.
-- Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
-- Story 4 Task 4.3 is now auditing the docs-plus-database workflow against Craig Architecture boundaries, so service code should keep treating workflow metadata as opaque outer context while remaining source-family agnostic once canonical sources enter the engine path.
-- Product-facing docs for mixed-source workflows should continue to present this package as the shared engine path after adapter translation, not as the home of row-mapping or data-access behavior.
-- Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
-- Supported example workflows should share this service path instead of duplicating stage sequencing in multiple scripts once a reference workflow composition helper exists.
-- Product-facing examples should describe this module as the shared engine path and should not present alternate scripts as separate service modes once they are only changing inspection output.
-- Story 5 Task 5.3 now also expects this service to keep caller metadata opaque and normalized, so outer low-code wrappers do not need to hand-pack every metadata value as a string just to stay on the shared engine path.
-- Story 5 Task 5.3 now also expects low-code workflow reinforcement to happen outside this package; if future low-code growth needs richer plan logic, that belongs in outer config/infrastructure seams rather than in service-specific branches here.
+- The current service layer is still a starter orchestration path over canonical sources, starter policies, and in-memory retrieval rather than a richer provider-aware or persistence-backed application service surface.
+- Trace metadata is currently optimized for local explainability and supported workflow review, not long-term audit storage or broader observability backends.
+- If workflow-specific branching starts accumulating here instead of staying in outer composition layers, this package should be decomposed further rather than absorbing more example-specific orchestration.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.

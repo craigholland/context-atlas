@@ -236,25 +236,9 @@
     - `_ScoredMemoryEntry` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
 
 ## Known Gaps / Future-State Notes
-- Some current names are intentionally starter-oriented and may evolve as richer domain concepts harden.
-- The current model set is canonical structure, not yet full policy behavior.
-- The current canonical model set now uses frozen Pydantic artifacts with immutable metadata helpers, and the public policy surface now follows the same validated-model direction.
-- The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
-- Packet and trace inspection work should continue to expose canonical summary signals here without pushing human-readable formatting into the domain layer.
-- The distinction between domain message constants and future richer audit projections is still intentionally thin.
-- Story 2 Task 2.2 now also includes a dedicated `models/source_semantics.py` module so supported source families can share one inward semantic surface without bloating `models/sources.py`.
-- Story 2 Task 2.2 now also has a dedicated semantic-consistency test suite, so changes to `models/source_semantics.py` should be validated directly against both filesystem documents and structured records.
-- The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
-- The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
-- The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
-- The current error/message surface now also covers filesystem source-adapter validation and unsupported document-class failures for the ontology-aware docs adapter.
-- The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
-- The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
-- The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
-- Story 2 Task 2.1 is now establishing explicit source-family provenance; canonical source semantics should stay shared even as document and structured-record adapters diverge outwardly.
-- The canonical source model now carries source-family identity through provenance, so future mixed-source work should reuse that field rather than inventing adapter-local family markers.
-- Story 2 Task 2.4 now also hardens `ContextSource.from_semantics(...)` as the preferred mixed-source boundary so adapters can cross inward through one resolved semantic profile instead of re-expressing semantic meaning field-by-field.
-- Story 2 Task 2.4 now also uses small source-level helper accessors so services can surface mixed-source trace metadata without reaching back into provenance structure directly.
+- Some names and policies remain intentionally starter-oriented and may evolve as richer domain concepts harden.
+- The current domain layer provides canonical structures plus starter policies, but it is not yet a full long-term domain model for every future provider, storage, or workflow surface.
+- The message/error surface is still pragmatic and relatively thin; richer audit projections or more formal event/read-model patterns remain future work.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

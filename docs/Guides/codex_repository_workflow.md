@@ -101,6 +101,19 @@ values are resolved from the selected repository root:
 python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
 ```
 
+If you want one run to make budget tradeoffs more obvious, the workflow also
+supports a one-shot total-budget override:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root . --total-budget 128
+```
+
+If you want the standard proof artifacts for the same run:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root . --proof-artifacts-dir tmp\mvp_proof\codex_repository_demo
+```
+
 ## Minimal Repository Layout
 
 If you want a concrete reference for the current supported repository shape, see:
@@ -117,7 +130,7 @@ The current supported composition path is:
 1. resolve a repository root and governed docs root
 2. translate governed docs into canonical `ContextSource` artifacts
 3. retrieve candidate sources through the shared lexical retriever
-4. build a packet through `build_starter_context_assembly_service(...)`
+4. build a packet through `assemble_with_starter_context_service(...)`
 5. render:
    - Codex-facing context
    - packet inspection
@@ -126,8 +139,11 @@ The current supported composition path is:
 That composition boundary is intentional:
 
 - repository-root and docs-root selection stay in outer workflow code
-- `build_starter_context_assembly_service(...)` remains the shared engine-side
-  wiring boundary
+- `assemble_with_starter_context_service(...)` remains the current
+  workflow-facing convenience over the same shared starter assembly service
+- one-shot demo/proof overrides such as `--total-budget` and
+  `--proof-artifacts-dir` stay at the runnable workflow boundary rather than
+  widening the core starter API
 - packet and trace inspection remain derived views over canonical artifacts
 
 ## What To Look For

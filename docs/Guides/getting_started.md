@@ -54,6 +54,7 @@ Those environment-backed settings currently cover:
 
 - logging behavior
 - starter assembly defaults
+- starter compression defaults
 - starter memory defaults
 
 The current supported configuration surface is intentionally smaller than the
@@ -64,9 +65,10 @@ full set of starter constants in code:
   through documented env-backed defaults
 - canonical slot identifiers stay internal
 
-The current hardening direction is to promote only starter defaults that change
-visible runtime behavior in a meaningful way for callers. Right now, the
-starter memory-budget split is the clearest candidate in that category.
+The starter memory-budget split is now the supported way to change the default
+documents-vs-memory balance without turning canonical slot identifiers into
+public config. That knob is exposed as
+`CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`.
 
 ## Run The Starter Context Flow
 
