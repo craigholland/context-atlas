@@ -185,6 +185,7 @@
     - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
     - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
     - tests should prove any one-shot infrastructure assembly helper remains a convenience wrapper over the same shared service path
+    - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
