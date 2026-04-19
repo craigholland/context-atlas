@@ -163,3 +163,57 @@ even when the artifacts are reviewed later by a different contributor.
 ## Current Recommendation State
 
 No recommendation yet. This rubric exists to define what later Story 6 tasks must capture before a recommendation is written.
+
+## Workflows Under Test For The Current Proof Pass
+
+The current MVP proof pass will include all three supported MVP workflows.
+
+### Inclusion Criteria
+
+A workflow is included only if it currently has:
+
+- a supported runnable path in `examples/`
+- packet inspection and trace inspection on the shared engine path
+- reproducible local inputs without hidden external services
+- enough product-facing documentation that a later reviewer can understand what
+  the workflow is proving
+
+### Exclusion Criteria
+
+A workflow should be excluded from the current proof pass if it:
+
+- requires a live provider API or external database client that is not already
+  modeled as tracked local input
+- depends on unpublished setup steps or manual hand-editing of packet or trace
+  artifacts
+- bypasses the supported Atlas workflow path to generate proof artifacts more
+  conveniently
+
+### Selected Workflow Set
+
+`1. Codex repository workflow`
+
+- workflow id: `codex_repository`
+- scenario id: `repo_governed_docs_update`
+- query focus: how an engineer should update repository planning and
+  architecture guidance
+- why included: it is the flagship repository-facing workflow and already has a
+  supported runnable path with packet and trace inspection
+
+`2. Documents plus database workflow`
+
+- workflow id: `docs_database_builder`
+- scenario id: `builder_support_troubleshooting`
+- query focus: how a technical builder should configure Atlas and troubleshoot
+  environment or preflight issues in a chatbot pipeline
+- why included: it proves the mixed-source component story over governed docs
+  plus already-fetched record rows
+
+`3. Low-code workflow`
+
+- workflow id: `low_code_chatbot`
+- scenario id: `low_code_validation`
+- query focus: how a low-code builder should validate Atlas packet and trace
+  behavior through the preset-driven path
+- why included: it now has a supported preset-driven wrapper with shared packet
+  and trace inspection plus reproducible tracked inputs
