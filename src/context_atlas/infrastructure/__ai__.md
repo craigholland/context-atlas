@@ -138,6 +138,7 @@
 - Story 3 Task 3.1 now also treats this module as the engine-side stop for the Codex repository workflow: repository-root and docs-root choices stay outside, while shared service wiring stays here.
 - The runnable Codex repository example should keep using this module as the composition boundary rather than inlining policy wiring inside `examples/`.
 - The product-facing Codex repository guide should only document runtime knobs that actually flow through `load_settings_from_env()` and this module's starter assembly wiring.
+- Product-facing sample-repo artifacts and CLI help should still describe this module as the real composition boundary rather than implying that `examples/` owns the policy wiring.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

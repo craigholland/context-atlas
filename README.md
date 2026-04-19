@@ -189,6 +189,8 @@ The product-facing setup guide for that path now lives at [docs/Guides/codex_rep
 
 The runnable reference example for that path now lives at [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md).
 
+The minimal repository-shape reference for that path now lives at [examples/codex_repository_workflow/sample_repo/README.md](/context-atlas/examples/codex_repository_workflow/sample_repo/README.md).
+
 ## Packet And Trace Inspection Contract
 
 Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.

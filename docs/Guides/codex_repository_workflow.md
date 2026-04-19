@@ -101,6 +101,15 @@ values are resolved from the selected repository root:
 python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
 ```
 
+## Minimal Repository Layout
+
+If you want a concrete reference for the current supported repository shape, see:
+
+- [examples/codex_repository_workflow/sample_repo/README.md](../../examples/codex_repository_workflow/sample_repo/README.md)
+
+That artifact describes the smallest governed-doc repository layout this workflow is
+intended to support today.
+
 ## What The Workflow Does
 
 The current supported composition path is:
