@@ -86,6 +86,7 @@
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 - Supported example workflows should share this service path instead of duplicating stage sequencing in multiple scripts once a reference workflow composition helper exists.
 - Product-facing examples should describe this module as the shared engine path and should not present alternate scripts as separate service modes once they are only changing inspection output.
+- Story 5 Task 5.3 now also expects this service to keep caller metadata opaque and normalized, so outer low-code wrappers do not need to hand-pack every metadata value as a string just to stay on the shared engine path.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.

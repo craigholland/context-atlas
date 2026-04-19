@@ -14,11 +14,14 @@ import tomllib
 import unittest
 
 from context_atlas.domain.models import ContextSourceFamily
+from context_atlas.infrastructure.config import ContextAtlasSettings
 from context_atlas.infrastructure.config.presets import (
     DEFAULT_LOW_CODE_WORKFLOW_PRESET,
     build_low_code_workflow_config_artifact,
     build_low_code_workflow_preset_artifact,
 )
+from context_atlas.infrastructure.assembly import assemble_with_starter_sources
+from context_atlas.domain.models import ContextSource, ContextSourceProvenance
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "low_code_workflow" / "run.py"
@@ -242,6 +245,46 @@ class LowCodeWorkflowTests(unittest.TestCase):
             preset_artifact,
             build_low_code_workflow_preset_artifact(DEFAULT_LOW_CODE_WORKFLOW_PRESET),
         )
+
+    def test_settings_can_apply_low_code_overrides_without_example_side_merging(
+        self,
+    ) -> None:
+        settings = ContextAtlasSettings()
+
+        updated = settings.with_low_code_overrides(
+            docs_root="docs/Product",
+            include_records=False,
+        )
+
+        self.assertEqual(updated.low_code.docs_root, "docs/Product")
+        self.assertFalse(updated.low_code.include_records)
+        self.assertTrue(updated.low_code.include_documents)
+
+    def test_shared_source_helper_normalizes_non_string_metadata(self) -> None:
+        source = ContextSource(
+            source_id="source-1",
+            title="Guide",
+            content="Low-code guidance keeps packet and trace inspection visible.",
+            source_class="authoritative",
+            provenance=ContextSourceProvenance(
+                collector="test_records",
+                source_uri="records://test/source-1",
+                source_family="structured_record",
+            ),
+        )
+
+        packet = assemble_with_starter_sources(
+            sources=(source,),
+            query="How should low-code builders inspect Atlas output?",
+            settings=ContextAtlasSettings(),
+            metadata={
+                "workflow": "low_code_chatbot",
+                "record_input_count": 1,
+            },
+        )
+
+        assert packet.trace is not None
+        self.assertEqual(packet.trace.metadata["request_record_input_count"], "1")
 
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

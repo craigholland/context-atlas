@@ -276,6 +276,7 @@
     - tests should prove disabling one source family still preserves the same canonical packet and trace path
     - tests should prove the CLI help and stdout keep the low-code boundary visible rather than hiding source resolution or packet inspection behavior
     - tests should prove tracked low-code config/preset artifacts stay aligned with the supported preset catalog and declared workflow surface
+    - tests should prove low-code override merging stays in validated config surfaces rather than being reimplemented ad hoc in the runnable example
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
