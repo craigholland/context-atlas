@@ -65,6 +65,7 @@
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - mixed-source trace metadata should consume domain-owned source helpers rather than reaching directly into provenance internals throughout the service
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
+    - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
     - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it

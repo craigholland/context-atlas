@@ -96,7 +96,12 @@ class ContextAssemblyService:
         metadata: Mapping[str, str] | None = None,
         now_epoch_seconds: float | None = None,
     ) -> ContextPacket:
-        """Build a canonical packet from candidates, memory, budget, and trace state."""
+        """Build a canonical packet from candidates, memory, budget, and trace state.
+
+        ``metadata`` is preserved as opaque outer-workflow context for packet
+        and trace inspection. The service does not interpret those keys as
+        ranking, budgeting, memory, or compression policy input.
+        """
 
         normalized_query = query.strip()
         if not normalized_query:
@@ -134,8 +139,8 @@ class ContextAssemblyService:
             budget,
             include_memory=bool(selected_memory_input),
         )
-        packet_metadata = dict(metadata or {})
-        request_metadata = dict(packet_metadata)
+        request_metadata = self._copy_request_metadata(metadata)
+        packet_metadata = dict(request_metadata)
 
         self._emit_log_message(
             LogMessage.ASSEMBLY_STARTED,
@@ -717,6 +722,14 @@ class ContextAssemblyService:
                 ),
             )
         return normalized
+
+    @staticmethod
+    def _copy_request_metadata(
+        metadata: Mapping[str, str] | None,
+    ) -> dict[str, str]:
+        """Copy outer-workflow metadata without treating it as service policy."""
+
+        return dict(metadata or {})
 
     def _prefix_metadata(
         self,
