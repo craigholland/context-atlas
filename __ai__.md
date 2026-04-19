@@ -149,6 +149,12 @@
 - The repository workflow now includes a minimal sample-layout reference under `examples/codex_repository_workflow/sample_repo/README.md`; future docs/examples should point back to that artifact instead of inventing competing sample layouts.
 - The product-facing repository workflow now includes a demonstration-oriented trace path through `examples/codex_repository_workflow/show_trace.py`, plus a concise `render_trace_highlights(...)` surface under `context_atlas.rendering`.
 - That demonstration path must remain derived from the same canonical packet and trace artifacts as the main runnable workflow, not a second debug-only model or Codex-specific engine path.
+- Story 3 Task 3.3 is now the active task-level feature branch and should keep the Codex repository workflow thin by removing any drift toward duplicated workflow composition or workflow-specific engine behavior.
+- Task 3.3 should preserve one shared repository-workflow assembly path, keep Codex-facing formatting in rendering/example composition layers, and avoid turning services or infrastructure into Codex-specific orchestration seams.
+- The current Task 3.3 direction is:
+  - PR A should audit the current workflow boundary and tighten any generic rendering/service semantics that are still carrying repository-specific assumptions
+  - PR B should remove duplicated repository-workflow composition so the runnable and demonstration paths share one thin outer workflow path over the same engine
+  - PR C should reinforce the intended architecture in docs and local contracts so future workflow polish does not reintroduce a second workflow engine
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
