@@ -113,6 +113,7 @@
 - Story 2 Task 2.1 is now defining a minimal structured-record input contract; adapter-facing record shapes should stay small and validation-first rather than becoming a database access layer.
 - Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
 - Story 2 Task 2.2 should now remove duplicated source-semantics defaults from adapters where possible by consuming shared domain helpers instead of maintaining parallel normalization rules.
+- Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

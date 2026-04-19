@@ -240,6 +240,7 @@
 - Packet and trace inspection work should continue to expose canonical summary signals here without pushing human-readable formatting into the domain layer.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - Story 2 Task 2.2 now also includes a dedicated `models/source_semantics.py` module so supported source families can share one inward semantic surface without bloating `models/sources.py`.
+- Story 2 Task 2.2 now also has a dedicated semantic-consistency test suite, so changes to `models/source_semantics.py` should be validated directly against both filesystem documents and structured records.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
