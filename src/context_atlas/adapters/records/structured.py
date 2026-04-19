@@ -1,17 +1,16 @@
 """Structured-record adapters for translating already-fetched record payloads.
 
 These adapters intentionally stop at translation. Outer application code owns
-query execution, client lifecycles, and row fetching before Atlas sees any
-record-shaped payloads.
+query execution, client lifecycles, row fetching, and payload-file loading
+before Atlas sees any record-shaped payloads.
 
 When callers need to reshape row field names before translation, that mapping
 should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
-rather than by widening this adapter into a query or client surface. Likewise,
-payload-file loading for runnable examples should remain in outer workflow code
-rather than moving into this adapter package.
+rather than by widening this adapter into a query or client surface.
 
 The technical-builder docs-plus-database workflow should keep using this same
-boundary: Atlas translates already-fetched rows, but does not fetch them.
+boundary: outer code chooses rows, Atlas validates and translates them into
+canonical sources, and the shared engine stays source-family agnostic.
 """
 
 from __future__ import annotations
@@ -82,7 +81,9 @@ class StructuredRecordSourceAdapter:
     - mapping-shaped row payloads that outer integration code already fetched
 
     Richer database, ORM, or vector-store objects should be normalized outside
-    Atlas before they cross this adapter boundary.
+    Atlas before they cross this adapter boundary. Row mappers may help outer
+    code reshape already-fetched payloads, but this adapter should remain the
+    canonical crossing point into `ContextSource` artifacts.
     """
 
     def __init__(

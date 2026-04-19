@@ -1,4 +1,14 @@
-"""Runnable docs-plus-database workflow example built on the shared Atlas engine."""
+"""Runnable docs-plus-database workflow over the shared Atlas engine.
+
+This example is intentionally an outer workflow composition path:
+
+- the workflow chooses governed docs and already-fetched record rows
+- Atlas adapters translate those inputs into canonical sources
+- the shared assembly service builds one packet and one trace
+
+It should demonstrate a mixed-source pipeline without turning Atlas into a
+database access framework.
+"""
 
 from __future__ import annotations
 
@@ -10,7 +20,6 @@ from typing import Any
 from context_atlas.adapters import (
     FilesystemDocumentSourceAdapter,
     InMemorySourceRegistry,
-    LexicalRetrievalMode,
     LexicalRetriever,
     StructuredRecordRowMapper,
     StructuredRecordSourceAdapter,
@@ -85,7 +94,7 @@ def assemble_docs_database_workflow_packet(
     records_file_arg: Path | None,
     query: str,
 ) -> tuple[Path, Path, int, ContextPacket]:
-    """Run the shared docs-plus-database workflow composition once."""
+    """Run one mixed-source workflow composition over the shared engine path."""
 
     docs_root = _resolve_docs_root(docs_root_arg)
     records_file = resolve_records_file(records_file_arg)
@@ -103,7 +112,6 @@ def assemble_docs_database_workflow_packet(
     packet = assemble_with_starter_context_service(
         retriever=LexicalRetriever(
             InMemorySourceRegistry((*document_sources, *record_sources)),
-            mode=LexicalRetrievalMode.KEYWORD,
         ),
         query=query,
         settings=settings,
@@ -176,7 +184,7 @@ def _resolve_docs_root(docs_root_arg: Path | None) -> Path:
 def _build_record_inputs(
     rows: tuple[dict[str, Any], ...],
 ):
-    """Shape already-fetched support rows into validated Atlas record inputs."""
+    """Shape already-fetched rows at the outer workflow boundary."""
 
     mapper = StructuredRecordRowMapper(
         record_id_field="ticket_id",
