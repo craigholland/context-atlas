@@ -152,6 +152,10 @@ Current state:
     traces
   - the current proof pass still lacks a deliberately budget-constrained
     scenario that makes tradeoffs under strong pressure obvious
+  - Story 7 now defines a reproducible constrained repository scenario,
+    `codex_repository / repo_budget_pressure_tradeoffs`, so the next
+    reassessment can review one explicit pressure bundle instead of a generic
+    follow-up note
 - workflow reproducibility:
   - this is now a clear strength because all three workflows can emit the same
     Atlas artifact set and can be bundled into one predictable review layout
@@ -195,9 +199,11 @@ Current state:
 
 - follow-up hardening plan is now tracked in
   [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
-- the first budget-pressure hardening target is the constrained repository
-  scenario `codex_repository / repo_budget_pressure_tradeoffs`
-- add at least one intentionally budget-constrained proof scenario so the MVP
-  assessment includes a stronger tradeoff example
+- the first budget-pressure hardening target, the constrained repository
+  scenario `codex_repository / repo_budget_pressure_tradeoffs`, is now a
+  reproducible supported run plus capture path
+- the next reassessment should review the generated bundle for that scenario to
+  determine whether budget-behavior evidence is now strong enough to remove the
+  budget-pressure caveat from the recommendation record
 - strengthen document-authority proof inputs so authority handling is not shown
   mainly through structured records
