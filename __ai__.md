@@ -142,6 +142,7 @@
 - PR B of that task should refactor any confirmed leaks so services stay source-family-agnostic, canonical source meaning stays domain-owned, and adapters stay outward and translation-focused.
 - The current PR B direction is to keep service trace metadata mixed-source-aware while consuming collector and source-family details through domain-owned source helpers instead of service-level provenance reach-through.
 - PR C of that task should reinforce the intended boundary through docs, examples, and owner-file guidance so future mixed-source work does not reopen the same architectural seams.
+- The final Task 2.4 guidance should leave one clear mixed-source rule in the repo docs: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

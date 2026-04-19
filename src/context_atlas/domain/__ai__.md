@@ -265,6 +265,7 @@
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 - `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
 - `services/`: service orchestration may now include retained memory entries in canonical packets, but service-layer filtering should still consume domain-owned packet and decision semantics rather than redefining them.
+- `services/`: mixed-source service metadata should consume source-family and collector information through canonical source helpers defined here rather than digging back into provenance structure throughout the service layer.
 
 ## Verification Contract
 ```yaml
