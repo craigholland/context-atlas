@@ -35,7 +35,7 @@ PLANNED
 - [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
 - current layer responsibilities across `domain`, `services`, `infrastructure`, and `rendering`
 
-## Proposed Work
+## Proposed Tasks
 
 ### PR - A: Boundary Audit For MVP Surface Changes
 
