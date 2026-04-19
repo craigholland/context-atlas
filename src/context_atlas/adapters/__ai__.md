@@ -136,6 +136,7 @@
 - Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
 - Story 2 Task 2.3 now also introduces a row-mapper pattern so application code can reshape already-fetched rows into validated record inputs without turning Atlas into a database or vector-store framework.
 - Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
+- Story 2 Task 2.4 now also hardens the mixed-source boundary around `ContextSource.from_semantics(...)`, so adapters should preserve source-family mechanics in provenance while relying on the domain for canonical semantic meaning.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
