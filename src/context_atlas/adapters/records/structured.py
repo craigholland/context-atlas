@@ -6,7 +6,9 @@ record-shaped payloads.
 
 When callers need to reshape row field names before translation, that mapping
 should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
-rather than by widening this adapter into a query or client surface.
+rather than by widening this adapter into a query or client surface. Likewise,
+payload-file loading for runnable examples should remain in outer workflow code
+rather than moving into this adapter package.
 
 The technical-builder docs-plus-database workflow should keep using this same
 boundary: Atlas translates already-fetched rows, but does not fetch them.

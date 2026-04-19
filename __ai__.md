@@ -161,6 +161,7 @@
 - The docs-plus-database runnable example should keep that same contract visible in product-facing output: guide docs are just demo governed docs, support-style rows are just demo already-fetched records, and one shared packet/trace path still carries the workflow.
 - The docs-plus-database workflow is now expected to stay test-backed as a real mixed-source path rather than a docs-only example with record-shaped placeholders.
 - The docs-plus-database runnable path should stay evaluable without hidden setup; tracked sample record payloads are acceptable, but they should remain clearly framed as already-fetched outer inputs rather than Atlas-managed data access.
+- Example-level helper modules for the docs-plus-database path may load tracked sample payload files, but repo-facing guidance should keep that file I/O at the outer workflow boundary rather than smuggling it into adapters.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

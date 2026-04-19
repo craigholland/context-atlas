@@ -85,6 +85,10 @@ The narrow adapter surface is:
 - `StructuredRecordRowMapper` for renaming already-fetched row fields
 - `StructuredRecordSourceAdapter` for translation into canonical sources
 
+The example also keeps simple payload-file loading in
+`examples/docs_database_workflow/record_feed.py`. That helper is part of the
+outer workflow boundary, not the Atlas adapter layer.
+
 That keeps Atlas responsible for context governance and packet assembly rather than
 query execution.
 
@@ -132,6 +136,7 @@ That composition boundary is intentional:
 
 - docs-root selection stays in outer workflow code
 - the runnable example uses a tracked JSON payload file as a stand-in for outer application fetching
+- payload-file loading stays in example-level workflow code, not in Atlas adapters
 - row fetching stays in outer workflow code
 - record shaping and translation happen through the supported adapter boundary
 - packet and trace remain the authoritative outputs

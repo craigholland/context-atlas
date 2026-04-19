@@ -16,6 +16,9 @@ from context_atlas.domain.models import ContextSourceFamily
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "docs_database_workflow" / "run.py"
+_RECORD_FEED_SCRIPT = (
+    _REPO_ROOT / "examples" / "docs_database_workflow" / "record_feed.py"
+)
 _MODULE_SPEC = importlib.util.spec_from_file_location(
     "docs_database_workflow_run",
     _WORKFLOW_SCRIPT,
@@ -23,6 +26,13 @@ _MODULE_SPEC = importlib.util.spec_from_file_location(
 assert _MODULE_SPEC is not None and _MODULE_SPEC.loader is not None
 _WORKFLOW_MODULE = importlib.util.module_from_spec(_MODULE_SPEC)
 _MODULE_SPEC.loader.exec_module(_WORKFLOW_MODULE)
+_RECORD_FEED_SPEC = importlib.util.spec_from_file_location(
+    "docs_database_workflow_record_feed",
+    _RECORD_FEED_SCRIPT,
+)
+assert _RECORD_FEED_SPEC is not None and _RECORD_FEED_SPEC.loader is not None
+_RECORD_FEED_MODULE = importlib.util.module_from_spec(_RECORD_FEED_SPEC)
+_RECORD_FEED_SPEC.loader.exec_module(_RECORD_FEED_MODULE)
 
 
 class DocsDatabaseWorkflowTests(unittest.TestCase):
@@ -154,6 +164,15 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
             self.assertIn("selected_source_family_counts:", result.stdout)
             self.assertIn("request_record_origin: already_fetched_rows", result.stdout)
             self.assertIn("Record boundary note:", result.stdout)
+
+    def test_record_feed_module_loads_tracked_sample_payload(self) -> None:
+        records_file = _RECORD_FEED_MODULE.resolve_records_file(None)
+
+        rows = _RECORD_FEED_MODULE.load_record_rows(records_file)
+
+        self.assertEqual(records_file.name, "sample_records.json")
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(rows[0]["ticket_id"], "support-101")
 
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
