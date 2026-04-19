@@ -43,6 +43,23 @@ The smoke example demonstrates the supported MVP path:
 
 This sequence should stay aligned with the root `README.md` golden path. If examples start requiring extra hidden setup or deep internal imports, the example surface should be corrected before more product-facing guidance is added.
 
+## Codex Repository Workflow Shape
+
+The flagship Codex repository workflow currently uses the same shared starter engine, but with a repository-oriented outer composition boundary:
+
+- start from a repository root
+- point Atlas at the repository's governed docs under `<repo_root>/docs`
+- assemble a packet for an engineering question
+- render Codex-facing context plus packet/trace inspection from the canonical outputs
+
+At this stage, the repository workflow should stay explicit about what it is not doing:
+
+- it is not crawling arbitrary source files by default
+- it is not reading git history or issue trackers automatically
+- it is not introducing a Codex-specific engine path separate from the shared assembly service
+
+The dedicated runnable example for that workflow lands in the Story 3 task slices under `examples/codex_repository_workflow/`.
+
 ## Mixed-Source Flow
 
 Run the mixed-source example after an editable install:
