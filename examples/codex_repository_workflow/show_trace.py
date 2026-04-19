@@ -1,4 +1,4 @@
-"""Runnable Codex repository workflow example built on the shared Atlas engine."""
+"""Demonstration script for showing rendered context plus trace-focused output."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from context_atlas.api import (
     render_packet_context,
 )
 from context_atlas.rendering import (
-    render_packet_inspection,
+    render_trace_highlights,
     render_trace_inspection,
 )
 
@@ -28,11 +28,9 @@ DEFAULT_LOG_LEVEL = "WARNING"
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run the flagship Codex repository workflow over governed docs.",
-        epilog=(
-            "See examples/codex_repository_workflow/sample_repo/README.md for "
-            "the minimal supported repository shape. Relative --docs-root "
-            "values are resolved from --repo-root."
+        description=(
+            "Show the Codex repository workflow as rendered context plus "
+            "trace-focused output."
         ),
     )
     parser.add_argument(
@@ -67,14 +65,13 @@ def main() -> None:
         retriever=retriever,
         settings=settings,
     )
-    workflow_metadata = {
-        "workflow": "codex_repository",
-        "repo_root": repo_root.as_posix(),
-        "docs_root": docs_root.as_posix(),
-    }
     packet = assembly_service.assemble(
         query=args.query,
-        metadata=workflow_metadata,
+        metadata={
+            "workflow": "codex_repository",
+            "repo_root": repo_root.as_posix(),
+            "docs_root": docs_root.as_posix(),
+        },
     )
 
     print(f"Repository root: {repo_root}")
@@ -84,8 +81,11 @@ def main() -> None:
     print("=== Codex Context ===")
     print(render_packet_context(packet, include_section_headers=True))
     print()
-    print("=== Packet Inspection ===")
-    print(render_packet_inspection(packet))
+    print("=== Trace Highlights ===")
+    if packet.trace is None:
+        print("Trace Highlights\n- none")
+    else:
+        print(render_trace_highlights(packet.trace))
     print()
     print("=== Trace Inspection ===")
     if packet.trace is None:

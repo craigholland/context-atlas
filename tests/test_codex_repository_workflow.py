@@ -26,6 +26,9 @@ from context_atlas.infrastructure.config import (
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "codex_repository_workflow" / "run.py"
+_SHOW_TRACE_SCRIPT = (
+    _REPO_ROOT / "examples" / "codex_repository_workflow" / "show_trace.py"
+)
 
 
 class CodexRepositoryWorkflowTests(unittest.TestCase):
@@ -191,6 +194,70 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                 "Authoritative/Architecture/Guidance.md",
                 result.stdout,
             )
+
+    def test_help_mentions_sample_repo_reference(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(_WORKFLOW_SCRIPT), "--help"],
+            cwd=_REPO_ROOT,
+            capture_output=True,
+            text=True,
+            env=os.environ.copy(),
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(
+            "examples/codex_repository_workflow/sample_repo/README.md",
+            result.stdout,
+        )
+        self.assertIn(
+            "Relative --docs-root values are resolved from",
+            result.stdout,
+        )
+        self.assertIn(
+            "--repo-root.",
+            result.stdout,
+        )
+
+    def test_show_trace_script_emits_highlights_and_trace_output(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Guidance
+
+                Trace output should stay inspectable when repository workflow
+                demonstrations are used for internal review.
+                """,
+            )
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_SHOW_TRACE_SCRIPT),
+                    "--repo-root",
+                    str(repo_root),
+                    "--query",
+                    "How should trace demonstrations be reviewed?",
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("=== Codex Context ===", result.stdout)
+            self.assertIn("=== Trace Highlights ===", result.stdout)
+            self.assertIn("=== Trace Inspection ===", result.stdout)
+            self.assertIn("- workflow: codex_repository", result.stdout)
 
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

@@ -135,7 +135,7 @@
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
 - Story 2 Task 2.4 is now merged into `development` and leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
-- Story 3 Task 3.1 now establishes the current flagship Codex repository workflow on feature PR #56 and should stop at the task-level review gate until that feature PR is reviewed and merged.
+- Story 3 Task 3.1 is now merged into `development` and establishes the current flagship Codex repository workflow baseline for the rest of Story 3.
 - The first supported repository workflow should stay intentionally narrow:
   - governed repository docs rooted at `<repo_root>/docs` are the current repository input surface
   - the shared assembly service, canonical packet, and trace remain the engine path
@@ -144,6 +144,11 @@
 - Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
 - Relative `--docs-root` values in the runnable repository example should resolve from the selected `--repo-root`, not from the caller's shell working directory.
 - Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
+- Story 3 Task 3.2 is now merged into the feature branch and packages the Codex repository workflow as a real product-facing evaluation path.
+- The Codex repository guide should stay consistent with `.env.example`, `examples/README.md`, and the root README rather than introducing a second description of supported runtime knobs or entrypoints.
+- The repository workflow now includes a minimal sample-layout reference under `examples/codex_repository_workflow/sample_repo/README.md`; future docs/examples should point back to that artifact instead of inventing competing sample layouts.
+- The product-facing repository workflow now includes a demonstration-oriented trace path through `examples/codex_repository_workflow/show_trace.py`, plus a concise `render_trace_highlights(...)` surface under `context_atlas.rendering`.
+- That demonstration path must remain derived from the same canonical packet and trace artifacts as the main runnable workflow, not a second debug-only model or Codex-specific engine path.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

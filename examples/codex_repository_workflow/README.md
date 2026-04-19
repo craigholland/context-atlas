@@ -44,3 +44,18 @@ The output shows:
 - trace inspection
 
 That makes the workflow suitable both for local experimentation and for internal MVP review.
+
+## Demo-Focused Trace View
+
+For a more demonstration-oriented output that keeps rendered context plus trace
+visibility front and center:
+
+```powershell
+python examples/codex_repository_workflow/show_trace.py --repo-root .
+```
+
+That script keeps the same shared engine path, but presents the output as:
+
+- rendered Codex context
+- concise trace highlights
+- full trace inspection
