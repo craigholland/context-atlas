@@ -28,11 +28,12 @@ class LogMessage:
     SETTINGS_LOADED = _NamedLogMessage(
         "SETTINGS_LOADED",
         "Settings loaded: logger_name=%s, log_level=%s, default_total_budget=%d, "
-        "default_retrieval_top_k=%d, default_compression_strategy=%s, "
-        "ranking_minimum_score=%.4f, compression_chars_per_token=%d, "
-        "compression_min_chunk_chars=%d, memory_short_term_count=%d, "
-        "memory_decay_rate=%.4f, memory_dedup_threshold=%.2f, "
-        "memory_min_effective_score=%.4f, memory_query_boost_weight=%.4f",
+        "default_memory_budget_fraction=%.4f, default_retrieval_top_k=%d, "
+        "default_compression_strategy=%s, ranking_minimum_score=%.4f, "
+        "compression_chars_per_token=%d, compression_min_chunk_chars=%d, "
+        "memory_short_term_count=%d, memory_decay_rate=%.4f, "
+        "memory_dedup_threshold=%.2f, memory_min_effective_score=%.4f, "
+        "memory_query_boost_weight=%.4f",
     )
     COMPONENT_INITIALIZED = _NamedLogMessage(
         "COMPONENT_INITIALIZED",

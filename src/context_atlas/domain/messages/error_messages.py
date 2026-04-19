@@ -34,6 +34,9 @@ class ErrorMessage:
 
     # services/assembly.py
     CUSTOM_BUDGET_REQUIRES_DOCUMENTS_SLOT = "custom budgets must define a 'documents' slot or omit slots to use the starter defaults"
+    DEFAULT_MEMORY_BUDGET_FRACTION_MUST_BE_IN_UNIT_INTERVAL = (
+        "default_memory_budget_fraction must be finite and in (0.0, 1.0)"
+    )
     DEFAULT_TOP_K_MUST_BE_AT_LEAST_ONE = "default_top_k must be >= 1"
     DEFAULT_TOTAL_BUDGET_MUST_BE_AT_LEAST_ONE = "default_total_budget must be >= 1"
     FIELD_MUST_NOT_BE_BLANK_WHEN_PROVIDED = "%s must not be blank when provided"

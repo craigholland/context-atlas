@@ -99,6 +99,9 @@ def build_starter_context_assembly_service(
         logger=active_logger,
         default_top_k=active_settings.assembly.default_retrieval_top_k,
         default_total_budget=active_settings.assembly.default_total_budget,
+        default_memory_budget_fraction=(
+            active_settings.assembly.default_memory_budget_fraction
+        ),
     )
 
 

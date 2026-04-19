@@ -436,6 +436,14 @@ The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical 
 
 As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
 
+The current supported-surface decision is intentionally narrow:
+
+- logging, starter assembly defaults, starter memory defaults, and low-code wrapper inputs are supported environment-backed knobs
+- ranking authority tables, ranking signal names, memory-scoring semantics, and canonical slot identifiers remain internal implementation constants
+- the starter memory-budget split is now the supported starter budget-allocation knob through `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`
+
+That keeps [`.env.example`](/context-atlas/.env.example) as a truthful product surface rather than turning every starter constant into a public tuning key.
+
 ## License
 
 MPL-2.0

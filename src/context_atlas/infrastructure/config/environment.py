@@ -38,6 +38,7 @@ class EnvironmentSettings(BaseSettings):
     log_level: str = "INFO"
     log_structured_events: bool = True
     default_total_budget: int = 2048
+    default_memory_budget_fraction: float = 0.25
     default_retrieval_top_k: int = 5
     default_compression_strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
     ranking_minimum_score: float = 0.0
@@ -81,6 +82,13 @@ class EnvironmentSettings(BaseSettings):
     @classmethod
     def _validate_total_budget(cls, value: int) -> int:
         return AssemblySettings(default_total_budget=value).default_total_budget
+
+    @field_validator("default_memory_budget_fraction")
+    @classmethod
+    def _validate_default_memory_budget_fraction(cls, value: float) -> float:
+        return AssemblySettings(
+            default_memory_budget_fraction=value
+        ).default_memory_budget_fraction
 
     @field_validator("default_retrieval_top_k")
     @classmethod
@@ -150,6 +158,7 @@ def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettin
         )
         assembly_settings = AssemblySettings(
             default_total_budget=env_settings.default_total_budget,
+            default_memory_budget_fraction=env_settings.default_memory_budget_fraction,
             default_retrieval_top_k=env_settings.default_retrieval_top_k,
             default_compression_strategy=env_settings.default_compression_strategy,
             ranking_minimum_score=env_settings.ranking_minimum_score,

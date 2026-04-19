@@ -102,6 +102,7 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should prove `.env.example`-backed settings remain parseable and validated
+    - tests should prove the env-backed starter memory-budget split stays aligned across settings loading and starter assembly behavior
     - assertions should verify structured event-name fields rather than ad hoc log text alone
 - `test_lexical_retrieval.py`:
   - responsibility: verifies PR 3 source registration and lexical retrieval behavior
@@ -188,6 +189,7 @@
     - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact

@@ -107,6 +107,27 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertEqual(packet.trace.metadata["retrieved_candidate_count"], "0")
         self.assertIn("budget:documents", {d.source_id for d in packet.trace.decisions})
 
+    def test_factory_passes_memory_budget_fraction_into_default_budget(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=200,
+                        default_memory_budget_fraction=0.4,
+                        default_retrieval_top_k=2,
+                    )
+                }
+            ),
+        )
+
+        packet = service.assemble(query="authoritative packet assembly")
+
+        memory_slot = next(
+            slot for slot in packet.budget.slots if slot.slot_name == "memory"
+        )
+        self.assertEqual(memory_slot.token_limit, 80)
+
     def test_factory_uses_settings_defaults_for_retrieval_limit(self) -> None:
         service = build_starter_context_assembly_service(
             retriever=self.retriever,
@@ -239,6 +260,58 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             "system assembles a packet for a model",
             rendered,
         )
+
+    def test_custom_budget_memory_slot_uses_configured_fraction_when_augmented(
+        self,
+    ) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=200,
+                        default_memory_budget_fraction=0.4,
+                        default_retrieval_top_k=2,
+                    )
+                }
+            ),
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-1",
+                source=ContextSource(
+                    source_id="memory-source-1",
+                    content="Recent architectural memory.",
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=100.0,
+                importance=1.0,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=200,
+                slots=(
+                    ContextBudgetSlot(
+                        slot_name="documents",
+                        token_limit=200,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+            now_epoch_seconds=150.0,
+        )
+
+        memory_slot = next(
+            slot for slot in packet.budget.slots if slot.slot_name == "memory"
+        )
+        self.assertEqual(memory_slot.token_limit, 80)
+        self.assertEqual(packet.budget.metadata["budget_augmented"], "true")
 
     def test_rendering_does_not_mutate_canonical_packet_state(self) -> None:
         service = build_starter_context_assembly_service(
