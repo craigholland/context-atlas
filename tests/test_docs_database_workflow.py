@@ -12,6 +12,8 @@ from tempfile import TemporaryDirectory
 import textwrap
 import unittest
 
+from pydantic import ValidationError
+
 from context_atlas.domain.models import ContextSourceFamily
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -288,6 +290,30 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
             self.assertEqual(packet.metadata["compression_applied"], "true")
             self.assertIn("elastic_slot_reduced", reason_codes)
             self.assertIn("compression_required", reason_codes)
+
+    def test_budget_override_is_validated_before_mixed_source_workflow_runs(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            docs_root = Path(temp_dir)
+            self._write_doc(
+                docs_root / "support-guide.md",
+                """
+                # Support Guide
+
+                Mixed-source proof runs should reject unsupported total budgets
+                before assembling packet or trace artifacts.
+                """,
+            )
+            records_path = self._write_records_file(docs_root / "sample_records.json")
+
+            with self.assertRaises(ValidationError):
+                _WORKFLOW_MODULE.assemble_docs_database_workflow_packet(
+                    docs_root_arg=docs_root,
+                    records_file_arg=records_path,
+                    query="How should unsupported mixed-source proof budgets be handled?",
+                    total_budget=32,
+                )
 
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

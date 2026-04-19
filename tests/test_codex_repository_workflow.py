@@ -12,6 +12,8 @@ from tempfile import TemporaryDirectory
 import textwrap
 import unittest
 
+from pydantic import ValidationError
+
 from context_atlas.adapters import (
     FilesystemDocumentSourceAdapter,
     InMemorySourceRegistry,
@@ -315,6 +317,28 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             self.assertEqual(packet.metadata["compression_applied"], "true")
             self.assertIn("elastic_slot_reduced", reason_codes)
             self.assertIn("compression_required", reason_codes)
+
+    def test_budget_override_is_validated_before_repository_workflow_runs(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs" / "Guides"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Guidance
+
+                Repository proof runs should reject unsupported total budgets
+                before assembling packet or trace artifacts.
+                """,
+            )
+
+            with self.assertRaises(ValidationError):
+                _WORKFLOW_MODULE.assemble_repository_workflow_packet(
+                    repo_root_arg=repo_root,
+                    docs_root_arg=Path("docs/Guides"),
+                    query="How should unsupported proof budgets be handled?",
+                    total_budget=32,
+                )
 
     def test_help_mentions_sample_repo_reference(self) -> None:
         result = subprocess.run(

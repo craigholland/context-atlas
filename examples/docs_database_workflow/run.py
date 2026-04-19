@@ -137,12 +137,8 @@ def assemble_docs_database_workflow_packet(
 
     settings = load_settings_from_env()
     if total_budget is not None:
-        settings = settings.model_copy(
-            update={
-                "assembly": settings.assembly.model_copy(
-                    update={"default_total_budget": total_budget}
-                )
-            }
+        settings = settings.with_assembly_overrides(
+            default_total_budget=total_budget,
         )
     document_sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
     record_sources = StructuredRecordSourceAdapter(

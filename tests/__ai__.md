@@ -258,6 +258,7 @@
     - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
     - tests should prove the runnable repository workflow can emit the standard MVP-proof Atlas artifact filenames when asked
     - tests should prove explicit total-budget overrides remain visible in workflow trace metadata and surface real pressure signals when constrained proof scenarios are run
+    - tests should prove unsupported repository-workflow total-budget overrides fail through the same validated settings path as env-backed assembly configuration
   - `test_docs_database_workflow.py`:
     - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
   - defines:
@@ -271,6 +272,7 @@
     - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
     - tests should prove the runnable mixed-source workflow can emit the standard MVP-proof Atlas artifact filenames when asked
     - tests should prove explicit total-budget overrides remain visible in mixed-source trace metadata and surface real pressure signals when constrained proof scenarios are run
+    - tests should prove unsupported mixed-source total-budget overrides fail through the same validated settings path as env-backed assembly configuration
   - `test_mvp_proof_capture.py`:
     - responsibility: verifies proof capture remains safe to rerun against an existing evidence bundle directory
   - defines:
