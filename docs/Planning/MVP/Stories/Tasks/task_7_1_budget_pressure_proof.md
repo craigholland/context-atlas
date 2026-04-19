@@ -114,6 +114,11 @@ IMPLEMENTED
 - packet and trace artifacts show meaningful budget tradeoffs
 - the readiness assessment can cite concrete budget-pressure evidence
 
+## Implemented Outcome
+
+- The constrained repository scenario `codex_repository / repo_budget_pressure_tradeoffs` is now a reviewed standing-proof artifact.
+- The proof bundle now shows explicit pressure signals through a reduced total budget, visible slot reduction, and compression/transformation trace decisions.
+
 ## Related Artifacts
 
 - [Story 7 - MVP Readiness Hardening](../story_7_mvp_readiness_hardening.md)

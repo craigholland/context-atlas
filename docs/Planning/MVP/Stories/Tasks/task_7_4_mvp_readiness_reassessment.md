@@ -27,7 +27,7 @@ Refresh the MVP evidence bundle and update the readiness recommendation after th
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
@@ -109,6 +109,12 @@ WORKING
 - the readiness recommendation is updated against the hardened evidence
 - any remaining gaps are explicit and bounded
 - Story 7 planning artifacts reflect the actual reassessment outcome
+
+## Implemented Outcome
+
+- The Story 7 evidence bundles were refreshed through the supported capture path without relying on stale bundle contents.
+- The MVP readiness assessment now records `MVP Ready`.
+- Remaining follow-up work is now explicitly framed as non-blocking future improvement rather than unfinished MVP hardening.
 
 ## Related Artifacts
 

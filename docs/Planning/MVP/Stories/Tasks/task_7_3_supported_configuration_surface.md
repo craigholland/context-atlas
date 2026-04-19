@@ -136,6 +136,8 @@ IMPLEMENTED
   `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`.
 - Ranking authority tables, ranking signal names, memory-scoring semantics, and
   canonical slot identifiers remain internal by design.
+- That supported-surface decision is now part of the standing MVP boundary and
+  the Story 7 proof baseline.
 
 ## Related Artifacts
 
