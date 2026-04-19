@@ -401,4 +401,5 @@ def _extract_title(content: str, document_path: Path) -> str:
             return stripped[2:].strip()
     return document_path.stem.replace("-", " ").replace("_", " ").strip()
 
+
 __all__ = ["FilesystemDocumentSourceAdapter"]
