@@ -624,9 +624,15 @@ class ContextAssemblyService:
                     for candidate in selected_candidates
                 )
             ),
+            "selected_source_families": ",".join(
+                self._ordered_unique(
+                    candidate.source.source_family_name
+                    for candidate in selected_candidates
+                )
+            ),
             "selected_source_collectors": ",".join(
                 self._ordered_unique(
-                    candidate.source.provenance.collector or ""
+                    candidate.source.collector_name or ""
                     for candidate in selected_candidates
                 )
             ),
@@ -635,9 +641,14 @@ class ContextAssemblyService:
                     entry.source.source_class.value for entry in selected_memory_entries
                 )
             ),
+            "selected_memory_source_families": ",".join(
+                self._ordered_unique(
+                    entry.source.source_family_name for entry in selected_memory_entries
+                )
+            ),
             "selected_memory_collectors": ",".join(
                 self._ordered_unique(
-                    entry.source.provenance.collector or ""
+                    entry.source.collector_name or ""
                     for entry in selected_memory_entries
                 )
             ),

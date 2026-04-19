@@ -201,6 +201,14 @@ class SourceSemanticsTests(unittest.TestCase):
                 "structured_record_source_adapter",
                 packet.trace.metadata["selected_source_collectors"],
             )
+            self.assertIn(
+                "document",
+                packet.trace.metadata["selected_source_families"],
+            )
+            self.assertIn(
+                "structured_record",
+                packet.trace.metadata["selected_source_families"],
+            )
 
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)

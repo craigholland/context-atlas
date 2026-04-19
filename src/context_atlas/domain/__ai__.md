@@ -117,6 +117,7 @@
     - source identifiers and content must normalize cleanly
     - source artifacts should consume shared semantic enums/helpers rather than redefining canonical defaults locally
     - adapters should cross into canonical source creation through one resolved semantic profile instead of passing source-class, authority, durability, and intended-use pieces independently
+    - source artifacts may expose small helper accessors for services and renderers when those helpers preserve canonical meaning without leaking provenance structure outward
     - candidate scoring metadata must remain machine-usable and deterministic
     - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
 - `models/source_semantics.py`:
@@ -252,6 +253,7 @@
 - Story 2 Task 2.1 is now establishing explicit source-family provenance; canonical source semantics should stay shared even as document and structured-record adapters diverge outwardly.
 - The canonical source model now carries source-family identity through provenance, so future mixed-source work should reuse that field rather than inventing adapter-local family markers.
 - Story 2 Task 2.4 now also hardens `ContextSource.from_semantics(...)` as the preferred mixed-source boundary so adapters can cross inward through one resolved semantic profile instead of re-expressing semantic meaning field-by-field.
+- Story 2 Task 2.4 now also uses small source-level helper accessors so services can surface mixed-source trace metadata without reaching back into provenance structure directly.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

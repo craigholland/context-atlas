@@ -146,6 +146,12 @@ class ContextSource(CanonicalDomainModel):
 
         return self.provenance.source_family
 
+    @property
+    def source_family_name(self) -> str:
+        """Return the canonical source-family name for trace and inspection use."""
+
+        return self.source_family.value
+
 
 class ContextCandidate(CanonicalDomainModel):
     """A candidate source paired with optional scoring metadata."""
