@@ -26,7 +26,7 @@ Design the adapter shape for non-document sources so Atlas remains a governance 
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

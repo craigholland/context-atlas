@@ -52,6 +52,7 @@
   - `LexicalRetriever`: Atlas-native lexical candidate builder
 - `records`:
   - `StructuredRecordInput`: minimal validated record input contract
+  - `StructuredRecordRowMapper`: application-facing mapper for shaping already-fetched rows into validated record inputs
   - `StructuredRecordSourceAdapter`: translates record inputs into canonical sources
 
 ## File Index
@@ -90,6 +91,7 @@
   - responsibility: validates structured-record inputs and translates them into canonical sources
   - defines:
     - `StructuredRecordInput`
+    - `StructuredRecordPayload`
     - `StructuredRecordSourceAdapter`
   - depends_on:
     - `context_atlas.domain.errors`
@@ -97,11 +99,25 @@
     - `context_atlas.domain.models`
   - invariants:
     - record adapters should accept already-fetched payloads rather than becoming a database access layer
+    - record adapters may accept validated `StructuredRecordInput` objects or mapping-shaped record payloads, but richer client, session, cursor, or query objects should stay outside Atlas
     - record provenance should preserve source-family identity and adapter collector name
     - canonical `record_id` should remain authoritative in provenance metadata even when callers supply extra provenance fields
     - invalid `tags` or `intended_uses` container shapes should fail fast through shared domain source-semantics helpers rather than adapter-local coercion
     - record adapters should resolve fallback authority, durability, and intended uses through shared domain semantics rather than adapter-local defaults
     - record translation should emit canonical `ContextSource` artifacts without inventing a second source object hierarchy
+- `records/mappers.py`:
+  - responsibility: shapes already-fetched row mappings into validated structured-record inputs before translation
+  - defines:
+    - `StructuredRecordRowMapper`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+  - invariants:
+    - row mappers should translate already-fetched mapping payloads only; they must not open connections, execute queries, or own client lifecycles
+    - row mappers should stay small and validation-first so application integrations can rename fields without widening Atlas into a connector framework
+    - row mappers should emit `StructuredRecordInput` objects so later translation still converges through one canonical source path
+    - row mappers should construct those record inputs through the validated `StructuredRecordInput` surface rather than keeping a parallel ad hoc row schema alive inside adapters
 
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
@@ -114,6 +130,9 @@
 - Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
 - Story 2 Task 2.2 should now remove duplicated source-semantics defaults from adapters where possible by consuming shared domain helpers instead of maintaining parallel normalization rules.
 - Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
+- Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
+- Story 2 Task 2.3 now also introduces a row-mapper pattern so application code can reshape already-fetched rows into validated record inputs without turning Atlas into a database or vector-store framework.
+- Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
@@ -134,10 +153,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py
+      py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py tests/test_record_adapter_shape.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordSourceAdapter"
+      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter"
 ```

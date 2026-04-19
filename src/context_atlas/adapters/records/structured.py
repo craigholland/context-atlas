@@ -1,4 +1,13 @@
-"""Structured-record adapters for translating record payloads into Atlas sources."""
+"""Structured-record adapters for translating already-fetched record payloads.
+
+These adapters intentionally stop at translation. Outer application code owns
+query execution, client lifecycles, and row fetching before Atlas sees any
+record-shaped payloads.
+
+When callers need to reshape row field names before translation, that mapping
+should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
+rather than by widening this adapter into a query or client surface.
+"""
 
 from __future__ import annotations
 
@@ -57,8 +66,19 @@ class StructuredRecordInput(BaseModel):
         return coerce_source_text_sequence(value)
 
 
+type StructuredRecordPayload = StructuredRecordInput | Mapping[str, object]
+
+
 class StructuredRecordSourceAdapter:
-    """Translate structured record payloads into canonical Atlas sources."""
+    """Translate record-shaped payloads into canonical Atlas sources.
+
+    Accepted inputs are intentionally narrow:
+    - validated ``StructuredRecordInput`` objects
+    - mapping-shaped row payloads that outer integration code already fetched
+
+    Richer database, ORM, or vector-store objects should be normalized outside
+    Atlas before they cross this adapter boundary.
+    """
 
     def __init__(
         self,
@@ -81,7 +101,7 @@ class StructuredRecordSourceAdapter:
 
     def load_sources(
         self,
-        records: Iterable[StructuredRecordInput | Mapping[str, object]],
+        records: Iterable[StructuredRecordPayload],
     ) -> tuple[ContextSource, ...]:
         """Translate a sequence of structured records into canonical sources."""
 
@@ -89,9 +109,9 @@ class StructuredRecordSourceAdapter:
 
     def load_source(
         self,
-        record: StructuredRecordInput | Mapping[str, object],
+        record: StructuredRecordPayload,
     ) -> ContextSource:
-        """Translate one structured record into a canonical source."""
+        """Translate one record-shaped payload into a canonical source."""
 
         record_input = self._validate_record(record)
         semantics = resolve_source_semantics(
@@ -123,7 +143,7 @@ class StructuredRecordSourceAdapter:
 
     def _validate_record(
         self,
-        record: StructuredRecordInput | Mapping[str, object],
+        record: StructuredRecordPayload,
     ) -> StructuredRecordInput:
         if isinstance(record, StructuredRecordInput):
             return record
@@ -139,5 +159,6 @@ class StructuredRecordSourceAdapter:
 
 __all__ = [
     "StructuredRecordInput",
+    "StructuredRecordPayload",
     "StructuredRecordSourceAdapter",
 ]

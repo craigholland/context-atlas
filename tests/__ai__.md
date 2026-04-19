@@ -201,8 +201,20 @@
     - tests should prove record provenance and intended-use metadata survive translation into canonical sources
     - tests should prove record-backed sources pick up fallback authority, durability, and intended uses from shared domain semantics when outer inputs omit them
     - tests should prove canonical `record_id` stays authoritative in provenance metadata even when callers provide overlapping provenance fields
+    - tests should prove Atlas rejects richer non-mapping outer row or handle objects so data-access concerns stay outside the adapter boundary
     - tests should prove mapping-shaped `tags` or `intended_uses` payloads fail fast instead of being silently coerced
     - tests should prove documents and structured records can coexist in one shared registry and packet flow
+- `test_record_adapter_shape.py`:
+  - responsibility: verifies the MVP row-mapper pattern for shaping already-fetched rows into validated record inputs
+  - defines:
+    - `StructuredRecordRowMapperTests`: row-mapper test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove row mappers emit validated `StructuredRecordInput` objects before translation into canonical sources
+    - tests should prove row mappers can batch-shape already-fetched mapping payloads without introducing database or vector-store client ownership
+    - tests should prove missing mapped fields fail through the coded adapter-input surface instead of silent partial normalization
 - `test_source_semantics.py`:
   - responsibility: verifies mixed-source semantic consistency across filesystem documents and structured records
   - defines:
@@ -240,6 +252,8 @@
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
 - The record-adapter test suite should verify that structured-record inputs translate into canonical sources with preserved intended uses, metadata, and structured-record provenance.
+- The record-adapter suite should also guard the explicit adapter boundary: Atlas accepts validated record inputs and mapping-shaped payloads, not richer driver-, query-, or handle-like objects.
+- The row-mapper suite should keep validating the MVP application-facing shaping pattern so Atlas remains a translation layer over already-fetched rows instead of growing toward a connector framework.
 - The record-adapter suite should now also prove that filesystem documents and structured records can coexist in one registry and one packet-assembly flow without splitting the canonical source model.
 - Bootstrap coverage should continue to guard the imports used by the getting-started guide and starter context-flow example so product-facing docs do not drift away from the supported surface.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
@@ -262,5 +276,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_source_adapter, tests.test_source_semantics"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```
