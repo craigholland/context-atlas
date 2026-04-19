@@ -153,6 +153,24 @@ forked engine mode. The preset chooses source-shaping defaults, but packet
 assembly, budgeting, compression, and trace inspection still run through the
 same shared starter engine path used by the other workflows.
 
+Run the current low-code example from the repository root:
+
+```powershell
+python examples/low_code_workflow/run.py
+```
+
+To inspect one source family in isolation, disable one side of the preset-driven
+input surface:
+
+```powershell
+python examples/low_code_workflow/run.py --no-documents
+python examples/low_code_workflow/run.py --no-records
+```
+
+Relative `--docs-root` and `--records-file` overrides are resolved from
+`--repo-root`, so the wrapper stays explicit about its outer workflow boundary
+instead of hiding source resolution inside the engine.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

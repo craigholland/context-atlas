@@ -264,6 +264,17 @@
     - tests should prove the workflow assembles packets containing both document and structured-record source families
     - tests should prove supported record metadata stays visible in trace output as outer-workflow context rather than hidden in example-only print logic
     - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
+- `test_low_code_workflow.py`:
+  - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
+  - defines:
+    - `LowCodeWorkflowTests`: low-code workflow validation test suite
+  - depends_on:
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove the workflow can assemble packets containing both documents and structured records through one preset-driven wrapper
+    - tests should prove disabling one source family still preserves the same canonical packet and trace path
+    - tests should prove the CLI help and stdout keep the low-code boundary visible rather than hiding source resolution or packet inspection behavior
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -295,6 +306,7 @@
 - The docs-plus-database workflow tests should also keep any example-level payload-loader helpers honest so file-backed demo inputs do not drift into the adapter boundary unnoticed.
 - Story 4 Task 4.3 now also expects tests to keep the mapper-plus-adapter crossing honest so mixed-source examples do not rebuild row-to-source translation logic in workflow scripts.
 - Story 5 Task 5.1 now introduces the low-code workflow wrapper; tests should verify that preset-driven source selection still flows through one shared packet and trace path rather than a second engine.
+- The low-code workflow suite should now also keep the one-preset MVP story honest so product-facing docs do not imply a broader no-code platform than the implementation actually supports.
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
@@ -323,5 +335,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```

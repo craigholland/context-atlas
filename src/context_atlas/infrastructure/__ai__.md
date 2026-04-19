@@ -174,6 +174,7 @@
 - Product-facing workflow guides should keep describing this module as the shared assembly boundary after adapter translation, not as a place where mixed-source workflows hide mapper or data-access decisions.
 - Story 5 Task 5.1 is now introducing the low-code workflow shape, so presets and declarative source settings should remain outer-layer conveniences over the same shared engine instead of creating a second orchestration stack.
 - Story 5 Task 5.1 now also includes the first runnable low-code wrapper path; future growth should extend the preset catalog or example/docs surface deliberately rather than accreting ad hoc low-code branches in `assembly.py`.
+- The low-code wrapper should now stay test-backed as a real integration path; future refactors should preserve docs-plus-records behavior and one-source-family evaluation without turning presets into hidden orchestration branches.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

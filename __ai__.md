@@ -169,6 +169,7 @@
 - The low-code workflow shape should stay intentionally small at the repo root: one preset plus a tiny source-selection/configuration surface is acceptable, but broader tuning should continue to live under the existing validated runtime-knob story unless the authoritative docs change.
 - The first low-code wrapper now lives under `examples/low_code_workflow/` and should stay honest about what it is doing: preset-driven source selection plus the shared starter engine, not a second packet path or a hidden data-access layer.
 - Repo-facing docs should describe the low-code workflow as a wrapper over governed docs plus a tracked record payload by default until a broader preset catalog is intentionally added.
+- The low-code workflow should now remain test-backed as a real preset-driven integration path, including records-only or docs-only evaluation of the same shared packet and trace flow.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
