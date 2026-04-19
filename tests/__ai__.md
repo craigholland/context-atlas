@@ -292,6 +292,7 @@
 - The suite should now also validate the Codex repository example against a temporary governed-doc repository so the flagship workflow remains more than a documentation claim.
 - The suite should now also validate the docs-plus-database example against temporary governed docs so the technical-builder mixed-source workflow remains more than a documentation claim.
 - The docs-plus-database workflow tests should now also keep the tracked sample-record payload path honest so product-facing examples remain runnable without widening Atlas into a query layer.
+- The docs-plus-database workflow tests should also keep any example-level payload-loader helpers honest so file-backed demo inputs do not drift into the adapter boundary unnoticed.
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.

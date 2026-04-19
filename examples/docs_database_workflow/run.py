@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 from pathlib import Path
 from typing import Any
@@ -26,6 +25,14 @@ from context_atlas.rendering import (
     render_trace_inspection,
 )
 
+try:
+    from examples.docs_database_workflow.record_feed import (
+        load_record_rows,
+        resolve_records_file,
+    )
+except ModuleNotFoundError:
+    from record_feed import load_record_rows, resolve_records_file
+
 DEFAULT_QUERY = (
     "How should a builder configure Context Atlas and troubleshoot preflight "
     "or environment-loading issues in a chatbot pipeline?"
@@ -33,7 +40,6 @@ DEFAULT_QUERY = (
 DEFAULT_LOG_LEVEL = "WARNING"
 CHATBOT_CONTEXT_HEADER = "Chatbot Context"
 RECORD_BATCH_NAME = "demo_support_rows"
-DEFAULT_RECORDS_FILE = Path(__file__).with_name("sample_records.json")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -82,8 +88,8 @@ def assemble_docs_database_workflow_packet(
     """Run the shared docs-plus-database workflow composition once."""
 
     docs_root = _resolve_docs_root(docs_root_arg)
-    records_file = _resolve_records_file(records_file_arg)
-    record_rows = _load_record_rows(records_file)
+    records_file = resolve_records_file(records_file_arg)
+    record_rows = load_record_rows(records_file)
     record_inputs = _build_record_inputs(record_rows)
 
     if "CONTEXT_ATLAS_LOG_LEVEL" not in os.environ:
@@ -165,21 +171,6 @@ def _resolve_docs_root(docs_root_arg: Path | None) -> Path:
     if docs_root_arg is not None:
         return docs_root_arg.resolve()
     return (Path(__file__).resolve().parents[2] / "docs" / "Guides").resolve()
-
-
-def _resolve_records_file(records_file_arg: Path | None) -> Path:
-    """Resolve the record payload file used by the runnable demo."""
-
-    if records_file_arg is not None:
-        return records_file_arg.resolve()
-    return DEFAULT_RECORDS_FILE.resolve()
-
-
-def _load_record_rows(records_file: Path) -> tuple[dict[str, Any], ...]:
-    """Load already-fetched record rows from a tracked JSON payload file."""
-
-    payload = json.loads(records_file.read_text(encoding="utf-8"))
-    return tuple(payload)
 
 
 def _build_record_inputs(
