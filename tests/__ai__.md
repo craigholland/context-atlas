@@ -83,6 +83,7 @@
   - invariants:
     - tests should verify structured artifacts remain canonical and machine-usable
     - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
+    - tests should verify canonical per-class source semantics stay domain-owned and merge overrides consistently before adapters consume them
 - `test_config_observability.py`:
   - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
@@ -213,6 +214,7 @@
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
 - The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
+- The suite should now also guard the canonical per-class source-semantics defaults so adapters do not drift into maintaining their own semantic rules.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.

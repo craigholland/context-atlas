@@ -25,9 +25,12 @@ from context_atlas.domain.models import (
     ContextSourceDurability,
     ContextSourceFamily,
     ContextSourceProvenance,
+    ContextSourceSemanticsProfile,
     ContextTrace,
     ExclusionReasonCode,
     InclusionReasonCode,
+    get_default_source_semantics,
+    resolve_source_semantics,
 )
 
 
@@ -91,6 +94,39 @@ class DomainModelTests(unittest.TestCase):
         self.assertEqual(
             source.provenance.collector, "structured_record_source_adapter"
         )
+
+    def test_default_source_semantics_are_defined_for_supported_classes(self) -> None:
+        authoritative_defaults = get_default_source_semantics(
+            ContextSourceClass.AUTHORITATIVE
+        )
+        code_defaults = get_default_source_semantics(ContextSourceClass.CODE)
+        memory_defaults = get_default_source_semantics(ContextSourceClass.MEMORY)
+
+        self.assertEqual(
+            authoritative_defaults,
+            ContextSourceSemanticsProfile(
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+                durability=ContextSourceDurability.DURABLE,
+                intended_uses=("implementation", "review", "planning"),
+            ),
+        )
+        self.assertEqual(code_defaults.authority, ContextSourceAuthority.PREFERRED)
+        self.assertEqual(code_defaults.intended_uses, ("implementation", "debugging"))
+        self.assertEqual(memory_defaults.durability, ContextSourceDurability.SESSION)
+        self.assertEqual(memory_defaults.intended_uses, ("continuity", "follow_up"))
+
+    def test_resolve_source_semantics_merges_defaults_and_overrides(self) -> None:
+        resolved = resolve_source_semantics(
+            source_class=ContextSourceClass.REVIEWS,
+            authority=ContextSourceAuthority.PREFERRED,
+            intended_uses=("review", "triage", "triage"),
+        )
+
+        self.assertEqual(resolved.source_class, ContextSourceClass.REVIEWS)
+        self.assertEqual(resolved.authority, ContextSourceAuthority.PREFERRED)
+        self.assertEqual(resolved.durability, ContextSourceDurability.WORKING)
+        self.assertEqual(resolved.intended_uses, ("review", "evidence", "triage"))
 
     def test_context_candidate_rejects_invalid_rank(self) -> None:
         source = ContextSource(source_id="source-1", content="useful content")

@@ -113,9 +113,13 @@
     - `ContextSource`
     - `ContextSourceProvenance`
     - `ContextCandidate`
+    - `ContextSourceSemanticsProfile`
+    - `get_default_source_semantics`
+    - `resolve_source_semantics`
     - source classification/authority/durability enums
   - invariants:
     - source identifiers and content must normalize cleanly
+    - canonical source-class defaults for authority, durability, and intended uses should remain defined inward here rather than duplicated across adapters
     - candidate scoring metadata must remain machine-usable and deterministic
     - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
 - `models/base.py`:
@@ -125,6 +129,7 @@
     - `FrozenStringMap`
   - invariants:
     - helper code here should stay thin and model-focused rather than becoming a general utility bucket
+    - shared text-sequence normalization helpers should remain small and canonical-model-focused rather than growing into general-purpose utilities
     - immutable metadata helpers should preserve canonical state without importing outer-layer libraries
 - `models/budget.py`:
   - responsibility: defines canonical budget and budget-slot artifacts
@@ -223,6 +228,7 @@
 - The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
 - Packet and trace inspection work should continue to expose canonical summary signals here without pushing human-readable formatting into the domain layer.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
+- Story 2 Task 2.2 is now defining canonical per-class defaults for source semantics so supported source families converge inward before adapters start sharing helper modules.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.

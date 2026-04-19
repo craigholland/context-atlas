@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from typing import NoReturn
 
 from pydantic import BaseModel, ConfigDict
@@ -40,3 +41,24 @@ class CanonicalDomainModel(BaseModel):
         """Return an immutable copy of metadata-like string maps."""
 
         return FrozenStringMap(dict(metadata))
+
+    @staticmethod
+    def merge_unique_text_groups(*groups: Iterable[str]) -> tuple[str, ...]:
+        """Merge text groups while preserving first-seen order."""
+
+        ordered: list[str] = []
+        seen: set[str] = set()
+        for group in groups:
+            for item in group:
+                normalized = item.strip()
+                if not normalized or normalized in seen:
+                    continue
+                ordered.append(normalized)
+                seen.add(normalized)
+        return tuple(ordered)
+
+    @classmethod
+    def normalize_text_sequence(cls, value: Iterable[str]) -> tuple[str, ...]:
+        """Normalize a text sequence while preserving first-seen order."""
+
+        return cls.merge_unique_text_groups(value)

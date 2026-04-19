@@ -45,6 +45,18 @@ The current translation surface for those inputs is `context_atlas.adapters.Stru
 
 See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
 
+## Canonical Source Semantics
+
+Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
+
+That means source class owns the default semantic posture for:
+
+- authority
+- durability
+- intended uses
+
+Adapters may still supply explicit overrides when the outer system knows better, but the shared defaults should remain domain-owned so filesystem documents, structured records, and future source families do not invent parallel semantic rules.
+
 ## Supported MVP Entry Surface
 
 The current supported MVP starter path is intentionally explicit.
