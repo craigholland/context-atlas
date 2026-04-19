@@ -87,6 +87,8 @@
     - inferred source authority/durability should flow through shared domain source-semantics helpers rather than adapter-local default tables
     - provenance should preserve file identity and classification source so later traces can explain where a source came from
     - filesystem documents should now identify themselves as the `document` source family in canonical provenance
+    - filesystem adapters should cross into canonical sources through `ContextSource.from_semantics(...)` rather than restating semantic fields piecemeal
+    - adapter-local tags and source metadata should not restate canonical source class or other domain-owned meaning when provenance already carries the source-family-specific mechanics
 - `records/structured.py`:
   - responsibility: validates structured-record inputs and translates them into canonical sources
   - defines:
@@ -105,6 +107,7 @@
     - invalid `tags` or `intended_uses` container shapes should fail fast through shared domain source-semantics helpers rather than adapter-local coercion
     - record adapters should resolve fallback authority, durability, and intended uses through shared domain semantics rather than adapter-local defaults
     - record translation should emit canonical `ContextSource` artifacts without inventing a second source object hierarchy
+    - record translation should now also cross through one resolved semantic profile rather than passing individual semantic fields into canonical sources
 - `records/mappers.py`:
   - responsibility: shapes already-fetched row mappings into validated structured-record inputs before translation
   - defines:
@@ -133,12 +136,14 @@
 - Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
 - Story 2 Task 2.3 now also introduces a row-mapper pattern so application code can reshape already-fetched rows into validated record inputs without turning Atlas into a database or vector-store framework.
 - Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
+- Story 2 Task 2.4 now also hardens the mixed-source boundary around `ContextSource.from_semantics(...)`, so adapters should preserve source-family mechanics in provenance while relying on the domain for canonical semantic meaning.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
 - `domain/`: candidate reranking, deduplication, and decision tracing now harden inward there; adapters should stop at source registration and candidate production.
 - `domain/`: filesystem document adapters may classify source authority and durability, but those classifications should be expressed through canonical `ContextSource` fields rather than local enums or ad hoc tags.
 - `domain/`: adapters may parse source-family-specific hints, but shared sequence coercion and fallback semantics should now come from `models/source_semantics.py` rather than adapter-local helper tables.
+- `domain/`: adapters should carry source-family-specific mechanics in provenance or validated adapter inputs, then cross inward through one resolved semantic profile rather than copying semantic meaning into adapter-local tags or source metadata.
 - `domain/`: source-family provenance may be expressed through canonical provenance fields, but structured-record input contracts should remain adapter-facing rather than becoming a second canonical source model.
 - `domain/`: structured-record adapters may default source semantics when outer integrations do not supply them, but those defaults must still surface through canonical source fields and provenance.
 - `services/`: future services should orchestrate retrieval through inward-safe contracts rather than by embedding lexical scoring logic directly.

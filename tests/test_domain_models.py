@@ -95,6 +95,54 @@ class DomainModelTests(unittest.TestCase):
             source.provenance.collector, "structured_record_source_adapter"
         )
 
+    def test_context_source_from_semantics_keeps_semantics_domain_owned(self) -> None:
+        semantics = resolve_source_semantics(
+            source_class=ContextSourceClass.REVIEWS,
+            intended_uses=("triage",),
+        )
+        source = ContextSource.from_semantics(
+            source_id="review-1",
+            content="Review evidence from a structured record.",
+            semantics=semantics,
+            provenance=ContextSourceProvenance(
+                source_family=ContextSourceFamily.STRUCTURED_RECORD,
+                collector="structured_record_source_adapter",
+            ),
+            metadata={"table": "reviews"},
+        )
+
+        self.assertEqual(source.source_class, ContextSourceClass.REVIEWS)
+        self.assertEqual(source.authority, ContextSourceAuthority.ADVISORY)
+        self.assertEqual(source.durability, ContextSourceDurability.WORKING)
+        self.assertEqual(source.intended_uses, ("review", "evidence", "triage"))
+        self.assertEqual(source.metadata["table"], "reviews")
+
+    def test_context_source_exposes_semantics_and_origin_helpers(self) -> None:
+        source = ContextSource(
+            source_id="record-2",
+            content="Source content",
+            source_class=ContextSourceClass.PLANNING,
+            authority=ContextSourceAuthority.PREFERRED,
+            durability=ContextSourceDurability.WORKING,
+            intended_uses=("planning", "execution"),
+            provenance=ContextSourceProvenance(
+                source_family=ContextSourceFamily.STRUCTURED_RECORD,
+                collector="structured_record_source_adapter",
+            ),
+        )
+
+        self.assertEqual(source.collector_name, "structured_record_source_adapter")
+        self.assertEqual(source.source_family, ContextSourceFamily.STRUCTURED_RECORD)
+        self.assertEqual(
+            source.semantics,
+            ContextSourceSemanticsProfile(
+                source_class=ContextSourceClass.PLANNING,
+                authority=ContextSourceAuthority.PREFERRED,
+                durability=ContextSourceDurability.WORKING,
+                intended_uses=("planning", "execution"),
+            ),
+        )
+
     def test_default_source_semantics_are_defined_for_supported_classes(self) -> None:
         authoritative_defaults = get_default_source_semantics(
             ContextSourceClass.AUTHORITATIVE

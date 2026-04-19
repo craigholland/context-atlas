@@ -137,6 +137,8 @@
 - Story 2 Task 2.4 is now the active task-level feature branch and should keep mixed-source support aligned with Craig Architecture boundaries.
 - That task should keep canonical semantics and source-family-agnostic meaning inward while pushing source-specific parsing, shaping, and provenance mechanics outward into adapters.
 - PR A of that task should audit the current mixed-source path for boundary leaks, especially adapter-local semantics or source-specific mechanics drifting into shared canonical models.
+- That audit is now hardening around one explicit rule: adapters should cross into canonical sources through one resolved semantic profile instead of restating semantic fields piecemeal or echoing source meaning through adapter-local tags and metadata.
+- The latest Task 2.4 slice now uses that rule as the mixed-source boundary baseline, so follow-up PRs should preserve provenance-rich outward adapters without reintroducing semantic duplication in source tags or metadata.
 - PR B of that task should refactor any confirmed leaks so services stay source-family-agnostic, canonical source meaning stays domain-owned, and adapters stay outward and translation-focused.
 - PR C of that task should reinforce the intended boundary through docs, examples, and owner-file guidance so future mixed-source work does not reopen the same architectural seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
