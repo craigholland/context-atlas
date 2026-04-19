@@ -140,6 +140,7 @@
 - That audit is now hardening around one explicit rule: adapters should cross into canonical sources through one resolved semantic profile instead of restating semantic fields piecemeal or echoing source meaning through adapter-local tags and metadata.
 - The latest Task 2.4 slice now uses that rule as the mixed-source boundary baseline, so follow-up PRs should preserve provenance-rich outward adapters without reintroducing semantic duplication in source tags or metadata.
 - PR B of that task should refactor any confirmed leaks so services stay source-family-agnostic, canonical source meaning stays domain-owned, and adapters stay outward and translation-focused.
+- The current PR B direction is to keep service trace metadata mixed-source-aware while consuming collector and source-family details through domain-owned source helpers instead of service-level provenance reach-through.
 - PR C of that task should reinforce the intended boundary through docs, examples, and owner-file guidance so future mixed-source work does not reopen the same architectural seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 

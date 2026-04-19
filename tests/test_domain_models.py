@@ -133,6 +133,7 @@ class DomainModelTests(unittest.TestCase):
 
         self.assertEqual(source.collector_name, "structured_record_source_adapter")
         self.assertEqual(source.source_family, ContextSourceFamily.STRUCTURED_RECORD)
+        self.assertEqual(source.source_family_name, "structured_record")
         self.assertEqual(
             source.semantics,
             ContextSourceSemanticsProfile(

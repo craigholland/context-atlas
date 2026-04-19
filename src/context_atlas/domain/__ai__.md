@@ -117,6 +117,7 @@
     - source identifiers and content must normalize cleanly
     - source artifacts should consume shared semantic enums/helpers rather than redefining canonical defaults locally
     - adapters should cross into canonical source creation through one resolved semantic profile instead of passing source-class, authority, durability, and intended-use pieces independently
+    - source artifacts may expose small helper accessors for services and renderers when those helpers preserve canonical meaning without leaking provenance structure outward
     - candidate scoring metadata must remain machine-usable and deterministic
     - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
 - `models/source_semantics.py`:
