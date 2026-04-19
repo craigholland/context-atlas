@@ -14,17 +14,21 @@ from .reason_codes import (
     ExclusionReasonCode,
     InclusionReasonCode,
 )
-from .sources import (
-    ContextCandidate,
-    ContextSource,
+from .source_semantics import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
     ContextSourceFamily,
-    ContextSourceProvenance,
     ContextSourceSemanticsProfile,
+    coerce_source_text_sequence,
     get_default_source_semantics,
+    merge_source_text_groups,
     resolve_source_semantics,
+)
+from .sources import (
+    ContextCandidate,
+    ContextSource,
+    ContextSourceProvenance,
 )
 from .transformations import CompressionResult, CompressionStrategy
 
@@ -51,6 +55,8 @@ __all__ = [
     "CompressionStrategy",
     "ExclusionReasonCode",
     "InclusionReasonCode",
+    "coerce_source_text_sequence",
     "get_default_source_semantics",
+    "merge_source_text_groups",
     "resolve_source_semantics",
 ]

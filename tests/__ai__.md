@@ -185,6 +185,7 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should prove documentation ontology classes map into canonical source authority and durability fields
+    - tests should prove filesystem documents now consume shared domain source-semantics helpers rather than adapter-local default tables
     - tests should prove classified source provenance remains visible enough to influence downstream packet traces
 - `test_record_source_adapter.py`:
   - responsibility: verifies structured-record input validation and record-to-source translation
@@ -196,6 +197,7 @@
   - invariants:
     - tests should prove record adapters emit canonical `ContextSource` artifacts with the structured-record source family
     - tests should prove record provenance and intended-use metadata survive translation into canonical sources
+    - tests should prove record-backed sources pick up fallback authority, durability, and intended uses from shared domain semantics when outer inputs omit them
     - tests should prove canonical `record_id` stays authoritative in provenance metadata even when callers provide overlapping provenance fields
     - tests should prove mapping-shaped `tags` or `intended_uses` payloads fail fast instead of being silently coerced
     - tests should prove documents and structured records can coexist in one shared registry and packet flow
@@ -215,6 +217,7 @@
 - The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - The suite should now also guard the canonical per-class source-semantics defaults so adapters do not drift into maintaining their own semantic rules.
+- The adapter-facing suites should now also guard that shared domain source-semantics helpers are being consumed by both filesystem documents and structured records rather than replaced with parallel adapter-local defaults.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.

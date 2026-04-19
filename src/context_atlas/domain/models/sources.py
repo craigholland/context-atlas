@@ -2,155 +2,20 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
 import math
-from enum import StrEnum
 
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
 from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
-
-
-class ContextSourceClass(StrEnum):
-    """High-level source classes available to Context Atlas."""
-
-    AUTHORITATIVE = "authoritative"
-    PLANNING = "planning"
-    REVIEWS = "reviews"
-    EXPLORATORY = "exploratory"
-    RELEASES = "releases"
-    CODE = "code"
-    MEMORY = "memory"
-    OTHER = "other"
-
-
-class ContextSourceAuthority(StrEnum):
-    """Trust/precedence posture of a source."""
-
-    BINDING = "binding"
-    PREFERRED = "preferred"
-    ADVISORY = "advisory"
-    SPECULATIVE = "speculative"
-    HISTORICAL = "historical"
-
-
-class ContextSourceDurability(StrEnum):
-    """Expected stability of a source over time."""
-
-    EPHEMERAL = "ephemeral"
-    SESSION = "session"
-    WORKING = "working"
-    DURABLE = "durable"
-    ARCHIVAL = "archival"
-
-
-class ContextSourceFamily(StrEnum):
-    """High-level ingestion family for a canonical source."""
-
-    DOCUMENT = "document"
-    STRUCTURED_RECORD = "structured_record"
-    MEMORY = "memory"
-    CODE = "code"
-    OTHER = "other"
-
-
-class ContextSourceSemanticsProfile(CanonicalDomainModel):
-    """Canonical semantic defaults for a source class."""
-
-    source_class: ContextSourceClass
-    authority: ContextSourceAuthority
-    durability: ContextSourceDurability
-    intended_uses: tuple[str, ...] = ()
-
-    def model_post_init(self, __context: object) -> None:
-        object.__setattr__(
-            self,
-            "intended_uses",
-            self.normalize_text_sequence(self.intended_uses),
-        )
-
-
-_DEFAULT_SOURCE_SEMANTICS_BY_CLASS = {
-    ContextSourceClass.AUTHORITATIVE: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.AUTHORITATIVE,
-        authority=ContextSourceAuthority.BINDING,
-        durability=ContextSourceDurability.DURABLE,
-        intended_uses=("implementation", "review", "planning"),
-    ),
-    ContextSourceClass.PLANNING: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.PLANNING,
-        authority=ContextSourceAuthority.PREFERRED,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("planning", "execution"),
-    ),
-    ContextSourceClass.REVIEWS: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.REVIEWS,
-        authority=ContextSourceAuthority.ADVISORY,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("review", "evidence"),
-    ),
-    ContextSourceClass.EXPLORATORY: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.EXPLORATORY,
-        authority=ContextSourceAuthority.SPECULATIVE,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("hypothesis_generation", "exploration"),
-    ),
-    ContextSourceClass.RELEASES: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.RELEASES,
-        authority=ContextSourceAuthority.HISTORICAL,
-        durability=ContextSourceDurability.ARCHIVAL,
-        intended_uses=("history", "operations"),
-    ),
-    ContextSourceClass.CODE: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.CODE,
-        authority=ContextSourceAuthority.PREFERRED,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("implementation", "debugging"),
-    ),
-    ContextSourceClass.MEMORY: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.MEMORY,
-        authority=ContextSourceAuthority.ADVISORY,
-        durability=ContextSourceDurability.SESSION,
-        intended_uses=("continuity", "follow_up"),
-    ),
-    ContextSourceClass.OTHER: ContextSourceSemanticsProfile(
-        source_class=ContextSourceClass.OTHER,
-        authority=ContextSourceAuthority.ADVISORY,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=(),
-    ),
-}
-
-
-def get_default_source_semantics(
-    source_class: ContextSourceClass,
-) -> ContextSourceSemanticsProfile:
-    """Return the canonical default semantics for a source class."""
-
-    return _DEFAULT_SOURCE_SEMANTICS_BY_CLASS[source_class]
-
-
-def resolve_source_semantics(
-    *,
-    source_class: ContextSourceClass,
-    authority: ContextSourceAuthority | None = None,
-    durability: ContextSourceDurability | None = None,
-    intended_uses: Iterable[str] = (),
-) -> ContextSourceSemanticsProfile:
-    """Resolve source semantics from canonical class defaults plus overrides."""
-
-    defaults = get_default_source_semantics(source_class)
-    return ContextSourceSemanticsProfile(
-        source_class=source_class,
-        authority=authority or defaults.authority,
-        durability=durability or defaults.durability,
-        intended_uses=CanonicalDomainModel.merge_unique_text_groups(
-            defaults.intended_uses,
-            intended_uses,
-        ),
-    )
+from .source_semantics import (
+    ContextSourceAuthority,
+    ContextSourceClass,
+    ContextSourceDurability,
+    ContextSourceFamily,
+    merge_source_text_groups,
+)
 
 
 class ContextSourceProvenance(CanonicalDomainModel):
@@ -215,12 +80,12 @@ class ContextSource(CanonicalDomainModel):
         object.__setattr__(
             self,
             "tags",
-            self.normalize_text_sequence(self.tags),
+            merge_source_text_groups(self.tags),
         )
         object.__setattr__(
             self,
             "intended_uses",
-            self.normalize_text_sequence(self.intended_uses),
+            merge_source_text_groups(self.intended_uses),
         )
         object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
@@ -262,7 +127,4 @@ __all__ = [
     "ContextSourceDurability",
     "ContextSourceFamily",
     "ContextSourceProvenance",
-    "ContextSourceSemanticsProfile",
-    "get_default_source_semantics",
-    "resolve_source_semantics",
 ]
