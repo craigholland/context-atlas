@@ -97,19 +97,9 @@
   - responsibility: declares current `context_atlas` layer boundary rules for the import checker
 
 ## Known Gaps / Future-State Notes
-- The current scripts focus on structural and architectural enforcement for the bootstrap repo; richer repo automation may arrive later.
-- Some scripts still assume git-based diffing rather than a more abstract change detector.
-- Local preflight parity with CI is intentional but still heuristic-driven rather than perfectly identical in every environment.
-- If the package grows multiple governed subsystems, this folder may eventually need nested owner files of its own.
-- The nested `scripts/mvp_proof/` folder now owns the evidence-package capture shape for Story 6; future proof scripts should stay there rather than bloating the root script directory.
-- Proof-capture scripts should now carry the standard review order inside the generated artifact so later assessment work can stay reproducible without private reviewer instructions.
-- Proof-capture scripts should also prefer standard workflow artifact-directory inputs when the selected MVP workflows already emit a shared Atlas artifact filename set, rather than forcing every caller to repeat three explicit Atlas file paths.
-- When proof work is being packaged for review, script surfaces should also prefer one bundle-root output that yields a predictable per-workflow/per-scenario directory layout over ad hoc output filenames.
-- Proof-capture surfaces should also verify that the packet and trace they package still reflect one canonical supported workflow run, rather than accepting hand-authored proof-only JSON at face value.
-- Proof-capture scripts should stay downstream of the runnable workflow examples; shared proof-artifact emission belongs on one infrastructure helper rather than in per-example script-local writers.
-- Proof-capture scripts should continue to assume that supported workflow examples emit their standard artifacts through that shared infrastructure helper; if proof packaging starts needing example-specific writer knowledge again, the proof path is drifting.
-- Proof-capture scripts may enforce scenario-specific review expectations such as visible budget-pressure signals, but those checks should remain workflow-agnostic and artifact-centered rather than importing runtime code from `src/context_atlas`.
-- Proof-capture scripts may also enforce scenario-specific authority expectations such as authoritative documents appearing ahead of lower-authority document classes, but those checks should remain artifact-centered rather than importing runtime code from `src/context_atlas`.
+- This folder still focuses on preflight, contract enforcement, and proof packaging rather than broader release, publication, or contributor-environment automation.
+- Some enforcement logic still assumes local git/diff semantics and repository-specific layout rather than a more abstract change-detection model.
+- If script scope continues to widen, additional nested owner files or directory splits may be needed so one contract does not cover too many unrelated automation concerns.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.

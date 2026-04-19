@@ -12,9 +12,18 @@ It exists to answer questions such as:
 
 ## Status
 
-This repository has completed its initial architecture and governance bootstrap. Context Atlas now has a first end-to-end starter implementation for canonical source modeling, retrieval, ranking, budgeting, compression, memory retention, packet assembly, and ontology-aware filesystem document ingestion.
+This repository has completed its initial architecture and governance bootstrap
+and now carries an explicit `MVP Ready` recommendation in
+[docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
+Context Atlas currently includes a runnable, evidence-backed MVP for canonical
+source modeling, retrieval, ranking, budgeting, compression, memory retention,
+packet assembly, ontology-aware filesystem document ingestion, structured-record
+ingestion, and three supported workflow surfaces.
 
-The current focus is implementation hardening rather than feature breadth: tightening model surfaces, standardizing validated Pydantic contracts, strengthening error and logging semantics, and continuing to refine the starter policies and adapter boundaries before broader expansion.
+The current focus is post-MVP hardening and expansion: keeping the supported
+product surface truthful, preserving packet-and-trace-centered evidence,
+strengthening configuration and boundary discipline, and widening scenario and
+integration coverage without forking the shared engine path.
 
 ## Principles
 
@@ -119,7 +128,7 @@ The runnable path now also includes a tracked sample record payload so a technic
 
 ## Low-Code Workflow Shape
 
-The incoming low-code workflow is intentionally small. Its configuration surface
+The current low-code workflow is intentionally small. Its configuration surface
 should let a less-technical builder declare:
 
 - one preset name

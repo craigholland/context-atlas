@@ -48,6 +48,8 @@
 ## Known Gaps / Future-State Notes
 - <intentional simplification in current implementation>
 - <future direction that is relevant to reading current code>
+- <areas where current scope is still narrower than the long-term architecture>
+- <do not use this section as a changelog of completed work>
 
 ## Cross-Folder Contracts
 - <folder or module>: <assumption this folder relies on>

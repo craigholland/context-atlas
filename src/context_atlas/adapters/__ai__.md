@@ -125,29 +125,9 @@
     - when examples need one-step row-to-source translation, that crossing should still run through the adapter package rather than by rebuilding a parallel translation seam in workflow scripts
 
 ## Known Gaps / Future-State Notes
-- This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
-- This folder now also contains a structured-record adapter path over already-fetched record payloads; direct database-driver integration should still stay outside Atlas.
-- Story 2 Task 2.1 should now also prove that the shared registry and lexical retrieval path stay source-family agnostic once canonical sources have been constructed.
-- The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
-- Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
-- The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.
-- Story 2 Task 2.1 is now defining a minimal structured-record input contract; adapter-facing record shapes should stay small and validation-first rather than becoming a database access layer.
-- Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
-- Story 2 Task 2.2 should now remove duplicated source-semantics defaults from adapters where possible by consuming shared domain helpers instead of maintaining parallel normalization rules.
-- Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
-- Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
-- Story 2 Task 2.3 now also introduces a row-mapper pattern so application code can reshape already-fetched rows into validated record inputs without turning Atlas into a database or vector-store framework.
-- Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
-- Story 2 Task 2.4 now also hardens the mixed-source boundary around `ContextSource.from_semantics(...)`, so adapters should preserve source-family mechanics in provenance while relying on the domain for canonical semantic meaning.
-- Story 2 Task 2.4 now also reinforces that boundary in the repo-facing docs, so future adapter work should treat adapter-local tags or source metadata that restate canonical meaning as architectural drift, not convenience.
-- Story 4 Task 4.1 is now defining the technical-builder docs-plus-database scenario, so adapter exports and docs should keep the already-fetched-record boundary explicit rather than implying Atlas owns database or vector-store access.
-- Story 4 Task 4.2 now also exposes that scenario through a product-facing guide, so adapter docs and examples should keep explaining record translation as an after-fetch boundary rather than widening toward queries or client management.
-- The runnable docs-plus-database example should keep demonstrating that `StructuredRecordRowMapper` and `StructuredRecordSourceAdapter` operate after row fetching, not as a query layer.
-- Story 4 Task 4.2 now also includes tracked sample record payloads for the runnable workflow, so adapter-facing examples should treat those files as already-fetched outer inputs rather than as a reason to widen adapters into loaders or client wrappers.
-- If examples add helper modules for resolving or loading tracked record payloads, that helper logic should remain outside this package and this owner file should keep the boundary explicit.
-- Story 4 Task 4.3 is now auditing the mixed-source workflow shape against the repository workflow, so adapter-facing guidance should keep the row-mapper and source-translation path clear without letting example scripts invent parallel translation seams.
-- Story 4 Task 4.3 now also expects `StructuredRecordSourceAdapter` to remain the canonical crossing into `ContextSource` artifacts even when outer workflows start from already-fetched row batches and a `StructuredRecordRowMapper`.
-- Product-facing docs for the docs-plus-database path should now name `load_mapped_sources(...)` as the preferred one-step crossing for already-fetched rows so builders are not taught to duplicate mapper-plus-translation glue in application scripts.
+- This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
+- Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
+- If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

@@ -119,17 +119,9 @@
     - operator-facing assembly defaults should stay narrow until real services prove they are worth stabilizing
 
 ## Known Gaps / Future-State Notes
-- `services/` now carries the first real orchestration slice, but richer provider-backed composition and persistence are still intentionally deferred.
-- `adapters/` and `rendering/` now hold real slices, but their public surfaces should stay intentionally narrow while the starter assembly path hardens.
-- The package root still intentionally avoids broad direct exports even though `context_atlas.api` now provides a curated starter namespace.
-- The current curated API is intentionally small; later slices should only widen it when examples and real workflows prove additional exports deserve to stabilize.
-- The current curated API is now exercised by the starter smoke example under `examples/`, which should stay aligned with the supported starter flow.
-- The getting-started guide and starter context-flow example should stay aligned with the curated starter API and stable rendering imports rather than teaching deeper package paths first.
-- The starter context-flow example should remain the primary product-facing example, while smaller smoke scripts should stay secondary and validation-oriented.
-- Story 1 Task 1.4 is now auditing the supported MVP starter path for boundary leaks; starter guidance should preserve the split between curated API imports, starter wiring in `infrastructure/`, and derived output in `rendering/`.
-- Story 1 Task 1.4 now treats that split as implemented guidance rather than an informal preference; product-facing docs should present it as the supported MVP architecture.
-- The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
-- The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
+- The package surface is still intentionally starter-oriented: `context_atlas.api` is curated and small, while the package root remains thin rather than acting as a broad convenience barrel.
+- Richer provider-backed composition, persistence-backed memory, and broader retrieval/integration surfaces are still future work outside the current MVP package shape.
+- The package should continue to keep structured boundary artifacts Pydantic-first; any remaining non-trivial dataclass use outside clearly private helpers should be treated as architectural drift.
 
 ## Cross-Folder Contracts
 - `domain/`: semantic codes, events, message templates, and canonical domain artifacts defined there are stable contracts for higher layers and must not import outward.

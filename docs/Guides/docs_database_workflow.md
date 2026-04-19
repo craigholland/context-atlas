@@ -111,6 +111,9 @@ From the repository root:
 python examples/docs_database_workflow/run.py
 ```
 
+By default, that run uses this repository's `docs/Guides/` tree plus the
+tracked `examples/docs_database_workflow/sample_records.json` payload.
+
 Override the docs root or chatbot question:
 
 ```powershell
@@ -121,6 +124,18 @@ Override the sample record payload with your own already-fetched rows:
 
 ```powershell
 python examples/docs_database_workflow/run.py --records-file C:\repos\my-app\data\support_rows.json
+```
+
+If you want one run to make budget tradeoffs more obvious:
+
+```powershell
+python examples/docs_database_workflow/run.py --total-budget 128
+```
+
+If you want the standard proof artifacts for the same run:
+
+```powershell
+python examples/docs_database_workflow/run.py --proof-artifacts-dir tmp\mvp_proof\docs_database_demo
 ```
 
 ## What The Workflow Does
@@ -145,6 +160,9 @@ That composition boundary is intentional:
 - payload-file loading stays in example-level workflow code, not in Atlas adapters
 - row fetching stays in outer workflow code
 - row-field mapping stays visible in outer workflow code, while the adapter package keeps the canonical row-to-source crossing in one place
+- one-shot demo/proof overrides such as `--total-budget` and
+  `--proof-artifacts-dir` stay at the runnable workflow boundary rather than
+  becoming hidden adapter behavior
 - packet and trace remain the authoritative outputs
 
 ## What To Look For

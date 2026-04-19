@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-17
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-19
 owners: [core]
 tags: [architecture, ai-guidance, template, local-guidance]
 related:
@@ -101,6 +101,11 @@ They should capture the real operational rules for the folder, including:
 - what invariants or runtime constraints matter in practice
 
 If the folder intentionally falls short of the long-term architecture, that should be stated explicitly in `Known Gaps / Future-State Notes`.
+
+That section should remain a short description of current unresolved delta. It
+should not become a changelog of completed slices, merged PRs, or already-fixed
+review findings. Historical progress belongs in planning artifacts, review
+records, or version history rather than in the local contract itself.
 
 ### 6. `File Index` Should Be Selective, Useful, And Maintained
 
@@ -239,6 +244,7 @@ The following is the baseline template Craig-style repositories should start fro
 - <future direction that is relevant to reading current code>
 - <areas where current runtime slice is narrower than the long-term architecture>
 - <folder split signals if this scope is becoming too broad to govern well with one local contract>
+- <do not list already-completed slices or use this section as a changelog>
 
 ## Cross-Folder Contracts
 - services/: domain objects passed across this boundary must be plain domain types or dataclasses, not ORM models

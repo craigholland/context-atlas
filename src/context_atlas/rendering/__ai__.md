@@ -73,18 +73,9 @@
     - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes
-- Rendering is intentionally minimal even now that the assembly service has landed.
-- Richer packet sections or role-specific renderers can arrive later, but they should still derive from canonical packet state.
-- The current renderer is now explicitly exercised as a read-only view over frozen Pydantic packet artifacts.
-- Upcoming packet/trace inspectors should stay text-first and product-facing while continuing to derive from canonical packet/trace state rather than inventing parallel DTOs.
-- Packet inspection now has a first-class renderer; later trace inspection should align with it instead of inventing a different product vocabulary.
-- Trace inspection now also has a first-class renderer; packet and trace views should continue to feel like one inspection surface rather than two unrelated outputs.
-- Demonstration-oriented trace views may be added, but they should remain lightweight derived renderers over canonical traces rather than workflow-specific data structures.
-- Story 1 Task 1.4 is now auditing the starter rendering path; rendering changes should make layer boundaries clearer without reintroducing prompt-first canonical thinking.
-- Story 1 Task 1.4 now also reinforces that product-facing docs should describe `context_atlas.rendering` as the supported home of derived packet/trace views rather than a fallback import path.
-- Story 3 Task 3.3 is now auditing the Codex repository workflow for boundary drift; generic renderers should keep defaults generic while repository-facing examples pass their own labels explicitly.
-- Story 3 Task 3.3 now also treats `show_trace.py` as a derived demonstration over the same packet path as `run.py`; rendering should stay reusable enough that both scripts can share it without workflow-specific branches.
-- Story 4 Task 4.1 now also uses the same generic rendering surface for a chatbot-oriented example; labels such as `Chatbot Context` should remain caller-supplied presentation rather than a new workflow-specific renderer.
+- Rendering is still intentionally text-first and terminal-oriented; richer UI-facing, structured-machine, or web presentation surfaces remain future work.
+- Generic renderers continue to avoid workflow-specific vocabulary; applications and examples remain responsible for labels and presentation framing.
+- If output modes expand materially beyond the current packet/trace text views, this package may need deeper subdivision so the rendering surface does not flatten into one broad folder.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.

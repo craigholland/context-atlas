@@ -117,6 +117,13 @@ Neither file is auto-loaded by Atlas today. They are meant to make the current
 supported low-code shape visible, not to imply a hidden config-loader or a
 broader no-code platform.
 
+The current single supported preset is also the workflow default, so `--preset`
+is optional but supported when you want the invocation to be explicit:
+
+```powershell
+python examples/low_code_workflow/run.py --preset chatbot_docs_records
+```
+
 From the repository root:
 
 ```powershell
@@ -142,6 +149,12 @@ python examples/low_code_workflow/run.py --no-documents
 python examples/low_code_workflow/run.py --no-records
 ```
 
+If you want the standard proof artifacts for the same run:
+
+```powershell
+python examples/low_code_workflow/run.py --proof-artifacts-dir tmp\mvp_proof\low_code_demo
+```
+
 ## What The Workflow Does
 
 The current supported composition path is:
@@ -160,6 +173,7 @@ That boundary is intentional:
 
 - preset selection is an outer workflow convenience
 - docs and record payload choices are still explicit
+- one-shot proof-artifact emission stays at the runnable workflow boundary
 - packet and trace remain canonical outputs
 - Atlas still does not own record fetching or connector lifecycles
 

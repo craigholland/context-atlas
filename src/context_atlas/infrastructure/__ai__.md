@@ -157,38 +157,9 @@
     - proof-artifact writing should stay on one shared outer helper here rather than being duplicated across runnable workflow examples
 
 ## Known Gaps / Future-State Notes
-- Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
-- The current logger setup is intentionally minimal and stdlib-based; richer sinks or structured emitters can be added later without changing domain message names.
-- `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
-- The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
-- The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
-- Story 1 Task 1.4 is now auditing the starter surface; changes here should make the composition boundary clearer, not more magical.
-- Product-facing getting-started guidance should only document runtime knobs that are actually supported by `load_settings_from_env()` and the current starter assembly factory.
-- The supported assembly env surface now includes the starter memory-budget split; future contributors should keep that one visible without promoting ranking authority tables or canonical slot names into runtime config.
-- Product-facing docs for the starter assembly surface should now name `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION` explicitly and should keep explaining that ranking authority tables and canonical slot names remain internal.
-- Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
-- Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
-- The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.
-- The current supported starter entry surface still lives here; a broader curated package-level API may later wrap or re-export it, but should not bypass this composition boundary semantically.
-- The current starter entry helper is now also re-exported through `context_atlas.api`; future API expansion should continue to preserve this module as the real composition boundary rather than moving wiring inward.
-- Story 3 Task 3.1 now also treats this module as the engine-side stop for the Codex repository workflow: repository-root and docs-root choices stay outside, while shared service wiring stays here.
-- The runnable Codex repository example should keep using this module as the composition boundary rather than inlining policy wiring inside `examples/`.
-- The runnable and demonstration-oriented Codex repository scripts should share one outer workflow composition path over this module rather than duplicating build-plus-assemble wiring in multiple example files.
-- The runnable repository script should remain the authoritative outer composition path; demonstration scripts may layer alternate inspection output on top of it but should not fork the composition boundary.
-- The product-facing Codex repository guide should only document runtime knobs that actually flow through `load_settings_from_env()` and this module's starter assembly wiring.
-- Product-facing sample-repo artifacts and CLI help should still describe this module as the real composition boundary rather than implying that `examples/` owns the policy wiring.
-- Story 4 Task 4.1 now also uses this module as the shared composition boundary for the technical-builder docs-plus-database example; outer workflow code may fetch rows and choose docs roots, but policy wiring should still stop here.
-- Story 4 Task 4.3 now also reinforces that boundary: outer workflows may still choose row mappers and already-fetched row batches, but this module must not absorb that row-shaping or translation logic just to make examples shorter.
-- Product-facing workflow guides should keep describing this module as the shared assembly boundary after adapter translation, not as a place where mixed-source workflows hide mapper or data-access decisions.
-- Story 5 Task 5.1 is now introducing the low-code workflow shape, so presets and declarative source settings should remain outer-layer conveniences over the same shared engine instead of creating a second orchestration stack.
-- Story 5 Task 5.1 now also includes the first runnable low-code wrapper path; future growth should extend the preset catalog or example/docs surface deliberately rather than accreting ad hoc low-code branches in `assembly.py`.
-- The low-code wrapper should now stay test-backed as a real integration path; future refactors should preserve docs-plus-records behavior and one-source-family evaluation without turning presets into hidden orchestration branches.
-- Story 5 Task 5.2 now also expects the product-facing low-code guide and example README to stay aligned with the supported preset catalog and low-code env surface rather than implying hidden presets or deeper runtime magic.
-- Story 5 Task 5.2 now also expects tracked low-code config/preset artifacts to stay aligned with the supported preset catalog and declarative setting defaults rather than becoming a second source of truth.
-- Story 5 Task 5.2 now also expects surrounding docs to present those artifacts in a stable order: reference config, reference preset, then runnable wrapper, so the low-code path stays understandable without implying hidden infrastructure behavior.
-- Story 5 Task 5.3 is now auditing that boundary more directly, so low-code preset meaning and repo-relative source selection should stay visible as resolved outer-layer plan state instead of being hidden inside the wrapper path.
-- Story 5 Task 5.3 now also expects low-code override merging and starter source-to-packet assembly to live on shared infrastructure seams rather than being reimplemented inside the runnable example.
-- The low-code example wrapper should now be treated as a thin composition layer over those shared seams; future refactors should make the resolved workflow plan more explicit, not less.
+- Infrastructure still focuses on config, logging, and shared assembly helpers; persistence, audit sinks, memory stores, and broader integration infrastructure remain future work.
+- The supported env-backed configuration surface remains intentionally narrow even though more internal policy constants exist.
+- If workflow wrappers or proof helpers continue to accumulate here, this package may need deeper subdivision so config, assembly, and workflow-facing utilities do not flatten into one broad infrastructure folder.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

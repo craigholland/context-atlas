@@ -308,45 +308,9 @@
     - tests should prove the runnable low-code workflow can emit the standard MVP-proof Atlas artifact filenames when asked
 
 ## Known Gaps / Future-State Notes
-- The suite now covers both bootstrap contracts and the first canonical domain artifacts.
-- The suite now also covers env-backed assembly defaults and the assembly-stage observability surface.
-- The suite now also covers lexical source registration and keyword/TF-IDF retrieval ranking.
-- The suite now also covers inward ranking policy behavior, deduplication, and decision recording.
-- The suite now also covers budget allocation, compression policy behavior, and rendering derived from structured packet state.
-- The suite now also covers canonical memory entries and starter retention policy behavior.
-- The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
-- The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
-- The suite now also covers structured-record validation and record-to-source translation.
-- The suite now also covers mixed-source registry and packet-flow validation across document and structured-record families.
-- The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
-- The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
-- The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
-- The suite should now also guard the canonical per-class source-semantics defaults so adapters do not drift into maintaining their own semantic rules.
-- The adapter-facing suites should now also guard that shared domain source-semantics helpers are being consumed by both filesystem documents and structured records rather than replaced with parallel adapter-local defaults.
-- The suite now also includes a dedicated semantic-consistency test file so Story 2 Task 2.2 can prove canonical semantics directly instead of only as a side effect of other adapter tests.
-- Story 2 Task 2.4 now also guards the mixed-source boundary by asserting that canonical semantics come from domain-owned profiles instead of adapter-local semantic tags or metadata echoes.
-- Story 2 Task 2.4 now also guards the service trace boundary by asserting that mixed-source packet traces expose source families through canonical source helpers rather than provenance reach-through assumptions.
-- The mixed-source trace tests should keep asserting both family visibility and semantic consistency so service-layer explainability does not silently drift while new source families arrive.
-- The suite now also covers the public policy-surface conversion to validated Pydantic models.
-- The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
-- The suite now also covers importability of the curated `context_atlas.api` starter namespace.
-- The example smoke script under `examples/` currently relies on that same curated namespace, so bootstrap coverage should keep guarding against accidental API drift.
-- The suite should now also validate the Codex repository example against a temporary governed-doc repository so the flagship workflow remains more than a documentation claim.
-- The suite should now also validate the docs-plus-database example against temporary governed docs so the technical-builder mixed-source workflow remains more than a documentation claim.
-- The docs-plus-database workflow tests should now also keep the tracked sample-record payload path honest so product-facing examples remain runnable without widening Atlas into a query layer.
-- The docs-plus-database workflow tests should also keep any example-level payload-loader helpers honest so file-backed demo inputs do not drift into the adapter boundary unnoticed.
-- Story 4 Task 4.3 now also expects tests to keep the mapper-plus-adapter crossing honest so mixed-source examples do not rebuild row-to-source translation logic in workflow scripts.
-- Story 5 Task 5.1 now introduces the low-code workflow wrapper; tests should verify that preset-driven source selection still flows through one shared packet and trace path rather than a second engine.
-- The low-code workflow suite should now also keep the one-preset MVP story honest so product-facing docs do not imply a broader no-code platform than the implementation actually supports.
-- The suite now also covers the first product-facing packet inspection renderer.
-- The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
-- Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
-- The record-adapter test suite should verify that structured-record inputs translate into canonical sources with preserved intended uses, metadata, and structured-record provenance.
-- The record-adapter suite should also guard the explicit adapter boundary: Atlas accepts validated record inputs and mapping-shaped payloads, not richer driver-, query-, or handle-like objects.
-- The row-mapper suite should keep validating the MVP application-facing shaping pattern so Atlas remains a translation layer over already-fetched rows instead of growing toward a connector framework.
-- The record-adapter suite should now also prove that filesystem documents and structured records can coexist in one registry and one packet-assembly flow without splitting the canonical source model.
-- Bootstrap coverage should continue to guard the imports used by the getting-started guide and starter context-flow example so product-facing docs do not drift away from the supported surface.
-- As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
+- The suite is strong for the current local MVP workflows, but it is still centered on tracked local examples and sample artifacts rather than broader external-service or production-style integration coverage.
+- The current workflow tests prove supported boundaries and artifact shapes, but they do not yet represent load, concurrency, or long-running operational behavior.
+- As test volume grows further, this folder may need more granular owner files or sub-suites so one local contract does not become too broad to govern well.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.

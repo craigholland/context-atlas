@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-16
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-19
 owners: [core]
 tags: [architecture, ai-guidance, ai-collaboration, repository-guidance]
 related:
@@ -94,6 +94,18 @@ Typical information contained in these files may include:
 - coding conventions specific to that area
 - warnings about common mistakes
 - Known Gaps / Future-State Notes describing where the current implementation intentionally falls short of the long-term architecture or where the subsystem is expected to evolve
+
+`Known Gaps / Future-State Notes` should stay focused on real present-tense
+delta:
+
+- current limitations that matter when reading or changing the folder today
+- intentional simplifications that differ from the long-term architecture
+- future-state expectations that are still unresolved
+
+That section should not become a changelog, release-note stream, or historical
+record of already-completed slices. If an item describes completed work rather
+than a current gap, it should be removed or moved to the appropriate planning
+or review artifact instead of remaining in the local contract.
 
 Some projects may also provide a standard template for `__ai__.md` files so that AI contributors can generate consistent documentation for new folders. A template is not required for the methodology to work, but it can help ensure that architectural guidance remains structured and machine-readable across the repository.
 
@@ -418,6 +430,23 @@ Relevant planning/decomposition anchors:
 
 - `Guidance Depth By Level` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 - `Decomposition Sanity Checks` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+
+#### `Known Gaps` Section Turning Into A Changelog
+
+If a local `__ai__.md` file's `Known Gaps / Future-State Notes` section starts
+reading like an incremental history of completed slices, merges, or review
+findings, the section is no longer serving its architectural purpose.
+
+Possible action:
+
+- remove items that no longer describe a real current gap
+- rewrite the section as a short present-vs-future delta
+- move historical detail into planning docs, review docs, or git history rather
+  than keeping it in the local contract
+
+Relevant template anchors:
+
+- `Known Gaps / Future-State Notes` in [Craig Architecture - __ai__.md Template](./Craig-Architecture-__ai__-Template.md)
 
 #### Task Feature PR Missing A Review Gate
 
