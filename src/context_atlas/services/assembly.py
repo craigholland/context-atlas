@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+import math
 import logging
 from typing import Protocol
 from uuid import uuid4
@@ -39,7 +40,6 @@ from ..domain.policies.compression import estimate_tokens
 
 _DOCUMENT_SLOT_NAME = "documents"
 _MEMORY_SLOT_NAME = "memory"
-_DEFAULT_MEMORY_BUDGET_FRACTION = 0.25
 
 
 class CandidateRetriever(Protocol):
@@ -67,6 +67,7 @@ class ContextAssemblyService:
         logger: logging.Logger | None = None,
         default_top_k: int = 5,
         default_total_budget: int = 2048,
+        default_memory_budget_fraction: float = 0.25,
     ) -> None:
         if default_top_k < 1:
             raise ContextAtlasError(
@@ -78,6 +79,15 @@ class ContextAssemblyService:
                 code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
                 message_args=(ErrorMessage.DEFAULT_TOTAL_BUDGET_MUST_BE_AT_LEAST_ONE,),
             )
+        if not math.isfinite(default_memory_budget_fraction) or not (
+            0.0 < default_memory_budget_fraction < 1.0
+        ):
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
+                message_args=(
+                    ErrorMessage.DEFAULT_MEMORY_BUDGET_FRACTION_MUST_BE_IN_UNIT_INTERVAL,
+                ),
+            )
 
         self._retriever = retriever
         self._ranking_policy = ranking_policy
@@ -87,6 +97,7 @@ class ContextAssemblyService:
         self._logger = logger or logging.getLogger(__name__)
         self._default_top_k = default_top_k
         self._default_total_budget = default_total_budget
+        self._default_memory_budget_fraction = default_memory_budget_fraction
 
     def assemble(
         self,
@@ -390,7 +401,9 @@ class ContextAssemblyService:
                 + (
                     ContextBudgetSlot(
                         slot_name=_MEMORY_SLOT_NAME,
-                        token_limit=max(1, int(budget.total_tokens * 0.25)),
+                        token_limit=self._memory_budget_tokens(
+                            total_tokens=budget.total_tokens
+                        ),
                         mode=ContextBudgetSlotMode.FIXED,
                         priority=0,
                     ),
@@ -402,7 +415,7 @@ class ContextAssemblyService:
     def _build_default_budget(self, *, total_tokens: int) -> ContextBudget:
         """Create the starter service budget when callers do not provide one."""
 
-        memory_tokens = max(1, int(total_tokens * _DEFAULT_MEMORY_BUDGET_FRACTION))
+        memory_tokens = self._memory_budget_tokens(total_tokens=total_tokens)
         return ContextBudget(
             total_tokens=total_tokens,
             slots=(
@@ -420,6 +433,14 @@ class ContextAssemblyService:
                 ),
             ),
             metadata={"budget_profile": "starter_context_assembly_service"},
+        )
+
+    def _memory_budget_tokens(self, *, total_tokens: int) -> int:
+        """Return starter memory-slot tokens from the configured budget split."""
+
+        return min(
+            total_tokens,
+            max(1, int(total_tokens * self._default_memory_budget_fraction)),
         )
 
     def _select_memory(

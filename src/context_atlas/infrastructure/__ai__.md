@@ -86,6 +86,7 @@
     - do not move domain policy toggles here without an explicit architectural decision
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
     - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
+    - the starter memory-budget split is now part of that operator-facing assembly surface and should stay mirrored across validated settings, `.env.example`, and starter assembly wiring
     - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
     - validated override helpers should reuse model validation rather than `model_copy(update=...)` when changing user-facing assembly defaults such as total budget
 - `config/environment.py`:
@@ -163,6 +164,7 @@
 - The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
 - Story 1 Task 1.4 is now auditing the starter surface; changes here should make the composition boundary clearer, not more magical.
 - Product-facing getting-started guidance should only document runtime knobs that are actually supported by `load_settings_from_env()` and the current starter assembly factory.
+- The supported assembly env surface now includes the starter memory-budget split; future contributors should keep that one visible without promoting ranking authority tables or canonical slot names into runtime config.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 - The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.

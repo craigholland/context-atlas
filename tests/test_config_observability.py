@@ -36,6 +36,7 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             CONTEXT_ATLAS_LOG_LEVEL="WARNING",
             CONTEXT_ATLAS_LOG_STRUCTURED_EVENTS="true",
             CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024",
+            CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION="0.4",
             CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="7",
             CONTEXT_ATLAS_DEFAULT_COMPRESSION_STRATEGY="sentence",
             CONTEXT_ATLAS_RANKING_MINIMUM_SCORE="0.15",
@@ -53,6 +54,7 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         self.assertEqual(settings.logging.level, "WARNING")
         self.assertTrue(settings.logging.structured_events)
         self.assertEqual(settings.assembly.default_total_budget, 1024)
+        self.assertAlmostEqual(settings.assembly.default_memory_budget_fraction, 0.4)
         self.assertEqual(settings.assembly.default_retrieval_top_k, 7)
         self.assertEqual(
             settings.assembly.default_compression_strategy,
@@ -71,11 +73,12 @@ class ConfigAndObservabilityTests(unittest.TestCase):
             settings.last_loaded_message,
             "Settings loaded: logger_name=atlas.observability.tests, "
             "log_level=WARNING, default_total_budget=1024, "
-            "default_retrieval_top_k=7, default_compression_strategy=sentence, "
-            "ranking_minimum_score=0.1500, compression_chars_per_token=5, "
-            "compression_min_chunk_chars=18, memory_short_term_count=6, "
-            "memory_decay_rate=0.0025, memory_dedup_threshold=0.81, "
-            "memory_min_effective_score=0.2200, memory_query_boost_weight=0.5500",
+            "default_memory_budget_fraction=0.4000, default_retrieval_top_k=7, "
+            "default_compression_strategy=sentence, ranking_minimum_score=0.1500, "
+            "compression_chars_per_token=5, compression_min_chunk_chars=18, "
+            "memory_short_term_count=6, memory_decay_rate=0.0025, "
+            "memory_dedup_threshold=0.81, memory_min_effective_score=0.2200, "
+            "memory_query_boost_weight=0.5500",
         )
 
     def test_invalid_integer_settings_raise_configuration_error(self) -> None:
@@ -109,6 +112,14 @@ class ConfigAndObservabilityTests(unittest.TestCase):
 
         self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
         self.assertIn("RANKING_MINIMUM_SCORE", str(context.exception))
+
+    def test_invalid_memory_budget_fraction_raises_configuration_error(self) -> None:
+        with _temporary_environment(CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION="1.5"):
+            with self.assertRaises(ConfigurationError) as context:
+                load_settings_from_env()
+
+        self.assertEqual(context.exception.code, ErrorCode.INVALID_CONFIGURATION)
+        self.assertIn("DEFAULT_MEMORY_BUDGET_FRACTION", str(context.exception))
 
     def test_configure_logger_uses_plain_formatter_when_structured_events_disabled(
         self,
@@ -182,6 +193,17 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         self.assertEqual(updated.assembly.default_total_budget, 256)
         self.assertEqual(settings.assembly.default_total_budget, 2048)
 
+    def test_with_assembly_overrides_revalidates_memory_budget_fraction(self) -> None:
+        settings = ContextAtlasSettings()
+
+        updated = settings.with_assembly_overrides(default_memory_budget_fraction=0.4)
+
+        self.assertAlmostEqual(updated.assembly.default_memory_budget_fraction, 0.4)
+        self.assertAlmostEqual(
+            settings.assembly.default_memory_budget_fraction,
+            0.25,
+        )
+
     def test_with_assembly_overrides_rejects_unsupported_total_budget(self) -> None:
         settings = ContextAtlasSettings(
             assembly=AssemblySettings(default_total_budget=128)
@@ -189,6 +211,14 @@ class ConfigAndObservabilityTests(unittest.TestCase):
 
         with self.assertRaises(ValidationError):
             settings.with_assembly_overrides(default_total_budget=32)
+
+    def test_with_assembly_overrides_rejects_unsupported_memory_budget_fraction(
+        self,
+    ) -> None:
+        settings = ContextAtlasSettings()
+
+        with self.assertRaises(ValidationError):
+            settings.with_assembly_overrides(default_memory_budget_fraction=1.0)
 
 
 class _temporary_environment:
