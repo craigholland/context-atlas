@@ -8,6 +8,17 @@ who do not need to learn the deeper package layout yet.
 This module owns starter wiring only. It should return configured orchestration
 services and leave packet rendering or inspection concerns to
 ``context_atlas.rendering``.
+
+For repository-oriented workflows such as the flagship Codex path, the current
+composition boundary is intentionally explicit:
+
+- outer workflow code chooses the governed repository inputs
+- outer workflow code translates those inputs into a `CandidateRetriever`
+- this module wires the shared policies, settings, and logger into the
+  canonical assembly service
+
+That keeps repository-specific source collection outside the engine while still
+making the shared assembly path easy to reuse.
 """
 
 from __future__ import annotations
@@ -35,9 +46,13 @@ def build_starter_context_assembly_service(
 
     This is the preferred composition boundary for the current MVP starter flow.
     Callers should prefer this helper to hand-wiring policies from deeper
-    modules when they only need the supported default assembly path. This helper
-    intentionally stops at configured orchestration; it does not render packet
-    context or inspection views.
+    modules when they only need the supported default assembly path.
+
+    For the current Codex repository workflow, this helper should sit after
+    repository-specific source collection has already been resolved into a
+    retriever over canonical Atlas sources. It intentionally stops at
+    configured orchestration; it does not choose repository inputs, render
+    packet context, or render inspection views.
     """
 
     active_settings = settings or ContextAtlasSettings()
