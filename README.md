@@ -50,6 +50,12 @@ from context_atlas.api import (
 
 The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
 
+That split is part of the supported architecture:
+
+- `context_atlas.api` is the curated starter namespace for ingestion, settings, and assembly wiring
+- `context_atlas.rendering` is the supported home of derived packet and trace views
+- the package root should not become a broad convenience barrel that hides those distinctions
+
 The recommended first run is [examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py). It is designed to be the first user-facing run after an editable install. [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) remains useful as a smaller smoke example, but it is no longer the primary onboarding path.
 
 See [examples/README.md](/context-atlas/examples/README.md) for the current starter-flow index.
@@ -71,6 +77,8 @@ The current starter walkthrough lives in [docs/Guides/getting_started.md](/conte
 ## Packet And Trace Inspection Contract
 
 Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.
+
+An attached transformation artifact does not replace canonical packet content unless the transformation was actually applied. If compression metadata is present but `was_applied` is false, starter rendering should continue to derive candidate content from the canonical selected candidates.
 
 For MVP users, packet inspection should emphasize:
 

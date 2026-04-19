@@ -75,6 +75,7 @@
 - Packet inspection now has a first-class renderer; later trace inspection should align with it instead of inventing a different product vocabulary.
 - Trace inspection now also has a first-class renderer; packet and trace views should continue to feel like one inspection surface rather than two unrelated outputs.
 - Story 1 Task 1.4 is now auditing the starter rendering path; rendering changes should make layer boundaries clearer without reintroducing prompt-first canonical thinking.
+- Story 1 Task 1.4 now also reinforces that product-facing docs should describe `context_atlas.rendering` as the supported home of derived packet/trace views rather than a fallback import path.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
