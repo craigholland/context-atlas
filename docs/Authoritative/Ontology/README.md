@@ -18,6 +18,16 @@ Document classes then add a content template appropriate to their role:
 
 This gives the project one shared metadata vocabulary while still allowing different document classes to carry different body shapes and levels of binding force.
 
+The shared metadata block should not be treated as static boilerplate.
+
+When a document is edited meaningfully, contributors should review whether the front matter still describes the document honestly, especially:
+
+- `summary`
+- `last_reviewed`
+- `tags`
+- `related`
+- and when relevant `status` or `supersedes`
+
 ## Independent Template Versioning
 
 Each template file is its own versioned artifact.

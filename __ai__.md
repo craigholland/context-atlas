@@ -128,6 +128,7 @@
 - The repo now includes a planning stack under `docs/Planning/MVP/` that decomposes MVP work from an Epic document into Story docs and then into task-level PR plans.
 - The planning stack now also includes `docs/Planning/README.md` plus lightweight Definition Of Done sections in the MVP Story docs so contributors can orient without inferring the planning model from individual files.
 - The planning stack now also expects task execution to pause at the feature-PR review boundary rather than rolling directly into the next Task after slice branches merge.
+- When contributors edit governed documents, they should review the front YAML metadata as part of the same change rather than treating it as static boilerplate; `summary`, `last_reviewed`, `tags`, `related`, and when relevant `status` or `supersedes`, should stay aligned with the document's current role.
 - The reusable Craig Architecture canon now also includes `docs/Authoritative/Architecture/README.md` so the documentation root can point contributors to the architecture set as a coherent whole rather than only to individual files.
 - The architecture canon now expects planning work to surface shape risks early, including duplicate file creation, hotspot files, folder flatness, large-file growth, and junk-drawer helper chains.
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.

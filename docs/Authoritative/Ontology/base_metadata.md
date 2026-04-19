@@ -53,5 +53,7 @@ supersedes: []
 - We use `last_reviewed` instead of `last_updated`. Git already records raw file changes, while review date better captures document trust.
 - We use `template_refs` instead of a single `template_version` because metadata and content templates may evolve independently.
 - This file is itself a versioned template artifact. Its own `template_version` appears in the front matter above, not inside the downstream document example block.
+- The metadata block is governed content, not write-once boilerplate. When a document changes meaningfully, contributors should review whether `summary`, `last_reviewed`, `tags`, `related`, and when relevant `status` or `supersedes`, still describe the document honestly.
+- `tags` should support discoverability and grouping of the document as it exists now, not only the concepts it had when first created.
 - Additional fields may be added later once the project formalizes authority, safe-to-act-on semantics, and provenance requirements at the ontology level.
 - The metadata block should stay compact. Fields should earn their place by supporting governance, review, or machine interpretation.
