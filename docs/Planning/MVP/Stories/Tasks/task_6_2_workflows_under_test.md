@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-18
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-19
 owners: [core]
 tags: [mvp, task, pr-plan, proof, workflows, evaluation]
 related:
@@ -28,7 +28,7 @@ Select and prepare the actual workflows that will be evaluated during MVP proof 
 
 ## Task Status
 
-PLANNED
+WORKING
 
 ## Inputs
 

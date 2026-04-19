@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 6 Task 6.1, which is defining the evaluation rubric and evidence-capture shape needed to make a grounded MVP readiness claim.
+- The current active MVP task is Story 6 Task 6.2, which is selecting the real workflows and reproducible scenarios that will be used for MVP proof.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
 - Product-facing repo guidance should stay aligned around one visible golden path from install to configure to assemble to inspect; contributors should not let root docs, examples, and runtime-knob docs drift into separate onboarding stories.
@@ -180,6 +180,7 @@
 - The repo README should now treat the MVP proof effort as rubric-driven work: packet quality, trace legibility, authority handling, budget behavior, and workflow reproducibility are the current proof dimensions, and README guidance should not imply an MVP claim ahead of that evidence.
 - Story 6 Task 6.1 now also expects proof packaging to stay explicit and reproducible: the current capture path should package already-generated workflow artifacts plus a naive baseline into one JSON evidence file rather than generating proof data through hidden demo-only shortcuts.
 - Story 6 Task 6.1 now also expects each proof package to carry a standard review order so later reviewers compare naive and Atlas artifacts consistently instead of improvising a different comparison path for each workflow.
+- Story 6 Task 6.2 is now selecting the actual workflows under test, so the proof story should stay grounded in supported runnable paths with reproducible scenario inputs rather than one-off manual runs or unpublished setup assumptions.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
