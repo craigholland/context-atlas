@@ -229,6 +229,17 @@ The first reproducible packaging path for those artifacts now lives at
 [examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).
 
+The current proof pass is scoped to the three supported MVP workflows:
+
+- `codex_repository` with the `repo_governed_docs_update` scenario
+- `docs_database_builder` with the `builder_support_troubleshooting` scenario
+- `low_code_chatbot` with the `low_code_validation` scenario
+
+Those workflows are included because they already have runnable local paths,
+packet and trace inspection, and reproducible tracked inputs. Workflows that
+need live external services or unpublished setup steps should not be counted in
+the current MVP proof pass.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
