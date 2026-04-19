@@ -281,6 +281,30 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             result.stdout,
         )
 
+    def test_show_trace_module_invocation_uses_package_safe_imports(self) -> None:
+        environment = os.environ.copy()
+        environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "examples.codex_repository_workflow.show_trace",
+                "--help",
+            ],
+            cwd=_REPO_ROOT,
+            capture_output=True,
+            text=True,
+            env=environment,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(
+            "examples/codex_repository_workflow/sample_repo/README.md",
+            result.stdout,
+        )
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

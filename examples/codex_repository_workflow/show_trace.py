@@ -1,14 +1,22 @@
 """Demonstration script for showing rendered context plus trace-focused output."""
 
 from __future__ import annotations
+
 from context_atlas.api import render_packet_context
 from context_atlas.rendering import render_trace_highlights, render_trace_inspection
 
-from run import (
-    REPOSITORY_CONTEXT_HEADER,
-    assemble_repository_workflow_packet,
-    build_parser,
-)
+if __package__:
+    from .run import (
+        REPOSITORY_CONTEXT_HEADER,
+        assemble_repository_workflow_packet,
+        build_parser,
+    )
+else:
+    from run import (
+        REPOSITORY_CONTEXT_HEADER,
+        assemble_repository_workflow_packet,
+        build_parser,
+    )
 
 
 def main() -> None:

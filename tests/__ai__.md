@@ -250,6 +250,7 @@
     - tests should prove demonstration-oriented workflow scripts still render canonical context plus derived trace output instead of inventing a second workflow state model
     - tests should prove repository-facing scripts apply repository-specific labels at the example boundary rather than through canonical rendering defaults
     - tests should prove the runnable and demonstration scripts share one supported parser/composition path instead of drifting into parallel example-specific workflow wiring
+    - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.

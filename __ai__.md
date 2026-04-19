@@ -152,6 +152,7 @@
 - Story 3 Task 3.3 is now merged into the feature branch and leaves one explicit workflow-shape rule for the Codex repository path: `examples/codex_repository_workflow/run.py` is the authoritative outer workflow composition path, while `show_trace.py` is a derived demonstration over that same packet path.
 - Repository-facing section labels such as `Repository Context` should remain caller-supplied at the example boundary; generic rendering defaults and service semantics should stay workflow-agnostic.
 - `assemble_with_starter_context_service(...)` is now the one-shot infrastructure convenience wrapper over the same shared service path; it must remain workflow-agnostic and must not grow Codex-specific branching.
+- The derived demonstration script should remain runnable both as a direct script and as `python -m examples.codex_repository_workflow.show_trace`; shared workflow imports must not assume only one invocation style.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
