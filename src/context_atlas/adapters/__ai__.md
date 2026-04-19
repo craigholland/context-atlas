@@ -103,6 +103,7 @@
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
 - This folder now also contains a structured-record adapter path over already-fetched record payloads; direct database-driver integration should still stay outside Atlas.
+- Story 2 Task 2.1 should now also prove that the shared registry and lexical retrieval path stay source-family agnostic once canonical sources have been constructed.
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
 - Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
 - The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.

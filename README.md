@@ -43,6 +43,8 @@ For structured records, the current minimum adapter contract is `context_atlas.a
 
 The current translation surface for those inputs is `context_atlas.adapters.StructuredRecordSourceAdapter`. It accepts validated record inputs, preserves provenance and intended-use metadata, and emits the same canonical `ContextSource` artifacts the rest of the engine already understands.
 
+See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
+
 ## Supported MVP Entry Surface
 
 The current supported MVP starter path is intentionally explicit.

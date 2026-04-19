@@ -2,15 +2,32 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import textwrap
 import unittest
 
-from context_atlas.adapters import StructuredRecordInput, StructuredRecordSourceAdapter
+from context_atlas.adapters import (
+    FilesystemDocumentSourceAdapter,
+    InMemorySourceRegistry,
+    LexicalRetrievalMode,
+    LexicalRetriever,
+    StructuredRecordInput,
+    StructuredRecordSourceAdapter,
+)
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
     ContextSourceFamily,
+)
+from context_atlas.infrastructure.assembly import build_starter_context_assembly_service
+from context_atlas.infrastructure.config import (
+    AssemblySettings,
+    ContextAtlasSettings,
+    LoggingSettings,
+    MemorySettings,
 )
 
 
@@ -89,6 +106,77 @@ class StructuredRecordSourceAdapterTests(unittest.TestCase):
             context.exception.code,
             ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
         )
+
+    def test_documents_and_records_coexist_in_shared_registry_and_packet_flow(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            docs_root = Path(temp_dir)
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Mixed-Sources.md",
+                """
+                # Mixed Sources
+
+                Authoritative documentation explains packet budgeting and retries.
+                """,
+            )
+
+            document_sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
+            record_sources = StructuredRecordSourceAdapter().load_sources(
+                (
+                    StructuredRecordInput(
+                        record_id="ticket-42",
+                        content="Structured support record covers retries and escalation.",
+                        title="Ticket 42",
+                        source_class=ContextSourceClass.REVIEWS,
+                        authority=ContextSourceAuthority.ADVISORY,
+                        durability=ContextSourceDurability.WORKING,
+                        intended_uses=("triage",),
+                    ),
+                )
+            )
+            service = build_starter_context_assembly_service(
+                retriever=LexicalRetriever(
+                    InMemorySourceRegistry((*document_sources, *record_sources)),
+                    mode=LexicalRetrievalMode.KEYWORD,
+                ),
+                settings=ContextAtlasSettings(
+                    logging=LoggingSettings(
+                        logger_name="context_atlas.tests.mixed_sources"
+                    ),
+                    assembly=AssemblySettings(
+                        default_total_budget=160,
+                        default_retrieval_top_k=4,
+                    ),
+                    memory=MemorySettings(),
+                ),
+            )
+
+            packet = service.assemble(query="retries packet budgeting escalation")
+            source_families = {
+                candidate.source.provenance.source_family
+                for candidate in packet.selected_candidates
+            }
+
+            self.assertEqual(
+                source_families,
+                {
+                    ContextSourceFamily.DOCUMENT,
+                    ContextSourceFamily.STRUCTURED_RECORD,
+                },
+            )
+            self.assertIn(
+                "filesystem_document_source_adapter",
+                packet.trace.metadata["selected_source_collectors"],
+            )
+            self.assertIn(
+                "structured_record_source_adapter",
+                packet.trace.metadata["selected_source_collectors"],
+            )
+
+    def _write_doc(self, path: Path, content: str) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
