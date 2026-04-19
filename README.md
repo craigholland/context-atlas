@@ -185,6 +185,8 @@ That means the current Codex repository story is repo-aware, but still honest ab
 
 Those broader repository inputs can come later, but they should extend the same engine path rather than replacing it with Codex-specific orchestration.
 
+The product-facing setup guide for that path now lives at [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
+
 The runnable reference example for that path now lives at [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md).
 
 ## Packet And Trace Inspection Contract

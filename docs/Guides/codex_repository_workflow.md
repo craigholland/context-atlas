@@ -1,0 +1,138 @@
+# Codex Repository Workflow
+
+This guide walks through the current flagship repository workflow for Context Atlas.
+
+The goal is to show how a Python engineer can point Atlas at a repository's governed
+docs, assemble a packet for a real engineering question, and inspect the resulting
+context, packet, and trace outputs.
+
+## What You Will Do
+
+You will:
+
+1. install Context Atlas into a Python environment
+2. optionally set runtime knobs through environment variables
+3. point the workflow at a repository root and governed docs directory
+4. run the Codex repository example
+5. inspect the rendered context, packet view, and trace view
+
+## Supported Workflow Shape
+
+The current repository workflow is intentionally narrow:
+
+- start from a repository root
+- ingest governed docs rooted at `<repo_root>/docs`
+- assemble a packet for an engineering question or task
+- render a Codex-facing context block
+- inspect packet and trace output
+
+This workflow does not yet:
+
+- crawl arbitrary source files
+- read git history automatically
+- connect to issue trackers or external repository systems
+
+## Prerequisites
+
+- Python `3.14+`
+- a local checkout of this repository
+
+## Install
+
+From the repository root:
+
+```powershell
+py -3.14 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+## Configure Runtime Knobs
+
+The Codex repository workflow uses the same supported runtime knobs as the starter
+flow. Those settings are documented in [`.env.example`](../../.env.example).
+
+`load_settings_from_env()` reads the live process environment. The example file is a
+reference surface for supported settings, not an automatically loaded dotenv file.
+
+If you want a visible local reference file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+If you want to set a few values explicitly in PowerShell:
+
+```powershell
+$env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
+$env:CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET = "1024"
+$env:CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K = "6"
+```
+
+The current knobs cover:
+
+- logging behavior
+- starter assembly defaults
+- starter compression defaults
+- starter memory defaults
+
+## Run The Repository Workflow
+
+The current runnable example is:
+
+- [examples/codex_repository_workflow/run.py](../../examples/codex_repository_workflow/run.py)
+
+From the repository root:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root .
+```
+
+Override the engineering question:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root . --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?"
+```
+
+If you want to point at an explicit docs directory, use `--docs-root`. Relative
+values are resolved from the selected repository root:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
+```
+
+## What The Workflow Does
+
+The current supported composition path is:
+
+1. resolve a repository root and governed docs root
+2. translate governed docs into canonical `ContextSource` artifacts
+3. retrieve candidate sources through the shared lexical retriever
+4. build a packet through `build_starter_context_assembly_service(...)`
+5. render:
+   - Codex-facing context
+   - packet inspection
+   - trace inspection
+
+That composition boundary is intentional:
+
+- repository-root and docs-root selection stay in outer workflow code
+- `build_starter_context_assembly_service(...)` remains the shared engine-side
+  wiring boundary
+- packet and trace inspection remain derived views over canonical artifacts
+
+## What To Look For
+
+On a successful run, you should see:
+
+- `=== Codex Context ===`
+- `=== Packet Inspection ===`
+- `=== Trace Inspection ===`
+
+The trace output should make the workflow itself inspectable too. Metadata such as
+`request_workflow`, `request_repo_root`, and `request_docs_root` should remain
+visible so the example can explain which outer path produced the packet.
+
+If this guide, [README](../../README.md), and [examples/README.md](../../examples/README.md)
+stop telling the same story, the product-facing documentation is drifting and should
+be corrected before new guidance is added.
