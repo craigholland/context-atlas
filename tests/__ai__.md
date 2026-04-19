@@ -64,6 +64,8 @@
   - `SourceSemanticsTests`: verifies canonical semantic consistency across supported source families
 - `test_codex_repository_workflow.py`:
   - `CodexRepositoryWorkflowTests`: verifies the flagship Codex repository example against a temporary governed-doc repo
+- `test_docs_database_workflow.py`:
+  - `DocsDatabaseWorkflowTests`: verifies the technical-builder docs-plus-database example against temporary docs plus built-in record rows
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -251,6 +253,17 @@
     - tests should prove repository-facing scripts apply repository-specific labels at the example boundary rather than through canonical rendering defaults
     - tests should prove the runnable and demonstration scripts share one supported parser/composition path instead of drifting into parallel example-specific workflow wiring
     - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
+- `test_docs_database_workflow.py`:
+  - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
+  - defines:
+    - `DocsDatabaseWorkflowTests`: docs-plus-database workflow validation test suite
+  - depends_on:
+    - `context_atlas.domain`
+    - `context_atlas.services`
+  - invariants:
+    - tests should prove the workflow assembles packets containing both document and structured-record source families
+    - tests should prove supported record metadata stays visible in trace output as outer-workflow context rather than hidden in example-only print logic
+    - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -277,6 +290,7 @@
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.
 - The example smoke script under `examples/` currently relies on that same curated namespace, so bootstrap coverage should keep guarding against accidental API drift.
 - The suite should now also validate the Codex repository example against a temporary governed-doc repository so the flagship workflow remains more than a documentation claim.
+- The suite should now also validate the docs-plus-database example against temporary governed docs so the technical-builder mixed-source workflow remains more than a documentation claim.
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
@@ -305,5 +319,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```
