@@ -136,6 +136,7 @@
 - The current supported starter entry surface still lives here; a broader curated package-level API may later wrap or re-export it, but should not bypass this composition boundary semantically.
 - The current starter entry helper is now also re-exported through `context_atlas.api`; future API expansion should continue to preserve this module as the real composition boundary rather than moving wiring inward.
 - Story 3 Task 3.1 now also treats this module as the engine-side stop for the Codex repository workflow: repository-root and docs-root choices stay outside, while shared service wiring stays here.
+- The runnable Codex repository example should keep using this module as the composition boundary rather than inlining policy wiring inside `examples/`.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

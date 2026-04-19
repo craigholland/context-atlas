@@ -19,6 +19,9 @@ composition boundary is intentionally explicit:
 
 That keeps repository-specific source collection outside the engine while still
 making the shared assembly path easy to reuse.
+
+The runnable example under ``examples/codex_repository_workflow/`` is the
+current reference implementation of that outer workflow composition.
 """
 
 from __future__ import annotations
