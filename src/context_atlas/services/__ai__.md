@@ -79,6 +79,7 @@
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.
+- `domain/`: services should consume mixed-source identity through canonical source helpers and domain trace semantics rather than walking provenance structure directly in multiple places.
 - `adapters/`: retrieval implementations may satisfy `CandidateRetriever`, but service code must stay adapter-agnostic.
 - `infrastructure/`: outer-layer factories may assemble this service with runtime settings and logger setup, but service code must remain inward-safe.
 - `rendering/`: rendering may derive text from packets produced here, but rendering must not become an alternate orchestration path.
