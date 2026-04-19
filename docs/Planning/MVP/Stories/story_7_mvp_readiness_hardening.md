@@ -1,7 +1,7 @@
 ---
 id: context-atlas-mvp-story-7-mvp-readiness-hardening
 title: Story 7 - MVP Readiness Hardening
-summary: Defines how Context Atlas should close the remaining evidence and configuration-surface gaps before making a stronger MVP readiness claim.
+summary: Captures how Context Atlas closed the remaining evidence and configuration-surface gaps and moved the MVP recommendation to a stronger final state.
 doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
@@ -60,6 +60,23 @@ Close the remaining gaps called out in the MVP readiness assessment so Context A
 - rerun the proof story after the new hardening work lands
 - update the readiness recommendation and follow-up list based on the new evidence
 - make the final recommendation explicit about whether Atlas remains conditionally ready or can be treated as fully MVP ready
+
+## Current Outcome
+
+- Story 7 closed the two blocker-level caveats from the original MVP readiness assessment:
+  - explicit budget-pressure proof
+  - explicit document-authority proof
+- The constrained repository scenario `codex_repository / repo_budget_pressure_tradeoffs` is now part of the standing proof set.
+- The authority-rich repository scenario `codex_repository / repo_document_authority_precedence` is now also part of the standing proof set.
+- The supported configuration-surface audit is now complete:
+  - `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION` is the approved env-backed starter-budget knob
+  - ranking authority tables, memory-scoring semantics, and canonical slot identifiers remain internal implementation constants
+- The canonical readiness assessment now records `MVP Ready`.
+
+## Remaining Follow-Up
+
+- widen scenario diversity over time if the product surface expands beyond the current MVP workflows
+- deepen proof coverage for future external-integration surfaces only when those surfaces become supported product paths
 
 ## Sequencing
 

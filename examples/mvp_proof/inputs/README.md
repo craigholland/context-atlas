@@ -60,6 +60,10 @@ rendered-context artifact should still be prepared separately for the same
 scenario before packaging evidence with
 [`scripts/mvp_proof/capture_evidence.py`](/context-atlas/scripts/mvp_proof/capture_evidence.py).
 
+For reassessment runs, prefer packaging with `--bundle-root` and
+`--refresh-bundle` so the workflow/scenario bundle is rebuilt cleanly instead of
+relying on whatever files were already present in the previous review pass.
+
 ## Repository Workflow
 
 Scenario: `repo_governed_docs_update`
@@ -117,7 +121,8 @@ python scripts/mvp_proof/capture_evidence.py `
   --input-summary "repo_root=.; docs_root=docs/Guides" `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository `
-  --output tmp\mvp_proof\evidence\repo_governed_docs_update.json
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```
 
 Use the same pattern for the other selected workflows by changing:
@@ -164,7 +169,8 @@ python scripts/mvp_proof/capture_evidence.py `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
   --expect-budget-pressure `
-  --output tmp\mvp_proof\evidence\repo_budget_pressure_tradeoffs.json
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```
 
 ## Story 7 Authority Hardening Target
@@ -203,5 +209,6 @@ python scripts/mvp_proof/capture_evidence.py `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
   --expect-document-authority-contrast `
-  --output tmp\mvp_proof\evidence\repo_document_authority_precedence.json
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```

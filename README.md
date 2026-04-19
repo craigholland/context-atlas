@@ -237,13 +237,12 @@ The first reproducible packaging path for those artifacts now lives at
 The canonical human-readable review record for that proof work now lives at
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
 
-The current recorded recommendation in that assessment is `Conditionally Ready`:
-Atlas now looks defensible as a reusable pipeline component, but the proof still
-needs stronger document-authority and budget-pressure evidence before the MVP
-claim should be treated as fully closed.
+The current recorded recommendation in that assessment is `MVP Ready`: Atlas
+now looks defensible as a reusable pipeline component with reproducible packet,
+trace, authority, and budget evidence across the current workflow set.
 
-Story 7 now defines two focused hardening scenarios on top of the same flagship
-repository workflow:
+Story 7 hardened the proof story with two focused repository scenarios that are
+now part of the standing evidence set:
 
 - `codex_repository / repo_budget_pressure_tradeoffs`
 - `codex_repository / repo_document_authority_precedence`
@@ -251,7 +250,9 @@ repository workflow:
 The first makes budget pressure and compression tradeoffs explicit under a
 constrained starter budget. The second uses a tracked authority-rich sample repo
 so packet and trace review can show authoritative documents ahead of lower-
-authority planning and review material for the same repository question.
+authority planning and review material for the same repository question. Those
+two bundles close the earlier proof caveats that kept the MVP recommendation at
+`Conditionally Ready`.
 
 The current proof pass is scoped to the three supported MVP workflows:
 

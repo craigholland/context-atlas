@@ -107,6 +107,94 @@ class MvpProofCaptureTests(unittest.TestCase):
                 str((bundle_dir / "atlas_packet.json").resolve()),
             )
 
+    def test_main_refresh_bundle_removes_stale_files_before_regeneration(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_root = Path(temp_dir)
+            bundle_dir = bundle_root / "codex_repository" / "repo_governed_docs_update"
+            bundle_dir.mkdir(parents=True, exist_ok=True)
+
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "stale.txt").write_text(
+                "stale content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(bundle_dir)
+
+            original_argv = sys.argv
+            try:
+                sys.argv = [
+                    "capture_evidence.py",
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_governed_docs_update",
+                    "--query",
+                    "How should repository planning docs be updated?",
+                    "--input-summary",
+                    "docs_root=docs/Guides",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--bundle-root",
+                    str(bundle_root),
+                    "--refresh-bundle",
+                ]
+                exit_code = _CAPTURE_MODULE.main()
+            finally:
+                sys.argv = original_argv
+
+            self.assertEqual(exit_code, 0)
+            self.assertFalse((bundle_dir / "stale.txt").exists())
+            self.assertTrue((bundle_dir / "baseline_rendered_context.txt").is_file())
+            self.assertTrue((bundle_dir / "atlas_packet.json").is_file())
+            self.assertTrue((bundle_dir / "atlas_trace.json").is_file())
+            self.assertTrue((bundle_dir / "atlas_rendered_context.txt").is_file())
+            package = json.loads(
+                (bundle_dir / "evidence_package.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(
+                package["artifacts"]["atlas_packet"]["path"],
+                str((bundle_dir / "atlas_packet.json").resolve()),
+            )
+
+    def test_resolve_output_paths_rejects_unsafe_bundle_component(self) -> None:
+        args = _CAPTURE_MODULE.build_parser().parse_args(
+            [
+                "--workflow",
+                "..\\outside",
+                "--scenario",
+                "repo_governed_docs_update",
+                "--query",
+                "How should repository planning docs be updated?",
+                "--input-summary",
+                "docs_root=docs/Guides",
+                "--baseline-rendered",
+                str(_REPO_ROOT / "README.md"),
+                "--atlas-packet",
+                str(_REPO_ROOT / "README.md"),
+                "--atlas-trace",
+                str(_REPO_ROOT / "README.md"),
+                "--atlas-rendered",
+                str(_REPO_ROOT / "README.md"),
+                "--bundle-root",
+                str(_REPO_ROOT / "tmp"),
+            ]
+        )
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "workflow must be a single relative path segment",
+        ):
+            _CAPTURE_MODULE._resolve_output_paths(args)
+
     def test_build_evidence_package_rejects_mismatched_workflow_metadata(self) -> None:
         with TemporaryDirectory() as temp_dir:
             bundle_dir = Path(temp_dir)

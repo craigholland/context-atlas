@@ -57,7 +57,8 @@ python scripts/mvp_proof/capture_evidence.py `
   --input-summary "repo_root=.; docs_root=docs/Guides" `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository `
-  --bundle-root tmp\mvp_proof\evidence
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```
 
 That command writes the reviewable bundle at:
@@ -98,6 +99,10 @@ The canonical human-readable assessment record that should reference these
 bundles lives in
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
 
+For reassessment runs, prefer `--refresh-bundle` so the per-workflow,
+per-scenario bundle directory is rebuilt cleanly and cannot retain stale files
+from the previous review pass.
+
 ## Current Assessment Run
 
 The current Story 6 Task 6.3 assessment used the default temporary bundle root:
@@ -136,7 +141,8 @@ python scripts/mvp_proof/capture_evidence.py `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
   --expect-budget-pressure `
-  --bundle-root tmp\mvp_proof\evidence
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```
 
 That keeps the hardening bundle on the same reviewable layout as the original
@@ -162,7 +168,8 @@ python scripts/mvp_proof/capture_evidence.py `
   --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
   --expect-document-authority-contrast `
-  --bundle-root tmp\mvp_proof\evidence
+  --bundle-root tmp\mvp_proof\evidence `
+  --refresh-bundle
 ```
 
 That keeps the authority hardening bundle on the same reviewable layout as the

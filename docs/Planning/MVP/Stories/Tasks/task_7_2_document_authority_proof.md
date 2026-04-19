@@ -110,6 +110,11 @@ IMPLEMENTED
 - the readiness assessment no longer depends mainly on structured-record authority examples
 - packet and trace inspection make the authority rationale visible
 
+## Implemented Outcome
+
+- The authority-rich repository scenario `codex_repository / repo_document_authority_precedence` is now a reviewed standing-proof artifact.
+- The proof set now shows a `binding` authoritative document staying ahead of lower-authority planning and review documents with explicit authority-aware trace reasons.
+
 ## Related Artifacts
 
 - [Story 7 - MVP Readiness Hardening](../story_7_mvp_readiness_hardening.md)
