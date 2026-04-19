@@ -50,7 +50,7 @@ from context_atlas.api import (
 
 The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
 
-See [examples/README.md](/context-atlas/examples/README.md) and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current golden-path smoke flow.
+See [examples/README.md](/context-atlas/examples/README.md), [examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py), and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current starter flow.
 
 ## MVP Golden Path
 
@@ -63,6 +63,8 @@ The current MVP onboarding story should read as one clear sequence:
 5. render packet context and inspect packet/trace output
 
 This repository does not yet present every future workflow. The current user-facing guidance should stay centered on that starter path so a new evaluator can get from installation to a first packet without inferring the product shape from internal modules.
+
+The current starter walkthrough lives in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
 
 ## Packet And Trace Inspection Contract
 
