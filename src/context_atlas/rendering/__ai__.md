@@ -20,6 +20,7 @@
 - Holds derived output renderers for Context Atlas artifacts.
 - Provides the first minimal packet renderer without turning prompt-ready text into the canonical storage model.
 - Renders both retained memory and candidate/compression content from canonical packet state.
+- Owns the product-facing packet/trace inspection surfaces as derived read-only views over canonical artifacts.
 
 ## Architectural Rules
 - Rendering may depend on `context_atlas.domain`, but canonical packet, budget, decision, and compression semantics must remain defined there.
@@ -39,21 +40,39 @@
 ## Public API / Key Exports
 - `render_packet_context`:
   - derived text renderer for canonical packets
+- `render_packet_inspection`:
+  - human-readable packet inspection renderer for canonical packet state
+- `render_trace_inspection`:
+  - human-readable trace inspection renderer for canonical trace state
 
 ## File Index
 - `__init__.py`:
-  - responsibility: exposes the small rendering surface
+  - responsibility: exposes the small rendering and inspection surface
 - `context.py`:
   - responsibility: derives renderable text from canonical packet artifacts
   - invariants:
     - prefer structured compression results when available
     - retained memory should render from canonical packet state rather than a parallel service-only string field
     - do not mutate packet state during rendering
+- `packet.py`:
+  - responsibility: renders packet inspection sections for product-facing debugging and demos
+  - invariants:
+    - emphasize canonical packet state such as selected sources, memory, budget, and compression
+    - reflect actual compression application state rather than just the presence of a `CompressionResult`
+    - remain a read-only formatter over canonical packet artifacts
+- `trace.py`:
+  - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos
+  - invariants:
+    - emphasize included, excluded, transformed, and deferred decisions plus trace metadata
+    - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes
 - Rendering is intentionally minimal even now that the assembly service has landed.
 - Richer packet sections or role-specific renderers can arrive later, but they should still derive from canonical packet state.
 - The current renderer is now explicitly exercised as a read-only view over frozen Pydantic packet artifacts.
+- Upcoming packet/trace inspectors should stay text-first and product-facing while continuing to derive from canonical packet/trace state rather than inventing parallel DTOs.
+- Packet inspection now has a first-class renderer; later trace inspection should align with it instead of inventing a different product vocabulary.
+- Trace inspection now also has a first-class renderer; packet and trace views should continue to feel like one inspection surface rather than two unrelated outputs.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
@@ -67,10 +86,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py
+      py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.rendering import render_packet_context"
+      py -3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
 ```

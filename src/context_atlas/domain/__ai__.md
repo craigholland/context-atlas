@@ -147,6 +147,8 @@
   - footguns:
     - do not add prompt-ready string rendering fields here as canonical state
     - packet item counts should reflect canonical included artifacts, not just one source family
+    - inspection-oriented helpers here should remain machine-usable summaries rather than presentation formatting
+    - packet-inspection renderers may consume packet summary properties from here, but human-readable section layout must stay in `rendering/`
 - `models/reason_codes.py`:
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:
@@ -219,6 +221,7 @@
 - The current model set is canonical structure, not yet full policy behavior.
 - The current canonical model set now uses frozen Pydantic artifacts with immutable metadata helpers, and the public policy surface now follows the same validated-model direction.
 - The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
+- Packet and trace inspection work should continue to expose canonical summary signals here without pushing human-readable formatting into the domain layer.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.

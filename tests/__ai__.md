@@ -124,6 +124,29 @@
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
+- `test_packet_rendering.py`:
+  - responsibility: verifies packet inspection rendering stays derived and product-facing
+  - defines:
+    - `PacketRenderingTests`: packet inspection rendering test suite
+  - depends_on:
+    - `context_atlas.domain`
+    - `context_atlas.rendering`
+  - invariants:
+    - tests should verify packet inspection highlights selected sources, retained memory, budget state, and compression
+    - tests should verify packet inspection distinguishes actual compression application from mere compression-result presence
+    - tests should verify packet inspection stays read-only over canonical packet artifacts
+- `test_trace_rendering.py`:
+  - responsibility: verifies trace inspection rendering stays derived, ordered, and useful for debugging
+  - defines:
+    - `TraceRenderingTests`: trace inspection rendering test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+    - `context_atlas.rendering`
+  - invariants:
+    - tests should verify trace inspection groups included, excluded, transformed, and deferred decisions clearly
+    - tests should verify service-produced traces carry stable decision positions for inspection renderers
 - `test_memory_policy.py`:
   - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
   - defines:
@@ -175,6 +198,8 @@
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.
 - The example smoke script under `examples/` currently relies on that same curated namespace, so bootstrap coverage should keep guarding against accidental API drift.
+- The suite now also covers the first product-facing packet inspection renderer.
+- The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
 ## Cross-Folder Contracts

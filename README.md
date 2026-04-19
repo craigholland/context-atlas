@@ -52,6 +52,37 @@ The package root currently remains intentionally thin. User-facing docs and exam
 
 See [examples/README.md](/context-atlas/examples/README.md) and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current golden-path smoke flow.
 
+## Packet And Trace Inspection Contract
+
+Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.
+
+For MVP users, packet inspection should emphasize:
+
+- selected source candidates
+- retained memory entries
+- budget state
+- whether compression was applied
+
+Trace inspection should emphasize:
+
+- inclusion, exclusion, transformation, and deferred decisions
+- why a source was rejected or transformed
+- trace metadata that explains ranking, budgeting, compression, and memory behavior
+
+Those inspection surfaces should live under `context_atlas.rendering` and remain read-only views over `ContextPacket` and `ContextTrace`.
+
+Current packet inspection lives at:
+
+```python
+from context_atlas.rendering import render_packet_inspection
+```
+
+Current trace inspection lives at:
+
+```python
+from context_atlas.rendering import render_trace_inspection
+```
+
 ## Runtime Knobs
 
 The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
