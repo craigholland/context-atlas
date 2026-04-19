@@ -79,12 +79,13 @@ Minimum acceptable evidence:
 - source summaries that preserve class or authority meaning
 - notes that call out whether authority-aware behavior was visible in the packet and trace
 
-Document-authority target for the next hardening pass:
+Document-authority reference scenario:
 
 - workflow id: `codex_repository`
 - scenario id: `repo_document_authority_precedence`
 - intent: run the flagship repository workflow over an authority-rich governed-doc tree so the packet and trace show authoritative architecture guidance being preferred over lower-authority planning or review material for the same query
 - success signal: a reviewer can point to at least one authoritative document that remains visible or is ranked ahead of a lower-authority document candidate and can explain that difference through packet and trace evidence rather than path names alone
+- current state: this Story 7 hardening scenario is now implemented and reviewed as part of the standing MVP proof set
 
 ### 4. Budget Behavior
 
@@ -103,12 +104,13 @@ Minimum acceptable evidence:
 - packet and trace artifacts that make the tradeoffs visible
 - one scenario definition that states which workflow is under pressure and why that workflow is a meaningful budget test rather than an arbitrary tiny-budget demo
 
-Budget-pressure target for the next hardening pass:
+Budget-pressure reference scenario:
 
 - workflow id: `codex_repository`
 - scenario id: `repo_budget_pressure_tradeoffs`
 - intent: run the flagship repository workflow with a deliberately reduced total budget so packet inspection and trace review show which governed-doc candidates were compressed or excluded under pressure
 - success signal: a reviewer can point to at least one concrete exclusion, compression, or deferred document-context tradeoff and relate it back to the visible budget state
+- current state: this Story 7 hardening scenario is now implemented and reviewed as part of the standing MVP proof set
 
 ### 5. Workflow Reproducibility
 
@@ -182,10 +184,12 @@ even when the artifacts are reviewed later by a different contributor.
 
 ## Current Recommendation State
 
-No recommendation yet. This rubric exists to define what later Story 6 tasks must capture before a recommendation is written.
+The current assessment now records `MVP Ready` as of `2026-04-19` after the
+Story 7 hardening pass closed the prior authority and budget caveats.
 
-The eventual recommendation should be recorded in
-[mvp_readiness_assessment.md](./mvp_readiness_assessment.md), not only here.
+This rubric still exists to define the threshold for future reassessments; the
+canonical decision record remains
+[mvp_readiness_assessment.md](./mvp_readiness_assessment.md).
 
 ## Workflows Under Test For The Current Proof Pass
 
