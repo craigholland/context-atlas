@@ -22,11 +22,11 @@ supersedes: []
 
 ## Objective
 
-Ensure that MVP-facing product-surface work strengthens, rather than erodes, the project’s Craig Architecture boundaries.
+Ensure that MVP-facing product-surface work strengthens, rather than erodes, the project's Craig Architecture boundaries.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -35,7 +35,7 @@ PLANNED
 - [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
 - current layer responsibilities across `domain`, `services`, `infrastructure`, and `rendering`
 
-## Proposed Work
+## Proposed Tasks
 
 ### PR - A: Boundary Audit For MVP Surface Changes
 
@@ -123,3 +123,4 @@ PLANNED
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)
 - [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+

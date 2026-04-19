@@ -4,6 +4,10 @@ This module defines the current MVP-facing assembly entrypoint that wires
 validated runtime settings and logging into the shared assembly service.
 The curated ``context_atlas.api`` surface re-exports this helper for callers
 who do not need to learn the deeper package layout yet.
+
+This module owns starter wiring only. It should return configured orchestration
+services and leave packet rendering or inspection concerns to
+``context_atlas.rendering``.
 """
 
 from __future__ import annotations
@@ -31,7 +35,9 @@ def build_starter_context_assembly_service(
 
     This is the preferred composition boundary for the current MVP starter flow.
     Callers should prefer this helper to hand-wiring policies from deeper
-    modules when they only need the supported default assembly path.
+    modules when they only need the supported default assembly path. This helper
+    intentionally stops at configured orchestration; it does not render packet
+    context or inspection views.
     """
 
     active_settings = settings or ContextAtlasSettings()
