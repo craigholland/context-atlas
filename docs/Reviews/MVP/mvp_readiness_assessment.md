@@ -56,9 +56,9 @@ Use this section to list the workflows and scenarios actually reviewed.
 
 | Workflow | Scenario | Evidence Package | Status |
 | --- | --- | --- | --- |
-| `codex_repository` | `repo_governed_docs_update` | `<bundle-root>/codex_repository/repo_governed_docs_update/evidence_package.json` | pending review |
-| `docs_database_builder` | `builder_support_troubleshooting` | `<bundle-root>/docs_database_builder/builder_support_troubleshooting/evidence_package.json` | pending review |
-| `low_code_chatbot` | `low_code_validation` | `<bundle-root>/low_code_chatbot/low_code_validation/evidence_package.json` | pending review |
+| `codex_repository` | `repo_governed_docs_update` | `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/evidence_package.json` | reviewed 2026-04-19 |
+| `docs_database_builder` | `builder_support_troubleshooting` | `tmp/mvp_proof/evidence/docs_database_builder/builder_support_troubleshooting/evidence_package.json` | reviewed 2026-04-19 |
+| `low_code_chatbot` | `low_code_validation` | `tmp/mvp_proof/evidence/low_code_chatbot/low_code_validation/evidence_package.json` | reviewed 2026-04-19 |
 
 ## Evidence Bundle Layout
 
@@ -81,18 +81,40 @@ Record workflow-local findings here once evidence has been reviewed.
 
 ### Codex Repository Workflow
 
-- evidence package: pending
-- findings: pending
+- evidence package: `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/evidence_package.json`
+- findings:
+  - Atlas reduced the rendered-context size materially versus the naive baseline
+    by selecting four guide documents instead of carrying the entire guide set
+    forward unchanged.
+  - Packet and trace outputs remained legible, and the workflow metadata stayed
+    visible enough to confirm which outer repository path produced the packet.
+  - This workflow is still weak evidence for document authority precedence
+    because the current proof input uses guide-style documents that classify as
+    advisory rather than strongly authoritative records.
 
 ### Documents Plus Database Workflow
 
-- evidence package: pending
-- findings: pending
+- evidence package: `tmp/mvp_proof/evidence/docs_database_builder/builder_support_troubleshooting/evidence_package.json`
+- findings:
+  - Atlas demonstrated the strongest mixed-source evidence in the current proof
+    pass by selecting both governed documents and preferred structured-record
+    sources in one packet.
+  - Trace metadata preserved source-family counts and source collectors, which
+    makes the mixed-source component story inspectable instead of implied.
+  - Preferred record-backed review sources surfaced ahead of advisory guide docs,
+    which is the clearest authority-aware behavior in the current assessment.
 
 ### Low-Code Workflow
 
-- evidence package: pending
-- findings: pending
+- evidence package: `tmp/mvp_proof/evidence/low_code_chatbot/low_code_validation/evidence_package.json`
+- findings:
+  - Atlas preserved the shared engine path under a preset-driven wrapper rather
+    than introducing a second packet or trace model for the low-code surface.
+  - The workflow remained reproducible and reviewable through the same bundle
+    shape as the other workflows.
+  - The low-code path is still less differentiated than the mixed-source
+    builder path because it uses the same guide and support-record inputs and
+    mainly proves packaging and ergonomics rather than a distinct context problem.
 
 ## Cross-Cutting Findings
 
@@ -108,7 +130,30 @@ Suggested grouping:
 
 Current state:
 
-- pending
+- packet quality:
+  - all three workflows reduced rendered-context size materially versus the
+    naive baselines while keeping packet inspection available for deeper review
+  - the strongest signal here is consistency: each workflow reduced roughly
+    twenty-thousand-character baseline bundles to roughly eight-thousand-character
+    Atlas-rendered outputs
+- trace legibility:
+  - all three workflows preserved workflow identifiers, source families, and
+    source collectors in trace metadata
+  - the mixed-source and low-code paths are especially legible because the
+    traces expose both document and structured-record participation directly
+- authority handling:
+  - authority-aware behavior is credible for structured-record inputs because
+    preferred review sources surfaced ahead of advisory documents
+  - authority evidence is weaker for documents because the current repository
+    proof input uses guide documents rather than more strongly authoritative docs
+- budget behavior:
+  - compression/transformation behavior is visible in the current packets and
+    traces
+  - the current proof pass still lacks a deliberately budget-constrained
+    scenario that makes tradeoffs under strong pressure obvious
+- workflow reproducibility:
+  - this is now a clear strength because all three workflows can emit the same
+    Atlas artifact set and can be bundled into one predictable review layout
 
 ## Recommendation Record
 
@@ -124,8 +169,17 @@ Required fields:
 
 Current state:
 
-- recommendation level: pending
-- rationale: pending
+- recommendation level: `Conditionally Ready`
+- review date: `2026-04-19`
+- rationale:
+  - Context Atlas can now be defended as a reusable context-governance component
+    across three distinct workflow surfaces: repository assistance, mixed-source
+    chatbot building, and preset-driven low-code assembly.
+  - The proof story is reproducible, packet-and-trace-centered, and no longer
+    dependent on ad hoc artifact naming.
+  - The recommendation remains conditional because the current proof evidence is
+    still light on strongly authoritative document inputs and on explicit
+    budget-pressure scenarios.
 
 ## Follow-Up Work
 
@@ -138,4 +192,9 @@ Use this section to record whether the current assessment points to:
 
 Current state:
 
-- pending
+- complete Task 6.4 so the proof-path architecture itself is audited against
+  Craig Architecture and the shared engine path
+- add at least one intentionally budget-constrained proof scenario so the MVP
+  assessment includes a stronger tradeoff example
+- strengthen document-authority proof inputs so authority handling is not shown
+  mainly through structured records
