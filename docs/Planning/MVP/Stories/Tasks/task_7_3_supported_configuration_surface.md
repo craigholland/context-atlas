@@ -27,7 +27,7 @@ Audit the hidden starter-policy and service defaults so Atlas has a clearer boun
 
 ## Task Status
 
-PLANNED
+WORKING
 
 ## Inputs
 
