@@ -21,6 +21,7 @@
 - Keeps CI and local push enforcement logic in plain Python so it remains inspectable and adaptable by both humans and AI contributors.
 - Centralizes architecture-adjacent automation rather than scattering it across workflow YAML and local shell fragments.
 - Keeps the local preflight close to GitHub `verify-ai-contracts` behavior so branch pushes usually fail locally before they fail remotely.
+- Treats proof-capture tooling as repo-owned automation too, so MVP evidence packaging remains reproducible and reviewable.
 
 ## Architectural Rules
 - Scripts in this folder should prefer Python standard library implementations unless a dependency is clearly justified.
@@ -100,6 +101,7 @@
 - Some scripts still assume git-based diffing rather than a more abstract change detector.
 - Local preflight parity with CI is intentional but still heuristic-driven rather than perfectly identical in every environment.
 - If the package grows multiple governed subsystems, this folder may eventually need nested owner files of its own.
+- The nested `scripts/mvp_proof/` folder now owns the evidence-package capture shape for Story 6; future proof scripts should stay there rather than bloating the root script directory.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.
@@ -107,6 +109,7 @@
 - `.github/workflows/`: workflows should call these repo-owned scripts rather than reimplement the same logic inline in YAML.
 - `.github/workflows/`: local preflight should mirror the same owner-file freshness expectations that workflow jobs enforce remotely.
 - `.githooks/`: the tracked pre-push hook should delegate to `preflight.py` instead of duplicating local gate logic.
+- `scripts/mvp_proof/`: proof-specific packaging scripts may live under a nested governed folder when they would otherwise flatten the root scripts directory.
 
 ## Verification Contract
 ```yaml
