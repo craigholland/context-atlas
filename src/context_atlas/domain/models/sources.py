@@ -45,9 +45,20 @@ class ContextSourceDurability(StrEnum):
     ARCHIVAL = "archival"
 
 
+class ContextSourceFamily(StrEnum):
+    """High-level ingestion family for a canonical source."""
+
+    DOCUMENT = "document"
+    STRUCTURED_RECORD = "structured_record"
+    MEMORY = "memory"
+    CODE = "code"
+    OTHER = "other"
+
+
 class ContextSourceProvenance(CanonicalDomainModel):
     """Describe how a source entered the system."""
 
+    source_family: ContextSourceFamily = ContextSourceFamily.OTHER
     source_uri: str | None = None
     collector: str | None = None
     version: str | None = None
@@ -151,5 +162,6 @@ __all__ = [
     "ContextSourceAuthority",
     "ContextSourceClass",
     "ContextSourceDurability",
+    "ContextSourceFamily",
     "ContextSourceProvenance",
 ]

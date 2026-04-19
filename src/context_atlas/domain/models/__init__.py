@@ -20,6 +20,7 @@ from .sources import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
+    ContextSourceFamily,
     ContextSourceProvenance,
 )
 from .transformations import CompressionResult, CompressionStrategy
@@ -39,6 +40,7 @@ __all__ = [
     "ContextSourceAuthority",
     "ContextSourceClass",
     "ContextSourceDurability",
+    "ContextSourceFamily",
     "ContextSourceProvenance",
     "ContextTrace",
     "CompressionResult",

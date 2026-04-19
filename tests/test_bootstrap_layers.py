@@ -8,7 +8,9 @@ import os
 import unittest
 
 from context_atlas import api
+from context_atlas.adapters import StructuredRecordInput
 from context_atlas.domain.errors import ConfigurationError, ContextAtlasError, ErrorCode
+from context_atlas.domain.models import ContextSourceClass
 from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.infrastructure import build_starter_context_assembly_service
 from context_atlas.infrastructure.config import load_settings_from_env
@@ -34,6 +36,20 @@ class BootstrapLayerTests(unittest.TestCase):
         self.assertTrue(callable(api.render_packet_context))
         self.assertTrue(callable(render_packet_inspection))
         self.assertTrue(callable(render_trace_inspection))
+
+    def test_structured_record_input_validates_minimum_adapter_shape(self) -> None:
+        record = StructuredRecordInput(
+            record_id="product-1",
+            content="Structured product record content",
+            source_class=ContextSourceClass.OTHER,
+            tags=("products",),
+            intended_uses=("answering",),
+            metadata={"table": "products"},
+        )
+
+        self.assertEqual(record.record_id, "product-1")
+        self.assertEqual(record.tags, ("products",))
+        self.assertEqual(record.metadata["table"], "products")
 
     def test_error_messages_are_centralized_and_formatted(self) -> None:
         message = ErrorMessage.DOCUMENT_NO_CONTENT % ("notes.md",)

@@ -23,6 +23,7 @@ from context_atlas.domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
+    ContextSourceFamily,
     ContextSourceProvenance,
     ContextTrace,
     ExclusionReasonCode,
@@ -71,6 +72,25 @@ class DomainModelTests(unittest.TestCase):
         self.assertEqual(source.content, "Durable project truth.")
         self.assertEqual(source.tags, ("charter", "architecture"))
         self.assertEqual(source.metadata["scope"], "identity")
+
+    def test_context_source_provenance_carries_source_family(self) -> None:
+        source = ContextSource(
+            source_id="record-1",
+            content="Row-backed source content.",
+            provenance=ContextSourceProvenance(
+                source_family=ContextSourceFamily.STRUCTURED_RECORD,
+                source_uri="records://products/1",
+                collector="structured_record_source_adapter",
+            ),
+        )
+
+        self.assertEqual(
+            source.provenance.source_family,
+            ContextSourceFamily.STRUCTURED_RECORD,
+        )
+        self.assertEqual(
+            source.provenance.collector, "structured_record_source_adapter"
+        )
 
     def test_context_candidate_rejects_invalid_rank(self) -> None:
         source = ContextSource(source_id="source-1", content="useful content")

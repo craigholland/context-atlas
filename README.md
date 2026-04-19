@@ -31,6 +31,16 @@ The current focus is implementation hardening rather than feature breadth: tight
 - `tests/` for automated tests
 - `examples/` for usage examples and demonstrations
 
+## Starter Source Families
+
+The shared engine is no longer intended to be docs-only. The current source-family direction is:
+
+- filesystem documents as the first mature source family
+- structured records as the next adapter-facing input family
+- one canonical `ContextSource` model regardless of ingestion path
+
+For structured records, the current minimum adapter contract is `context_atlas.adapters.StructuredRecordInput`. It stays intentionally small so outer integrations can adapt database rows, vector-search payloads, or already-fetched record objects into one validated record shape before translating them into canonical sources.
+
 ## Supported MVP Entry Surface
 
 The current supported MVP starter path is intentionally explicit.
