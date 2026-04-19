@@ -27,7 +27,7 @@ Strengthen the MVP proof inputs so authority handling is demonstrated through go
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
