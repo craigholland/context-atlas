@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
 from context_atlas.adapters import (
@@ -22,6 +25,7 @@ from context_atlas.domain.models import (
 from context_atlas.infrastructure.assembly import (
     assemble_with_starter_context_service,
     build_starter_context_assembly_service,
+    write_standard_proof_artifacts,
 )
 from context_atlas.infrastructure.config import (
     AssemblySettings,
@@ -484,6 +488,39 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             LogMessage.ASSEMBLY_FAILED,
             "Context assembly failed: trace_id=%s, error=%s",
         )
+
+    def test_shared_proof_artifact_writer_emits_standard_files(self) -> None:
+        packet = assemble_with_starter_context_service(
+            retriever=self.retriever,
+            query="authoritative packet assembly",
+            settings=self.settings,
+            metadata={"workflow": "codex_repository"},
+        )
+        rendered_context = render_packet_context(packet)
+
+        with TemporaryDirectory() as temp_dir:
+            output_dir = write_standard_proof_artifacts(
+                output_dir=Path(temp_dir),
+                packet=packet,
+                rendered_context=rendered_context,
+            )
+
+            self.assertTrue((output_dir / "atlas_rendered_context.txt").is_file())
+            self.assertTrue((output_dir / "atlas_packet.json").is_file())
+            self.assertTrue((output_dir / "atlas_trace.json").is_file())
+
+            packet_payload = json.loads(
+                (output_dir / "atlas_packet.json").read_text(encoding="utf-8")
+            )
+            trace_payload = json.loads(
+                (output_dir / "atlas_trace.json").read_text(encoding="utf-8")
+            )
+
+            self.assertEqual(packet_payload["metadata"]["workflow"], "codex_repository")
+            self.assertEqual(
+                trace_payload["metadata"]["request_workflow"],
+                "codex_repository",
+            )
 
 
 if __name__ == "__main__":

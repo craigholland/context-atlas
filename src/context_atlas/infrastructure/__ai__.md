@@ -70,6 +70,7 @@
   - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into the supported starter assembly service
   - `assemble_with_starter_context_service`: build the supported starter assembly service and immediately assemble one canonical packet
   - `assemble_with_low_code_workflow`: low-code outer wrapper over the same starter engine path
+  - `write_standard_proof_artifacts`: write the canonical proof-artifact set from one already-assembled packet plus rendered context
 
 ## File Index
 - `config/settings.py`:
@@ -137,6 +138,7 @@
     - `build_starter_context_assembly_service`
     - `assemble_with_starter_context_service`
     - `assemble_with_low_code_workflow`
+    - `write_standard_proof_artifacts`
   - depends_on:
     - `context_atlas.domain.policies`
     - `context_atlas.infrastructure.config`
@@ -150,6 +152,7 @@
     - one-shot packet assembly helpers here must remain workflow-agnostic convenience wrappers over the same shared service path rather than growing provider- or workflow-specific branches
     - low-code convenience here may choose a supported preset, docs root, and payload file, but it should still cross into the same registry/retriever/service path rather than creating alternate packet semantics
     - low-code wrappers should prefer `ContextAtlasSettings.with_low_code_overrides(...)`, `build_low_code_workflow_plan(...)`, and `assemble_with_starter_sources(...)` over wrapper-local setting merges or metadata packing
+    - proof-artifact writing should stay on one shared outer helper here rather than being duplicated across runnable workflow examples
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
@@ -205,5 +208,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
+      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```

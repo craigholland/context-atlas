@@ -128,6 +128,67 @@ def _load_artifact(path: Path) -> dict[str, Any]:
     }
 
 
+def _require_mapping(*, value: object, name: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ValueError(f"{name} must be a JSON object.")
+    return value
+
+
+def _require_sequence(*, value: object, name: str) -> list[Any]:
+    if not isinstance(value, list):
+        raise ValueError(f"{name} must be a JSON array.")
+    return value
+
+
+def _validate_atlas_artifacts(
+    *,
+    workflow: str,
+    packet_artifact: dict[str, Any],
+    trace_artifact: dict[str, Any],
+) -> None:
+    packet_content = _require_mapping(
+        value=packet_artifact["content"],
+        name="Atlas packet artifact",
+    )
+    trace_content = _require_mapping(
+        value=trace_artifact["content"],
+        name="Atlas trace artifact",
+    )
+
+    packet_trace = _require_mapping(
+        value=packet_content.get("trace"),
+        name="Atlas packet trace",
+    )
+    packet_id = packet_content.get("packet_id")
+    if not isinstance(packet_id, str) or not packet_id.strip():
+        raise ValueError("Atlas packet artifact must include a non-empty packet_id.")
+    _require_sequence(
+        value=packet_content.get("selected_candidates"),
+        name="Atlas packet selected_candidates",
+    )
+
+    trace_id = trace_content.get("trace_id")
+    if not isinstance(trace_id, str) or not trace_id.strip():
+        raise ValueError("Atlas trace artifact must include a non-empty trace_id.")
+    if packet_trace.get("trace_id") != trace_id:
+        raise ValueError(
+            "Atlas packet trace_id must match the standalone Atlas trace artifact."
+        )
+
+    trace_metadata = _require_mapping(
+        value=trace_content.get("metadata"),
+        name="Atlas trace metadata",
+    )
+    _require_sequence(
+        value=trace_content.get("decisions"),
+        name="Atlas trace decisions",
+    )
+    if trace_metadata.get("request_workflow") != workflow:
+        raise ValueError(
+            "Atlas trace metadata request_workflow must match the declared workflow."
+        )
+
+
 def _resolve_atlas_artifact_paths(
     args: argparse.Namespace,
 ) -> tuple[Path, Path, Path]:
@@ -180,6 +241,15 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
     atlas_packet_path, atlas_trace_path, atlas_rendered_path = (
         _resolve_atlas_artifact_paths(args)
     )
+    baseline_rendered_context = _load_artifact(args.baseline_rendered)
+    atlas_packet = _load_artifact(atlas_packet_path)
+    atlas_trace = _load_artifact(atlas_trace_path)
+    atlas_rendered_context = _load_artifact(atlas_rendered_path)
+    _validate_atlas_artifacts(
+        workflow=args.workflow,
+        packet_artifact=atlas_packet,
+        trace_artifact=atlas_trace,
+    )
     return {
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
@@ -193,10 +263,10 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             "comparison_steps": list(COMPARISON_STEPS),
         },
         "artifacts": {
-            "baseline_rendered_context": _load_artifact(args.baseline_rendered),
-            "atlas_packet": _load_artifact(atlas_packet_path),
-            "atlas_trace": _load_artifact(atlas_trace_path),
-            "atlas_rendered_context": _load_artifact(atlas_rendered_path),
+            "baseline_rendered_context": baseline_rendered_context,
+            "atlas_packet": atlas_packet,
+            "atlas_trace": atlas_trace,
+            "atlas_rendered_context": atlas_rendered_context,
         },
     }
 

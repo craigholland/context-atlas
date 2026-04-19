@@ -192,8 +192,6 @@ Use this section to record whether the current assessment points to:
 
 Current state:
 
-- complete Task 6.4 so the proof-path architecture itself is audited against
-  Craig Architecture and the shared engine path
 - add at least one intentionally budget-constrained proof scenario so the MVP
   assessment includes a stronger tradeoff example
 - strengthen document-authority proof inputs so authority handling is not shown

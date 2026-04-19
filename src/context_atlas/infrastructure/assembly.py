@@ -238,9 +238,46 @@ def assemble_with_low_code_workflow(
     )
 
 
+def write_standard_proof_artifacts(
+    *,
+    output_dir: Path,
+    packet: ContextPacket,
+    rendered_context: str,
+) -> Path:
+    """Write the standard proof-artifact set for one canonical workflow run.
+
+    This helper stays in infrastructure because it packages the canonical packet
+    and trace artifacts emitted by the shared engine without changing their
+    meaning. Workflow examples may call it, but they should not each maintain
+    their own proof-only artifact writer.
+    """
+
+    resolved_output_dir = output_dir.resolve()
+    resolved_output_dir.mkdir(parents=True, exist_ok=True)
+    (resolved_output_dir / "atlas_rendered_context.txt").write_text(
+        rendered_context,
+        encoding="utf-8",
+    )
+    (resolved_output_dir / "atlas_packet.json").write_text(
+        json.dumps(packet.model_dump(mode="json"), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (resolved_output_dir / "atlas_trace.json").write_text(
+        json.dumps(
+            packet.trace.model_dump(mode="json") if packet.trace is not None else None,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return resolved_output_dir
+
+
 __all__ = [
     "assemble_with_low_code_workflow",
     "assemble_with_starter_sources",
     "assemble_with_starter_context_service",
     "build_starter_context_assembly_service",
+    "write_standard_proof_artifacts",
 ]

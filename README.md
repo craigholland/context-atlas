@@ -225,6 +225,11 @@ That rubric is intentionally centered on:
 The proof story should stay packet-and-trace-centered. Atlas should not claim
 MVP readiness based only on narrative impressions or polished screenshots.
 
+The proof harness should also stay honest about where its evidence comes from:
+the current capture path is expected to package canonical packet, trace, and
+rendered-context artifacts emitted by one supported workflow run, not
+handcrafted proof-only JSON.
+
 The first reproducible packaging path for those artifacts now lives at
 [examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).
@@ -234,8 +239,8 @@ The canonical human-readable review record for that proof work now lives at
 
 The current recorded recommendation in that assessment is `Conditionally Ready`:
 Atlas now looks defensible as a reusable pipeline component, but the proof still
-needs stronger document-authority and budget-pressure evidence plus the Task 6.4
-proof-path architecture audit before the MVP claim should be treated as fully closed.
+needs stronger document-authority and budget-pressure evidence before the MVP
+claim should be treated as fully closed.
 
 The current proof pass is scoped to the three supported MVP workflows:
 
@@ -255,6 +260,10 @@ supplied:
 - `atlas_rendered_context.txt`
 - `atlas_packet.json`
 - `atlas_trace.json`
+
+Those artifacts now come from one shared infrastructure helper used by the
+supported runnable workflows, so the proof path stays aligned with the real
+shared engine instead of drifting into per-example proof-only writers.
 
 That shared artifact shape is what allows
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py)
