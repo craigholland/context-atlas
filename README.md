@@ -31,6 +31,20 @@ The current focus is implementation hardening rather than feature breadth: tight
 - `tests/` for automated tests
 - `examples/` for usage examples and demonstrations
 
+## Starter Source Families
+
+The shared engine is no longer intended to be docs-only. The current source-family direction is:
+
+- filesystem documents as the first mature source family
+- structured records as the next adapter-facing input family
+- one canonical `ContextSource` model regardless of ingestion path
+
+For structured records, the current minimum adapter contract is `context_atlas.adapters.StructuredRecordInput`. It stays intentionally small so outer integrations can adapt database rows, vector-search payloads, or already-fetched record objects into one validated record shape before translating them into canonical sources.
+
+The current translation surface for those inputs is `context_atlas.adapters.StructuredRecordSourceAdapter`. It accepts validated record inputs, preserves provenance and intended-use metadata, and emits the same canonical `ContextSource` artifacts the rest of the engine already understands.
+
+See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
+
 ## Supported MVP Entry Surface
 
 The current supported MVP starter path is intentionally explicit.

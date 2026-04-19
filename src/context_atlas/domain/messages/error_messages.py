@@ -138,6 +138,8 @@ class ErrorMessage:
         "document path '%s' is outside adapter root '%s'"
     )
     INVALID_FRONT_MATTER_IN_DOCUMENT = "invalid front matter in '%s': %s"
+    INVALID_STRUCTURED_RECORD_INPUT = "invalid structured record input: %s"
+    RECORD_COLLECTOR_NAME_MUST_NOT_BE_EMPTY = "record collector name must not be empty"
     ROOT_PATH_DOES_NOT_EXIST = "root path does not exist: %s"
     ROOT_PATH_IS_NOT_A_DIRECTORY = "root path is not a directory: %s"
     UNSUPPORTED_DOCUMENT_SUFFIX = "unsupported document suffix '%s' for %s"

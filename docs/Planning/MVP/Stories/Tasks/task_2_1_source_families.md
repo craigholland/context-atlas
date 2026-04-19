@@ -26,7 +26,7 @@ Extend Atlas beyond filesystem documents so the MVP clearly supports more than o
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

@@ -134,11 +134,15 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 1 Task 1.4 is now the active task-level feature branch and should keep the supported MVP surface aligned with Craig Architecture boundaries while preserving `ContextPacket` and `ContextTrace` as the canonical machine-readable artifacts.
-- That task should treat `infrastructure/assembly.py` as starter wiring only, `services/assembly.py` as orchestration only, and `rendering/` as derived output only; convenience work should not blur those responsibilities.
-- PR A of that task is the boundary-audit slice; it should strengthen the package-root, starter-wiring, and rendering contracts before any deeper behavioral refactor lands.
-- PR B of that task should reinforce the difference between canonical packet state and attached transformation artifacts so starter rendering does not quietly treat non-applied compression as new canonical content.
-- PR C of that task should mark the task `IMPLEMENTED` and make the product-facing docs describe the `context_atlas.api` / `context_atlas.rendering` split as the intended MVP architecture rather than a temporary convenience choice.
+- Story 2 Task 2.1 is now the active task-level feature branch and should prove that Atlas supports more than one source family through one canonical governance model.
+- That task should treat structured records as adapter-facing inputs that become canonical `ContextSource` artifacts rather than as a parallel inner model.
+- PR A of that task is the contract slice; it should define the minimum structured-record shape Atlas needs without turning the package into a database framework.
+- PR B of that task should implement record-backed source translation inside `adapters/records/` while preserving provenance and intended-use metadata on canonical sources.
+- PR C of that task should validate mixed-source use so filesystem docs and structured records can coexist in one registry and packet flow without leaking source-family quirks inward.
+- Review fixes on Story 2 Task 2.1 should keep structured-record validation strict: mapping-shaped `tags` or `intended_uses` inputs should fail fast, and canonical `record_id` should remain authoritative in source provenance metadata.
+- The root README should now describe structured records as the next source family through the adapter-facing `StructuredRecordInput` contract while keeping `ContextSource` as the only canonical source artifact.
+- PR B should move the structured-record contract into `adapters/records/`, expose a real translation adapter, and keep the root README aligned with that implemented starter surface.
+- PR C should prove mixed-source packet flow with one registry and one assembly path, and the root README should point to a concrete mixed-source example rather than leaving that claim abstract.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

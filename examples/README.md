@@ -42,3 +42,13 @@ The smoke example demonstrates the supported MVP path:
 - render packet context and inspect the resulting packet/trace surfaces
 
 This sequence should stay aligned with the root `README.md` golden path. If examples start requiring extra hidden setup or deep internal imports, the example surface should be corrected before more product-facing guidance is added.
+
+## Mixed-Source Flow
+
+Run the mixed-source example after an editable install:
+
+```powershell
+python examples/mixed_source_registry.py
+```
+
+This example demonstrates that filesystem documents and structured records can coexist in one registry and one packet-assembly flow without introducing a second canonical source model.
