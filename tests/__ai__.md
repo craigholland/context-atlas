@@ -58,6 +58,8 @@
   - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
 - `test_filesystem_document_adapter.py`:
   - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
+- `test_record_source_adapter.py`:
+  - `StructuredRecordSourceAdapterTests`: verifies structured-record input validation and record-to-source translation
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -183,6 +185,16 @@
   - invariants:
     - tests should prove documentation ontology classes map into canonical source authority and durability fields
     - tests should prove classified source provenance remains visible enough to influence downstream packet traces
+- `test_record_source_adapter.py`:
+  - responsibility: verifies structured-record input validation and record-to-source translation
+  - defines:
+    - `StructuredRecordSourceAdapterTests`: structured-record adapter test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+  - invariants:
+    - tests should prove record adapters emit canonical `ContextSource` artifacts with the structured-record source family
+    - tests should prove record provenance and intended-use metadata survive translation into canonical sources
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -193,6 +205,7 @@
 - The suite now also covers canonical memory entries and starter retention policy behavior.
 - The suite now also covers the first real end-to-end assembly path plus the starter infrastructure composition helper.
 - The suite now also covers ontology-aware filesystem document ingestion and its downstream effect on ranking and packet traces.
+- The suite now also covers structured-record validation and record-to-source translation.
 - The suite now also covers the direct `LogMessage`/`ErrorMessage` pattern and the Pydantic config refactor.
 - The suite now also covers the Pydantic-backed exception payload behind the coded domain error surface.
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
@@ -203,6 +216,7 @@
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
+- The record-adapter test suite should verify that structured-record inputs translate into canonical sources with preserved intended uses, metadata, and structured-record provenance.
 - Bootstrap coverage should continue to guard the imports used by the getting-started guide and starter context-flow example so product-facing docs do not drift away from the supported surface.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
 
@@ -224,5 +238,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_source_adapter"
 ```

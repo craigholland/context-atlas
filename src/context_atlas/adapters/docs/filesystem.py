@@ -25,6 +25,7 @@ from ...domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
+    ContextSourceFamily,
     ContextSourceProvenance,
 )
 
@@ -235,6 +236,7 @@ class FilesystemDocumentSourceAdapter:
             authority=classification.authority,
             durability=classification.durability,
             provenance=ContextSourceProvenance(
+                source_family=ContextSourceFamily.DOCUMENT,
                 source_uri=document_path.as_uri(),
                 collector="filesystem_document_source_adapter",
                 captured_at_utc=datetime.fromtimestamp(
