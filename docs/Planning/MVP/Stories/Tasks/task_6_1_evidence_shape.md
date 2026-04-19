@@ -26,7 +26,7 @@ Define what kinds of evidence Atlas must produce in order to make a grounded MVP
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
