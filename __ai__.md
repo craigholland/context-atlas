@@ -174,6 +174,7 @@
 - Story 5 Task 5.2 now also introduces tracked low-code reference artifacts under `examples/low_code_workflow/`; those TOML files should stay honest about being reference surfaces rather than implied hidden loaders.
 - Story 5 Task 5.2 now also expects the low-code guide, example README, and repo README to preserve the same recommended first-time evaluation order for those reference artifacts and the runnable wrapper.
 - Story 5 Task 5.3 is now auditing the low-code boundary, so preset resolution, repo-relative path resolution, and workflow metadata assembly should become more explicit outer-layer plan logic rather than staying smeared across the wrapper and example surface.
+- Story 5 Task 5.3 now also expects low-code override merging and starter source-to-packet wiring to stay on shared config/infrastructure seams rather than being rebuilt inside the runnable example.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

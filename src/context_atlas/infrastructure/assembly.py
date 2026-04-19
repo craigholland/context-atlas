@@ -113,7 +113,7 @@ def assemble_with_starter_context_service(
     top_k: int | None = None,
     packet_id: str | None = None,
     trace_id: str | None = None,
-    metadata: Mapping[str, str] | None = None,
+    metadata: Mapping[str, object] | None = None,
     now_epoch_seconds: float | None = None,
 ) -> ContextPacket:
     """Build the supported starter service and assemble one canonical packet.
@@ -141,6 +141,38 @@ def assemble_with_starter_context_service(
     )
 
 
+def assemble_with_starter_sources(
+    *,
+    sources: Iterable[ContextSource],
+    query: str,
+    settings: ContextAtlasSettings | None = None,
+    logger: logging.Logger | None = None,
+    budget: ContextBudget | None = None,
+    memory_entries: Iterable[ContextMemoryEntry] = (),
+    top_k: int | None = None,
+    packet_id: str | None = None,
+    trace_id: str | None = None,
+    metadata: Mapping[str, object] | None = None,
+    now_epoch_seconds: float | None = None,
+) -> ContextPacket:
+    """Assemble one packet from canonical sources through the shared starter path."""
+
+    source_registry = InMemorySourceRegistry(tuple(sources))
+    return assemble_with_starter_context_service(
+        retriever=LexicalRetriever(source_registry),
+        query=query,
+        settings=settings,
+        logger=logger,
+        budget=budget,
+        memory_entries=memory_entries,
+        top_k=top_k,
+        packet_id=packet_id,
+        trace_id=trace_id,
+        metadata=metadata,
+        now_epoch_seconds=now_epoch_seconds,
+    )
+
+
 def assemble_with_low_code_workflow(
     *,
     query: str,
@@ -150,7 +182,7 @@ def assemble_with_low_code_workflow(
     top_k: int | None = None,
     packet_id: str | None = None,
     trace_id: str | None = None,
-    metadata: Mapping[str, str] | None = None,
+    metadata: Mapping[str, object] | None = None,
     now_epoch_seconds: float | None = None,
 ) -> ContextPacket:
     """Assemble one packet through the supported low-code wrapper path.
@@ -191,10 +223,10 @@ def assemble_with_low_code_workflow(
         record_sources = plan.load_record_sources(record_rows)
         sources.extend(record_sources)
         workflow_metadata["record_origin"] = "payload_file"
-        workflow_metadata["record_input_count"] = str(len(record_rows))
+        workflow_metadata["record_input_count"] = len(record_rows)
 
-    return assemble_with_starter_context_service(
-        retriever=LexicalRetriever(InMemorySourceRegistry(tuple(sources))),
+    return assemble_with_starter_sources(
+        sources=tuple(sources),
         query=query,
         settings=active_settings,
         logger=logger,
@@ -208,6 +240,7 @@ def assemble_with_low_code_workflow(
 
 __all__ = [
     "assemble_with_low_code_workflow",
+    "assemble_with_starter_sources",
     "assemble_with_starter_context_service",
     "build_starter_context_assembly_service",
 ]

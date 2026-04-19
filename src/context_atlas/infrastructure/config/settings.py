@@ -207,6 +207,32 @@ class LowCodeWorkflowSettings(BaseModel):
             raise ValueError("At least one low-code source family must be enabled.")
         return self
 
+    def with_overrides(
+        self,
+        *,
+        preset: str | None = None,
+        docs_root: str | None = None,
+        records_file: str | None = None,
+        include_documents: bool | None = None,
+        include_records: bool | None = None,
+    ) -> "LowCodeWorkflowSettings":
+        """Return a validated copy with explicit low-code overrides applied."""
+
+        overrides: dict[str, object] = {}
+        if preset is not None:
+            overrides["preset"] = preset
+        if docs_root is not None:
+            overrides["docs_root"] = docs_root
+        if records_file is not None:
+            overrides["records_file"] = records_file
+        if include_documents is not None:
+            overrides["include_documents"] = include_documents
+        if include_records is not None:
+            overrides["include_records"] = include_records
+        return self.__class__.model_validate(
+            self.model_dump(mode="python") | overrides,
+        )
+
 
 class ContextAtlasSettings(BaseModel):
     """Validated top-level runtime settings assembled from environment input."""
@@ -265,4 +291,27 @@ class ContextAtlasSettings(BaseModel):
                 memory.min_effective_score,
                 memory.query_boost_weight,
             ),
+        )
+
+    def with_low_code_overrides(
+        self,
+        *,
+        preset: str | None = None,
+        docs_root: str | None = None,
+        records_file: str | None = None,
+        include_documents: bool | None = None,
+        include_records: bool | None = None,
+    ) -> "ContextAtlasSettings":
+        """Return settings with validated low-code overrides applied."""
+
+        return self.model_copy(
+            update={
+                "low_code": self.low_code.with_overrides(
+                    preset=preset,
+                    docs_root=docs_root,
+                    records_file=records_file,
+                    include_documents=include_documents,
+                    include_records=include_records,
+                )
+            }
         )
