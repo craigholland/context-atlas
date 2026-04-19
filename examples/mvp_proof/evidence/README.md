@@ -81,3 +81,21 @@ artifact directories still live in
 The canonical human-readable assessment record that should reference these
 bundles lives in
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
+
+## Current Assessment Run
+
+The current Story 6 Task 6.3 assessment used the default temporary bundle root:
+
+```text
+tmp/mvp_proof/evidence
+```
+
+and reviewed these bundle paths:
+
+- `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/`
+- `tmp/mvp_proof/evidence/docs_database_builder/builder_support_troubleshooting/`
+- `tmp/mvp_proof/evidence/low_code_chatbot/low_code_validation/`
+
+Those bundle directories are generated, not tracked. Recreate them with the
+commands in [../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
+plus the `--bundle-root tmp/mvp_proof/evidence` capture step shown above.
