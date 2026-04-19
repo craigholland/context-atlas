@@ -140,6 +140,7 @@
 - Story 2 Task 2.4 now also hardens the mixed-source boundary around `ContextSource.from_semantics(...)`, so adapters should preserve source-family mechanics in provenance while relying on the domain for canonical semantic meaning.
 - Story 2 Task 2.4 now also reinforces that boundary in the repo-facing docs, so future adapter work should treat adapter-local tags or source metadata that restate canonical meaning as architectural drift, not convenience.
 - Story 4 Task 4.1 is now defining the technical-builder docs-plus-database scenario, so adapter exports and docs should keep the already-fetched-record boundary explicit rather than implying Atlas owns database or vector-store access.
+- Story 4 Task 4.2 now also exposes that scenario through a product-facing guide, so adapter docs and examples should keep explaining record translation as an after-fetch boundary rather than widening toward queries or client management.
 - The runnable docs-plus-database example should keep demonstrating that `StructuredRecordRowMapper` and `StructuredRecordSourceAdapter` operate after row fetching, not as a query layer.
 
 ## Cross-Folder Contracts
