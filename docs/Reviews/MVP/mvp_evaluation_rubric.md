@@ -88,11 +88,20 @@ Review questions:
 - Is the packet budget state inspectable?
 - Can a reviewer see when compression, trimming, or exclusion occurred?
 - Does the evidence show what was lost or transformed under pressure?
+- Does at least one proof run make the budget tradeoff strong enough that a reviewer can name the sacrificed content, not merely infer that pressure existed?
 
 Minimum acceptable evidence:
 
 - one scenario with explicit budget pressure
 - packet and trace artifacts that make the tradeoffs visible
+- one scenario definition that states which workflow is under pressure and why that workflow is a meaningful budget test rather than an arbitrary tiny-budget demo
+
+Budget-pressure target for the next hardening pass:
+
+- workflow id: `codex_repository`
+- scenario id: `repo_budget_pressure_tradeoffs`
+- intent: run the flagship repository workflow with a deliberately reduced total budget so packet inspection and trace review show which governed-doc candidates were compressed or excluded under pressure
+- success signal: a reviewer can point to at least one concrete exclusion, compression, or deferred document-context tradeoff and relate it back to the visible budget state
 
 ### 5. Workflow Reproducibility
 

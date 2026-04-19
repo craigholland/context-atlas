@@ -87,6 +87,7 @@
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
     - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
     - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
+    - validated override helpers should reuse model validation rather than `model_copy(update=...)` when changing user-facing assembly defaults such as total budget
 - `config/environment.py`:
   - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:

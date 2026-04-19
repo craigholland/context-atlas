@@ -30,16 +30,20 @@ class MvpProofCaptureTests(unittest.TestCase):
         bundle_dir: Path,
         *,
         workflow: str = "codex_repository",
+        packet_metadata: dict[str, str] | None = None,
+        trace_metadata: dict[str, str] | None = None,
+        decisions: list[dict[str, object]] | None = None,
     ) -> None:
         trace = {
             "trace_id": "trace-proof-1",
-            "metadata": {"request_workflow": workflow},
-            "decisions": [],
+            "metadata": {"request_workflow": workflow} | (trace_metadata or {}),
+            "decisions": decisions or [],
         }
         packet = {
             "packet_id": "packet-proof-1",
             "selected_candidates": [],
             "trace": trace,
+            "metadata": packet_metadata or {},
         }
         (bundle_dir / "atlas_packet.json").write_text(
             json.dumps(packet) + "\n",
@@ -142,6 +146,94 @@ class MvpProofCaptureTests(unittest.TestCase):
                 "request_workflow must match the declared workflow",
             ):
                 _CAPTURE_MODULE.build_evidence_package(args)
+
+    def test_build_evidence_package_rejects_budget_pressure_bundle_without_signal(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                trace_metadata={"budget_budget_total_tokens": "64"},
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_budget_pressure_tradeoffs",
+                    "--query",
+                    "What guidance should an engineer follow when updating repository planning docs or architecture guidance?",
+                    "--input-summary",
+                    "repo_root=.; docs_root=docs/Guides; total_budget=64",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--expect-budget-pressure",
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "Budget-pressure proof artifacts must include visible pressure decisions",
+            ):
+                _CAPTURE_MODULE.build_evidence_package(args)
+
+    def test_build_evidence_package_accepts_budget_pressure_bundle_with_compression_metadata(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                packet_metadata={"compression_applied": "true"},
+                trace_metadata={"budget_budget_total_tokens": "64"},
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_budget_pressure_tradeoffs",
+                    "--query",
+                    "What guidance should an engineer follow when updating repository planning docs or architecture guidance?",
+                    "--input-summary",
+                    "repo_root=.; docs_root=docs/Guides; total_budget=64",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--expect-budget-pressure",
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            package = _CAPTURE_MODULE.build_evidence_package(args)
+
+            self.assertEqual(package["scenario"], "repo_budget_pressure_tradeoffs")
+            self.assertTrue(package["review_path"]["budget_pressure_expected"])
 
 
 if __name__ == "__main__":

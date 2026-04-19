@@ -7,13 +7,20 @@ import logging
 import os
 import unittest
 
+from pydantic import ValidationError
+
 from context_atlas.domain.errors import ConfigurationError, ErrorCode
 from context_atlas.domain.messages import LogMessage
 from context_atlas.infrastructure.config import (
+    ContextAtlasSettings,
     CompressionStrategy,
     load_settings_from_env,
 )
-from context_atlas.infrastructure.config.settings import LoggingSettings, MemorySettings
+from context_atlas.infrastructure.config.settings import (
+    AssemblySettings,
+    LoggingSettings,
+    MemorySettings,
+)
 from context_atlas.infrastructure.logging import (
     configure_logger,
     log_assembly_stage_message,
@@ -166,6 +173,22 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         settings = load_settings_from_env()
 
         self.assertEqual(settings.memory, MemorySettings())
+
+    def test_with_assembly_overrides_revalidates_total_budget(self) -> None:
+        settings = ContextAtlasSettings()
+
+        updated = settings.with_assembly_overrides(default_total_budget=256)
+
+        self.assertEqual(updated.assembly.default_total_budget, 256)
+        self.assertEqual(settings.assembly.default_total_budget, 2048)
+
+    def test_with_assembly_overrides_rejects_unsupported_total_budget(self) -> None:
+        settings = ContextAtlasSettings(
+            assembly=AssemblySettings(default_total_budget=128)
+        )
+
+        with self.assertRaises(ValidationError):
+            settings.with_assembly_overrides(default_total_budget=32)
 
 
 class _temporary_environment:

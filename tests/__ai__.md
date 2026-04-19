@@ -239,8 +239,8 @@
   - invariants:
     - tests should prove supported source families can differ in provenance family while sharing one canonical semantic model
     - tests should prove explicit intended-use overrides merge consistently across source families instead of replacing canonical defaults in only one adapter path
-- `test_codex_repository_workflow.py`:
-  - responsibility: verifies the supported Codex repository workflow remains a real integration path over the shared engine
+  - `test_codex_repository_workflow.py`:
+    - responsibility: verifies the supported Codex repository workflow remains a real integration path over the shared engine
   - defines:
     - `CodexRepositoryWorkflowTests`: repository workflow validation test suite
   - depends_on:
@@ -257,8 +257,10 @@
     - tests should prove the runnable and demonstration scripts share one supported parser/composition path instead of drifting into parallel example-specific workflow wiring
     - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
     - tests should prove the runnable repository workflow can emit the standard MVP-proof Atlas artifact filenames when asked
-- `test_docs_database_workflow.py`:
-  - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
+    - tests should prove explicit total-budget overrides remain visible in workflow trace metadata and surface real pressure signals when constrained proof scenarios are run
+    - tests should prove unsupported repository-workflow total-budget overrides fail through the same validated settings path as env-backed assembly configuration
+  - `test_docs_database_workflow.py`:
+    - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
   - defines:
     - `DocsDatabaseWorkflowTests`: docs-plus-database workflow validation test suite
   - depends_on:
@@ -269,8 +271,10 @@
     - tests should prove supported record metadata stays visible in trace output as outer-workflow context rather than hidden in example-only print logic
     - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
     - tests should prove the runnable mixed-source workflow can emit the standard MVP-proof Atlas artifact filenames when asked
-- `test_mvp_proof_capture.py`:
-  - responsibility: verifies proof capture remains safe to rerun against an existing evidence bundle directory
+    - tests should prove explicit total-budget overrides remain visible in mixed-source trace metadata and surface real pressure signals when constrained proof scenarios are run
+    - tests should prove unsupported mixed-source total-budget overrides fail through the same validated settings path as env-backed assembly configuration
+  - `test_mvp_proof_capture.py`:
+    - responsibility: verifies proof capture remains safe to rerun against an existing evidence bundle directory
   - defines:
     - `MvpProofCaptureTests`: MVP proof capture test suite
   - depends_on:
@@ -279,6 +283,7 @@
     - tests should prove proof capture can regenerate a workflow/scenario bundle without failing when the source artifacts already sit at the bundle target paths
     - tests should verify the evidence package remains written in the same bundle directory after regeneration
     - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
+    - tests should prove `--expect-budget-pressure` rejects artifact sets without visible pressure signals and accepts constrained bundles that expose packet- or trace-level pressure evidence
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:

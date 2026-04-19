@@ -107,6 +107,20 @@ class AssemblySettings(BaseModel):
             raise ValueError(f"COMPRESSION_MIN_CHUNK_CHARS must be >= 1, got {value}")
         return value
 
+    def with_overrides(
+        self,
+        *,
+        default_total_budget: int | None = None,
+    ) -> "AssemblySettings":
+        """Return a validated copy with explicit assembly overrides applied."""
+
+        overrides: dict[str, object] = {}
+        if default_total_budget is not None:
+            overrides["default_total_budget"] = default_total_budget
+        return self.__class__.model_validate(
+            self.model_dump(mode="python") | overrides,
+        )
+
 
 class MemorySettings(BaseModel):
     """Validated runtime defaults for starter memory retention behavior."""
@@ -312,6 +326,21 @@ class ContextAtlasSettings(BaseModel):
                     records_file=records_file,
                     include_documents=include_documents,
                     include_records=include_records,
+                )
+            }
+        )
+
+    def with_assembly_overrides(
+        self,
+        *,
+        default_total_budget: int | None = None,
+    ) -> "ContextAtlasSettings":
+        """Return settings with validated assembly overrides applied."""
+
+        return self.model_copy(
+            update={
+                "assembly": self.assembly.with_overrides(
+                    default_total_budget=default_total_budget,
                 )
             }
         )

@@ -60,6 +60,15 @@ def build_parser(*, description: str) -> argparse.ArgumentParser:
         help="Engineering question or task query to assemble context for.",
     )
     parser.add_argument(
+        "--total-budget",
+        type=int,
+        default=None,
+        help=(
+            "Optional total token budget override for this run. Useful when a "
+            "proof or demo should show visible budget pressure."
+        ),
+    )
+    parser.add_argument(
         "--proof-artifacts-dir",
         type=Path,
         default=None,
@@ -76,6 +85,7 @@ def assemble_repository_workflow_packet(
     repo_root_arg: Path,
     docs_root_arg: Path | None,
     query: str,
+    total_budget: int | None = None,
 ) -> tuple[Path, Path, ContextPacket]:
     """Run the shared repository-workflow composition path once."""
 
@@ -86,17 +96,24 @@ def assemble_repository_workflow_packet(
         os.environ["CONTEXT_ATLAS_LOG_LEVEL"] = DEFAULT_LOG_LEVEL
 
     settings = load_settings_from_env()
+    if total_budget is not None:
+        settings = settings.with_assembly_overrides(
+            default_total_budget=total_budget,
+        )
     sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
     retriever = LexicalRetriever(InMemorySourceRegistry(sources))
+    workflow_metadata: dict[str, object] = {
+        "workflow": "codex_repository",
+        "repo_root": repo_root.as_posix(),
+        "docs_root": docs_root.as_posix(),
+    }
+    if total_budget is not None:
+        workflow_metadata["requested_total_budget"] = str(total_budget)
     packet = assemble_with_starter_context_service(
         retriever=retriever,
         query=query,
         settings=settings,
-        metadata={
-            "workflow": "codex_repository",
-            "repo_root": repo_root.as_posix(),
-            "docs_root": docs_root.as_posix(),
-        },
+        metadata=workflow_metadata,
     )
     return repo_root, docs_root, packet
 
@@ -110,10 +127,12 @@ def main() -> None:
         repo_root_arg=args.repo_root,
         docs_root_arg=args.docs_root,
         query=args.query,
+        total_budget=args.total_budget,
     )
 
     print(f"Repository root: {repo_root}")
     print(f"Governed docs root: {docs_root}")
+    print(f"Total budget: {packet.budget.total_tokens if packet.budget else 'none'}")
     print(f"Query: {args.query}")
     print()
     print("=== Codex Context ===")

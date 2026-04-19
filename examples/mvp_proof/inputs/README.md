@@ -29,6 +29,16 @@ The selected workflows and scenarios are:
 - `docs_database_builder`: `builder_support_troubleshooting`
 - `low_code_chatbot`: `low_code_validation`
 
+The first Story 7 budget-pressure hardening target is:
+
+- `codex_repository`: `repo_budget_pressure_tradeoffs`
+
+That hardening scenario is intentionally centered on the flagship repository
+workflow so the budget evidence is easy to compare against the current default
+proof pass. The scenario keeps the same governed-doc workflow shape while
+reducing the available budget enough that packet and trace review show concrete
+compression tradeoffs and an explicitly reduced document-slot allocation.
+
 Each supported workflow runner can now emit the same Atlas artifact filenames
 when `--proof-artifacts-dir` is supplied:
 
@@ -109,3 +119,41 @@ Use the same pattern for the other selected workflows by changing:
 - `--input-summary`
 - the baseline rendered artifact path
 - the Atlas artifact directory
+
+## Story 7 Hardening Target
+
+The constrained repository scenario for Story 7 should use this supported run:
+
+- workflow id: `codex_repository`
+- scenario id: `repo_budget_pressure_tradeoffs`
+- purpose: show that Atlas makes visible, governed tradeoffs when the starter
+  budget is intentionally constrained
+- expected review outcome:
+  - packet inspection should show the lower budget explicitly
+  - trace inspection should show compression, exclusion, or budget-pressure
+    reasoning that is easy to point at explicitly
+  - the evidence package should make the sacrificed or transformed context
+    visible enough to compare against the naive baseline
+
+```powershell
+python examples/codex_repository_workflow/run.py `
+  --repo-root . `
+  --docs-root docs/Guides `
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
+  --total-budget 64 `
+  --proof-artifacts-dir tmp\mvp_proof\codex_repository_budget_pressure
+```
+
+Package that constrained run with:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_budget_pressure_tradeoffs `
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
+  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
+  --expect-budget-pressure `
+  --output tmp\mvp_proof\evidence\repo_budget_pressure_tradeoffs.json
+```

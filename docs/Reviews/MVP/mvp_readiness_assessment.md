@@ -1,7 +1,7 @@
 ---
 id: context-atlas-mvp-readiness-assessment
 title: Context Atlas MVP Readiness Assessment
-summary: Provides the canonical review record for MVP proof findings, workflow evidence, and the current readiness recommendation.
+summary: Provides the canonical review record for MVP proof findings, workflow evidence, the current readiness recommendation, and the remaining hardening gaps.
 doc_class: review
 template_refs:
   metadata: base_metadata@1.0.0
@@ -10,10 +10,11 @@ status: active
 created: 2026-04-19
 last_reviewed: 2026-04-19
 owners: [core]
-tags: [mvp, review, assessment, evidence, recommendation]
+tags: [mvp, review, assessment, evidence, recommendation, hardening]
 related:
   - ./mvp_evaluation_rubric.md
   - ../../Planning/MVP/Stories/story_6_mvp_proof.md
+  - ../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md
   - ../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md
   - ../../../examples/mvp_proof/README.md
   - ../../../examples/mvp_proof/evidence/README.md
@@ -151,6 +152,10 @@ Current state:
     traces
   - the current proof pass still lacks a deliberately budget-constrained
     scenario that makes tradeoffs under strong pressure obvious
+  - Story 7 now defines a reproducible constrained repository scenario,
+    `codex_repository / repo_budget_pressure_tradeoffs`, so the next
+    reassessment can review one explicit pressure bundle instead of a generic
+    follow-up note
 - workflow reproducibility:
   - this is now a clear strength because all three workflows can emit the same
     Atlas artifact set and can be bundled into one predictable review layout
@@ -192,7 +197,13 @@ Use this section to record whether the current assessment points to:
 
 Current state:
 
-- add at least one intentionally budget-constrained proof scenario so the MVP
-  assessment includes a stronger tradeoff example
+- follow-up hardening plan is now tracked in
+  [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
+- the first budget-pressure hardening target, the constrained repository
+  scenario `codex_repository / repo_budget_pressure_tradeoffs`, is now a
+  reproducible supported run plus capture path
+- the next reassessment should review the generated bundle for that scenario to
+  determine whether budget-behavior evidence is now strong enough to remove the
+  budget-pressure caveat from the recommendation record
 - strengthen document-authority proof inputs so authority handling is not shown
   mainly through structured records

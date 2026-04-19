@@ -26,6 +26,20 @@ The capture script expects:
 - an Atlas trace artifact
 - an Atlas rendered-context artifact
 
+For constrained proof scenarios, the capture script can also assert that the
+Atlas packet and trace really do show budget pressure rather than merely using a
+smaller number in narration:
+
+- pass `--expect-budget-pressure` for scenarios that are supposed to show
+  compression or budget-driven exclusion
+- the script will then require visible budget metadata plus at least one
+  budget-pressure signal in the packet or trace artifacts
+
+The first constrained hardening target now uses the supported repository
+workflow with `--total-budget 64`; see
+[`inputs/README.md`](/context-atlas/examples/mvp_proof/inputs/README.md) for the
+exact run and packaging commands.
+
 Before packaging those artifacts, the script now also verifies that the Atlas
 packet and Atlas trace still look like one canonical workflow run:
 
