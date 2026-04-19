@@ -143,6 +143,7 @@
 - PR A of that task should define the minimal supported repository workflow shape and make the current composition boundary explicit in repo-facing docs and infrastructure guidance.
 - The current PR A direction now makes one reference-workflow rule explicit: repository-root and docs-root selection stay in outer workflow code, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
 - PR B should implement the runnable workflow example directory and keep it close to the supported public API.
+- The current PR B direction is to make that workflow concrete through a repository-root-oriented example directory while keeping Codex-facing context as a derived rendering story over the canonical packet.
 - PR C should validate the workflow against realistic engineering questions, capture packet/trace/context output, and refine the path until it feels like a real integration path rather than demo glue.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 

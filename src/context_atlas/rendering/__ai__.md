@@ -55,6 +55,7 @@
     - prefer structured compression results when available
     - retained memory should render from canonical packet state rather than a parallel service-only string field
     - do not mutate packet state during rendering
+    - optional section headers may improve product-facing readability, but they should remain derived formatting rather than Codex-specific packet semantics
 - `packet.py`:
   - responsibility: renders packet inspection sections for product-facing debugging and demos
   - invariants:

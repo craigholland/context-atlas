@@ -60,6 +60,14 @@ At this stage, the repository workflow should stay explicit about what it is not
 
 The dedicated runnable example for that workflow lands in the Story 3 task slices under `examples/codex_repository_workflow/`.
 
+Run the repository-oriented example directly:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root .
+```
+
+See [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md) for the current supported repository path.
+
 ## Mixed-Source Flow
 
 Run the mixed-source example after an editable install:
