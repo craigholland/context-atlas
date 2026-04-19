@@ -33,6 +33,7 @@ class MvpProofCaptureTests(unittest.TestCase):
         packet_metadata: dict[str, str] | None = None,
         trace_metadata: dict[str, str] | None = None,
         decisions: list[dict[str, object]] | None = None,
+        selected_candidates: list[dict[str, object]] | None = None,
     ) -> None:
         trace = {
             "trace_id": "trace-proof-1",
@@ -41,7 +42,7 @@ class MvpProofCaptureTests(unittest.TestCase):
         }
         packet = {
             "packet_id": "packet-proof-1",
-            "selected_candidates": [],
+            "selected_candidates": selected_candidates or [],
             "trace": trace,
             "metadata": packet_metadata or {},
         }
@@ -234,6 +235,113 @@ class MvpProofCaptureTests(unittest.TestCase):
 
             self.assertEqual(package["scenario"], "repo_budget_pressure_tradeoffs")
             self.assertTrue(package["review_path"]["budget_pressure_expected"])
+
+    def test_build_evidence_package_rejects_missing_document_authority_contrast(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                selected_candidates=[
+                    {
+                        "source": {
+                            "source_class": "planning",
+                            "provenance": {"source_family": "document"},
+                        }
+                    }
+                ],
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_document_authority_precedence",
+                    "--query",
+                    "Which guidance should an engineer follow when authoritative and planning docs both discuss repository process?",
+                    "--input-summary",
+                    "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=<repo_root>/docs",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--expect-document-authority-contrast",
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "must include an authoritative document",
+            ):
+                _CAPTURE_MODULE.build_evidence_package(args)
+
+    def test_build_evidence_package_accepts_document_authority_contrast(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                selected_candidates=[
+                    {
+                        "source": {
+                            "source_class": "authoritative",
+                            "provenance": {"source_family": "document"},
+                        }
+                    },
+                    {
+                        "source": {
+                            "source_class": "planning",
+                            "provenance": {"source_family": "document"},
+                        }
+                    },
+                ],
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_document_authority_precedence",
+                    "--query",
+                    "Which guidance should an engineer follow when authoritative and planning docs both discuss repository process?",
+                    "--input-summary",
+                    "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=<repo_root>/docs",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--expect-document-authority-contrast",
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            package = _CAPTURE_MODULE.build_evidence_package(args)
+
+            self.assertEqual(package["scenario"], "repo_document_authority_precedence")
+            self.assertTrue(package["review_path"]["document_authority_expected"])
 
 
 if __name__ == "__main__":

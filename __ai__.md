@@ -194,6 +194,7 @@
 - The current MVP proof packaging path should now prefer reviewable bundle directories under one bundle root, with one per-workflow/per-scenario directory containing copied baseline and Atlas artifacts plus the packaged evidence JSON.
 - The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until stronger document-authority and budget-pressure proof closes the remaining gaps.
 - The constrained repository proof scenario `codex_repository / repo_budget_pressure_tradeoffs` is now part of that hardening path and should remain aligned across the runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
+- The document-authority hardening path now also includes the repository scenario `codex_repository / repo_document_authority_precedence`, which should remain aligned across the tracked sample repo, runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

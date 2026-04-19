@@ -187,8 +187,21 @@ run:
 
 ```powershell
 python examples/codex_repository_workflow/run.py `
-  --repo-root . `
-  --docs-root docs `
+  --repo-root examples/codex_repository_workflow/sample_repo `
   --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
   --proof-artifacts-dir tmp\mvp_proof\codex_repository_authority
+```
+
+Package that authority-rich run with:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_document_authority_precedence `
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
+  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
+  --expect-document-authority-contrast `
+  --output tmp\mvp_proof\evidence\repo_document_authority_precedence.json
 ```
