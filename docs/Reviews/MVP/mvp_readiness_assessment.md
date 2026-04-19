@@ -1,7 +1,7 @@
 ---
 id: context-atlas-mvp-readiness-assessment
 title: Context Atlas MVP Readiness Assessment
-summary: Provides the canonical review record for MVP proof findings, workflow evidence, and the current readiness recommendation.
+summary: Provides the canonical review record for MVP proof findings, workflow evidence, the current readiness recommendation, and the remaining hardening gaps.
 doc_class: review
 template_refs:
   metadata: base_metadata@1.0.0
@@ -10,10 +10,11 @@ status: active
 created: 2026-04-19
 last_reviewed: 2026-04-19
 owners: [core]
-tags: [mvp, review, assessment, evidence, recommendation]
+tags: [mvp, review, assessment, evidence, recommendation, hardening]
 related:
   - ./mvp_evaluation_rubric.md
   - ../../Planning/MVP/Stories/story_6_mvp_proof.md
+  - ../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md
   - ../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md
   - ../../../examples/mvp_proof/README.md
   - ../../../examples/mvp_proof/evidence/README.md
@@ -192,6 +193,8 @@ Use this section to record whether the current assessment points to:
 
 Current state:
 
+- follow-up hardening plan is now tracked in
+  [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
 - add at least one intentionally budget-constrained proof scenario so the MVP
   assessment includes a stronger tradeoff example
 - strengthen document-authority proof inputs so authority handling is not shown
