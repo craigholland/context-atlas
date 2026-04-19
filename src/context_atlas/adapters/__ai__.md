@@ -117,6 +117,7 @@
     - row mappers should translate already-fetched mapping payloads only; they must not open connections, execute queries, or own client lifecycles
     - row mappers should stay small and validation-first so application integrations can rename fields without widening Atlas into a connector framework
     - row mappers should emit `StructuredRecordInput` objects so later translation still converges through one canonical source path
+    - row mappers should construct those record inputs through the validated `StructuredRecordInput` surface rather than keeping a parallel ad hoc row schema alive inside adapters
 
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
