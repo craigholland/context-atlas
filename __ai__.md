@@ -172,6 +172,7 @@
 - The low-code workflow should now remain test-backed as a real preset-driven integration path, including records-only or docs-only evaluation of the same shared packet and trace flow.
 - Story 5 Task 5.2 is now packaging that low-code path into product-facing deliverables, so README, `.env.example`, and the low-code guide/example README should stay aligned on what the workflow does and does not do.
 - Story 5 Task 5.2 now also introduces tracked low-code reference artifacts under `examples/low_code_workflow/`; those TOML files should stay honest about being reference surfaces rather than implied hidden loaders.
+- Story 5 Task 5.2 now also expects the low-code guide, example README, and repo README to preserve the same recommended first-time evaluation order for those reference artifacts and the runnable wrapper.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

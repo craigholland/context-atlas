@@ -16,6 +16,20 @@ The example is intentionally honest about scope:
 - it does not open database connections or vector-store clients
 - it does not claim a mature no-code product surface
 
+## Start Here
+
+Use the files in this folder in the following order:
+
+1. [config.example.toml](./config.example.toml)
+2. [presets/basic.toml](./presets/basic.toml)
+3. [run.py](./run.py)
+
+That keeps the experience legible without overstating maturity:
+
+- `config.example.toml` shows the small runtime-selection surface
+- `presets/basic.toml` shows the single supported preset contract
+- `run.py` demonstrates how the wrapper still delegates to the shared engine
+
 ## Run
 
 After an editable install:

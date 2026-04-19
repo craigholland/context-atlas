@@ -182,6 +182,17 @@ Tracked reference artifacts for the current low-code story now also live at:
 - [examples/low_code_workflow/config.example.toml](/context-atlas/examples/low_code_workflow/config.example.toml)
 - [examples/low_code_workflow/presets/basic.toml](/context-atlas/examples/low_code_workflow/presets/basic.toml)
 
+If you are evaluating the low-code path for the first time, the recommended
+order is:
+
+1. `config.example.toml`
+2. `presets/basic.toml`
+3. `examples/low_code_workflow/README.md`
+4. `examples/low_code_workflow/run.py`
+
+That order is intentional. The tracked TOML files are reference surfaces for
+the current MVP story, not hidden config loaders or a broader no-code platform.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

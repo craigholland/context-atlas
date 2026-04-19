@@ -15,6 +15,23 @@ You will:
 3. run the supported low-code workflow example
 4. inspect the rendered chatbot context, packet view, and trace view
 
+## Recommended Order
+
+If you are evaluating this path for the first time, use the files in this
+order:
+
+1. [examples/low_code_workflow/config.example.toml](../../examples/low_code_workflow/config.example.toml)
+2. [examples/low_code_workflow/presets/basic.toml](../../examples/low_code_workflow/presets/basic.toml)
+3. [examples/low_code_workflow/README.md](../../examples/low_code_workflow/README.md)
+4. [examples/low_code_workflow/run.py](../../examples/low_code_workflow/run.py)
+
+That sequence keeps the product story honest:
+
+- `config.example.toml` shows the tiny runtime-selection surface
+- `presets/basic.toml` shows what the one supported preset actually means
+- the example README shows how to run the workflow
+- `run.py` is the runnable wrapper over the shared engine
+
 ## Supported Workflow Shape
 
 The current low-code path is intentionally small:
@@ -162,5 +179,7 @@ outer path produced the packet.
 
 If this guide, [README](../../README.md), and
 [examples/low_code_workflow/README.md](../../examples/low_code_workflow/README.md)
-stop telling the same story, the low-code product surface is drifting and
-should be corrected before more presets or wrapper behavior are added.
+stop telling the same story, or if the tracked TOML artifacts start implying a
+loader Atlas does not actually provide, the low-code product surface is
+drifting and should be corrected before more presets or wrapper behavior are
+added.
