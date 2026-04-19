@@ -3,56 +3,19 @@
 from __future__ import annotations
 
 import math
-from enum import StrEnum
 
 from pydantic import Field
 
 from ..errors import ContextAtlasError, ErrorCode
 from ..messages import ErrorMessage
 from .base import CanonicalDomainModel
-
-
-class ContextSourceClass(StrEnum):
-    """High-level source classes available to Context Atlas."""
-
-    AUTHORITATIVE = "authoritative"
-    PLANNING = "planning"
-    REVIEWS = "reviews"
-    EXPLORATORY = "exploratory"
-    RELEASES = "releases"
-    CODE = "code"
-    MEMORY = "memory"
-    OTHER = "other"
-
-
-class ContextSourceAuthority(StrEnum):
-    """Trust/precedence posture of a source."""
-
-    BINDING = "binding"
-    PREFERRED = "preferred"
-    ADVISORY = "advisory"
-    SPECULATIVE = "speculative"
-    HISTORICAL = "historical"
-
-
-class ContextSourceDurability(StrEnum):
-    """Expected stability of a source over time."""
-
-    EPHEMERAL = "ephemeral"
-    SESSION = "session"
-    WORKING = "working"
-    DURABLE = "durable"
-    ARCHIVAL = "archival"
-
-
-class ContextSourceFamily(StrEnum):
-    """High-level ingestion family for a canonical source."""
-
-    DOCUMENT = "document"
-    STRUCTURED_RECORD = "structured_record"
-    MEMORY = "memory"
-    CODE = "code"
-    OTHER = "other"
+from .source_semantics import (
+    ContextSourceAuthority,
+    ContextSourceClass,
+    ContextSourceDurability,
+    ContextSourceFamily,
+    merge_source_text_groups,
+)
 
 
 class ContextSourceProvenance(CanonicalDomainModel):
@@ -117,12 +80,12 @@ class ContextSource(CanonicalDomainModel):
         object.__setattr__(
             self,
             "tags",
-            tuple(tag.strip() for tag in self.tags if tag.strip()),
+            merge_source_text_groups(self.tags),
         )
         object.__setattr__(
             self,
             "intended_uses",
-            tuple(use.strip() for use in self.intended_uses if use.strip()),
+            merge_source_text_groups(self.intended_uses),
         )
         object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 

@@ -15,6 +15,8 @@ from ...domain.models import (
     ContextSourceDurability,
     ContextSourceFamily,
     ContextSourceProvenance,
+    coerce_source_text_sequence,
+    resolve_source_semantics,
 )
 
 
@@ -32,8 +34,8 @@ class StructuredRecordInput(BaseModel):
     title: str | None = None
     source_uri: str | None = None
     source_class: ContextSourceClass = ContextSourceClass.OTHER
-    authority: ContextSourceAuthority = ContextSourceAuthority.ADVISORY
-    durability: ContextSourceDurability = ContextSourceDurability.WORKING
+    authority: ContextSourceAuthority | None = None
+    durability: ContextSourceDurability | None = None
     tags: tuple[str, ...] = ()
     intended_uses: tuple[str, ...] = ()
     metadata: dict[str, str] = Field(default_factory=dict)
@@ -52,23 +54,7 @@ class StructuredRecordInput(BaseModel):
         cls,
         value: object,
     ) -> tuple[str, ...]:
-        if value is None:
-            return ()
-        if isinstance(value, str):
-            normalized = value.strip()
-            return () if not normalized else (normalized,)
-        if isinstance(value, Mapping):
-            raise ValueError("must not be a mapping")
-        if isinstance(value, Iterable):
-            normalized_items: list[str] = []
-            for item in value:
-                if not isinstance(item, str):
-                    raise ValueError("must contain only strings")
-                normalized = item.strip()
-                if normalized:
-                    normalized_items.append(normalized)
-            return tuple(normalized_items)
-        raise ValueError("must be a string or iterable of strings")
+        return coerce_source_text_sequence(value)
 
 
 class StructuredRecordSourceAdapter:
@@ -108,13 +94,19 @@ class StructuredRecordSourceAdapter:
         """Translate one structured record into a canonical source."""
 
         record_input = self._validate_record(record)
+        semantics = resolve_source_semantics(
+            source_class=record_input.source_class,
+            authority=record_input.authority,
+            durability=record_input.durability,
+            intended_uses=record_input.intended_uses,
+        )
         return ContextSource(
             source_id=record_input.record_id,
             content=record_input.content,
             title=record_input.title,
             source_class=record_input.source_class,
-            authority=record_input.authority,
-            durability=record_input.durability,
+            authority=semantics.authority,
+            durability=semantics.durability,
             provenance=ContextSourceProvenance(
                 source_family=ContextSourceFamily.STRUCTURED_RECORD,
                 source_uri=record_input.source_uri,
@@ -125,7 +117,7 @@ class StructuredRecordSourceAdapter:
                 },
             ),
             tags=record_input.tags,
-            intended_uses=record_input.intended_uses,
+            intended_uses=semantics.intended_uses,
             metadata=record_input.metadata,
         )
 

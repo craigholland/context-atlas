@@ -134,15 +134,12 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.1 is now the active task-level feature branch and should prove that Atlas supports more than one source family through one canonical governance model.
-- That task should treat structured records as adapter-facing inputs that become canonical `ContextSource` artifacts rather than as a parallel inner model.
-- PR A of that task is the contract slice; it should define the minimum structured-record shape Atlas needs without turning the package into a database framework.
-- PR B of that task should implement record-backed source translation inside `adapters/records/` while preserving provenance and intended-use metadata on canonical sources.
-- PR C of that task should validate mixed-source use so filesystem docs and structured records can coexist in one registry and packet flow without leaking source-family quirks inward.
-- Review fixes on Story 2 Task 2.1 should keep structured-record validation strict: mapping-shaped `tags` or `intended_uses` inputs should fail fast, and canonical `record_id` should remain authoritative in source provenance metadata.
-- The root README should now describe structured records as the next source family through the adapter-facing `StructuredRecordInput` contract while keeping `ContextSource` as the only canonical source artifact.
-- PR B should move the structured-record contract into `adapters/records/`, expose a real translation adapter, and keep the root README aligned with that implemented starter surface.
-- PR C should prove mixed-source packet flow with one registry and one assembly path, and the root README should point to a concrete mixed-source example rather than leaving that claim abstract.
+- Story 2 Task 2.2 is now the active task-level feature branch and should prove that supported source families converge into one inward-owned semantic model.
+- That task should keep source classification, authority, durability, intended use, and provenance semantics canonical inside `domain/` rather than duplicated across adapters.
+- PR A of that task is now defining canonical per-class defaults for source authority, durability, and intended uses so later adapters can share one inward semantic target.
+- PR B of that task is now moving repeated source-semantics behavior into a dedicated inward helper module so adapters stop owning shared normalization rules and fallback defaults.
+- PR C of that task is now validating that documents and structured records expose coherent semantics through the same canonical packet and trace flow, and the task should be ready for feature-branch review once that validation is green.
+- The root README should keep describing structured records and filesystem documents as two source families that converge into one `ContextSource` model, not as parallel semantic hierarchies.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

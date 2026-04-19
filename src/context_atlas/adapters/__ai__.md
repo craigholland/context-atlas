@@ -83,7 +83,7 @@
     - `context_atlas.domain.models`
   - invariants:
     - document classification should prefer explicit front matter over path inference when both are present
-    - inferred source authority/durability should follow the documentation ontology rather than flattening docs into generic tags
+    - inferred source authority/durability should flow through shared domain source-semantics helpers rather than adapter-local default tables
     - provenance should preserve file identity and classification source so later traces can explain where a source came from
     - filesystem documents should now identify themselves as the `document` source family in canonical provenance
 - `records/structured.py`:
@@ -99,7 +99,8 @@
     - record adapters should accept already-fetched payloads rather than becoming a database access layer
     - record provenance should preserve source-family identity and adapter collector name
     - canonical `record_id` should remain authoritative in provenance metadata even when callers supply extra provenance fields
-    - invalid `tags` or `intended_uses` container shapes should fail fast rather than being silently normalized into misleading metadata
+    - invalid `tags` or `intended_uses` container shapes should fail fast through shared domain source-semantics helpers rather than adapter-local coercion
+    - record adapters should resolve fallback authority, durability, and intended uses through shared domain semantics rather than adapter-local defaults
     - record translation should emit canonical `ContextSource` artifacts without inventing a second source object hierarchy
 
 ## Known Gaps / Future-State Notes
@@ -111,11 +112,14 @@
 - The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.
 - Story 2 Task 2.1 is now defining a minimal structured-record input contract; adapter-facing record shapes should stay small and validation-first rather than becoming a database access layer.
 - Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
+- Story 2 Task 2.2 should now remove duplicated source-semantics defaults from adapters where possible by consuming shared domain helpers instead of maintaining parallel normalization rules.
+- Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
 - `domain/`: candidate reranking, deduplication, and decision tracing now harden inward there; adapters should stop at source registration and candidate production.
 - `domain/`: filesystem document adapters may classify source authority and durability, but those classifications should be expressed through canonical `ContextSource` fields rather than local enums or ad hoc tags.
+- `domain/`: adapters may parse source-family-specific hints, but shared sequence coercion and fallback semantics should now come from `models/source_semantics.py` rather than adapter-local helper tables.
 - `domain/`: source-family provenance may be expressed through canonical provenance fields, but structured-record input contracts should remain adapter-facing rather than becoming a second canonical source model.
 - `domain/`: structured-record adapters may default source semantics when outer integrations do not supply them, but those defaults must still surface through canonical source fields and provenance.
 - `services/`: future services should orchestrate retrieval through inward-safe contracts rather than by embedding lexical scoring logic directly.
