@@ -166,6 +166,7 @@
 - The current Task 4.3 refactor direction is to let the adapter package own the mapper-plus-translation crossing for already-fetched rows while keeping row fetching, payload loading, and workflow metadata outward in examples or applications.
 - Story 4 Task 4.3 now also expects the product-facing docs to teach that same boundary explicitly rather than describing row mapping, translation, and engine assembly as one undifferentiated workflow blob.
 - Story 5 Task 5.1 is now shaping the first low-code path, so repo-facing guidance should treat presets and declarative source configuration as outer workflow conveniences over the same canonical engine rather than as a second product or alternate packet model.
+- The low-code workflow shape should stay intentionally small at the repo root: one preset plus a tiny source-selection/configuration surface is acceptable, but broader tuning should continue to live under the existing validated runtime-knob story unless the authoritative docs change.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
