@@ -325,6 +325,32 @@ class BudgetAndCompressionTests(unittest.TestCase):
             CompressionStrategy.EXTRACTIVE.value,
         )
 
+    def test_render_packet_context_uses_selected_candidates_when_compression_was_not_applied(
+        self,
+    ) -> None:
+        candidates = LexicalRetriever(
+            self.registry,
+            mode=LexicalRetrievalMode.KEYWORD,
+        ).retrieve("context architecture", top_k=1)
+        packet = ContextPacket(
+            packet_id="packet-budget-2",
+            query="How should Atlas render non-applied compression?",
+            selected_candidates=candidates,
+            compression_result={
+                "text": "Artifact text should not replace canonical candidate content.",
+                "strategy_used": CompressionStrategy.EXTRACTIVE,
+                "original_chars": 56,
+                "compressed_chars": 56,
+                "estimated_tokens_saved": 0,
+                "was_applied": False,
+                "source_ids": (candidates[0].source.source_id,),
+            },
+        )
+
+        rendered = render_packet_context(packet)
+
+        self.assertEqual(rendered, candidates[0].source.content)
+
     def test_budget_and_compression_templates_are_registered(self) -> None:
         self.assertEqual(
             LogMessage.BUDGET_ALLOCATED,

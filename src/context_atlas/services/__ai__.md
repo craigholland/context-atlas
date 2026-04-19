@@ -62,6 +62,7 @@
     - orchestration should produce canonical packets and traces, not prompt-first strings
     - packet assembly should stay explainable through structured trace metadata and decisions
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
+    - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
     - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it
@@ -70,6 +71,7 @@
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.
 - The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
 - The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
+- Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 
 ## Cross-Folder Contracts

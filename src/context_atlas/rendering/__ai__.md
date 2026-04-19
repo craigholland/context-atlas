@@ -26,6 +26,7 @@
 - Renderers should be pure formatting/derivation code, not hidden orchestration or policy engines.
 - Renderers should not mutate packet or compression models; tests should be able to compare packet snapshots before and after rendering.
 - `render_packet_context` should derive output from canonical packet state or an attached canonical transformation artifact; it must not become a service-like assembly step.
+- when a transformation artifact is attached but was not applied, rendering should continue to derive starter context from canonical selected candidates rather than treating the transform artifact as new canonical state
 
 ## Allowed Dependencies
 - may depend on:

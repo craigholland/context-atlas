@@ -124,6 +124,7 @@
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
+    - tests should prove non-applied compression artifacts do not silently replace canonical selected-candidate content in starter rendering
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:
@@ -170,6 +171,7 @@
     - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
     - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
+    - tests should prove service trace metadata distinguishes compression presence from actual compression application
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:

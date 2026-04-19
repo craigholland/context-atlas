@@ -250,6 +250,11 @@ class ContextAssemblyService:
                     compressed_chars=compression_outcome.compression_result.compressed_chars,
                 )
 
+            compression_applied = (
+                compression_outcome is not None
+                and compression_outcome.compression_result.was_applied
+            )
+
             trace = ContextTrace(
                 trace_id=active_trace_id,
                 decisions=self._with_decision_positions(
@@ -274,6 +279,7 @@ class ContextAssemblyService:
                     memory_outcome=memory_outcome,
                     budget_outcome=budget_outcome,
                     compression_outcome=compression_outcome,
+                    compression_applied=compression_applied,
                 ),
             )
 
@@ -284,10 +290,7 @@ class ContextAssemblyService:
                     "selected_memory_count": str(len(selected_memory_entries)),
                     "document_budget_tokens": str(document_budget_tokens),
                     "memory_budget_tokens": str(memory_budget_tokens),
-                    "compression_applied": str(
-                        compression_outcome is not None
-                        and compression_outcome.compression_result.was_applied
-                    ).lower(),
+                    "compression_applied": str(compression_applied).lower(),
                 }
             )
 
@@ -602,6 +605,7 @@ class ContextAssemblyService:
         memory_outcome: MemorySelectionOutcome,
         budget_outcome: BudgetAllocationOutcome,
         compression_outcome: CompressionOutcome | None,
+        compression_applied: bool,
     ) -> dict[str, str]:
         """Assemble service-level and stage-prefixed trace metadata."""
 
@@ -613,6 +617,7 @@ class ContextAssemblyService:
             "budget_total_tokens": str(budget.total_tokens),
             "budget_slot_count": str(len(budget.slots)),
             "compression_present": str(compression_outcome is not None).lower(),
+            "compression_applied": str(compression_applied).lower(),
             "selected_source_classes": ",".join(
                 self._ordered_unique(
                     candidate.source.source_class.value
