@@ -34,6 +34,7 @@
 - Infrastructure code may reuse stable domain error codes, exceptions, and direct message constants instead of inventing semantic strings locally.
 - Do not let logger setup or config parsing become a backdoor for embedding business/domain policy.
 - If infrastructure grows persistence backends, audit stores, or memory stores later, they must continue to translate external/runtime details before they cross inward.
+- `assembly.py` should stop at starter wiring and configured orchestration; it must not absorb rendering or packet-inspection responsibilities for convenience.
 
 ## Allowed Dependencies
 - may depend on:
@@ -126,6 +127,7 @@
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
 - The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
+- Story 1 Task 1.4 is now auditing the starter surface; changes here should make the composition boundary clearer, not more magical.
 - Product-facing getting-started guidance should only document runtime knobs that are actually supported by `load_settings_from_env()` and the current starter assembly factory.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
