@@ -24,6 +24,7 @@
 - Prefer standard-library implementations and simple file-shape transformations over runtime imports from `src/context_atlas`.
 - When the supported workflows emit one shared artifact filename set, this folder should prefer accepting an artifact directory plus those standard filenames over duplicating per-workflow path conventions.
 - When proof work is being packaged for review, this folder should prefer writing a predictable bundle directory that keeps copied artifacts and the packaged evidence JSON together for one workflow/scenario pair.
+- Reassessment-oriented bundle refreshes should be able to clear an existing workflow/scenario bundle first so new review passes do not inherit stale files silently.
 - Bundle generation should be idempotent when rerun against an existing workflow/scenario directory; proof capture must not fail just because the current artifact paths already point at the target bundle files.
 - Proof capture should validate that the packet and trace it packages still look like one canonical workflow run, including matching trace identifiers and a trace `request_workflow` that matches the declared workflow name.
 - When a proof scenario is explicitly marked as budget-constrained, capture should also verify that the packaged artifacts show visible budget-pressure evidence rather than only narrative claims.
@@ -49,6 +50,7 @@
     - should accept workflow artifacts as inputs rather than generating them itself
     - should support the shared Atlas artifact-directory convention used by the selected MVP workflows without losing backward compatibility for explicit file paths
     - should support a reviewable bundle-root output path so reviewers can open copied artifacts directly without first unpacking the JSON evidence record
+    - should support an explicit reassessment refresh path that clears stale bundle contents before rewriting a workflow/scenario bundle
     - should tolerate regeneration into an already-populated bundle directory when the source artifacts already live at the target paths
     - should reject packet/trace inputs that do not look like one canonical workflow run over the shared engine path
     - should support an explicit budget-pressure expectation for constrained scenarios and reject artifact sets that do not show visible pressure signals

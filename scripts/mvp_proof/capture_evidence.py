@@ -127,6 +127,14 @@ def build_parser() -> argparse.ArgumentParser:
             "<bundle-root>/<workflow>/<scenario>/."
         ),
     )
+    parser.add_argument(
+        "--refresh-bundle",
+        action="store_true",
+        help=(
+            "When writing to --bundle-root, remove any existing workflow/scenario "
+            "bundle directory first so the refreshed bundle cannot retain stale files."
+        ),
+    )
     return parser
 
 
@@ -460,7 +468,10 @@ def _write_evidence_bundle(
     atlas_trace_path: Path,
     atlas_rendered_path: Path,
     package: dict[str, Any],
+    refresh_bundle: bool,
 ) -> None:
+    if refresh_bundle and bundle_dir.exists():
+        shutil.rmtree(bundle_dir)
     bundle_dir.mkdir(parents=True, exist_ok=True)
     _copy_artifact_if_needed(
         source_path=baseline_rendered_path,
@@ -511,6 +522,7 @@ def main() -> int:
             atlas_trace_path=atlas_trace_path.resolve(),
             atlas_rendered_path=atlas_rendered_path.resolve(),
             package=package,
+            refresh_bundle=args.refresh_bundle,
         )
         print(bundle_dir)
         return 0
