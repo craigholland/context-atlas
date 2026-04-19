@@ -27,6 +27,8 @@
 - Bundle generation should be idempotent when rerun against an existing workflow/scenario directory; proof capture must not fail just because the current artifact paths already point at the target bundle files.
 - Proof capture should validate that the packet and trace it packages still look like one canonical workflow run, including matching trace identifiers and a trace `request_workflow` that matches the declared workflow name.
 - When a proof scenario is explicitly marked as budget-constrained, capture should also verify that the packaged artifacts show visible budget-pressure evidence rather than only narrative claims.
+- When a proof scenario is explicitly marked as authority-focused, capture should also verify that the packaged packet shows authoritative repository documents alongside lower-authority document material in the expected packet order.
+- That authority-focused validation should key off the canonical `source.authority` values in the packet artifacts, not only document classes, so front-matter authority overrides remain visible in proof review.
 
 ## Allowed Dependencies
 - may depend on:
@@ -51,6 +53,7 @@
     - should reject packet/trace inputs that do not look like one canonical workflow run over the shared engine path
     - should support an explicit budget-pressure expectation for constrained scenarios and reject artifact sets that do not show visible pressure signals
     - should require budget trace metadata before accepting a constrained budget-pressure bundle, even when packet-level compression metadata is present
+    - should support an explicit `--expect-document-authority-contrast` expectation for authority-focused scenarios and reject packet artifacts that do not keep higher-authority repository documents ahead of lower-authority ones based on canonical `source.authority`
     - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes

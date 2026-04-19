@@ -33,11 +33,20 @@ The first Story 7 budget-pressure hardening target is:
 
 - `codex_repository`: `repo_budget_pressure_tradeoffs`
 
+The first Story 7 document-authority hardening target is:
+
+- `codex_repository`: `repo_document_authority_precedence`
+
 That hardening scenario is intentionally centered on the flagship repository
 workflow so the budget evidence is easy to compare against the current default
 proof pass. The scenario keeps the same governed-doc workflow shape while
 reducing the available budget enough that packet and trace review show concrete
 compression tradeoffs and an explicitly reduced document-slot allocation.
+
+The authority hardening scenario should also stay on the flagship repository
+workflow, but it should widen the governed-doc scope enough that authoritative,
+planning, and review-style documents can all participate in the same candidate
+set for one query.
 
 Each supported workflow runner can now emit the same Atlas artifact filenames
 when `--proof-artifacts-dir` is supplied:
@@ -156,4 +165,43 @@ python scripts/mvp_proof/capture_evidence.py `
   --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
   --expect-budget-pressure `
   --output tmp\mvp_proof\evidence\repo_budget_pressure_tradeoffs.json
+```
+
+## Story 7 Authority Hardening Target
+
+The first document-authority scenario for Story 7 should use this supported
+run:
+
+- workflow id: `codex_repository`
+- scenario id: `repo_document_authority_precedence`
+- purpose: show that authoritative governed documents remain visible and are
+  preferred ahead of lower-authority planning or review material when the same
+  repository question overlaps all of them
+- expected review outcome:
+  - packet inspection should show at least one authoritative repository
+    document in the selected candidate set
+  - packet or trace review should make it possible to identify lower-authority
+    planning or review documents that overlapped the same topic
+  - a reviewer should be able to explain the authority contrast through packet
+    and trace evidence rather than relying only on the folder names
+
+```powershell
+python examples/codex_repository_workflow/run.py `
+  --repo-root examples/codex_repository_workflow/sample_repo `
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
+  --proof-artifacts-dir tmp\mvp_proof\codex_repository_authority
+```
+
+Package that authority-rich run with:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_document_authority_precedence `
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
+  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
+  --expect-document-authority-contrast `
+  --output tmp\mvp_proof\evidence\repo_document_authority_precedence.json
 ```

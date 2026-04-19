@@ -28,6 +28,13 @@ ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
 ATLAS_TRACE_FILENAME = "atlas_trace.json"
 BASELINE_RENDERED_CONTEXT_FILENAME = "baseline_rendered_context.txt"
 EVIDENCE_PACKAGE_FILENAME = "evidence_package.json"
+_DOCUMENT_AUTHORITY_ORDER = {
+    "binding": 5,
+    "preferred": 4,
+    "advisory": 3,
+    "speculative": 2,
+    "historical": 1,
+}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -94,6 +101,15 @@ def build_parser() -> argparse.ArgumentParser:
             "Require the Atlas packet/trace artifacts to show visible budget-pressure "
             "signals such as compression, out-of-budget exclusion, or budget-pressure "
             "reason codes."
+        ),
+    )
+    parser.add_argument(
+        "--expect-document-authority-contrast",
+        action="store_true",
+        help=(
+            "Require the Atlas packet artifact to show an authoritative document "
+            "selected ahead of lower-authority repository documents in the same "
+            "scenario."
         ),
     )
     parser.add_argument(
@@ -261,6 +277,80 @@ def _validate_budget_pressure_artifacts(
         )
 
 
+def _validate_authoritative_document_artifacts(
+    *,
+    packet_artifact: dict[str, Any],
+) -> None:
+    packet_content = _require_mapping(
+        value=packet_artifact["content"],
+        name="Atlas packet artifact",
+    )
+    selected_candidates = _require_sequence(
+        value=packet_content.get("selected_candidates"),
+        name="Atlas packet selected_candidates",
+    )
+
+    selected_document_authorities: list[str] = []
+    for candidate in selected_candidates:
+        candidate_mapping = _require_mapping(
+            value=candidate,
+            name="Atlas packet selected candidate",
+        )
+        source_mapping = _require_mapping(
+            value=candidate_mapping.get("source"),
+            name="Atlas packet selected candidate source",
+        )
+        provenance_mapping = _require_mapping(
+            value=source_mapping.get("provenance"),
+            name="Atlas packet selected candidate provenance",
+        )
+        if provenance_mapping.get("source_family") != "document":
+            continue
+        source_authority = source_mapping.get("authority")
+        if isinstance(source_authority, str) and source_authority.strip():
+            selected_document_authorities.append(source_authority)
+
+    if not selected_document_authorities:
+        raise ValueError(
+            "Document-authority proof artifacts must include at least one document "
+            "candidate with visible authority semantics in the selected packet."
+        )
+
+    authority_levels = [
+        _DOCUMENT_AUTHORITY_ORDER[authority]
+        for authority in selected_document_authorities
+        if authority in _DOCUMENT_AUTHORITY_ORDER
+    ]
+    if len(authority_levels) != len(selected_document_authorities):
+        raise ValueError(
+            "Document-authority proof artifacts must use recognized authority values "
+            "for selected document candidates."
+        )
+
+    highest_authority = max(authority_levels)
+    lower_authority_positions = [
+        index
+        for index, level in enumerate(authority_levels)
+        if level < highest_authority
+    ]
+    if not lower_authority_positions:
+        raise ValueError(
+            "Document-authority proof artifacts must include at least one lower-authority "
+            "document alongside a higher-authority document."
+        )
+
+    highest_authority_positions = [
+        index
+        for index, level in enumerate(authority_levels)
+        if level == highest_authority
+    ]
+    if min(highest_authority_positions) > min(lower_authority_positions):
+        raise ValueError(
+            "Document-authority proof artifacts must keep higher-authority documents "
+            "ahead of lower-authority document candidates in packet order."
+        )
+
+
 def _resolve_atlas_artifact_paths(
     args: argparse.Namespace,
 ) -> tuple[Path, Path, Path]:
@@ -327,6 +417,10 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             packet_artifact=atlas_packet,
             trace_artifact=atlas_trace,
         )
+    if args.expect_document_authority_contrast:
+        _validate_authoritative_document_artifacts(
+            packet_artifact=atlas_packet,
+        )
     return {
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
@@ -339,6 +433,7 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             "rubric_dimensions": list(RUBRIC_DIMENSIONS),
             "comparison_steps": list(COMPARISON_STEPS),
             "budget_pressure_expected": args.expect_budget_pressure,
+            "document_authority_expected": args.expect_document_authority_contrast,
         },
         "artifacts": {
             "baseline_rendered_context": baseline_rendered_context,

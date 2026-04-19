@@ -79,6 +79,13 @@ Minimum acceptable evidence:
 - source summaries that preserve class or authority meaning
 - notes that call out whether authority-aware behavior was visible in the packet and trace
 
+Document-authority target for the next hardening pass:
+
+- workflow id: `codex_repository`
+- scenario id: `repo_document_authority_precedence`
+- intent: run the flagship repository workflow over an authority-rich governed-doc tree so the packet and trace show authoritative architecture guidance being preferred over lower-authority planning or review material for the same query
+- success signal: a reviewer can point to at least one authoritative document that remains visible or is ranked ahead of a lower-authority document candidate and can explain that difference through packet and trace evidence rather than path names alone
+
 ### 4. Budget Behavior
 
 Evidence should show that Atlas remains disciplined under constrained context budgets instead of simply stuffing everything into output.

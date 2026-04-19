@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 7 Task 7.1, which now provides a reproducible budget-constrained proof scenario and feature-branch review surface so the MVP evidence can show visible tradeoffs under real pressure.
+- The current active MVP task is Story 7 Task 7.2, which has completed implementation and is now at the task-level review gate with a stronger repository document-authority proof path built around the tracked sample repo.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
 - Product-facing repo guidance should stay aligned around one visible golden path from install to configure to assemble to inspect; contributors should not let root docs, examples, and runtime-knob docs drift into separate onboarding stories.
@@ -194,6 +194,8 @@
 - The current MVP proof packaging path should now prefer reviewable bundle directories under one bundle root, with one per-workflow/per-scenario directory containing copied baseline and Atlas artifacts plus the packaged evidence JSON.
 - The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until stronger document-authority and budget-pressure proof closes the remaining gaps.
 - The constrained repository proof scenario `codex_repository / repo_budget_pressure_tradeoffs` is now part of that hardening path and should remain aligned across the runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
+- The document-authority hardening path now also includes the repository scenario `codex_repository / repo_document_authority_precedence`, which should remain aligned across the tracked sample repo, runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
+- The repository authority-hardening scenario should now also remain test-backed, so the tracked sample repo, repository workflow, readiness assessment, and proof-capture docs do not silently drift away from one another before Story 7 reassessment closes the loop.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

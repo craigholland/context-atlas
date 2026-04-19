@@ -82,6 +82,14 @@ That bundle should be packaged with `--expect-budget-pressure` so capture fails
 unless the packet and trace artifacts show visible pressure metadata or
 budget-pressure decisions.
 
+Story 7 also adds one document-authority hardening target:
+
+- `codex_repository` / `repo_document_authority_precedence`
+
+That bundle should be packaged with `--expect-document-authority-contrast` so
+capture fails unless the packet shows an authoritative document selected ahead
+of lower-authority repository documents in the same scenario.
+
 The canonical workflow commands and scenario inputs for generating the Atlas
 artifact directories still live in
 [examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md).
@@ -133,3 +141,30 @@ python scripts/mvp_proof/capture_evidence.py `
 
 That keeps the hardening bundle on the same reviewable layout as the original
 Story 6 proof set while making the constrained-budget expectation explicit.
+
+## Story 7 Document-Authority Hardening Bundle
+
+The first authority hardening bundle that should be added next is:
+
+```text
+tmp/mvp_proof/evidence/codex_repository/repo_document_authority_precedence/
+```
+
+Package it with the authority-rich repository command from
+[../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md) and:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_document_authority_precedence `
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
+  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
+  --expect-document-authority-contrast `
+  --bundle-root tmp\mvp_proof\evidence
+```
+
+That keeps the authority hardening bundle on the same reviewable layout as the
+original proof set while making the expected document-authority contrast
+explicit.

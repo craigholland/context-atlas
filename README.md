@@ -242,6 +242,17 @@ Atlas now looks defensible as a reusable pipeline component, but the proof still
 needs stronger document-authority and budget-pressure evidence before the MVP
 claim should be treated as fully closed.
 
+Story 7 now defines two focused hardening scenarios on top of the same flagship
+repository workflow:
+
+- `codex_repository / repo_budget_pressure_tradeoffs`
+- `codex_repository / repo_document_authority_precedence`
+
+The first makes budget pressure and compression tradeoffs explicit under a
+constrained starter budget. The second uses a tracked authority-rich sample repo
+so packet and trace review can show authoritative documents ahead of lower-
+authority planning and review material for the same repository question.
+
 The current proof pass is scoped to the three supported MVP workflows:
 
 - `codex_repository` with the `repo_governed_docs_update` scenario

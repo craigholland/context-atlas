@@ -109,6 +109,7 @@
 - Proof-capture scripts should stay downstream of the runnable workflow examples; shared proof-artifact emission belongs on one infrastructure helper rather than in per-example script-local writers.
 - Proof-capture scripts should continue to assume that supported workflow examples emit their standard artifacts through that shared infrastructure helper; if proof packaging starts needing example-specific writer knowledge again, the proof path is drifting.
 - Proof-capture scripts may enforce scenario-specific review expectations such as visible budget-pressure signals, but those checks should remain workflow-agnostic and artifact-centered rather than importing runtime code from `src/context_atlas`.
+- Proof-capture scripts may also enforce scenario-specific authority expectations such as authoritative documents appearing ahead of lower-authority document classes, but those checks should remain artifact-centered rather than importing runtime code from `src/context_atlas`.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.

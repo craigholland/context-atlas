@@ -38,8 +38,9 @@ def build_parser(*, description: str) -> argparse.ArgumentParser:
         description=description,
         epilog=(
             "See examples/codex_repository_workflow/sample_repo/README.md for "
-            "the minimal supported repository shape. Relative --docs-root "
-            "values are resolved from --repo-root."
+            "the minimal supported repository shape, including the authority-rich "
+            "proof corpus used by Story 7. Relative --docs-root values are "
+            "resolved from --repo-root."
         ),
     )
     parser.add_argument(
