@@ -84,6 +84,7 @@
 - Story 1 Task 1.4 now also reinforces that product-facing docs should describe `context_atlas.rendering` as the supported home of derived packet/trace views rather than a fallback import path.
 - Story 3 Task 3.3 is now auditing the Codex repository workflow for boundary drift; generic renderers should keep defaults generic while repository-facing examples pass their own labels explicitly.
 - Story 3 Task 3.3 now also treats `show_trace.py` as a derived demonstration over the same packet path as `run.py`; rendering should stay reusable enough that both scripts can share it without workflow-specific branches.
+- Story 4 Task 4.1 now also uses the same generic rendering surface for a chatbot-oriented example; labels such as `Chatbot Context` should remain caller-supplied presentation rather than a new workflow-specific renderer.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.

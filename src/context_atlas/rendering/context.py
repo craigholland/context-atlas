@@ -19,8 +19,9 @@ def render_packet_context(
 ) -> str:
     """Render a packet's current context view without mutating canonical state.
 
-    Callers may supply workflow-facing section labels, but those labels remain
-    outer presentation concerns over the same canonical packet data.
+    Callers may supply workflow-facing section labels such as ``Repository
+    Context`` or ``Chatbot Context``, but those labels remain outer
+    presentation concerns over the same canonical packet data.
     """
 
     sections: list[str] = []

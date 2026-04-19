@@ -64,6 +64,7 @@
     - packet assembly should stay explainable through structured trace metadata and decisions
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - mixed-source trace metadata should consume domain-owned source helpers rather than reaching directly into provenance internals throughout the service
+    - mixed-source trace metadata may expose stable family or collector count summaries when that improves workflow inspection, but it should remain derived from canonical source helpers rather than adapter-specific reach-through
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
     - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
@@ -75,6 +76,7 @@
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.
 - The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
 - The current service now also surfaces selected source families in trace metadata while consuming collector and family information through domain-owned source helpers instead of raw provenance reach-through.
+- The current service now also surfaces stable source-family and collector count summaries in trace metadata so mixed-source workflows can prove coherence without walking selected candidates by hand.
 - The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
 - The current service should now also preserve caller-supplied workflow metadata in trace metadata so supported examples can prove which outer workflow path was used without adding parallel debug state.
 - Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.

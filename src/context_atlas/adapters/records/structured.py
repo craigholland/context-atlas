@@ -7,6 +7,9 @@ record-shaped payloads.
 When callers need to reshape row field names before translation, that mapping
 should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
 rather than by widening this adapter into a query or client surface.
+
+The technical-builder docs-plus-database workflow should keep using this same
+boundary: Atlas translates already-fetched rows, but does not fetch them.
 """
 
 from __future__ import annotations
