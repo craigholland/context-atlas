@@ -66,6 +66,7 @@ class AssemblySettings(BaseModel):
     )
 
     default_total_budget: int = 2048
+    default_memory_budget_fraction: float = 0.25
     default_retrieval_top_k: int = 5
     default_compression_strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
     ranking_minimum_score: float = 0.0
@@ -77,6 +78,15 @@ class AssemblySettings(BaseModel):
     def _validate_total_budget(cls, value: int) -> int:
         if value < 64:
             raise ValueError(f"DEFAULT_TOTAL_BUDGET must be >= 64, got {value}")
+        return value
+
+    @field_validator("default_memory_budget_fraction")
+    @classmethod
+    def _validate_default_memory_budget_fraction(cls, value: float) -> float:
+        if not math.isfinite(value) or not 0.0 < value < 1.0:
+            raise ValueError(
+                "DEFAULT_MEMORY_BUDGET_FRACTION must be finite and in (0.0, 1.0)"
+            )
         return value
 
     @field_validator("default_retrieval_top_k")
@@ -111,12 +121,15 @@ class AssemblySettings(BaseModel):
         self,
         *,
         default_total_budget: int | None = None,
+        default_memory_budget_fraction: float | None = None,
     ) -> "AssemblySettings":
         """Return a validated copy with explicit assembly overrides applied."""
 
         overrides: dict[str, object] = {}
         if default_total_budget is not None:
             overrides["default_total_budget"] = default_total_budget
+        if default_memory_budget_fraction is not None:
+            overrides["default_memory_budget_fraction"] = default_memory_budget_fraction
         return self.__class__.model_validate(
             self.model_dump(mode="python") | overrides,
         )
@@ -294,6 +307,7 @@ class ContextAtlasSettings(BaseModel):
                 logging.logger_name,
                 logging.level,
                 assembly.default_total_budget,
+                assembly.default_memory_budget_fraction,
                 assembly.default_retrieval_top_k,
                 assembly.default_compression_strategy.value,
                 assembly.ranking_minimum_score,
@@ -334,6 +348,7 @@ class ContextAtlasSettings(BaseModel):
         self,
         *,
         default_total_budget: int | None = None,
+        default_memory_budget_fraction: float | None = None,
     ) -> "ContextAtlasSettings":
         """Return settings with validated assembly overrides applied."""
 
@@ -341,6 +356,7 @@ class ContextAtlasSettings(BaseModel):
             update={
                 "assembly": self.assembly.with_overrides(
                     default_total_budget=default_total_budget,
+                    default_memory_budget_fraction=default_memory_budget_fraction,
                 )
             }
         )

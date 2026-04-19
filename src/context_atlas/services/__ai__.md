@@ -69,6 +69,7 @@
     - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - outer low-code or product wrappers should pass that metadata through shared infrastructure seams instead of teaching this service about presets, wrapper modes, or workflow-specific source toggles
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
+    - the starter memory-budget split may be injected as a thin constructor default, but canonical slot names should remain internal service constants rather than env-backed config names
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
     - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it
     - caller-supplied workflow metadata should remain visible in trace metadata so supported workflow examples can explain which outer path produced a packet
