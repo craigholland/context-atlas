@@ -141,6 +141,7 @@
 - Story 3 Task 3.1 now also treats this module as the engine-side stop for the Codex repository workflow: repository-root and docs-root choices stay outside, while shared service wiring stays here.
 - The runnable Codex repository example should keep using this module as the composition boundary rather than inlining policy wiring inside `examples/`.
 - The runnable and demonstration-oriented Codex repository scripts should share one outer workflow composition path over this module rather than duplicating build-plus-assemble wiring in multiple example files.
+- The runnable repository script should remain the authoritative outer composition path; demonstration scripts may layer alternate inspection output on top of it but should not fork the composition boundary.
 - The product-facing Codex repository guide should only document runtime knobs that actually flow through `load_settings_from_env()` and this module's starter assembly wiring.
 - Product-facing sample-repo artifacts and CLI help should still describe this module as the real composition boundary rather than implying that `examples/` owns the policy wiring.
 
