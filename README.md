@@ -255,7 +255,9 @@ That shared artifact shape is what allows
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py)
 to package proof scenarios without workflow-specific file wiring. See
 [examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
-for the current proof commands and scenario inputs, and
+for the current proof commands and scenario inputs,
+[examples/mvp_proof/evidence/README.md](/context-atlas/examples/mvp_proof/evidence/README.md)
+for the current reviewable bundle layout, and
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md)
 for the review record that should summarize the captured findings.
 

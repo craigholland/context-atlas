@@ -23,6 +23,7 @@
 - Keep the proof artifact shape workflow-agnostic so the same capture path can be reused across the repository, docs-plus-database, and low-code workflows.
 - Prefer standard-library implementations and simple file-shape transformations over runtime imports from `src/context_atlas`.
 - When the supported workflows emit one shared artifact filename set, this folder should prefer accepting an artifact directory plus those standard filenames over duplicating per-workflow path conventions.
+- When proof work is being packaged for review, this folder should prefer writing a predictable bundle directory that keeps copied artifacts and the packaged evidence JSON together for one workflow/scenario pair.
 
 ## Allowed Dependencies
 - may depend on:
@@ -42,6 +43,7 @@
     - should capture both naive baseline and Atlas artifacts together
     - should accept workflow artifacts as inputs rather than generating them itself
     - should support the shared Atlas artifact-directory convention used by the selected MVP workflows without losing backward compatibility for explicit file paths
+    - should support a reviewable bundle-root output path so reviewers can open copied artifacts directly without first unpacking the JSON evidence record
     - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes
@@ -49,6 +51,7 @@
 - Later Story 6 tasks may add comparison or assessment helpers, but they should remain downstream of real workflow execution.
 - The current capture script now also carries the standard review order for comparing naive and Atlas artifacts; future additions should extend that path carefully instead of inventing workflow-specific review steps.
 - The current capture script should stay aligned with the standard artifact filenames emitted by the selected MVP workflows so later proof slices do not reintroduce workflow-specific file naming.
+- The current capture script should also stay aligned with the documented bundle layout under `examples/mvp_proof/evidence/README.md` so later proof slices do not create competing review directory shapes.
 
 ## Cross-Folder Contracts
 - `examples/`: example-facing proof docs may show how to invoke these scripts, but should not replace them with copy-paste shell fragments.
