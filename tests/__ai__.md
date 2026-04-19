@@ -286,6 +286,7 @@
     - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
     - tests should prove `--expect-budget-pressure` rejects artifact sets without visible pressure signals and accepts constrained bundles that expose packet- or trace-level pressure evidence
     - tests should prove `--expect-document-authority-contrast` rejects artifact sets without an authoritative-versus-lower-authority document contrast and accepts bundles that preserve that packet order
+    - tests should prove document-authority proof validation follows canonical `source.authority` semantics even when document class labels and authority overrides diverge
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:

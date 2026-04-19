@@ -28,6 +28,13 @@ ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
 ATLAS_TRACE_FILENAME = "atlas_trace.json"
 BASELINE_RENDERED_CONTEXT_FILENAME = "baseline_rendered_context.txt"
 EVIDENCE_PACKAGE_FILENAME = "evidence_package.json"
+_DOCUMENT_AUTHORITY_ORDER = {
+    "binding": 5,
+    "preferred": 4,
+    "advisory": 3,
+    "speculative": 2,
+    "historical": 1,
+}
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -283,7 +290,7 @@ def _validate_authoritative_document_artifacts(
         name="Atlas packet selected_candidates",
     )
 
-    selected_document_classes: list[str] = []
+    selected_document_authorities: list[str] = []
     for candidate in selected_candidates:
         candidate_mapping = _require_mapping(
             value=candidate,
@@ -299,35 +306,47 @@ def _validate_authoritative_document_artifacts(
         )
         if provenance_mapping.get("source_family") != "document":
             continue
-        source_class = source_mapping.get("source_class")
-        if isinstance(source_class, str) and source_class.strip():
-            selected_document_classes.append(source_class)
+        source_authority = source_mapping.get("authority")
+        if isinstance(source_authority, str) and source_authority.strip():
+            selected_document_authorities.append(source_authority)
 
-    if "authoritative" not in selected_document_classes:
+    if not selected_document_authorities:
         raise ValueError(
-            "Document-authority proof artifacts must include an authoritative "
-            "document in the selected packet candidates."
+            "Document-authority proof artifacts must include at least one document "
+            "candidate with visible authority semantics in the selected packet."
         )
 
-    lower_authority_classes = {
-        source_class
-        for source_class in selected_document_classes
-        if source_class in {"planning", "reviews", "exploratory", "releases", "other"}
-    }
-    if not lower_authority_classes:
+    authority_levels = [
+        _DOCUMENT_AUTHORITY_ORDER[authority]
+        for authority in selected_document_authorities
+        if authority in _DOCUMENT_AUTHORITY_ORDER
+    ]
+    if len(authority_levels) != len(selected_document_authorities):
+        raise ValueError(
+            "Document-authority proof artifacts must use recognized authority values "
+            "for selected document candidates."
+        )
+
+    highest_authority = max(authority_levels)
+    lower_authority_positions = [
+        index
+        for index, level in enumerate(authority_levels)
+        if level < highest_authority
+    ]
+    if not lower_authority_positions:
         raise ValueError(
             "Document-authority proof artifacts must include at least one lower-authority "
-            "document class alongside the authoritative document."
+            "document alongside a higher-authority document."
         )
 
-    authoritative_index = selected_document_classes.index("authoritative")
-    lower_authority_index = min(
-        selected_document_classes.index(source_class)
-        for source_class in lower_authority_classes
-    )
-    if authoritative_index > lower_authority_index:
+    highest_authority_positions = [
+        index
+        for index, level in enumerate(authority_levels)
+        if level == highest_authority
+    ]
+    if min(highest_authority_positions) > min(lower_authority_positions):
         raise ValueError(
-            "Document-authority proof artifacts must keep the authoritative document "
+            "Document-authority proof artifacts must keep higher-authority documents "
             "ahead of lower-authority document candidates in packet order."
         )
 

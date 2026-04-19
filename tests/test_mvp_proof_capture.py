@@ -255,6 +255,7 @@ class MvpProofCaptureTests(unittest.TestCase):
                     {
                         "source": {
                             "source_class": "planning",
+                            "authority": "preferred",
                             "provenance": {"source_family": "document"},
                         }
                     }
@@ -283,7 +284,7 @@ class MvpProofCaptureTests(unittest.TestCase):
 
             with self.assertRaisesRegex(
                 ValueError,
-                "must include an authoritative document",
+                "must include at least one lower-authority document",
             ):
                 _CAPTURE_MODULE.build_evidence_package(args)
 
@@ -306,12 +307,14 @@ class MvpProofCaptureTests(unittest.TestCase):
                     {
                         "source": {
                             "source_class": "authoritative",
+                            "authority": "binding",
                             "provenance": {"source_family": "document"},
                         }
                     },
                     {
                         "source": {
                             "source_class": "planning",
+                            "authority": "preferred",
                             "provenance": {"source_family": "document"},
                         }
                     },
@@ -342,6 +345,65 @@ class MvpProofCaptureTests(unittest.TestCase):
 
             self.assertEqual(package["scenario"], "repo_document_authority_precedence")
             self.assertTrue(package["review_path"]["document_authority_expected"])
+
+    def test_build_evidence_package_uses_authority_not_source_class_for_contrast(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                selected_candidates=[
+                    {
+                        "source": {
+                            "source_class": "authoritative",
+                            "authority": "advisory",
+                            "provenance": {"source_family": "document"},
+                        }
+                    },
+                    {
+                        "source": {
+                            "source_class": "planning",
+                            "authority": "binding",
+                            "provenance": {"source_family": "document"},
+                        }
+                    },
+                ],
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_document_authority_precedence",
+                    "--query",
+                    "Which guidance should an engineer follow when authoritative and planning docs both discuss repository process?",
+                    "--input-summary",
+                    "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=<repo_root>/docs",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--expect-document-authority-contrast",
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "must keep higher-authority documents ahead",
+            ):
+                _CAPTURE_MODULE.build_evidence_package(args)
 
 
 if __name__ == "__main__":
