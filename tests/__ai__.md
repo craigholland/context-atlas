@@ -284,8 +284,10 @@
     - Python standard library
   - invariants:
     - tests should prove `--refresh-bundle` removes stale files from an existing workflow/scenario bundle before regenerated proof artifacts are written
+    - tests should prove `--refresh-bundle` still preserves the regenerated canonical artifact files when the source artifacts already live inside the bundle being refreshed
     - tests should prove proof capture can regenerate a workflow/scenario bundle without failing when the source artifacts already sit at the bundle target paths
     - tests should verify the evidence package remains written in the same bundle directory after regeneration
+    - tests should prove proof capture rejects unsafe workflow/scenario bundle components before refresh logic can target paths outside the declared bundle root
     - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
     - tests should prove `--expect-budget-pressure` rejects artifact sets without visible pressure signals and accepts constrained bundles that expose packet- or trace-level pressure evidence
     - tests should prove `--expect-document-authority-contrast` rejects artifact sets without an authoritative-versus-lower-authority document contrast and accepts bundles that preserve that packet order

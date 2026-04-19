@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from datetime import UTC, datetime
-from pathlib import Path
+from pathlib import Path, PurePath
 import shutil
 from typing import Any
 
@@ -392,7 +392,7 @@ def _resolve_atlas_artifact_paths(
 
 def _resolve_output_paths(
     args: argparse.Namespace,
-) -> tuple[Path, Path | None]:
+) -> tuple[Path, Path | None, Path | None]:
     has_output = args.output is not None
     has_bundle_root = args.bundle_root is not None
 
@@ -400,11 +400,31 @@ def _resolve_output_paths(
         raise ValueError("Provide exactly one of --output or --bundle-root.")
 
     if args.output is not None:
-        return args.output.resolve(), None
+        return args.output.resolve(), None, None
 
     assert args.bundle_root is not None
-    bundle_dir = args.bundle_root.resolve() / args.workflow / args.scenario
-    return bundle_dir / EVIDENCE_PACKAGE_FILENAME, bundle_dir
+    bundle_root = args.bundle_root.resolve()
+    workflow_name = _validate_bundle_component(args.workflow, name="workflow")
+    scenario_name = _validate_bundle_component(args.scenario, name="scenario")
+    bundle_dir = bundle_root / workflow_name / scenario_name
+    if not bundle_dir.is_relative_to(bundle_root):
+        raise ValueError("Bundle directory must stay within the declared bundle root.")
+    return bundle_dir / EVIDENCE_PACKAGE_FILENAME, bundle_dir, bundle_root
+
+
+def _validate_bundle_component(value: str, *, name: str) -> str:
+    stripped_value = value.strip()
+    candidate = PurePath(stripped_value)
+    if (
+        not stripped_value
+        or candidate.is_absolute()
+        or len(candidate.parts) != 1
+        or candidate.parts[0] in {".", ".."}
+    ):
+        raise ValueError(
+            f"{name} must be a single relative path segment when --bundle-root is used."
+        )
+    return candidate.parts[0]
 
 
 def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
@@ -452,43 +472,27 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
-def _copy_artifact_if_needed(*, source_path: Path, target_path: Path) -> None:
-    resolved_source = source_path.resolve()
-    resolved_target = target_path.resolve()
-    if resolved_source == resolved_target:
-        return
-    shutil.copyfile(resolved_source, resolved_target)
+def _snapshot_artifact_bytes(*, artifact_path: Path) -> bytes:
+    return _require_file(artifact_path).read_bytes()
 
 
 def _write_evidence_bundle(
     *,
+    bundle_root: Path,
     bundle_dir: Path,
-    baseline_rendered_path: Path,
-    atlas_packet_path: Path,
-    atlas_trace_path: Path,
-    atlas_rendered_path: Path,
+    artifact_bytes_by_filename: dict[str, bytes],
     package: dict[str, Any],
     refresh_bundle: bool,
 ) -> None:
+    resolved_bundle_root = bundle_root.resolve()
+    resolved_bundle_dir = bundle_dir.resolve()
+    if not resolved_bundle_dir.is_relative_to(resolved_bundle_root):
+        raise ValueError("Bundle directory must stay within the declared bundle root.")
     if refresh_bundle and bundle_dir.exists():
         shutil.rmtree(bundle_dir)
     bundle_dir.mkdir(parents=True, exist_ok=True)
-    _copy_artifact_if_needed(
-        source_path=baseline_rendered_path,
-        target_path=bundle_dir / BASELINE_RENDERED_CONTEXT_FILENAME,
-    )
-    _copy_artifact_if_needed(
-        source_path=atlas_packet_path,
-        target_path=bundle_dir / ATLAS_PACKET_FILENAME,
-    )
-    _copy_artifact_if_needed(
-        source_path=atlas_trace_path,
-        target_path=bundle_dir / ATLAS_TRACE_FILENAME,
-    )
-    _copy_artifact_if_needed(
-        source_path=atlas_rendered_path,
-        target_path=bundle_dir / ATLAS_RENDERED_CONTEXT_FILENAME,
-    )
+    for filename, artifact_bytes in artifact_bytes_by_filename.items():
+        (bundle_dir / filename).write_bytes(artifact_bytes)
     (bundle_dir / EVIDENCE_PACKAGE_FILENAME).write_text(
         json.dumps(package, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -501,7 +505,7 @@ def main() -> int:
 
     try:
         package = build_evidence_package(args)
-        output_path, bundle_dir = _resolve_output_paths(args)
+        output_path, bundle_dir, bundle_root = _resolve_output_paths(args)
     except ValueError as error:
         parser.error(str(error))
 
@@ -516,11 +520,22 @@ def main() -> int:
             _resolve_atlas_artifact_paths(args)
         )
         _write_evidence_bundle(
+            bundle_root=bundle_root,
             bundle_dir=bundle_dir,
-            baseline_rendered_path=args.baseline_rendered.resolve(),
-            atlas_packet_path=atlas_packet_path.resolve(),
-            atlas_trace_path=atlas_trace_path.resolve(),
-            atlas_rendered_path=atlas_rendered_path.resolve(),
+            artifact_bytes_by_filename={
+                BASELINE_RENDERED_CONTEXT_FILENAME: _snapshot_artifact_bytes(
+                    artifact_path=args.baseline_rendered.resolve()
+                ),
+                ATLAS_PACKET_FILENAME: _snapshot_artifact_bytes(
+                    artifact_path=atlas_packet_path.resolve()
+                ),
+                ATLAS_TRACE_FILENAME: _snapshot_artifact_bytes(
+                    artifact_path=atlas_trace_path.resolve()
+                ),
+                ATLAS_RENDERED_CONTEXT_FILENAME: _snapshot_artifact_bytes(
+                    artifact_path=atlas_rendered_path.resolve()
+                ),
+            },
             package=package,
             refresh_bundle=args.refresh_bundle,
         )
