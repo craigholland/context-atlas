@@ -232,6 +232,63 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                 "docs_database_builder",
             )
 
+    def test_budget_constrained_workflow_surfaces_pressure_signals(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            docs_root = Path(temp_dir)
+            repeated_guidance = " ".join(
+                [
+                    (
+                        "Builders should inspect packet and trace output, keep "
+                        "supported config visible, and compare document plus "
+                        "record-backed guidance when budget tradeoffs appear."
+                    )
+                ]
+                * 8
+            )
+            self._write_doc(
+                docs_root / "support-guide.md",
+                f"# Support Guide\n\n{repeated_guidance}\n",
+            )
+            self._write_doc(
+                docs_root / "operations.md",
+                f"# Operations\n\n{repeated_guidance}\n",
+            )
+            records_path = self._write_pressure_records_file(
+                docs_root / "pressure_records.json"
+            )
+
+            resolved_docs_root, resolved_records_file, record_count, packet = (
+                _WORKFLOW_MODULE.assemble_docs_database_workflow_packet(
+                    docs_root_arg=docs_root,
+                    records_file_arg=records_path,
+                    query=(
+                        "How should a builder configure Context Atlas and "
+                        "troubleshoot preflight or environment-loading issues "
+                        "in a chatbot pipeline?"
+                    ),
+                    total_budget=96,
+                )
+            )
+
+            reason_codes = {
+                reason.value
+                for decision in packet.trace.decisions
+                for reason in decision.reason_codes
+            }
+
+            self.assertEqual(resolved_docs_root, docs_root.resolve())
+            self.assertEqual(resolved_records_file, records_path.resolve())
+            self.assertEqual(record_count, 3)
+            self.assertEqual(packet.budget.total_tokens, 96)
+            self.assertEqual(
+                packet.trace.metadata["request_requested_total_budget"], "96"
+            )
+            self.assertEqual(packet.trace.metadata["budget_budget_total_tokens"], "96")
+            self.assertTrue(packet.compression_was_applied)
+            self.assertEqual(packet.metadata["compression_applied"], "true")
+            self.assertIn("elastic_slot_reduced", reason_codes)
+            self.assertIn("compression_required", reason_codes)
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")
@@ -274,6 +331,59 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                             "knob and inspection story visible."
                         ),
                         "uri": "records://support/support-203",
+                        "uses": ["answering", "onboarding"],
+                        "team": "developer-education",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                ],
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        return path
+
+    def _write_pressure_records_file(self, path: Path) -> Path:
+        repeated_body = " ".join(
+            [
+                (
+                    "Builders should compare governed documents with record-backed "
+                    "support guidance, keep environment-loading notes visible, and "
+                    "inspect packet plus trace output when budget pressure forces "
+                    "Atlas to compress or defer lower-priority content."
+                )
+            ]
+            * 6
+        )
+        path.write_text(
+            json.dumps(
+                [
+                    {
+                        "ticket_id": "support-301",
+                        "title": "Environment troubleshooting",
+                        "body": repeated_body,
+                        "uri": "records://support/support-301",
+                        "uses": ["answering", "support"],
+                        "team": "support",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                    {
+                        "ticket_id": "support-302",
+                        "title": "Preflight note",
+                        "body": repeated_body,
+                        "uri": "records://support/support-302",
+                        "uses": ["support", "troubleshooting"],
+                        "team": "developer-experience",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                    {
+                        "ticket_id": "support-303",
+                        "title": "Starter path note",
+                        "body": repeated_body,
+                        "uri": "records://support/support-303",
                         "uses": ["answering", "onboarding"],
                         "team": "developer-education",
                         "table": "support_tickets",

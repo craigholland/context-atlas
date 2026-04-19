@@ -50,6 +50,7 @@
     - should tolerate regeneration into an already-populated bundle directory when the source artifacts already live at the target paths
     - should reject packet/trace inputs that do not look like one canonical workflow run over the shared engine path
     - should support an explicit budget-pressure expectation for constrained scenarios and reject artifact sets that do not show visible pressure signals
+    - should require budget trace metadata before accepting a constrained budget-pressure bundle, even when packet-level compression metadata is present
     - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes

@@ -74,6 +74,14 @@ Use the same bundle-root pattern for the current selected workflows:
 - `docs_database_builder` / `builder_support_troubleshooting`
 - `low_code_chatbot` / `low_code_validation`
 
+Story 7 also adds one constrained hardening target:
+
+- `codex_repository` / `repo_budget_pressure_tradeoffs`
+
+That bundle should be packaged with `--expect-budget-pressure` so capture fails
+unless the packet and trace artifacts show visible pressure metadata or
+budget-pressure decisions.
+
 The canonical workflow commands and scenario inputs for generating the Atlas
 artifact directories still live in
 [examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md).
@@ -99,3 +107,29 @@ and reviewed these bundle paths:
 Those bundle directories are generated, not tracked. Recreate them with the
 commands in [../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
 plus the `--bundle-root tmp/mvp_proof/evidence` capture step shown above.
+
+## Story 7 Budget-Pressure Hardening Bundle
+
+The first hardening bundle that should be added next is:
+
+```text
+tmp/mvp_proof/evidence/codex_repository/repo_budget_pressure_tradeoffs/
+```
+
+Package it with the constrained repository command from
+[../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md) and:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_budget_pressure_tradeoffs `
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
+  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
+  --expect-budget-pressure `
+  --bundle-root tmp\mvp_proof\evidence
+```
+
+That keeps the hardening bundle on the same reviewable layout as the original
+Story 6 proof set while making the constrained-budget expectation explicit.

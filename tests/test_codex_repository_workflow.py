@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.util
 import os
 from pathlib import Path
 import json
@@ -30,6 +31,13 @@ _WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "codex_repository_workflow" / "run.
 _SHOW_TRACE_SCRIPT = (
     _REPO_ROOT / "examples" / "codex_repository_workflow" / "show_trace.py"
 )
+_MODULE_SPEC = importlib.util.spec_from_file_location(
+    "codex_repository_workflow_run",
+    _WORKFLOW_SCRIPT,
+)
+assert _MODULE_SPEC is not None and _MODULE_SPEC.loader is not None
+_WORKFLOW_MODULE = importlib.util.module_from_spec(_MODULE_SPEC)
+_MODULE_SPEC.loader.exec_module(_WORKFLOW_MODULE)
 
 
 class CodexRepositoryWorkflowTests(unittest.TestCase):
@@ -248,6 +256,65 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
 
             self.assertEqual(packet["metadata"]["workflow"], "codex_repository")
             self.assertEqual(trace["metadata"]["request_workflow"], "codex_repository")
+
+    def test_budget_constrained_repository_workflow_surfaces_pressure_signals(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs" / "Guides"
+            repeated_guidance = " ".join(
+                [
+                    (
+                        "Engineers should update planning docs and architecture "
+                        "guidance together, keep owner files aligned, and inspect "
+                        "packet plus trace output when budget tradeoffs appear."
+                    )
+                ]
+                * 8
+            )
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                f"# Guidance\n\n{repeated_guidance}\n",
+            )
+            self._write_doc(
+                docs_root / "Planning" / "Workflow.md",
+                f"# Workflow\n\n{repeated_guidance}\n",
+            )
+            self._write_doc(
+                docs_root / "Reviews" / "Findings.md",
+                f"# Findings\n\n{repeated_guidance}\n",
+            )
+
+            resolved_repo_root, resolved_docs_root, packet = (
+                _WORKFLOW_MODULE.assemble_repository_workflow_packet(
+                    repo_root_arg=repo_root,
+                    docs_root_arg=Path("docs/Guides"),
+                    query=(
+                        "What guidance should an engineer follow when updating "
+                        "repository planning docs or architecture guidance?"
+                    ),
+                    total_budget=64,
+                )
+            )
+
+            reason_codes = {
+                reason.value
+                for decision in packet.trace.decisions
+                for reason in decision.reason_codes
+            }
+
+            self.assertEqual(resolved_repo_root, repo_root.resolve())
+            self.assertEqual(resolved_docs_root, docs_root.resolve())
+            self.assertEqual(packet.budget.total_tokens, 64)
+            self.assertEqual(
+                packet.trace.metadata["request_requested_total_budget"], "64"
+            )
+            self.assertEqual(packet.trace.metadata["budget_budget_total_tokens"], "64")
+            self.assertTrue(packet.compression_was_applied)
+            self.assertEqual(packet.metadata["compression_applied"], "true")
+            self.assertIn("elastic_slot_reduced", reason_codes)
+            self.assertIn("compression_required", reason_codes)
 
     def test_help_mentions_sample_repo_reference(self) -> None:
         result = subprocess.run(
