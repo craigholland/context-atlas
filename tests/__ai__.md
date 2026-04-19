@@ -60,6 +60,8 @@
   - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
 - `test_record_source_adapter.py`:
   - `StructuredRecordSourceAdapterTests`: verifies structured-record input validation and record-to-source translation
+- `test_source_semantics.py`:
+  - `SourceSemanticsTests`: verifies canonical semantic consistency across supported source families
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -201,6 +203,17 @@
     - tests should prove canonical `record_id` stays authoritative in provenance metadata even when callers provide overlapping provenance fields
     - tests should prove mapping-shaped `tags` or `intended_uses` payloads fail fast instead of being silently coerced
     - tests should prove documents and structured records can coexist in one shared registry and packet flow
+- `test_source_semantics.py`:
+  - responsibility: verifies mixed-source semantic consistency across filesystem documents and structured records
+  - defines:
+    - `SourceSemanticsTests`: source-semantics consistency test suite
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+    - `context_atlas.infrastructure`
+  - invariants:
+    - tests should prove supported source families can differ in provenance family while sharing one canonical semantic model
+    - tests should prove explicit intended-use overrides merge consistently across source families instead of replacing canonical defaults in only one adapter path
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
@@ -218,6 +231,7 @@
 - The suite now also covers the frozen Pydantic domain-model refactor for canonical artifacts.
 - The suite should now also guard the canonical per-class source-semantics defaults so adapters do not drift into maintaining their own semantic rules.
 - The adapter-facing suites should now also guard that shared domain source-semantics helpers are being consumed by both filesystem documents and structured records rather than replaced with parallel adapter-local defaults.
+- The suite now also includes a dedicated semantic-consistency test file so Story 2 Task 2.2 can prove canonical semantics directly instead of only as a side effect of other adapter tests.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.
@@ -248,5 +262,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_source_adapter"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_config_observability, tests.test_context_assembly_service, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_memory_policy, tests.test_record_source_adapter, tests.test_source_semantics"
 ```

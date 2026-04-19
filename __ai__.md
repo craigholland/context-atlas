@@ -138,7 +138,7 @@
 - That task should keep source classification, authority, durability, intended use, and provenance semantics canonical inside `domain/` rather than duplicated across adapters.
 - PR A of that task is now defining canonical per-class defaults for source authority, durability, and intended uses so later adapters can share one inward semantic target.
 - PR B of that task is now moving repeated source-semantics behavior into a dedicated inward helper module so adapters stop owning shared normalization rules and fallback defaults.
-- PR C of that task should validate that documents and structured records expose coherent semantics through the same canonical packet and trace flow.
+- PR C of that task is now validating that documents and structured records expose coherent semantics through the same canonical packet and trace flow, and the task should be ready for feature-branch review once that validation is green.
 - The root README should keep describing structured records and filesystem documents as two source families that converge into one `ContextSource` model, not as parallel semantic hierarchies.
 
 ## Cross-Folder Contracts
