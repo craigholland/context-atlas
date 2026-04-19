@@ -37,8 +37,10 @@ def _render_memory_text(packet: ContextPacket) -> str:
 def _render_candidate_text(packet: ContextPacket) -> str:
     """Render candidate-facing content from packet state or its transform artifact."""
 
-    if packet.compression_result is not None:
-        return packet.compression_result.text.strip()
+    if packet.compression_was_applied:
+        compression_result = packet.compression_result
+        assert compression_result is not None
+        return compression_result.text.strip()
 
     return "\n\n".join(
         candidate.source.content for candidate in packet.selected_candidates

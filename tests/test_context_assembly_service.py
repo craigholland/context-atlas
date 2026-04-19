@@ -150,11 +150,13 @@ class ContextAssemblyServiceTests(unittest.TestCase):
 
         self.assertIsNotNone(packet.compression_result)
         self.assertTrue(packet.compression_result.was_applied)
+        self.assertTrue(packet.compression_was_applied)
         self.assertLess(
             packet.compression_result.compressed_chars,
             packet.compression_result.original_chars,
         )
         self.assertEqual(packet.trace.metadata["compression_present"], "true")
+        self.assertEqual(packet.trace.metadata["compression_applied"], "true")
 
     def test_assemble_includes_memory_entries_in_packet_and_rendered_output(
         self,

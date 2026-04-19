@@ -10,6 +10,8 @@ from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import ErrorMessage, LogMessage
 from context_atlas.domain.models import (
     AuthorityPrecedenceReasonCode,
+    CompressionResult,
+    CompressionStrategy,
     ContextAssemblyDecision,
     ContextBudget,
     ContextBudgetSlot,
@@ -193,6 +195,25 @@ class DomainModelTests(unittest.TestCase):
             packet.trace.decisions[0].reason_codes[0],
             InclusionReasonCode.DIRECT_MATCH,
         )
+
+    def test_context_packet_distinguishes_compression_presence_from_application(
+        self,
+    ) -> None:
+        packet = ContextPacket(
+            packet_id="packet-compression-state",
+            query="How should packet compression semantics behave?",
+            compression_result=CompressionResult(
+                text="Unchanged source text.",
+                strategy_used=CompressionStrategy.EXTRACTIVE,
+                original_chars=21,
+                compressed_chars=21,
+                estimated_tokens_saved=0,
+                was_applied=False,
+            ),
+        )
+
+        self.assertTrue(packet.has_compression)
+        self.assertFalse(packet.compression_was_applied)
 
     def test_canonical_models_support_pydantic_validation_and_dump(self) -> None:
         source = ContextSource.model_validate(

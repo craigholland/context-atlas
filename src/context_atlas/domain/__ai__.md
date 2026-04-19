@@ -148,6 +148,7 @@
     - packet item counts should reflect canonical included artifacts, not just one source family
     - inspection-oriented helpers here should remain machine-usable summaries rather than presentation formatting
     - packet-inspection renderers may consume packet summary properties from here, but human-readable section layout must stay in `rendering/`
+    - semantic helpers such as whether compression was actually applied may live here when they clarify canonical packet state without introducing presentation formatting
 - `models/reason_codes.py`:
   - responsibility: defines starter structured reason-code enums for assembly decisions
   - invariants:

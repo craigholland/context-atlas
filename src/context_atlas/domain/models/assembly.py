@@ -201,6 +201,14 @@ class ContextPacket(CanonicalDomainModel):
         return self.compression_result is not None
 
     @property
+    def compression_was_applied(self) -> bool:
+        """Return whether the attached compression artifact changed packet content."""
+
+        return (
+            self.compression_result is not None and self.compression_result.was_applied
+        )
+
+    @property
     def has_budget(self) -> bool:
         """Return whether the packet carries canonical budget state."""
 

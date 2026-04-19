@@ -137,6 +137,7 @@
 - Story 1 Task 1.4 is now the active task-level feature branch and should keep the supported MVP surface aligned with Craig Architecture boundaries while preserving `ContextPacket` and `ContextTrace` as the canonical machine-readable artifacts.
 - That task should treat `infrastructure/assembly.py` as starter wiring only, `services/assembly.py` as orchestration only, and `rendering/` as derived output only; convenience work should not blur those responsibilities.
 - PR A of that task is the boundary-audit slice; it should strengthen the package-root, starter-wiring, and rendering contracts before any deeper behavioral refactor lands.
+- PR B of that task should reinforce the difference between canonical packet state and attached transformation artifacts so starter rendering does not quietly treat non-applied compression as new canonical content.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
