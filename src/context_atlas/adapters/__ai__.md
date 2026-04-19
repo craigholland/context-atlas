@@ -90,6 +90,7 @@
   - responsibility: validates structured-record inputs and translates them into canonical sources
   - defines:
     - `StructuredRecordInput`
+    - `StructuredRecordPayload`
     - `StructuredRecordSourceAdapter`
   - depends_on:
     - `context_atlas.domain.errors`
@@ -97,6 +98,7 @@
     - `context_atlas.domain.models`
   - invariants:
     - record adapters should accept already-fetched payloads rather than becoming a database access layer
+    - record adapters may accept validated `StructuredRecordInput` objects or mapping-shaped record payloads, but richer client, session, cursor, or query objects should stay outside Atlas
     - record provenance should preserve source-family identity and adapter collector name
     - canonical `record_id` should remain authoritative in provenance metadata even when callers supply extra provenance fields
     - invalid `tags` or `intended_uses` container shapes should fail fast through shared domain source-semantics helpers rather than adapter-local coercion
@@ -114,6 +116,7 @@
 - Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
 - Story 2 Task 2.2 should now remove duplicated source-semantics defaults from adapters where possible by consuming shared domain helpers instead of maintaining parallel normalization rules.
 - Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
+- Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

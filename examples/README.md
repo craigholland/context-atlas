@@ -52,3 +52,5 @@ python examples/mixed_source_registry.py
 ```
 
 This example demonstrates that filesystem documents and structured records can coexist in one registry and one packet-assembly flow without introducing a second canonical source model.
+
+For structured records, the example boundary should stay narrow: outer application code fetches rows or payloads using its own database, vector-store, or API client, then hands Atlas either a validated `StructuredRecordInput` or a mapping-shaped record payload for translation into canonical sources. Atlas should not become the query framework in these examples.
