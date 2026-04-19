@@ -132,6 +132,11 @@ That means the low-code path is still a wrapper around the same engine:
 - presets remain outer configuration, not domain truth
 - low-code settings choose supported source inputs and starter defaults
 - packet and trace artifacts remain canonical and shared with every other workflow
+- low-code override merging should happen through validated infrastructure settings,
+  not ad hoc example-script dictionaries
+- low-code wrappers should build a resolved outer workflow plan and then hand
+  canonical sources into the shared starter assembly seam rather than packing a
+  second orchestration path
 
 The current runtime surface for that path now lives in [`.env.example`](/context-atlas/.env.example)
 under the `CONTEXT_ATLAS_LOW_CODE_*` keys. The broader assembly, compression,
@@ -152,6 +157,17 @@ That means the low-code path is still a real Atlas component integration, not a
 forked engine mode. The preset chooses source-shaping defaults, but packet
 assembly, budgeting, compression, and trace inspection still run through the
 same shared starter engine path used by the other workflows.
+
+The current low-code boundary is now intentionally explicit:
+
+- `ContextAtlasSettings.with_low_code_overrides(...)` owns validated override
+  merging for the wrapper path
+- `build_low_code_workflow_plan(...)` owns preset resolution, repo-relative path
+  resolution, and workflow-facing metadata assembly
+- `assemble_with_starter_sources(...)` remains the shared starter seam from
+  canonical sources into packet assembly
+- low-code examples should not hand-pack packet metadata, re-merge runtime
+  settings, or invent alternate packet/trace behavior for convenience
 
 Run the current low-code example from the repository root:
 
