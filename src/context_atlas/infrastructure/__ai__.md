@@ -149,6 +149,7 @@
     - repository-specific source collection should remain outside this module; callers should hand this helper an already-built retriever over canonical Atlas sources
     - one-shot packet assembly helpers here must remain workflow-agnostic convenience wrappers over the same shared service path rather than growing provider- or workflow-specific branches
     - low-code convenience here may choose a supported preset, docs root, and payload file, but it should still cross into the same registry/retriever/service path rather than creating alternate packet semantics
+    - low-code wrappers should prefer `ContextAtlasSettings.with_low_code_overrides(...)`, `build_low_code_workflow_plan(...)`, and `assemble_with_starter_sources(...)` over wrapper-local setting merges or metadata packing
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
@@ -180,6 +181,7 @@
 - Story 5 Task 5.2 now also expects surrounding docs to present those artifacts in a stable order: reference config, reference preset, then runnable wrapper, so the low-code path stays understandable without implying hidden infrastructure behavior.
 - Story 5 Task 5.3 is now auditing that boundary more directly, so low-code preset meaning and repo-relative source selection should stay visible as resolved outer-layer plan state instead of being hidden inside the wrapper path.
 - Story 5 Task 5.3 now also expects low-code override merging and starter source-to-packet assembly to live on shared infrastructure seams rather than being reimplemented inside the runnable example.
+- The low-code example wrapper should now be treated as a thin composition layer over those shared seams; future refactors should make the resolved workflow plan more explicit, not less.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

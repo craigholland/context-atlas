@@ -175,6 +175,7 @@
 - Story 5 Task 5.2 now also expects the low-code guide, example README, and repo README to preserve the same recommended first-time evaluation order for those reference artifacts and the runnable wrapper.
 - Story 5 Task 5.3 is now auditing the low-code boundary, so preset resolution, repo-relative path resolution, and workflow metadata assembly should become more explicit outer-layer plan logic rather than staying smeared across the wrapper and example surface.
 - Story 5 Task 5.3 now also expects low-code override merging and starter source-to-packet wiring to stay on shared config/infrastructure seams rather than being rebuilt inside the runnable example.
+- Story 5 Task 5.3 now also expects the low-code wrapper to stay honest about those seams: validated override merging should flow through `ContextAtlasSettings.with_low_code_overrides(...)`, preset and path resolution should flow through `build_low_code_workflow_plan(...)`, and canonical sources should cross into packet assembly through `assemble_with_starter_sources(...)` rather than through ad hoc wrapper-local orchestration.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
