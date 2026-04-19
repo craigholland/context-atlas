@@ -31,6 +31,7 @@ The current workflow is most useful when the governed docs include:
 - at least one planning or task-oriented artifact
 - optionally one review or exploratory artifact that overlaps the same topic but should not outrank the authoritative document
 - plain markdown content with normal headings and prose
+- tracked markdown files under `sample_repo/docs/` so the example can be run directly for proof work
 
 For the Story 7 authority-hardening pass, the sample shape should make the
 document-side authority contrast explicit:
@@ -50,6 +51,12 @@ The goal is not to rely on folder names alone. The proof should make it easy
 for a reviewer to see the canonical source-class and authority meaning survive
 translation into packet and trace output.
 
+This sample repo now includes that tracked authority contrast under:
+
+- `sample_repo/docs/Authoritative/Architecture/Repo-Guidance.md`
+- `sample_repo/docs/Planning/Current-Work.md`
+- `sample_repo/docs/Reviews/Review-Notes.md`
+
 ## Example Command
 
 ```powershell
@@ -62,6 +69,14 @@ Relative `--docs-root` values are resolved from `--repo-root`.
 For the authority-hardening proof scenario, the supported repository workflow
 should point at an authority-rich docs tree, typically the full `docs/` root,
 instead of only one advisory subfolder.
+
+You can run that authority-proof scenario directly with:
+
+```powershell
+python examples/codex_repository_workflow/run.py `
+  --repo-root examples/codex_repository_workflow/sample_repo `
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?"
+```
 
 ## Why This Exists
 

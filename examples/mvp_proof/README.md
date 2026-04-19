@@ -40,6 +40,17 @@ workflow with `--total-budget 64`; see
 [`inputs/README.md`](/context-atlas/examples/mvp_proof/inputs/README.md) for the
 exact run and packaging commands.
 
+For document-authority hardening scenarios, the capture script can also assert
+that the packet really does show an authority contrast through governed
+documents:
+
+- pass `--expect-document-authority-contrast` for scenarios that are supposed to
+  show authoritative repository docs alongside lower-authority planning or
+  review docs
+- the script will then require an authoritative document candidate plus a
+  lower-authority document candidate, with the authoritative one appearing
+  earlier in the selected packet order
+
 Before packaging those artifacts, the script now also verifies that the Atlas
 packet and Atlas trace still look like one canonical workflow run:
 

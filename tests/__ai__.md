@@ -284,6 +284,7 @@
     - tests should verify the evidence package remains written in the same bundle directory after regeneration
     - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
     - tests should prove `--expect-budget-pressure` rejects artifact sets without visible pressure signals and accepts constrained bundles that expose packet- or trace-level pressure evidence
+    - tests should prove `--expect-document-authority-contrast` rejects artifact sets without an authoritative-versus-lower-authority document contrast and accepts bundles that preserve that packet order
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:

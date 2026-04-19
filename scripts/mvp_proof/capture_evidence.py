@@ -97,6 +97,15 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--expect-document-authority-contrast",
+        action="store_true",
+        help=(
+            "Require the Atlas packet artifact to show an authoritative document "
+            "selected ahead of lower-authority repository documents in the same "
+            "scenario."
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=None,
@@ -261,6 +270,68 @@ def _validate_budget_pressure_artifacts(
         )
 
 
+def _validate_authoritative_document_artifacts(
+    *,
+    packet_artifact: dict[str, Any],
+) -> None:
+    packet_content = _require_mapping(
+        value=packet_artifact["content"],
+        name="Atlas packet artifact",
+    )
+    selected_candidates = _require_sequence(
+        value=packet_content.get("selected_candidates"),
+        name="Atlas packet selected_candidates",
+    )
+
+    selected_document_classes: list[str] = []
+    for candidate in selected_candidates:
+        candidate_mapping = _require_mapping(
+            value=candidate,
+            name="Atlas packet selected candidate",
+        )
+        source_mapping = _require_mapping(
+            value=candidate_mapping.get("source"),
+            name="Atlas packet selected candidate source",
+        )
+        provenance_mapping = _require_mapping(
+            value=source_mapping.get("provenance"),
+            name="Atlas packet selected candidate provenance",
+        )
+        if provenance_mapping.get("source_family") != "document":
+            continue
+        source_class = source_mapping.get("source_class")
+        if isinstance(source_class, str) and source_class.strip():
+            selected_document_classes.append(source_class)
+
+    if "authoritative" not in selected_document_classes:
+        raise ValueError(
+            "Document-authority proof artifacts must include an authoritative "
+            "document in the selected packet candidates."
+        )
+
+    lower_authority_classes = {
+        source_class
+        for source_class in selected_document_classes
+        if source_class in {"planning", "reviews", "exploratory", "releases", "other"}
+    }
+    if not lower_authority_classes:
+        raise ValueError(
+            "Document-authority proof artifacts must include at least one lower-authority "
+            "document class alongside the authoritative document."
+        )
+
+    authoritative_index = selected_document_classes.index("authoritative")
+    lower_authority_index = min(
+        selected_document_classes.index(source_class)
+        for source_class in lower_authority_classes
+    )
+    if authoritative_index > lower_authority_index:
+        raise ValueError(
+            "Document-authority proof artifacts must keep the authoritative document "
+            "ahead of lower-authority document candidates in packet order."
+        )
+
+
 def _resolve_atlas_artifact_paths(
     args: argparse.Namespace,
 ) -> tuple[Path, Path, Path]:
@@ -327,6 +398,10 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             packet_artifact=atlas_packet,
             trace_artifact=atlas_trace,
         )
+    if args.expect_document_authority_contrast:
+        _validate_authoritative_document_artifacts(
+            packet_artifact=atlas_packet,
+        )
     return {
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
@@ -339,6 +414,7 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             "rubric_dimensions": list(RUBRIC_DIMENSIONS),
             "comparison_steps": list(COMPARISON_STEPS),
             "budget_pressure_expected": args.expect_budget_pressure,
+            "document_authority_expected": args.expect_document_authority_contrast,
         },
         "artifacts": {
             "baseline_rendered_context": baseline_rendered_context,
