@@ -10,7 +10,7 @@ from context_atlas.domain.models import ContextPacket
 from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow
 from context_atlas.infrastructure.config import (
     LowCodeWorkflowSettings,
-    get_low_code_workflow_preset,
+    build_low_code_workflow_plan,
     load_settings_from_env,
     list_low_code_workflow_presets,
 )
@@ -104,30 +104,19 @@ def assemble_low_code_workflow_packet(
         os.environ["CONTEXT_ATLAS_LOG_LEVEL"] = DEFAULT_LOG_LEVEL
 
     settings = load_settings_from_env()
-    active_low_code = LowCodeWorkflowSettings(
-        preset=settings.low_code.preset if preset is None else preset,
-        docs_root=settings.low_code.docs_root if docs_root is None else docs_root,
-        records_file=(
-            settings.low_code.records_file if records_file is None else records_file
-        ),
-        include_documents=(
-            settings.low_code.include_documents
-            if include_documents is None
-            else include_documents
-        ),
-        include_records=(
-            settings.low_code.include_records
-            if include_records is None
-            else include_records
-        ),
+    active_settings = settings.with_low_code_overrides(
+        preset=preset,
+        docs_root=docs_root,
+        records_file=records_file,
+        include_documents=include_documents,
+        include_records=include_records,
     )
-    active_settings = settings.model_copy(update={"low_code": active_low_code})
     packet = assemble_with_low_code_workflow(
         query=query,
         settings=active_settings,
         repo_root=active_repo_root,
     )
-    return active_repo_root, active_low_code, packet
+    return active_repo_root, active_settings.low_code, packet
 
 
 def main() -> None:
@@ -141,18 +130,19 @@ def main() -> None:
         include_documents=args.include_documents,
         include_records=args.include_records,
     )
-    trace_metadata = {} if packet.trace is None else packet.trace.metadata
-    preset = get_low_code_workflow_preset(low_code_settings.preset)
+    plan = build_low_code_workflow_plan(
+        low_code_settings=low_code_settings,
+        repo_root=repo_root,
+    )
 
     print(f"Repo root: {repo_root}")
-    print(f"Preset: {preset.name}")
-    print(f"Preset description: {preset.description}")
+    print(f"Preset: {plan.preset_name}")
+    print(f"Preset description: {plan.preset_description}")
     print(
-        "Enabled source families: "
-        f"{trace_metadata.get('request_enabled_source_families', 'none')}"
+        f"Enabled source families: {','.join(plan.enabled_source_families) or 'none'}"
     )
-    print(f"Governed docs root: {trace_metadata.get('request_docs_root', 'disabled')}")
-    print(f"Records file: {trace_metadata.get('request_records_file', 'disabled')}")
+    print(f"Governed docs root: {plan.docs_root or 'disabled'}")
+    print(f"Records file: {plan.records_file or 'disabled'}")
     print(f"Query: {args.query}")
     print()
     print("=== Chatbot Context ===")

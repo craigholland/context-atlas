@@ -67,6 +67,7 @@
     - mixed-source trace metadata may expose stable family or collector count summaries when that improves workflow inspection, but it should remain derived from canonical source helpers rather than adapter-specific reach-through
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
     - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
+    - outer low-code or product wrappers should pass that metadata through shared infrastructure seams instead of teaching this service about presets, wrapper modes, or workflow-specific source toggles
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
     - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it
@@ -86,6 +87,8 @@
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 - Supported example workflows should share this service path instead of duplicating stage sequencing in multiple scripts once a reference workflow composition helper exists.
 - Product-facing examples should describe this module as the shared engine path and should not present alternate scripts as separate service modes once they are only changing inspection output.
+- Story 5 Task 5.3 now also expects this service to keep caller metadata opaque and normalized, so outer low-code wrappers do not need to hand-pack every metadata value as a string just to stay on the shared engine path.
+- Story 5 Task 5.3 now also expects low-code workflow reinforcement to happen outside this package; if future low-code growth needs richer plan logic, that belongs in outer config/infrastructure seams rather than in service-specific branches here.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.

@@ -97,7 +97,7 @@ class ContextAssemblyService:
         top_k: int | None = None,
         packet_id: str | None = None,
         trace_id: str | None = None,
-        metadata: Mapping[str, str] | None = None,
+        metadata: Mapping[str, object] | None = None,
         now_epoch_seconds: float | None = None,
     ) -> ContextPacket:
         """Build a canonical packet from candidates, memory, budget, and trace state.
@@ -739,11 +739,19 @@ class ContextAssemblyService:
 
     @staticmethod
     def _copy_request_metadata(
-        metadata: Mapping[str, str] | None,
+        metadata: Mapping[str, object] | None,
     ) -> dict[str, str]:
         """Copy outer-workflow metadata without treating it as service policy."""
 
-        return dict(metadata or {})
+        normalized_metadata: dict[str, str] = {}
+        for key, value in (metadata or {}).items():
+            normalized_key = str(key)
+            if not normalized_key:
+                continue
+            if value is None:
+                continue
+            normalized_metadata[normalized_key] = str(value)
+        return normalized_metadata
 
     def _prefix_metadata(
         self,

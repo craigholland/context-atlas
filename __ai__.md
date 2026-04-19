@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 5 Task 5.2, which is packaging the low-code workflow into user-facing deliverables while keeping the product story honest about current MVP scope.
+- The current active MVP task is Story 5 Task 5.3, which is keeping the low-code workflow as a thin outer product surface rather than a second engine with its own semantics.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
 - Product-facing repo guidance should stay aligned around one visible golden path from install to configure to assemble to inspect; contributors should not let root docs, examples, and runtime-knob docs drift into separate onboarding stories.
@@ -173,6 +173,9 @@
 - Story 5 Task 5.2 is now packaging that low-code path into product-facing deliverables, so README, `.env.example`, and the low-code guide/example README should stay aligned on what the workflow does and does not do.
 - Story 5 Task 5.2 now also introduces tracked low-code reference artifacts under `examples/low_code_workflow/`; those TOML files should stay honest about being reference surfaces rather than implied hidden loaders.
 - Story 5 Task 5.2 now also expects the low-code guide, example README, and repo README to preserve the same recommended first-time evaluation order for those reference artifacts and the runnable wrapper.
+- Story 5 Task 5.3 is now auditing the low-code boundary, so preset resolution, repo-relative path resolution, and workflow metadata assembly should become more explicit outer-layer plan logic rather than staying smeared across the wrapper and example surface.
+- Story 5 Task 5.3 now also expects low-code override merging and starter source-to-packet wiring to stay on shared config/infrastructure seams rather than being rebuilt inside the runnable example.
+- Story 5 Task 5.3 now also expects the low-code wrapper to stay honest about those seams: validated override merging should flow through `ContextAtlasSettings.with_low_code_overrides(...)`, preset and path resolution should flow through `build_low_code_workflow_plan(...)`, and canonical sources should cross into packet assembly through `assemble_with_starter_sources(...)` rather than through ad hoc wrapper-local orchestration.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
