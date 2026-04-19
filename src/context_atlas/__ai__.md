@@ -40,6 +40,7 @@
 - Non-trivial public policy surfaces should avoid dataclass-era positional construction assumptions for the same reason.
 - The package root should stay intentionally thin even after a curated public API is introduced; current user-facing guidance should prefer `context_atlas.api` for the starter flow and only reach for stable subpackage imports when architectural seams matter.
 - Product-facing guides and examples should treat `context_atlas.api` as the starter import surface and `context_atlas.rendering` as the supported home of derived packet/trace inspection renderers.
+- `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
 
 ## Allowed Dependencies
 - may depend on:
@@ -125,6 +126,7 @@
 - The current curated API is now exercised by the starter smoke example under `examples/`, which should stay aligned with the supported starter flow.
 - The getting-started guide and starter context-flow example should stay aligned with the curated starter API and stable rendering imports rather than teaching deeper package paths first.
 - The starter context-flow example should remain the primary product-facing example, while smaller smoke scripts should stay secondary and validation-oriented.
+- Story 1 Task 1.4 is now auditing the supported MVP starter path for boundary leaks; starter guidance should preserve the split between curated API imports, starter wiring in `infrastructure/`, and derived output in `rendering/`.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
