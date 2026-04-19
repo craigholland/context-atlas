@@ -123,6 +123,10 @@ Each proof scenario should eventually capture:
 - Atlas rendered context artifact
 - short reviewer notes
 
+The current reference packaging path for that evidence is
+`scripts/mvp_proof/capture_evidence.py`. It packages already-generated workflow
+artifacts; it does not generate packet or trace outputs itself.
+
 ## Recommendation Thresholds
 
 ### Not Ready

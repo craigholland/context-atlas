@@ -178,6 +178,7 @@
 - Story 5 Task 5.3 now also expects the low-code wrapper to stay honest about those seams: validated override merging should flow through `ContextAtlasSettings.with_low_code_overrides(...)`, preset and path resolution should flow through `build_low_code_workflow_plan(...)`, and canonical sources should cross into packet assembly through `assemble_with_starter_sources(...)` rather than through ad hoc wrapper-local orchestration.
 - Story 6 Task 6.1 is now defining the MVP proof rubric and evidence shape, so proof artifacts should stay reproducible, packet-and-trace-centered, and workflow-agnostic rather than devolving into one-off demo screenshots or narrative-only assessments.
 - The repo README should now treat the MVP proof effort as rubric-driven work: packet quality, trace legibility, authority handling, budget behavior, and workflow reproducibility are the current proof dimensions, and README guidance should not imply an MVP claim ahead of that evidence.
+- Story 6 Task 6.1 now also expects proof packaging to stay explicit and reproducible: the current capture path should package already-generated workflow artifacts plus a naive baseline into one JSON evidence file rather than generating proof data through hidden demo-only shortcuts.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

@@ -225,6 +225,10 @@ That rubric is intentionally centered on:
 The proof story should stay packet-and-trace-centered. Atlas should not claim
 MVP readiness based only on narrative impressions or polished screenshots.
 
+The first reproducible packaging path for those artifacts now lives at
+[examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
+[scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
