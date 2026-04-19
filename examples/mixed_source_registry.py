@@ -9,7 +9,7 @@ from context_atlas.adapters import (
     InMemorySourceRegistry,
     LexicalRetrievalMode,
     LexicalRetriever,
-    StructuredRecordInput,
+    StructuredRecordRowMapper,
     StructuredRecordSourceAdapter,
 )
 from context_atlas.infrastructure import build_starter_context_assembly_service
@@ -26,33 +26,43 @@ def main() -> None:
     docs_root = repo_root / "docs"
 
     document_sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
+    already_fetched_rows = (
+        {
+            "external_id": "product-1",
+            "body": (
+                "Structured product record describing pricing policy, support "
+                "escalation, and release readiness."
+            ),
+            "name": "Product 1",
+            "uri": "records://products/1",
+            "uses": ("answering", "comparison"),
+            "table": "products",
+            "database": "atlas_app",
+        },
+        {
+            "external_id": "ticket-42",
+            "body": (
+                "Support ticket record describing packet budgeting concerns "
+                "and escalation ownership."
+            ),
+            "name": "Ticket 42",
+            "uri": "records://tickets/42",
+            "uses": ("triage",),
+            "table": "tickets",
+            "database": "atlas_app",
+        },
+    )
+    record_mapper = StructuredRecordRowMapper(
+        record_id_field="external_id",
+        content_field="body",
+        title_field="name",
+        source_uri_field="uri",
+        intended_uses_field="uses",
+        metadata_fields=("table",),
+        provenance_fields=("database",),
+    )
     record_sources = StructuredRecordSourceAdapter().load_sources(
-        (
-            StructuredRecordInput(
-                record_id="product-1",
-                content=(
-                    "Structured product record describing pricing policy, support "
-                    "escalation, and release readiness."
-                ),
-                title="Product 1",
-                source_uri="records://products/1",
-                intended_uses=("answering", "comparison"),
-                metadata={"table": "products"},
-                provenance_metadata={"database": "atlas_app"},
-            ),
-            StructuredRecordInput(
-                record_id="ticket-42",
-                content=(
-                    "Support ticket record describing packet budgeting concerns "
-                    "and escalation ownership."
-                ),
-                title="Ticket 42",
-                source_uri="records://tickets/42",
-                intended_uses=("triage",),
-                metadata={"table": "tickets"},
-                provenance_metadata={"database": "atlas_app"},
-            ),
-        )
+        record_mapper.to_record_inputs(already_fetched_rows)
     )
 
     registry = InMemorySourceRegistry((*document_sources, *record_sources))
@@ -84,6 +94,11 @@ def main() -> None:
 
     print("\nTrace collectors:")
     print(packet.trace.metadata.get("selected_source_collectors", "<none>"))
+
+    print(
+        "\nRecord adapter boundary:"
+        " rows were shaped before translation; Atlas did not fetch them."
+    )
 
 
 if __name__ == "__main__":

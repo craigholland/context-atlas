@@ -132,6 +132,7 @@
 - Story 2 Task 2.2 now includes explicit semantic-consistency validation, so adapter changes should keep filesystem documents and structured records aligned on canonical authority, durability, and intended-use behavior when they share the same source class.
 - Story 2 Task 2.3 is now making the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but fetching/query execution should remain entirely outside this package.
 - Story 2 Task 2.3 now also introduces a row-mapper pattern so application code can reshape already-fetched rows into validated record inputs without turning Atlas into a database or vector-store framework.
+- Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

@@ -76,6 +76,14 @@ sources = StructuredRecordSourceAdapter().load_sources(record_inputs)
 
 That keeps Atlas responsible for shaping and canonical translation, while outer integration code remains responsible for database access, vector-store access, or API calls.
 
+Future adapter work should preserve the same guardrails:
+
+- Atlas adapters may validate and reshape already-fetched payloads
+- Atlas adapters should translate payloads into canonical `ContextSource` artifacts
+- Atlas adapters should not own connections, sessions, queries, or client lifecycles
+- Atlas adapters should not become a general-purpose connector or ORM facade
+- outer integration code should remain responsible for fetching rows, vectors, or API responses before Atlas sees them
+
 See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
 
 ## Canonical Source Semantics
