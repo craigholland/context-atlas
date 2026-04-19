@@ -419,6 +419,22 @@ Relevant planning/decomposition anchors:
 - `Guidance Depth By Level` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 - `Decomposition Sanity Checks` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
 
+#### Task Feature PR Missing A Review Gate
+
+If a Task is being executed through multiple PR slices but there is no task-level feature PR, no `@codex review` request, or no pause before the next Task starts, contributors can lose the intended review boundary and drift into unsupervised multi-task accumulation.
+
+Possible action:
+
+- open or update the task-level feature PR
+- request `@codex review` once the Task's planned slices are complete
+- resolve review findings on the same feature branch before recommending human merge
+- avoid moving to the next Task until the current Task has been reviewed and handed off, unless explicit parallelization was chosen
+
+Relevant planning/decomposition anchors:
+
+- `Task Execution Workflow Should Use The Feature PR As The Review Gate` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+- `Branch Naming Should Reflect Decomposition` in [Craig Architecture - Planning And Decomposition](./Craig-Architecture-Planning-And-Decomposition.md)
+
 ## Constraints
 
 - This document must not be interpreted as overriding the architectural invariants in [Craig Architecture](./Craig-Architecture.md).

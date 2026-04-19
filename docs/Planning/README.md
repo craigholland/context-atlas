@@ -11,6 +11,15 @@ The expected planning stack is:
 - `Task` documents for implementation-ready decomposition of a Story, including a basic `Task Status` field (`PLANNED`, `WORKING`, or `IMPLEMENTED`)
 - task-level PR-plan documents for bounded reviewable slices
 
+The expected execution loop for a Task is:
+
+- open the task-level feature branch and feature PR early
+- mark the Task `WORKING`
+- implement bounded PR slices on short-lived slice branches and merge them back into the task feature branch
+- when the Task's planned slices are complete, mark it `IMPLEMENTED`
+- run local preflight on the feature branch, request `@codex review`, and resolve findings there
+- hand the clean feature PR to a human reviewer before starting the next Task unless an explicit parallelization decision has been made
+
 The current MVP planning stack lives under [MVP](./MVP/):
 
 - [MVP Product Definition](./MVP/mvp_product_defintiion.md)
