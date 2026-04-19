@@ -50,7 +50,7 @@ def main() -> None:
     args = parser.parse_args()
 
     repo_root = args.repo_root.resolve()
-    docs_root = (args.docs_root or (repo_root / "docs")).resolve()
+    docs_root = _resolve_docs_root(repo_root=repo_root, docs_root_arg=args.docs_root)
 
     if "CONTEXT_ATLAS_LOG_LEVEL" not in os.environ:
         os.environ["CONTEXT_ATLAS_LOG_LEVEL"] = DEFAULT_LOG_LEVEL
@@ -87,6 +87,16 @@ def main() -> None:
         print("Trace\n- none")
     else:
         print(render_trace_inspection(packet.trace))
+
+
+def _resolve_docs_root(*, repo_root: Path, docs_root_arg: Path | None) -> Path:
+    """Resolve docs-root arguments against the selected repository root."""
+
+    if docs_root_arg is None:
+        return (repo_root / "docs").resolve()
+    if docs_root_arg.is_absolute():
+        return docs_root_arg.resolve()
+    return (repo_root / docs_root_arg).resolve()
 
 
 if __name__ == "__main__":

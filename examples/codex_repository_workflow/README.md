@@ -31,6 +31,12 @@ Override the engineering question:
 python examples/codex_repository_workflow/run.py --repo-root . --query "What should planning docs be treated as during implementation?"
 ```
 
+When `--docs-root` is relative, it is resolved from the selected `--repo-root`:
+
+```powershell
+python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
+```
+
 The output shows:
 
 - the rendered Codex-facing context block

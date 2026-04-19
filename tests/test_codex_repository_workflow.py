@@ -143,6 +143,55 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             self.assertIn("request_workflow: codex_repository", result.stdout)
             self.assertIn("request_docs_root:", result.stdout)
 
+    def test_relative_docs_root_is_resolved_from_repo_root(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / "sample-repo"
+            docs_root = repo_root / "docs"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Guidance
+
+                Relative docs-root arguments should resolve from the chosen
+                repository root, not from the caller's current working directory.
+                """,
+            )
+
+            outside_cwd = Path(temp_dir) / "outside"
+            outside_cwd.mkdir(parents=True, exist_ok=True)
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_WORKFLOW_SCRIPT),
+                    "--repo-root",
+                    str(repo_root),
+                    "--docs-root",
+                    "docs",
+                    "--query",
+                    "How should docs-root be resolved?",
+                ],
+                cwd=outside_cwd,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn(
+                f"Governed docs root: {docs_root.resolve()}",
+                result.stdout,
+            )
+            self.assertIn(
+                "Authoritative/Architecture/Guidance.md",
+                result.stdout,
+            )
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

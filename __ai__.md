@@ -142,6 +142,7 @@
   - Codex-facing context remains a derived rendering story, not a special-case engine path
 - The runnable reference composition path now lives under `examples/codex_repository_workflow/` and should remain close to the supported public API rather than deep internal imports.
 - Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
+- Relative `--docs-root` values in the runnable repository example should resolve from the selected `--repo-root`, not from the caller's shell working directory.
 - Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
