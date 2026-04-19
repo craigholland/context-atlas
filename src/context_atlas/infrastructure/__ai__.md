@@ -33,6 +33,7 @@
 - Keep runtime environment loading, settings models, logger factories, handlers, and emission helpers here rather than in the semantic core.
 - Infrastructure code may reuse stable domain error codes, exceptions, and direct message constants instead of inventing semantic strings locally.
 - Do not let logger setup or config parsing become a backdoor for embedding business/domain policy.
+- Keep low-code presets and declarative workflow settings in this outer layer rather than leaking them into domain models or service orchestration semantics.
 - If infrastructure grows persistence backends, audit stores, or memory stores later, they must continue to translate external/runtime details before they cross inward.
 - `assembly.py` should stop at starter wiring and configured orchestration; it must not absorb rendering or packet-inspection responsibilities for convenience.
 
@@ -71,12 +72,14 @@
     - `LoggingSettings`: logger configuration model
     - `AssemblySettings`: default assembly-budget/retrieval/compression settings
     - `MemorySettings`: starter memory-retention settings
+    - `LowCodeWorkflowSettings`: declarative low-code workflow settings
     - `ContextAtlasSettings`: top-level infrastructure settings container
   - invariants:
     - keep settings focused on runtime/config concerns
     - do not move domain policy toggles here without an explicit architectural decision
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
     - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
+    - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
 - `config/environment.py`:
   - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:
@@ -88,6 +91,7 @@
   - footguns:
     - avoid accreting unrelated config parsing for future adapters unless it remains clearly outer-layer
     - only promote true operator-facing defaults into the env surface and `.env.example`
+    - low-code env keys should stay limited to preset/source selection plus a tiny amount of workflow configuration; deeper tuning still belongs to the existing assembly/memory settings surface
 - `logging/factory.py`:
   - responsibility: configures package loggers and default formatters
   - defines:
@@ -147,6 +151,7 @@
 - Story 4 Task 4.1 now also uses this module as the shared composition boundary for the technical-builder docs-plus-database example; outer workflow code may fetch rows and choose docs roots, but policy wiring should still stop here.
 - Story 4 Task 4.3 now also reinforces that boundary: outer workflows may still choose row mappers and already-fetched row batches, but this module must not absorb that row-shaping or translation logic just to make examples shorter.
 - Product-facing workflow guides should keep describing this module as the shared assembly boundary after adapter translation, not as a place where mixed-source workflows hide mapper or data-access decisions.
+- Story 5 Task 5.1 is now introducing the low-code workflow shape, so presets and declarative source settings should remain outer-layer conveniences over the same shared engine instead of creating a second orchestration stack.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

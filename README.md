@@ -117,6 +117,28 @@ The product-facing setup guide for that path now lives at [docs/Guides/docs_data
 
 The runnable path now also includes a tracked sample record payload so a technical builder can evaluate the mixed-source packet and trace flow without first wiring a real database client.
 
+## Low-Code Workflow Shape
+
+The incoming low-code workflow is intentionally small. Its configuration surface
+should let a less-technical builder declare:
+
+- one preset name
+- whether documents and/or structured records are enabled
+- a docs root
+- a record payload file
+
+That means the low-code path is still a wrapper around the same engine:
+
+- presets remain outer configuration, not domain truth
+- low-code settings choose supported source inputs and starter defaults
+- packet and trace artifacts remain canonical and shared with every other workflow
+
+The current runtime surface for that path now lives in [`.env.example`](/context-atlas/.env.example)
+under the `CONTEXT_ATLAS_LOW_CODE_*` keys. The broader assembly, compression,
+and memory knobs remain available too, but the low-code path should prefer
+presets plus a very small declarative source surface before exposing deeper
+runtime tuning.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

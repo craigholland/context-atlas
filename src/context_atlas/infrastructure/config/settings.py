@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from ...domain.messages import LogMessage
 from ...domain.models import CompressionStrategy
@@ -157,6 +157,35 @@ class MemorySettings(BaseModel):
         return value
 
 
+class LowCodeWorkflowSettings(BaseModel):
+    """Validated low-code workflow settings for the MVP wrapper path."""
+
+    model_config = ConfigDict(
+        frozen=True,
+        extra="forbid",
+        str_strip_whitespace=True,
+    )
+
+    preset: str = "chatbot_docs_records"
+    docs_root: str = "docs/Guides"
+    records_file: str = "examples/docs_database_workflow/sample_records.json"
+    include_documents: bool = True
+    include_records: bool = True
+
+    @field_validator("preset", "docs_root", "records_file")
+    @classmethod
+    def _require_non_blank_strings(cls, value: str) -> str:
+        if not value:
+            raise ValueError("LOW_CODE settings must not be blank")
+        return value
+
+    @model_validator(mode="after")
+    def _require_at_least_one_source(self) -> "LowCodeWorkflowSettings":
+        if not (self.include_documents or self.include_records):
+            raise ValueError("At least one low-code source family must be enabled.")
+        return self
+
+
 class ContextAtlasSettings(BaseModel):
     """Validated top-level runtime settings assembled from environment input."""
 
@@ -168,6 +197,7 @@ class ContextAtlasSettings(BaseModel):
     logging: LoggingSettings = Field(default_factory=LoggingSettings)
     assembly: AssemblySettings = Field(default_factory=AssemblySettings)
     memory: MemorySettings = Field(default_factory=MemorySettings)
+    low_code: LowCodeWorkflowSettings = Field(default_factory=LowCodeWorkflowSettings)
     last_loaded_message_name: str | None = None
     last_loaded_message: str | None = None
 
@@ -187,6 +217,7 @@ class ContextAtlasSettings(BaseModel):
         logging: LoggingSettings,
         assembly: AssemblySettings,
         memory: MemorySettings,
+        low_code: LowCodeWorkflowSettings,
     ) -> "ContextAtlasSettings":
         """Build a settings object with a formatted load-summary message attached."""
 
@@ -194,6 +225,7 @@ class ContextAtlasSettings(BaseModel):
             logging=logging,
             assembly=assembly,
             memory=memory,
+            low_code=low_code,
             last_loaded_message_name=LogMessage.SETTINGS_LOADED.name,
             last_loaded_message=str(LogMessage.SETTINGS_LOADED)
             % (
