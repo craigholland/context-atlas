@@ -56,6 +56,18 @@ Those environment-backed settings currently cover:
 - starter assembly defaults
 - starter memory defaults
 
+The current supported configuration surface is intentionally smaller than the
+full set of starter constants in code:
+
+- ranking authority tables and trace-signal constants stay internal
+- memory retention semantics stay internal unless they are already exposed
+  through documented env-backed defaults
+- canonical slot identifiers stay internal
+
+The current hardening direction is to promote only starter defaults that change
+visible runtime behavior in a meaningful way for callers. Right now, the
+starter memory-budget split is the clearest candidate in that category.
+
 ## Run The Starter Context Flow
 
 The supported starter example is:

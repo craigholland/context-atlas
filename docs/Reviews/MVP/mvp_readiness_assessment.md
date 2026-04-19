@@ -205,6 +205,13 @@ Current state:
 
 - follow-up hardening plan is now tracked in
   [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
+- the current configuration-surface audit classifies ranking authority tables,
+  ranking signal names, memory-scoring semantics, and canonical slot
+  identifiers as internal implementation constants rather than MVP env-backed
+  runtime knobs
+- the starter memory-budget split is the one current default approved for
+  promotion into the supported runtime surface because it changes visible
+  starter-budget behavior for callers
 - the first budget-pressure hardening target, the constrained repository
   scenario `codex_repository / repo_budget_pressure_tradeoffs`, is now a
   reproducible supported run plus capture path
