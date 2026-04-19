@@ -127,6 +127,20 @@ The current reference packaging path for that evidence is
 `scripts/mvp_proof/capture_evidence.py`. It packages already-generated workflow
 artifacts; it does not generate packet or trace outputs itself.
 
+## Evidence Review Path
+
+Each captured evidence package should be reviewed in the same order:
+
+1. read the naive baseline rendered-context artifact first
+2. read the Atlas rendered-context artifact for the same scenario
+3. inspect the Atlas packet artifact to verify what was actually selected
+4. inspect the Atlas trace artifact to understand inclusion, exclusion, and transformation decisions
+5. record notes against each rubric dimension before making a recommendation
+
+That review order is also embedded directly into the evidence package produced by
+`scripts/mvp_proof/capture_evidence.py` so the proof process stays repeatable
+even when the artifacts are reviewed later by a different contributor.
+
 ## Recommendation Thresholds
 
 ### Not Ready

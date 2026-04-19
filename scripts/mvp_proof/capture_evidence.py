@@ -6,6 +6,22 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+RUBRIC_DIMENSIONS = [
+    "packet_quality",
+    "trace_legibility",
+    "authority_handling",
+    "budget_behavior",
+    "workflow_reproducibility",
+]
+
+COMPARISON_STEPS = [
+    "Read the naive baseline rendered-context artifact first.",
+    "Read the Atlas rendered-context artifact for the same scenario.",
+    "Inspect the Atlas packet artifact to confirm what was actually selected.",
+    "Inspect the Atlas trace artifact to understand why sources were included, excluded, or transformed.",
+    "Record notes against each rubric dimension before making an MVP-readiness recommendation.",
+]
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -94,6 +110,11 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
         "query": args.query,
         "input_summary": args.input_summary,
         "review_notes": list(args.note),
+        "review_path": {
+            "rubric_document": "docs/Reviews/MVP/mvp_evaluation_rubric.md",
+            "rubric_dimensions": list(RUBRIC_DIMENSIONS),
+            "comparison_steps": list(COMPARISON_STEPS),
+        },
         "artifacts": {
             "baseline_rendered_context": _load_artifact(args.baseline_rendered),
             "atlas_packet": _load_artifact(args.atlas_packet),
