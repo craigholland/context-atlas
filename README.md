@@ -139,6 +139,20 @@ and memory knobs remain available too, but the low-code path should prefer
 presets plus a very small declarative source surface before exposing deeper
 runtime tuning.
 
+The first supported wrapper for that path now lives at
+[examples/low_code_workflow/run.py](/context-atlas/examples/low_code_workflow/run.py).
+It currently supports one preset, `chatbot_docs_records`, which keeps the
+workflow intentionally concrete:
+
+- governed guide docs
+- a tracked JSON payload of already-fetched support-style records
+- one shared `ContextPacket` and `ContextTrace` path after preset-driven source selection
+
+That means the low-code path is still a real Atlas component integration, not a
+forked engine mode. The preset chooses source-shaping defaults, but packet
+assembly, budgeting, compression, and trace inspection still run through the
+same shared starter engine path used by the other workflows.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

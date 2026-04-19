@@ -179,6 +179,21 @@ class LowCodeWorkflowSettings(BaseModel):
             raise ValueError("LOW_CODE settings must not be blank")
         return value
 
+    @field_validator("preset")
+    @classmethod
+    def _validate_supported_preset(cls, value: str) -> str:
+        from .presets import (
+            is_supported_low_code_preset,
+            list_low_code_workflow_presets,
+        )
+
+        if not is_supported_low_code_preset(value):
+            raise ValueError(
+                "LOW_CODE_PRESET must be one of "
+                f"{list_low_code_workflow_presets()}, got {value}"
+            )
+        return value
+
     @model_validator(mode="after")
     def _require_at_least_one_source(self) -> "LowCodeWorkflowSettings":
         if not (self.include_documents or self.include_records):

@@ -294,6 +294,7 @@
 - The docs-plus-database workflow tests should now also keep the tracked sample-record payload path honest so product-facing examples remain runnable without widening Atlas into a query layer.
 - The docs-plus-database workflow tests should also keep any example-level payload-loader helpers honest so file-backed demo inputs do not drift into the adapter boundary unnoticed.
 - Story 4 Task 4.3 now also expects tests to keep the mapper-plus-adapter crossing honest so mixed-source examples do not rebuild row-to-source translation logic in workflow scripts.
+- Story 5 Task 5.1 now introduces the low-code workflow wrapper; tests should verify that preset-driven source selection still flows through one shared packet and trace path rather than a second engine.
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
