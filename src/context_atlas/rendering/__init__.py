@@ -7,10 +7,11 @@ state models or hidden orchestration boundaries.
 
 from .context import render_packet_context
 from .packet import render_packet_inspection
-from .trace import render_trace_inspection
+from .trace import render_trace_highlights, render_trace_inspection
 
 __all__ = [
     "render_packet_context",
     "render_packet_inspection",
+    "render_trace_highlights",
     "render_trace_inspection",
 ]

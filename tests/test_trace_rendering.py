@@ -19,7 +19,10 @@ from context_atlas.domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
 )
-from context_atlas.rendering import render_trace_inspection
+from context_atlas.rendering import (
+    render_trace_highlights,
+    render_trace_inspection,
+)
 
 
 class TraceRenderingTests(unittest.TestCase):
@@ -86,6 +89,35 @@ class TraceRenderingTests(unittest.TestCase):
 
         self.assertTrue(positions)
         self.assertEqual(positions, tuple(range(1, len(positions) + 1)))
+
+    def test_trace_highlights_render_concise_workflow_summary(self) -> None:
+        trace = ContextTrace(
+            trace_id="trace-render-2",
+            decisions=(
+                ContextAssemblyDecision(
+                    source_id="charter",
+                    action=ContextDecisionAction.INCLUDED,
+                    reason_codes=(InclusionReasonCode.DIRECT_MATCH,),
+                    position=1,
+                ),
+            ),
+            metadata={
+                "request_workflow": "codex_repository",
+                "request_repo_root": "K:/repo",
+                "request_docs_root": "K:/repo/docs",
+                "selected_source_classes": "authoritative,planning",
+                "selected_source_families": "document",
+                "compression_applied": "true",
+            },
+        )
+
+        rendered = render_trace_highlights(trace)
+
+        self.assertIn("Trace Highlights", rendered)
+        self.assertIn("- workflow: codex_repository", rendered)
+        self.assertIn("- selected_source_classes: authoritative,planning", rendered)
+        self.assertIn("- selected_source_families: document", rendered)
+        self.assertIn("- compression_applied: true", rendered)
 
 
 if __name__ == "__main__":
