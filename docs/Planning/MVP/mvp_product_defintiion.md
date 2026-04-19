@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-18
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-19
 owners: [core]
 tags: [mvp, product, planning, codex, chatbot]
 related:
@@ -239,6 +239,7 @@ The MVP should ship with three concrete reference workflows.
 
 - Goal: produce evidence that Atlas is behaving like a real reusable product component rather than an architectural demo.
 - Primary implementation areas:
+  - one explicit evaluation rubric that defines what counts as acceptable MVP evidence
   - comparison workflows against naive context stuffing
   - artifact capture for packet and trace output
   - a documented assessment of usefulness, legibility, and correctness across at least two workflows
