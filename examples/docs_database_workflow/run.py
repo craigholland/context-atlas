@@ -15,7 +15,6 @@ from __future__ import annotations
 import argparse
 import os
 from pathlib import Path
-from typing import Any
 
 from context_atlas.adapters import (
     FilesystemDocumentSourceAdapter,
@@ -49,6 +48,17 @@ DEFAULT_QUERY = (
 DEFAULT_LOG_LEVEL = "WARNING"
 CHATBOT_CONTEXT_HEADER = "Chatbot Context"
 RECORD_BATCH_NAME = "demo_support_rows"
+RECORD_ROW_MAPPER = StructuredRecordRowMapper(
+    record_id_field="ticket_id",
+    content_field="body",
+    title_field="title",
+    source_uri_field="uri",
+    intended_uses_field="uses",
+    metadata_fields=("team", "table"),
+    provenance_fields=("database",),
+    source_class="reviews",
+    authority="preferred",
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -99,7 +109,6 @@ def assemble_docs_database_workflow_packet(
     docs_root = _resolve_docs_root(docs_root_arg)
     records_file = resolve_records_file(records_file_arg)
     record_rows = load_record_rows(records_file)
-    record_inputs = _build_record_inputs(record_rows)
 
     if "CONTEXT_ATLAS_LOG_LEVEL" not in os.environ:
         os.environ["CONTEXT_ATLAS_LOG_LEVEL"] = DEFAULT_LOG_LEVEL
@@ -108,7 +117,10 @@ def assemble_docs_database_workflow_packet(
     document_sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
     record_sources = StructuredRecordSourceAdapter(
         collector_name="docs_database_demo_records"
-    ).load_sources(record_inputs)
+    ).load_mapped_sources(
+        record_rows,
+        row_mapper=RECORD_ROW_MAPPER,
+    )
     packet = assemble_with_starter_context_service(
         retriever=LexicalRetriever(
             InMemorySourceRegistry((*document_sources, *record_sources)),
@@ -121,11 +133,11 @@ def assemble_docs_database_workflow_packet(
             "docs_root": docs_root.as_posix(),
             "record_batch": RECORD_BATCH_NAME,
             "records_file": records_file.as_posix(),
-            "record_input_count": str(len(record_inputs)),
+            "record_input_count": str(len(record_rows)),
             "record_origin": "already_fetched_rows",
         },
     )
-    return docs_root, records_file, len(record_inputs), packet
+    return docs_root, records_file, len(record_rows), packet
 
 
 def main() -> None:
@@ -179,25 +191,6 @@ def _resolve_docs_root(docs_root_arg: Path | None) -> Path:
     if docs_root_arg is not None:
         return docs_root_arg.resolve()
     return (Path(__file__).resolve().parents[2] / "docs" / "Guides").resolve()
-
-
-def _build_record_inputs(
-    rows: tuple[dict[str, Any], ...],
-):
-    """Shape already-fetched rows at the outer workflow boundary."""
-
-    mapper = StructuredRecordRowMapper(
-        record_id_field="ticket_id",
-        content_field="body",
-        title_field="title",
-        source_uri_field="uri",
-        intended_uses_field="uses",
-        metadata_fields=("team", "table"),
-        provenance_fields=("database",),
-        source_class="reviews",
-        authority="preferred",
-    )
-    return mapper.to_record_inputs(rows)
 
 
 if __name__ == "__main__":

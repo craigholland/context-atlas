@@ -79,6 +79,41 @@ class StructuredRecordRowMapperTests(unittest.TestCase):
             ("row-1", "row-2"),
         )
 
+    def test_source_adapter_supports_batch_row_mapping_in_one_step(self) -> None:
+        mapper = StructuredRecordRowMapper(
+            record_id_field="ticket_id",
+            content_field="body",
+            source_class=ContextSourceClass.REVIEWS,
+            authority=ContextSourceAuthority.PREFERRED,
+        )
+        adapter = StructuredRecordSourceAdapter(
+            collector_name="docs_database_demo_records"
+        )
+
+        sources = adapter.load_mapped_sources(
+            (
+                {
+                    "ticket_id": "ticket-44",
+                    "body": "Retry escalation details for a support record.",
+                },
+                {
+                    "ticket_id": "ticket-45",
+                    "body": "Preflight failures should be investigated quickly.",
+                },
+            ),
+            row_mapper=mapper,
+        )
+
+        self.assertEqual(
+            tuple(source.source_id for source in sources), ("ticket-44", "ticket-45")
+        )
+        self.assertTrue(
+            all(
+                source.collector_name == "docs_database_demo_records"
+                for source in sources
+            )
+        )
+
     def test_missing_required_row_field_raises_coded_error(self) -> None:
         mapper = StructuredRecordRowMapper(
             record_id_field="ticket_id",

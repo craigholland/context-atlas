@@ -163,6 +163,7 @@
 - The docs-plus-database runnable path should stay evaluable without hidden setup; tracked sample record payloads are acceptable, but they should remain clearly framed as already-fetched outer inputs rather than Atlas-managed data access.
 - Example-level helper modules for the docs-plus-database path may load tracked sample payload files, but repo-facing guidance should keep that file I/O at the outer workflow boundary rather than smuggling it into adapters.
 - Story 4 Task 4.3 is now auditing that workflow against the cleaner repository path, so mixed-source examples should remain thin outer composition code over canonical sources and the shared assembly service rather than growing ad hoc engine behavior.
+- The current Task 4.3 refactor direction is to let the adapter package own the mapper-plus-translation crossing for already-fetched rows while keeping row fetching, payload loading, and workflow metadata outward in examples or applications.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
