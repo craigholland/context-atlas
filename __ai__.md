@@ -138,6 +138,7 @@
 - That task should treat `infrastructure/assembly.py` as starter wiring only, `services/assembly.py` as orchestration only, and `rendering/` as derived output only; convenience work should not blur those responsibilities.
 - PR A of that task is the boundary-audit slice; it should strengthen the package-root, starter-wiring, and rendering contracts before any deeper behavioral refactor lands.
 - PR B of that task should reinforce the difference between canonical packet state and attached transformation artifacts so starter rendering does not quietly treat non-applied compression as new canonical content.
+- PR C of that task should mark the task `IMPLEMENTED` and make the product-facing docs describe the `context_atlas.api` / `context_atlas.rendering` split as the intended MVP architecture rather than a temporary convenience choice.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

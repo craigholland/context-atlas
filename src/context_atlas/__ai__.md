@@ -127,6 +127,7 @@
 - The getting-started guide and starter context-flow example should stay aligned with the curated starter API and stable rendering imports rather than teaching deeper package paths first.
 - The starter context-flow example should remain the primary product-facing example, while smaller smoke scripts should stay secondary and validation-oriented.
 - Story 1 Task 1.4 is now auditing the supported MVP starter path for boundary leaks; starter guidance should preserve the split between curated API imports, starter wiring in `infrastructure/`, and derived output in `rendering/`.
+- Story 1 Task 1.4 now treats that split as implemented guidance rather than an informal preference; product-facing docs should present it as the supported MVP architecture.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 
