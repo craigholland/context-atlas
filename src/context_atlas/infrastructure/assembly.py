@@ -58,8 +58,9 @@ def build_starter_context_assembly_service(
     docs-plus-database workflow, this helper should sit after outer workflow
     code has already resolved docs and/or record-backed inputs into a
     retriever over canonical Atlas sources. It intentionally stops at
-    configured orchestration; it does not choose workflow inputs, execute
-    database access, render packet context, or render inspection views.
+    configured orchestration; it does not choose workflow inputs, own row
+    mapping conventions, execute database access, render packet context, or
+    render inspection views.
     """
 
     active_settings = settings or ContextAtlasSettings()

@@ -70,11 +70,16 @@ mapper = StructuredRecordRowMapper(
     fixed_intended_uses=("triage",),
 )
 
-record_inputs = mapper.to_record_inputs(rows)
-sources = StructuredRecordSourceAdapter().load_sources(record_inputs)
+sources = StructuredRecordSourceAdapter().load_mapped_sources(
+    rows,
+    row_mapper=mapper,
+)
 ```
 
-That keeps Atlas responsible for shaping and canonical translation, while outer integration code remains responsible for database access, vector-store access, or API calls.
+That keeps Atlas responsible for shaping and canonical translation, while outer
+integration code remains responsible for database access, vector-store access,
+or API calls. The mapper names the outer row shape, and the adapter remains the
+canonical crossing into `ContextSource` artifacts.
 
 Future adapter work should preserve the same guardrails:
 
@@ -96,7 +101,7 @@ That workflow should currently look like this:
 2. outer application code fetches rows or record payloads from its own database, vector store, or API client
 3. `FilesystemDocumentSourceAdapter` translates the docs into canonical `ContextSource` artifacts
 4. `StructuredRecordRowMapper` or validated `StructuredRecordInput` objects normalize the fetched record payloads into Atlas-ready record shapes
-5. `StructuredRecordSourceAdapter` translates those record shapes into the same canonical `ContextSource` model used by documents
+5. `StructuredRecordSourceAdapter` performs the canonical crossing into the same `ContextSource` model used by documents, including the one-step `load_mapped_sources(...)` path for already-fetched rows
 6. one shared registry, retriever, assembly service, packet, and trace path operates over both source families together
 
 That means Atlas is demonstrating a real pipeline-component role here:

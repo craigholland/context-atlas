@@ -122,6 +122,7 @@
     - row mappers should stay small and validation-first so application integrations can rename fields without widening Atlas into a connector framework
     - row mappers should emit `StructuredRecordInput` objects so later translation still converges through one canonical source path
     - row mappers should construct those record inputs through the validated `StructuredRecordInput` surface rather than keeping a parallel ad hoc row schema alive inside adapters
+    - when examples need one-step row-to-source translation, that crossing should still run through the adapter package rather than by rebuilding a parallel translation seam in workflow scripts
 
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
@@ -144,6 +145,9 @@
 - The runnable docs-plus-database example should keep demonstrating that `StructuredRecordRowMapper` and `StructuredRecordSourceAdapter` operate after row fetching, not as a query layer.
 - Story 4 Task 4.2 now also includes tracked sample record payloads for the runnable workflow, so adapter-facing examples should treat those files as already-fetched outer inputs rather than as a reason to widen adapters into loaders or client wrappers.
 - If examples add helper modules for resolving or loading tracked record payloads, that helper logic should remain outside this package and this owner file should keep the boundary explicit.
+- Story 4 Task 4.3 is now auditing the mixed-source workflow shape against the repository workflow, so adapter-facing guidance should keep the row-mapper and source-translation path clear without letting example scripts invent parallel translation seams.
+- Story 4 Task 4.3 now also expects `StructuredRecordSourceAdapter` to remain the canonical crossing into `ContextSource` artifacts even when outer workflows start from already-fetched row batches and a `StructuredRecordRowMapper`.
+- Product-facing docs for the docs-plus-database path should now name `load_mapped_sources(...)` as the preferred one-step crossing for already-fetched rows so builders are not taught to duplicate mapper-plus-translation glue in application scripts.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

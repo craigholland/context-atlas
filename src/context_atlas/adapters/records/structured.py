@@ -1,22 +1,22 @@
 """Structured-record adapters for translating already-fetched record payloads.
 
 These adapters intentionally stop at translation. Outer application code owns
-query execution, client lifecycles, and row fetching before Atlas sees any
-record-shaped payloads.
+query execution, client lifecycles, row fetching, and payload-file loading
+before Atlas sees any record-shaped payloads.
 
 When callers need to reshape row field names before translation, that mapping
 should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
-rather than by widening this adapter into a query or client surface. Likewise,
-payload-file loading for runnable examples should remain in outer workflow code
-rather than moving into this adapter package.
+rather than by widening this adapter into a query or client surface.
 
 The technical-builder docs-plus-database workflow should keep using this same
-boundary: Atlas translates already-fetched rows, but does not fetch them.
+boundary: outer code chooses rows, Atlas validates and translates them into
+canonical sources, and the shared engine stays source-family agnostic.
 """
 
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+from typing import Protocol
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
@@ -74,6 +74,16 @@ class StructuredRecordInput(BaseModel):
 type StructuredRecordPayload = StructuredRecordInput | Mapping[str, object]
 
 
+class _StructuredRecordInputBatchMapper(Protocol):
+    """Minimal batch-mapper contract for already-fetched row payloads."""
+
+    def to_record_inputs(
+        self,
+        rows: Iterable[Mapping[str, object]],
+    ) -> tuple[StructuredRecordInput, ...]:
+        """Return validated record inputs for a batch of outer-workflow rows."""
+
+
 class StructuredRecordSourceAdapter:
     """Translate record-shaped payloads into canonical Atlas sources.
 
@@ -82,7 +92,9 @@ class StructuredRecordSourceAdapter:
     - mapping-shaped row payloads that outer integration code already fetched
 
     Richer database, ORM, or vector-store objects should be normalized outside
-    Atlas before they cross this adapter boundary.
+    Atlas before they cross this adapter boundary. Row mappers may help outer
+    code reshape already-fetched payloads, but this adapter should remain the
+    canonical crossing point into `ContextSource` artifacts.
     """
 
     def __init__(
@@ -111,6 +123,16 @@ class StructuredRecordSourceAdapter:
         """Translate a sequence of structured records into canonical sources."""
 
         return tuple(self.load_source(record) for record in records)
+
+    def load_mapped_sources(
+        self,
+        rows: Iterable[Mapping[str, object]],
+        *,
+        row_mapper: _StructuredRecordInputBatchMapper,
+    ) -> tuple[ContextSource, ...]:
+        """Translate already-fetched rows through one mapper-plus-adapter path."""
+
+        return self.load_sources(row_mapper.to_record_inputs(rows))
 
     def load_source(
         self,

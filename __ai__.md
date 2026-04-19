@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 4 Task 4.2, which packages the technical-builder docs-plus-database workflow into usable guide, example, and supporting configuration deliverables; repo-level guidance should stay aligned with that task until its feature PR is reviewed and merged.
+- The current active MVP task is Story 4 Task 4.3, which is hardening the documents-plus-database workflow back toward the intended Craig Architecture boundaries; repo-level guidance should stay aligned with that task until its feature PR is reviewed and merged.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
 - Product-facing repo guidance should stay aligned around one visible golden path from install to configure to assemble to inspect; contributors should not let root docs, examples, and runtime-knob docs drift into separate onboarding stories.
@@ -162,6 +162,9 @@
 - The docs-plus-database workflow is now expected to stay test-backed as a real mixed-source path rather than a docs-only example with record-shaped placeholders.
 - The docs-plus-database runnable path should stay evaluable without hidden setup; tracked sample record payloads are acceptable, but they should remain clearly framed as already-fetched outer inputs rather than Atlas-managed data access.
 - Example-level helper modules for the docs-plus-database path may load tracked sample payload files, but repo-facing guidance should keep that file I/O at the outer workflow boundary rather than smuggling it into adapters.
+- Story 4 Task 4.3 is now auditing that workflow against the cleaner repository path, so mixed-source examples should remain thin outer composition code over canonical sources and the shared assembly service rather than growing ad hoc engine behavior.
+- The current Task 4.3 refactor direction is to let the adapter package own the mapper-plus-translation crossing for already-fetched rows while keeping row fetching, payload loading, and workflow metadata outward in examples or applications.
+- Story 4 Task 4.3 now also expects the product-facing docs to teach that same boundary explicitly rather than describing row mapping, translation, and engine assembly as one undifferentiated workflow blob.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
