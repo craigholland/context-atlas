@@ -26,7 +26,7 @@ Create the core user-facing guidance that turns the starter implementation into 
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
