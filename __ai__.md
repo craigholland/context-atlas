@@ -134,12 +134,16 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.4 is now implemented on the task-level feature branch and is awaiting the task review gate on the feature PR.
-- That task now leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
-- The completed Task 2.4 slices now establish three durable guardrails:
-  - adapters cross into canonical sources through one resolved semantic profile rather than restating semantics piecemeal
-  - services surface mixed-source trace metadata through domain-owned source helpers rather than provenance reach-through
-  - repo-facing docs and owner files reinforce that same boundary so future source-family work does not reopen it accidentally
+- Story 2 Task 2.4 is now merged into `development` and leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
+- Story 3 Task 3.1 now establishes the current flagship Codex repository workflow on feature PR #56 and should stop at the task-level review gate until that feature PR is reviewed and merged.
+- The first supported repository workflow should stay intentionally narrow:
+  - governed repository docs rooted at `<repo_root>/docs` are the current repository input surface
+  - the shared assembly service, canonical packet, and trace remain the engine path
+  - Codex-facing context remains a derived rendering story, not a special-case engine path
+- The runnable reference composition path now lives under `examples/codex_repository_workflow/` and should remain close to the supported public API rather than deep internal imports.
+- Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
+- Relative `--docs-root` values in the runnable repository example should resolve from the selected `--repo-root`, not from the caller's shell working directory.
+- Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

@@ -153,6 +153,40 @@ This repository does not yet present every future workflow. The current user-fac
 
 The current starter walkthrough lives in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
 
+## Codex Repository Workflow Shape
+
+The flagship Codex repository workflow should currently be understood as a thin reference composition path over the same shared Atlas engine, not as a separate engine mode.
+
+The current supported repository inputs are intentionally narrow:
+
+- a repository root
+- governed repository documents rooted at `<repo_root>/docs`
+- an engineering question or task query
+
+The current supported composition path is:
+
+1. outer workflow code resolves the governed docs root from the repository
+2. `FilesystemDocumentSourceAdapter` translates those docs into canonical `ContextSource` artifacts
+3. `InMemorySourceRegistry` and `LexicalRetriever` produce the candidate flow
+4. `build_starter_context_assembly_service(...)` wires the shared policies and settings
+5. the workflow renders Codex-facing context from the resulting `ContextPacket` and keeps packet/trace inspection visible
+
+The outer workflow metadata that defines that path should remain inspectable too. If
+workflow code supplies metadata such as `workflow`, `repo_root`, or `docs_root`,
+the shared assembly service should preserve it in trace metadata rather than hiding
+that context inside example-only print logic.
+
+That means the current Codex repository story is repo-aware, but still honest about scope:
+
+- it is governed-doc aware
+- it is packet-and-trace aware
+- it is not yet a general code crawler
+- it does not yet own git history, issue systems, or arbitrary repository connectors
+
+Those broader repository inputs can come later, but they should extend the same engine path rather than replacing it with Codex-specific orchestration.
+
+The runnable reference example for that path now lives at [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md).
+
 ## Packet And Trace Inspection Contract
 
 Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.
