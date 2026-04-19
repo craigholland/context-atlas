@@ -66,6 +66,8 @@ Run the repository-oriented example directly:
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
+The current product-facing setup guide for that path is [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
+
 See [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md) for the current supported repository path.
 
 ## Mixed-Source Flow
