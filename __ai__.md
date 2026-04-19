@@ -141,6 +141,7 @@
 - PR C of that task should validate mixed-source use so filesystem docs and structured records can coexist in one registry and packet flow without leaking source-family quirks inward.
 - The root README should now describe structured records as the next source family through the adapter-facing `StructuredRecordInput` contract while keeping `ContextSource` as the only canonical source artifact.
 - PR B should move the structured-record contract into `adapters/records/`, expose a real translation adapter, and keep the root README aligned with that implemented starter surface.
+- PR C should prove mixed-source packet flow with one registry and one assembly path, and the root README should point to a concrete mixed-source example rather than leaving that claim abstract.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

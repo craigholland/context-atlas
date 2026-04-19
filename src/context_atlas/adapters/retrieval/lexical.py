@@ -101,7 +101,7 @@ class LexicalRetrievalMode(StrEnum):
 
 
 class InMemorySourceRegistry:
-    """A small in-memory registry for canonical context sources."""
+    """A small in-memory registry for canonical context sources from any family."""
 
     def __init__(self, sources: Iterable[ContextSource] = ()) -> None:
         self._sources: dict[str, ContextSource] = {}
@@ -122,6 +122,7 @@ class InMemorySourceRegistry:
             source.source_id,
             len(self._sources),
             source_id=source.source_id,
+            source_family=source.provenance.source_family,
             total_sources=len(self._sources),
         )
 
