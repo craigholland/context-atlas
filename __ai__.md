@@ -139,6 +139,7 @@
 - PR A of that task is the contract slice; it should define the minimum structured-record shape Atlas needs without turning the package into a database framework.
 - PR B of that task should implement record-backed source translation inside `adapters/records/` while preserving provenance and intended-use metadata on canonical sources.
 - PR C of that task should validate mixed-source use so filesystem docs and structured records can coexist in one registry and packet flow without leaking source-family quirks inward.
+- Review fixes on Story 2 Task 2.1 should keep structured-record validation strict: mapping-shaped `tags` or `intended_uses` inputs should fail fast, and canonical `record_id` should remain authoritative in source provenance metadata.
 - The root README should now describe structured records as the next source family through the adapter-facing `StructuredRecordInput` contract while keeping `ContextSource` as the only canonical source artifact.
 - PR B should move the structured-record contract into `adapters/records/`, expose a real translation adapter, and keep the root README aligned with that implemented starter surface.
 - PR C should prove mixed-source packet flow with one registry and one assembly path, and the root README should point to a concrete mixed-source example rather than leaving that claim abstract.

@@ -195,6 +195,8 @@
   - invariants:
     - tests should prove record adapters emit canonical `ContextSource` artifacts with the structured-record source family
     - tests should prove record provenance and intended-use metadata survive translation into canonical sources
+    - tests should prove canonical `record_id` stays authoritative in provenance metadata even when callers provide overlapping provenance fields
+    - tests should prove mapping-shaped `tags` or `intended_uses` payloads fail fast instead of being silently coerced
     - tests should prove documents and structured records can coexist in one shared registry and packet flow
 
 ## Known Gaps / Future-State Notes

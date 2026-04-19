@@ -87,6 +87,23 @@ class StructuredRecordSourceAdapterTests(unittest.TestCase):
         self.assertEqual(source.metadata["table"], "tickets")
         self.assertEqual(source.intended_uses, ("triage",))
 
+    def test_canonical_record_id_overrides_provenance_metadata(self) -> None:
+        adapter = StructuredRecordSourceAdapter()
+        source = adapter.load_source(
+            StructuredRecordInput(
+                record_id="product-2",
+                content="Structured product record content",
+                provenance_metadata={
+                    "record_id": "spoofed-id",
+                    "database": "atlas_app",
+                },
+            )
+        )
+
+        self.assertEqual(source.source_id, "product-2")
+        self.assertEqual(source.provenance.metadata["record_id"], "product-2")
+        self.assertEqual(source.provenance.metadata["database"], "atlas_app")
+
     def test_invalid_record_input_raises_coded_error(self) -> None:
         adapter = StructuredRecordSourceAdapter()
 
@@ -97,6 +114,24 @@ class StructuredRecordSourceAdapterTests(unittest.TestCase):
             context.exception.code,
             ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
         )
+
+    def test_mapping_tags_input_raises_coded_error(self) -> None:
+        adapter = StructuredRecordSourceAdapter()
+
+        with self.assertRaises(ContextAtlasError) as context:
+            adapter.load_source(
+                {
+                    "record_id": "ticket-43",
+                    "content": "Ticket record content",
+                    "tags": {"primary": "triage"},
+                }
+            )
+
+        self.assertEqual(
+            context.exception.code,
+            ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
+        )
+        self.assertIn("must not be a mapping", str(context.exception))
 
     def test_blank_collector_name_raises_coded_error(self) -> None:
         with self.assertRaises(ContextAtlasError) as context:

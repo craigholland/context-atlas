@@ -57,14 +57,18 @@ class StructuredRecordInput(BaseModel):
         if isinstance(value, str):
             normalized = value.strip()
             return () if not normalized else (normalized,)
+        if isinstance(value, Mapping):
+            raise ValueError("must not be a mapping")
         if isinstance(value, Iterable):
-            normalized_items = [
-                normalized
-                for item in value
-                if isinstance(item, str) and (normalized := item.strip())
-            ]
+            normalized_items: list[str] = []
+            for item in value:
+                if not isinstance(item, str):
+                    raise ValueError("must contain only strings")
+                normalized = item.strip()
+                if normalized:
+                    normalized_items.append(normalized)
             return tuple(normalized_items)
-        return ()
+        raise ValueError("must be a string or iterable of strings")
 
 
 class StructuredRecordSourceAdapter:
@@ -116,8 +120,8 @@ class StructuredRecordSourceAdapter:
                 source_uri=record_input.source_uri,
                 collector=self._collector_name,
                 metadata={
-                    "record_id": record_input.record_id,
                     **record_input.provenance_metadata,
+                    "record_id": record_input.record_id,
                 },
             ),
             tags=record_input.tags,

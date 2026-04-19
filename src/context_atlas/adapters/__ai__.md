@@ -98,6 +98,8 @@
   - invariants:
     - record adapters should accept already-fetched payloads rather than becoming a database access layer
     - record provenance should preserve source-family identity and adapter collector name
+    - canonical `record_id` should remain authoritative in provenance metadata even when callers supply extra provenance fields
+    - invalid `tags` or `intended_uses` container shapes should fail fast rather than being silently normalized into misleading metadata
     - record translation should emit canonical `ContextSource` artifacts without inventing a second source object hierarchy
 
 ## Known Gaps / Future-State Notes
@@ -108,6 +110,7 @@
 - Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
 - The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.
 - Story 2 Task 2.1 is now defining a minimal structured-record input contract; adapter-facing record shapes should stay small and validation-first rather than becoming a database access layer.
+- Structured-record validation should now reject mapping-shaped `tags` and `intended_uses` inputs so integrations fail fast on malformed metadata instead of silently converting keys into canonical fields.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
