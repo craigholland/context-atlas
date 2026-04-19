@@ -192,7 +192,7 @@
 - The proof capture path should now also validate that packaged packet and trace artifacts still reflect one canonical supported workflow run, including a matching `request_workflow` trace field, rather than accepting proof-only JSON at face value.
 - The canonical human-readable home for MVP proof findings and recommendations is now `docs/Reviews/MVP/mvp_readiness_assessment.md`; proof deliverables should summarize there rather than scattering conclusions across README notes and example docs.
 - The current MVP proof packaging path should now prefer reviewable bundle directories under one bundle root, with one per-workflow/per-scenario directory containing copied baseline and Atlas artifacts plus the packaged evidence JSON.
-- The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until Story 6 Task 6.4 finishes the proof-path architecture audit.
+- The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until stronger document-authority and budget-pressure proof closes the remaining gaps.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
