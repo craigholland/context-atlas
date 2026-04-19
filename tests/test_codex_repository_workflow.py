@@ -1,0 +1,152 @@
+"""Validation tests for the flagship Codex repository workflow example."""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+import subprocess
+import sys
+from tempfile import TemporaryDirectory
+import textwrap
+import unittest
+
+from context_atlas.adapters import (
+    FilesystemDocumentSourceAdapter,
+    InMemorySourceRegistry,
+    LexicalRetrievalMode,
+    LexicalRetriever,
+)
+from context_atlas.infrastructure.assembly import build_starter_context_assembly_service
+from context_atlas.infrastructure.config import (
+    AssemblySettings,
+    ContextAtlasSettings,
+    LoggingSettings,
+    MemorySettings,
+)
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "codex_repository_workflow" / "run.py"
+
+
+class CodexRepositoryWorkflowTests(unittest.TestCase):
+    """Keep the flagship repository workflow honest and inspectable."""
+
+    def test_service_trace_preserves_request_workflow_metadata(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Guidance
+
+                Engineers should keep architecture guidance aligned with active
+                planning documents and update local owner files in the same slice.
+                """,
+            )
+
+            sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
+            service = build_starter_context_assembly_service(
+                retriever=LexicalRetriever(
+                    InMemorySourceRegistry(sources),
+                    mode=LexicalRetrievalMode.KEYWORD,
+                ),
+                settings=ContextAtlasSettings(
+                    logging=LoggingSettings(
+                        logger_name="context_atlas.tests.codex_repository"
+                    ),
+                    assembly=AssemblySettings(
+                        default_total_budget=512,
+                        default_retrieval_top_k=3,
+                    ),
+                    memory=MemorySettings(),
+                ),
+            )
+
+            packet = service.assemble(
+                query="How should engineers update architecture guidance?",
+                metadata={
+                    "workflow": "codex_repository",
+                    "repo_root": repo_root.as_posix(),
+                    "docs_root": docs_root.as_posix(),
+                },
+            )
+
+            self.assertIsNotNone(packet.trace)
+            self.assertEqual(
+                packet.trace.metadata["request_workflow"],
+                "codex_repository",
+            )
+            self.assertEqual(
+                packet.trace.metadata["request_repo_root"],
+                repo_root.as_posix(),
+            )
+            self.assertEqual(
+                packet.trace.metadata["request_docs_root"],
+                docs_root.as_posix(),
+            )
+
+    def test_workflow_script_emits_context_packet_and_trace_sections(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Architecture Guidance
+
+                Engineers should update architecture guidance and planning docs
+                together when the supported workflow changes.
+                """,
+            )
+            self._write_doc(
+                docs_root / "Planning" / "Workflow.md",
+                """
+                # Workflow Plan
+
+                Planning notes should describe how contributors review feature
+                branches and task-level pull requests.
+                """,
+            )
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_WORKFLOW_SCRIPT),
+                    "--repo-root",
+                    str(repo_root),
+                    "--query",
+                    "What guidance should an engineer follow when updating "
+                    "architecture guidance and planning docs?",
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("=== Codex Context ===", result.stdout)
+            self.assertIn("[Repository Context]", result.stdout)
+            self.assertIn("=== Packet Inspection ===", result.stdout)
+            self.assertIn("=== Trace Inspection ===", result.stdout)
+            self.assertIn(
+                "Authoritative/Architecture/Guidance.md",
+                result.stdout,
+            )
+            self.assertIn("selected_source_families: document", result.stdout)
+            self.assertIn("request_workflow: codex_repository", result.stdout)
+            self.assertIn("request_docs_root:", result.stdout)
+
+    def _write_doc(self, path: Path, content: str) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -145,6 +145,7 @@
 - PR B should implement the runnable workflow example directory and keep it close to the supported public API.
 - The current PR B direction is to make that workflow concrete through a repository-root-oriented example directory while keeping Codex-facing context as a derived rendering story over the canonical packet.
 - PR C should validate the workflow against realistic engineering questions, capture packet/trace/context output, and refine the path until it feels like a real integration path rather than demo glue.
+- The current PR C direction is to keep the validation honest by testing a temporary governed-doc repository end to end and by preserving outer workflow metadata in the shared trace instead of inventing Codex-only inspection seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
