@@ -174,6 +174,64 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
         self.assertEqual(len(rows), 3)
         self.assertEqual(rows[0]["ticket_id"], "support-101")
 
+    def test_workflow_script_can_write_standard_proof_artifacts(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            docs_root = Path(temp_dir)
+            proof_dir = docs_root / "proof"
+            self._write_doc(
+                docs_root / "support-guide.md",
+                """
+                # Support Guide
+
+                Proof workflows should emit reproducible packet, trace, and
+                rendered-context artifacts from the supported mixed-source path.
+                """,
+            )
+            records_path = self._write_records_file(docs_root / "sample_records.json")
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_WORKFLOW_SCRIPT),
+                    "--docs-root",
+                    str(docs_root),
+                    "--records-file",
+                    str(records_path),
+                    "--query",
+                    "How should proof artifacts be generated for the mixed-source workflow?",
+                    "--proof-artifacts-dir",
+                    str(proof_dir),
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue((proof_dir / "atlas_rendered_context.txt").is_file())
+            self.assertTrue((proof_dir / "atlas_packet.json").is_file())
+            self.assertTrue((proof_dir / "atlas_trace.json").is_file())
+            self.assertIn("Proof artifacts written to:", result.stdout)
+
+            packet = json.loads(
+                (proof_dir / "atlas_packet.json").read_text(encoding="utf-8")
+            )
+            trace = json.loads(
+                (proof_dir / "atlas_trace.json").read_text(encoding="utf-8")
+            )
+
+            self.assertEqual(packet["metadata"]["workflow"], "docs_database_builder")
+            self.assertEqual(
+                trace["metadata"]["request_workflow"],
+                "docs_database_builder",
+            )
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

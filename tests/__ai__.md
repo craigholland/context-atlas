@@ -253,6 +253,7 @@
     - tests should prove repository-facing scripts apply repository-specific labels at the example boundary rather than through canonical rendering defaults
     - tests should prove the runnable and demonstration scripts share one supported parser/composition path instead of drifting into parallel example-specific workflow wiring
     - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
+    - tests should prove the runnable repository workflow can emit the standard MVP-proof Atlas artifact filenames when asked
 - `test_docs_database_workflow.py`:
   - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
   - defines:
@@ -264,6 +265,7 @@
     - tests should prove the workflow assembles packets containing both document and structured-record source families
     - tests should prove supported record metadata stays visible in trace output as outer-workflow context rather than hidden in example-only print logic
     - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
+    - tests should prove the runnable mixed-source workflow can emit the standard MVP-proof Atlas artifact filenames when asked
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:
@@ -277,6 +279,7 @@
     - tests should prove the CLI help and stdout keep the low-code boundary visible rather than hiding source resolution or packet inspection behavior
     - tests should prove tracked low-code config/preset artifacts stay aligned with the supported preset catalog and declared workflow surface
     - tests should prove low-code override merging stays in validated config surfaces rather than being reimplemented ad hoc in the runnable example
+    - tests should prove the runnable low-code workflow can emit the standard MVP-proof Atlas artifact filenames when asked
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
