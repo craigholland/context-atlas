@@ -4,6 +4,7 @@ import argparse
 import json
 from datetime import UTC, datetime
 from pathlib import Path
+import shutil
 from typing import Any
 
 RUBRIC_DIMENSIONS = [
@@ -25,6 +26,8 @@ COMPARISON_STEPS = [
 ATLAS_PACKET_FILENAME = "atlas_packet.json"
 ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
 ATLAS_TRACE_FILENAME = "atlas_trace.json"
+BASELINE_RENDERED_CONTEXT_FILENAME = "baseline_rendered_context.txt"
+EVIDENCE_PACKAGE_FILENAME = "evidence_package.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -86,9 +89,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--output",
-        required=True,
         type=Path,
+        default=None,
         help="Path to the JSON evidence package to write.",
+    )
+    parser.add_argument(
+        "--bundle-root",
+        type=Path,
+        default=None,
+        help=(
+            "Optional root directory for writing a reviewable evidence bundle at "
+            "<bundle-root>/<workflow>/<scenario>/."
+        ),
     )
     return parser
 
@@ -147,6 +159,23 @@ def _resolve_atlas_artifact_paths(
     return args.atlas_packet, args.atlas_trace, args.atlas_rendered
 
 
+def _resolve_output_paths(
+    args: argparse.Namespace,
+) -> tuple[Path, Path | None]:
+    has_output = args.output is not None
+    has_bundle_root = args.bundle_root is not None
+
+    if has_output == has_bundle_root:
+        raise ValueError("Provide exactly one of --output or --bundle-root.")
+
+    if args.output is not None:
+        return args.output.resolve(), None
+
+    assert args.bundle_root is not None
+    bundle_dir = args.bundle_root.resolve() / args.workflow / args.scenario
+    return bundle_dir / EVIDENCE_PACKAGE_FILENAME, bundle_dir
+
+
 def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
     atlas_packet_path, atlas_trace_path, atlas_rendered_path = (
         _resolve_atlas_artifact_paths(args)
@@ -172,21 +201,77 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def _copy_artifact_if_needed(*, source_path: Path, target_path: Path) -> None:
+    resolved_source = source_path.resolve()
+    resolved_target = target_path.resolve()
+    if resolved_source == resolved_target:
+        return
+    shutil.copyfile(resolved_source, resolved_target)
+
+
+def _write_evidence_bundle(
+    *,
+    bundle_dir: Path,
+    baseline_rendered_path: Path,
+    atlas_packet_path: Path,
+    atlas_trace_path: Path,
+    atlas_rendered_path: Path,
+    package: dict[str, Any],
+) -> None:
+    bundle_dir.mkdir(parents=True, exist_ok=True)
+    _copy_artifact_if_needed(
+        source_path=baseline_rendered_path,
+        target_path=bundle_dir / BASELINE_RENDERED_CONTEXT_FILENAME,
+    )
+    _copy_artifact_if_needed(
+        source_path=atlas_packet_path,
+        target_path=bundle_dir / ATLAS_PACKET_FILENAME,
+    )
+    _copy_artifact_if_needed(
+        source_path=atlas_trace_path,
+        target_path=bundle_dir / ATLAS_TRACE_FILENAME,
+    )
+    _copy_artifact_if_needed(
+        source_path=atlas_rendered_path,
+        target_path=bundle_dir / ATLAS_RENDERED_CONTEXT_FILENAME,
+    )
+    (bundle_dir / EVIDENCE_PACKAGE_FILENAME).write_text(
+        json.dumps(package, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
     try:
         package = build_evidence_package(args)
+        output_path, bundle_dir = _resolve_output_paths(args)
     except ValueError as error:
         parser.error(str(error))
 
-    output_path = args.output.resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
         json.dumps(package, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+
+    if bundle_dir is not None:
+        atlas_packet_path, atlas_trace_path, atlas_rendered_path = (
+            _resolve_atlas_artifact_paths(args)
+        )
+        _write_evidence_bundle(
+            bundle_dir=bundle_dir,
+            baseline_rendered_path=args.baseline_rendered.resolve(),
+            atlas_packet_path=atlas_packet_path.resolve(),
+            atlas_trace_path=atlas_trace_path.resolve(),
+            atlas_rendered_path=atlas_rendered_path.resolve(),
+            package=package,
+        )
+        print(bundle_dir)
+        return 0
+
     print(output_path)
     return 0
 

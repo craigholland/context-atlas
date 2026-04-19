@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 6 Task 6.2, which is selecting the real workflows and reproducible scenarios that will be used for MVP proof.
+- The current active MVP task is Story 6 Task 6.3, which is turning the MVP proof outputs into reviewable deliverables and a grounded readiness recommendation.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
 - Product-facing repo guidance should stay aligned around one visible golden path from install to configure to assemble to inspect; contributors should not let root docs, examples, and runtime-knob docs drift into separate onboarding stories.
@@ -188,6 +188,9 @@
   - `atlas_trace.json`
 - Those proof artifacts should continue to come from the supported runnable workflow scripts themselves rather than from a separate hidden orchestration path.
 - The proof capture path should now prefer `scripts/mvp_proof/capture_evidence.py --atlas-artifact-dir ...` over hand-wiring three Atlas artifact file paths whenever a workflow has already emitted the standard filenames above.
+- The canonical human-readable home for MVP proof findings and recommendations is now `docs/Reviews/MVP/mvp_readiness_assessment.md`; proof deliverables should summarize there rather than scattering conclusions across README notes and example docs.
+- The current MVP proof packaging path should now prefer reviewable bundle directories under one bundle root, with one per-workflow/per-scenario directory containing copied baseline and Atlas artifacts plus the packaged evidence JSON.
+- The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until Story 6 Task 6.4 finishes the proof-path architecture audit.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

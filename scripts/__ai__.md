@@ -104,6 +104,7 @@
 - The nested `scripts/mvp_proof/` folder now owns the evidence-package capture shape for Story 6; future proof scripts should stay there rather than bloating the root script directory.
 - Proof-capture scripts should now carry the standard review order inside the generated artifact so later assessment work can stay reproducible without private reviewer instructions.
 - Proof-capture scripts should also prefer standard workflow artifact-directory inputs when the selected MVP workflows already emit a shared Atlas artifact filename set, rather than forcing every caller to repeat three explicit Atlas file paths.
+- When proof work is being packaged for review, script surfaces should also prefer one bundle-root output that yields a predictable per-workflow/per-scenario directory layout over ad hoc output filenames.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.
