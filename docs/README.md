@@ -8,6 +8,8 @@ The canonical semantic definitions for the document classes now live in [docs/Au
 
 The canonical definition of project mission, scope, and strategic boundaries now lives in [docs/Authoritative/Identity/Context-Atlas-Charter.md](./Authoritative/Identity/Context-Atlas-Charter.md). The project-specific operational model now lives in [docs/Authoritative/Identity/Context-Atlas-System-Model.md](./Authoritative/Identity/Context-Atlas-System-Model.md).
 
+The reusable Craig Architecture canon now has its own directory index at [docs/Authoritative/Architecture/README.md](./Authoritative/Architecture/README.md). Contributors looking for the architecture set as a whole should start there before diving into individual supplements.
+
 The canonical planning and decomposition reference now lives in [docs/Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
 
 The intended documentation ontology is:
