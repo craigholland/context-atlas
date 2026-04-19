@@ -94,11 +94,11 @@ class LowCodeWorkflowPlan(BaseModel):
 
     def build_request_metadata(
         self,
-        metadata: Mapping[str, str] | None = None,
-    ) -> dict[str, str]:
+        metadata: Mapping[str, object] | None = None,
+    ) -> dict[str, object]:
         """Build trace-visible workflow metadata from the resolved plan."""
 
-        workflow_metadata = dict(metadata or {})
+        workflow_metadata: dict[str, object] = dict(metadata or {})
         workflow_metadata.update(
             {
                 "workflow": "low_code_chatbot",
