@@ -27,6 +27,10 @@ from ...domain.models import (
     ContextSourceDurability,
     ContextSourceFamily,
     ContextSourceProvenance,
+    ContextSourceSemanticsProfile,
+    coerce_source_text_sequence,
+    merge_source_text_groups,
+    resolve_source_semantics,
 )
 
 logger = logging.getLogger(__name__)
@@ -75,73 +79,8 @@ class _DocumentFrontMatter(BaseModel):
         cls,
         value: object,
     ) -> tuple[str, ...]:
-        if value is None:
-            return ()
-        if isinstance(value, str):
-            normalized = _strip_quotes(value.strip())
-            return () if not normalized else (normalized,)
-        if isinstance(value, Iterable):
-            normalized_items = [
-                normalized
-                for item in value
-                if isinstance(item, str) and (normalized := _strip_quotes(item.strip()))
-            ]
-            return tuple(normalized_items)
-        return ()
-
-
-class _DocumentOntologyProfile(BaseModel):
-    """Canonical mapping profile from document class to Atlas source semantics."""
-
-    model_config = ConfigDict(
-        frozen=True,
-        extra="forbid",
-    )
-
-    source_class: ContextSourceClass
-    authority: ContextSourceAuthority
-    durability: ContextSourceDurability
-    intended_uses: tuple[str, ...] = ()
-
-
-_PROFILE_BY_DOC_CLASS = {
-    "authoritative": _DocumentOntologyProfile(
-        source_class=ContextSourceClass.AUTHORITATIVE,
-        authority=ContextSourceAuthority.BINDING,
-        durability=ContextSourceDurability.DURABLE,
-        intended_uses=("implementation", "review", "planning"),
-    ),
-    "planning": _DocumentOntologyProfile(
-        source_class=ContextSourceClass.PLANNING,
-        authority=ContextSourceAuthority.PREFERRED,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("planning", "execution"),
-    ),
-    "reviews": _DocumentOntologyProfile(
-        source_class=ContextSourceClass.REVIEWS,
-        authority=ContextSourceAuthority.ADVISORY,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("review", "evidence"),
-    ),
-    "exploratory": _DocumentOntologyProfile(
-        source_class=ContextSourceClass.EXPLORATORY,
-        authority=ContextSourceAuthority.SPECULATIVE,
-        durability=ContextSourceDurability.WORKING,
-        intended_uses=("hypothesis_generation", "exploration"),
-    ),
-    "releases": _DocumentOntologyProfile(
-        source_class=ContextSourceClass.RELEASES,
-        authority=ContextSourceAuthority.HISTORICAL,
-        durability=ContextSourceDurability.ARCHIVAL,
-        intended_uses=("history", "operations"),
-    ),
-}
-_DEFAULT_PROFILE = _DocumentOntologyProfile(
-    source_class=ContextSourceClass.OTHER,
-    authority=ContextSourceAuthority.ADVISORY,
-    durability=ContextSourceDurability.WORKING,
-    intended_uses=(),
-)
+        normalized = coerce_source_text_sequence(value)
+        return tuple(_strip_quotes(item) for item in normalized)
 
 
 class FilesystemDocumentSourceAdapter:
@@ -233,8 +172,8 @@ class FilesystemDocumentSourceAdapter:
             content=content,
             title=front_matter.title or _extract_title(content, document_path),
             source_class=classification.source_class,
-            authority=classification.authority,
-            durability=classification.durability,
+            authority=classification.semantics.authority,
+            durability=classification.semantics.durability,
             provenance=ContextSourceProvenance(
                 source_family=ContextSourceFamily.DOCUMENT,
                 source_uri=document_path.as_uri(),
@@ -266,7 +205,7 @@ class FilesystemDocumentSourceAdapter:
                 ),
             ),
             intended_uses=_merge_unique_values(
-                classification.profile.intended_uses,
+                classification.semantics.intended_uses,
                 front_matter.intended_uses,
             ),
             metadata={
@@ -307,25 +246,36 @@ class FilesystemDocumentSourceAdapter:
 
         path_doc_class = _doc_class_from_path(relative_path)
         frontmatter_doc_class = front_matter.doc_class
-        resolved_doc_class = frontmatter_doc_class or path_doc_class
-        if resolved_doc_class is None:
-            profile = _DEFAULT_PROFILE
-            classification_source = "default"
-        else:
-            profile_candidate = _PROFILE_BY_DOC_CLASS.get(resolved_doc_class)
-            if profile_candidate is None:
-                raise ContextAtlasError(
-                    code=ErrorCode.UNSUPPORTED_DOCUMENT_CLASS,
-                    message_args=(resolved_doc_class,),
-                )
-            profile = profile_candidate
-            classification_source = "frontmatter" if frontmatter_doc_class else "path"
+        resolved_doc_class = frontmatter_doc_class or path_doc_class or "other"
+        source_class = _CLASS_SEGMENT_BY_NAME.get(
+            resolved_doc_class,
+            ContextSourceClass.OTHER,
+        )
+        if (
+            resolved_doc_class != "other"
+            and resolved_doc_class not in _CLASS_SEGMENT_BY_NAME
+        ):
+            raise ContextAtlasError(
+                code=ErrorCode.UNSUPPORTED_DOCUMENT_CLASS,
+                message_args=(resolved_doc_class,),
+            )
+        classification_source = (
+            "frontmatter"
+            if frontmatter_doc_class
+            else "path"
+            if path_doc_class
+            else "default"
+        )
+        semantics = resolve_source_semantics(
+            source_class=source_class,
+            authority=front_matter.authority,
+            durability=front_matter.durability,
+            intended_uses=front_matter.intended_uses,
+        )
 
         return _DocumentClassification(
-            profile=profile,
-            source_class=profile.source_class,
-            authority=front_matter.authority or profile.authority,
-            durability=front_matter.durability or profile.durability,
+            semantics=semantics,
+            source_class=source_class,
             classification_source=classification_source,
             path_doc_class=path_doc_class,
             frontmatter_doc_class=frontmatter_doc_class,
@@ -361,10 +311,8 @@ class _DocumentClassification(BaseModel):
         extra="forbid",
     )
 
-    profile: _DocumentOntologyProfile
+    semantics: ContextSourceSemanticsProfile
     source_class: ContextSourceClass
-    authority: ContextSourceAuthority
-    durability: ContextSourceDurability
     classification_source: str
     path_doc_class: str | None = None
     frontmatter_doc_class: str | None = None
@@ -477,16 +425,7 @@ def _extract_title(content: str, document_path: Path) -> str:
 def _merge_unique_values(*groups: Iterable[str]) -> tuple[str, ...]:
     """Merge text groups while preserving first-seen order."""
 
-    ordered: list[str] = []
-    seen: set[str] = set()
-    for group in groups:
-        for item in group:
-            normalized = item.strip()
-            if not normalized or normalized in seen:
-                continue
-            ordered.append(normalized)
-            seen.add(normalized)
-    return tuple(ordered)
+    return merge_source_text_groups(*groups)
 
 
 __all__ = ["FilesystemDocumentSourceAdapter"]

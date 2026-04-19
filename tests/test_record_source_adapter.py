@@ -85,7 +85,21 @@ class StructuredRecordSourceAdapterTests(unittest.TestCase):
             source.provenance.source_family, ContextSourceFamily.STRUCTURED_RECORD
         )
         self.assertEqual(source.metadata["table"], "tickets")
-        self.assertEqual(source.intended_uses, ("triage",))
+        self.assertEqual(source.intended_uses, ("review", "evidence", "triage"))
+
+    def test_record_class_defaults_use_shared_domain_semantics(self) -> None:
+        adapter = StructuredRecordSourceAdapter()
+        source = adapter.load_source(
+            {
+                "record_id": "review-7",
+                "content": "Review evidence from a structured record.",
+                "source_class": ContextSourceClass.REVIEWS,
+            }
+        )
+
+        self.assertEqual(source.authority, ContextSourceAuthority.ADVISORY)
+        self.assertEqual(source.durability, ContextSourceDurability.WORKING)
+        self.assertEqual(source.intended_uses, ("review", "evidence"))
 
     def test_canonical_record_id_overrides_provenance_metadata(self) -> None:
         adapter = StructuredRecordSourceAdapter()

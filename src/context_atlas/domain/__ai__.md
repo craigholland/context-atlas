@@ -108,20 +108,31 @@
     - each constant should carry a stable event name without needing a separate event enum or lookup table
     - expanded settings and stage-event wording should be updated here, not introduced inline in outer layers
 - `models/sources.py`:
-  - responsibility: defines canonical source, provenance, and candidate artifacts
+  - responsibility: defines canonical source, provenance, and candidate artifacts that consume the shared semantic enums/helpers
   - defines:
     - `ContextSource`
     - `ContextSourceProvenance`
     - `ContextCandidate`
-    - `ContextSourceSemanticsProfile`
-    - `get_default_source_semantics`
-    - `resolve_source_semantics`
-    - source classification/authority/durability enums
   - invariants:
     - source identifiers and content must normalize cleanly
-    - canonical source-class defaults for authority, durability, and intended uses should remain defined inward here rather than duplicated across adapters
+    - source artifacts should consume shared semantic enums/helpers rather than redefining canonical defaults locally
     - candidate scoring metadata must remain machine-usable and deterministic
     - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
+- `models/source_semantics.py`:
+  - responsibility: defines canonical source-semantic enums, defaults, and normalization helpers
+  - defines:
+    - `ContextSourceClass`
+    - `ContextSourceAuthority`
+    - `ContextSourceDurability`
+    - `ContextSourceFamily`
+    - `ContextSourceSemanticsProfile`
+    - `coerce_source_text_sequence`
+    - `merge_source_text_groups`
+    - `get_default_source_semantics`
+    - `resolve_source_semantics`
+  - invariants:
+    - canonical source-class defaults for authority, durability, and intended uses should remain defined inward here rather than duplicated across adapters
+    - helper functions here should stay source-semantics-focused and must not turn into a general utility bucket
 - `models/base.py`:
   - responsibility: provides shared frozen-model and immutable metadata helpers for canonical artifacts
   - defines:
@@ -228,7 +239,7 @@
 - The only remaining dataclasses in `domain/` should be private helper structs that do not act as serialization or package-boundary surfaces.
 - Packet and trace inspection work should continue to expose canonical summary signals here without pushing human-readable formatting into the domain layer.
 - The distinction between domain message constants and future richer audit projections is still intentionally thin.
-- Story 2 Task 2.2 is now defining canonical per-class defaults for source semantics so supported source families converge inward before adapters start sharing helper modules.
+- Story 2 Task 2.2 now also includes a dedicated `models/source_semantics.py` module so supported source families can share one inward semantic surface without bloating `models/sources.py`.
 - The current message surface now includes starter observability for candidate gathering, ranking, budget allocation, compression, and memory selection ahead of service orchestration.
 - The current message surface now also includes the expanded starter settings-load summary so ranking, compression, and memory policy defaults stay visible when infrastructure loads them.
 - The current error/message surface now also covers source registration and retrieval completion for the lexical adapter slice.
