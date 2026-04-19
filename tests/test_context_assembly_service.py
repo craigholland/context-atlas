@@ -19,7 +19,10 @@ from context_atlas.domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
 )
-from context_atlas.infrastructure.assembly import build_starter_context_assembly_service
+from context_atlas.infrastructure.assembly import (
+    assemble_with_starter_context_service,
+    build_starter_context_assembly_service,
+)
 from context_atlas.infrastructure.config import (
     AssemblySettings,
     ContextAtlasSettings,
@@ -130,6 +133,18 @@ class ContextAssemblyServiceTests(unittest.TestCase):
 
         self.assertEqual(packet.selected_candidates, ())
         self.assertEqual(packet.metadata["ranked_candidate_count"], "0")
+
+    def test_one_shot_infrastructure_helper_reuses_shared_service_path(self) -> None:
+        packet = assemble_with_starter_context_service(
+            retriever=self.retriever,
+            query="context model authoritative sources",
+            settings=self.settings,
+            metadata={"workflow": "codex_repository"},
+        )
+
+        self.assertEqual(len(packet.selected_candidates), 1)
+        self.assertEqual(packet.selected_candidates[0].source.source_id, "charter")
+        self.assertEqual(packet.trace.metadata["request_workflow"], "codex_repository")
 
     def test_assemble_applies_compression_when_budget_is_tight(self) -> None:
         service = build_starter_context_assembly_service(
