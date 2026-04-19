@@ -52,6 +52,18 @@ The package root currently remains intentionally thin. User-facing docs and exam
 
 See [examples/README.md](/context-atlas/examples/README.md) and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current golden-path smoke flow.
 
+## MVP Golden Path
+
+The current MVP onboarding story should read as one clear sequence:
+
+1. install Context Atlas into a Python environment
+2. configure supported runtime knobs through environment settings
+3. ingest governed repository documents
+4. assemble a `ContextPacket` through the supported starter service
+5. render packet context and inspect packet/trace output
+
+This repository does not yet present every future workflow. The current user-facing guidance should stay centered on that starter path so a new evaluator can get from installation to a first packet without inferring the product shape from internal modules.
+
 ## Packet And Trace Inspection Contract
 
 Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.
@@ -85,7 +97,9 @@ from context_atlas.rendering import render_trace_inspection
 
 ## Runtime Knobs
 
-The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
+The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. For the current MVP path, those knobs should help a new user understand logging, assembly defaults, compression behavior, and memory behavior without reading internal implementation modules first.
+
+As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
 
 ## License
 
