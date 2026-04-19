@@ -26,7 +26,7 @@ Package the documents-plus-database workflow into concrete deliverables a techni
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
