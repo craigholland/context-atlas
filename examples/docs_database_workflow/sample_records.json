@@ -1,0 +1,32 @@
+[
+  {
+    "ticket_id": "support-101",
+    "title": "Environment loading confusion",
+    "body": "Support notes that .env.example is a reference only. load_settings_from_env() reads the live process environment and does not auto-load a dotenv file.",
+    "uri": "records://support/support-101",
+    "uses": ["answering", "support"],
+    "team": "support",
+    "table": "support_tickets",
+    "database": "atlas_app"
+  },
+  {
+    "ticket_id": "support-102",
+    "title": "Preflight failure guidance",
+    "body": "Support escalation guidance says to run py -3 scripts/preflight.py before pushing and to update the relevant __ai__.md owner files when governed code or docs change.",
+    "uri": "records://support/support-102",
+    "uses": ["support", "troubleshooting"],
+    "team": "developer-experience",
+    "table": "support_tickets",
+    "database": "atlas_app"
+  },
+  {
+    "ticket_id": "support-103",
+    "title": "Starter surface recommendation",
+    "body": "Builder-facing guidance recommends context_atlas.api for the starter path and examples/starter_context_flow.py as the first example after an editable install.",
+    "uri": "records://support/support-103",
+    "uses": ["answering", "onboarding"],
+    "team": "developer-education",
+    "table": "support_tickets",
+    "database": "atlas_app"
+  }
+]

@@ -93,6 +93,7 @@ query execution.
 The current runnable example is:
 
 - [examples/docs_database_workflow/run.py](../../examples/docs_database_workflow/run.py)
+- [examples/docs_database_workflow/sample_records.json](../../examples/docs_database_workflow/sample_records.json)
 
 From the repository root:
 
@@ -104,6 +105,12 @@ Override the docs root or chatbot question:
 
 ```powershell
 python examples/docs_database_workflow/run.py --docs-root C:\repos\my-app\docs --query "How should a builder configure Atlas and troubleshoot preflight failures?"
+```
+
+Override the sample record payload with your own already-fetched rows:
+
+```powershell
+python examples/docs_database_workflow/run.py --records-file C:\repos\my-app\data\support_rows.json
 ```
 
 ## What The Workflow Does
@@ -124,6 +131,7 @@ The current supported composition path is:
 That composition boundary is intentional:
 
 - docs-root selection stays in outer workflow code
+- the runnable example uses a tracked JSON payload file as a stand-in for outer application fetching
 - row fetching stays in outer workflow code
 - record shaping and translation happen through the supported adapter boundary
 - packet and trace remain the authoritative outputs
