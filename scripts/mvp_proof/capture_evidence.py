@@ -22,6 +22,10 @@ COMPARISON_STEPS = [
     "Record notes against each rubric dimension before making an MVP-readiness recommendation.",
 ]
 
+ATLAS_PACKET_FILENAME = "atlas_packet.json"
+ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
+ATLAS_TRACE_FILENAME = "atlas_trace.json"
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -48,21 +52,31 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--atlas-packet",
-        required=True,
         type=Path,
+        default=None,
         help="Path to the Atlas packet artifact.",
     )
     parser.add_argument(
         "--atlas-trace",
-        required=True,
         type=Path,
+        default=None,
         help="Path to the Atlas trace artifact.",
     )
     parser.add_argument(
         "--atlas-rendered",
-        required=True,
         type=Path,
+        default=None,
         help="Path to the Atlas rendered-context artifact.",
+    )
+    parser.add_argument(
+        "--atlas-artifact-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Optional directory containing the standard Atlas workflow artifacts "
+            f"({ATLAS_PACKET_FILENAME}, {ATLAS_TRACE_FILENAME}, "
+            f"{ATLAS_RENDERED_CONTEXT_FILENAME})."
+        ),
     )
     parser.add_argument(
         "--note",
@@ -102,7 +116,41 @@ def _load_artifact(path: Path) -> dict[str, Any]:
     }
 
 
+def _resolve_atlas_artifact_paths(
+    args: argparse.Namespace,
+) -> tuple[Path, Path, Path]:
+    artifact_dir: Path | None = args.atlas_artifact_dir
+    explicit_paths = (args.atlas_packet, args.atlas_trace, args.atlas_rendered)
+    explicit_path_count = sum(path is not None for path in explicit_paths)
+
+    if artifact_dir is not None:
+        if explicit_path_count:
+            raise ValueError(
+                "Use either --atlas-artifact-dir or the explicit --atlas-* paths, not both."
+            )
+        resolved_artifact_dir = artifact_dir.resolve()
+        return (
+            resolved_artifact_dir / ATLAS_PACKET_FILENAME,
+            resolved_artifact_dir / ATLAS_TRACE_FILENAME,
+            resolved_artifact_dir / ATLAS_RENDERED_CONTEXT_FILENAME,
+        )
+
+    if explicit_path_count != 3:
+        raise ValueError(
+            "Provide all of --atlas-packet, --atlas-trace, and --atlas-rendered when "
+            "--atlas-artifact-dir is not supplied."
+        )
+
+    assert args.atlas_packet is not None
+    assert args.atlas_trace is not None
+    assert args.atlas_rendered is not None
+    return args.atlas_packet, args.atlas_trace, args.atlas_rendered
+
+
 def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
+    atlas_packet_path, atlas_trace_path, atlas_rendered_path = (
+        _resolve_atlas_artifact_paths(args)
+    )
     return {
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
@@ -117,9 +165,9 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
         },
         "artifacts": {
             "baseline_rendered_context": _load_artifact(args.baseline_rendered),
-            "atlas_packet": _load_artifact(args.atlas_packet),
-            "atlas_trace": _load_artifact(args.atlas_trace),
-            "atlas_rendered_context": _load_artifact(args.atlas_rendered),
+            "atlas_packet": _load_artifact(atlas_packet_path),
+            "atlas_trace": _load_artifact(atlas_trace_path),
+            "atlas_rendered_context": _load_artifact(atlas_rendered_path),
         },
     }
 
@@ -128,7 +176,11 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
-    package = build_evidence_package(args)
+    try:
+        package = build_evidence_package(args)
+    except ValueError as error:
+        parser.error(str(error))
+
     output_path = args.output.resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
