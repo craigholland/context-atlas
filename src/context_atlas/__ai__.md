@@ -124,6 +124,7 @@
 - The current curated API is intentionally small; later slices should only widen it when examples and real workflows prove additional exports deserve to stabilize.
 - The current curated API is now exercised by the starter smoke example under `examples/`, which should stay aligned with the supported starter flow.
 - The getting-started guide and starter context-flow example should stay aligned with the curated starter API and stable rendering imports rather than teaching deeper package paths first.
+- The starter context-flow example should remain the primary product-facing example, while smaller smoke scripts should stay secondary and validation-oriented.
 - The canonical model package now uses frozen Pydantic artifacts; later hardening should reduce remaining non-trivial dataclasses in adjacent policy layers as those boundaries stabilize.
 - The remaining dataclasses in the package should now be limited to clearly private helper structs or exception mechanics that do not define the package's public structured-data surface.
 

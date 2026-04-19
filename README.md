@@ -50,7 +50,9 @@ from context_atlas.api import (
 
 The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
 
-See [examples/README.md](/context-atlas/examples/README.md), [examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py), and [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) for the current starter flow.
+The recommended first run is [examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py). It is designed to be the first user-facing run after an editable install. [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) remains useful as a smaller smoke example, but it is no longer the primary onboarding path.
+
+See [examples/README.md](/context-atlas/examples/README.md) for the current starter-flow index.
 
 ## MVP Golden Path
 
