@@ -89,7 +89,7 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
                 authoritative.provenance.metadata["classification_source"],
                 "path",
             )
-            self.assertIn("authoritative", authoritative.tags)
+            self.assertEqual(authoritative.tags, ())
             self.assertEqual(planning.source_class, ContextSourceClass.PLANNING)
             self.assertEqual(planning.authority, ContextSourceAuthority.PREFERRED)
             self.assertEqual(release.source_class, ContextSourceClass.RELEASES)
@@ -133,6 +133,7 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
                 "true",
             )
             self.assertIn("prototype", source.tags)
+            self.assertNotIn("exploratory", source.tags)
             self.assertIn("exploration", source.intended_uses)
 
     def test_unsupported_doc_class_raises_coded_error(self) -> None:

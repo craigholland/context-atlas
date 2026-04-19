@@ -86,6 +86,7 @@
     - tests should verify structured artifacts remain canonical and machine-usable
     - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
     - tests should verify canonical per-class source semantics stay domain-owned and merge overrides consistently before adapters consume them
+    - tests should verify canonical sources can be built from one resolved semantic profile instead of adapter-style piecemeal semantic arguments
 - `test_config_observability.py`:
   - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
@@ -189,6 +190,7 @@
     - tests should prove documentation ontology classes map into canonical source authority and durability fields
     - tests should prove filesystem documents now consume shared domain source-semantics helpers rather than adapter-local default tables
     - tests should prove classified source provenance remains visible enough to influence downstream packet traces
+    - tests should prove filesystem adapters do not restate canonical source class through adapter-local tags when that meaning already lives in canonical source semantics
 - `test_record_source_adapter.py`:
   - responsibility: verifies structured-record input validation and record-to-source translation
   - defines:

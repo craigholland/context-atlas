@@ -116,6 +116,7 @@
   - invariants:
     - source identifiers and content must normalize cleanly
     - source artifacts should consume shared semantic enums/helpers rather than redefining canonical defaults locally
+    - adapters should cross into canonical source creation through one resolved semantic profile instead of passing source-class, authority, durability, and intended-use pieces independently
     - candidate scoring metadata must remain machine-usable and deterministic
     - canonical source/candidate artifacts should stay frozen Pydantic models with immutable metadata maps
 - `models/source_semantics.py`:
@@ -257,6 +258,7 @@
 - `adapters/`: retrieval adapters may return raw candidates, but they should hand off reranking and decision recording to inward domain policy rather than embedding those rules locally.
 - `adapters/`: future adapter translation boundaries may log with domain `LogMessage` constants, but provider-specific payload wording must stay out of domain messages.
 - `adapters/`: filesystem document adapters may classify ontology meaning, but they should still surface that meaning through canonical source fields and domain-owned codes/messages.
+- `adapters/`: mixed-source adapters should carry source-family-specific mechanics in provenance or validated outer inputs, then cross inward through canonical semantic profiles rather than leaking source meaning into adapter-local tags or source metadata.
 - `rendering/`: may render domain semantics for humans, but must not become the place where semantic identifiers are invented.
 - `services/`: future assembly orchestration may attach memory traces to packets, but memory-retention logic itself should stay inward here while it remains deterministic.
 - `services/`: service orchestration may now include retained memory entries in canonical packets, but service-layer filtering should still consume domain-owned packet and decision semantics rather than redefining them.

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterable
 from datetime import UTC, datetime
 import hashlib
 import logging
@@ -29,7 +28,6 @@ from ...domain.models import (
     ContextSourceProvenance,
     ContextSourceSemanticsProfile,
     coerce_source_text_sequence,
-    merge_source_text_groups,
     resolve_source_semantics,
 )
 
@@ -167,13 +165,11 @@ class FilesystemDocumentSourceAdapter:
         checksum = hashlib.sha256(document_path.read_bytes()).hexdigest()
         stat = document_path.stat()
 
-        source = ContextSource(
+        source = ContextSource.from_semantics(
             source_id=relative_path.as_posix(),
             content=content,
             title=front_matter.title or _extract_title(content, document_path),
-            source_class=classification.source_class,
-            authority=classification.semantics.authority,
-            durability=classification.semantics.durability,
+            semantics=classification.semantics,
             provenance=ContextSourceProvenance(
                 source_family=ContextSourceFamily.DOCUMENT,
                 source_uri=document_path.as_uri(),
@@ -196,23 +192,7 @@ class FilesystemDocumentSourceAdapter:
                     ).lower(),
                 },
             ),
-            tags=_merge_unique_values(
-                front_matter.tags,
-                (
-                    classification.source_class.value
-                    if classification.source_class is not ContextSourceClass.OTHER
-                    else "",
-                ),
-            ),
-            intended_uses=_merge_unique_values(
-                classification.semantics.intended_uses,
-                front_matter.intended_uses,
-            ),
-            metadata={
-                "classification_source": classification.classification_source,
-                "relative_path": relative_path.as_posix(),
-                "doc_class": classification.source_class.value,
-            },
+            tags=front_matter.tags,
         )
         self._emit_classification_log(source)
         return source
@@ -292,13 +272,13 @@ class FilesystemDocumentSourceAdapter:
         logger.info(
             LogMessage.SOURCE_CLASSIFIED,
             source.source_id,
-            source.source_class.value,
+            source.semantics.source_class.value,
             extra={
                 "event": LogMessage.SOURCE_CLASSIFIED.event_name,
                 "source_id": source.source_id,
-                "source_class": source.source_class.value,
-                "authority": source.authority.value,
-                "collector": source.provenance.collector,
+                "source_class": source.semantics.source_class.value,
+                "authority": source.semantics.authority.value,
+                "collector": source.collector_name,
             },
         )
 
@@ -420,12 +400,5 @@ def _extract_title(content: str, document_path: Path) -> str:
         if stripped.startswith("# "):
             return stripped[2:].strip()
     return document_path.stem.replace("-", " ").replace("_", " ").strip()
-
-
-def _merge_unique_values(*groups: Iterable[str]) -> tuple[str, ...]:
-    """Merge text groups while preserving first-seen order."""
-
-    return merge_source_text_groups(*groups)
-
 
 __all__ = ["FilesystemDocumentSourceAdapter"]

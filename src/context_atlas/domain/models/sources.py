@@ -14,6 +14,7 @@ from .source_semantics import (
     ContextSourceClass,
     ContextSourceDurability,
     ContextSourceFamily,
+    ContextSourceSemanticsProfile,
     merge_source_text_groups,
 )
 
@@ -61,6 +62,39 @@ class ContextSource(CanonicalDomainModel):
     intended_uses: tuple[str, ...] = ()
     metadata: dict[str, str] = Field(default_factory=dict)
 
+    @classmethod
+    def from_semantics(
+        cls,
+        *,
+        source_id: str,
+        content: str,
+        semantics: ContextSourceSemanticsProfile,
+        title: str | None = None,
+        provenance: ContextSourceProvenance | None = None,
+        tags: tuple[str, ...] = (),
+        metadata: dict[str, str] | None = None,
+    ) -> "ContextSource":
+        """Build a canonical source from a resolved semantic profile.
+
+        Adapters should shape source-family-specific mechanics outward, then cross
+        into the domain through one canonical semantic surface instead of passing
+        source-class, authority, durability, and intended-use pieces around
+        independently.
+        """
+
+        return cls(
+            source_id=source_id,
+            content=content,
+            title=title,
+            source_class=semantics.source_class,
+            authority=semantics.authority,
+            durability=semantics.durability,
+            provenance=provenance or ContextSourceProvenance(),
+            tags=tags,
+            intended_uses=semantics.intended_uses,
+            metadata={} if metadata is None else metadata,
+        )
+
     def model_post_init(self, __context: object) -> None:
         normalized_source_id = self.source_id.strip()
         if not normalized_source_id:
@@ -88,6 +122,29 @@ class ContextSource(CanonicalDomainModel):
             merge_source_text_groups(self.intended_uses),
         )
         object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
+
+    @property
+    def collector_name(self) -> str | None:
+        """Return the outward collector identity that supplied this source."""
+
+        return self.provenance.collector
+
+    @property
+    def semantics(self) -> ContextSourceSemanticsProfile:
+        """Return the canonical semantic profile expressed by this source."""
+
+        return ContextSourceSemanticsProfile(
+            source_class=self.source_class,
+            authority=self.authority,
+            durability=self.durability,
+            intended_uses=self.intended_uses,
+        )
+
+    @property
+    def source_family(self) -> ContextSourceFamily:
+        """Return the canonical ingestion family carried in source provenance."""
+
+        return self.provenance.source_family
 
 
 class ContextCandidate(CanonicalDomainModel):
