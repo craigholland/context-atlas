@@ -145,3 +145,21 @@ visible so the example can explain which outer path produced the packet.
 If this guide, [README](../../README.md), and [examples/README.md](../../examples/README.md)
 stop telling the same story, the product-facing documentation is drifting and should
 be corrected before new guidance is added.
+
+## Demonstration Path
+
+If you want a more review-oriented output than the main runnable example, use:
+
+- [examples/codex_repository_workflow/show_trace.py](../../examples/codex_repository_workflow/show_trace.py)
+
+Run it from the repository root:
+
+```powershell
+python examples/codex_repository_workflow/show_trace.py --repo-root .
+```
+
+That path keeps the same canonical packet/trace flow, but presents the results as:
+
+- rendered Codex context
+- concise trace highlights
+- full trace inspection

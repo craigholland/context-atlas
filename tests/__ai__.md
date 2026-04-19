@@ -156,6 +156,7 @@
   - invariants:
     - tests should verify trace inspection groups included, excluded, transformed, and deferred decisions clearly
     - tests should verify service-produced traces carry stable decision positions for inspection renderers
+    - tests should verify any concise trace-highlight surface remains derived from canonical trace metadata and counts
 - `test_memory_policy.py`:
   - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
   - defines:
@@ -243,6 +244,7 @@
     - tests should prove supported workflow metadata remains visible in trace inspection output instead of being hidden in example-only print logic
     - tests should prove relative `--docs-root` arguments resolve from the selected repository root instead of the caller's shell working directory
     - tests should prove the CLI help surface points back to the minimal sample-repo artifact so the documented workflow shape stays discoverable
+    - tests should prove demonstration-oriented workflow scripts still render canonical context plus derived trace output instead of inventing a second workflow state model
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.

@@ -5,6 +5,28 @@ from __future__ import annotations
 from ..domain.models import ContextAssemblyDecision, ContextTrace
 
 
+def render_trace_highlights(trace: ContextTrace) -> str:
+    """Render a concise product-facing summary of the most useful trace facts."""
+
+    metadata = trace.metadata
+    lines = [
+        "Trace Highlights",
+        f"- workflow: {metadata.get('request_workflow', 'unknown')}",
+        f"- selected_source_classes: {metadata.get('selected_source_classes', 'none')}",
+        f"- selected_source_families: {metadata.get('selected_source_families', 'none')}",
+        f"- included_count: {len(trace.included_decisions)}",
+        f"- transformed_count: {len(trace.transformed_decisions)}",
+        f"- compression_applied: {metadata.get('compression_applied', 'false')}",
+    ]
+
+    if repo_root := metadata.get("request_repo_root"):
+        lines.append(f"- repo_root: {repo_root}")
+    if docs_root := metadata.get("request_docs_root"):
+        lines.append(f"- docs_root: {docs_root}")
+
+    return "\n".join(lines)
+
+
 def render_trace_inspection(trace: ContextTrace) -> str:
     """Render a human-readable inspection view of a canonical trace."""
 
@@ -89,4 +111,4 @@ def _position_text(decision: ContextAssemblyDecision) -> str:
     return str(decision.position)
 
 
-__all__ = ["render_trace_inspection"]
+__all__ = ["render_trace_highlights", "render_trace_inspection"]

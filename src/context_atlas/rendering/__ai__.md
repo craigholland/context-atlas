@@ -45,6 +45,8 @@
   - human-readable packet inspection renderer for canonical packet state
 - `render_trace_inspection`:
   - human-readable trace inspection renderer for canonical trace state
+- `render_trace_highlights`:
+  - concise product-facing summary renderer for canonical trace state
 
 ## File Index
 - `__init__.py`:
@@ -66,6 +68,7 @@
   - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos
   - invariants:
     - emphasize included, excluded, transformed, and deferred decisions plus trace metadata
+    - concise highlight views should stay derived from canonical trace metadata and counts rather than introducing a second summary model
     - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes
@@ -75,6 +78,7 @@
 - Upcoming packet/trace inspectors should stay text-first and product-facing while continuing to derive from canonical packet/trace state rather than inventing parallel DTOs.
 - Packet inspection now has a first-class renderer; later trace inspection should align with it instead of inventing a different product vocabulary.
 - Trace inspection now also has a first-class renderer; packet and trace views should continue to feel like one inspection surface rather than two unrelated outputs.
+- Demonstration-oriented trace views may be added, but they should remain lightweight derived renderers over canonical traces rather than workflow-specific data structures.
 - Story 1 Task 1.4 is now auditing the starter rendering path; rendering changes should make layer boundaries clearer without reintroducing prompt-first canonical thinking.
 - Story 1 Task 1.4 now also reinforces that product-facing docs should describe `context_atlas.rendering` as the supported home of derived packet/trace views rather than a fallback import path.
 
