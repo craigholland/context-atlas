@@ -87,3 +87,5 @@ The current Story 4 technical-builder scenario builds on that same boundary. It 
 - governed filesystem documents
 - already-fetched support-style records such as tickets, product facts, or policy rows
 - one shared packet and trace path after those inputs have crossed into canonical Atlas sources
+
+The dedicated runnable example for that path now lives at [examples/docs_database_workflow/README.md](/context-atlas/examples/docs_database_workflow/README.md).
