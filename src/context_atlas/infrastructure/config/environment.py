@@ -8,6 +8,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from ...domain.errors import ConfigurationError, ErrorCode
 from ...domain.messages import ErrorMessage
 from ...domain.models import CompressionStrategy
+from .presets import (
+    DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT,
+    DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS,
+    DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS,
+    DEFAULT_LOW_CODE_WORKFLOW_PRESET,
+    DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE,
+)
 from .settings import (
     AssemblySettings,
     ContextAtlasSettings,
@@ -41,11 +48,11 @@ class EnvironmentSettings(BaseSettings):
     memory_dedup_threshold: float = 0.72
     memory_min_effective_score: float = 0.1
     memory_query_boost_weight: float = 0.35
-    low_code_preset: str = "chatbot_docs_records"
-    low_code_docs_root: str = "docs/Guides"
-    low_code_records_file: str = "examples/docs_database_workflow/sample_records.json"
-    low_code_include_documents: bool = True
-    low_code_include_records: bool = True
+    low_code_preset: str = DEFAULT_LOW_CODE_WORKFLOW_PRESET
+    low_code_docs_root: str = DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT
+    low_code_records_file: str = DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE
+    low_code_include_documents: bool = DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS
+    low_code_include_records: bool = DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS
 
     @field_validator("logger_name")
     @classmethod

@@ -8,6 +8,13 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 from ...domain.messages import LogMessage
 from ...domain.models import CompressionStrategy
+from .presets import (
+    DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT,
+    DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS,
+    DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS,
+    DEFAULT_LOW_CODE_WORKFLOW_PRESET,
+    DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE,
+)
 
 _VALID_LOG_LEVELS = frozenset(
     {
@@ -166,11 +173,11 @@ class LowCodeWorkflowSettings(BaseModel):
         str_strip_whitespace=True,
     )
 
-    preset: str = "chatbot_docs_records"
-    docs_root: str = "docs/Guides"
-    records_file: str = "examples/docs_database_workflow/sample_records.json"
-    include_documents: bool = True
-    include_records: bool = True
+    preset: str = DEFAULT_LOW_CODE_WORKFLOW_PRESET
+    docs_root: str = DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT
+    records_file: str = DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE
+    include_documents: bool = DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS
+    include_records: bool = DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS
 
     @field_validator("preset", "docs_root", "records_file")
     @classmethod

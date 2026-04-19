@@ -1,0 +1,26 @@
+# Reference preset artifact for the single supported low-code MVP path.
+# This file documents the supported preset contract; it is not auto-loaded.
+
+[preset]
+name = "chatbot_docs_records"
+description = "Use governed guide docs plus already-fetched support-style records to assemble one chatbot-oriented packet."
+record_collector_name = "low_code_support_records"
+
+[workflow_defaults]
+docs_root = "docs/Guides"
+records_file = "examples/docs_database_workflow/sample_records.json"
+include_documents = true
+include_records = true
+
+[record_mapping]
+record_id_field = "ticket_id"
+content_field = "body"
+title_field = "title"
+source_uri_field = "uri"
+intended_uses_field = "uses"
+metadata_fields = ["team", "table"]
+provenance_fields = ["database"]
+source_class = "reviews"
+authority = "preferred"
+fixed_tags = []
+fixed_intended_uses = []

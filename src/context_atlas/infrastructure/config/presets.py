@@ -4,11 +4,20 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from pathlib import Path
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
 from ...adapters.records import StructuredRecordRowMapper, StructuredRecordSourceAdapter
 from ...domain.models import ContextSource, ContextSourceAuthority, ContextSourceClass
+
+DEFAULT_LOW_CODE_WORKFLOW_PRESET = "chatbot_docs_records"
+DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT = "docs/Guides"
+DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE = (
+    "examples/docs_database_workflow/sample_records.json"
+)
+DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS = True
+DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS = True
 
 
 class LowCodeWorkflowPreset(BaseModel):
@@ -63,7 +72,7 @@ class LowCodeWorkflowPreset(BaseModel):
 
 
 _LOW_CODE_PRESETS = {
-    "chatbot_docs_records": LowCodeWorkflowPreset(
+    DEFAULT_LOW_CODE_WORKFLOW_PRESET: LowCodeWorkflowPreset(
         name="chatbot_docs_records",
         description=(
             "Use governed guide docs plus already-fetched support-style records "
@@ -103,8 +112,58 @@ def list_low_code_workflow_presets() -> tuple[str, ...]:
     return tuple(_LOW_CODE_PRESETS)
 
 
+def build_low_code_workflow_config_artifact() -> dict[str, Any]:
+    """Return the tracked example config surface for the low-code workflow."""
+
+    return {
+        "context_atlas": {
+            "low_code": {
+                "preset": DEFAULT_LOW_CODE_WORKFLOW_PRESET,
+                "docs_root": DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT,
+                "records_file": DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE,
+                "include_documents": DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS,
+                "include_records": DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS,
+            }
+        }
+    }
+
+
+def build_low_code_workflow_preset_artifact(
+    name: str = DEFAULT_LOW_CODE_WORKFLOW_PRESET,
+) -> dict[str, Any]:
+    """Return the tracked example preset surface for one supported preset."""
+
+    preset = get_low_code_workflow_preset(name)
+    row_mapper = (
+        {}
+        if preset.record_row_mapper is None
+        else preset.record_row_mapper.model_dump(mode="json", exclude_none=True)
+    )
+    return {
+        "preset": {
+            "name": preset.name,
+            "description": preset.description,
+            "record_collector_name": preset.record_collector_name,
+        },
+        "workflow_defaults": {
+            "docs_root": DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT,
+            "records_file": DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE,
+            "include_documents": DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS,
+            "include_records": DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS,
+        },
+        "record_mapping": row_mapper,
+    }
+
+
 __all__ = [
+    "DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT",
+    "DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_DOCUMENTS",
+    "DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS",
+    "DEFAULT_LOW_CODE_WORKFLOW_PRESET",
+    "DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE",
     "LowCodeWorkflowPreset",
+    "build_low_code_workflow_config_artifact",
+    "build_low_code_workflow_preset_artifact",
     "get_low_code_workflow_preset",
     "is_supported_low_code_preset",
     "list_low_code_workflow_presets",
