@@ -24,6 +24,10 @@ supersedes: []
 
 Keep the multi-source expansion work aligned with Craig Architecture by ensuring semantics stay inward and source mechanics stay outward.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)

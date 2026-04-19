@@ -24,6 +24,10 @@ supersedes: []
 
 Ensure the MVP proof path evaluates the real Atlas architecture and supported engine rather than hidden demo-specific shortcuts.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)

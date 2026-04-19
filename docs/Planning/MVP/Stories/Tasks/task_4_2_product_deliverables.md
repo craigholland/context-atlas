@@ -24,6 +24,10 @@ supersedes: []
 
 Package the documents-plus-database workflow into concrete deliverables a technical builder can follow and evaluate.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)

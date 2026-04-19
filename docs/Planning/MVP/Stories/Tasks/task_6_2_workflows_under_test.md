@@ -26,6 +26,10 @@ supersedes: []
 
 Select and prepare the actual workflows that will be evaluated during MVP proof so the assessment is grounded in real Atlas usage paths.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)

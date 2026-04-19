@@ -24,6 +24,10 @@ supersedes: []
 
 Keep the documents-plus-database workflow architecture clean so Atlas governs context without absorbing application-specific database responsibilities.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)

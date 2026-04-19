@@ -24,6 +24,10 @@ supersedes: []
 
 Create the core user-facing guidance that turns the starter implementation into an understandable MVP onboarding path.
 
+## Task Status
+
+IMPLEMENTED
+
 ## Inputs
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)

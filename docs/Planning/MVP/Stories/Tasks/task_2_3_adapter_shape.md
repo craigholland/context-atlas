@@ -24,6 +24,10 @@ supersedes: []
 
 Design the adapter shape for non-document sources so Atlas remains a governance engine rather than a general-purpose data-access framework.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)

@@ -24,6 +24,10 @@ supersedes: []
 
 Define the actual mixed-source workflow that a technical builder will use when assembling chatbot context from documents and database-backed records.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)
