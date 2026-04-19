@@ -134,7 +134,7 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.3 is now the active task-level feature branch and should keep Atlas on the governance-engine side of the adapter boundary instead of drifting toward a data-access framework.
+- Story 2 Task 2.3 is now complete on its task-level feature branch and is awaiting `@codex review` before merge to `development`.
 - That task should keep Atlas adapters focused on accepted record payload shapes, translation, and canonical provenance rather than query execution, driver ownership, or connector orchestration.
 - PR A of that task now makes the adapter boundary explicit in the starter docs and structured-record adapter contract: Atlas accepts validated record inputs plus mapping-shaped row payloads, while outer systems still own fetching, clients, and query execution.
 - PR B of that task now introduces the MVP row-mapper pattern so outer systems can reshape already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
