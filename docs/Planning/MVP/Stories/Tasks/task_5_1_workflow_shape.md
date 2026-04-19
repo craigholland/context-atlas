@@ -24,6 +24,10 @@ supersedes: []
 
 Define the actual low-code workflow shape so a less-technical builder can reach a working Atlas flow without custom composition code for every step.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 5 - Low-Code Workflow](../story_5_low_code_workflow.md)

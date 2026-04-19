@@ -24,6 +24,10 @@ supersedes: []
 
 Package the Codex repository workflow into product-facing deliverables that an engineer can actually follow and evaluate.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 3 - Codex Repository Workflow](../story_3_codex_repository_workflow.md)

@@ -24,6 +24,10 @@ supersedes: []
 
 Ensure the Codex repository workflow remains a thin reference experience built on the shared Atlas engine, not a forked workflow engine.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 3 - Codex Repository Workflow](../story_3_codex_repository_workflow.md)

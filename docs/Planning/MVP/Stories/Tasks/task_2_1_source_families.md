@@ -24,6 +24,10 @@ supersedes: []
 
 Extend Atlas beyond filesystem documents so the MVP clearly supports more than one source family.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)

@@ -24,6 +24,10 @@ supersedes: []
 
 Package the low-code workflow into user-facing deliverables that make Atlas approachable without misrepresenting what the engine is doing.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 5 - Low-Code Workflow](../story_5_low_code_workflow.md)

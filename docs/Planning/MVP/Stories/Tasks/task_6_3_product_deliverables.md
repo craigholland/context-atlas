@@ -24,6 +24,10 @@ supersedes: []
 
 Turn MVP proof outputs into reviewable deliverables that support a grounded decision about Atlas’s MVP readiness.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)

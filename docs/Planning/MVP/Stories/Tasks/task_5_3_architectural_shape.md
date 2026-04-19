@@ -24,6 +24,10 @@ supersedes: []
 
 Ensure the low-code workflow remains an outer product surface and preset layer, not a second Atlas engine with its own semantics.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 5 - Low-Code Workflow](../story_5_low_code_workflow.md)

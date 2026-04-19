@@ -24,6 +24,10 @@ supersedes: []
 
 Define and implement the actual flow of the Codex repository workflow so it uses the shared Atlas engine rather than ad hoc demo logic.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 3 - Codex Repository Workflow](../story_3_codex_repository_workflow.md)

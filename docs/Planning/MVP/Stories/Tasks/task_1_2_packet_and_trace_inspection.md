@@ -24,6 +24,10 @@ supersedes: []
 
 Provide human-readable inspection surfaces for packets and traces without turning those renderings into the canonical data model.
 
+## Task Status
+
+IMPLEMENTED
+
 ## Inputs
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)

@@ -24,6 +24,10 @@ supersedes: []
 
 Ensure that MVP-facing product-surface work strengthens, rather than erodes, the project’s Craig Architecture boundaries.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)

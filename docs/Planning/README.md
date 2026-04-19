@@ -8,7 +8,7 @@ The expected planning stack is:
 
 - `Epic` documents for major product or delivery surfaces
 - `Story` documents for architectural increments inside an Epic
-- `Task` documents for implementation-ready decomposition of a Story
+- `Task` documents for implementation-ready decomposition of a Story, including a basic `Task Status` field (`PLANNED`, `WORKING`, or `IMPLEMENTED`)
 - task-level PR-plan documents for bounded reviewable slices
 
 The current MVP planning stack lives under [MVP](./MVP/):

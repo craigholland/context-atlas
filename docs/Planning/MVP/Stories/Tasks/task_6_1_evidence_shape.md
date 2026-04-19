@@ -24,6 +24,10 @@ supersedes: []
 
 Define what kinds of evidence Atlas must produce in order to make a grounded MVP readiness claim.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)

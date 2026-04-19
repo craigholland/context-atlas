@@ -24,6 +24,10 @@ supersedes: []
 
 Define and stabilize the public package entry surface that a new MVP user should reach for first.
 
+## Task Status
+
+IMPLEMENTED
+
 ## Inputs
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)

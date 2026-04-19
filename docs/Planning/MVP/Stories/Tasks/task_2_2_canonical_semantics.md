@@ -24,6 +24,10 @@ supersedes: []
 
 Ensure that all supported source families converge into one shared semantic model inside the Atlas domain.
 
+## Task Status
+
+PLANNED
+
 ## Inputs
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)
