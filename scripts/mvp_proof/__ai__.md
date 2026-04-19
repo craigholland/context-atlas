@@ -1,11 +1,10 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: bf5ec38883fc3b2e6edf0c728eae78f7a994b32d
-- timestamp_utc: 2026-04-19T17:00:00Z
-- verified_by: local
-- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
-
+- commit: 30288f3a4fabbb74b4b7eea53502113879f366bb
+- timestamp_utc: 2026-04-19T17:39:31Z
+- verified_by: ci
+- notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: scripts/mvp_proof
 - included:
