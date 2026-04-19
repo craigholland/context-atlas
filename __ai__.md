@@ -52,7 +52,7 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
-- The current active MVP task is Story 7 Task 7.4, which is refreshing the hardened MVP evidence and updating the readiness recommendation against the Story 7 proof results.
+- The current active MVP task is Story 7 Task 7.4, which is now in planning closeout after refreshing the hardened MVP evidence and updating the readiness recommendation against the Story 7 proof results.
 - The Task 7.3 configuration-surface decision is now part of the active proof baseline: the supported env-backed surface includes `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`, while ranking authority tables, memory-scoring semantics, and canonical slot identifiers remain internal by design.
 - The architecture canon under `docs/Authoritative/Architecture/` should include a directory-level README so contributors can orient to the full Craig Architecture set before jumping into individual supplements.
 - The current MVP-supported package surface is now centered on `context_atlas.api`; repo-level docs and examples should prefer that curated starter namespace over deep internal module paths unless they are deliberately teaching architectural seams.
@@ -198,6 +198,7 @@
 - The constrained repository proof scenario `codex_repository / repo_budget_pressure_tradeoffs` is now part of the standing MVP evidence set and should remain aligned across the runnable workflow, proof capture, evidence-bundle docs, and readiness assessment.
 - The repository document-authority scenario `codex_repository / repo_document_authority_precedence` is now also part of the standing MVP evidence set and should remain aligned across the tracked sample repo, runnable workflow, proof capture, evidence-bundle docs, and readiness assessment.
 - The repository authority-hardening scenario should remain test-backed so the tracked sample repo, repository workflow, readiness assessment, and proof-capture docs do not silently drift away from one another after Story 7 closes the loop.
+- Story 7 planning docs should now describe their outcome explicitly: the hardening loop is complete, the supported configuration-surface decision is settled, and any remaining work is non-blocking follow-up rather than unfinished MVP readiness work.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
