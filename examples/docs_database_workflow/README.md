@@ -6,8 +6,8 @@ Current supported shape:
 
 - point Atlas at a governed docs directory
 - fetch rows or payloads outside Atlas using your own database, vector-store, or API client
-- shape those already-fetched rows into validated Atlas record inputs
-- translate both source families into one canonical `ContextSource` model
+- keep any row-field naming choices visible at the outer workflow boundary
+- let the adapter package perform the mapped-row to canonical-source crossing
 - assemble one packet and one trace through the shared engine
 
 The runnable demo stays honest about the boundary:
@@ -15,6 +15,7 @@ The runnable demo stays honest about the boundary:
 - filesystem documents come from this repository's `docs/Guides/` tree by default
 - support-style records come from the tracked `sample_records.json` artifact by default
 - Atlas shapes and translates those rows, but it does not execute the database query
+- `StructuredRecordSourceAdapter.load_mapped_sources(...)` is the current one-step crossing from already-fetched rows plus a row mapper into canonical sources
 - `record_feed.py` keeps payload-file loading at the outer workflow boundary rather than inside Atlas adapters
 
 ## Run

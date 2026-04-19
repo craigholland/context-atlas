@@ -85,6 +85,12 @@ The narrow adapter surface is:
 - `StructuredRecordRowMapper` for renaming already-fetched row fields
 - `StructuredRecordSourceAdapter` for translation into canonical sources
 
+For already-fetched row batches, the current preferred crossing is:
+
+- keep the row mapper visible in outer workflow code
+- let `StructuredRecordSourceAdapter.load_mapped_sources(...)` perform the
+  mapper-plus-translation step into canonical sources
+
 The example also keeps simple payload-file loading in
 `examples/docs_database_workflow/record_feed.py`. That helper is part of the
 outer workflow boundary, not the Atlas adapter layer.
@@ -123,8 +129,8 @@ The current supported composition path is:
 
 1. resolve a governed docs root
 2. translate docs into canonical `ContextSource` artifacts
-3. reshape already-fetched record rows into validated record inputs
-4. translate those record inputs into the same canonical `ContextSource` model
+3. define the row-field mapping for already-fetched records in outer workflow code
+4. let `StructuredRecordSourceAdapter.load_mapped_sources(...)` translate those rows into the same canonical `ContextSource` model
 5. assemble one packet and one trace through the shared starter assembly service
 6. render:
    - chatbot-facing context
@@ -138,7 +144,7 @@ That composition boundary is intentional:
 - the runnable example uses a tracked JSON payload file as a stand-in for outer application fetching
 - payload-file loading stays in example-level workflow code, not in Atlas adapters
 - row fetching stays in outer workflow code
-- record shaping and translation happen through the supported adapter boundary
+- row-field mapping stays visible in outer workflow code, while the adapter package keeps the canonical row-to-source crossing in one place
 - packet and trace remain the authoritative outputs
 
 ## What To Look For
