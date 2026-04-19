@@ -9,8 +9,7 @@ Current examples should prefer the curated `context_atlas.api` surface rather th
 The recommended first example is:
 
 ```powershell
-$env:PYTHONPATH = "src"
-py -3 examples/starter_context_flow.py docs "How should planning docs be treated?"
+py -3 examples/starter_context_flow.py
 ```
 
 That flow is also documented in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
@@ -22,6 +21,8 @@ It demonstrates:
 - rendered context output
 - packet inspection output
 - trace inspection output
+
+This is the intended onboarding example after an editable install. It defaults to the repository `docs/` directory and a starter query, and it keeps logs quieter unless you explicitly raise `CONTEXT_ATLAS_LOG_LEVEL`.
 
 ## Smoke Flow
 

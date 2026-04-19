@@ -56,9 +56,22 @@ The supported starter example is:
 Run it from the repository root:
 
 ```powershell
+py -3 examples/starter_context_flow.py
+```
+
+That command uses the example defaults:
+
+- `docs/` as the input directory
+- `How should planning docs be treated?` as the starter query
+
+If you want the repo-local no-install path instead:
+
+```powershell
 $env:PYTHONPATH = "src"
 py -3 examples/starter_context_flow.py docs "How should planning docs be treated?"
 ```
+
+For readability, the example defaults logging to `WARNING` unless you explicitly set `CONTEXT_ATLAS_LOG_LEVEL` yourself.
 
 The example will:
 
@@ -104,3 +117,5 @@ On a successful run, you should see:
 - a trace summary that shows why sources were included, excluded, or transformed
 
 If the output feels confusing, the root [README](../../README.md) and [examples/README.md](../../examples/README.md) should describe the same starter story. If they do not, the docs are drifting and should be corrected before adding more guidance.
+
+The smaller [examples/starter_api_smoke.py](../../examples/starter_api_smoke.py) script is still useful for smoke validation, but `starter_context_flow.py` is the recommended onboarding path.
