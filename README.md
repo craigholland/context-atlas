@@ -225,6 +225,11 @@ That rubric is intentionally centered on:
 The proof story should stay packet-and-trace-centered. Atlas should not claim
 MVP readiness based only on narrative impressions or polished screenshots.
 
+The proof harness should also stay honest about where its evidence comes from:
+the current capture path is expected to package canonical packet, trace, and
+rendered-context artifacts emitted by one supported workflow run, not
+handcrafted proof-only JSON.
+
 The first reproducible packaging path for those artifacts now lives at
 [examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).

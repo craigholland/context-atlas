@@ -10,6 +10,11 @@ all proof artifacts for every workflow. Instead, the current proof flow is:
 3. package both sides into one reproducible JSON evidence file with
    [`scripts/mvp_proof/capture_evidence.py`](/context-atlas/scripts/mvp_proof/capture_evidence.py)
 
+That capture step is intentionally a packaging boundary, not a second workflow
+runner. It should package the canonical packet, trace, and rendered-context
+artifacts emitted by one supported workflow path. It should not be treated as a
+place to hand-author replacement packet JSON or proof-only trace shapes.
+
 The capture script expects:
 
 - a workflow name
@@ -20,6 +25,14 @@ The capture script expects:
 - an Atlas packet artifact
 - an Atlas trace artifact
 - an Atlas rendered-context artifact
+
+Before packaging those artifacts, the script now also verifies that the Atlas
+packet and Atlas trace still look like one canonical workflow run:
+
+- the packet includes a canonical embedded trace
+- the standalone trace includes workflow metadata
+- the trace metadata `request_workflow` matches the declared `--workflow`
+- the packet trace identifier matches the standalone trace identifier
 
 Example:
 

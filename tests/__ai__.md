@@ -277,6 +277,7 @@
   - invariants:
     - tests should prove proof capture can regenerate a workflow/scenario bundle without failing when the source artifacts already sit at the bundle target paths
     - tests should verify the evidence package remains written in the same bundle directory after regeneration
+    - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:
