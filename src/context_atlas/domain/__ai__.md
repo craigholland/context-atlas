@@ -253,6 +253,7 @@
 - Story 2 Task 2.1 is now establishing explicit source-family provenance; canonical source semantics should stay shared even as document and structured-record adapters diverge outwardly.
 - The canonical source model now carries source-family identity through provenance, so future mixed-source work should reuse that field rather than inventing adapter-local family markers.
 - Story 2 Task 2.4 now also hardens `ContextSource.from_semantics(...)` as the preferred mixed-source boundary so adapters can cross inward through one resolved semantic profile instead of re-expressing semantic meaning field-by-field.
+- Story 2 Task 2.4 now also uses small source-level helper accessors so services can surface mixed-source trace metadata without reaching back into provenance structure directly.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

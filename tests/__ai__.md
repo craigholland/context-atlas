@@ -248,6 +248,7 @@
 - The suite now also includes a dedicated semantic-consistency test file so Story 2 Task 2.2 can prove canonical semantics directly instead of only as a side effect of other adapter tests.
 - Story 2 Task 2.4 now also guards the mixed-source boundary by asserting that canonical semantics come from domain-owned profiles instead of adapter-local semantic tags or metadata echoes.
 - Story 2 Task 2.4 now also guards the service trace boundary by asserting that mixed-source packet traces expose source families through canonical source helpers rather than provenance reach-through assumptions.
+- The mixed-source trace tests should keep asserting both family visibility and semantic consistency so service-layer explainability does not silently drift while new source families arrive.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.

@@ -643,8 +643,7 @@ class ContextAssemblyService:
             ),
             "selected_memory_source_families": ",".join(
                 self._ordered_unique(
-                    entry.source.source_family_name
-                    for entry in selected_memory_entries
+                    entry.source.source_family_name for entry in selected_memory_entries
                 )
             ),
             "selected_memory_collectors": ",".join(

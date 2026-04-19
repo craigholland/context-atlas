@@ -73,6 +73,7 @@
 - The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
 - The current service now also surfaces selected source families in trace metadata while consuming collector and family information through domain-owned source helpers instead of raw provenance reach-through.
 - The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
+- Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.
 - Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 
