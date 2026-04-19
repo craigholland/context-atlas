@@ -165,6 +165,7 @@
 - Story 1 Task 1.4 is now auditing the starter surface; changes here should make the composition boundary clearer, not more magical.
 - Product-facing getting-started guidance should only document runtime knobs that are actually supported by `load_settings_from_env()` and the current starter assembly factory.
 - The supported assembly env surface now includes the starter memory-budget split; future contributors should keep that one visible without promoting ranking authority tables or canonical slot names into runtime config.
+- Product-facing docs for the starter assembly surface should now name `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION` explicitly and should keep explaining that ranking authority tables and canonical slot names remain internal.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 - The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.

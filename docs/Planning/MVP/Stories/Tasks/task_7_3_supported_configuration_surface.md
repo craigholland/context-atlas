@@ -27,7 +27,7 @@ Audit the hidden starter-policy and service defaults so Atlas has a clearer boun
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
@@ -129,6 +129,13 @@ WORKING
 - the hidden defaults under review are classified as internal or env-backed
 - `.env.example` and validated settings reflect only the supported runtime knobs
 - the product docs explain the supported starter configuration surface clearly
+
+## Implementation Notes
+
+- The supported env-backed starter budget-allocation knob is now
+  `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`.
+- Ranking authority tables, ranking signal names, memory-scoring semantics, and
+  canonical slot identifiers remain internal by design.
 
 ## Related Artifacts
 
