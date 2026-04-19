@@ -170,6 +170,7 @@
 - The first low-code wrapper now lives under `examples/low_code_workflow/` and should stay honest about what it is doing: preset-driven source selection plus the shared starter engine, not a second packet path or a hidden data-access layer.
 - Repo-facing docs should describe the low-code workflow as a wrapper over governed docs plus a tracked record payload by default until a broader preset catalog is intentionally added.
 - The low-code workflow should now remain test-backed as a real preset-driven integration path, including records-only or docs-only evaluation of the same shared packet and trace flow.
+- Story 5 Task 5.2 is now packaging that low-code path into product-facing deliverables, so README, `.env.example`, and the low-code guide/example README should stay aligned on what the workflow does and does not do.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
