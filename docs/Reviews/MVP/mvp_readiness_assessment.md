@@ -16,6 +16,7 @@ related:
   - ../../Planning/MVP/Stories/story_6_mvp_proof.md
   - ../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md
   - ../../../examples/mvp_proof/README.md
+  - ../../../examples/mvp_proof/evidence/README.md
 supersedes: []
 ---
 
@@ -55,9 +56,24 @@ Use this section to list the workflows and scenarios actually reviewed.
 
 | Workflow | Scenario | Evidence Package | Status |
 | --- | --- | --- | --- |
-| `codex_repository` | `repo_governed_docs_update` | pending capture | pending review |
-| `docs_database_builder` | `builder_support_troubleshooting` | pending capture | pending review |
-| `low_code_chatbot` | `low_code_validation` | pending capture | pending review |
+| `codex_repository` | `repo_governed_docs_update` | `<bundle-root>/codex_repository/repo_governed_docs_update/evidence_package.json` | pending review |
+| `docs_database_builder` | `builder_support_troubleshooting` | `<bundle-root>/docs_database_builder/builder_support_troubleshooting/evidence_package.json` | pending review |
+| `low_code_chatbot` | `low_code_validation` | `<bundle-root>/low_code_chatbot/low_code_validation/evidence_package.json` | pending review |
+
+## Evidence Bundle Layout
+
+The preferred generated bundle shape for the current proof pass is documented in
+[examples/mvp_proof/evidence/README.md](/context-atlas/examples/mvp_proof/evidence/README.md).
+
+That bundle should keep:
+
+- the copied baseline rendered-context artifact
+- the copied Atlas rendered-context artifact
+- the copied Atlas packet artifact
+- the copied Atlas trace artifact
+- the packaged JSON evidence record
+
+in one per-workflow, per-scenario directory.
 
 ## Workflow Findings
 
