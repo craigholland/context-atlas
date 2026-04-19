@@ -134,11 +134,11 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.3 is now complete on its task-level feature branch and is awaiting `@codex review` before merge to `development`.
-- That task should keep Atlas adapters focused on accepted record payload shapes, translation, and canonical provenance rather than query execution, driver ownership, or connector orchestration.
-- PR A of that task now makes the adapter boundary explicit in the starter docs and structured-record adapter contract: Atlas accepts validated record inputs plus mapping-shaped row payloads, while outer systems still own fetching, clients, and query execution.
-- PR B of that task now introduces the MVP row-mapper pattern so outer systems can reshape already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
-- PR C of that task now reinforces the boundary in docs, exports, and examples so future adapter work stays translation-first instead of turning into a query framework.
+- Story 2 Task 2.4 is now the active task-level feature branch and should keep mixed-source support aligned with Craig Architecture boundaries.
+- That task should keep canonical semantics and source-family-agnostic meaning inward while pushing source-specific parsing, shaping, and provenance mechanics outward into adapters.
+- PR A of that task should audit the current mixed-source path for boundary leaks, especially adapter-local semantics or source-specific mechanics drifting into shared canonical models.
+- PR B of that task should refactor any confirmed leaks so services stay source-family-agnostic, canonical source meaning stays domain-owned, and adapters stay outward and translation-focused.
+- PR C of that task should reinforce the intended boundary through docs, examples, and owner-file guidance so future mixed-source work does not reopen the same architectural seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
