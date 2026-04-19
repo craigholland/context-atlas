@@ -9,10 +9,11 @@ This module owns starter wiring only. It should return configured orchestration
 services and leave packet rendering or inspection concerns to
 ``context_atlas.rendering``.
 
-For repository-oriented workflows such as the flagship Codex path, the current
+For repository-oriented or mixed-source workflows such as the flagship Codex
+path and the technical-builder docs-plus-database path, the current
 composition boundary is intentionally explicit:
 
-- outer workflow code chooses the governed repository inputs
+- outer workflow code chooses the governed docs or record-backed inputs
 - outer workflow code translates those inputs into a `CandidateRetriever`
 - this module wires the shared policies, settings, and logger into the
   canonical assembly service
@@ -53,11 +54,12 @@ def build_starter_context_assembly_service(
     Callers should prefer this helper to hand-wiring policies from deeper
     modules when they only need the supported default assembly path.
 
-    For the current Codex repository workflow, this helper should sit after
-    repository-specific source collection has already been resolved into a
+    For the current Codex repository workflow and the technical-builder
+    docs-plus-database workflow, this helper should sit after outer workflow
+    code has already resolved docs and/or record-backed inputs into a
     retriever over canonical Atlas sources. It intentionally stops at
-    configured orchestration; it does not choose repository inputs, render
-    packet context, or render inspection views.
+    configured orchestration; it does not choose workflow inputs, execute
+    database access, render packet context, or render inspection views.
     """
 
     active_settings = settings or ContextAtlasSettings()
@@ -104,8 +106,9 @@ def assemble_with_starter_context_service(
     """Build the supported starter service and assemble one canonical packet.
 
     This remains a workflow-agnostic outer composition helper. Callers still
-    choose retrievers, queries, and any outer-workflow metadata; the helper
-    just keeps supported starter wiring in one place.
+    choose retrievers, queries, any record/database access they own, and any
+    outer-workflow metadata; the helper just keeps supported starter wiring in
+    one place.
     """
 
     service = build_starter_context_assembly_service(
