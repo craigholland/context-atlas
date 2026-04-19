@@ -103,6 +103,8 @@ from context_atlas.rendering import render_trace_inspection
 
 The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. For the current MVP path, those knobs should help a new user understand logging, assembly defaults, compression behavior, and memory behavior without reading internal implementation modules first.
 
+`load_settings_from_env()` reads the live process environment. The example file is a reference surface for supported settings, not an automatically loaded dotenv path.
+
 As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
 
 ## License

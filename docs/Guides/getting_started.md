@@ -9,7 +9,7 @@ The goal is to get from a local checkout to a first assembled packet using the s
 You will:
 
 1. install Context Atlas into a Python environment
-2. optionally configure runtime settings through `.env`
+2. optionally configure runtime settings through environment variables
 3. ingest a documentation directory
 4. assemble a `ContextPacket`
 5. inspect the rendered context, packet view, and trace view
@@ -35,13 +35,22 @@ If you prefer not to install the package into a virtual environment yet, the exa
 
 Context Atlas uses validated defaults, so you can run the starter example without setting every environment variable.
 
-If you want a visible local configuration file:
+If you want a visible local reference file:
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-The supported starter knobs are documented in [`.env.example`](../../.env.example). They are loaded through `load_settings_from_env()` and currently cover:
+The supported starter knobs are documented in [`.env.example`](../../.env.example). That file is the canonical example surface for supported settings, but `load_settings_from_env()` reads the live process environment, not `.env` files automatically.
+
+In PowerShell, you can set variables explicitly before running the example:
+
+```powershell
+$env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
+$env:CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET = "1024"
+```
+
+Those environment-backed settings currently cover:
 
 - logging behavior
 - starter assembly defaults
@@ -56,7 +65,7 @@ The supported starter example is:
 Run it from the repository root:
 
 ```powershell
-py -3 examples/starter_context_flow.py
+python examples/starter_context_flow.py
 ```
 
 That command uses the example defaults:
@@ -68,7 +77,7 @@ If you want the repo-local no-install path instead:
 
 ```powershell
 $env:PYTHONPATH = "src"
-py -3 examples/starter_context_flow.py docs "How should planning docs be treated?"
+python examples/starter_context_flow.py docs "How should planning docs be treated?"
 ```
 
 For readability, the example defaults logging to `WARNING` unless you explicitly set `CONTEXT_ATLAS_LOG_LEVEL` yourself.

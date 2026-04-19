@@ -9,7 +9,7 @@ Current examples should prefer the curated `context_atlas.api` surface rather th
 The recommended first example is:
 
 ```powershell
-py -3 examples/starter_context_flow.py
+python examples/starter_context_flow.py
 ```
 
 That flow is also documented in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
