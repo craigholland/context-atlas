@@ -160,6 +160,7 @@
 - The current Story 4 scenario should stay concrete: a technical builder combines governed docs with already-fetched support-style records, while Atlas remains the context-governance layer rather than the database or vector-store query layer.
 - The docs-plus-database runnable example should keep that same contract visible in product-facing output: guide docs are just demo governed docs, support-style rows are just demo already-fetched records, and one shared packet/trace path still carries the workflow.
 - The docs-plus-database workflow is now expected to stay test-backed as a real mixed-source path rather than a docs-only example with record-shaped placeholders.
+- The docs-plus-database runnable path should stay evaluable without hidden setup; tracked sample record payloads are acceptable, but they should remain clearly framed as already-fetched outer inputs rather than Atlas-managed data access.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

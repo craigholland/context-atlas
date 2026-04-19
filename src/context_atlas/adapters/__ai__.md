@@ -142,6 +142,7 @@
 - Story 4 Task 4.1 is now defining the technical-builder docs-plus-database scenario, so adapter exports and docs should keep the already-fetched-record boundary explicit rather than implying Atlas owns database or vector-store access.
 - Story 4 Task 4.2 now also exposes that scenario through a product-facing guide, so adapter docs and examples should keep explaining record translation as an after-fetch boundary rather than widening toward queries or client management.
 - The runnable docs-plus-database example should keep demonstrating that `StructuredRecordRowMapper` and `StructuredRecordSourceAdapter` operate after row fetching, not as a query layer.
+- Story 4 Task 4.2 now also includes tracked sample record payloads for the runnable workflow, so adapter-facing examples should treat those files as already-fetched outer inputs rather than as a reason to widen adapters into loaders or client wrappers.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

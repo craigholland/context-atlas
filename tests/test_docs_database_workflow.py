@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -50,9 +51,11 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                 """,
             )
 
-            resolved_docs_root, record_count, packet = (
+            records_path = self._write_records_file(docs_root / "sample_records.json")
+            resolved_docs_root, records_file, record_count, packet = (
                 _WORKFLOW_MODULE.assemble_docs_database_workflow_packet(
                     docs_root_arg=docs_root,
+                    records_file_arg=records_path,
                     query=(
                         "How should a builder configure Context Atlas and "
                         "troubleshoot preflight or environment-loading issues "
@@ -67,6 +70,7 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
             }
 
             self.assertEqual(resolved_docs_root, docs_root.resolve())
+            self.assertEqual(records_file, records_path.resolve())
             self.assertEqual(record_count, 3)
             self.assertEqual(
                 source_families,
@@ -110,6 +114,7 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                 troubleshooting environment loading or preflight issues.
                 """,
             )
+            records_path = self._write_records_file(docs_root / "sample_records.json")
 
             environment = os.environ.copy()
             environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
@@ -121,6 +126,8 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                     str(_WORKFLOW_SCRIPT),
                     "--docs-root",
                     str(docs_root),
+                    "--records-file",
+                    str(records_path),
                     "--query",
                     (
                         "How should a builder configure Context Atlas and "
@@ -137,6 +144,7 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("=== Chatbot Context ===", result.stdout)
+            self.assertIn("Records file:", result.stdout)
             self.assertIn("=== Packet Inspection ===", result.stdout)
             self.assertIn("=== Trace Highlights ===", result.stdout)
             self.assertIn("=== Trace Inspection ===", result.stdout)
@@ -150,6 +158,57 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")
+
+    def _write_records_file(self, path: Path) -> Path:
+        path.write_text(
+            json.dumps(
+                [
+                    {
+                        "ticket_id": "support-201",
+                        "title": "Environment troubleshooting",
+                        "body": (
+                            "Builders should inspect packet and trace output when "
+                            "debugging configuration and preflight issues."
+                        ),
+                        "uri": "records://support/support-201",
+                        "uses": ["answering", "support"],
+                        "team": "support",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                    {
+                        "ticket_id": "support-202",
+                        "title": "Preflight note",
+                        "body": (
+                            "Run py -3 scripts/preflight.py before push and keep "
+                            "the relevant __ai__.md files updated."
+                        ),
+                        "uri": "records://support/support-202",
+                        "uses": ["support", "troubleshooting"],
+                        "team": "developer-experience",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                    {
+                        "ticket_id": "support-203",
+                        "title": "Starter path note",
+                        "body": (
+                            "Builder-facing guidance should keep the shared runtime "
+                            "knob and inspection story visible."
+                        ),
+                        "uri": "records://support/support-203",
+                        "uses": ["answering", "onboarding"],
+                        "team": "developer-education",
+                        "table": "support_tickets",
+                        "database": "atlas_app",
+                    },
+                ],
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        return path
 
 
 if __name__ == "__main__":

@@ -65,7 +65,7 @@
 - `test_codex_repository_workflow.py`:
   - `CodexRepositoryWorkflowTests`: verifies the flagship Codex repository example against a temporary governed-doc repo
 - `test_docs_database_workflow.py`:
-  - `DocsDatabaseWorkflowTests`: verifies the technical-builder docs-plus-database example against temporary docs plus built-in record rows
+  - `DocsDatabaseWorkflowTests`: verifies the technical-builder docs-plus-database example against temporary docs plus tracked sample-style record payloads
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -291,6 +291,7 @@
 - The example smoke script under `examples/` currently relies on that same curated namespace, so bootstrap coverage should keep guarding against accidental API drift.
 - The suite should now also validate the Codex repository example against a temporary governed-doc repository so the flagship workflow remains more than a documentation claim.
 - The suite should now also validate the docs-plus-database example against temporary governed docs so the technical-builder mixed-source workflow remains more than a documentation claim.
+- The docs-plus-database workflow tests should now also keep the tracked sample-record payload path honest so product-facing examples remain runnable without widening Atlas into a query layer.
 - The suite now also covers the first product-facing packet inspection renderer.
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
