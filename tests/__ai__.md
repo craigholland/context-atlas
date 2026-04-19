@@ -86,6 +86,7 @@
     - tests should verify structured artifacts remain canonical and machine-usable
     - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
     - tests should verify canonical per-class source semantics stay domain-owned and merge overrides consistently before adapters consume them
+    - tests should verify canonical sources can be built from one resolved semantic profile instead of adapter-style piecemeal semantic arguments
 - `test_config_observability.py`:
   - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
@@ -189,6 +190,7 @@
     - tests should prove documentation ontology classes map into canonical source authority and durability fields
     - tests should prove filesystem documents now consume shared domain source-semantics helpers rather than adapter-local default tables
     - tests should prove classified source provenance remains visible enough to influence downstream packet traces
+    - tests should prove filesystem adapters do not restate canonical source class through adapter-local tags when that meaning already lives in canonical source semantics
 - `test_record_source_adapter.py`:
   - responsibility: verifies structured-record input validation and record-to-source translation
   - defines:
@@ -244,6 +246,9 @@
 - The suite should now also guard the canonical per-class source-semantics defaults so adapters do not drift into maintaining their own semantic rules.
 - The adapter-facing suites should now also guard that shared domain source-semantics helpers are being consumed by both filesystem documents and structured records rather than replaced with parallel adapter-local defaults.
 - The suite now also includes a dedicated semantic-consistency test file so Story 2 Task 2.2 can prove canonical semantics directly instead of only as a side effect of other adapter tests.
+- Story 2 Task 2.4 now also guards the mixed-source boundary by asserting that canonical semantics come from domain-owned profiles instead of adapter-local semantic tags or metadata echoes.
+- Story 2 Task 2.4 now also guards the service trace boundary by asserting that mixed-source packet traces expose source families through canonical source helpers rather than provenance reach-through assumptions.
+- The mixed-source trace tests should keep asserting both family visibility and semantic consistency so service-layer explainability does not silently drift while new source families arrive.
 - The suite now also covers the public policy-surface conversion to validated Pydantic models.
 - The suite now also covers short-candidate compression passthrough/fallback behavior and newest-first ordering for the short-term memory window.
 - The suite now also covers importability of the curated `context_atlas.api` starter namespace.

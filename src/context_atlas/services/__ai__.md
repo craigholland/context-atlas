@@ -62,6 +62,7 @@
     - orchestration should produce canonical packets and traces, not prompt-first strings
     - packet assembly should stay explainable through structured trace metadata and decisions
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
+    - mixed-source trace metadata should consume domain-owned source helpers rather than reaching directly into provenance internals throughout the service
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
@@ -70,12 +71,15 @@
 ## Known Gaps / Future-State Notes
 - The current service is a starter orchestration path over in-memory retrieval plus starter policies.
 - The current service now also surfaces selected source classes and provenance collectors in trace metadata for downstream inspection.
+- The current service now also surfaces selected source families in trace metadata while consuming collector and family information through domain-owned source helpers instead of raw provenance reach-through.
 - The current service now also assigns sequential decision positions so trace renderers can present ordered decision flow consistently.
+- Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.
 - Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.
+- `domain/`: services should consume mixed-source identity through canonical source helpers and domain trace semantics rather than walking provenance structure directly in multiple places.
 - `adapters/`: retrieval implementations may satisfy `CandidateRetriever`, but service code must stay adapter-agnostic.
 - `infrastructure/`: outer-layer factories may assemble this service with runtime settings and logger setup, but service code must remain inward-safe.
 - `rendering/`: rendering may derive text from packets produced here, but rendering must not become an alternate orchestration path.

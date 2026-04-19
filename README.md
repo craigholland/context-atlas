@@ -98,6 +98,18 @@ That means source class owns the default semantic posture for:
 
 Adapters may still supply explicit overrides when the outer system knows better, but the shared defaults should remain domain-owned so filesystem documents, structured records, and future source families do not invent parallel semantic rules.
 
+## Mixed-Source Boundary Model
+
+The current mixed-source architecture should follow one explicit boundary:
+
+- adapters own source-family-specific parsing, shaping, and provenance capture
+- adapters resolve source meaning through domain-owned semantic profiles
+- adapters cross into canonical sources through `ContextSource.from_semantics(...)`
+- canonical source meaning then lives on `ContextSource` itself, not in adapter-local tags or source metadata echoes
+- services and renderers should consume mixed-source identity through canonical source helpers and trace metadata rather than reaching back into provenance structure throughout the codebase
+
+In practice, that means filesystem adapters may keep document-specific mechanics in provenance metadata, structured-record adapters may keep record-specific mechanics in validated inputs and provenance, and the rest of the engine should still work over one canonical `ContextSource` model.
+
 ## Supported MVP Entry Surface
 
 The current supported MVP starter path is intentionally explicit.

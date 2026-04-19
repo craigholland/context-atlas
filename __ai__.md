@@ -134,11 +134,12 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.3 is now complete on its task-level feature branch and is awaiting `@codex review` before merge to `development`.
-- That task should keep Atlas adapters focused on accepted record payload shapes, translation, and canonical provenance rather than query execution, driver ownership, or connector orchestration.
-- PR A of that task now makes the adapter boundary explicit in the starter docs and structured-record adapter contract: Atlas accepts validated record inputs plus mapping-shaped row payloads, while outer systems still own fetching, clients, and query execution.
-- PR B of that task now introduces the MVP row-mapper pattern so outer systems can reshape already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
-- PR C of that task now reinforces the boundary in docs, exports, and examples so future adapter work stays translation-first instead of turning into a query framework.
+- Story 2 Task 2.4 is now implemented on the task-level feature branch and is awaiting the task review gate on the feature PR.
+- That task now leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
+- The completed Task 2.4 slices now establish three durable guardrails:
+  - adapters cross into canonical sources through one resolved semantic profile rather than restating semantics piecemeal
+  - services surface mixed-source trace metadata through domain-owned source helpers rather than provenance reach-through
+  - repo-facing docs and owner files reinforce that same boundary so future source-family work does not reopen it accidentally
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

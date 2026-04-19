@@ -120,13 +120,11 @@ class StructuredRecordSourceAdapter:
             durability=record_input.durability,
             intended_uses=record_input.intended_uses,
         )
-        return ContextSource(
+        return ContextSource.from_semantics(
             source_id=record_input.record_id,
             content=record_input.content,
             title=record_input.title,
-            source_class=record_input.source_class,
-            authority=semantics.authority,
-            durability=semantics.durability,
+            semantics=semantics,
             provenance=ContextSourceProvenance(
                 source_family=ContextSourceFamily.STRUCTURED_RECORD,
                 source_uri=record_input.source_uri,
@@ -137,7 +135,6 @@ class StructuredRecordSourceAdapter:
                 },
             ),
             tags=record_input.tags,
-            intended_uses=semantics.intended_uses,
             metadata=record_input.metadata,
         )
 
