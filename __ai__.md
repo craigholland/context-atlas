@@ -144,15 +144,11 @@
 - Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
 - Relative `--docs-root` values in the runnable repository example should resolve from the selected `--repo-root`, not from the caller's shell working directory.
 - Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
-- Story 3 Task 3.2 is now the active task-level feature branch and should package that workflow into polished product-facing deliverables without inventing a second onboarding story.
-- Task 3.2 should keep the Codex repository guide, runnable example surface, and runtime-knob guidance aligned so an evaluator can move from install to configure to run to inspect without reconstructing the path from internal modules.
-- The current Task 3.2 direction is:
-  - PR A should add the explicit Codex repository setup guide and align root/example/runtime-knob docs around it
-  - PR B should refine the runnable example surface and add a small sample repo artifact that matches the guide exactly
-  - PR C should add a demonstration-oriented trace path suitable for internal review while keeping packet and trace outputs as derived surfaces over canonical artifacts
+- Story 3 Task 3.2 is now merged into the feature branch and packages the Codex repository workflow as a real product-facing evaluation path.
 - The Codex repository guide should stay consistent with `.env.example`, `examples/README.md`, and the root README rather than introducing a second description of supported runtime knobs or entrypoints.
-- The current PR B direction is to keep the repository example honest through one minimal sample-layout artifact and one CLI/help surface that points back to that artifact instead of expanding into a second onboarding system.
-- The current PR C direction is to add one concise trace-highlights surface and one demo script that uses it, while keeping both derived from the same canonical packet/trace artifacts the main workflow already produces.
+- The repository workflow now includes a minimal sample-layout reference under `examples/codex_repository_workflow/sample_repo/README.md`; future docs/examples should point back to that artifact instead of inventing competing sample layouts.
+- The product-facing repository workflow now includes a demonstration-oriented trace path through `examples/codex_repository_workflow/show_trace.py`, plus a concise `render_trace_highlights(...)` surface under `context_atlas.rendering`.
+- That demonstration path must remain derived from the same canonical packet and trace artifacts as the main runnable workflow, not a second debug-only model or Codex-specific engine path.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
