@@ -1,11 +1,10 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: 00f5ed5518d18fc1d03c8394e95eef41bab0c31f
-- timestamp_utc: 2026-04-17T19:51:13Z
-- verified_by: local
-- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
-
+- commit: eace5c6161693122ee13f8772d61a312c018c6fe
+- timestamp_utc: 2026-04-19T00:47:16Z
+- verified_by: ci
+- notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: src/context_atlas/rendering
 - included:
