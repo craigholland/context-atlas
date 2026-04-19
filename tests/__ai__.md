@@ -283,6 +283,7 @@
   - depends_on:
     - Python standard library
   - invariants:
+    - tests should prove `--refresh-bundle` removes stale files from an existing workflow/scenario bundle before regenerated proof artifacts are written
     - tests should prove proof capture can regenerate a workflow/scenario bundle without failing when the source artifacts already sit at the bundle target paths
     - tests should verify the evidence package remains written in the same bundle directory after regeneration
     - tests should prove proof capture rejects packet/trace inputs whose workflow metadata no longer matches the declared supported workflow
