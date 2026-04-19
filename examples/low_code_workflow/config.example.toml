@@ -1,0 +1,10 @@
+# Reference config for the supported low-code MVP workflow.
+# Context Atlas does not auto-load this file; copy these values into your host
+# application's configuration or environment-management layer.
+
+[context_atlas.low_code]
+preset = "chatbot_docs_records"
+docs_root = "docs/Guides"
+records_file = "examples/docs_database_workflow/sample_records.json"
+include_documents = true
+include_records = true

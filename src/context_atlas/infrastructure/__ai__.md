@@ -176,6 +176,7 @@
 - Story 5 Task 5.1 now also includes the first runnable low-code wrapper path; future growth should extend the preset catalog or example/docs surface deliberately rather than accreting ad hoc low-code branches in `assembly.py`.
 - The low-code wrapper should now stay test-backed as a real integration path; future refactors should preserve docs-plus-records behavior and one-source-family evaluation without turning presets into hidden orchestration branches.
 - Story 5 Task 5.2 now also expects the product-facing low-code guide and example README to stay aligned with the supported preset catalog and low-code env surface rather than implying hidden presets or deeper runtime magic.
+- Story 5 Task 5.2 now also expects tracked low-code config/preset artifacts to stay aligned with the supported preset catalog and declarative setting defaults rather than becoming a second source of truth.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

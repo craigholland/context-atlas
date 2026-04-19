@@ -86,6 +86,19 @@ The current runnable example is:
 
 - [examples/low_code_workflow/run.py](../../examples/low_code_workflow/run.py)
 - [examples/low_code_workflow/README.md](../../examples/low_code_workflow/README.md)
+- [examples/low_code_workflow/config.example.toml](../../examples/low_code_workflow/config.example.toml)
+- [examples/low_code_workflow/presets/basic.toml](../../examples/low_code_workflow/presets/basic.toml)
+
+The tracked TOML files are reference artifacts for the current MVP story:
+
+- `config.example.toml` shows the tiny runtime-selection surface a host app can
+  carry
+- `presets/basic.toml` shows the single supported preset contract in a readable
+  product-facing form
+
+Neither file is auto-loaded by Atlas today. They are meant to make the current
+supported low-code shape visible, not to imply a hidden config-loader or a
+broader no-code platform.
 
 From the repository root:
 

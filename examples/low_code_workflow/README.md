@@ -50,5 +50,13 @@ The output shows:
 - trace highlights
 - trace inspection
 
+Tracked reference artifacts for this path also live here:
+
+- [config.example.toml](./config.example.toml)
+- [presets/basic.toml](./presets/basic.toml)
+
+Those files are reference surfaces for the current MVP story. They are not
+auto-loaded by Atlas today.
+
 That makes the workflow suitable both for product-facing MVP evaluation and for
 internal review of how the preset wrapper still delegates to the shared engine.

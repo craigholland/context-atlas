@@ -177,6 +177,11 @@ The product-facing guide for that path now lives at
 The example-oriented README for that path now lives at
 [examples/low_code_workflow/README.md](/context-atlas/examples/low_code_workflow/README.md).
 
+Tracked reference artifacts for the current low-code story now also live at:
+
+- [examples/low_code_workflow/config.example.toml](/context-atlas/examples/low_code_workflow/config.example.toml)
+- [examples/low_code_workflow/presets/basic.toml](/context-atlas/examples/low_code_workflow/presets/basic.toml)
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
