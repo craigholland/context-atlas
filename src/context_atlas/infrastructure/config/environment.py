@@ -11,6 +11,7 @@ from ...domain.models import CompressionStrategy
 from .settings import (
     AssemblySettings,
     ContextAtlasSettings,
+    LowCodeWorkflowSettings,
     LoggingSettings,
     MemorySettings,
 )
@@ -40,6 +41,11 @@ class EnvironmentSettings(BaseSettings):
     memory_dedup_threshold: float = 0.72
     memory_min_effective_score: float = 0.1
     memory_query_boost_weight: float = 0.35
+    low_code_preset: str = "chatbot_docs_records"
+    low_code_docs_root: str = "docs/Guides"
+    low_code_records_file: str = "examples/docs_database_workflow/sample_records.json"
+    low_code_include_documents: bool = True
+    low_code_include_records: bool = True
 
     @field_validator("logger_name")
     @classmethod
@@ -52,6 +58,17 @@ class EnvironmentSettings(BaseSettings):
     @classmethod
     def _normalize_log_level(cls, value: str) -> str:
         return LoggingSettings(level=value).level
+
+    @field_validator(
+        "low_code_preset",
+        "low_code_docs_root",
+        "low_code_records_file",
+    )
+    @classmethod
+    def _validate_low_code_strings(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("LOW_CODE values must not be empty")
+        return value.strip()
 
     @field_validator("default_total_budget")
     @classmethod
@@ -139,6 +156,13 @@ def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettin
             min_effective_score=env_settings.memory_min_effective_score,
             query_boost_weight=env_settings.memory_query_boost_weight,
         )
+        low_code_settings = LowCodeWorkflowSettings(
+            preset=env_settings.low_code_preset,
+            docs_root=env_settings.low_code_docs_root,
+            records_file=env_settings.low_code_records_file,
+            include_documents=env_settings.low_code_include_documents,
+            include_records=env_settings.low_code_include_records,
+        )
     except ValidationError as error:
         raise ConfigurationError(
             code=ErrorCode.INVALID_CONFIGURATION,
@@ -149,6 +173,7 @@ def load_settings_from_env(prefix: str = "CONTEXT_ATLAS_") -> ContextAtlasSettin
         logging=logging_settings,
         assembly=assembly_settings,
         memory=memory_settings,
+        low_code=low_code_settings,
     )
 
 

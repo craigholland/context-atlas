@@ -33,12 +33,14 @@
 - Keep runtime environment loading, settings models, logger factories, handlers, and emission helpers here rather than in the semantic core.
 - Infrastructure code may reuse stable domain error codes, exceptions, and direct message constants instead of inventing semantic strings locally.
 - Do not let logger setup or config parsing become a backdoor for embedding business/domain policy.
+- Keep low-code presets and declarative workflow settings in this outer layer rather than leaking them into domain models or service orchestration semantics.
 - If infrastructure grows persistence backends, audit stores, or memory stores later, they must continue to translate external/runtime details before they cross inward.
 - `assembly.py` should stop at starter wiring and configured orchestration; it must not absorb rendering or packet-inspection responsibilities for convenience.
 
 ## Allowed Dependencies
 - may depend on:
   - Python standard library
+  - `context_atlas.adapters`
   - `context_atlas.domain`
   - `context_atlas.services`
   - sibling modules within `context_atlas.infrastructure`
@@ -53,7 +55,11 @@
   - `LoggingSettings`: logging configuration model
   - `AssemblySettings`: runtime defaults for early assembly behavior
   - `MemorySettings`: runtime defaults for starter memory retention behavior
+  - `LowCodeWorkflowSettings`: validated low-code preset/source-selection settings
+  - `LowCodeWorkflowPreset`: one supported low-code preset definition
   - `CompressionStrategy`: domain-owned compression-strategy names re-exported for runtime settings
+  - `get_low_code_workflow_preset`: preset lookup for the current low-code workflow wrapper
+  - `list_low_code_workflow_presets`: stable supported low-code preset names
   - `load_settings_from_env`: environment-backed settings loader
 - `logging`:
   - `configure_logger`: package logger setup helper
@@ -63,6 +69,7 @@
 - `assembly`:
   - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into the supported starter assembly service
   - `assemble_with_starter_context_service`: build the supported starter assembly service and immediately assemble one canonical packet
+  - `assemble_with_low_code_workflow`: low-code outer wrapper over the same starter engine path
 
 ## File Index
 - `config/settings.py`:
@@ -71,12 +78,14 @@
     - `LoggingSettings`: logger configuration model
     - `AssemblySettings`: default assembly-budget/retrieval/compression settings
     - `MemorySettings`: starter memory-retention settings
+    - `LowCodeWorkflowSettings`: declarative low-code workflow settings
     - `ContextAtlasSettings`: top-level infrastructure settings container
   - invariants:
     - keep settings focused on runtime/config concerns
     - do not move domain policy toggles here without an explicit architectural decision
     - import canonical strategy enums from `context_atlas.domain` rather than redefining them locally
     - memory tuning knobs should stay limited to operator-facing starter defaults until real orchestration proves broader settings are justified
+    - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
 - `config/environment.py`:
   - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:
@@ -88,6 +97,20 @@
   - footguns:
     - avoid accreting unrelated config parsing for future adapters unless it remains clearly outer-layer
     - only promote true operator-facing defaults into the env surface and `.env.example`
+    - low-code env keys should stay limited to preset/source selection plus a tiny amount of workflow configuration; deeper tuning still belongs to the existing assembly/memory settings surface
+- `config/presets.py`:
+  - responsibility: defines the supported low-code preset catalog without turning presets into domain semantics
+  - defines:
+    - `LowCodeWorkflowPreset`: preset definition model
+    - `get_low_code_workflow_preset`
+    - `list_low_code_workflow_presets`
+  - depends_on:
+    - `context_atlas.adapters`
+    - `context_atlas.domain`
+  - invariants:
+    - presets should stay few, explicit, and product-facing
+    - preset definitions may shape adapter defaults, but they must not redefine canonical packet or source semantics
+    - preset path resolution should stay relative to an outer workflow root rather than assuming one repo layout globally
 - `logging/factory.py`:
   - responsibility: configures package loggers and default formatters
   - defines:
@@ -113,6 +136,7 @@
   - defines:
     - `build_starter_context_assembly_service`
     - `assemble_with_starter_context_service`
+    - `assemble_with_low_code_workflow`
   - depends_on:
     - `context_atlas.domain.policies`
     - `context_atlas.infrastructure.config`
@@ -124,6 +148,7 @@
     - current MVP-facing docs should treat this helper as the supported starter entrypoint rather than reaching into deeper service wiring
     - repository-specific source collection should remain outside this module; callers should hand this helper an already-built retriever over canonical Atlas sources
     - one-shot packet assembly helpers here must remain workflow-agnostic convenience wrappers over the same shared service path rather than growing provider- or workflow-specific branches
+    - low-code convenience here may choose a supported preset, docs root, and payload file, but it should still cross into the same registry/retriever/service path rather than creating alternate packet semantics
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
@@ -147,6 +172,9 @@
 - Story 4 Task 4.1 now also uses this module as the shared composition boundary for the technical-builder docs-plus-database example; outer workflow code may fetch rows and choose docs roots, but policy wiring should still stop here.
 - Story 4 Task 4.3 now also reinforces that boundary: outer workflows may still choose row mappers and already-fetched row batches, but this module must not absorb that row-shaping or translation logic just to make examples shorter.
 - Product-facing workflow guides should keep describing this module as the shared assembly boundary after adapter translation, not as a place where mixed-source workflows hide mapper or data-access decisions.
+- Story 5 Task 5.1 is now introducing the low-code workflow shape, so presets and declarative source settings should remain outer-layer conveniences over the same shared engine instead of creating a second orchestration stack.
+- Story 5 Task 5.1 now also includes the first runnable low-code wrapper path; future growth should extend the preset catalog or example/docs surface deliberately rather than accreting ad hoc low-code branches in `assembly.py`.
+- The low-code wrapper should now stay test-backed as a real integration path; future refactors should preserve docs-plus-records behavior and one-source-family evaluation without turning presets into hidden orchestration branches.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.
@@ -170,5 +198,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, MemorySettings, load_settings_from_env; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
+      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```

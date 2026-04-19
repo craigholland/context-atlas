@@ -117,6 +117,60 @@ The product-facing setup guide for that path now lives at [docs/Guides/docs_data
 
 The runnable path now also includes a tracked sample record payload so a technical builder can evaluate the mixed-source packet and trace flow without first wiring a real database client.
 
+## Low-Code Workflow Shape
+
+The incoming low-code workflow is intentionally small. Its configuration surface
+should let a less-technical builder declare:
+
+- one preset name
+- whether documents and/or structured records are enabled
+- a docs root
+- a record payload file
+
+That means the low-code path is still a wrapper around the same engine:
+
+- presets remain outer configuration, not domain truth
+- low-code settings choose supported source inputs and starter defaults
+- packet and trace artifacts remain canonical and shared with every other workflow
+
+The current runtime surface for that path now lives in [`.env.example`](/context-atlas/.env.example)
+under the `CONTEXT_ATLAS_LOW_CODE_*` keys. The broader assembly, compression,
+and memory knobs remain available too, but the low-code path should prefer
+presets plus a very small declarative source surface before exposing deeper
+runtime tuning.
+
+The first supported wrapper for that path now lives at
+[examples/low_code_workflow/run.py](/context-atlas/examples/low_code_workflow/run.py).
+It currently supports one preset, `chatbot_docs_records`, which keeps the
+workflow intentionally concrete:
+
+- governed guide docs
+- a tracked JSON payload of already-fetched support-style records
+- one shared `ContextPacket` and `ContextTrace` path after preset-driven source selection
+
+That means the low-code path is still a real Atlas component integration, not a
+forked engine mode. The preset chooses source-shaping defaults, but packet
+assembly, budgeting, compression, and trace inspection still run through the
+same shared starter engine path used by the other workflows.
+
+Run the current low-code example from the repository root:
+
+```powershell
+python examples/low_code_workflow/run.py
+```
+
+To inspect one source family in isolation, disable one side of the preset-driven
+input surface:
+
+```powershell
+python examples/low_code_workflow/run.py --no-documents
+python examples/low_code_workflow/run.py --no-records
+```
+
+Relative `--docs-root` and `--records-file` overrides are resolved from
+`--repo-root`, so the wrapper stays explicit about its outer workflow boundary
+instead of hiding source resolution inside the engine.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
