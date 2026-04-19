@@ -207,6 +207,64 @@ class LowCodeWorkflowTests(unittest.TestCase):
                 result.stdout,
             )
 
+    def test_workflow_script_can_write_standard_proof_artifacts(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            docs_root = repo_root / "docs" / "Guides"
+            proof_dir = repo_root / "proof"
+            self._write_doc(
+                docs_root / "guide.md",
+                """
+                # Guide
+
+                Low-code proof workflows should emit reproducible packet, trace,
+                and rendered-context artifacts from the supported runnable path.
+                """,
+            )
+            self._write_records_file(repo_root / "records.json")
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_WORKFLOW_SCRIPT),
+                    "--repo-root",
+                    str(repo_root),
+                    "--docs-root",
+                    "docs/Guides",
+                    "--records-file",
+                    "records.json",
+                    "--query",
+                    "How should proof artifacts be generated for the low-code workflow?",
+                    "--proof-artifacts-dir",
+                    str(proof_dir),
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue((proof_dir / "atlas_rendered_context.txt").is_file())
+            self.assertTrue((proof_dir / "atlas_packet.json").is_file())
+            self.assertTrue((proof_dir / "atlas_trace.json").is_file())
+            self.assertIn("Proof artifacts written to:", result.stdout)
+
+            packet = json.loads(
+                (proof_dir / "atlas_packet.json").read_text(encoding="utf-8")
+            )
+            trace = json.loads(
+                (proof_dir / "atlas_trace.json").read_text(encoding="utf-8")
+            )
+
+            self.assertEqual(packet["metadata"]["workflow"], "low_code_chatbot")
+            self.assertEqual(trace["metadata"]["request_workflow"], "low_code_chatbot")
+
     def test_help_mentions_repo_root_resolution_and_presets(self) -> None:
         result = subprocess.run(
             [sys.executable, str(_WORKFLOW_SCRIPT), "--help"],

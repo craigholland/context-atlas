@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+import json
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
@@ -194,6 +195,59 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                 "Authoritative/Architecture/Guidance.md",
                 result.stdout,
             )
+
+    def test_workflow_script_can_write_standard_proof_artifacts(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / "sample-repo"
+            docs_root = repo_root / "docs"
+            proof_dir = Path(temp_dir) / "proof"
+            self._write_doc(
+                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                """
+                # Guidance
+
+                Proof workflows should emit reproducible packet, trace, and
+                rendered-context artifacts from the supported runnable path.
+                """,
+            )
+
+            environment = os.environ.copy()
+            environment["PYTHONPATH"] = str(_REPO_ROOT / "src")
+            environment["CONTEXT_ATLAS_LOG_LEVEL"] = "WARNING"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_WORKFLOW_SCRIPT),
+                    "--repo-root",
+                    str(repo_root),
+                    "--query",
+                    "How should proof artifacts be generated for the repository workflow?",
+                    "--proof-artifacts-dir",
+                    str(proof_dir),
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                env=environment,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue((proof_dir / "atlas_rendered_context.txt").is_file())
+            self.assertTrue((proof_dir / "atlas_packet.json").is_file())
+            self.assertTrue((proof_dir / "atlas_trace.json").is_file())
+            self.assertIn("Proof artifacts written to:", result.stdout)
+
+            packet = json.loads(
+                (proof_dir / "atlas_packet.json").read_text(encoding="utf-8")
+            )
+            trace = json.loads(
+                (proof_dir / "atlas_trace.json").read_text(encoding="utf-8")
+            )
+
+            self.assertEqual(packet["metadata"]["workflow"], "codex_repository")
+            self.assertEqual(trace["metadata"]["request_workflow"], "codex_repository")
 
     def test_help_mentions_sample_repo_reference(self) -> None:
         result = subprocess.run(

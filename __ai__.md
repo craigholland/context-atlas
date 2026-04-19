@@ -182,6 +182,11 @@
 - Story 6 Task 6.1 now also expects each proof package to carry a standard review order so later reviewers compare naive and Atlas artifacts consistently instead of improvising a different comparison path for each workflow.
 - Story 6 Task 6.2 is now selecting the actual workflows under test, so the proof story should stay grounded in supported runnable paths with reproducible scenario inputs rather than one-off manual runs or unpublished setup assumptions.
 - The repo README and MVP proof rubric should now name the currently selected proof workflows and scenarios explicitly so later proof artifacts can be reviewed against a stable scope rather than an implied or shifting workflow set.
+- The currently selected MVP proof workflows should now also emit one shared Atlas artifact shape at the example boundary when `--proof-artifacts-dir` is supplied:
+  - `atlas_rendered_context.txt`
+  - `atlas_packet.json`
+  - `atlas_trace.json`
+- Those proof artifacts should continue to come from the supported runnable workflow scripts themselves rather than from a separate hidden orchestration path.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.

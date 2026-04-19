@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 
@@ -26,6 +27,9 @@ DEFAULT_QUERY = (
 )
 DEFAULT_LOG_LEVEL = "WARNING"
 REPOSITORY_CONTEXT_HEADER = "Repository Context"
+ATLAS_PACKET_FILENAME = "atlas_packet.json"
+ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
+ATLAS_TRACE_FILENAME = "atlas_trace.json"
 
 
 def build_parser(*, description: str) -> argparse.ArgumentParser:
@@ -55,6 +59,15 @@ def build_parser(*, description: str) -> argparse.ArgumentParser:
         "--query",
         default=DEFAULT_QUERY,
         help="Engineering question or task query to assemble context for.",
+    )
+    parser.add_argument(
+        "--proof-artifacts-dir",
+        type=Path,
+        default=None,
+        help=(
+            "Optional directory for writing standard MVP-proof artifacts "
+            "(rendered context, packet JSON, trace JSON)."
+        ),
     )
     return parser
 
@@ -105,13 +118,12 @@ def main() -> None:
     print(f"Query: {args.query}")
     print()
     print("=== Codex Context ===")
-    print(
-        render_packet_context(
-            packet,
-            include_section_headers=True,
-            context_header=REPOSITORY_CONTEXT_HEADER,
-        )
+    rendered_context = render_packet_context(
+        packet,
+        include_section_headers=True,
+        context_header=REPOSITORY_CONTEXT_HEADER,
     )
+    print(rendered_context)
     print()
     print("=== Packet Inspection ===")
     print(render_packet_inspection(packet))
@@ -122,6 +134,15 @@ def main() -> None:
     else:
         print(render_trace_inspection(packet.trace))
 
+    if args.proof_artifacts_dir is not None:
+        output_dir = _write_proof_artifacts(
+            output_dir=args.proof_artifacts_dir,
+            packet=packet,
+            rendered_context=rendered_context,
+        )
+        print()
+        print(f"Proof artifacts written to: {output_dir}")
+
 
 def _resolve_docs_root(*, repo_root: Path, docs_root_arg: Path | None) -> Path:
     """Resolve docs-root arguments against the selected repository root."""
@@ -131,6 +152,36 @@ def _resolve_docs_root(*, repo_root: Path, docs_root_arg: Path | None) -> Path:
     if docs_root_arg.is_absolute():
         return docs_root_arg.resolve()
     return (repo_root / docs_root_arg).resolve()
+
+
+def _write_proof_artifacts(
+    *,
+    output_dir: Path,
+    packet: ContextPacket,
+    rendered_context: str,
+) -> Path:
+    """Write the standard Atlas proof artifacts for one workflow run."""
+
+    resolved_output_dir = output_dir.resolve()
+    resolved_output_dir.mkdir(parents=True, exist_ok=True)
+    (resolved_output_dir / ATLAS_RENDERED_CONTEXT_FILENAME).write_text(
+        rendered_context,
+        encoding="utf-8",
+    )
+    (resolved_output_dir / ATLAS_PACKET_FILENAME).write_text(
+        json.dumps(packet.model_dump(mode="json"), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (resolved_output_dir / ATLAS_TRACE_FILENAME).write_text(
+        json.dumps(
+            packet.trace.model_dump(mode="json") if packet.trace is not None else None,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return resolved_output_dir
 
 
 if __name__ == "__main__":
