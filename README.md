@@ -171,6 +171,12 @@ Relative `--docs-root` and `--records-file` overrides are resolved from
 `--repo-root`, so the wrapper stays explicit about its outer workflow boundary
 instead of hiding source resolution inside the engine.
 
+The product-facing guide for that path now lives at
+[docs/Guides/low_code_workflow.md](/context-atlas/docs/Guides/low_code_workflow.md).
+
+The example-oriented README for that path now lives at
+[examples/low_code_workflow/README.md](/context-atlas/examples/low_code_workflow/README.md).
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
