@@ -84,3 +84,28 @@ python examples/low_code_workflow/run.py `
 
 The current low-code proof path intentionally stays on the tracked default
 preset and tracked sample record payload so the workflow remains reproducible.
+
+## Package One Proof Scenario
+
+After a workflow run has produced the standard Atlas artifacts, package that run
+with one naive baseline rendered-context artifact:
+
+```powershell
+python scripts/mvp_proof/capture_evidence.py `
+  --workflow codex_repository `
+  --scenario repo_governed_docs_update `
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
+  --input-summary "repo_root=.; docs_root=docs/Guides" `
+  --baseline-rendered tmp\mvp_proof\baselines\codex_repository.txt `
+  --atlas-artifact-dir tmp\mvp_proof\codex_repository `
+  --output tmp\mvp_proof\evidence\repo_governed_docs_update.json
+```
+
+Use the same pattern for the other selected workflows by changing:
+
+- `--workflow`
+- `--scenario`
+- `--query`
+- `--input-summary`
+- the baseline rendered artifact path
+- the Atlas artifact directory

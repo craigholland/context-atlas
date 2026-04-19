@@ -240,6 +240,20 @@ packet and trace inspection, and reproducible tracked inputs. Workflows that
 need live external services or unpublished setup steps should not be counted in
 the current MVP proof pass.
 
+Each selected workflow can now also emit the same standard Atlas proof
+artifacts from its runnable example boundary when `--proof-artifacts-dir` is
+supplied:
+
+- `atlas_rendered_context.txt`
+- `atlas_packet.json`
+- `atlas_trace.json`
+
+That shared artifact shape is what allows
+[scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py)
+to package proof scenarios without workflow-specific file wiring. See
+[examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
+for the current proof commands and scenario inputs.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

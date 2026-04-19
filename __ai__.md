@@ -187,6 +187,7 @@
   - `atlas_packet.json`
   - `atlas_trace.json`
 - Those proof artifacts should continue to come from the supported runnable workflow scripts themselves rather than from a separate hidden orchestration path.
+- The proof capture path should now prefer `scripts/mvp_proof/capture_evidence.py --atlas-artifact-dir ...` over hand-wiring three Atlas artifact file paths whenever a workflow has already emitted the standard filenames above.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
