@@ -135,17 +135,14 @@
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
 - Story 2 Task 2.4 is now merged into `development` and leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
-- Story 3 Task 3.1 is now the active task-level feature branch and should define the flagship Codex repository workflow around the shared Atlas engine rather than ad hoc demo glue.
-- That task should keep the first supported repository workflow honest and narrow:
-  - governed repository docs and related authoritative artifacts are the current supported repository inputs
+- Story 3 Task 3.1 now establishes the current flagship Codex repository workflow on feature PR #56 and should stop at the task-level review gate until that feature PR is reviewed and merged.
+- The first supported repository workflow should stay intentionally narrow:
+  - governed repository docs rooted at `<repo_root>/docs` are the current repository input surface
   - the shared assembly service, canonical packet, and trace remain the engine path
-  - Codex-facing context should be a derived rendering/output story, not a special-case engine path
-- PR A of that task should define the minimal supported repository workflow shape and make the current composition boundary explicit in repo-facing docs and infrastructure guidance.
-- The current PR A direction now makes one reference-workflow rule explicit: repository-root and docs-root selection stay in outer workflow code, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
-- PR B should implement the runnable workflow example directory and keep it close to the supported public API.
-- The current PR B direction is to make that workflow concrete through a repository-root-oriented example directory while keeping Codex-facing context as a derived rendering story over the canonical packet.
-- PR C should validate the workflow against realistic engineering questions, capture packet/trace/context output, and refine the path until it feels like a real integration path rather than demo glue.
-- The current PR C direction is to keep the validation honest by testing a temporary governed-doc repository end to end and by preserving outer workflow metadata in the shared trace instead of inventing Codex-only inspection seams.
+  - Codex-facing context remains a derived rendering story, not a special-case engine path
+- The runnable reference composition path now lives under `examples/codex_repository_workflow/` and should remain close to the supported public API rather than deep internal imports.
+- Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
+- Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
