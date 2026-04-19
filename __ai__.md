@@ -136,7 +136,7 @@
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
 - Story 2 Task 2.2 is now the active task-level feature branch and should prove that supported source families converge into one inward-owned semantic model.
 - That task should keep source classification, authority, durability, intended use, and provenance semantics canonical inside `domain/` rather than duplicated across adapters.
-- PR A of that task should define the mapping rules for canonical source semantics and identify any missing provider-agnostic normalization behavior.
+- PR A of that task is now defining canonical per-class defaults for source authority, durability, and intended uses so later adapters can share one inward semantic target.
 - PR B of that task should move repeated source-semantics behavior into inward helpers so adapters stop owning shared normalization rules.
 - PR C of that task should validate that documents and structured records expose coherent semantics through the same canonical packet and trace flow.
 - The root README should keep describing structured records and filesystem documents as two source families that converge into one `ContextSource` model, not as parallel semantic hierarchies.

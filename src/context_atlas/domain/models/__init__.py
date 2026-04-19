@@ -22,6 +22,9 @@ from .sources import (
     ContextSourceDurability,
     ContextSourceFamily,
     ContextSourceProvenance,
+    ContextSourceSemanticsProfile,
+    get_default_source_semantics,
+    resolve_source_semantics,
 )
 from .transformations import CompressionResult, CompressionStrategy
 
@@ -42,9 +45,12 @@ __all__ = [
     "ContextSourceDurability",
     "ContextSourceFamily",
     "ContextSourceProvenance",
+    "ContextSourceSemanticsProfile",
     "ContextTrace",
     "CompressionResult",
     "CompressionStrategy",
     "ExclusionReasonCode",
     "InclusionReasonCode",
+    "get_default_source_semantics",
+    "resolve_source_semantics",
 ]
