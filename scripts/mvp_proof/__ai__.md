@@ -24,6 +24,7 @@
 - Prefer standard-library implementations and simple file-shape transformations over runtime imports from `src/context_atlas`.
 - When the supported workflows emit one shared artifact filename set, this folder should prefer accepting an artifact directory plus those standard filenames over duplicating per-workflow path conventions.
 - When proof work is being packaged for review, this folder should prefer writing a predictable bundle directory that keeps copied artifacts and the packaged evidence JSON together for one workflow/scenario pair.
+- Bundle generation should be idempotent when rerun against an existing workflow/scenario directory; proof capture must not fail just because the current artifact paths already point at the target bundle files.
 
 ## Allowed Dependencies
 - may depend on:
@@ -44,6 +45,7 @@
     - should accept workflow artifacts as inputs rather than generating them itself
     - should support the shared Atlas artifact-directory convention used by the selected MVP workflows without losing backward compatibility for explicit file paths
     - should support a reviewable bundle-root output path so reviewers can open copied artifacts directly without first unpacking the JSON evidence record
+    - should tolerate regeneration into an already-populated bundle directory when the source artifacts already live at the target paths
     - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes

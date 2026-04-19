@@ -66,6 +66,8 @@
   - `CodexRepositoryWorkflowTests`: verifies the flagship Codex repository example against a temporary governed-doc repo
 - `test_docs_database_workflow.py`:
   - `DocsDatabaseWorkflowTests`: verifies the technical-builder docs-plus-database example against temporary docs plus tracked sample-style record payloads
+- `test_mvp_proof_capture.py`:
+  - `MvpProofCaptureTests`: verifies MVP proof evidence capture remains idempotent and reviewable
 
 ## File Index
 - `test_bootstrap_layers.py`:
@@ -266,6 +268,15 @@
     - tests should prove supported record metadata stays visible in trace output as outer-workflow context rather than hidden in example-only print logic
     - tests should prove the example continues to describe record rows as already-fetched outer inputs rather than implying Atlas owns database access
     - tests should prove the runnable mixed-source workflow can emit the standard MVP-proof Atlas artifact filenames when asked
+- `test_mvp_proof_capture.py`:
+  - responsibility: verifies proof capture remains safe to rerun against an existing evidence bundle directory
+  - defines:
+    - `MvpProofCaptureTests`: MVP proof capture test suite
+  - depends_on:
+    - Python standard library
+  - invariants:
+    - tests should prove proof capture can regenerate a workflow/scenario bundle without failing when the source artifacts already sit at the bundle target paths
+    - tests should verify the evidence package remains written in the same bundle directory after regeneration
 - `test_low_code_workflow.py`:
   - responsibility: verifies the supported low-code workflow remains a real preset-driven integration path over the shared engine
   - defines:

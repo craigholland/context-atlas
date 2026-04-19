@@ -201,6 +201,14 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+def _copy_artifact_if_needed(*, source_path: Path, target_path: Path) -> None:
+    resolved_source = source_path.resolve()
+    resolved_target = target_path.resolve()
+    if resolved_source == resolved_target:
+        return
+    shutil.copyfile(resolved_source, resolved_target)
+
+
 def _write_evidence_bundle(
     *,
     bundle_dir: Path,
@@ -211,21 +219,21 @@ def _write_evidence_bundle(
     package: dict[str, Any],
 ) -> None:
     bundle_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(
-        baseline_rendered_path,
-        bundle_dir / BASELINE_RENDERED_CONTEXT_FILENAME,
+    _copy_artifact_if_needed(
+        source_path=baseline_rendered_path,
+        target_path=bundle_dir / BASELINE_RENDERED_CONTEXT_FILENAME,
     )
-    shutil.copyfile(
-        atlas_packet_path,
-        bundle_dir / ATLAS_PACKET_FILENAME,
+    _copy_artifact_if_needed(
+        source_path=atlas_packet_path,
+        target_path=bundle_dir / ATLAS_PACKET_FILENAME,
     )
-    shutil.copyfile(
-        atlas_trace_path,
-        bundle_dir / ATLAS_TRACE_FILENAME,
+    _copy_artifact_if_needed(
+        source_path=atlas_trace_path,
+        target_path=bundle_dir / ATLAS_TRACE_FILENAME,
     )
-    shutil.copyfile(
-        atlas_rendered_path,
-        bundle_dir / ATLAS_RENDERED_CONTEXT_FILENAME,
+    _copy_artifact_if_needed(
+        source_path=atlas_rendered_path,
+        target_path=bundle_dir / ATLAS_RENDERED_CONTEXT_FILENAME,
     )
     (bundle_dir / EVIDENCE_PACKAGE_FILENAME).write_text(
         json.dumps(package, indent=2, sort_keys=True) + "\n",

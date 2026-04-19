@@ -1,0 +1,89 @@
+"""Regression tests for MVP proof evidence capture helpers."""
+
+from __future__ import annotations
+
+import contextlib
+import importlib.util
+import io
+import json
+from pathlib import Path
+import sys
+from tempfile import TemporaryDirectory
+import unittest
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_CAPTURE_SCRIPT = _REPO_ROOT / "scripts" / "mvp_proof" / "capture_evidence.py"
+_MODULE_SPEC = importlib.util.spec_from_file_location(
+    "mvp_proof_capture_evidence",
+    _CAPTURE_SCRIPT,
+)
+assert _MODULE_SPEC is not None and _MODULE_SPEC.loader is not None
+_CAPTURE_MODULE = importlib.util.module_from_spec(_MODULE_SPEC)
+_MODULE_SPEC.loader.exec_module(_CAPTURE_MODULE)
+
+
+class MvpProofCaptureTests(unittest.TestCase):
+    """Keep proof capture idempotent and reviewable."""
+
+    def test_main_allows_regeneration_into_existing_bundle_directory(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_root = Path(temp_dir)
+            bundle_dir = bundle_root / "codex_repository" / "repo_governed_docs_update"
+            bundle_dir.mkdir(parents=True, exist_ok=True)
+
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_packet.json").write_text(
+                json.dumps({"packet": "ok"}) + "\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_trace.json").write_text(
+                json.dumps({"trace": "ok"}) + "\n",
+                encoding="utf-8",
+            )
+
+            original_argv = sys.argv
+            output = io.StringIO()
+            try:
+                sys.argv = [
+                    "capture_evidence.py",
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_governed_docs_update",
+                    "--query",
+                    "How should repository planning docs be updated?",
+                    "--input-summary",
+                    "docs_root=docs/Guides",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--bundle-root",
+                    str(bundle_root),
+                ]
+                with contextlib.redirect_stdout(output):
+                    exit_code = _CAPTURE_MODULE.main()
+            finally:
+                sys.argv = original_argv
+
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(output.getvalue().strip(), str(bundle_dir.resolve()))
+            package = json.loads(
+                (bundle_dir / "evidence_package.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(package["workflow"], "codex_repository")
+            self.assertEqual(
+                package["artifacts"]["atlas_packet"]["path"],
+                str((bundle_dir / "atlas_packet.json").resolve()),
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()
