@@ -155,6 +155,7 @@
 - The derived demonstration script should remain runnable both as a direct script and as `python -m examples.codex_repository_workflow.show_trace`; shared workflow imports must not assume only one invocation style.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 - Story 4 Task 4.1 is now the active MVP task, so planning and docs changes on this branch should keep the technical-builder mixed-source workflow aligned around one shared packet path over filesystem documents and already-fetched record inputs.
+- The current Story 4 scenario should stay concrete: a technical builder combines governed docs with already-fetched support-style records, while Atlas remains the context-governance layer rather than the database or vector-store query layer.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
