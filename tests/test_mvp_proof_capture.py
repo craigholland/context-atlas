@@ -25,6 +25,31 @@ _MODULE_SPEC.loader.exec_module(_CAPTURE_MODULE)
 class MvpProofCaptureTests(unittest.TestCase):
     """Keep proof capture idempotent and reviewable."""
 
+    def _write_valid_atlas_artifacts(
+        self,
+        bundle_dir: Path,
+        *,
+        workflow: str = "codex_repository",
+    ) -> None:
+        trace = {
+            "trace_id": "trace-proof-1",
+            "metadata": {"request_workflow": workflow},
+            "decisions": [],
+        }
+        packet = {
+            "packet_id": "packet-proof-1",
+            "selected_candidates": [],
+            "trace": trace,
+        }
+        (bundle_dir / "atlas_packet.json").write_text(
+            json.dumps(packet) + "\n",
+            encoding="utf-8",
+        )
+        (bundle_dir / "atlas_trace.json").write_text(
+            json.dumps(trace) + "\n",
+            encoding="utf-8",
+        )
+
     def test_main_allows_regeneration_into_existing_bundle_directory(self) -> None:
         with TemporaryDirectory() as temp_dir:
             bundle_root = Path(temp_dir)
@@ -39,14 +64,7 @@ class MvpProofCaptureTests(unittest.TestCase):
                 "rendered content\n",
                 encoding="utf-8",
             )
-            (bundle_dir / "atlas_packet.json").write_text(
-                json.dumps({"packet": "ok"}) + "\n",
-                encoding="utf-8",
-            )
-            (bundle_dir / "atlas_trace.json").write_text(
-                json.dumps({"trace": "ok"}) + "\n",
-                encoding="utf-8",
-            )
+            self._write_valid_atlas_artifacts(bundle_dir)
 
             original_argv = sys.argv
             output = io.StringIO()
@@ -83,6 +101,47 @@ class MvpProofCaptureTests(unittest.TestCase):
                 package["artifacts"]["atlas_packet"]["path"],
                 str((bundle_dir / "atlas_packet.json").resolve()),
             )
+
+    def test_build_evidence_package_rejects_mismatched_workflow_metadata(self) -> None:
+        with TemporaryDirectory() as temp_dir:
+            bundle_dir = Path(temp_dir)
+            (bundle_dir / "baseline_rendered_context.txt").write_text(
+                "baseline content\n",
+                encoding="utf-8",
+            )
+            (bundle_dir / "atlas_rendered_context.txt").write_text(
+                "rendered content\n",
+                encoding="utf-8",
+            )
+            self._write_valid_atlas_artifacts(
+                bundle_dir,
+                workflow="docs_database_builder",
+            )
+
+            args = _CAPTURE_MODULE.build_parser().parse_args(
+                [
+                    "--workflow",
+                    "codex_repository",
+                    "--scenario",
+                    "repo_governed_docs_update",
+                    "--query",
+                    "How should repository planning docs be updated?",
+                    "--input-summary",
+                    "docs_root=docs/Guides",
+                    "--baseline-rendered",
+                    str(bundle_dir / "baseline_rendered_context.txt"),
+                    "--atlas-artifact-dir",
+                    str(bundle_dir),
+                    "--output",
+                    str(bundle_dir / "evidence_package.json"),
+                ]
+            )
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "request_workflow must match the declared workflow",
+            ):
+                _CAPTURE_MODULE.build_evidence_package(args)
 
 
 if __name__ == "__main__":
