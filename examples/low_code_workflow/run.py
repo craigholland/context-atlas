@@ -39,7 +39,8 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=(
             "Relative --docs-root and --records-file values are resolved from "
             "--repo-root. The default preset uses governed docs plus a tracked "
-            "sample records payload."
+            "sample records payload. Use --no-documents or --no-records to "
+            "inspect one source family in isolation."
         ),
     )
     parser.add_argument(
@@ -177,6 +178,12 @@ def main() -> None:
         print("Trace\n- none")
     else:
         print(render_trace_inspection(packet.trace))
+    print()
+    print(
+        "Low-code boundary note: presets choose supported source defaults, but "
+        "packet assembly and trace generation still run through the shared "
+        "starter engine."
+    )
 
 
 if __name__ == "__main__":
