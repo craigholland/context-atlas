@@ -88,6 +88,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional short reviewer note. May be supplied multiple times.",
     )
     parser.add_argument(
+        "--expect-budget-pressure",
+        action="store_true",
+        help=(
+            "Require the Atlas packet/trace artifacts to show visible budget-pressure "
+            "signals such as compression, out-of-budget exclusion, or budget-pressure "
+            "reason codes."
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=None,
@@ -189,6 +198,69 @@ def _validate_atlas_artifacts(
         )
 
 
+def _validate_budget_pressure_artifacts(
+    *,
+    packet_artifact: dict[str, Any],
+    trace_artifact: dict[str, Any],
+) -> None:
+    packet_content = _require_mapping(
+        value=packet_artifact["content"],
+        name="Atlas packet artifact",
+    )
+    trace_content = _require_mapping(
+        value=trace_artifact["content"],
+        name="Atlas trace artifact",
+    )
+    packet_metadata = _require_mapping(
+        value=packet_content.get("metadata"),
+        name="Atlas packet metadata",
+    )
+    trace_metadata = _require_mapping(
+        value=trace_content.get("metadata"),
+        name="Atlas trace metadata",
+    )
+    decisions = _require_sequence(
+        value=trace_content.get("decisions"),
+        name="Atlas trace decisions",
+    )
+
+    if "budget_budget_total_tokens" not in trace_metadata:
+        raise ValueError(
+            "Budget-pressure proof artifacts must include budget trace metadata."
+        )
+
+    pressure_reason_codes = {
+        "compression_required",
+        "elastic_slot_reduced",
+        "out_of_budget",
+        "slot_exhausted",
+        "total_budget_exhausted",
+    }
+    pressure_visible = packet_metadata.get("compression_applied") == "true"
+
+    for decision in decisions:
+        decision_mapping = _require_mapping(
+            value=decision,
+            name="Atlas trace decision",
+        )
+        reason_codes = {
+            str(code)
+            for code in _require_sequence(
+                value=decision_mapping.get("reason_codes", []),
+                name="Atlas trace decision reason_codes",
+            )
+        }
+        if reason_codes & pressure_reason_codes:
+            pressure_visible = True
+            break
+
+    if not pressure_visible:
+        raise ValueError(
+            "Budget-pressure proof artifacts must include visible pressure decisions "
+            "or packet-level compression metadata."
+        )
+
+
 def _resolve_atlas_artifact_paths(
     args: argparse.Namespace,
 ) -> tuple[Path, Path, Path]:
@@ -250,6 +322,11 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
         packet_artifact=atlas_packet,
         trace_artifact=atlas_trace,
     )
+    if args.expect_budget_pressure:
+        _validate_budget_pressure_artifacts(
+            packet_artifact=atlas_packet,
+            trace_artifact=atlas_trace,
+        )
     return {
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "workflow": args.workflow,
@@ -261,6 +338,7 @@ def build_evidence_package(args: argparse.Namespace) -> dict[str, Any]:
             "rubric_document": "docs/Reviews/MVP/mvp_evaluation_rubric.md",
             "rubric_dimensions": list(RUBRIC_DIMENSIONS),
             "comparison_steps": list(COMPARISON_STEPS),
+            "budget_pressure_expected": args.expect_budget_pressure,
         },
         "artifacts": {
             "baseline_rendered_context": baseline_rendered_context,

@@ -26,6 +26,7 @@
 - When proof work is being packaged for review, this folder should prefer writing a predictable bundle directory that keeps copied artifacts and the packaged evidence JSON together for one workflow/scenario pair.
 - Bundle generation should be idempotent when rerun against an existing workflow/scenario directory; proof capture must not fail just because the current artifact paths already point at the target bundle files.
 - Proof capture should validate that the packet and trace it packages still look like one canonical workflow run, including matching trace identifiers and a trace `request_workflow` that matches the declared workflow name.
+- When a proof scenario is explicitly marked as budget-constrained, capture should also verify that the packaged artifacts show visible budget-pressure evidence rather than only narrative claims.
 
 ## Allowed Dependencies
 - may depend on:
@@ -48,6 +49,7 @@
     - should support a reviewable bundle-root output path so reviewers can open copied artifacts directly without first unpacking the JSON evidence record
     - should tolerate regeneration into an already-populated bundle directory when the source artifacts already live at the target paths
     - should reject packet/trace inputs that do not look like one canonical workflow run over the shared engine path
+    - should support an explicit budget-pressure expectation for constrained scenarios and reject artifact sets that do not show visible pressure signals
     - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes
