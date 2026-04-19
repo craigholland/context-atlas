@@ -229,6 +229,9 @@ The first reproducible packaging path for those artifacts now lives at
 [examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).
 
+The canonical human-readable review record for that proof work now lives at
+[docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
+
 The current proof pass is scoped to the three supported MVP workflows:
 
 - `codex_repository` with the `repo_governed_docs_update` scenario
@@ -252,7 +255,9 @@ That shared artifact shape is what allows
 [scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py)
 to package proof scenarios without workflow-specific file wiring. See
 [examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
-for the current proof commands and scenario inputs.
+for the current proof commands and scenario inputs, and
+[docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md)
+for the review record that should summarize the captured findings.
 
 ## Canonical Source Semantics
 

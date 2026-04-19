@@ -12,6 +12,7 @@ last_reviewed: 2026-04-19
 owners: [core]
 tags: [mvp, review, rubric, evidence, evaluation]
 related:
+  - ./mvp_readiness_assessment.md
   - ../../Planning/MVP/mvp_product_defintiion.md
   - ../../Planning/MVP/Stories/story_6_mvp_proof.md
   - ../../Planning/MVP/Stories/Tasks/task_6_1_evidence_shape.md
@@ -127,6 +128,9 @@ The current reference packaging path for that evidence is
 `scripts/mvp_proof/capture_evidence.py`. It packages already-generated workflow
 artifacts; it does not generate packet or trace outputs itself.
 
+The canonical review record for those packages should live in
+[mvp_readiness_assessment.md](./mvp_readiness_assessment.md).
+
 ## Evidence Review Path
 
 Each captured evidence package should be reviewed in the same order:
@@ -163,6 +167,9 @@ even when the artifacts are reviewed later by a different contributor.
 ## Current Recommendation State
 
 No recommendation yet. This rubric exists to define what later Story 6 tasks must capture before a recommendation is written.
+
+The eventual recommendation should be recorded in
+[mvp_readiness_assessment.md](./mvp_readiness_assessment.md), not only here.
 
 ## Workflows Under Test For The Current Proof Pass
 
