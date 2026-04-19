@@ -129,6 +129,20 @@ class StructuredRecordSourceAdapterTests(unittest.TestCase):
             ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
         )
 
+    def test_non_mapping_non_record_objects_are_rejected(self) -> None:
+        class RowHandle:
+            """Represents an outer integration object that Atlas should not own."""
+
+        adapter = StructuredRecordSourceAdapter()
+
+        with self.assertRaises(ContextAtlasError) as context:
+            adapter.load_source(RowHandle())
+
+        self.assertEqual(
+            context.exception.code,
+            ErrorCode.INVALID_SOURCE_ADAPTER_INPUT,
+        )
+
     def test_mapping_tags_input_raises_coded_error(self) -> None:
         adapter = StructuredRecordSourceAdapter()
 

@@ -201,6 +201,7 @@
     - tests should prove record provenance and intended-use metadata survive translation into canonical sources
     - tests should prove record-backed sources pick up fallback authority, durability, and intended uses from shared domain semantics when outer inputs omit them
     - tests should prove canonical `record_id` stays authoritative in provenance metadata even when callers provide overlapping provenance fields
+    - tests should prove Atlas rejects richer non-mapping outer row or handle objects so data-access concerns stay outside the adapter boundary
     - tests should prove mapping-shaped `tags` or `intended_uses` payloads fail fast instead of being silently coerced
     - tests should prove documents and structured records can coexist in one shared registry and packet flow
 - `test_source_semantics.py`:
@@ -240,6 +241,7 @@
 - The suite now also covers the first product-facing trace inspection renderer plus ordered decision positions from the assembly service.
 - Story 2 Task 2.1 should prove that structured-record input contracts validate cleanly and that canonical source provenance can carry source-family identity without creating a second source model.
 - The record-adapter test suite should verify that structured-record inputs translate into canonical sources with preserved intended uses, metadata, and structured-record provenance.
+- The record-adapter suite should also guard the explicit adapter boundary: Atlas accepts validated record inputs and mapping-shaped payloads, not richer driver-, query-, or handle-like objects.
 - The record-adapter suite should now also prove that filesystem documents and structured records can coexist in one registry and one packet-assembly flow without splitting the canonical source model.
 - Bootstrap coverage should continue to guard the imports used by the getting-started guide and starter context-flow example so product-facing docs do not drift away from the supported surface.
 - As services, adapters, and richer domain models arrive, this folder will likely need more granular owner files or sub-suites.
