@@ -108,6 +108,10 @@ That means Atlas is demonstrating a real pipeline-component role here:
 
 The current runnable example for that path lives at [examples/docs_database_workflow/README.md](/context-atlas/examples/docs_database_workflow/README.md).
 
+The product-facing setup guide for that path now lives at [docs/Guides/docs_database_workflow.md](/context-atlas/docs/Guides/docs_database_workflow.md).
+
+The runnable path now also includes a tracked sample record payload so a technical builder can evaluate the mixed-source packet and trace flow without first wiring a real database client.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

@@ -25,6 +25,14 @@ from context_atlas.rendering import (
     render_trace_inspection,
 )
 
+try:
+    from examples.docs_database_workflow.record_feed import (
+        load_record_rows,
+        resolve_records_file,
+    )
+except ModuleNotFoundError:
+    from record_feed import load_record_rows, resolve_records_file
+
 DEFAULT_QUERY = (
     "How should a builder configure Context Atlas and troubleshoot preflight "
     "or environment-loading issues in a chatbot pipeline?"
@@ -59,18 +67,29 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_QUERY,
         help="Chatbot question to assemble context for.",
     )
+    parser.add_argument(
+        "--records-file",
+        type=Path,
+        default=None,
+        help=(
+            "Optional JSON file containing already-fetched record rows. Defaults "
+            "to this example's sample_records.json file."
+        ),
+    )
     return parser
 
 
 def assemble_docs_database_workflow_packet(
     *,
     docs_root_arg: Path | None,
+    records_file_arg: Path | None,
     query: str,
-) -> tuple[Path, int, ContextPacket]:
+) -> tuple[Path, Path, int, ContextPacket]:
     """Run the shared docs-plus-database workflow composition once."""
 
     docs_root = _resolve_docs_root(docs_root_arg)
-    record_rows = _already_fetched_support_rows()
+    records_file = resolve_records_file(records_file_arg)
+    record_rows = load_record_rows(records_file)
     record_inputs = _build_record_inputs(record_rows)
 
     if "CONTEXT_ATLAS_LOG_LEVEL" not in os.environ:
@@ -93,21 +112,26 @@ def assemble_docs_database_workflow_packet(
             "workflow": "docs_database_builder",
             "docs_root": docs_root.as_posix(),
             "record_batch": RECORD_BATCH_NAME,
+            "records_file": records_file.as_posix(),
             "record_input_count": str(len(record_inputs)),
             "record_origin": "already_fetched_rows",
         },
     )
-    return docs_root, len(record_inputs), packet
+    return docs_root, records_file, len(record_inputs), packet
 
 
 def main() -> None:
     args = build_parser().parse_args()
-    docs_root, record_count, packet = assemble_docs_database_workflow_packet(
-        docs_root_arg=args.docs_root,
-        query=args.query,
+    docs_root, records_file, record_count, packet = (
+        assemble_docs_database_workflow_packet(
+            docs_root_arg=args.docs_root,
+            records_file_arg=args.records_file,
+            query=args.query,
+        )
     )
 
     print(f"Governed docs root: {docs_root}")
+    print(f"Records file: {records_file}")
     print(f"Record batch: {RECORD_BATCH_NAME} ({record_count} already-fetched rows)")
     print(f"Query: {args.query}")
     print()
@@ -166,55 +190,6 @@ def _build_record_inputs(
         authority="preferred",
     )
     return mapper.to_record_inputs(rows)
-
-
-def _already_fetched_support_rows() -> tuple[dict[str, Any], ...]:
-    """Return demo rows that stand in for data fetched outside Atlas."""
-
-    return (
-        {
-            "ticket_id": "support-101",
-            "title": "Environment loading confusion",
-            "body": (
-                "Support notes that .env.example is a reference only. "
-                "load_settings_from_env() reads the live process environment "
-                "and does not auto-load a dotenv file."
-            ),
-            "uri": "records://support/support-101",
-            "uses": ("answering", "support"),
-            "team": "support",
-            "table": "support_tickets",
-            "database": "atlas_app",
-        },
-        {
-            "ticket_id": "support-102",
-            "title": "Preflight failure guidance",
-            "body": (
-                "Support escalation guidance says to run py -3 scripts/preflight.py "
-                "before pushing and to update the relevant __ai__.md owner files "
-                "when governed code or docs change."
-            ),
-            "uri": "records://support/support-102",
-            "uses": ("support", "troubleshooting"),
-            "team": "developer-experience",
-            "table": "support_tickets",
-            "database": "atlas_app",
-        },
-        {
-            "ticket_id": "support-103",
-            "title": "Starter surface recommendation",
-            "body": (
-                "Builder-facing guidance recommends context_atlas.api for the "
-                "starter path and examples/starter_context_flow.py as the first "
-                "example after an editable install."
-            ),
-            "uri": "records://support/support-103",
-            "uses": ("answering", "onboarding"),
-            "team": "developer-education",
-            "table": "support_tickets",
-            "database": "atlas_app",
-        },
-    )
 
 
 if __name__ == "__main__":

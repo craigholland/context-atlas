@@ -13,8 +13,9 @@ Current supported shape:
 The runnable demo stays honest about the boundary:
 
 - filesystem documents come from this repository's `docs/Guides/` tree by default
-- support-style records are represented as already-fetched in-memory rows inside the script
+- support-style records come from the tracked `sample_records.json` artifact by default
 - Atlas shapes and translates those rows, but it does not execute the database query
+- `record_feed.py` keeps payload-file loading at the outer workflow boundary rather than inside Atlas adapters
 
 ## Run
 
@@ -28,6 +29,12 @@ Override the docs root or chatbot question:
 
 ```powershell
 python examples/docs_database_workflow/run.py --docs-root C:\repos\my-app\docs --query "How should I configure Atlas and troubleshoot preflight failures?"
+```
+
+Point the example at your own already-fetched rows:
+
+```powershell
+python examples/docs_database_workflow/run.py --records-file C:\repos\my-app\data\support_rows.json
 ```
 
 The output shows:
@@ -44,4 +51,5 @@ This example should teach one specific lesson:
 - Atlas can operate as a real pipeline component over mixed source families
 - the engine path stays shared with the rest of the product
 - database access remains an outer application concern
+- payload-file loading remains an outer workflow concern too
 - packet and trace remain the authoritative outputs
