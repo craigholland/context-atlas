@@ -26,7 +26,7 @@ Package the Codex repository workflow into product-facing deliverables that an e
 
 ## Task Status
 
-PLANNED
+WORKING
 
 ## Inputs
 

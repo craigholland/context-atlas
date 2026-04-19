@@ -135,7 +135,7 @@
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
 - Story 2 Task 2.4 is now merged into `development` and leaves one explicit mixed-source rule in the repo: source-family mechanics stay outward in adapters and provenance, canonical meaning stays inward on `ContextSource`, and services/renderers should consume that meaning through source helpers and trace metadata.
-- Story 3 Task 3.1 now establishes the current flagship Codex repository workflow on feature PR #56 and should stop at the task-level review gate until that feature PR is reviewed and merged.
+- Story 3 Task 3.1 is now merged into `development` and establishes the current flagship Codex repository workflow baseline for the rest of Story 3.
 - The first supported repository workflow should stay intentionally narrow:
   - governed repository docs rooted at `<repo_root>/docs` are the current repository input surface
   - the shared assembly service, canonical packet, and trace remain the engine path
@@ -144,6 +144,12 @@
 - Repository-root and docs-root selection should remain outer-workflow concerns, while `build_starter_context_assembly_service(...)` remains the engine-side composition boundary.
 - Relative `--docs-root` values in the runnable repository example should resolve from the selected `--repo-root`, not from the caller's shell working directory.
 - Workflow-supplied metadata such as `workflow`, `repo_root`, and `docs_root` should remain visible in trace inspection output so supported examples can explain which outer path produced a packet without adding Codex-only debug seams.
+- Story 3 Task 3.2 is now the active task-level feature branch and should package that workflow into polished product-facing deliverables without inventing a second onboarding story.
+- Task 3.2 should keep the Codex repository guide, runnable example surface, and runtime-knob guidance aligned so an evaluator can move from install to configure to run to inspect without reconstructing the path from internal modules.
+- The current Task 3.2 direction is:
+  - PR A should add the explicit Codex repository setup guide and align root/example/runtime-knob docs around it
+  - PR B should refine the runnable example surface and add a small sample repo artifact that matches the guide exactly
+  - PR C should add a demonstration-oriented trace path suitable for internal review while keeping packet and trace outputs as derived surfaces over canonical artifacts
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
