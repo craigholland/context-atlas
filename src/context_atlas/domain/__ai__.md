@@ -230,6 +230,7 @@
 - The current domain policy surface now includes a starter ranking policy; more advanced or provider-aware ranking should remain replaceable rather than becoming hardcoded truth.
 - The current domain policy surface now also includes starter budget-allocation and compression policies; richer strategies should remain replaceable.
 - The current domain policy surface now also includes a starter memory-retention policy; richer importance, freshness, or persistence-backed behavior should remain replaceable.
+- Story 2 Task 2.1 is now establishing explicit source-family provenance; canonical source semantics should stay shared even as document and structured-record adapters diverge outwardly.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.
