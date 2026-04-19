@@ -58,6 +58,7 @@
   - responsibility: renders packet inspection sections for product-facing debugging and demos
   - invariants:
     - emphasize canonical packet state such as selected sources, memory, budget, and compression
+    - reflect actual compression application state rather than just the presence of a `CompressionResult`
     - remain a read-only formatter over canonical packet artifacts
 - `trace.py`:
   - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos

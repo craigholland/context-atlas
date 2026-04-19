@@ -116,6 +116,42 @@ class PacketRenderingTests(unittest.TestCase):
         self.assertIn("Retained Memory\n- none", rendered)
         self.assertIn("Compression\n- none", rendered)
 
+    def test_packet_inspection_distinguishes_compression_presence_from_application(
+        self,
+    ) -> None:
+        packet = ContextPacket(
+            packet_id="packet-inspect-3",
+            query="How should Atlas report non-applied compression?",
+            selected_candidates=(
+                ContextCandidate(
+                    source=ContextSource(
+                        source_id="planning",
+                        title="Planning",
+                        content="Short content that already fits the budget.",
+                        source_class=ContextSourceClass.PLANNING,
+                        authority=ContextSourceAuthority.PREFERRED,
+                    ),
+                    score=0.5,
+                    rank=1,
+                ),
+            ),
+            compression_result=CompressionResult(
+                text="Short content that already fits the budget.",
+                strategy_used=CompressionStrategy.EXTRACTIVE,
+                original_chars=40,
+                compressed_chars=40,
+                estimated_tokens_saved=0,
+                was_applied=False,
+                source_ids=("planning",),
+            ),
+            trace=ContextTrace(trace_id="trace-inspect-3"),
+        )
+
+        rendered = render_packet_inspection(packet)
+
+        self.assertIn("- compression_applied: no", rendered)
+        self.assertIn("- was_applied: no", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()

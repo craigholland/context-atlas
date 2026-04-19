@@ -19,6 +19,11 @@ def render_packet_inspection(packet: ContextPacket) -> str:
 
 
 def _render_packet_summary(packet: ContextPacket) -> str:
+    compression_applied = (
+        False
+        if packet.compression_result is None
+        else packet.compression_result.was_applied
+    )
     lines = [
         "Packet",
         f"- packet_id: {packet.packet_id}",
@@ -26,7 +31,7 @@ def _render_packet_summary(packet: ContextPacket) -> str:
         f"- selected_candidates: {packet.selected_candidate_count}",
         f"- selected_memory_entries: {packet.selected_memory_count}",
         f"- total_items: {packet.item_count}",
-        f"- compression_applied: {_yes_no(packet.has_compression)}",
+        f"- compression_applied: {_yes_no(compression_applied)}",
         f"- trace_attached: {_yes_no(packet.has_trace)}",
     ]
     return "\n".join(lines)

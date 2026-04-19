@@ -133,6 +133,7 @@
     - `context_atlas.rendering`
   - invariants:
     - tests should verify packet inspection highlights selected sources, retained memory, budget state, and compression
+    - tests should verify packet inspection distinguishes actual compression application from mere compression-result presence
     - tests should verify packet inspection stays read-only over canonical packet artifacts
 - `test_trace_rendering.py`:
   - responsibility: verifies trace inspection rendering stays derived, ordered, and useful for debugging
