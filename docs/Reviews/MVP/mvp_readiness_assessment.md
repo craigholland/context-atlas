@@ -1,7 +1,7 @@
 ---
 id: context-atlas-mvp-readiness-assessment
 title: Context Atlas MVP Readiness Assessment
-summary: Provides the canonical review record for MVP proof findings, workflow evidence, the current readiness recommendation, and the remaining hardening gaps.
+summary: Provides the canonical review record for MVP proof findings, refreshed Story 7 evidence, the current readiness recommendation, and any remaining non-blocking follow-up.
 doc_class: review
 template_refs:
   metadata: base_metadata@1.0.0
@@ -16,6 +16,7 @@ related:
   - ../../Planning/MVP/Stories/story_6_mvp_proof.md
   - ../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md
   - ../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md
+  - ../../Planning/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md
   - ../../../examples/mvp_proof/README.md
   - ../../../examples/mvp_proof/evidence/README.md
 supersedes: []
@@ -26,13 +27,15 @@ supersedes: []
 ## Objective
 
 Record the actual review findings, evidence references, and recommendation that
-result from the Story 6 MVP proof work.
+result from the Story 6 MVP proof work plus the Story 7 hardening reassessment.
 
 ## Inputs
 
 - [Context Atlas MVP Evaluation Rubric](./mvp_evaluation_rubric.md)
 - [Story 6 - MVP Proof](../../Planning/MVP/Stories/story_6_mvp_proof.md)
+- [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
 - [Task 6.3 - Product Deliverables PR Plan](../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md)
+- [Task 7.4 - MVP Readiness Reassessment PR Plan](../../Planning/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md)
 - packaged workflow evidence generated through
   [`scripts/mvp_proof/capture_evidence.py`](/context-atlas/scripts/mvp_proof/capture_evidence.py)
 
@@ -58,6 +61,8 @@ Use this section to list the workflows and scenarios actually reviewed.
 | Workflow | Scenario | Evidence Package | Status |
 | --- | --- | --- | --- |
 | `codex_repository` | `repo_governed_docs_update` | `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/evidence_package.json` | reviewed 2026-04-19 |
+| `codex_repository` | `repo_budget_pressure_tradeoffs` | `tmp/mvp_proof/evidence/codex_repository/repo_budget_pressure_tradeoffs/evidence_package.json` | reviewed 2026-04-19 |
+| `codex_repository` | `repo_document_authority_precedence` | `tmp/mvp_proof/evidence/codex_repository/repo_document_authority_precedence/evidence_package.json` | reviewed 2026-04-19 |
 | `docs_database_builder` | `builder_support_troubleshooting` | `tmp/mvp_proof/evidence/docs_database_builder/builder_support_troubleshooting/evidence_package.json` | reviewed 2026-04-19 |
 | `low_code_chatbot` | `low_code_validation` | `tmp/mvp_proof/evidence/low_code_chatbot/low_code_validation/evidence_package.json` | reviewed 2026-04-19 |
 
@@ -82,18 +87,28 @@ Record workflow-local findings here once evidence has been reviewed.
 
 ### Codex Repository Workflow
 
-- evidence package: `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/evidence_package.json`
+- evidence packages:
+  - `tmp/mvp_proof/evidence/codex_repository/repo_governed_docs_update/evidence_package.json`
+  - `tmp/mvp_proof/evidence/codex_repository/repo_budget_pressure_tradeoffs/evidence_package.json`
+  - `tmp/mvp_proof/evidence/codex_repository/repo_document_authority_precedence/evidence_package.json`
 - findings:
   - Atlas reduced the rendered-context size materially versus the naive baseline
     by selecting four guide documents instead of carrying the entire guide set
     forward unchanged.
   - Packet and trace outputs remained legible, and the workflow metadata stayed
     visible enough to confirm which outer repository path produced the packet.
-  - Story 7 now adds a stronger repository scenario,
-    `codex_repository / repo_document_authority_precedence`, that uses a tracked
-    sample repo with authoritative, planning, and review documents over the same
-    query. The next reassessment should review that bundle directly rather than
-    continuing to treat the repository workflow as guide-only authority evidence.
+  - The constrained repository hardening scenario,
+    `codex_repository / repo_budget_pressure_tradeoffs`, now makes the budget
+    story concrete: the packet total budget is capped at `64`, the trace records
+    `elastic_slot_reduced` and `compression_required`, and the rendered context
+    is compressed down to a small surviving summary instead of silently stuffing
+    the full guide set into output.
+  - The authority hardening scenario,
+    `codex_repository / repo_document_authority_precedence`, now makes the
+    document-authority story concrete: a `binding` authoritative repository
+    guidance document stays ahead of `preferred` planning and `advisory` review
+    documents, and the trace carries `higher_authority_preferred` and
+    `authority_priority` reason codes that explain that ordering directly.
 
 ### Documents Plus Database Workflow
 
@@ -147,21 +162,22 @@ Current state:
 - authority handling:
   - authority-aware behavior is credible for structured-record inputs because
     preferred review sources surfaced ahead of advisory documents
-  - the repository workflow now also has a reproducible document-authority
-    hardening scenario, `codex_repository / repo_document_authority_precedence`,
-    built around a tracked authority-rich sample repo corpus
-  - the current assessment has not yet reviewed that new authority bundle, so
-    the authority story should still be treated as improving rather than fully
-    closed until Story 7 reassessment completes
+  - the repository workflow now also has reviewed document-authority evidence:
+    the tracked `codex_repository / repo_document_authority_precedence` bundle
+    keeps a `binding` authoritative document ahead of lower-authority planning
+    and review material for the same repository-process question
+  - authority handling is now inspectable across both mixed-source and
+    document-only contexts rather than being inferred from only one workflow
 - budget behavior:
   - compression/transformation behavior is visible in the current packets and
     traces
-  - the current proof pass still lacks a deliberately budget-constrained
-    scenario that makes tradeoffs under strong pressure obvious
-  - Story 7 now defines a reproducible constrained repository scenario,
-    `codex_repository / repo_budget_pressure_tradeoffs`, so the next
-    reassessment can review one explicit pressure bundle instead of a generic
-    follow-up note
+  - the constrained repository bundle,
+    `codex_repository / repo_budget_pressure_tradeoffs`, now makes that tradeoff
+    explicit by showing a `64`-token total budget, zero memory-slot allocation,
+    a reduced document slot, and visible compression/transformation decisions in
+    the trace
+  - budget behavior is now reviewable as a concrete governed-doc tradeoff, not
+    only as a generic observation that compression exists somewhere in the stack
 - workflow reproducibility:
   - this is now a clear strength because all three workflows can emit the same
     Atlas artifact set and can be bundled into one predictable review layout
@@ -180,7 +196,7 @@ Required fields:
 
 Current state:
 
-- recommendation level: `Conditionally Ready`
+- recommendation level: `MVP Ready`
 - review date: `2026-04-19`
 - rationale:
   - Context Atlas can now be defended as a reusable context-governance component
@@ -188,9 +204,13 @@ Current state:
     chatbot building, and preset-driven low-code assembly.
   - The proof story is reproducible, packet-and-trace-centered, and no longer
     dependent on ad hoc artifact naming.
-  - The recommendation remains conditional because the current proof evidence is
-    still light on strongly authoritative document inputs and on explicit
-    budget-pressure scenarios.
+  - The Story 7 hardening pass closed the two remaining blocker caveats by
+    adding and reviewing one explicit budget-pressure bundle and one explicit
+    document-authority bundle on the flagship repository workflow.
+- explicit remaining gaps:
+  - no blocker-level gaps remain for the current MVP claim
+  - future work can deepen scenario diversity and external-integration breadth,
+    but those are follow-on improvements rather than MVP readiness blockers
 
 ## Follow-Up Work
 
@@ -203,8 +223,8 @@ Use this section to record whether the current assessment points to:
 
 Current state:
 
-- follow-up hardening plan is now tracked in
-  [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
+- Story 7 hardening is now the completed closeout path that moved the MVP
+  recommendation from `Conditionally Ready` to `MVP Ready`
 - the current configuration-surface audit classifies ranking authority tables,
   ranking signal names, memory-scoring semantics, and canonical slot
   identifiers as internal implementation constants rather than MVP env-backed
@@ -212,16 +232,12 @@ Current state:
 - the starter memory-budget split is the one current default approved for
   promotion into the supported runtime surface because it changes visible
   starter-budget behavior for callers
-- the first budget-pressure hardening target, the constrained repository
-  scenario `codex_repository / repo_budget_pressure_tradeoffs`, is now a
-  reproducible supported run plus capture path
-- the next reassessment should review the generated bundle for that scenario to
-  determine whether budget-behavior evidence is now strong enough to remove the
-  budget-pressure caveat from the recommendation record
-- the document-authority hardening target,
-  `codex_repository / repo_document_authority_precedence`, is now also a
-  reproducible supported run plus capture path built around tracked
-  authoritative, planning, and review documents in the sample repository
-- the next reassessment should review the generated authority bundle to
-  determine whether the recommendation can stop treating document authority as a
-  comparatively weaker part of the current proof story
+- the constrained repository scenario
+  `codex_repository / repo_budget_pressure_tradeoffs` should remain in the
+  standing proof set so future contributors can re-check visible budget tradeoffs
+- the authority-rich repository scenario
+  `codex_repository / repo_document_authority_precedence` should remain in the
+  standing proof set so future contributors can re-check document-authority
+  ordering against tracked local inputs
+- future follow-up can widen the proof set or deepen scenario diversity, but the
+  current MVP claim no longer depends on another immediate hardening cycle
