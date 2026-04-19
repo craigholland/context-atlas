@@ -104,7 +104,10 @@ class ContextAssemblyService:
 
         ``metadata`` is preserved as opaque outer-workflow context for packet
         and trace inspection. The service does not interpret those keys as
-        ranking, budgeting, memory, or compression policy input.
+        ranking, budgeting, memory, or compression policy input. That is
+        especially important for mixed-source workflows: the service consumes
+        canonical candidates and sources, not database, vector-store, or
+        repository-specific semantics.
         """
 
         normalized_query = query.strip()

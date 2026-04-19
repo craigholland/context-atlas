@@ -144,6 +144,7 @@
 - The runnable docs-plus-database example should keep demonstrating that `StructuredRecordRowMapper` and `StructuredRecordSourceAdapter` operate after row fetching, not as a query layer.
 - Story 4 Task 4.2 now also includes tracked sample record payloads for the runnable workflow, so adapter-facing examples should treat those files as already-fetched outer inputs rather than as a reason to widen adapters into loaders or client wrappers.
 - If examples add helper modules for resolving or loading tracked record payloads, that helper logic should remain outside this package and this owner file should keep the boundary explicit.
+- Story 4 Task 4.3 is now auditing the mixed-source workflow shape against the repository workflow, so adapter-facing guidance should keep the row-mapper and source-translation path clear without letting example scripts invent parallel translation seams.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
