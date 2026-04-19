@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-18
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-19
 owners: [core]
 tags: [mvp, task, pr-plan, low-code, docs, presets]
 related:
@@ -26,7 +26,7 @@ Package the low-code workflow into user-facing deliverables that make Atlas appr
 
 ## Task Status
 
-PLANNED
+WORKING
 
 ## Inputs
 
