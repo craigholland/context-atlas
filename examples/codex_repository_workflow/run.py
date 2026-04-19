@@ -10,10 +10,11 @@ from context_atlas.api import (
     FilesystemDocumentSourceAdapter,
     InMemorySourceRegistry,
     LexicalRetriever,
-    build_starter_context_assembly_service,
     load_settings_from_env,
     render_packet_context,
 )
+from context_atlas.domain.models import ContextPacket
+from context_atlas.infrastructure.assembly import assemble_with_starter_context_service
 from context_atlas.rendering import (
     render_packet_inspection,
     render_trace_inspection,
@@ -24,11 +25,14 @@ DEFAULT_QUERY = (
     "docs or architecture guidance?"
 )
 DEFAULT_LOG_LEVEL = "WARNING"
+REPOSITORY_CONTEXT_HEADER = "Repository Context"
 
 
-def main() -> None:
+def build_parser(*, description: str) -> argparse.ArgumentParser:
+    """Build the shared CLI surface for supported repository workflow scripts."""
+
     parser = argparse.ArgumentParser(
-        description="Run the flagship Codex repository workflow over governed docs.",
+        description=description,
         epilog=(
             "See examples/codex_repository_workflow/sample_repo/README.md for "
             "the minimal supported repository shape. Relative --docs-root "
@@ -52,10 +56,19 @@ def main() -> None:
         default=DEFAULT_QUERY,
         help="Engineering question or task query to assemble context for.",
     )
-    args = parser.parse_args()
+    return parser
 
-    repo_root = args.repo_root.resolve()
-    docs_root = _resolve_docs_root(repo_root=repo_root, docs_root_arg=args.docs_root)
+
+def assemble_repository_workflow_packet(
+    *,
+    repo_root_arg: Path,
+    docs_root_arg: Path | None,
+    query: str,
+) -> tuple[Path, Path, ContextPacket]:
+    """Run the shared repository-workflow composition path once."""
+
+    repo_root = repo_root_arg.resolve()
+    docs_root = _resolve_docs_root(repo_root=repo_root, docs_root_arg=docs_root_arg)
 
     if "CONTEXT_ATLAS_LOG_LEVEL" not in os.environ:
         os.environ["CONTEXT_ATLAS_LOG_LEVEL"] = DEFAULT_LOG_LEVEL
@@ -63,18 +76,28 @@ def main() -> None:
     settings = load_settings_from_env()
     sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
     retriever = LexicalRetriever(InMemorySourceRegistry(sources))
-    assembly_service = build_starter_context_assembly_service(
+    packet = assemble_with_starter_context_service(
         retriever=retriever,
+        query=query,
         settings=settings,
+        metadata={
+            "workflow": "codex_repository",
+            "repo_root": repo_root.as_posix(),
+            "docs_root": docs_root.as_posix(),
+        },
     )
-    workflow_metadata = {
-        "workflow": "codex_repository",
-        "repo_root": repo_root.as_posix(),
-        "docs_root": docs_root.as_posix(),
-    }
-    packet = assembly_service.assemble(
+    return repo_root, docs_root, packet
+
+
+def main() -> None:
+    parser = build_parser(
+        description="Run the flagship Codex repository workflow over governed docs."
+    )
+    args = parser.parse_args()
+    repo_root, docs_root, packet = assemble_repository_workflow_packet(
+        repo_root_arg=args.repo_root,
+        docs_root_arg=args.docs_root,
         query=args.query,
-        metadata=workflow_metadata,
     )
 
     print(f"Repository root: {repo_root}")
@@ -82,7 +105,13 @@ def main() -> None:
     print(f"Query: {args.query}")
     print()
     print("=== Codex Context ===")
-    print(render_packet_context(packet, include_section_headers=True))
+    print(
+        render_packet_context(
+            packet,
+            include_section_headers=True,
+            context_header=REPOSITORY_CONTEXT_HEADER,
+        )
+    )
     print()
     print("=== Packet Inspection ===")
     print(render_packet_inspection(packet))

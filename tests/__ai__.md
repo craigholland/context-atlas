@@ -144,6 +144,7 @@
     - tests should verify packet inspection highlights selected sources, retained memory, budget state, and compression
     - tests should verify packet inspection distinguishes actual compression application from mere compression-result presence
     - tests should verify packet inspection stays read-only over canonical packet artifacts
+    - tests should verify generic packet-context rendering defaults stay generic while workflow-facing labels remain caller-supplied
 - `test_trace_rendering.py`:
   - responsibility: verifies trace inspection rendering stays derived, ordered, and useful for debugging
   - defines:
@@ -179,8 +180,10 @@
   - invariants:
     - tests should prove services orchestrate canonical packets and traces rather than inventing parallel string state
     - tests should prove infrastructure settings are used through the outer composition helper rather than through hidden globals
+    - tests should prove any one-shot infrastructure assembly helper remains a convenience wrapper over the same shared service path
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:
@@ -245,6 +248,9 @@
     - tests should prove relative `--docs-root` arguments resolve from the selected repository root instead of the caller's shell working directory
     - tests should prove the CLI help surface points back to the minimal sample-repo artifact so the documented workflow shape stays discoverable
     - tests should prove demonstration-oriented workflow scripts still render canonical context plus derived trace output instead of inventing a second workflow state model
+    - tests should prove repository-facing scripts apply repository-specific labels at the example boundary rather than through canonical rendering defaults
+    - tests should prove the runnable and demonstration scripts share one supported parser/composition path instead of drifting into parallel example-specific workflow wiring
+    - tests should prove the demonstration script can still run via `python -m examples.codex_repository_workflow.show_trace` without import-path regressions
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.

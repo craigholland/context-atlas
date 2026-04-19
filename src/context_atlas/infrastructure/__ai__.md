@@ -62,6 +62,7 @@
   - `log_assembly_stage_message`: helper for emitting assembly-stage messages with consistent trace fields
 - `assembly`:
   - `build_starter_context_assembly_service`: compose starter policies, settings, and logger setup into the supported starter assembly service
+  - `assemble_with_starter_context_service`: build the supported starter assembly service and immediately assemble one canonical packet
 
 ## File Index
 - `config/settings.py`:
@@ -111,6 +112,7 @@
   - responsibility: wires validated runtime settings and logger setup into the starter assembly service
   - defines:
     - `build_starter_context_assembly_service`
+    - `assemble_with_starter_context_service`
   - depends_on:
     - `context_atlas.domain.policies`
     - `context_atlas.infrastructure.config`
@@ -121,6 +123,7 @@
     - starter settings should influence service defaults through constructor wiring rather than through hidden globals
     - current MVP-facing docs should treat this helper as the supported starter entrypoint rather than reaching into deeper service wiring
     - repository-specific source collection should remain outside this module; callers should hand this helper an already-built retriever over canonical Atlas sources
+    - one-shot packet assembly helpers here must remain workflow-agnostic convenience wrappers over the same shared service path rather than growing provider- or workflow-specific branches
 
 ## Known Gaps / Future-State Notes
 - Infrastructure currently covers only config and logging; future persistence, audit, memory-store, and lineage implementations will likely live here as the system grows.
@@ -137,6 +140,8 @@
 - The current starter entry helper is now also re-exported through `context_atlas.api`; future API expansion should continue to preserve this module as the real composition boundary rather than moving wiring inward.
 - Story 3 Task 3.1 now also treats this module as the engine-side stop for the Codex repository workflow: repository-root and docs-root choices stay outside, while shared service wiring stays here.
 - The runnable Codex repository example should keep using this module as the composition boundary rather than inlining policy wiring inside `examples/`.
+- The runnable and demonstration-oriented Codex repository scripts should share one outer workflow composition path over this module rather than duplicating build-plus-assemble wiring in multiple example files.
+- The runnable repository script should remain the authoritative outer composition path; demonstration scripts may layer alternate inspection output on top of it but should not fork the composition boundary.
 - The product-facing Codex repository guide should only document runtime knobs that actually flow through `load_settings_from_env()` and this module's starter assembly wiring.
 - Product-facing sample-repo artifacts and CLI help should still describe this module as the real composition boundary rather than implying that `examples/` owns the policy wiring.
 

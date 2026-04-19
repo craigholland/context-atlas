@@ -168,7 +168,7 @@ The current supported composition path is:
 1. outer workflow code resolves the governed docs root from the repository
 2. `FilesystemDocumentSourceAdapter` translates those docs into canonical `ContextSource` artifacts
 3. `InMemorySourceRegistry` and `LexicalRetriever` produce the candidate flow
-4. `build_starter_context_assembly_service(...)` wires the shared policies and settings
+4. `assemble_with_starter_context_service(...)` or `build_starter_context_assembly_service(...).assemble(...)` wires the same shared policies and settings into the canonical assembly service path
 5. the workflow renders Codex-facing context from the resulting `ContextPacket` and keeps packet/trace inspection visible
 
 The outer workflow metadata that defines that path should remain inspectable too. If
@@ -184,6 +184,8 @@ That means the current Codex repository story is repo-aware, but still honest ab
 - it does not yet own git history, issue systems, or arbitrary repository connectors
 
 Those broader repository inputs can come later, but they should extend the same engine path rather than replacing it with Codex-specific orchestration.
+
+Within `examples/codex_repository_workflow/`, `run.py` is now the authoritative outer workflow composition path. `show_trace.py` should stay a derived demonstration over that same parser and packet-assembly path rather than growing a second copy of repository workflow composition.
 
 The product-facing setup guide for that path now lives at [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
 
@@ -211,6 +213,8 @@ Trace inspection should emphasize:
 - trace metadata that explains ranking, budgeting, compression, and memory behavior
 
 Those inspection surfaces should live under `context_atlas.rendering` and remain read-only views over `ContextPacket` and `ContextTrace`.
+
+Workflow-facing labels such as `Repository Context` should remain caller-supplied presentation at the example or app boundary. Generic renderers should default to generic labels rather than baking one workflow's vocabulary into canonical rendering behavior.
 
 Current packet inspection lives at:
 

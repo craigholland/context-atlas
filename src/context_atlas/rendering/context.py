@@ -14,14 +14,21 @@ def render_packet_context(
     packet: ContextPacket,
     *,
     include_section_headers: bool = False,
+    memory_header: str = "Retained Memory",
+    context_header: str = "Context",
 ) -> str:
-    """Render a packet's current context view without mutating canonical state."""
+    """Render a packet's current context view without mutating canonical state.
+
+    Callers may supply workflow-facing section labels, but those labels remain
+    outer presentation concerns over the same canonical packet data.
+    """
 
     sections: list[str] = []
 
     memory_text = _render_memory_text(
         packet,
         include_section_headers=include_section_headers,
+        header=memory_header,
     )
     if memory_text:
         sections.append(memory_text)
@@ -29,6 +36,7 @@ def render_packet_context(
     candidate_text = _render_candidate_text(
         packet,
         include_section_headers=include_section_headers,
+        header=context_header,
     )
     if candidate_text:
         sections.append(candidate_text)
@@ -40,6 +48,7 @@ def _render_memory_text(
     packet: ContextPacket,
     *,
     include_section_headers: bool,
+    header: str,
 ) -> str:
     """Render retained memory content directly from canonical packet state."""
 
@@ -50,7 +59,7 @@ def _render_memory_text(
         return ""
     return _with_header(
         rendered,
-        header="Retained Memory",
+        header=header,
         include_section_headers=include_section_headers,
     )
 
@@ -59,6 +68,7 @@ def _render_candidate_text(
     packet: ContextPacket,
     *,
     include_section_headers: bool,
+    header: str,
 ) -> str:
     """Render candidate-facing content from packet state or its transform artifact."""
 
@@ -68,7 +78,7 @@ def _render_candidate_text(
         rendered = compression_result.text.strip()
         return _with_header(
             rendered,
-            header="Repository Context",
+            header=header,
             include_section_headers=include_section_headers,
         )
 
@@ -77,7 +87,7 @@ def _render_candidate_text(
     ).strip()
     return _with_header(
         rendered,
-        header="Repository Context",
+        header=header,
         include_section_headers=include_section_headers,
     )
 

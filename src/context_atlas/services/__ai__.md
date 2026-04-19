@@ -65,6 +65,7 @@
     - service-level trace metadata may summarize selected source classes and collectors, but canonical source semantics still belong on the sources themselves
     - mixed-source trace metadata should consume domain-owned source helpers rather than reaching directly into provenance internals throughout the service
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
+    - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
     - memory-slot trimming must preserve the priority order returned by domain memory policies instead of re-ranking memory locally
     - service-produced trace decisions should keep stable positions so rendering can inspect ordered decision flow without re-sequencing it
@@ -79,6 +80,8 @@
 - Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.
 - Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
+- Supported example workflows should share this service path instead of duplicating stage sequencing in multiple scripts once a reference workflow composition helper exists.
+- Product-facing examples should describe this module as the shared engine path and should not present alternate scripts as separate service modes once they are only changing inspection output.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.
