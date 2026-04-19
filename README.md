@@ -209,6 +209,22 @@ order is:
 That order is intentional. The tracked TOML files are reference surfaces for
 the current MVP story, not hidden config loaders or a broader no-code platform.
 
+## MVP Proof Direction
+
+The current MVP proof work now has an explicit review rubric at
+[docs/Reviews/MVP/mvp_evaluation_rubric.md](/context-atlas/docs/Reviews/MVP/mvp_evaluation_rubric.md).
+
+That rubric is intentionally centered on:
+
+- packet quality against a naive baseline
+- trace legibility
+- authority handling
+- budget behavior
+- workflow reproducibility
+
+The proof story should stay packet-and-trace-centered. Atlas should not claim
+MVP readiness based only on narrative impressions or polished screenshots.
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
