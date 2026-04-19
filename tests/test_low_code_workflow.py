@@ -10,12 +10,24 @@ import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import textwrap
+import tomllib
 import unittest
 
 from context_atlas.domain.models import ContextSourceFamily
+from context_atlas.infrastructure.config.presets import (
+    DEFAULT_LOW_CODE_WORKFLOW_PRESET,
+    build_low_code_workflow_config_artifact,
+    build_low_code_workflow_preset_artifact,
+)
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _WORKFLOW_SCRIPT = _REPO_ROOT / "examples" / "low_code_workflow" / "run.py"
+_WORKFLOW_CONFIG_ARTIFACT = (
+    _REPO_ROOT / "examples" / "low_code_workflow" / "config.example.toml"
+)
+_WORKFLOW_PRESET_ARTIFACT = (
+    _REPO_ROOT / "examples" / "low_code_workflow" / "presets" / "basic.toml"
+)
 _MODULE_SPEC = importlib.util.spec_from_file_location(
     "low_code_workflow_run",
     _WORKFLOW_SCRIPT,
@@ -214,6 +226,21 @@ class LowCodeWorkflowTests(unittest.TestCase):
         self.assertIn(
             "--no-documents",
             result.stdout,
+        )
+
+    def test_reference_artifacts_match_supported_low_code_surface(self) -> None:
+        with _WORKFLOW_CONFIG_ARTIFACT.open("rb") as config_file:
+            config_artifact = tomllib.load(config_file)
+        with _WORKFLOW_PRESET_ARTIFACT.open("rb") as preset_file:
+            preset_artifact = tomllib.load(preset_file)
+
+        self.assertEqual(
+            config_artifact,
+            build_low_code_workflow_config_artifact(),
+        )
+        self.assertEqual(
+            preset_artifact,
+            build_low_code_workflow_preset_artifact(DEFAULT_LOW_CODE_WORKFLOW_PRESET),
         )
 
     def _write_doc(self, path: Path, content: str) -> None:
