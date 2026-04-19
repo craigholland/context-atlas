@@ -195,6 +195,8 @@ Current state:
 
 - follow-up hardening plan is now tracked in
   [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
+- the first budget-pressure hardening target is the constrained repository
+  scenario `codex_repository / repo_budget_pressure_tradeoffs`
 - add at least one intentionally budget-constrained proof scenario so the MVP
   assessment includes a stronger tradeoff example
 - strengthen document-authority proof inputs so authority handling is not shown
