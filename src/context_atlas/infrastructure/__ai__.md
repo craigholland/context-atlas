@@ -178,6 +178,7 @@
 - Story 5 Task 5.2 now also expects the product-facing low-code guide and example README to stay aligned with the supported preset catalog and low-code env surface rather than implying hidden presets or deeper runtime magic.
 - Story 5 Task 5.2 now also expects tracked low-code config/preset artifacts to stay aligned with the supported preset catalog and declarative setting defaults rather than becoming a second source of truth.
 - Story 5 Task 5.2 now also expects surrounding docs to present those artifacts in a stable order: reference config, reference preset, then runnable wrapper, so the low-code path stays understandable without implying hidden infrastructure behavior.
+- Story 5 Task 5.3 is now auditing that boundary more directly, so low-code preset meaning and repo-relative source selection should stay visible as resolved outer-layer plan state instead of being hidden inside the wrapper path.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.

@@ -10,7 +10,7 @@ from context_atlas.domain.models import ContextPacket
 from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow
 from context_atlas.infrastructure.config import (
     LowCodeWorkflowSettings,
-    get_low_code_workflow_preset,
+    build_low_code_workflow_plan,
     load_settings_from_env,
     list_low_code_workflow_presets,
 )
@@ -141,18 +141,19 @@ def main() -> None:
         include_documents=args.include_documents,
         include_records=args.include_records,
     )
-    trace_metadata = {} if packet.trace is None else packet.trace.metadata
-    preset = get_low_code_workflow_preset(low_code_settings.preset)
+    plan = build_low_code_workflow_plan(
+        low_code_settings=low_code_settings,
+        repo_root=repo_root,
+    )
 
     print(f"Repo root: {repo_root}")
-    print(f"Preset: {preset.name}")
-    print(f"Preset description: {preset.description}")
+    print(f"Preset: {plan.preset_name}")
+    print(f"Preset description: {plan.preset_description}")
     print(
-        "Enabled source families: "
-        f"{trace_metadata.get('request_enabled_source_families', 'none')}"
+        f"Enabled source families: {','.join(plan.enabled_source_families) or 'none'}"
     )
-    print(f"Governed docs root: {trace_metadata.get('request_docs_root', 'disabled')}")
-    print(f"Records file: {trace_metadata.get('request_records_file', 'disabled')}")
+    print(f"Governed docs root: {plan.docs_root or 'disabled'}")
+    print(f"Records file: {plan.records_file or 'disabled'}")
     print(f"Query: {args.query}")
     print()
     print("=== Chatbot Context ===")
