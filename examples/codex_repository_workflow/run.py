@@ -24,6 +24,7 @@ DEFAULT_QUERY = (
     "docs or architecture guidance?"
 )
 DEFAULT_LOG_LEVEL = "WARNING"
+REPOSITORY_CONTEXT_HEADER = "Repository Context"
 
 
 def main() -> None:
@@ -82,7 +83,13 @@ def main() -> None:
     print(f"Query: {args.query}")
     print()
     print("=== Codex Context ===")
-    print(render_packet_context(packet, include_section_headers=True))
+    print(
+        render_packet_context(
+            packet,
+            include_section_headers=True,
+            context_header=REPOSITORY_CONTEXT_HEADER,
+        )
+    )
     print()
     print("=== Packet Inspection ===")
     print(render_packet_inspection(packet))

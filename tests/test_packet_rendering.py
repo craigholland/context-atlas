@@ -18,7 +18,7 @@ from context_atlas.domain.models import (
 )
 from context_atlas.domain.models.memory import ContextMemoryEntry
 from context_atlas.domain.models.sources import ContextCandidate
-from context_atlas.rendering import render_packet_inspection
+from context_atlas.rendering import render_packet_context, render_packet_inspection
 
 
 class PacketRenderingTests(unittest.TestCase):
@@ -151,6 +151,42 @@ class PacketRenderingTests(unittest.TestCase):
 
         self.assertIn("- compression_applied: no", rendered)
         self.assertIn("- was_applied: no", rendered)
+
+    def test_packet_context_defaults_to_generic_header_but_allows_override(
+        self,
+    ) -> None:
+        packet = ContextPacket(
+            packet_id="packet-context-1",
+            query="How should the renderer label context sections?",
+            selected_candidates=(
+                ContextCandidate(
+                    source=ContextSource(
+                        source_id="guidance",
+                        title="Guidance",
+                        content="Renderers should stay generic by default.",
+                        source_class=ContextSourceClass.AUTHORITATIVE,
+                        authority=ContextSourceAuthority.BINDING,
+                    ),
+                    score=0.99,
+                    rank=1,
+                ),
+            ),
+            trace=ContextTrace(trace_id="trace-context-1"),
+        )
+
+        rendered_default = render_packet_context(
+            packet,
+            include_section_headers=True,
+        )
+        rendered_override = render_packet_context(
+            packet,
+            include_section_headers=True,
+            context_header="Repository Context",
+        )
+
+        self.assertIn("[Context]", rendered_default)
+        self.assertNotIn("[Repository Context]", rendered_default)
+        self.assertIn("[Repository Context]", rendered_override)
 
 
 if __name__ == "__main__":

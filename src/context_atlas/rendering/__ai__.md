@@ -57,6 +57,7 @@
     - prefer structured compression results when available
     - retained memory should render from canonical packet state rather than a parallel service-only string field
     - do not mutate packet state during rendering
+    - default section headers should stay generic to the renderer; workflow-specific labels should be passed in by the caller rather than baked into canonical rendering semantics
     - optional section headers may improve product-facing readability, but they should remain derived formatting rather than Codex-specific packet semantics
 - `packet.py`:
   - responsibility: renders packet inspection sections for product-facing debugging and demos
@@ -81,6 +82,7 @@
 - Demonstration-oriented trace views may be added, but they should remain lightweight derived renderers over canonical traces rather than workflow-specific data structures.
 - Story 1 Task 1.4 is now auditing the starter rendering path; rendering changes should make layer boundaries clearer without reintroducing prompt-first canonical thinking.
 - Story 1 Task 1.4 now also reinforces that product-facing docs should describe `context_atlas.rendering` as the supported home of derived packet/trace views rather than a fallback import path.
+- Story 3 Task 3.3 is now auditing the Codex repository workflow for boundary drift; generic renderers should keep defaults generic while repository-facing examples pass their own labels explicitly.
 
 ## Cross-Folder Contracts
 - `domain/`: packet and compression semantics stay canonical there; rendering only derives text from them.
