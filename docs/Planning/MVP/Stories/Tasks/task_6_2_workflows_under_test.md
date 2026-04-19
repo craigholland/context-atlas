@@ -28,7 +28,7 @@ Select and prepare the actual workflows that will be evaluated during MVP proof 
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
