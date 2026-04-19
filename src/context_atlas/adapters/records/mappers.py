@@ -85,21 +85,26 @@ class StructuredRecordRowMapper(BaseModel):
         try:
             row_tags = self._sequence_value(row, self.tags_field)
             row_intended_uses = self._sequence_value(row, self.intended_uses_field)
-            return StructuredRecordInput(
-                record_id=self._required_value(row, self.record_id_field),
-                content=self._required_value(row, self.content_field),
-                title=self._optional_value(row, self.title_field),
-                source_uri=self._optional_value(row, self.source_uri_field),
-                source_class=self.source_class,
-                authority=self.authority,
-                durability=self.durability,
-                tags=merge_source_text_groups(self.fixed_tags, row_tags),
-                intended_uses=merge_source_text_groups(
-                    self.fixed_intended_uses,
-                    row_intended_uses,
-                ),
-                metadata=self._string_field_map(row, self.metadata_fields),
-                provenance_metadata=self._string_field_map(row, self.provenance_fields),
+            return StructuredRecordInput.model_validate(
+                {
+                    "record_id": self._required_value(row, self.record_id_field),
+                    "content": self._required_value(row, self.content_field),
+                    "title": self._optional_value(row, self.title_field),
+                    "source_uri": self._optional_value(row, self.source_uri_field),
+                    "source_class": self.source_class,
+                    "authority": self.authority,
+                    "durability": self.durability,
+                    "tags": merge_source_text_groups(self.fixed_tags, row_tags),
+                    "intended_uses": merge_source_text_groups(
+                        self.fixed_intended_uses,
+                        row_intended_uses,
+                    ),
+                    "metadata": self._string_field_map(row, self.metadata_fields),
+                    "provenance_metadata": self._string_field_map(
+                        row,
+                        self.provenance_fields,
+                    ),
+                }
             )
         except (KeyError, TypeError, ValidationError, ValueError) as error:
             raise ContextAtlasError(
