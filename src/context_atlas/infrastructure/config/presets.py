@@ -4,12 +4,16 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from pathlib import Path
+from typing import TYPE_CHECKING
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
 from ...adapters.records import StructuredRecordRowMapper, StructuredRecordSourceAdapter
 from ...domain.models import ContextSource, ContextSourceAuthority, ContextSourceClass
+
+if TYPE_CHECKING:
+    from .settings import LowCodeWorkflowSettings
 
 DEFAULT_LOW_CODE_WORKFLOW_PRESET = "chatbot_docs_records"
 DEFAULT_LOW_CODE_WORKFLOW_DOCS_ROOT = "docs/Guides"
@@ -71,6 +75,60 @@ class LowCodeWorkflowPreset(BaseModel):
         )
 
 
+class LowCodeWorkflowPlan(BaseModel):
+    """Resolved outer-layer plan for one supported low-code workflow run."""
+
+    model_config = ConfigDict(
+        frozen=True,
+        extra="forbid",
+    )
+
+    preset_name: str
+    preset_description: str
+    repo_root: Path
+    docs_root: Path | None = None
+    records_file: Path | None = None
+    enabled_source_families: tuple[str, ...] = ()
+    record_collector_name: str | None = None
+    record_row_mapper: StructuredRecordRowMapper | None = None
+
+    def build_request_metadata(
+        self,
+        metadata: Mapping[str, str] | None = None,
+    ) -> dict[str, str]:
+        """Build trace-visible workflow metadata from the resolved plan."""
+
+        workflow_metadata = dict(metadata or {})
+        workflow_metadata.update(
+            {
+                "workflow": "low_code_chatbot",
+                "repo_root": self.repo_root.as_posix(),
+                "low_code_preset": self.preset_name,
+                "enabled_source_families": ",".join(self.enabled_source_families),
+            }
+        )
+        if self.docs_root is not None:
+            workflow_metadata["docs_root"] = self.docs_root.as_posix()
+        if self.records_file is not None:
+            workflow_metadata["records_file"] = self.records_file.as_posix()
+        return workflow_metadata
+
+    def load_record_sources(
+        self,
+        rows: tuple[Mapping[str, object], ...],
+    ) -> tuple[ContextSource, ...]:
+        """Translate rows through the plan's supported record-mapping surface."""
+
+        if self.record_collector_name is None or self.record_row_mapper is None:
+            return ()
+        return StructuredRecordSourceAdapter(
+            collector_name=self.record_collector_name,
+        ).load_mapped_sources(
+            rows,
+            row_mapper=self.record_row_mapper,
+        )
+
+
 _LOW_CODE_PRESETS = {
     DEFAULT_LOW_CODE_WORKFLOW_PRESET: LowCodeWorkflowPreset(
         name="chatbot_docs_records",
@@ -110,6 +168,54 @@ def list_low_code_workflow_presets() -> tuple[str, ...]:
     """Return the supported preset names in stable order."""
 
     return tuple(_LOW_CODE_PRESETS)
+
+
+def build_low_code_workflow_plan(
+    *,
+    low_code_settings: "LowCodeWorkflowSettings",
+    repo_root: Path,
+) -> LowCodeWorkflowPlan:
+    """Resolve one supported low-code workflow plan from settings plus repo root."""
+
+    preset = get_low_code_workflow_preset(low_code_settings.preset)
+    docs_root = (
+        preset.resolve_configured_path(
+            repo_root=repo_root,
+            configured_path=low_code_settings.docs_root,
+        )
+        if low_code_settings.include_documents
+        else None
+    )
+    records_file = (
+        preset.resolve_configured_path(
+            repo_root=repo_root,
+            configured_path=low_code_settings.records_file,
+        )
+        if low_code_settings.include_records
+        else None
+    )
+    enabled_source_families = tuple(
+        family
+        for family, is_enabled in (
+            ("document", low_code_settings.include_documents),
+            ("structured_record", low_code_settings.include_records),
+        )
+        if is_enabled
+    )
+    return LowCodeWorkflowPlan(
+        preset_name=preset.name,
+        preset_description=preset.description,
+        repo_root=repo_root.resolve(),
+        docs_root=docs_root,
+        records_file=records_file,
+        enabled_source_families=enabled_source_families,
+        record_collector_name=(
+            preset.record_collector_name if low_code_settings.include_records else None
+        ),
+        record_row_mapper=(
+            preset.record_row_mapper if low_code_settings.include_records else None
+        ),
+    )
 
 
 def build_low_code_workflow_config_artifact() -> dict[str, Any]:
@@ -161,7 +267,9 @@ __all__ = [
     "DEFAULT_LOW_CODE_WORKFLOW_INCLUDE_RECORDS",
     "DEFAULT_LOW_CODE_WORKFLOW_PRESET",
     "DEFAULT_LOW_CODE_WORKFLOW_RECORDS_FILE",
+    "LowCodeWorkflowPlan",
     "LowCodeWorkflowPreset",
+    "build_low_code_workflow_plan",
     "build_low_code_workflow_config_artifact",
     "build_low_code_workflow_preset_artifact",
     "get_low_code_workflow_preset",
