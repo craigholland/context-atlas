@@ -134,12 +134,12 @@
 - The planning/decomposition supplement now also defines preferred Git branch naming that mirrors the Task and PR-slice hierarchy rather than broad work themes.
 - The starter API story has now introduced `context_atlas.api` as the curated MVP namespace, while the package root remains intentionally thin and stable subpackage imports remain valid for architecture-oriented documentation.
 - The starter API story now also includes a smoke example under `examples/` that should continue to validate the curated API rather than drift back to deep internal imports.
-- Story 2 Task 2.2 is now the active task-level feature branch and should prove that supported source families converge into one inward-owned semantic model.
-- That task should keep source classification, authority, durability, intended use, and provenance semantics canonical inside `domain/` rather than duplicated across adapters.
-- PR A of that task is now defining canonical per-class defaults for source authority, durability, and intended uses so later adapters can share one inward semantic target.
-- PR B of that task is now moving repeated source-semantics behavior into a dedicated inward helper module so adapters stop owning shared normalization rules and fallback defaults.
-- PR C of that task is now validating that documents and structured records expose coherent semantics through the same canonical packet and trace flow, and the task should be ready for feature-branch review once that validation is green.
-- The root README should keep describing structured records and filesystem documents as two source families that converge into one `ContextSource` model, not as parallel semantic hierarchies.
+- Story 2 Task 2.3 is now the active task-level feature branch and should keep Atlas on the governance-engine side of the adapter boundary instead of drifting toward a data-access framework.
+- That task should keep Atlas adapters focused on accepted record payload shapes, translation, and canonical provenance rather than query execution, driver ownership, or connector orchestration.
+- PR A of that task should make the adapter boundary explicit: Atlas may accept validated record inputs and mapping-shaped row payloads, but richer database or vector-store objects should stay outside Atlas.
+- PR B of that task should introduce the MVP adapter-shaping pattern for application code so outer systems can map already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
+- PR C of that task should reinforce the boundary in docs and examples so future adapter work stays translation-first instead of turning into a query framework.
+- The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
