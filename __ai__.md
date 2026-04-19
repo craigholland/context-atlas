@@ -154,6 +154,7 @@
 - `assemble_with_starter_context_service(...)` is now the one-shot infrastructure convenience wrapper over the same shared service path; it must remain workflow-agnostic and must not grow Codex-specific branching.
 - The derived demonstration script should remain runnable both as a direct script and as `python -m examples.codex_repository_workflow.show_trace`; shared workflow imports must not assume only one invocation style.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
+- Story 4 Task 4.1 is now the active MVP task, so planning and docs changes on this branch should keep the technical-builder mixed-source workflow aligned around one shared packet path over filesystem documents and already-fetched record inputs.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
