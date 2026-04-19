@@ -259,6 +259,7 @@
     - tests should prove the runnable repository workflow can emit the standard MVP-proof Atlas artifact filenames when asked
     - tests should prove explicit total-budget overrides remain visible in workflow trace metadata and surface real pressure signals when constrained proof scenarios are run
     - tests should prove unsupported repository-workflow total-budget overrides fail through the same validated settings path as env-backed assembly configuration
+    - tests should prove the tracked sample-repo authority scenario keeps authoritative documents ahead of lower-authority planning and review docs for the same repository question
   - `test_docs_database_workflow.py`:
     - responsibility: verifies the supported docs-plus-database workflow remains a real mixed-source integration path over the shared engine
   - defines:
