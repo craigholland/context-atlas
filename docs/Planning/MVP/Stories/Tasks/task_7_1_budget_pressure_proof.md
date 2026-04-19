@@ -27,7 +27,7 @@ Add an intentionally budget-constrained proof scenario that demonstrates Atlas m
 
 ## Task Status
 
-WORKING
+IMPLEMENTED
 
 ## Inputs
 
