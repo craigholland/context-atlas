@@ -135,6 +135,7 @@ class ContextAssemblyService:
             include_memory=bool(selected_memory_input),
         )
         packet_metadata = dict(metadata or {})
+        request_metadata = dict(packet_metadata)
 
         self._emit_log_message(
             LogMessage.ASSEMBLY_STARTED,
@@ -269,6 +270,7 @@ class ContextAssemblyService:
                     )
                 ),
                 metadata=self._build_trace_metadata(
+                    request_metadata=request_metadata,
                     retrieved_candidate_count=len(gathered_candidates),
                     ranked_candidate_count=ranking_outcome.included_count,
                     selected_memory_count=len(selected_memory_entries),
@@ -595,6 +597,7 @@ class ContextAssemblyService:
     def _build_trace_metadata(
         self,
         *,
+        request_metadata: Mapping[str, str],
         retrieved_candidate_count: int,
         ranked_candidate_count: int,
         selected_memory_count: int,
@@ -653,6 +656,7 @@ class ContextAssemblyService:
                 )
             ),
         }
+        metadata.update(self._prefix_metadata("request", request_metadata))
         metadata.update(
             self._prefix_metadata("ranking", ranking_outcome.trace.metadata)
         )

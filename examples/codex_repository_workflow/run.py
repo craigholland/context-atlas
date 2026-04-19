@@ -62,13 +62,14 @@ def main() -> None:
         retriever=retriever,
         settings=settings,
     )
+    workflow_metadata = {
+        "workflow": "codex_repository",
+        "repo_root": repo_root.as_posix(),
+        "docs_root": docs_root.as_posix(),
+    }
     packet = assembly_service.assemble(
         query=args.query,
-        metadata={
-            "workflow": "codex_repository",
-            "repo_root": repo_root.as_posix(),
-            "docs_root": docs_root.as_posix(),
-        },
+        metadata=workflow_metadata,
     )
 
     print(f"Repository root: {repo_root}")

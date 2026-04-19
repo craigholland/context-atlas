@@ -171,6 +171,11 @@ The current supported composition path is:
 4. `build_starter_context_assembly_service(...)` wires the shared policies and settings
 5. the workflow renders Codex-facing context from the resulting `ContextPacket` and keeps packet/trace inspection visible
 
+The outer workflow metadata that defines that path should remain inspectable too. If
+workflow code supplies metadata such as `workflow`, `repo_root`, or `docs_root`,
+the shared assembly service should preserve it in trace metadata rather than hiding
+that context inside example-only print logic.
+
 That means the current Codex repository story is repo-aware, but still honest about scope:
 
 - it is governed-doc aware
