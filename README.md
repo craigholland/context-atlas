@@ -86,6 +86,26 @@ Future adapter work should preserve the same guardrails:
 
 See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
 
+## Documents Plus Database Workflow Shape
+
+The current Story 4 technical-builder scenario is intentionally specific: a builder wants to assemble chatbot context from governed documentation plus already-fetched support-style records such as tickets, policy rows, or product facts.
+
+That workflow should currently look like this:
+
+1. outer application code chooses the governed docs root
+2. outer application code fetches rows or record payloads from its own database, vector store, or API client
+3. `FilesystemDocumentSourceAdapter` translates the docs into canonical `ContextSource` artifacts
+4. `StructuredRecordRowMapper` or validated `StructuredRecordInput` objects normalize the fetched record payloads into Atlas-ready record shapes
+5. `StructuredRecordSourceAdapter` translates those record shapes into the same canonical `ContextSource` model used by documents
+6. one shared registry, retriever, assembly service, packet, and trace path operates over both source families together
+
+That means Atlas is demonstrating a real pipeline-component role here:
+
+- Atlas governs mixed-source context assembly
+- Atlas does not own the database query surface
+- Atlas does not own the vector-store client surface
+- Atlas does not create a second packet path just because record-backed inputs are present
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

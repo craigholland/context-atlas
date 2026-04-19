@@ -52,6 +52,7 @@
   - `LexicalRetriever`: Atlas-native lexical candidate builder
 - `records`:
   - `StructuredRecordInput`: minimal validated record input contract
+  - `StructuredRecordPayload`: supported record-adapter input union for validated inputs or mapping-shaped payloads
   - `StructuredRecordRowMapper`: application-facing mapper for shaping already-fetched rows into validated record inputs
   - `StructuredRecordSourceAdapter`: translates record inputs into canonical sources
 
@@ -138,6 +139,7 @@
 - Story 2 Task 2.3 now also reinforces that pattern through package exports and examples, so future adapter work should treat row shaping and canonical translation as the boundary rather than query execution.
 - Story 2 Task 2.4 now also hardens the mixed-source boundary around `ContextSource.from_semantics(...)`, so adapters should preserve source-family mechanics in provenance while relying on the domain for canonical semantic meaning.
 - Story 2 Task 2.4 now also reinforces that boundary in the repo-facing docs, so future adapter work should treat adapter-local tags or source metadata that restate canonical meaning as architectural drift, not convenience.
+- Story 4 Task 4.1 is now defining the technical-builder docs-plus-database scenario, so adapter exports and docs should keep the already-fetched-record boundary explicit rather than implying Atlas owns database or vector-store access.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.
@@ -164,5 +166,5 @@ steps:
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter"
+      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter; from context_atlas.adapters.records import StructuredRecordPayload"
 ```
