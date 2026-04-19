@@ -50,6 +50,32 @@ It does not own query execution, database clients, ORM sessions, or vector-store
 
 Within that boundary, the adapter preserves provenance and intended-use metadata and emits the same canonical `ContextSource` artifacts the rest of the engine already understands.
 
+When application rows need field remapping before translation, the current MVP pattern is to use `context_atlas.adapters.StructuredRecordRowMapper`:
+
+```python
+from context_atlas.adapters import (
+    StructuredRecordRowMapper,
+    StructuredRecordSourceAdapter,
+)
+
+rows = fetch_rows_somewhere_outside_atlas()
+
+mapper = StructuredRecordRowMapper(
+    record_id_field="ticket_id",
+    content_field="summary",
+    title_field="title",
+    metadata_fields=("team", "table"),
+    provenance_fields=("database",),
+    source_class="reviews",
+    fixed_intended_uses=("triage",),
+)
+
+record_inputs = mapper.to_record_inputs(rows)
+sources = StructuredRecordSourceAdapter().load_sources(record_inputs)
+```
+
+That keeps Atlas responsible for shaping and canonical translation, while outer integration code remains responsible for database access, vector-store access, or API calls.
+
 See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
 
 ## Canonical Source Semantics

@@ -137,7 +137,7 @@
 - Story 2 Task 2.3 is now the active task-level feature branch and should keep Atlas on the governance-engine side of the adapter boundary instead of drifting toward a data-access framework.
 - That task should keep Atlas adapters focused on accepted record payload shapes, translation, and canonical provenance rather than query execution, driver ownership, or connector orchestration.
 - PR A of that task now makes the adapter boundary explicit in the starter docs and structured-record adapter contract: Atlas accepts validated record inputs plus mapping-shaped row payloads, while outer systems still own fetching, clients, and query execution.
-- PR B of that task should introduce the MVP adapter-shaping pattern for application code so outer systems can map already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
+- PR B of that task now introduces the MVP row-mapper pattern so outer systems can reshape already-fetched rows into Atlas-friendly record inputs without coupling Atlas to one storage client.
 - PR C of that task should reinforce the boundary in docs and examples so future adapter work stays translation-first instead of turning into a query framework.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 

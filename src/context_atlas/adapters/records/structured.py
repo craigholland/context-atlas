@@ -3,6 +3,10 @@
 These adapters intentionally stop at translation. Outer application code owns
 query execution, client lifecycles, and row fetching before Atlas sees any
 record-shaped payloads.
+
+When callers need to reshape row field names before translation, that mapping
+should happen through adapter-facing helpers such as ``StructuredRecordRowMapper``
+rather than by widening this adapter into a query or client surface.
 """
 
 from __future__ import annotations
