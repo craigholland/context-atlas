@@ -183,7 +183,33 @@ The goal is that a contributor should be able to infer:
 - whether a branch is the long-lived task branch or a short-lived PR slice
 - what bounded delivery unit the branch is meant to contain
 
-### 7. Decomposition Sanity Checks
+### 7. Task Execution Workflow Should Use The Feature PR As The Review Gate
+
+When work is being executed through a planned `Epic -> Story -> Task -> Pull Request` hierarchy, Craig Architecture prefers the `Task` feature PR to be the main review and handoff boundary rather than treating every PR slice as an independent human-review checkpoint.
+
+The usual workflow is:
+
+- create the task-level feature branch and open its feature PR early
+- mark the Task as `WORKING`
+- implement bounded PR slices on short-lived slice branches and merge them back into the task feature branch
+- keep the feature PR body aligned with the Task goals and current slice status
+- when all planned slices for the Task are complete, mark the Task as `IMPLEMENTED`
+- run the full local preflight on the feature branch
+- request `@codex review` on the feature PR
+- resolve review findings on the same feature branch and rerun preflight
+- hand the feature PR to a human reviewer once the task branch is review-clean
+- avoid starting the next Task until the current task feature PR has been reviewed, fixed if needed, and merged, unless an explicit parallelization decision has been made
+
+This workflow preserves two useful properties at once:
+
+- contributors can move quickly within a Task without pausing for human review on every slice
+- humans still review work at a meaningful architectural boundary rather than only after many Tasks have accumulated
+
+The goal is not process ceremony for its own sake.
+
+The goal is that decomposition should also define the review cadence and handoff shape, especially when AI contributors are executing many small slices quickly.
+
+### 8. Decomposition Sanity Checks
 
 Before accepting a Story, Task, or PR plan, contributors should inspect the plan for shape risks rather than only counting how many slices exist.
 
@@ -200,7 +226,7 @@ These checks are not intended to create planning ceremony for its own sake.
 
 They exist because brittle implementation plans often reveal themselves before coding starts, especially when work is being decomposed for AI-assisted execution.
 
-### 8. Code Shape Governance
+### 9. Code Shape Governance
 
 Craig Architecture treats code shape as an architectural concern rather than a mere style preference.
 
