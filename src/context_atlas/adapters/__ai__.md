@@ -147,6 +147,7 @@
 - If examples add helper modules for resolving or loading tracked record payloads, that helper logic should remain outside this package and this owner file should keep the boundary explicit.
 - Story 4 Task 4.3 is now auditing the mixed-source workflow shape against the repository workflow, so adapter-facing guidance should keep the row-mapper and source-translation path clear without letting example scripts invent parallel translation seams.
 - Story 4 Task 4.3 now also expects `StructuredRecordSourceAdapter` to remain the canonical crossing into `ContextSource` artifacts even when outer workflows start from already-fetched row batches and a `StructuredRecordRowMapper`.
+- Product-facing docs for the docs-plus-database path should now name `load_mapped_sources(...)` as the preferred one-step crossing for already-fetched rows so builders are not taught to duplicate mapper-plus-translation glue in application scripts.
 
 ## Cross-Folder Contracts
 - `domain/`: adapters may consume canonical source/candidate artifacts plus stable error/message contracts, but may not redefine those semantics locally.

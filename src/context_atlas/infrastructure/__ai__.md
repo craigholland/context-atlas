@@ -146,6 +146,7 @@
 - Product-facing sample-repo artifacts and CLI help should still describe this module as the real composition boundary rather than implying that `examples/` owns the policy wiring.
 - Story 4 Task 4.1 now also uses this module as the shared composition boundary for the technical-builder docs-plus-database example; outer workflow code may fetch rows and choose docs roots, but policy wiring should still stop here.
 - Story 4 Task 4.3 now also reinforces that boundary: outer workflows may still choose row mappers and already-fetched row batches, but this module must not absorb that row-shaping or translation logic just to make examples shorter.
+- Product-facing workflow guides should keep describing this module as the shared assembly boundary after adapter translation, not as a place where mixed-source workflows hide mapper or data-access decisions.
 
 ## Cross-Folder Contracts
 - `domain/`: infrastructure may consume domain-coded errors and message constants, but must never require domain code to import infrastructure implementation modules.
