@@ -28,9 +28,21 @@ current reference implementation of that outer workflow composition.
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+import json
 import logging
+from pathlib import Path
 
-from ..domain.models import ContextBudget, ContextMemoryEntry, ContextPacket
+from ..adapters import (
+    FilesystemDocumentSourceAdapter,
+    InMemorySourceRegistry,
+    LexicalRetriever,
+)
+from ..domain.models import (
+    ContextBudget,
+    ContextMemoryEntry,
+    ContextPacket,
+    ContextSource,
+)
 from ..domain.policies import (
     StarterBudgetAllocationPolicy,
     StarterCandidateRankingPolicy,
@@ -38,7 +50,7 @@ from ..domain.policies import (
     StarterMemoryRetentionPolicy,
 )
 from ..services.assembly import CandidateRetriever, ContextAssemblyService
-from .config import ContextAtlasSettings
+from .config import ContextAtlasSettings, get_low_code_workflow_preset
 from .logging import configure_logger
 
 
@@ -129,7 +141,92 @@ def assemble_with_starter_context_service(
     )
 
 
+def assemble_with_low_code_workflow(
+    *,
+    query: str,
+    settings: ContextAtlasSettings | None = None,
+    logger: logging.Logger | None = None,
+    repo_root: Path | str | None = None,
+    top_k: int | None = None,
+    packet_id: str | None = None,
+    trace_id: str | None = None,
+    metadata: Mapping[str, str] | None = None,
+    now_epoch_seconds: float | None = None,
+) -> ContextPacket:
+    """Assemble one packet through the supported low-code wrapper path.
+
+    This helper stays in the outer layer on purpose. It chooses one supported
+    preset, translates enabled sources into canonical Atlas inputs, and then
+    delegates packet creation to the same starter assembly path used elsewhere.
+    """
+
+    active_settings = settings or ContextAtlasSettings()
+    active_low_code = active_settings.low_code
+    active_repo_root = Path.cwd() if repo_root is None else Path(repo_root)
+    active_repo_root = active_repo_root.resolve()
+    preset = get_low_code_workflow_preset(active_low_code.preset)
+
+    sources: list[ContextSource] = []
+    workflow_metadata = dict(metadata or {})
+    workflow_metadata.update(
+        {
+            "workflow": "low_code_chatbot",
+            "repo_root": active_repo_root.as_posix(),
+            "low_code_preset": preset.name,
+        }
+    )
+
+    enabled_source_families: list[str] = []
+
+    if active_low_code.include_documents:
+        docs_root = preset.resolve_configured_path(
+            repo_root=active_repo_root,
+            configured_path=active_low_code.docs_root,
+        )
+        document_sources = FilesystemDocumentSourceAdapter(docs_root).load_sources()
+        sources.extend(document_sources)
+        enabled_source_families.append("document")
+        workflow_metadata["docs_root"] = docs_root.as_posix()
+
+    if active_low_code.include_records:
+        records_file = preset.resolve_configured_path(
+            repo_root=active_repo_root,
+            configured_path=active_low_code.records_file,
+        )
+        payload = json.loads(records_file.read_text(encoding="utf-8"))
+        if not isinstance(payload, list):
+            raise TypeError(
+                "Low-code records payload must be a JSON array of row objects."
+            )
+        record_rows = tuple(row for row in payload if isinstance(row, Mapping))
+        if len(record_rows) != len(payload):
+            raise TypeError(
+                "Low-code records payload must contain only mapping-shaped rows."
+            )
+        record_sources = preset.load_record_sources(record_rows)
+        sources.extend(record_sources)
+        enabled_source_families.append("structured_record")
+        workflow_metadata["records_file"] = records_file.as_posix()
+        workflow_metadata["record_origin"] = "payload_file"
+        workflow_metadata["record_input_count"] = str(len(record_rows))
+
+    workflow_metadata["enabled_source_families"] = ",".join(enabled_source_families)
+
+    return assemble_with_starter_context_service(
+        retriever=LexicalRetriever(InMemorySourceRegistry(tuple(sources))),
+        query=query,
+        settings=active_settings,
+        logger=logger,
+        top_k=top_k,
+        packet_id=packet_id,
+        trace_id=trace_id,
+        metadata=workflow_metadata,
+        now_epoch_seconds=now_epoch_seconds,
+    )
+
+
 __all__ = [
+    "assemble_with_low_code_workflow",
     "assemble_with_starter_context_service",
     "build_starter_context_assembly_service",
 ]

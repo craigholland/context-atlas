@@ -167,6 +167,8 @@
 - Story 4 Task 4.3 now also expects the product-facing docs to teach that same boundary explicitly rather than describing row mapping, translation, and engine assembly as one undifferentiated workflow blob.
 - Story 5 Task 5.1 is now shaping the first low-code path, so repo-facing guidance should treat presets and declarative source configuration as outer workflow conveniences over the same canonical engine rather than as a second product or alternate packet model.
 - The low-code workflow shape should stay intentionally small at the repo root: one preset plus a tiny source-selection/configuration surface is acceptable, but broader tuning should continue to live under the existing validated runtime-knob story unless the authoritative docs change.
+- The first low-code wrapper now lives under `examples/low_code_workflow/` and should stay honest about what it is doing: preset-driven source selection plus the shared starter engine, not a second packet path or a hidden data-access layer.
+- Repo-facing docs should describe the low-code workflow as a wrapper over governed docs plus a tracked record payload by default until a broader preset catalog is intentionally added.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
