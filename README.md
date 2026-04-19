@@ -106,6 +106,8 @@ That means Atlas is demonstrating a real pipeline-component role here:
 - Atlas does not own the vector-store client surface
 - Atlas does not create a second packet path just because record-backed inputs are present
 
+The current runnable example for that path lives at [examples/docs_database_workflow/README.md](/context-atlas/examples/docs_database_workflow/README.md).
+
 ## Canonical Source Semantics
 
 Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.

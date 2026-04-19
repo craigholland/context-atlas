@@ -648,6 +648,13 @@ class ContextAssemblyService:
                     for candidate in selected_candidates
                 )
             ),
+            "selected_source_family_counts": self._count_summary(
+                candidate.source.source_family_name for candidate in selected_candidates
+            ),
+            "selected_source_collector_counts": self._count_summary(
+                candidate.source.collector_name or ""
+                for candidate in selected_candidates
+            ),
             "selected_memory_source_classes": ",".join(
                 self._ordered_unique(
                     entry.source.source_class.value for entry in selected_memory_entries
@@ -767,6 +774,17 @@ class ContextAssemblyService:
             ordered.append(normalized)
             seen.add(normalized)
         return tuple(ordered)
+
+    def _count_summary(self, values: Iterable[str]) -> str:
+        """Return first-seen value counts as a stable comma-separated summary."""
+
+        counts: dict[str, int] = {}
+        for value in values:
+            normalized = value.strip()
+            if not normalized:
+                continue
+            counts[normalized] = counts.get(normalized, 0) + 1
+        return ",".join(f"{value}={count}" for value, count in counts.items())
 
 
 __all__ = ["CandidateRetriever", "ContextAssemblyService"]
