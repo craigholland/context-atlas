@@ -126,6 +126,7 @@
 - `ContextAtlasSettings` is intentionally small and may expand as real adapters and stores are introduced.
 - The assembly defaults here are starter runtime knobs; they are not a substitute for explicit request-level policy inputs once services land.
 - The starter assembly factory now makes those defaults operational without forcing `services/` to import infrastructure modules.
+- Product-facing getting-started guidance should only document runtime knobs that are actually supported by `load_settings_from_env()` and the current starter assembly factory.
 - Compression strategy semantics now live in the domain layer; infrastructure only configures which canonical strategy should be used by default.
 - Memory retention semantics now live in the domain layer; infrastructure only configures which starter defaults are used when callers do not override them.
 - The starter assembly factory now also wires validated ranking/compression/memory policy settings through to the Pydantic policy models instead of relying on hidden defaults.

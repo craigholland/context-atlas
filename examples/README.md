@@ -6,6 +6,25 @@ Current examples should prefer the curated `context_atlas.api` surface rather th
 
 ## Starter Flow
 
+The recommended first example is:
+
+```powershell
+$env:PYTHONPATH = "src"
+py -3 examples/starter_context_flow.py docs "How should planning docs be treated?"
+```
+
+That flow is also documented in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
+
+It demonstrates:
+
+- supported starter imports from `context_atlas.api`
+- validated settings loaded from the environment
+- rendered context output
+- packet inspection output
+- trace inspection output
+
+## Smoke Flow
+
 Run the starter smoke example against a docs directory:
 
 ```powershell
