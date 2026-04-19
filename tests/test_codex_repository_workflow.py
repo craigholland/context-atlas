@@ -340,6 +340,61 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                     total_budget=32,
                 )
 
+    def test_sample_repo_authority_scenario_keeps_authoritative_docs_first(
+        self,
+    ) -> None:
+        sample_repo_root = (
+            _REPO_ROOT / "examples" / "codex_repository_workflow" / "sample_repo"
+        )
+
+        resolved_repo_root, resolved_docs_root, packet = (
+            _WORKFLOW_MODULE.assemble_repository_workflow_packet(
+                repo_root_arg=sample_repo_root,
+                docs_root_arg=None,
+                query=(
+                    "When authoritative architecture guidance and planning docs "
+                    "both discuss repository process, which guidance should an "
+                    "engineer follow and how should planning docs be updated?"
+                ),
+            )
+        )
+
+        selected_document_ids = [
+            candidate.source.source_id for candidate in packet.selected_candidates
+        ]
+        selected_document_classes = [
+            candidate.source.source_class.value
+            for candidate in packet.selected_candidates
+        ]
+        reason_codes_by_source = {
+            decision.source_id: {reason.value for reason in decision.reason_codes}
+            for decision in packet.trace.decisions
+            if decision.source_id
+        }
+
+        self.assertEqual(resolved_repo_root, sample_repo_root.resolve())
+        self.assertEqual(resolved_docs_root, (sample_repo_root / "docs").resolve())
+        self.assertEqual(
+            selected_document_ids,
+            [
+                "Authoritative/Architecture/Repo-Guidance.md",
+                "Planning/Current-Work.md",
+                "Reviews/Review-Notes.md",
+            ],
+        )
+        self.assertEqual(
+            selected_document_classes,
+            ["authoritative", "planning", "reviews"],
+        )
+        self.assertIn(
+            "authority_priority",
+            reason_codes_by_source["Authoritative/Architecture/Repo-Guidance.md"],
+        )
+        self.assertEqual(
+            packet.trace.metadata["selected_source_classes"],
+            "authoritative,planning,reviews",
+        )
+
     def test_help_mentions_sample_repo_reference(self) -> None:
         result = subprocess.run(
             [sys.executable, str(_WORKFLOW_SCRIPT), "--help"],

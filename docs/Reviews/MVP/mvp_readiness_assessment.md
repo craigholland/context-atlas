@@ -89,9 +89,11 @@ Record workflow-local findings here once evidence has been reviewed.
     forward unchanged.
   - Packet and trace outputs remained legible, and the workflow metadata stayed
     visible enough to confirm which outer repository path produced the packet.
-  - This workflow is still weak evidence for document authority precedence
-    because the current proof input uses guide-style documents that classify as
-    advisory rather than strongly authoritative records.
+  - Story 7 now adds a stronger repository scenario,
+    `codex_repository / repo_document_authority_precedence`, that uses a tracked
+    sample repo with authoritative, planning, and review documents over the same
+    query. The next reassessment should review that bundle directly rather than
+    continuing to treat the repository workflow as guide-only authority evidence.
 
 ### Documents Plus Database Workflow
 
@@ -145,8 +147,12 @@ Current state:
 - authority handling:
   - authority-aware behavior is credible for structured-record inputs because
     preferred review sources surfaced ahead of advisory documents
-  - authority evidence is weaker for documents because the current repository
-    proof input uses guide documents rather than more strongly authoritative docs
+  - the repository workflow now also has a reproducible document-authority
+    hardening scenario, `codex_repository / repo_document_authority_precedence`,
+    built around a tracked authority-rich sample repo corpus
+  - the current assessment has not yet reviewed that new authority bundle, so
+    the authority story should still be treated as improving rather than fully
+    closed until Story 7 reassessment completes
 - budget behavior:
   - compression/transformation behavior is visible in the current packets and
     traces
@@ -205,5 +211,10 @@ Current state:
 - the next reassessment should review the generated bundle for that scenario to
   determine whether budget-behavior evidence is now strong enough to remove the
   budget-pressure caveat from the recommendation record
-- strengthen document-authority proof inputs so authority handling is not shown
-  mainly through structured records
+- the document-authority hardening target,
+  `codex_repository / repo_document_authority_precedence`, is now also a
+  reproducible supported run plus capture path built around tracked
+  authoritative, planning, and review documents in the sample repository
+- the next reassessment should review the generated authority bundle to
+  determine whether the recommendation can stop treating document authority as a
+  comparatively weaker part of the current proof story

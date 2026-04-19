@@ -195,6 +195,7 @@
 - The current MVP readiness assessment now records a provisional `Conditionally Ready` recommendation; contributors should treat that as an evidence-backed interim state until stronger document-authority and budget-pressure proof closes the remaining gaps.
 - The constrained repository proof scenario `codex_repository / repo_budget_pressure_tradeoffs` is now part of that hardening path and should remain aligned across the runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
 - The document-authority hardening path now also includes the repository scenario `codex_repository / repo_document_authority_precedence`, which should remain aligned across the tracked sample repo, runnable workflow, proof capture, and evidence-bundle docs until Story 7 reassessment is complete.
+- The repository authority-hardening scenario should now also remain test-backed, so the tracked sample repo, repository workflow, readiness assessment, and proof-capture docs do not silently drift away from one another before Story 7 reassessment closes the loop.
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
