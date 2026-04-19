@@ -106,6 +106,7 @@
 - Proof-capture scripts should also prefer standard workflow artifact-directory inputs when the selected MVP workflows already emit a shared Atlas artifact filename set, rather than forcing every caller to repeat three explicit Atlas file paths.
 - When proof work is being packaged for review, script surfaces should also prefer one bundle-root output that yields a predictable per-workflow/per-scenario directory layout over ad hoc output filenames.
 - Proof-capture surfaces should also verify that the packet and trace they package still reflect one canonical supported workflow run, rather than accepting hand-authored proof-only JSON at face value.
+- Proof-capture scripts should stay downstream of the runnable workflow examples; shared proof-artifact emission belongs on one infrastructure helper rather than in per-example script-local writers.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.

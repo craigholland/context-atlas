@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 from pathlib import Path
 
@@ -15,7 +14,10 @@ from context_atlas.api import (
     render_packet_context,
 )
 from context_atlas.domain.models import ContextPacket
-from context_atlas.infrastructure.assembly import assemble_with_starter_context_service
+from context_atlas.infrastructure.assembly import (
+    assemble_with_starter_context_service,
+    write_standard_proof_artifacts,
+)
 from context_atlas.rendering import (
     render_packet_inspection,
     render_trace_inspection,
@@ -27,9 +29,6 @@ DEFAULT_QUERY = (
 )
 DEFAULT_LOG_LEVEL = "WARNING"
 REPOSITORY_CONTEXT_HEADER = "Repository Context"
-ATLAS_PACKET_FILENAME = "atlas_packet.json"
-ATLAS_RENDERED_CONTEXT_FILENAME = "atlas_rendered_context.txt"
-ATLAS_TRACE_FILENAME = "atlas_trace.json"
 
 
 def build_parser(*, description: str) -> argparse.ArgumentParser:
@@ -135,7 +134,7 @@ def main() -> None:
         print(render_trace_inspection(packet.trace))
 
     if args.proof_artifacts_dir is not None:
-        output_dir = _write_proof_artifacts(
+        output_dir = write_standard_proof_artifacts(
             output_dir=args.proof_artifacts_dir,
             packet=packet,
             rendered_context=rendered_context,
@@ -152,36 +151,6 @@ def _resolve_docs_root(*, repo_root: Path, docs_root_arg: Path | None) -> Path:
     if docs_root_arg.is_absolute():
         return docs_root_arg.resolve()
     return (repo_root / docs_root_arg).resolve()
-
-
-def _write_proof_artifacts(
-    *,
-    output_dir: Path,
-    packet: ContextPacket,
-    rendered_context: str,
-) -> Path:
-    """Write the standard Atlas proof artifacts for one workflow run."""
-
-    resolved_output_dir = output_dir.resolve()
-    resolved_output_dir.mkdir(parents=True, exist_ok=True)
-    (resolved_output_dir / ATLAS_RENDERED_CONTEXT_FILENAME).write_text(
-        rendered_context,
-        encoding="utf-8",
-    )
-    (resolved_output_dir / ATLAS_PACKET_FILENAME).write_text(
-        json.dumps(packet.model_dump(mode="json"), indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    (resolved_output_dir / ATLAS_TRACE_FILENAME).write_text(
-        json.dumps(
-            packet.trace.model_dump(mode="json") if packet.trace is not None else None,
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-    return resolved_output_dir
 
 
 if __name__ == "__main__":
