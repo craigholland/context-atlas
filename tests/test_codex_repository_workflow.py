@@ -192,6 +192,30 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                 result.stdout,
             )
 
+    def test_help_mentions_sample_repo_reference(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(_WORKFLOW_SCRIPT), "--help"],
+            cwd=_REPO_ROOT,
+            capture_output=True,
+            text=True,
+            env=os.environ.copy(),
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(
+            "examples/codex_repository_workflow/sample_repo/README.md",
+            result.stdout,
+        )
+        self.assertIn(
+            "Relative --docs-root values are resolved from",
+            result.stdout,
+        )
+        self.assertIn(
+            "--repo-root.",
+            result.stdout,
+        )
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

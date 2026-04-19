@@ -29,6 +29,11 @@ DEFAULT_LOG_LEVEL = "WARNING"
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Run the flagship Codex repository workflow over governed docs.",
+        epilog=(
+            "See examples/codex_repository_workflow/sample_repo/README.md for "
+            "the minimal supported repository shape. Relative --docs-root "
+            "values are resolved from --repo-root."
+        ),
     )
     parser.add_argument(
         "--repo-root",

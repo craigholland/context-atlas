@@ -151,6 +151,7 @@
   - PR B should refine the runnable example surface and add a small sample repo artifact that matches the guide exactly
   - PR C should add a demonstration-oriented trace path suitable for internal review while keeping packet and trace outputs as derived surfaces over canonical artifacts
 - The Codex repository guide should stay consistent with `.env.example`, `examples/README.md`, and the root README rather than introducing a second description of supported runtime knobs or entrypoints.
+- The current PR B direction is to keep the repository example honest through one minimal sample-layout artifact and one CLI/help surface that points back to that artifact instead of expanding into a second onboarding system.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

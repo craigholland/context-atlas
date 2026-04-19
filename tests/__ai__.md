@@ -242,6 +242,7 @@
     - tests should prove the workflow example can assemble packet, trace, and rendered context from a temporary governed-doc repository
     - tests should prove supported workflow metadata remains visible in trace inspection output instead of being hidden in example-only print logic
     - tests should prove relative `--docs-root` arguments resolve from the selected repository root instead of the caller's shell working directory
+    - tests should prove the CLI help surface points back to the minimal sample-repo artifact so the documented workflow shape stays discoverable
 
 ## Known Gaps / Future-State Notes
 - The suite now covers both bootstrap contracts and the first canonical domain artifacts.
