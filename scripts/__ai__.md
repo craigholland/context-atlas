@@ -102,6 +102,7 @@
 - Local preflight parity with CI is intentional but still heuristic-driven rather than perfectly identical in every environment.
 - If the package grows multiple governed subsystems, this folder may eventually need nested owner files of its own.
 - The nested `scripts/mvp_proof/` folder now owns the evidence-package capture shape for Story 6; future proof scripts should stay there rather than bloating the root script directory.
+- Proof-capture scripts should now carry the standard review order inside the generated artifact so later assessment work can stay reproducible without private reviewer instructions.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: scripts may validate local contracts and import boundaries there, but must not redefine the package's semantic rules.

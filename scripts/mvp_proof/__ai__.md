@@ -41,10 +41,12 @@
   - invariants:
     - should capture both naive baseline and Atlas artifacts together
     - should accept workflow artifacts as inputs rather than generating them itself
+    - should embed the standard review order and rubric-dimension list so evidence packages stay reviewable without extra private instructions
 
 ## Known Gaps / Future-State Notes
 - This folder currently defines only the evidence package shape, not the full workflow runners that will feed it.
 - Later Story 6 tasks may add comparison or assessment helpers, but they should remain downstream of real workflow execution.
+- The current capture script now also carries the standard review order for comparing naive and Atlas artifacts; future additions should extend that path carefully instead of inventing workflow-specific review steps.
 
 ## Cross-Folder Contracts
 - `examples/`: example-facing proof docs may show how to invoke these scripts, but should not replace them with copy-paste shell fragments.

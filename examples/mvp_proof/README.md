@@ -40,3 +40,15 @@ python scripts/mvp_proof/capture_evidence.py `
 The resulting JSON package is meant to be review-friendly and reproducible. It
 should become one of the primary inputs for later Story 6 workflow comparison
 and MVP readiness assessment work.
+
+Recommended review order for each captured package:
+
+1. read `artifacts.baseline_rendered_context`
+2. read `artifacts.atlas_rendered_context`
+3. inspect `artifacts.atlas_packet`
+4. inspect `artifacts.atlas_trace`
+5. record notes against the `review_path.rubric_dimensions` list
+
+That order is deliberate. The proof story should answer whether Atlas improved
+over a naive baseline, not simply whether the Atlas output looks reasonable in
+isolation.
