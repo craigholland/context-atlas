@@ -50,7 +50,11 @@ class CandidateRetriever(Protocol):
 
 
 class ContextAssemblyService:
-    """Compose retrieval, ranking, budgeting, memory, and compression into a packet."""
+    """Compose retrieval, ranking, budgeting, memory, and compression into a packet.
+
+    Outer workflows should share this service path rather than re-implementing
+    stage sequencing in example scripts or provider-specific adapters.
+    """
 
     def __init__(
         self,

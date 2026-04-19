@@ -156,6 +156,7 @@
   - PR B should remove duplicated repository-workflow composition so the runnable and demonstration paths share one thin outer workflow path over the same engine
   - PR C should reinforce the intended architecture in docs and local contracts so future workflow polish does not reintroduce a second workflow engine
 - The current PR A direction is to keep repository-specific section labels and workflow metadata clearly on the outer example boundary while generic rendering and service surfaces stay workflow-agnostic.
+- The current PR B direction is to collapse the runnable and demonstration scripts onto one shared repository-workflow composition path while keeping infrastructure helpers workflow-agnostic and provider-neutral.
 - The root README should keep describing structured records as adapter-facing inputs supplied by outer integration code rather than as evidence that Atlas owns database access.
 
 ## Cross-Folder Contracts

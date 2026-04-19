@@ -259,6 +259,28 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             self.assertIn("=== Trace Inspection ===", result.stdout)
             self.assertIn("- workflow: codex_repository", result.stdout)
 
+    def test_show_trace_help_reuses_shared_repository_workflow_cli_surface(
+        self,
+    ) -> None:
+        result = subprocess.run(
+            [sys.executable, str(_SHOW_TRACE_SCRIPT), "--help"],
+            cwd=_REPO_ROOT,
+            capture_output=True,
+            text=True,
+            env=os.environ.copy(),
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn(
+            "examples/codex_repository_workflow/sample_repo/README.md",
+            result.stdout,
+        )
+        self.assertIn(
+            "Relative --docs-root values are resolved from",
+            result.stdout,
+        )
+
     def _write_doc(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")

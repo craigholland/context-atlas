@@ -26,8 +26,10 @@ current reference implementation of that outer workflow composition.
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
 import logging
 
+from ..domain.models import ContextBudget, ContextMemoryEntry, ContextPacket
 from ..domain.policies import (
     StarterBudgetAllocationPolicy,
     StarterCandidateRankingPolicy,
@@ -85,4 +87,45 @@ def build_starter_context_assembly_service(
     )
 
 
-__all__ = ["build_starter_context_assembly_service"]
+def assemble_with_starter_context_service(
+    *,
+    retriever: CandidateRetriever,
+    query: str,
+    settings: ContextAtlasSettings | None = None,
+    logger: logging.Logger | None = None,
+    budget: ContextBudget | None = None,
+    memory_entries: Iterable[ContextMemoryEntry] = (),
+    top_k: int | None = None,
+    packet_id: str | None = None,
+    trace_id: str | None = None,
+    metadata: Mapping[str, str] | None = None,
+    now_epoch_seconds: float | None = None,
+) -> ContextPacket:
+    """Build the supported starter service and assemble one canonical packet.
+
+    This remains a workflow-agnostic outer composition helper. Callers still
+    choose retrievers, queries, and any outer-workflow metadata; the helper
+    just keeps supported starter wiring in one place.
+    """
+
+    service = build_starter_context_assembly_service(
+        retriever=retriever,
+        settings=settings,
+        logger=logger,
+    )
+    return service.assemble(
+        query=query,
+        budget=budget,
+        memory_entries=memory_entries,
+        top_k=top_k,
+        packet_id=packet_id,
+        trace_id=trace_id,
+        metadata=metadata,
+        now_epoch_seconds=now_epoch_seconds,
+    )
+
+
+__all__ = [
+    "assemble_with_starter_context_service",
+    "build_starter_context_assembly_service",
+]

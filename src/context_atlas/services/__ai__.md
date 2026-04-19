@@ -80,6 +80,7 @@
 - Story 2 Task 2.4 now also treats source-family trace summaries as part of the mixed-source contract, so future service changes should keep that visibility without reintroducing provenance reach-through.
 - Story 1 Task 1.4 PR B now distinguishes `compression_present` from `compression_applied` so downstream renderers do not need to guess whether a transform artifact actually changed packet content.
 - Richer source providers, persistence-backed memory, and tokenizer-aware budgeting can arrive later through additional ports and outer-layer composition.
+- Supported example workflows should share this service path instead of duplicating stage sequencing in multiple scripts once a reference workflow composition helper exists.
 
 ## Cross-Folder Contracts
 - `domain/`: services consume canonical artifacts and pure policies from there; they must not redefine semantic models locally.
