@@ -20,6 +20,7 @@ from context_atlas.domain.models import (
     ContextSourceAuthority,
     ContextSourceClass,
     ContextSourceDurability,
+    ContextSourceFamily,
     InclusionReasonCode,
 )
 from context_atlas.infrastructure.assembly import build_starter_context_assembly_service
@@ -79,6 +80,10 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
             self.assertEqual(
                 authoritative.provenance.collector,
                 "filesystem_document_source_adapter",
+            )
+            self.assertEqual(
+                authoritative.provenance.source_family,
+                ContextSourceFamily.DOCUMENT,
             )
             self.assertEqual(
                 authoritative.provenance.metadata["classification_source"],

@@ -10,6 +10,7 @@
 - included:
   - "__init__.py"
   - "docs/**/*.py"
+  - "records/**/*.py"
   - "retrieval/**/*.py"
 - excluded:
   - "__pycache__/**"
@@ -20,6 +21,7 @@
 - Holds adapter-layer implementations that translate external or storage-facing inputs into Atlas-native artifacts.
 - Provides the first retrieval-oriented adapter slice for turning registered `ContextSource` objects into raw `ContextCandidate` outputs.
 - Provides an ontology-aware filesystem document adapter for turning markdown docs into classified `ContextSource` artifacts.
+- Provides a structured-record adapter path for turning already-fetched record payloads into canonical `ContextSource` artifacts.
 - Keeps lexical retrieval behavior outside the semantic core while still consuming domain-stable codes, messages, and canonical models.
 - Makes it explicit that this package is part of the supported starter surface and may be re-exported through `context_atlas.api`.
 
@@ -48,6 +50,9 @@
   - `InMemorySourceRegistry`: in-memory registry for canonical sources
   - `LexicalRetrievalMode`: supported keyword/TF-IDF retrieval modes
   - `LexicalRetriever`: Atlas-native lexical candidate builder
+- `records`:
+  - `StructuredRecordInput`: minimal validated record input contract
+  - `StructuredRecordSourceAdapter`: translates record inputs into canonical sources
 
 ## File Index
 - `__init__.py`:
@@ -80,9 +85,24 @@
     - document classification should prefer explicit front matter over path inference when both are present
     - inferred source authority/durability should follow the documentation ontology rather than flattening docs into generic tags
     - provenance should preserve file identity and classification source so later traces can explain where a source came from
+    - filesystem documents should now identify themselves as the `document` source family in canonical provenance
+- `records/structured.py`:
+  - responsibility: validates structured-record inputs and translates them into canonical sources
+  - defines:
+    - `StructuredRecordInput`
+    - `StructuredRecordSourceAdapter`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+  - invariants:
+    - record adapters should accept already-fetched payloads rather than becoming a database access layer
+    - record provenance should preserve source-family identity and adapter collector name
+    - record translation should emit canonical `ContextSource` artifacts without inventing a second source object hierarchy
 
 ## Known Gaps / Future-State Notes
 - This folder now contains lexical retrieval plus a filesystem document adapter; embeddings and provider-backed adapters can land later as separate slices.
+- This folder now also contains a structured-record adapter path over already-fetched record payloads; direct database-driver integration should still stay outside Atlas.
 - The current registry is intentionally in-memory and deterministic; persistence-backed source providers should arrive through separate adapters or infrastructure-backed ports later.
 - Adapter outputs are now explicitly tested as immutable canonical artifacts so downstream services and renderers can trust their shape.
 - The current starter API may re-export this package's supported exports, but deeper adapter modules should still stay out of the public surface unless they are intentionally stabilized.
@@ -93,6 +113,7 @@
 - `domain/`: candidate reranking, deduplication, and decision tracing now harden inward there; adapters should stop at source registration and candidate production.
 - `domain/`: filesystem document adapters may classify source authority and durability, but those classifications should be expressed through canonical `ContextSource` fields rather than local enums or ad hoc tags.
 - `domain/`: source-family provenance may be expressed through canonical provenance fields, but structured-record input contracts should remain adapter-facing rather than becoming a second canonical source model.
+- `domain/`: structured-record adapters may default source semantics when outer integrations do not supply them, but those defaults must still surface through canonical source fields and provenance.
 - `services/`: future services should orchestrate retrieval through inward-safe contracts rather than by embedding lexical scoring logic directly.
 - `infrastructure/`: adapters should not depend on infrastructure helpers unless a concrete runtime concern truly requires it.
 
@@ -105,10 +126,10 @@ steps:
 
   - name: unit_tests
     run: |
-      py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py
+      py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py
 
   - name: import_sanity
     run: |
       $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput"
+      py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordSourceAdapter"
 ```
