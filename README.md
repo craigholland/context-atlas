@@ -25,6 +25,9 @@ product surface truthful, preserving packet-and-trace-centered evidence,
 strengthening configuration and boundary discipline, and widening scenario and
 integration coverage without forking the shared engine path.
 
+The in-repo summary for the first shipped MVP release now lives at
+[docs/Release/release_0_1_0.md](/context-atlas/docs/Release/release_0_1_0.md).
+
 ## Start Here
 
 If you are trying to evaluate or set up Context Atlas, start with:
