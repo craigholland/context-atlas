@@ -99,7 +99,9 @@ while preserving deterministic behavior and inspectable trace artifacts.
 
 The epic should establish or strengthen these capability areas:
 
-- precomputed or lazily cached lexical retrieval indexes for repeated queries
+- precomputed or lazily cached lexical retrieval indexes for repeated queries,
+  including both corpus-wide IDF statistics and reusable per-document token/TF
+  state
 - one shared duplicate-detection surface usable by both ranking and memory
 - better handling of boilerplate, front matter, and near-duplicate content
 - a more realistic starter token-estimation policy than one global
@@ -173,7 +175,8 @@ The first target users for this epic are internal and integration-oriented.
 This epic should ultimately produce:
 
 - one retrieval indexing story that removes full TF-IDF recomputation from the
-  steady-state repeated-query path
+  steady-state repeated-query path, including reuse of both document-frequency
+  state and per-document vector-building work
 - one shared duplicate-detection surface that both ranking and memory can use
   without inheriting the current fragile prefix heuristic unchanged
 - one starter token-estimation improvement plus a provider-agnostic tokenizer
@@ -210,8 +213,8 @@ This epic should ultimately produce:
   - precomputed index state should remain an outward retrieval concern rather
     than becoming a new domain model
 - Expected outcome: repeated queries over a static in-memory corpus reuse
-  indexed state instead of rebuilding document frequency and token vectors on
-  every call.
+  indexed state instead of rebuilding document frequency, per-document token
+  state, and per-document vectors on every call.
 
 `Story 2: Duplicate Detection And Similarity Quality`
 
@@ -228,6 +231,12 @@ This epic should ultimately produce:
     and memory
   - the hardening work should improve memory dedup as well, not simply export
     today's memory heuristic into ranking
+- Scope ceiling:
+  - this Story should deliver one clearly bounded lexical/structural
+    near-duplicate baseline for Atlas-owned text, not an open-ended semantic
+    similarity initiative
+  - this Story should not expand into embeddings, provider-specific similarity
+    services, or a generalized content-clustering system
 - Expected outcome: near-duplicate documents with minor wording changes are less
   likely to crowd the same packet, while boilerplate or front-matter prefixes
   alone no longer trigger easy false positives.
@@ -236,6 +245,11 @@ This epic should ultimately produce:
 
 - Goal: replace the one-size-fits-all character heuristic with a more realistic
   starter estimation model while introducing a future-safe tokenizer seam.
+- Required kickoff decision:
+  - this Story must begin by deciding whether the implementation priority is
+    `heuristic-first` or `tokenizer-seam-first`
+  - contributors should not advance implementation until that decision is
+    recorded at the Story or Task layer
 - Primary implementation areas:
   - `domain/policies/compression.py`
   - settings/config wiring for estimation behavior
@@ -271,6 +285,10 @@ This epic should ultimately produce:
 `Story 5: Validation, Documentation, And Hardening Proof`
 
 - Goal: prove the hardened semantics through tests, proof artifacts, and docs.
+- Dependency note:
+  - this Story depends on Story 4 settling the canonical budget and compression
+    semantics cleanly enough that validation and docs are not forced to target a
+    moving contract
 - Primary implementation areas:
   - tests covering retrieval index reuse, duplicate handling, token estimation,
     budget semantics, and compression truthfulness
@@ -290,14 +308,18 @@ This epic should ultimately produce:
   ownership and invalidation rules are not kept small and explicit.
 - Improving duplicate detection may change ranking and memory outcomes in ways
   that surface previously hidden assumptions in tests or guides.
+- Story 2 can easily sprawl unless the project holds the line on one bounded
+  shared near-duplicate baseline rather than treating this epic as a general
+  semantic-similarity initiative.
 - A tokenizer seam can become a layering leak if provider-specific assumptions
   move inward too early.
 - Clarifying budget and compression semantics may require canonical model or
   trace metadata changes that ripple into renderers, examples, and proof
   artifacts.
-- There is a risk of solving the `chars_per_token` concern twice unless the
-  project decides clearly whether this epic delivers only a better heuristic or
-  also the first tokenizer contract.
+- Story 3 should treat the `heuristic-first` versus `tokenizer-seam-first`
+  choice as an explicit decision gate, not just a risk to monitor, so the epic
+  does not deliver a half-improved heuristic and a half-formed seam in the same
+  increment.
 
 ## Exit Criteria
 
