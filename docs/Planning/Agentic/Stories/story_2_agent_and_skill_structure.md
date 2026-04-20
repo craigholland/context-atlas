@@ -14,6 +14,8 @@ tags: [agentic-development, story, agents, specialists, skills]
 related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
+  - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Contract.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture.md
@@ -46,6 +48,8 @@ before project roles and runtime-specific files are introduced.
   a flat list of peer workers
 - capture the authority difference between a parent that owns workflow state
   and a specialist that performs bounded delegated work
+- make the structural asymmetry explicit enough that later role and protocol
+  docs inherit it rather than rediscovering it
 - prevent specialists from quietly accumulating lifecycle authority that should
   stay with the parent layer
 
@@ -104,6 +108,8 @@ before project roles and runtime-specific files are introduced.
 - Context Atlas has one documented structural model for parent agents,
   specialists, and skills
 - the boundary between skill definition and agent definition is explicit
+- the boundary between parent-agent and specialist-agent contract shapes is
+  explicit
 - skills are explicitly treated as atomic reusable units
 - specialists are explicitly treated as focused agents built from curated
   skills plus bounded authority
@@ -132,4 +138,6 @@ before project roles and runtime-specific files are introduced.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)

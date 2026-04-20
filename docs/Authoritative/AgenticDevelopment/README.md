@@ -43,6 +43,8 @@ The initial canon surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+- [Delegation-Model.md](./Delegation-Model.md)
+- [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
 - [Boundary-Model.md](./Boundary-Model.md)
@@ -55,10 +57,12 @@ For most readers, the intended order is:
 1. this README
 2. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-4. [Mode-Model.md](./Mode-Model.md)
-5. [Skill-Contract.md](./Skill-Contract.md)
-6. [Boundary-Model.md](./Boundary-Model.md)
-7. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+4. [Delegation-Model.md](./Delegation-Model.md)
+5. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
+6. [Mode-Model.md](./Mode-Model.md)
+7. [Skill-Contract.md](./Skill-Contract.md)
+8. [Boundary-Model.md](./Boundary-Model.md)
+9. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -66,6 +70,8 @@ This ordering is intentional:
 - the glossary defines the vocabulary
 - the authority model defines the invariant relationship chain built on that
   vocabulary
+- the delegation and composition docs refine how parent agents and specialists
+  stay structurally distinct inside that relationship chain
 - the later supplements refine adjacent concerns without replacing those
   foundations
 
