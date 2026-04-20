@@ -123,6 +123,8 @@ the explicit distinction between:
 
 - define how Codex materialized assets are kept aligned with the project role,
   mode, and protocol model
+- bind those review expectations to one explicit Codex governance surface
+  before later refresh guidance or validation rules expand them
 - identify the validation or review hooks needed to keep the Codex surface from
   drifting
 - preserve room for future non-Codex bindings without forcing Codex patterns
@@ -162,6 +164,8 @@ the explicit distinction between:
 - the Codex creation guidance remains the repeatable source for copied,
   adapted, and derived content expectations when assets are created or
   refreshed
+- the Codex governance doc remains the review and refresh entrypoint for
+  keeping runtime-facing Codex assets aligned after Story 8 lands
 
 ## Definition Of Done
 

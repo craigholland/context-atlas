@@ -84,8 +84,14 @@ materializations aligned over time.
 - identify how future validation should check that Codex runtime assets still
   follow the project creation-guidance contract for copied, adapted, and
   derived content instead of drifting into memory-authored local conventions
+- identify how future validation should detect Codex assets that now live at
+  the wrong bound paths, use stale naming conventions, or no longer reflect
+  their cited upstream sources
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
+- keep Codex-specific validation and governance discoverable through the
+  Codex binding docs instead of letting planning prose become the only
+  operational memory for the Codex surface
 - preserve the distinction between content validation and workflow-state review
 
 ### Task 3: Owner-File And Metadata Governance
