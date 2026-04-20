@@ -114,6 +114,8 @@ The epic should establish these capability areas:
   prose-only status transitions
 - runtime-capacity planning inputs that let decomposition work reflect the
   number of independent AI runtimes currently available
+  while staying explicitly separate from live operational availability or
+  scheduler state
 - platform-specific materialization guidance so concrete runtime assets can be
   created consistently instead of ad hoc
 
@@ -282,6 +284,8 @@ The broader epic is complete when:
 - the repository has an explicit role model and explicit mode model rather than
   blending those concepts into one layer
 - runtime-capacity planning is machine-readable and usable during decomposition
+- runtime-capacity planning remains governed as planning input rather than
+  drifting into live runtime orchestration semantics
 - shared workflow protocols define not only task execution but inter-agent
   handoff and escalation
 - QA review is expressed as one review workflow with gate-specific passes rather
