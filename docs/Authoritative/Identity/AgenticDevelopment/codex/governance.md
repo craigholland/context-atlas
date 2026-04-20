@@ -37,7 +37,8 @@ and Codex creation guidance.
 This document governs how Codex binding artifacts should be reviewed and what
 they must stay aligned with over time.
 
-It does not replace the generic drift-control model from Story 9.
+It does not replace the generic drift-control model from Story 10 or the
+portable [Drift Model](../../../Canon/AgenticDevelopment/Drift-Model.md).
 
 ## Binding Decisions
 

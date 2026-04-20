@@ -56,7 +56,7 @@ IMPLEMENTED
 
 - define when Codex assets should be refreshed after upstream changes
 - make it explicit what counts as drift for the Codex surface
-- keep the guidance subordinate to the generic drift-control model in Story 9
+- keep the guidance subordinate to the generic drift-control model in Story 10
 
 #### Expected New Files
 - none expected
@@ -71,7 +71,7 @@ IMPLEMENTED
 
 ### PR - C: Planning Reinforcement
 
-- align Story 8 and Story 9 with the Codex governance hooks
+- align Story 8 and Story 10 with the Codex governance hooks
 - reduce the chance that Codex assets become an unmanaged operational side surface
 - document any open questions for future non-Codex bindings separately
 
