@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-18
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [architecture, planning, decomposition, delivery, governance]
 related:
