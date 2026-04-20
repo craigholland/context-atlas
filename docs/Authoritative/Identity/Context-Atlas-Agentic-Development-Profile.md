@@ -14,6 +14,7 @@ tags: [context-atlas, agentic-development, identity, structural-binding, profile
 related:
   - ./Context-Atlas-Charter.md
   - ./Context-Atlas-System-Model.md
+  - ./AgenticDevelopment/runtime_capacity.yaml
   - ./AgenticDevelopment/Role-Model.md
   - ./AgenticDevelopment/Role-Accountability-Matrix.md
   - ./AgenticDevelopment/Role-Authority-Matrix.md
@@ -167,6 +168,31 @@ Context Atlas should bind the portable protocol family to project roles, modes,
 and review gates in the Identity layer rather than pushing those project
 choices back into the portable protocol canon.
 
+### 14. Planning Capacity Must Bind Through One Authoritative Artifact
+
+Context Atlas should bind planning-time runtime capacity through one
+machine-readable artifact at:
+
+`docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml`
+
+That artifact is the authoritative planning-capacity input for decomposition.
+
+It should remain:
+
+- human-editable
+- project-specific
+- separate from live runtime availability or runtime-materialization state
+
+### 15. Runtime Capacity Updates Must Be Intentional, Not Ambient
+
+Context Atlas should treat changes to the runtime-capacity artifact as an
+intentional planning update rather than as a side effect of transient runtime
+conditions.
+
+That means later tooling may validate or consume the file, but it should not
+silently overwrite the planning input based on queue state, PR state, or
+momentary worker availability.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -187,6 +213,7 @@ choices back into the portable protocol canon.
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
+- [Context Atlas Runtime Capacity Artifact](./AgenticDevelopment/runtime_capacity.yaml)
 - [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
