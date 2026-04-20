@@ -81,6 +81,9 @@ materializations aligned over time.
 - identify how future validation should check that runtime assets still declare
   their authoritative sources and maintenance mode in a way that matches the
   portable traceability model
+- identify how future validation should check that Codex runtime assets still
+  follow the project creation-guidance contract for copied, adapted, and
+  derived content instead of drifting into memory-authored local conventions
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review
