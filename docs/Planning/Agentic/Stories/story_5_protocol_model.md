@@ -30,6 +30,9 @@ related:
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
@@ -178,6 +181,8 @@ ad hoc tool-trigger convention.
   explicit enough to prevent later task-level drift
 - the protocol layer has a reusable authoritative template and entrypoint
   instead of relying on planning docs to describe protocol shape ad hoc
+- the project-specific role bindings, mode bindings, and gate-to-pass bindings
+  are explicitly documented rather than inferred
 
 ## Definition Of Done
 
@@ -208,6 +213,9 @@ ad hoc tool-trigger convention.
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Protocol Role Bindings](../../../Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](../../../Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
 - [Context Atlas Mode Model](../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md)
 - [Mode Transition Rules](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md)
 - [Mode Mutation Matrix](../../../Authoritative/Identity/AgenticDevelopment/Mode-Mutation-Matrix.md)

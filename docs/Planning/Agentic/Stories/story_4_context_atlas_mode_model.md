@@ -118,6 +118,8 @@ alternate role definitions.
   between role and mode
 - the relationship between protocol execution and mode entry/transition is
   explicit
+- the protocol story can bind review passes inside review mode without turning
+  them into extra mode nodes
 - later protocol docs can reference the mode model as a stable workflow-state
   layer
 

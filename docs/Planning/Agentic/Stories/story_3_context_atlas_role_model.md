@@ -138,6 +138,8 @@ of review passes rather than relying on ad hoc review-trigger comments.
 - the distinction between role, parent agent, and specialist is explicit
 - authority boundaries between planning, implementation, QA review-pass
   execution, and DevOps are explicit
+- role participation in later protocols is easy to bind without redefining role
+  ownership
 - later stories can reference roles as stable project concepts
 
 ## Definition Of Done
