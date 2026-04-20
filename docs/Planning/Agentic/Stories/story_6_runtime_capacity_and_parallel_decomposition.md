@@ -15,6 +15,7 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
+  - ../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
@@ -32,6 +33,7 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
@@ -114,4 +116,5 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
