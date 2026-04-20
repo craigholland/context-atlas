@@ -17,6 +17,7 @@ related:
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Template-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -34,6 +35,7 @@ given AI environment without making those runtime assets authoritative.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -127,6 +129,7 @@ given AI environment without making those runtime assets authoritative.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
