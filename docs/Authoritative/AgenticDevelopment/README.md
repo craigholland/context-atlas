@@ -7,6 +7,9 @@ These documents are intentionally more general than the project-specific
 artifacts that will later bind the canon to Context Atlas's chosen roles,
 modes, protocols, runtime-capacity inputs, and platform materializations.
 
+This set should be read alongside the reusable Craig Architecture canon, not as
+an isolated prompt bundle or runtime-specific helper surface.
+
 ## What Lives Here
 
 This surface should define portable concepts and invariant rules such as:
@@ -65,3 +68,14 @@ This directory should not be used for:
 
 Those concerns belong in downstream project-specific bindings and
 runtime-specific materialization guidance, not in the portable canon.
+
+## Neighboring Canon
+
+The most relevant adjacent authoritative surfaces are:
+
+- [../Architecture/README.md](../Architecture/README.md): reusable architectural
+  philosophy, planning/decomposition guidance, and AI-collaboration rules
+- [../Identity/Context-Atlas-System-Model.md](../Identity/Context-Atlas-System-Model.md):
+  the project-specific operational model for Context Atlas
+- [../Ontology/README.md](../Ontology/README.md): metadata and document-class
+  guidance for authoring authoritative artifacts
