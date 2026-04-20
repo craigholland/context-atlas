@@ -10,6 +10,14 @@ User-facing setup and workflow help now lives under
 If you are trying to evaluate or set up Context Atlas as a product, start there
 before reading `examples/` or the deeper architecture/planning canon.
 
+## Release Notes
+
+In-repo release summaries now live under [docs/Release](./Release/).
+
+Those artifacts are the repository home for `releases`-class product summaries
+such as shipped-version notes, operational release state, and versioned product
+history.
+
 Before creating or editing project documents, start with [docs/Authoritative/Ontology/README.md](./Authoritative/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
 
 The canonical semantic definitions for the document classes now live in [docs/Authoritative/Ontology/Documentation-Ontology.md](./Authoritative/Ontology/Documentation-Ontology.md). That document defines what `Authoritative`, `Planning`, `Reviews`, `Exploratory`, and `Releases` actually mean, what they are safe to use for, and how they should interact when they disagree.
