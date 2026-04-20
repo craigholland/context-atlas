@@ -61,6 +61,7 @@
 - Broader doc indexes such as `docs/README.md`, `docs/Authoritative/Architecture/README.md`, and `docs/Planning/README.md` should surface the AgenticDevelopment canon explicitly so contributors can discover it before writing project-specific bindings or runtime assets.
 - The `docs/Authoritative/AgenticDevelopment/README.md` file should remain the portable entrypoint for human readers; later Story docs should inherit that orientation instead of compensating for a weak canon index.
 - Cross-links between `docs/README.md`, `docs/Authoritative/Architecture/README.md`, `docs/Authoritative/AgenticDevelopment/README.md`, and `docs/Planning/README.md` should preserve the reading order from portable canon to project binding to planning rather than flattening those layers together.
+- Downstream Agentic Story docs should point back to the relevant portable AgenticDevelopment canon docs in their inputs or related artifacts instead of expecting Task plans to reconstruct that lineage.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
 - There is no currently active MVP task; Story 7 is complete and the current baseline is the merged `MVP Ready` recommendation plus its standing proof scenarios.
