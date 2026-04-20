@@ -19,6 +19,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
   - ../../../Authoritative/AgenticDevelopment/Template-Model.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -38,6 +39,7 @@ given AI environment without making those runtime assets authoritative.
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -83,6 +85,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define how a human operator or later validation step should tell whether
   runtime artifacts still match the authoritative docs
+- bind those reviewer expectations to one portable traceability model before
+  any platform story chooses a concrete metadata or manifest strategy
 - clarify whether materialized assets are hand-maintained, generated, or
   partially generated
 - make regeneration and update expectations explicit before the first concrete
@@ -142,6 +146,7 @@ given AI environment without making those runtime assets authoritative.
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
