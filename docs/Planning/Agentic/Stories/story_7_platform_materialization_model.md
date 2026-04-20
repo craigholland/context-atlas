@@ -43,6 +43,8 @@ given AI environment without making those runtime assets authoritative.
 
 ### Task 1: Materialization Concepts And Boundaries
 
+- bind Story 7 to one explicit materialization-boundary model instead of
+  letting later platform stories restate the source-of-truth rules ad hoc
 - define what it means to materialize an abstract agentic concept into a
   platform-specific runtime artifact
 - keep the source-of-truth boundary explicit so generated or maintained runtime
@@ -100,6 +102,8 @@ given AI environment without making those runtime assets authoritative.
 - the template/discovery model is defined without assuming one vendor
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
+- Story 8 and later validation work inherit one clear upstream-versus-downstream
+  change model instead of reconstructing it from planning prose
 
 ## Definition Of Done
 
