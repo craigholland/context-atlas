@@ -164,6 +164,8 @@ the explicit distinction between:
 - the Codex creation guidance remains the repeatable source for copied,
   adapted, and derived content expectations when assets are created or
   refreshed
+- the Codex governance doc remains the review and refresh entrypoint for
+  keeping runtime-facing Codex assets aligned after Story 8 lands
 
 ## Definition Of Done
 
