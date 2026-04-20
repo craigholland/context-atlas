@@ -16,6 +16,7 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
@@ -35,6 +36,7 @@ actually available for an Epic, Story, or Task.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
 - [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
@@ -66,6 +68,8 @@ actually available for an Epic, Story, or Task.
 - define how planners should identify:
   - base or blocking work that must happen first
   - independent work lanes that may happen in parallel
+- require planners to read the governed planning-capacity artifact before
+  finalizing lane count when bounded parallelism is being considered
 - ensure the number of planned parallel lanes does not exceed usable runtime
   capacity
 - preserve Craig Architecture decomposition quality even when parallelism is
@@ -126,5 +130,6 @@ actually available for an Epic, Story, or Task.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
 - [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

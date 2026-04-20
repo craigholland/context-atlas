@@ -117,6 +117,8 @@ The epic should establish these capability areas:
   number of independent AI runtimes currently available
   while staying explicitly separate from live operational availability or
   scheduler state
+- parallel-decomposition rules that identify base work first and only fan out
+  into lanes that are both capacity-bounded and architecturally independent
 - platform-specific materialization guidance so concrete runtime assets can be
   created consistently instead of ad hoc
 
