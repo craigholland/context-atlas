@@ -92,7 +92,7 @@ steps:
     run: |
       py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/RepoManagement/__ai__.md docs/Authoritative/AgenticDevelopment/__ai__.md __ai__.md
 
-  - name: preflight
+  - name: freshness
     run: |
-      py -3 scripts/preflight.py
+      py -3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/AgenticDevelopment --governed-root docs/Authoritative/RepoManagement --suffix .md
 ```
