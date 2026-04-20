@@ -87,6 +87,37 @@ The traceability model should be explicit enough that later validation,
 regeneration, or drift-control work can rely on it without first inventing a
 new provenance scheme.
 
+### 6. Materialized Assets Should Declare Their Maintenance Mode
+
+Each materialized asset surface should make it possible to tell whether it is:
+
+- hand-maintained
+- generated
+- mixed, where some portions are regenerated and others remain human-owned
+
+That declaration does not need one portable encoding, but the maintenance mode
+itself should not stay implicit.
+
+### 7. Regeneration Should Preserve Upstream Authority And Traceability
+
+When an asset is regenerated, that process should preserve or refresh the
+traceability needed to connect the regenerated output back to its upstream
+authoritative sources.
+
+Regeneration should not become a reason to discard provenance or silently
+replace the semantic source of truth.
+
+### 8. Mixed Maintenance Should Keep Human-Owned And Generated Surfaces Distinct
+
+If a materialization uses a mixed maintenance model, reviewers should still be
+able to tell:
+
+- which portions are expected to regenerate
+- which portions remain manually curated
+- which upstream sources govern each portion
+
+Mixed maintenance should not become an excuse for blurry ownership.
+
 ## Constraints
 
 - Traceability rules must remain portable across multiple environments.
@@ -94,11 +125,13 @@ new provenance scheme.
   one manifest schema, or one code generator.
 - Traceability should stay subordinate to upstream canon and application
   bindings rather than becoming a new source of truth.
+- Regeneration expectations should remain portable and should not assume one
+  code generator, workflow engine, or environment hook.
 
 ## Non-Goals
 
 - Define a platform-specific manifest format.
-- Define regeneration behavior in full.
+- Define platform-specific regeneration commands or automation hooks.
 - Replace downstream validation or review policy.
 
 ## Related Artifacts

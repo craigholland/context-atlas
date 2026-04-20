@@ -103,6 +103,14 @@ Downstream bindings may map one or more template types into concrete discovery
 surfaces, but that mapping should not replace the upstream template
 vocabulary.
 
+### 8. Template Types Should Support Explicit Maintenance Modes
+
+Template types should remain stable regardless of whether later runtime-facing
+assets are hand-maintained, generated, or mixed.
+
+The template model should support those downstream maintenance choices without
+making one maintenance strategy the portable default.
+
 ## Constraints
 
 - Templates must not replace authoritative canon or bindings.
@@ -110,6 +118,8 @@ vocabulary.
 - Template inventory should stay concept-shaped rather than folder-shaped.
 - Template definitions should remain valid even when later environments satisfy
   discovery through manifests, indexes, or mixed layouts instead of folders.
+- Template definitions should stay usable across hand-maintained, generated, or
+  mixed runtime-asset maintenance strategies.
 
 ## Non-Goals
 
