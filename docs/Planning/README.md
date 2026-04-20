@@ -41,7 +41,9 @@ When planning depends on machine-readable governance input, that input should
 live in the authoritative layers rather than inside planning docs themselves.
 For the agentic-development stack, runtime-capacity planning input belongs in
 the Identity layer artifact at
-[runtime_capacity.yaml](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml).
+[runtime_capacity.yaml](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml),
+with its human update/trust model defined in
+[runtime_capacity.md](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md).
 
 If a planning artifact needs to explain what a role, mode, skill, protocol, or
 materialization layer means, the first fix should usually be to improve the

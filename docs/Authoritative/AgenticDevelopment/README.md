@@ -49,6 +49,8 @@ The initial canon surface is centered on:
 - [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Protocols/README.md](./Protocols/README.md)
+- [Runtime-Capacity-Model.md](./Runtime-Capacity-Model.md)
+- [Parallel-Decomposition-Model.md](./Parallel-Decomposition-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
 - [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
 - [Composition-Decision-Model.md](./Composition-Decision-Model.md)
@@ -68,12 +70,14 @@ For most readers, the intended order is:
 6. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 7. [Mode-Model.md](./Mode-Model.md)
 8. [Protocols/README.md](./Protocols/README.md)
-9. [Skill-Contract.md](./Skill-Contract.md)
-10. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-11. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
-12. [Escalation-Model.md](./Escalation-Model.md)
-13. [Boundary-Model.md](./Boundary-Model.md)
-14. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+9. [Runtime-Capacity-Model.md](./Runtime-Capacity-Model.md)
+10. [Parallel-Decomposition-Model.md](./Parallel-Decomposition-Model.md)
+11. [Skill-Contract.md](./Skill-Contract.md)
+12. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+13. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+14. [Escalation-Model.md](./Escalation-Model.md)
+15. [Boundary-Model.md](./Boundary-Model.md)
+16. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -88,6 +92,9 @@ This ordering is intentional:
 - the mode and protocol docs define portable execution-state and workflow-path
   semantics before any downstream application binds them to concrete roles,
   gates, or runtime assets
+- the runtime-capacity and parallel-decomposition docs define how bounded
+  planning capacity should influence safe decomposition before any project or
+  environment binding chooses concrete values
 - the skill docs refine what a skill may contain and how skills attach to
   parent agents and specialists without becoming role or protocol surrogates
 - the composition-decision and escalation docs define when work should stay

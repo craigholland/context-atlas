@@ -67,6 +67,8 @@ materializations aligned over time.
 - identify how future validation should detect stale, malformed, or
   out-of-bound runtime-capacity planning inputs without turning those checks
   into a live scheduler
+- identify how future validation should distinguish structural capacity-artifact
+  checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review
 
 ### Task 3: Owner-File And Metadata Governance
@@ -125,6 +127,8 @@ materializations aligned over time.
   same feature branch before human merge
 - the resulting validation approach is concrete enough to support later task and
   PR-plan decomposition without becoming tool-specific too early
+- runtime-capacity validation remains bounded to structural trustworthiness and
+  does not drift into ungoverned live-state inference
 
 ## Related Artifacts
 
