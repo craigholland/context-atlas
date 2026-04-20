@@ -124,7 +124,20 @@ That means delegation and escalation may route work or decisions, but they
 should not implicitly reassign authority without an explicit downstream
 contract.
 
-### 10. Role Bindings Must Remain Separate From Runtime Materialization
+### 10. Handoff State Changes Must Be Structured, Not Conversational
+
+Context Atlas should treat inter-agent handoff, review, escalation, and return
+state as changed only when a valid structured contract artifact exists.
+
+That means:
+
+- role transitions should not depend on prose-only status updates
+- review intake should not depend on ad hoc tool-invocation comments
+- YAML or JSON should be the expected contract shape, even when a later
+  runtime materialization projects that contract onto a PR review or comment
+  surface
+
+### 11. Role Bindings Must Remain Separate From Runtime Materialization
 
 Context Atlas should define role-to-parent bindings at the project-identity
 layer before any environment-specific files attempt to materialize those

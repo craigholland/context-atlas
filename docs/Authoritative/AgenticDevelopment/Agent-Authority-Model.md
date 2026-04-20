@@ -63,6 +63,9 @@ project uses.
   not only in the breadth of work they happen to perform.
 - Handoff is the explicit protocol-governed transfer of workflow ownership
   between eligible actors.
+- Handoff and escalation should be represented by structured contracts rather
+  than by conversational implication, because authority state should be
+  inspectable and resumable across runtime boundaries.
 - Escalation returns decisions or blocked states to a broader authority
   boundary rather than silently widening a delegate's authority.
 
@@ -72,6 +75,8 @@ project uses.
   defining property is accountable workflow ownership.
 - Specialists should not silently acquire broader authority than the parent
   agent granted them.
+- Workflow ownership should not be considered transferred until the relevant
+  structured handoff contract exists.
 - Protocol participation must not blur the distinction between actor
   accountability and workflow structure.
 - Mode transitions must not be treated as implicit substitutes for handoff,

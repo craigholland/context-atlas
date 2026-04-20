@@ -51,6 +51,9 @@ review workflow.
   - what remains unresolved
   - why escalation was necessary
   - what next action appears to be required
+- Return contracts should be structured and machine-readable, typically in a
+  form representable as YAML or JSON, so the receiving authority boundary does
+  not have to reconstruct the state from prose.
 
 ## Constraints
 
@@ -65,7 +68,7 @@ review workflow.
 
 ## Non-Goals
 
-- Define a detailed handoff artifact schema.
+- Define a project-specific or runtime-specific handoff artifact schema.
 - Define protocol-specific rework loops.
 - Replace broader workflow protocols with escalation rules alone.
 

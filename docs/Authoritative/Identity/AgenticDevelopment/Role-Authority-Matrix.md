@@ -71,6 +71,8 @@ the protocol story.
 
 - implement and mutate backend-owned product surfaces
 - request review of backend changes
+- emit structured completion handoff contracts for downstream review or
+  protocol-governed next steps
 - delegate bounded backend implementation work to specialists under
   parent-owned authority
 - escalate architectural, ownership, or review blockers that prevent delivery
@@ -88,6 +90,8 @@ the protocol story.
 
 - implement and mutate documentation/UAT-owned user-facing product surfaces
 - request review of documentation, example, or evaluator-facing changes
+- emit structured completion handoff contracts for downstream review or
+  protocol-governed next steps
 - delegate bounded documentation/UAT work to specialists under parent-owned
   authority
 - escalate user-facing or evaluation-surface blockers that need review or
@@ -105,13 +109,18 @@ the protocol story.
 #### May
 
 - perform governed review
+- publish governed review findings directly on the active review surface
+  selected by the current runtime materialization
 - record findings, acceptance analysis, and rework requests
 - request additional evidence or validation work before recommending readiness
+- accept or reject structured review-intake handoffs according to protocol
 - escalate when review results conflict with claimed readiness or ownership
 
 #### May Not
 
 - silently inherit implementation ownership while performing review
+- depend on ad hoc prose comments as the canonical review trigger when the
+  protocol requires a structured handoff contract
 - approve merges or releases as a substitute for DevOps authority
 - convert review participation into a general right to rewrite owned product
   surfaces without explicit reassignment
@@ -122,6 +131,8 @@ the protocol story.
 
 - approve or execute merge actions once required planning, implementation, and
   QA expectations are satisfied
+- rely on explicit upstream structured handoff or review-outcome state when
+  determining merge or release readiness
 - prepare and execute release-oriented actions
 - mutate operational workflow surfaces such as CI and release automation
 - escalate when merge or release readiness is incomplete or contractually

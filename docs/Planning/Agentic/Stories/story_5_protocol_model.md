@@ -80,10 +80,13 @@ entering modes during protocol execution.
 ### Task 3: Delegation, Handoff, And Escalation Contracts
 
 - define how work is delegated to specialists or other roles
-- define what a valid handoff must communicate
+- define what a valid handoff must communicate and require that it be expressed
+  as a structured machine-readable contract rather than prose
 - define when escalation is required and what information must accompany it
 - keep escalation inheriting the structural return-contract model rather than
   treating it as protocol-only improvisation
+- make QA review enter from a structured `implementation_complete` handoff
+  rather than from an ad hoc tool-invocation comment
 
 ### Task 4: Role And Mode Bindings
 
@@ -110,6 +113,8 @@ entering modes during protocol execution.
   narratives instead of shared workflow definitions.
 - Handoffs could remain too implicit if the required output contract is not
   precise enough.
+- If handoff state is left conversational instead of structured, later
+  automation and runtime materialization will be brittle.
 - If escalation rules are vague, later runtime materialization will be hard to
   enforce consistently.
 
@@ -117,7 +122,8 @@ entering modes during protocol execution.
 
 - Context Atlas has a documented protocol model and a reusable protocol shape
 - the initial shared workflow protocols are defined
-- delegation, handoff, and escalation have explicit contract expectations
+- delegation, handoff, and escalation have explicit structured contract
+  expectations
 - protocols are clearly bound to project roles and modes without collapsing the
   distinction between those layers
 - the relationship between protocol execution and mode entry/transition is
@@ -136,6 +142,8 @@ entering modes during protocol execution.
   resolved on that same feature branch before human merge
 - handoff and escalation expectations are explicit enough to support later
   runtime materialization and validation work
+- inter-agent state transitions are defined as structured contracts so later QA
+  automation does not depend on prose-only triggers
 
 ## Related Artifacts
 

@@ -22,7 +22,7 @@ supersedes: []
 
 ## Objective
 
-Define delegation, handoff, and escalation as explicit contracts rather than hidden workflow assumptions.
+Define delegation, handoff, and escalation as explicit structured contracts rather than hidden workflow assumptions.
 
 ## Task Status
 
@@ -42,6 +42,7 @@ PLANNED
 - define what information must accompany delegated work
 - make it explicit how parents delegate to specialists while retaining accountability
 - keep delegation rules compatible with the structural model from Story 2
+- require the contract shape to be machine-readable rather than prose-only
 
 #### Expected New Files
 - `docs/Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md`
@@ -56,6 +57,9 @@ PLANNED
 
 - define what a valid handoff must communicate between roles or workflow steps
 - define what escalation must communicate when authority or mode constraints are hit
+- require handoff and escalation contracts to be representable as YAML or JSON
+- make `implementation_complete -> QA review intake` a first-class structured
+  contract path instead of a comment-driven convention
 - make the contracts explicit enough to support later validation
 
 #### Expected New Files
@@ -74,6 +78,8 @@ PLANNED
 - align the core workflow protocols with the new delegation, handoff, and escalation contracts
 - ensure the role and mode Stories reference these contracts instead of describing ad hoc behavior
 - identify any contract fields that should later become machine-validated
+- make it explicit where QA review outcomes should be projected onto later
+  runtime review surfaces without changing the structured source contract
 
 #### Expected New Files
 - none expected
@@ -97,11 +103,13 @@ PLANNED
 
 - Delegation may stay too implicit if parent-owned accountability is not preserved.
 - Handoff contracts may be too weak to support recovery or validation later.
+- If the contracts are not structured enough, QA review dispatch will drift back
+  toward prose-only triggers.
 - Escalation may overlap with authority rules unless the boundary stays explicit.
 
 ## Exit Criteria
 
-- delegation, handoff, and escalation are explicit contracts
+- delegation, handoff, and escalation are explicit structured contracts
 - the contracts are reinforced across the workflow protocols
 - later validation work has a stable contract surface to build on
 

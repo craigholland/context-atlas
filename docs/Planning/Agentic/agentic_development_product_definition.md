@@ -105,6 +105,8 @@ The epic should establish these capability areas:
 - project-specific bindings that define what Context Atlas actually uses
 - workflow protocols for planning, execution, review, rework, recovery,
   delegation, handoff, and escalation
+- structured handoff and review contracts that are machine-readable rather than
+  prose-only status transitions
 - runtime-capacity planning inputs that let decomposition work reflect the
   number of independent AI runtimes currently available
 - platform-specific materialization guidance so concrete runtime assets can be
@@ -275,6 +277,8 @@ The broader epic is complete when:
 - runtime-capacity planning is machine-readable and usable during decomposition
 - shared workflow protocols define not only task execution but inter-agent
   handoff and escalation
+- inter-agent handoff and review state is represented through structured
+  YAML/JSON-style contracts rather than ad hoc prose or tool-specific comments
 - at least one runtime materialization path is concretely supported without
   becoming the source of truth
 - the resulting runtime assets are discoverable, governed, and resistant to

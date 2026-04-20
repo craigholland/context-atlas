@@ -92,6 +92,9 @@ Context Atlas behaves as a system.
 - technical tradeoffs needed to deliver backend slices within Craig
   Architecture
 - code-shape and architectural-conformance decisions inside owned backend work
+- when backend-owned work is complete enough to emit a structured
+  `implementation_complete` handoff for downstream QA review or another
+  protocol-governed next step
 
 #### Specialist Participation Note
 
@@ -122,6 +125,9 @@ product surfaces for the repository.
   user-acceptance-style walkthroughs
 - user-facing clarity when backend capabilities need outward explanation or
   demonstration
+- when documentation/UAT-owned work is complete enough to emit a structured
+  `implementation_complete` handoff for downstream QA review or another
+  protocol-governed next step
 
 #### Specialist Participation Note
 
@@ -139,6 +145,7 @@ feedback loops.
 #### Direct Artifact Ownership
 
 - review findings and acceptance artifacts
+- structured review-intake, handoff, and review-outcome artifacts
 - test-oriented verification additions that exist to validate behavior rather
   than to own the primary implementation direction
 - review or proof surfaces that summarize validation outcomes
@@ -147,6 +154,8 @@ feedback loops.
 
 - whether delivered work appears validated, incomplete, risky, or ready for
   acceptance recommendation
+- whether a received structured completion handoff is valid enough to enter the
+  QA review flow
 - what findings must be resolved before work should be treated as ready
 - how verification evidence should be framed for downstream handoff
 
