@@ -110,6 +110,19 @@ the downstream environment uses Codex, Claude, or another execution system.
 Project bindings may later map the model onto concrete runtime platforms, but
 the concept itself should not assume one vendor or discovery convention.
 
+### 8. Runtime Capacity Should Be Governed Like Other Planning Inputs
+
+When a project chooses to maintain explicit runtime-capacity input, that input
+should be treated as governed planning data rather than as ad hoc
+conversational context.
+
+That means:
+
+- planners should read one authoritative capacity source
+- later bindings should make update expectations explicit
+- live queue state or transient availability should not silently override the
+  governed planning input during decomposition
+
 ## Constraints
 
 - Runtime capacity should remain a planning concept rather than an operational
