@@ -85,6 +85,8 @@ runtime-materialization scheme.
 - ensure later stories can build on the canon without redefining its terms
 - keep the AgenticDevelopment directory README as the intended human entrypoint
   to the portable layer
+- make later Story docs treat the portable canon as their upstream source
+  instead of relying on Task docs to recreate that orientation
 
 ## Sequencing
 
