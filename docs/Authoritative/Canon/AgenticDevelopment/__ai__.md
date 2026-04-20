@@ -17,6 +17,7 @@
 - Governs the portable, environment-agnostic canon for agentic-development concepts and invariants.
 - Keeps the canon readable from its own README before downstream bindings or runtime materializations are consulted.
 - Defines how drift, validation, and change-management should be reasoned about for this canon and the neighboring repo-management surface.
+- Keeps the README strong enough to explain why this canon exists in a context-governance engine, not only how to traverse the file set.
 
 ## Architectural Rules
 - This folder must stay portable: do not define project-specific role rosters, provider choices, or runtime folder layouts here unless the relevant portable boundary model explicitly authorizes them.
@@ -24,6 +25,7 @@
 - Drift, validation, and change-management docs in this folder should define stable models and expectations, not platform-specific scripts or operator folklore.
 - Protocol, role-archetype, materialization, and governance supplements should remain separate enough that later validators and reviewers can reason about one concern without reconstructing the whole system.
 - Meaningful updates to this folder should also review root governance, metadata, and neighboring planning indexes so the canon remains discoverable and trustworthy.
+- The README should explain why the agentic canon matters to Context Atlas's broader governance model, not only provide a reading order over the documents.
 
 ## Allowed Dependencies
 - may depend on:
@@ -38,6 +40,8 @@
 ## Public API / Key Exports
 - README.md:
   - entrypoint: defines the portable reading order and boundary of the canon.
+  - invariants:
+    - should explain why the canon exists in a context-governance engine, not only list documents
 - Agentic-Development-Glossary.md:
   - glossary: defines the portable vocabulary for the agentic model.
 - Protocols/README.md:
