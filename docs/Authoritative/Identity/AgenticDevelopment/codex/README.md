@@ -106,6 +106,29 @@ contributor to answer:
 Those details belong in the later Codex binding docs, not in this initial
 decision record.
 
+### 6. Codex Binding Must Consume One Explicit Upstream Input Set
+
+The Codex binding should treat the following upstream surfaces as its normal
+authoritative input set:
+
+- the project structural profile
+- the project role model and role-accountability/authority/binding docs
+- the project mode model and mode-transition/mutation docs
+- the project protocol-role, protocol-mode, and gate-review-pass bindings
+- the portable materialization-boundary, template, discovery, and traceability
+  docs
+
+If a later Codex artifact appears to require meaning outside that set, the
+correct response is to update the upstream canon or binding layer first.
+
+### 7. Future Non-Codex Bindings Should Reuse The Same Upstream Categories
+
+A later non-Codex binding should need the same kinds of upstream inputs even if
+it materializes them very differently.
+
+That means the Codex binding should record which upstream categories it needs
+without pretending those categories are unique to Codex itself.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of
@@ -114,6 +137,8 @@ decision record.
   relying on implicit project memory.
 - The Codex binding should stay compatible with the Story 7 materialization
   rules around boundary, template, discovery, traceability, and regeneration.
+- The Codex binding should remain readable as a downstream consumer of the
+  project identity layer rather than as a substitute binding layer of its own.
 
 ## Non-Goals
 
