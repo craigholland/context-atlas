@@ -109,10 +109,10 @@ When specialists contribute to a workstream, they do so beneath a
 parent-owned role.
 
 That means planning artifacts remain Planner/Decomp-owned, engine
-implementation remains Backend-owned, user-facing product surfaces remain
-Frontend-owned, governed validation remains QA-owned, and operational delivery
-remains DevOps-owned unless a later authority or protocol artifact explicitly
-changes the handoff state.
+implementation remains Backend-owned, user-facing documentation and evaluation
+surfaces remain Documentation/UAT-owned, governed validation remains QA-owned,
+and operational delivery remains DevOps-owned unless a later authority or
+protocol artifact explicitly changes the handoff state.
 
 ### 9. Authority Must Stay Bound To Parent-Owned Roles Until Explicit Handoff
 

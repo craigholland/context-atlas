@@ -61,7 +61,7 @@ the protocol story.
 #### May Not
 
 - self-approve merge or release actions solely by virtue of owning planning
-- silently assume backend, frontend, QA, or DevOps authority without an
+- silently assume backend, documentation/UAT, QA, or DevOps authority without an
   explicit role handoff
 - treat a decomposition proposal as equivalent to implementation approval
 
@@ -82,20 +82,21 @@ the protocol story.
 - mutate repository workflow or release surfaces unless explicitly operating
   under DevOps authority
 
-### Frontend
+### Documentation/UAT
 
 #### May
 
-- implement and mutate frontend-owned user-facing product surfaces
-- request review of frontend changes
-- delegate bounded frontend work to specialists under parent-owned authority
-- escalate user-facing or ownership blockers that need review or operational
-  resolution
+- implement and mutate documentation/UAT-owned user-facing product surfaces
+- request review of documentation, example, or evaluator-facing changes
+- delegate bounded documentation/UAT work to specialists under parent-owned
+  authority
+- escalate user-facing or evaluation-surface blockers that need review or
+  operational resolution
 
 #### May Not
 
-- treat presentation ownership as final QA acceptance
-- approve merges or releases as a default part of frontend work
+- treat documentation or evaluator-surface ownership as final QA acceptance
+- approve merges or releases as a default part of documentation/UAT work
 - mutate repository workflow or release surfaces unless explicitly operating
   under DevOps authority
 

@@ -255,7 +255,7 @@ top-level project accountabilities for:
 
 - Planner/Decomp
 - Backend
-- Frontend
+- Documentation/UAT
 - QA
 - DevOps
 

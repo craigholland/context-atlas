@@ -154,10 +154,10 @@ The first target users for this epic are internal to Context Atlas delivery.
 - Value from this epic: knows what role it occupies, what modes it can enter,
   what artifacts it can mutate, and how to hand work off correctly
 
-`3. Frontend Role`
+`3. Documentation/UAT Role`
 
-- Primary job: execute frontend-oriented implementation work without losing
-  workflow discipline
+- Primary job: own user-facing documentation, guided evaluation surfaces, and
+  user-acceptance-oriented walkthroughs without losing workflow discipline
 - Value from this epic: knows what role it occupies, what modes it can enter,
   what artifacts it can mutate, and how to hand work off correctly
 
@@ -192,7 +192,7 @@ This epic should ultimately produce:
 - a project-specific role model that explicitly defines:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 - a project-specific mode model that defines which execution states Context
@@ -255,7 +255,7 @@ This Epic definition is ready to guide implementation when:
 - the initial Context Atlas top-level role set is accepted:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 

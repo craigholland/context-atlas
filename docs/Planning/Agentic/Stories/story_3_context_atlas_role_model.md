@@ -33,8 +33,9 @@ supersedes: []
 ## Objective
 
 Define the Context Atlas project-specific role model so the repository has a
-clear answer for who is accountable for planning, backend delivery, frontend
-delivery, QA review, and DevOps-oriented operational work, while keeping it
+clear answer for who is accountable for planning, backend delivery,
+documentation and UAT-oriented delivery, QA review, and DevOps-oriented
+operational work, while keeping it
 explicit that a role is the accountability concept embodied by a parent agent
 rather than the runtime actor itself.
 
@@ -60,7 +61,7 @@ rather than the runtime actor itself.
 - define the initial Context Atlas top-level roles:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 - explain why those roles exist as distinct project accountabilities instead of

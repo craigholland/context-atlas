@@ -58,7 +58,7 @@ The initial project binding is:
 
 - Planner/Decomp role -> Planner/Decomp parent agent
 - Backend role -> Backend parent agent
-- Frontend role -> Frontend parent agent
+- Documentation/UAT role -> Documentation/UAT parent agent
 - QA role -> QA parent agent
 - DevOps role -> DevOps parent agent
 

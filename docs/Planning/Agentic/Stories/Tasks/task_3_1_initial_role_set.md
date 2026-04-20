@@ -44,7 +44,7 @@ IMPLEMENTED
 - define the first project role set:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 - explain why these roles are distinct and why a generic implementation role is insufficient

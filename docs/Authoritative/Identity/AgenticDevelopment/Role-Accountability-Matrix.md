@@ -98,33 +98,36 @@ Context Atlas behaves as a system.
 Backend specialists may own narrow delegated slices, but they do so under
 parent-owned Backend accountability rather than as an alternate top-level role.
 
-### Frontend
+### Documentation/UAT
 
 #### Primary Accountability
 
-Own user-facing interaction and presentation surfaces for the product.
+Own user-facing documentation, guided evaluation, and user-acceptance-oriented
+product surfaces for the repository.
 
 #### Direct Artifact Ownership
 
 - user-facing guides and onboarding surfaces under `docs/Guides/`
 - runnable example experience under `examples/`
-- CLI-facing interaction shape when the concern is user-facing presentation
+- documentation or example flows that shape how a technical evaluator
+  understands and validates the product
+- CLI-facing experience when the concern is user-facing evaluation or clarity
   rather than backend execution logic
-- future UI-facing or product-presentation surfaces when those become part of
-  the repository
 
 #### Direct Decision Ownership
 
-- how users encounter, understand, and operate product-facing surfaces
-- presentation and interaction choices for guided setup, examples, and future
-  UI flows
-- user-facing clarity when backend capabilities need outward expression
+- how evaluators and users encounter, understand, and exercise the current
+  product surface
+- documentation and example choices for guided setup, guided validation, and
+  user-acceptance-style walkthroughs
+- user-facing clarity when backend capabilities need outward explanation or
+  demonstration
 
 #### Specialist Participation Note
 
-Frontend specialists may help with narrow presentation tasks, but the
-parent-owned Frontend role remains accountable for the resulting user-facing
-surface.
+Documentation/UAT specialists may help with narrow presentation or evaluation
+tasks, but the parent-owned Documentation/UAT role remains accountable for the
+resulting user-facing surface.
 
 ### QA
 

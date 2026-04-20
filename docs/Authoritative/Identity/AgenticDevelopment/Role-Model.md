@@ -58,7 +58,7 @@ The initial top-level role set for Context Atlas is:
 
 - Planner/Decomp
 - Backend
-- Frontend
+- Documentation/UAT
 - QA
 - DevOps
 
@@ -72,8 +72,9 @@ Context Atlas should not fall back to one generic implementation role for all
 non-planning work.
 
 The project has enough meaningful distinction between product-engine work,
-user-facing surface work, review work, and operational delivery work that a
-single implementation role would hide real accountability boundaries.
+user-facing documentation and evaluation work, review work, and operational
+delivery work that a single implementation role would hide real accountability
+boundaries.
 
 ### 4. Each Role Exists Because It Represents A Real Repository Accountability
 
@@ -84,9 +85,9 @@ titles:
   and dependency-aware delivery shape
 - `Backend`: owns engine, model, service, adapter, and infrastructure-facing
   implementation work for the product core
-- `Frontend`: owns user-facing interaction and presentation surfaces such as
-  guides, examples, CLI-oriented experience, and future UI-facing product
-  surfaces
+- `Documentation/UAT`: owns user-facing documentation, runnable example
+  experience, guided evaluation surfaces, and user-acceptance-oriented product
+  walkthroughs for the current repository
 - `QA`: owns governed validation, findings, acceptance analysis, and rework
   feedback loops
 - `DevOps`: owns merge, release, workflow, and operational delivery surfaces
@@ -100,6 +101,10 @@ specialists, or protocol participation.
 
 This keeps the role model legible and prevents the parent-agent layer from
 fragmenting too early.
+
+If Context Atlas later grows a bona fide frontend application surface, that may
+justify introducing a separate frontend role in a future revision. The current
+repository does not justify that split yet.
 
 ### 6. Specialists Do Not Create A Shadow Role Roster
 
