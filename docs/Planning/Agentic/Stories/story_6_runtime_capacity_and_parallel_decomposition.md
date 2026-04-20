@@ -16,6 +16,7 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
@@ -34,6 +35,7 @@ actually available for an Epic, Story, or Task.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
@@ -124,4 +126,5 @@ actually available for an Epic, Story, or Task.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

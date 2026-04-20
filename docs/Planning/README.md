@@ -37,6 +37,12 @@ rules from [docs/Authoritative/AgenticDevelopment/README.md](../Authoritative/Ag
 and its neighboring canon docs instead of redefining those concepts at the
 planning layer.
 
+When planning depends on machine-readable governance input, that input should
+live in the authoritative layers rather than inside planning docs themselves.
+For the agentic-development stack, runtime-capacity planning input belongs in
+the Identity layer artifact at
+[runtime_capacity.yaml](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml).
+
 If a planning artifact needs to explain what a role, mode, skill, protocol, or
 materialization layer means, the first fix should usually be to improve the
 AgenticDevelopment canon rather than expanding the planning doc into a second
