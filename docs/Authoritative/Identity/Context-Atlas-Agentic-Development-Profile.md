@@ -15,6 +15,7 @@ related:
   - ./Context-Atlas-Charter.md
   - ./Context-Atlas-System-Model.md
   - ./AgenticDevelopment/Role-Model.md
+  - ./AgenticDevelopment/Role-Accountability-Matrix.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -100,6 +101,17 @@ That means the project role roster should be interpreted as top-level
 accountability carried by parent agents, while specialists remain subordinate
 delegates beneath those parent-owned roles.
 
+### 8. Specialist Participation Does Not Change Role Ownership
+
+When specialists contribute to a workstream, they do so beneath a
+parent-owned role.
+
+That means planning artifacts remain Planner/Decomp-owned, engine
+implementation remains Backend-owned, user-facing product surfaces remain
+Frontend-owned, governed validation remains QA-owned, and operational delivery
+remains DevOps-owned unless a later authority or protocol artifact explicitly
+changes the handoff state.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -121,6 +133,7 @@ delegates beneath those parent-owned roles.
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
 - [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

@@ -16,6 +16,7 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_2_agent_and_skill_structure.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
@@ -41,6 +42,7 @@ rather than the runtime actor itself.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
@@ -142,6 +144,7 @@ rather than the runtime actor itself.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)

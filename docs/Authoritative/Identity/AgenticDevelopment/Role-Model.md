@@ -14,6 +14,7 @@ tags: [context-atlas, agentic-development, identity, roles, accountability]
 related:
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../Context-Atlas-System-Model.md
+  - ./Role-Accountability-Matrix.md
   - ../../AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../AgenticDevelopment/Agent-Authority-Model.md
   - ../../AgenticDevelopment/Agent-Composition-Model.md
@@ -108,6 +109,15 @@ labels do not define top-level project accountability.
 Any future specialist roster should therefore be interpreted as delegated
 execution structure beneath these roles rather than as a competing role model.
 
+### 7. Accountability And Ownership Are Defined Separately From Naming
+
+The role roster answers which top-level accountabilities exist.
+
+The accountability matrix answers what those roles directly own.
+
+Context Atlas should keep those two surfaces separate so a short role roster
+does not become overloaded with artifact-level ownership details.
+
 ## Constraints
 
 - Role names should remain project accountabilities rather than vendor worker
@@ -128,6 +138,7 @@ execution structure beneath these roles rather than as a competing role model.
 
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Context Atlas System Model](../Context-Atlas-System-Model.md)
+- [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
 - [Agentic Development Glossary](../../AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../AgenticDevelopment/Agent-Authority-Model.md)
 - [Agent Composition Model](../../AgenticDevelopment/Agent-Composition-Model.md)
