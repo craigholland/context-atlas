@@ -1,6 +1,14 @@
 # Documentation
 
-This directory will hold the canonical project documentation for Context Atlas.
+This directory holds the canonical project documentation for Context Atlas.
+
+## Guides
+
+User-facing setup and workflow help now lives under
+[docs/Guides/README.md](./Guides/README.md).
+
+If you are trying to evaluate or set up Context Atlas as a product, start there
+before reading `examples/` or the deeper architecture/planning canon.
 
 Before creating or editing project documents, start with [docs/Authoritative/Ontology/README.md](./Authoritative/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
 

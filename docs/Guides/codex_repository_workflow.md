@@ -6,6 +6,9 @@ The goal is to show how a Python engineer can point Atlas at a repository's gove
 docs, assemble a packet for a real engineering question, and inspect the resulting
 context, packet, and trace outputs.
 
+If you want the broader user-help index first, start with
+[Guides/README.md](./README.md).
+
 ## What You Will Do
 
 You will:
@@ -34,7 +37,7 @@ This workflow does not yet:
 
 ## Prerequisites
 
-- Python `3.14+`
+- Python `3.12+`
 - a local checkout of this repository
 
 ## Install
@@ -42,7 +45,7 @@ This workflow does not yet:
 From the repository root:
 
 ```powershell
-py -3.14 -m venv .venv
+py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e .[dev]
 ```
@@ -158,9 +161,9 @@ The trace output should make the workflow itself inspectable too. Metadata such 
 `request_workflow`, `request_repo_root`, and `request_docs_root` should remain
 visible so the example can explain which outer path produced the packet.
 
-If this guide, [README](../../README.md), and [examples/README.md](../../examples/README.md)
-stop telling the same story, the product-facing documentation is drifting and should
-be corrected before new guidance is added.
+If this guide, [README](../../README.md), and the
+[Guides index](./README.md) stop telling the same story, the product-facing
+documentation is drifting and should be corrected before new guidance is added.
 
 ## Demonstration Path
 

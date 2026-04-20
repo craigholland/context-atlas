@@ -25,6 +25,7 @@
 - Verifies that public policy inputs, outputs, and configurable starter policies follow the same validated-model direction.
 - Verifies that infrastructure composition, adapters, and renderers can consume those immutable validated models without mutating them.
 - Verifies that the curated `context_atlas.api` starter surface remains importable and sufficient for MVP-facing examples.
+- Verifies that the installable starter CLI remains aligned with the MVP starter surface rather than drifting into a separate execution path.
 
 ## Architectural Rules
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
@@ -42,6 +43,8 @@
 ## Public API / Key Exports
 - `test_bootstrap_layers.py`:
   - `BootstrapLayerTests`: verifies direct error/log message constants, config loading, and structured log output
+- `test_cli.py`:
+  - `StarterCliTests`: verifies the installable starter CLI and current release-version surface
 - `test_domain_models.py`:
   - `DomainModelTests`: verifies canonical source, budget, decision, trace, and packet artifacts
 - `test_config_observability.py`:
@@ -82,6 +85,15 @@
     - assertions should track centralized message constants rather than ad hoc inline strings
     - tests should prove the base coded exception now carries a validated payload rather than a dataclass-style surface
     - tests should prove the curated `context_atlas.api` surface exposes the supported starter flow without requiring deep imports
+- `test_cli.py`:
+  - responsibility: verifies the installable starter CLI stays aligned with the supported starter flow
+  - defines:
+    - `StarterCliTests`: starter CLI test suite
+  - depends_on:
+    - `context_atlas`
+  - invariants:
+    - tests should prove the installable starter CLI can assemble a packet from a docs directory without relying on repository-only helper scripts
+    - tests should prove the package version surface stays aligned with the current MVP release contract
 - `test_domain_models.py`:
   - responsibility: verifies canonical domain artifacts and their starter invariants
   - defines:

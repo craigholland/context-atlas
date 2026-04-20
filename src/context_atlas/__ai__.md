@@ -9,6 +9,8 @@
 - folder: src/context_atlas
 - included:
   - "__init__.py"
+  - "api.py"
+  - "cli.py"
   - "domain/**/*.py"
   - "services/**/*.py"
   - "adapters/**/*.py"
@@ -27,6 +29,7 @@
 - Makes it explicit that canonical domain artifacts now standardize on frozen Pydantic models inside the `context_atlas` namespace.
 - Makes it explicit that public policy inputs, outputs, and configurable starter policies now follow the same validated-model direction.
 - Makes it explicit that the current supported MVP surface is a curated `context_atlas.api` module plus a small set of stable subpackage imports rather than a broad root-level barrel.
+- Makes it explicit that the current installable starter CLI is a product-facing wrapper over the same curated starter surface rather than a second engine mode.
 
 ## Architectural Rules
 - This package is a standalone library package; downstream code should import through the `context_atlas` namespace rather than treating layer folders as top-level packages.
@@ -41,6 +44,7 @@
 - The package root should stay intentionally thin even after a curated public API is introduced; current user-facing guidance should prefer `context_atlas.api` for the starter flow and only reach for stable subpackage imports when architectural seams matter.
 - Product-facing guides and examples should treat `context_atlas.api` as the starter import surface and `context_atlas.rendering` as the supported home of derived packet/trace inspection renderers.
 - `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
+- The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
 
 ## Allowed Dependencies
 - may depend on:
@@ -58,6 +62,8 @@
   - package docstring: describes the current MVP-supported import surface
 - `api.py`:
   - curated starter-facing exports for adapters, settings loading, assembly wiring, and rendering
+- `cli.py`:
+  - installable starter command for running the MVP starter flow against a docs directory
 - `domain/`:
   - semantic core for error codes, log events, messages, canonical domain artifacts, and pure policy logic
   - canonical artifacts now use frozen Pydantic models with explicit domain validation
@@ -89,6 +95,14 @@
     - keep the export set small and intentional
     - re-export only the starter flow pieces that are explicitly supported for MVP users
     - examples should validate this module as the first import stop before they reach for stable subpackage paths
+- `cli.py`:
+  - responsibility: provides the installable starter CLI over the same curated starter surface
+  - depends_on:
+    - `context_atlas.api`
+    - `context_atlas.rendering`
+  - invariants:
+    - should stay a thin outer wrapper over the starter flow
+    - should not become a second workflow engine or a dumping ground for example-only behavior
 - `domain/`:
   - responsibility: holds semantic core contracts and canonical domain artifacts
   - used_by:
@@ -119,7 +133,7 @@
     - operator-facing assembly defaults should stay narrow until real services prove they are worth stabilizing
 
 ## Known Gaps / Future-State Notes
-- The package surface is still intentionally starter-oriented: `context_atlas.api` is curated and small, while the package root remains thin rather than acting as a broad convenience barrel.
+- The package surface is still intentionally starter-oriented: `context_atlas.api` and the installable starter CLI are both intentionally small, while the package root remains thin rather than acting as a broad convenience barrel.
 - Richer provider-backed composition, persistence-backed memory, and broader retrieval/integration surfaces are still future work outside the current MVP package shape.
 - The package should continue to keep structured boundary artifacts Pydantic-first; any remaining non-trivial dataclass use outside clearly private helpers should be treated as architectural drift.
 

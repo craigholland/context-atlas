@@ -2,6 +2,10 @@
 
 This example demonstrates the current technical-builder workflow for Context Atlas.
 
+For product-facing setup guidance, start with
+[docs/Guides/docs_database_workflow.md](/context-atlas/docs/Guides/docs_database_workflow.md).
+This README is the runnable companion artifact for that guide.
+
 Current supported shape:
 
 - point Atlas at a governed docs directory

@@ -25,6 +25,17 @@ product surface truthful, preserving packet-and-trace-centered evidence,
 strengthening configuration and boundary discipline, and widening scenario and
 integration coverage without forking the shared engine path.
 
+## Start Here
+
+If you are trying to evaluate or set up Context Atlas, start with:
+
+- [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
+- [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+
+Those guides are the primary user-facing help surface. The `examples/`
+directory contains runnable companion artifacts, sample payloads, and proof
+inputs that support the guides rather than replacing them.
+
 ## Principles
 
 - Standalone and reusable
@@ -35,10 +46,10 @@ integration coverage without forking the shared engine path.
 
 ## Initial Repository Layout
 
-- `docs/` for project documentation and documentation ontology
+- `docs/` for project documentation, product-facing guides, and documentation ontology
 - `src/context_atlas/` for the package source
 - `tests/` for automated tests
-- `examples/` for usage examples and demonstrations
+- `examples/` for runnable companion artifacts, sample payloads, and demonstrations
 
 ## Starter Source Families
 
@@ -324,6 +335,16 @@ In practice, that means filesystem adapters may keep document-specific mechanics
 
 The current supported MVP starter path is intentionally explicit.
 
+The starter surface is available in two forms:
+
+- installable command-line entrypoint:
+
+```powershell
+context-atlas-starter docs --query "How should planning docs be treated?"
+```
+
+- curated Python imports:
+
 Prefer imports like:
 
 ```python
@@ -345,9 +366,20 @@ That split is part of the supported architecture:
 - `context_atlas.rendering` is the supported home of derived packet and trace views
 - the package root should not become a broad convenience barrel that hides those distinctions
 
-The recommended first run is [examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py). It is designed to be the first user-facing run after an editable install. [examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py) remains useful as a smaller smoke example, but it is no longer the primary onboarding path.
+The recommended setup path is the guide index at
+[docs/Guides/README.md](/context-atlas/docs/Guides/README.md), followed by the
+starter walkthrough in
+[docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
 
-See [examples/README.md](/context-atlas/examples/README.md) for the current starter-flow index.
+The installable starter command, `context-atlas-starter`, is the smallest
+package-facing entrypoint. The runnable companion example
+[examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py)
+remains useful when working from a repository checkout, and
+[examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py)
+remains a smaller smoke surface rather than the primary onboarding path.
+
+See [examples/README.md](/context-atlas/examples/README.md) for the companion
+runnable artifact index.
 
 ## MVP Golden Path
 
