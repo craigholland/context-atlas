@@ -52,6 +52,8 @@ materializations aligned over time.
   through review guidance
 - keep drift detection focused on meaningful mismatches rather than cosmetic
   wording differences
+- treat unauthorized downstream semantic edits to runtime-facing assets as a
+  first-class drift condition once materialization work begins
 
 ### Task 2: Validation And Preflight Integration
 

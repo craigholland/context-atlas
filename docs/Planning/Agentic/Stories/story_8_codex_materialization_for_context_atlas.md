@@ -82,6 +82,9 @@ the explicit distinction between:
 - preserve the distinction between a skill definition and an actor's attached
   skill inventory as the abstract model becomes concrete files
 - keep those mappings clearly subordinate to the generic materialization model
+- require any Codex-specific runtime-file semantics to originate in Story 7's
+  generic materialization boundary and template model before the Codex binding
+  projects them into concrete assets
 
 ### Task 3: Codex Templates And Creation Guidance
 
