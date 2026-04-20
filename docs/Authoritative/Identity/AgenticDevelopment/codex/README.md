@@ -12,6 +12,9 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, materialization]
 related:
+  - ./folder_layout.md
+  - ./creation_guidance.md
+  - ./governance.md
   - ../Role-Model.md
   - ../Role-Agent-Binding-Model.md
   - ../Mode-Model.md
@@ -190,6 +193,9 @@ That separation helps keep the Codex layer honest during refresh work.
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Codex Folder Layout](./folder_layout.md)
+- [Context Atlas Codex Creation Guidance](./creation_guidance.md)
+- [Context Atlas Codex Governance](./governance.md)
 - [Role Model](../Role-Model.md)
 - [Role-Agent Binding Model](../Role-Agent-Binding-Model.md)
 - [Mode Model](../Mode-Model.md)
