@@ -159,6 +159,9 @@ the explicit distinction between:
 - the Identity-layer Codex binding README remains the single entrypoint for
   what Codex consumes before later docs explain how Codex stores or refreshes
   those assets
+- the Codex creation guidance remains the repeatable source for copied,
+  adapted, and derived content expectations when assets are created or
+  refreshed
 
 ## Definition Of Done
 
