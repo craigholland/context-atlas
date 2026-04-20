@@ -70,6 +70,8 @@ the explicit distinction between:
   of scattering the decision across later layout and template docs
 - define what parts of the abstract model must be represented for Codex to use
   them effectively
+- make the upstream dependency categories explicit so later Codex layout and
+  template docs consume one stable input set
 - keep the Story framed as a platform binding, not as a rewrite of the generic
   canon in Codex language
 - treat the portable canon and project-specific bindings as upstream sources
