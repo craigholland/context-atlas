@@ -100,6 +100,26 @@ The materialization boundary should preserve the three-layer model:
 Materialization is therefore downstream of interpretation, not a shortcut
 around interpretation.
 
+### 7. Upstream Semantic Change Must Precede Downstream Projection Change
+
+When a proposed runtime-facing update would change meaning, the semantic source
+must be changed first in the appropriate upstream authoritative layer.
+
+Only after that upstream change exists should the runtime-facing projection be
+updated to match it.
+
+### 8. Downstream-First Changes Are Limited To Non-Semantic Concerns
+
+Downstream-first changes are acceptable only when they refine how meaning is
+presented or discovered without changing the meaning itself.
+
+Typical examples include:
+
+- formatting or layout refinements
+- non-semantic naming refinements inside one platform surface
+- traceability metadata additions
+- regeneration metadata additions
+
 ## Constraints
 
 - Runtime-facing assets must remain downstream of authoritative semantics.
