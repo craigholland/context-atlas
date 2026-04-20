@@ -125,6 +125,8 @@ actually available for an Epic, Story, or Task.
   same feature branch before human merge
 - any machine-readable capacity artifact introduced by the Story is documented
   well enough for later validation and human editing
+- the Story points to one governed update path for runtime-capacity planning
+  input rather than leaving the artifact as a free-floating file
 
 ## Related Artifacts
 
