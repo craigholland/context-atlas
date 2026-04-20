@@ -85,6 +85,14 @@ A reviewer should be able to tell:
 - whether the template expresses portable canon, project binding, or both
 - which later runtime asset type the template is meant to support
 
+### 6. Template Types Should Carry Explicit Information Contracts
+
+Each generic template type should define what information it must carry before
+that template is projected into a platform-specific file layout.
+
+Those contracts belong in a portable template-contract surface rather than
+being rediscovered independently by each platform binding.
+
 ## Constraints
 
 - Templates must not replace authoritative canon or bindings.
@@ -101,5 +109,6 @@ A reviewer should be able to tell:
 
 - [Platform Materialization Model](./Platform-Materialization-Model.md)
 - [Materialization Boundary Model](./Materialization-Boundary-Model.md)
+- [Generic Template Contracts](./Templates/README.md)
 - [Role Archetypes README](./RoleArchetypes/README.md)
 - [Protocols README](./Protocols/README.md)
