@@ -112,7 +112,7 @@ expectations.
 
 Project skills should materialize into:
 
-- `.agents/skills/<skill-id>/SKILL.md`
+- `.agents/skills/context-atlas-<skill-id>/SKILL.md`
 
 Those files remain the Codex-facing realization of the atomic skill model.
 
@@ -179,7 +179,7 @@ That keeps the shared format from collapsing the upstream distinctions.
 | Parent agents and specialists | `.codex/agents/<agent-id>.toml` |
 | Modes | `.codex/modes/<mode-id>.md` |
 | Protocols | `.codex/protocols/<protocol-id>.md` |
-| Skills | `.agents/skills/<skill-id>/SKILL.md` |
+| Skills | `.agents/skills/context-atlas-<skill-id>/SKILL.md` |
 | Runtime config | `.codex/config.toml` |
 
 ## Constraints
