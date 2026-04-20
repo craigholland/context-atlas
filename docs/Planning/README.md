@@ -32,6 +32,11 @@ The current agentic-development planning surface lives under [Agentic](./Agentic
 - [Story docs](./Agentic/Stories/)
 - [Task PR plans](./Agentic/Stories/Tasks/)
 
+Those planning artifacts should derive their portable vocabulary and boundary
+rules from [docs/Authoritative/AgenticDevelopment/README.md](../Authoritative/AgenticDevelopment/README.md)
+and its neighboring canon docs instead of redefining those concepts at the
+planning layer.
+
 Contributors should prefer planning artifacts that move from:
 
 - product-level intent at the Epic layer
