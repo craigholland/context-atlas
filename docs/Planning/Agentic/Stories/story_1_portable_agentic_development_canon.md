@@ -83,6 +83,8 @@ runtime-materialization scheme.
 - cross-link the new canon with Craig Architecture, documentation ontology, and
   the Context Atlas system model where appropriate
 - ensure later stories can build on the canon without redefining its terms
+- keep the AgenticDevelopment directory README as the intended human entrypoint
+  to the portable layer
 
 ## Sequencing
 
@@ -123,6 +125,8 @@ runtime-materialization scheme.
   resolved on that same feature branch before human merge
 - any new glossary or canon documents include enough cross-linking to be usable
   as a discoverable entrypoint rather than an isolated document set
+- the AgenticDevelopment directory README remains a credible "start here"
+  surface for a reader who has not yet opened the downstream Story docs
 
 ## Related Artifacts
 
