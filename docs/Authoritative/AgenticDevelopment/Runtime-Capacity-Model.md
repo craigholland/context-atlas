@@ -144,6 +144,20 @@ That artifact should be:
 Projects should avoid scattering planning-capacity truth across multiple
 uncoordinated notes, prompts, or runtime-specific state files.
 
+### 10. Validation Should Focus On Structural Trustworthiness
+
+When projects validate a runtime-capacity artifact, the first validation target
+should be structural trustworthiness.
+
+Typical checks include:
+
+- required fields are present
+- values are well-formed
+- numeric relationships remain internally coherent
+- declared policy fields stay within the expected schema
+
+Those checks should not claim to prove real-time runtime availability.
+
 ## Constraints
 
 - Runtime capacity should remain a planning concept rather than an operational
