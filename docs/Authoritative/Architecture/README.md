@@ -4,6 +4,19 @@ This directory holds the reusable Craig Architecture canon for Context Atlas.
 
 These documents are intentionally more general than the project-specific artifacts under [`docs/Authoritative/Identity`](../Identity/). They define the architectural philosophy, implementation guidance, AI-collaboration rules, planning/decomposition model, and local `__ai__.md` contract shape that downstream projects can copy and adapt.
 
+The neighboring runtime-agnostic agentic-development canon lives under
+[`docs/Authoritative/AgenticDevelopment`](../AgenticDevelopment/README.md).
+When a change concerns agent roles, modes, skills, protocols, or runtime
+materialization concepts, contributors should read that set alongside Craig
+Architecture rather than forcing those concepts into the architecture docs.
+
+In practice:
+
+- Craig Architecture explains reusable architectural philosophy and delivery
+  governance
+- AgenticDevelopment explains reusable agentic vocabulary, authority,
+  boundaries, and materialization concepts
+
 ## What Lives Here
 
 - [Craig-Architecture.md](./Craig-Architecture.md): the core language-agnostic Craig Architecture philosophy

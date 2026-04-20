@@ -16,6 +16,7 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
+  - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
 
@@ -40,6 +41,7 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - Current Codex discovery expectations for agent, skill, mode, and runtime config files
 
 ## Proposed Tasks
@@ -52,6 +54,8 @@ the explicit distinction between:
   them effectively
 - keep the Story framed as a platform binding, not as a rewrite of the generic
   canon in Codex language
+- treat the portable canon and project-specific bindings as upstream sources
+  rather than restating them in Codex-specific terms
 
 ### Task 2: Codex Folder And File Conventions
 
@@ -127,3 +131,4 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)

@@ -26,6 +26,18 @@ The canonical definition of project mission, scope, and strategic boundaries now
 
 The reusable Craig Architecture canon now has its own directory index at [docs/Authoritative/Architecture/README.md](./Authoritative/Architecture/README.md). Contributors looking for the architecture set as a whole should start there before diving into individual supplements.
 
+The reusable, runtime-agnostic agentic-development canon now has its own
+directory index at [docs/Authoritative/AgenticDevelopment/README.md](./Authoritative/AgenticDevelopment/README.md).
+Contributors working on roles, modes, skills, protocols, or runtime
+materialization should start there before writing project-specific bindings or
+runtime assets.
+
+That order matters:
+
+- `AgenticDevelopment` defines portable concepts and boundaries
+- `Identity` defines what Context Atlas actually chooses to use
+- `Planning` defines how we intend to deliver those choices
+
 The canonical planning and decomposition reference now lives in [docs/Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
 
 The intended documentation ontology is:

@@ -16,6 +16,8 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
+  - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../Authoritative/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
 
@@ -35,6 +37,8 @@ entering modes during protocol execution.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
+- [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Mode Model](../../../Authoritative/AgenticDevelopment/Mode-Model.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
 
 ## Proposed Tasks
