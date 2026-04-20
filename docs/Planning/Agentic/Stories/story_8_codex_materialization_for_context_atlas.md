@@ -16,9 +16,11 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
+  - ./story_9_repo_management.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
+  - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
   - ../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
@@ -52,6 +54,7 @@ the explicit distinction between:
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
 - [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
@@ -156,6 +159,8 @@ the explicit distinction between:
   Codex assets
 - the Codex binding keeps the distinctions between role, parent agent,
   specialist, mode, protocol, and skill explicit
+- the Codex binding does not become the source of truth for GitHub principals,
+  branch-target policy, or review authority
 - Codex materialization stays clearly downstream of the portable canon and the
   Context Atlas project profile
 - the Identity-layer Codex binding README remains the single entrypoint for
@@ -188,9 +193,11 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Story 9 - RepoManagement](./story_9_repo_management.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
 - [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)

@@ -17,6 +17,9 @@ related:
   - ./story_5_protocol_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
   - ./story_10_validation_governance_and_drift_control.md
+  - ../../../Authoritative/RepoManagement/README.md
+  - ../../../Authoritative/RepoManagement/GitHub/README.md
+  - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
   - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md
@@ -38,6 +41,9 @@ provider-specific bindings, and auditable operational identities.
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 10 - Validation, Governance, And Drift Control](./story_10_validation_governance_and_drift_control.md)
+- [Repo Management](../../../Authoritative/RepoManagement/README.md)
+- [GitHub RepoManagement Canon](../../../Authoritative/RepoManagement/GitHub/README.md)
+- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)

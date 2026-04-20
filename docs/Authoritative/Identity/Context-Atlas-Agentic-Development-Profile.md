@@ -28,6 +28,7 @@ related:
   - ./AgenticDevelopment/Role-Mode-Matrix.md
   - ./AgenticDevelopment/Mode-Transition-Graph.md
   - ./AgenticDevelopment/codex/README.md
+  - ./RepoManagement/GitHub/README.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -204,6 +205,17 @@ That keeps the project-specific structural choices readable before any
 environment translates them into runtime-facing folders, templates, or helper
 assets.
 
+### 17. Repo-Management Authority Must Bind Through Its Own Identity Layer
+
+When Context Atlas roles need to comment, review, push, or merge through an
+external repository provider, those permissions should bind through
+`docs/Authoritative/Identity/RepoManagement/` rather than through runtime
+materialization docs or role notes alone.
+
+That keeps provider principals, branch-target merge policy, and audit identity
+explicit as a sibling binding layer instead of letting environment-specific
+assets become the de facto source of repository authority.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -241,6 +253,7 @@ assets.
 - [Context Atlas Role-Mode Matrix](./AgenticDevelopment/Role-Mode-Matrix.md)
 - [Mode Transition Graph](./AgenticDevelopment/Mode-Transition-Graph.md)
 - [Context Atlas Codex Binding](./AgenticDevelopment/codex/README.md)
+- [Context Atlas GitHub Binding](./RepoManagement/GitHub/README.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

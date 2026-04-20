@@ -15,6 +15,7 @@ related:
   - ./folder_layout.md
   - ./creation_guidance.md
   - ./governance.md
+  - ../../RepoManagement/GitHub/README.md
   - ../Role-Model.md
   - ../Role-Agent-Binding-Model.md
   - ../Mode-Model.md
@@ -172,6 +173,14 @@ Later creation guidance should make it explicit which parts of a Codex asset:
 
 That separation helps keep the Codex layer honest during refresh work.
 
+### 11. Repository Authority Remains Outside The Codex Binding
+
+Codex-facing assets may help a runtime discover how to act, but they do not
+define repository principals, provider permissions, branch-target merge policy,
+or audit identity.
+
+Those concerns remain defined by the Context Atlas RepoManagement binding.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of
@@ -188,6 +197,7 @@ That separation helps keep the Codex layer honest during refresh work.
 - Define the full Codex folder layout.
 - Define the final Codex templates.
 - Define the final Codex governance hooks.
+- Define repository principals, permissions, or merge policy.
 - Materialize the runtime-facing Codex assets themselves.
 
 ## Related Artifacts
@@ -196,6 +206,7 @@ That separation helps keep the Codex layer honest during refresh work.
 - [Context Atlas Codex Folder Layout](./folder_layout.md)
 - [Context Atlas Codex Creation Guidance](./creation_guidance.md)
 - [Context Atlas Codex Governance](./governance.md)
+- [Context Atlas GitHub Binding](../../RepoManagement/GitHub/README.md)
 - [Role Model](../Role-Model.md)
 - [Role-Agent Binding Model](../Role-Agent-Binding-Model.md)
 - [Mode Model](../Mode-Model.md)

@@ -1,7 +1,7 @@
 ---
 id: context-atlas-role-authority-matrix
 title: Context Atlas Role Authority Matrix
-summary: Defines what each Context Atlas role may authorize, approve, mutate, delegate, or escalate so ownership does not drift into implicit authority.
+summary: Defines what each Context Atlas role may authorize, approve, mutate, delegate, review, or escalate so ownership does not drift into implicit authority, including GitHub-facing repo actions.
 doc_class: authoritative
 template_refs:
   metadata: base_metadata@1.0.0
@@ -16,6 +16,9 @@ related:
   - ./Role-Accountability-Matrix.md
   - ./Role-Mode-Matrix.md
   - ./Gate-Review-Pass-Matrix.md
+  - ../RepoManagement/GitHub/Operation-Matrix.md
+  - ../RepoManagement/GitHub/Branch-Target-Policy.md
+  - ../RepoManagement/GitHub/Agentic-Integration-Model.md
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../../AgenticDevelopment/Escalation-Model.md
 supersedes: []
@@ -40,6 +43,7 @@ This document defines:
 - authority to decompose work
 - authority to implement or mutate owned surfaces
 - authority to request or perform review
+- authority to publish GitHub-facing implementation, review, or merge actions
 - authority to approve merge or release actions
 - authority to change repository operational workflows
 - escalation expectations where authority should stop rather than drift
@@ -55,6 +59,8 @@ the protocol story.
 
 - decompose Epics, Stories, Tasks, and PR slices
 - update planning artifacts under `docs/Planning/`
+- push and update planning branches or PRs through the scoped GitHub planner
+  principal
 - request review of planning changes
 - delegate bounded planning analysis while retaining planning authority
 - escalate when planning conflicts require ownership, review, or operational
@@ -72,6 +78,8 @@ the protocol story.
 #### May
 
 - implement and mutate backend-owned product surfaces
+- push and update backend-owned branches and PRs through the scoped GitHub
+  backend principal
 - request review of backend changes
 - emit structured completion handoff contracts for downstream review or
   protocol-governed next steps
@@ -82,6 +90,7 @@ the protocol story.
 #### May Not
 
 - treat implementation ownership as final QA acceptance
+- unilaterally clear or dismiss blocking QA findings on the review surface
 - approve merges or releases as a default part of backend work
 - mutate repository workflow or release surfaces unless explicitly operating
   under DevOps authority
@@ -91,6 +100,8 @@ the protocol story.
 #### May
 
 - implement and mutate documentation/UAT-owned user-facing product surfaces
+- push and update documentation/UAT-owned branches and PRs through the scoped
+  GitHub documentation/UAT principal
 - request review of documentation, example, or evaluator-facing changes
 - emit structured completion handoff contracts for downstream review or
   protocol-governed next steps
@@ -102,6 +113,7 @@ the protocol story.
 #### May Not
 
 - treat documentation or evaluator-surface ownership as final QA acceptance
+- unilaterally clear or dismiss blocking QA findings on the review surface
 - approve merges or releases as a default part of documentation/UAT work
 - mutate repository workflow or release surfaces unless explicitly operating
   under DevOps authority
@@ -115,9 +127,12 @@ the protocol story.
   contract and gate binding
 - publish governed review findings directly on the active review surface
   selected by the current runtime materialization
+- publish GitHub PR reviews, inline findings, and review summaries through the
+  scoped QA principal when GitHub is the active review surface
 - record findings, acceptance analysis, and rework requests
 - request additional evidence or validation work before recommending readiness
 - accept or reject structured review-intake handoffs according to protocol
+- clear findings once the required response or patch is satisfactory
 - escalate when review results conflict with claimed readiness or ownership
 
 #### May Not
@@ -126,6 +141,7 @@ the protocol story.
 - depend on ad hoc prose comments as the canonical review trigger when the
   protocol requires a structured handoff contract
 - approve merges or releases as a substitute for DevOps authority
+- execute merges merely because QA published the review
 - convert review participation into a general right to rewrite owned product
   surfaces without explicit reassignment
 
@@ -135,6 +151,8 @@ the protocol story.
 
 - approve or execute merge actions once required planning, implementation, and
   QA expectations are satisfied
+- execute GitHub merges only through the scoped DevOps principal bound to the
+  current target branch class
 - rely on explicit upstream structured handoff or review-outcome state when
   determining merge or release readiness
 - prepare and execute release-oriented actions
@@ -179,5 +197,8 @@ the protocol story.
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
 - [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
 - [Gate Review Pass Matrix](./Gate-Review-Pass-Matrix.md)
+- [GitHub Operation Matrix](../RepoManagement/GitHub/Operation-Matrix.md)
+- [GitHub Branch-Target Policy](../RepoManagement/GitHub/Branch-Target-Policy.md)
+- [GitHub Agentic Integration Model](../RepoManagement/GitHub/Agentic-Integration-Model.md)
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Escalation Model](../../AgenticDevelopment/Escalation-Model.md)
