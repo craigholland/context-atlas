@@ -24,7 +24,7 @@ related:
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md
   - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -52,7 +52,7 @@ alternate role definitions.
 - [Context Atlas Role-Mode Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md)
 - [Mode Transition Graph](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - Current repository workflow expectations around planning, implementation, review, rework, recovery, and release-oriented work
 
 ## Proposed Tasks
@@ -147,4 +147,5 @@ alternate role definitions.
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

@@ -19,9 +19,9 @@ related:
   - ./story_7_platform_materialization_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
   - ./story_9_repo_management.md
-  - ../../../Authoritative/AgenticDevelopment/Drift-Model.md
-  - ../../../Authoritative/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/AgenticDevelopment/Change-Management-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
 supersedes: []
 ---
 
@@ -42,9 +42,9 @@ inputs, and runtime materializations aligned over time.
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
-- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/AgenticDevelopment/Change-Management-Model.md)
+- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
 - Current repository validation and `__ai__.md` governance patterns
 
 ## Proposed Tasks
@@ -123,12 +123,24 @@ inputs, and runtime materializations aligned over time.
   Identity-layer Codex binding entrypoint rather than letting runtime docs
   define their own shadow binding model
 
+### Task 5: Canon And Identity Directory Split
+
+- make the top-tier reusable surfaces explicitly live under
+  `docs/Authoritative/Canon/`
+- keep `docs/Authoritative/Identity/` as the sibling project-binding layer
+- update links, planning references, owner files, examples, and tests so the
+  new split is reflected in both prose and runnable fixtures
+- keep the refactor structural rather than semantic: the move should clarify
+  layer boundaries without redefining the canon itself
+
 ## Sequencing
 
 - define the drift model and what mismatches matter
 - define validation and preflight integration expectations
 - bind the new surfaces into owner-file and metadata governance
 - define change-management and recovery expectations for future evolution
+- keep the top-tier directory split between reusable canon and project-specific
+  identity explicit as the authoritative surface grows
 
 ## Risks And Unknowns
 
@@ -174,6 +186,7 @@ inputs, and runtime materializations aligned over time.
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
-- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/AgenticDevelopment/Change-Management-Model.md)
+- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+

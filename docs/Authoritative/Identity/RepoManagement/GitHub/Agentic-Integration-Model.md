@@ -15,10 +15,10 @@ related:
   - ./README.md
   - ./Operation-Matrix.md
   - ./Branch-Target-Policy.md
-  - ../../AgenticDevelopment/Role-Authority-Matrix.md
-  - ../../AgenticDevelopment/Gate-Review-Pass-Matrix.md
-  - ../../../AgenticDevelopment/Protocols/Handoff-Protocol.md
-  - ../../../AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../../Canon/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../Canon/AgenticDevelopment/Gate-Review-Pass-Matrix.md
+  - ../../../Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md
+  - ../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
 supersedes: []
 ---
 
@@ -112,3 +112,4 @@ review_outcome:
   tool-trigger pattern.
 - Merge execution should stay DevOps-owned rather than drifting into
   implementation or QA participation.
+

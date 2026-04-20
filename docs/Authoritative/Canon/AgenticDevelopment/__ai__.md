@@ -7,7 +7,7 @@
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 
 ## Scope
-- folder: docs/Authoritative/AgenticDevelopment
+- folder: docs/Authoritative/Canon/AgenticDevelopment
 - included:
   - "*.md"
   - "**/*.md"
@@ -28,9 +28,9 @@
 
 ## Allowed Dependencies
 - may depend on:
-  - docs/Authoritative/Architecture/**
-  - docs/Authoritative/Ontology/**
-  - docs/Authoritative/RepoManagement/**
+  - docs/Authoritative/Canon/Architecture/**
+  - docs/Authoritative/Canon/Ontology/**
+  - docs/Authoritative/Canon/RepoManagement/**
 - must not depend on:
   - docs/Authoritative/Identity/**
   - docs/Planning/**
@@ -82,7 +82,7 @@
 - The repo-management sibling canon is now present, but the provisioned GitHub-principal reality still depends on future operational setup outside this doc set.
 
 ## Cross-Folder Contracts
-- docs/Authoritative/RepoManagement: sibling canon for repository-provider concepts that agentic-development may rely on but must not absorb.
+- docs/Authoritative/Canon/RepoManagement: sibling canon for repository-provider concepts that agentic-development may rely on but must not absorb.
 - docs/Authoritative/Identity/AgenticDevelopment: project-specific binding layer that refines, but must not redefine, the portable canon.
 - docs/Authoritative/Identity/RepoManagement: project-specific repo-provider bindings that must stay downstream of this canon and the RepoManagement canon.
 - docs/Planning/Agentic: planning surfaces should inherit vocabulary and governance from this folder rather than creating a second source of truth.
@@ -92,13 +92,14 @@
 steps:
   - name: validate_owner_file
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/AgenticDevelopment/__ai__.md __ai__.md
+      py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md __ai__.md
 
   - name: validate_related_owner_files
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/AgenticDevelopment/__ai__.md docs/Authoritative/RepoManagement/__ai__.md __ai__.md
+      py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md docs/Authoritative/Canon/RepoManagement/__ai__.md __ai__.md
 
   - name: freshness
     run: |
-      py -3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/AgenticDevelopment --governed-root docs/Authoritative/RepoManagement --suffix .md
+      py -3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/Canon/AgenticDevelopment --governed-root docs/Authoritative/Canon/RepoManagement --suffix .md
 ```
+

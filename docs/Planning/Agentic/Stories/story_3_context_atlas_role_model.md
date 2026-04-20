@@ -19,10 +19,10 @@ related:
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
-  - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
-  - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
-  - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
-  - ../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Composition-Decision-Model.md
   - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
@@ -47,14 +47,14 @@ of review passes rather than relying on ad hoc review-trigger comments.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
-- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Role Archetypes](../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
-- [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
+- [Agentic Development Glossary](../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - Current repo delivery expectations around planning, implementation, review, merge, and release work
 
@@ -165,12 +165,13 @@ of review passes rather than relying on ad hoc review-trigger comments.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
-- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Role Archetypes](../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
-- [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
+- [Agent Composition Model](../../../Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md)
+- [Composition Decision Model](../../../Authoritative/Canon/AgenticDevelopment/Composition-Decision-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+

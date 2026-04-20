@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, review, recovery, change-management]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - the drift, validation, and governance work from Tasks 10.1 through 10.3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - prevent live runtime assets from becoming the first place changes are made
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Change-Management-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
@@ -62,9 +62,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Change-Management-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Drift-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Validation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Drift-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Validation-Model.md`
 
 #### Update AI files
 - `.`
@@ -109,4 +109,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+

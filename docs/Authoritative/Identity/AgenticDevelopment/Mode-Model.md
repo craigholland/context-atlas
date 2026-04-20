@@ -18,7 +18,7 @@ related:
   - ./Mode-Transition-Rules.md
   - ./Mode-Mutation-Matrix.md
   - ./Mode-Transition-Graph.md
-  - ../../AgenticDevelopment/Mode-Model.md
+  - ../../Canon/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
 
@@ -163,4 +163,5 @@ artifacts and protocol rules rather than reconstructed from freeform comments.
 - [Mode Transition Rules](./Mode-Transition-Rules.md)
 - [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
 - [Mode Transition Graph](./Mode-Transition-Graph.md)
-- [Portable Mode Model](../../AgenticDevelopment/Mode-Model.md)
+- [Portable Mode Model](../../Canon/AgenticDevelopment/Mode-Model.md)
+

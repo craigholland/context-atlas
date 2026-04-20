@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, proof, deliverables, assessment]
 related:
   - ../story_6_mvp_proof.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - outputs from Tasks 6.1 and 6.2
 
 ## Proposed Work
@@ -110,3 +110,4 @@ IMPLEMENTED
 
 - [Story 6 - MVP Proof](../story_6_mvp_proof.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

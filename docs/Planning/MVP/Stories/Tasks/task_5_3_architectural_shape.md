@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, low-code, architecture, configuration]
 related:
   - ../story_5_low_code_workflow.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 5 - Low-Code Workflow](../story_5_low_code_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - outputs from Tasks 5.1 and 5.2
 
 ## Proposed Work
@@ -117,4 +117,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Low-Code Workflow](../story_5_low_code_workflow.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

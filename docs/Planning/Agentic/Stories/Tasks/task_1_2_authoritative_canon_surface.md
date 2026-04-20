@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, canon, docs]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -22,7 +22,7 @@ supersedes: []
 
 ## Objective
 
-Define the initial authoritative document surface under `docs/Authoritative/AgenticDevelopment/` so the canon has a stable home before project-specific bindings are added.
+Define the initial authoritative document surface under `docs/Authoritative/Canon/AgenticDevelopment/` so the canon has a stable home before project-specific bindings are added.
 
 ## Task Status
 
@@ -32,8 +32,8 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
-- current authoritative-doc structure under `docs/Authoritative/Architecture/`
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- current authoritative-doc structure under `docs/Authoritative/Canon/Architecture/`
 
 ## Proposed Work
 
@@ -44,7 +44,7 @@ IMPLEMENTED
 - keep the initial surface small enough to govern clearly
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md`
@@ -60,14 +60,14 @@ IMPLEMENTED
 - align the new documents with the documentation ontology and authoritative-doc conventions
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Mode-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Skill-Contract.md`
-- `docs/Authoritative/AgenticDevelopment/Platform-Materialization-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Mode-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Skill-Contract.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/README.md`
-- `docs/Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md`
-- `docs/Authoritative/AgenticDevelopment/Agent-Authority-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md`
 
 #### Update AI files
 - `.`
@@ -83,8 +83,8 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/README.md`
-- `docs/Authoritative/Architecture/README.md`
-- `docs/Authoritative/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/Architecture/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
 - `docs/Planning/README.md`
 
 #### Update AI files
@@ -111,4 +111,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+

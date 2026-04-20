@@ -29,9 +29,9 @@ related:
   - ./AgenticDevelopment/Mode-Transition-Graph.md
   - ./AgenticDevelopment/codex/README.md
   - ./RepoManagement/GitHub/README.md
-  - ../AgenticDevelopment/Agent-Composition-Model.md
-  - ../AgenticDevelopment/Composition-Decision-Model.md
-  - ../AgenticDevelopment/Boundary-Model.md
+  - ../Canon/AgenticDevelopment/Agent-Composition-Model.md
+  - ../Canon/AgenticDevelopment/Composition-Decision-Model.md
+  - ../Canon/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
 
@@ -254,6 +254,7 @@ assets become the de facto source of repository authority.
 - [Mode Transition Graph](./AgenticDevelopment/Mode-Transition-Graph.md)
 - [Context Atlas Codex Binding](./AgenticDevelopment/codex/README.md)
 - [Context Atlas GitHub Binding](./RepoManagement/GitHub/README.md)
-- [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
-- [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
-- [Boundary Model](../AgenticDevelopment/Boundary-Model.md)
+- [Agent Composition Model](../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+- [Composition Decision Model](../Canon/AgenticDevelopment/Composition-Decision-Model.md)
+- [Boundary Model](../Canon/AgenticDevelopment/Boundary-Model.md)
+

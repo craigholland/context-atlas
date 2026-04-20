@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Role Archetypes](../../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Role Archetypes](../../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - the structural binding from Story 2
@@ -120,3 +120,4 @@ IMPLEMENTED
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+

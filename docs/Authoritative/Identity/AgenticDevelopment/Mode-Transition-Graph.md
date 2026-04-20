@@ -16,7 +16,7 @@ related:
   - ./Mode-Transition-Rules.md
   - ./Role-Mode-Matrix.md
   - ./Protocol-Mode-Bindings.md
-  - ../../AgenticDevelopment/Mode-Model.md
+  - ../../Canon/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
 
@@ -144,4 +144,5 @@ workstream without implying that a new execution mode has been entered.
 - [Mode Transition Rules](./Mode-Transition-Rules.md)
 - [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
 - [Protocol Mode Bindings](./Protocol-Mode-Bindings.md)
-- [Portable Mode Model](../../AgenticDevelopment/Mode-Model.md)
+- [Portable Mode Model](../../Canon/AgenticDevelopment/Mode-Model.md)
+

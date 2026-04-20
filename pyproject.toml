@@ -61,4 +61,5 @@ testpaths = ["tests"]
 
 [tool.ruff]
 target-version = "py312"
-extend-exclude = ["docs/Authoritative/Architecture/example_ci_scripts"]
+extend-exclude = ["docs/Authoritative/Canon/Architecture/example_ci_scripts"]
+

@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, canon]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the current Context Atlas branch/PR workflow and role authority model
 
 ## Proposed Work
@@ -48,8 +48,8 @@ IMPLEMENTED
 - keep the new canon clearly separate from AgenticDevelopment
 
 #### Expected New Files
-- `docs/Authoritative/RepoManagement/README.md`
-- `docs/Authoritative/RepoManagement/RepoManagement-Glossary.md`
+- `docs/Authoritative/Canon/RepoManagement/README.md`
+- `docs/Authoritative/Canon/RepoManagement/RepoManagement-Glossary.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_9_repo_management.md`
@@ -68,14 +68,14 @@ IMPLEMENTED
   provider bindings
 
 #### Expected New Files
-- `docs/Authoritative/RepoManagement/Principal-Model.md`
-- `docs/Authoritative/RepoManagement/Authorization-Model.md`
-- `docs/Authoritative/RepoManagement/Operation-Model.md`
-- `docs/Authoritative/RepoManagement/Branch-Target-Policy-Model.md`
-- `docs/Authoritative/RepoManagement/Audit-Identity-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/Principal-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/Authorization-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/Operation-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/Branch-Target-Policy-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/Audit-Identity-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/RepoManagement/README.md`
+- `docs/Authoritative/Canon/RepoManagement/README.md`
 
 #### Update AI files
 - `.`
@@ -120,4 +120,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

@@ -14,7 +14,7 @@ tags: [context-atlas, repo-management, identity, github]
 related:
   - ./GitHub/README.md
   - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../RepoManagement/README.md
+  - ../../Canon/RepoManagement/README.md
 supersedes: []
 ---
 
@@ -50,13 +50,14 @@ That GitHub binding is the project-specific home for:
 
 For most readers:
 
-1. [../../RepoManagement/README.md](../../RepoManagement/README.md)
-2. [../../RepoManagement/GitHub/README.md](../../RepoManagement/GitHub/README.md)
+1. [../../Canon/RepoManagement/README.md](../../Canon/RepoManagement/README.md)
+2. [../../Canon/RepoManagement/GitHub/README.md](../../Canon/RepoManagement/GitHub/README.md)
 3. [GitHub/README.md](./GitHub/README.md)
 
 ## Boundary Rules
 
-- portable repo-management meaning belongs in `docs/Authoritative/RepoManagement/`
+- portable repo-management meaning belongs in `docs/Authoritative/Canon/RepoManagement/`
 - provider-specific reusable GitHub meaning belongs in
-  `docs/Authoritative/RepoManagement/GitHub/`
+  `docs/Authoritative/Canon/RepoManagement/GitHub/`
 - Context Atlas-specific GitHub policy belongs here
+

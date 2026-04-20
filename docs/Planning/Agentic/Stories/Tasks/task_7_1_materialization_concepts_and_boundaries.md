@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, materialization, boundaries]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 - the portable canon and project profile layers from earlier Stories
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - prevent runtime assets from being treated as authoritative by default
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
@@ -62,8 +62,8 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Platform-Materialization-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md`
 - `docs/Planning/Agentic/agentic_development_product_definition.md`
 
 #### Update AI files
@@ -107,4 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+

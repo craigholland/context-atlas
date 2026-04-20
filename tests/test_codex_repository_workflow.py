@@ -50,7 +50,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             repo_root = Path(temp_dir)
             docs_root = repo_root / "docs"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Guidance
 
@@ -105,7 +105,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             repo_root = Path(temp_dir)
             docs_root = repo_root / "docs"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Architecture Guidance
 
@@ -150,7 +150,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             self.assertIn("=== Packet Inspection ===", result.stdout)
             self.assertIn("=== Trace Inspection ===", result.stdout)
             self.assertIn(
-                "Authoritative/Architecture/Guidance.md",
+                "Authoritative/Canon/Architecture/Guidance.md",
                 result.stdout,
             )
             self.assertIn("selected_source_families: document", result.stdout)
@@ -162,7 +162,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             repo_root = Path(temp_dir) / "sample-repo"
             docs_root = repo_root / "docs"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Guidance
 
@@ -202,7 +202,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                 result.stdout,
             )
             self.assertIn(
-                "Authoritative/Architecture/Guidance.md",
+                "Authoritative/Canon/Architecture/Guidance.md",
                 result.stdout,
             )
 
@@ -212,7 +212,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             docs_root = repo_root / "docs"
             proof_dir = Path(temp_dir) / "proof"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Guidance
 
@@ -276,7 +276,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
                 * 8
             )
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 f"# Guidance\n\n{repeated_guidance}\n",
             )
             self._write_doc(
@@ -323,7 +323,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             repo_root = Path(temp_dir)
             docs_root = repo_root / "docs" / "Guides"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Guidance
 
@@ -377,7 +377,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
         self.assertEqual(
             selected_document_ids,
             [
-                "Authoritative/Architecture/Repo-Guidance.md",
+                "Authoritative/Canon/Architecture/Repo-Guidance.md",
                 "Planning/Current-Work.md",
                 "Reviews/Review-Notes.md",
             ],
@@ -388,7 +388,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
         )
         self.assertIn(
             "authority_priority",
-            reason_codes_by_source["Authoritative/Architecture/Repo-Guidance.md"],
+            reason_codes_by_source["Authoritative/Canon/Architecture/Repo-Guidance.md"],
         )
         self.assertEqual(
             packet.trace.metadata["selected_source_classes"],
@@ -424,7 +424,7 @@ class CodexRepositoryWorkflowTests(unittest.TestCase):
             repo_root = Path(temp_dir)
             docs_root = repo_root / "docs"
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Guidance.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Guidance.md",
                 """
                 # Guidance
 

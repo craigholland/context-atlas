@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, portability, boundaries]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - current repo pattern for separating portable philosophy from project bindings
 
 ## Proposed Work
@@ -47,7 +47,7 @@ IMPLEMENTED
 - prevent role names, platform folders, or runtime conventions from leaking upward
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Boundary-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Boundary-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/agentic_development_product_definition.md`
@@ -66,10 +66,10 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/README.md`
-- `docs/Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md`
-- `docs/Authoritative/AgenticDevelopment/Agent-Authority-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Boundary-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Boundary-Model.md`
 
 #### Update AI files
 - `.`
@@ -114,3 +114,4 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+

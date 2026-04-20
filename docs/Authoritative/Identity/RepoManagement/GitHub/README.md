@@ -18,10 +18,10 @@ related:
   - ./Audit-Identity-Model.md
   - ./Agentic-Integration-Model.md
   - ../../Context-Atlas-Agentic-Development-Profile.md
-  - ../../AgenticDevelopment/Role-Authority-Matrix.md
-  - ../../AgenticDevelopment/Gate-Review-Pass-Matrix.md
-  - ../../../RepoManagement/README.md
-  - ../../../RepoManagement/GitHub/README.md
+  - ../../Canon/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../Canon/AgenticDevelopment/Gate-Review-Pass-Matrix.md
+  - ../../../Canon/RepoManagement/README.md
+  - ../../../Canon/RepoManagement/GitHub/README.md
 supersedes: []
 ---
 
@@ -110,7 +110,8 @@ GitHub authority must remain defined in this binding layer.
 - [Audit Identity Model](./Audit-Identity-Model.md)
 - [Agentic Integration Model](./Agentic-Integration-Model.md)
 - [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
-- [Role Authority Matrix](../../AgenticDevelopment/Role-Authority-Matrix.md)
-- [Gate Review Pass Matrix](../../AgenticDevelopment/Gate-Review-Pass-Matrix.md)
-- [RepoManagement README](../../../RepoManagement/README.md)
-- [GitHub RepoManagement Canon](../../../RepoManagement/GitHub/README.md)
+- [Role Authority Matrix](../../Canon/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Gate Review Pass Matrix](../../Canon/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
+- [RepoManagement README](../../../Canon/RepoManagement/README.md)
+- [GitHub RepoManagement Canon](../../../Canon/RepoManagement/GitHub/README.md)
+

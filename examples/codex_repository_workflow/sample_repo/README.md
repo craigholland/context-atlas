@@ -15,8 +15,9 @@ The workflow expects:
 sample_repo/
   docs/
     Authoritative/
-      Architecture/
-        Repo-Guidance.md
+      Canon/
+        Architecture/
+          Repo-Guidance.md
     Planning/
       Current-Work.md
     Reviews/
@@ -36,7 +37,7 @@ The current workflow is most useful when the governed docs include:
 For the Story 7 authority-hardening pass, the sample shape should make the
 document-side authority contrast explicit:
 
-- `Authoritative/Architecture/Repo-Guidance.md`
+- `Authoritative/Canon/Architecture/Repo-Guidance.md`
   - should describe the binding or preferred repository guidance that should win
     when the same question is answered from multiple document classes
 - `Planning/Current-Work.md`
@@ -53,7 +54,7 @@ translation into packet and trace output.
 
 This sample repo now includes that tracked authority contrast under:
 
-- `sample_repo/docs/Authoritative/Architecture/Repo-Guidance.md`
+- `sample_repo/docs/Authoritative/Canon/Architecture/Repo-Guidance.md`
 - `sample_repo/docs/Planning/Current-Work.md`
 - `sample_repo/docs/Reviews/Review-Notes.md`
 
@@ -83,3 +84,4 @@ python examples/codex_repository_workflow/run.py `
 This artifact is not a second workflow. It is a concrete layout reference so the
 guide, CLI help, and runnable example all describe the same minimal repository
 shape before broader repository inputs arrive later.
+

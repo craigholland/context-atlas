@@ -18,22 +18,27 @@ Those artifacts are the repository home for `releases`-class product summaries
 such as shipped-version notes, operational release state, and versioned product
 history.
 
-Before creating or editing project documents, start with [docs/Authoritative/Ontology/README.md](./Authoritative/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
+The reusable top-tier canon is now grouped under
+[docs/Authoritative/Canon/README.md](./Authoritative/Canon/README.md), while
+Context Atlas-specific bindings remain under
+[docs/Authoritative/Identity/](./Authoritative/Identity/).
 
-The canonical semantic definitions for the document classes now live in [docs/Authoritative/Ontology/Documentation-Ontology.md](./Authoritative/Ontology/Documentation-Ontology.md). That document defines what `Authoritative`, `Planning`, `Reviews`, `Exploratory`, and `Releases` actually mean, what they are safe to use for, and how they should interact when they disagree.
+Before creating or editing project documents, start with [docs/Authoritative/Canon/Ontology/README.md](./Authoritative/Canon/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
+
+The canonical semantic definitions for the document classes now live in [docs/Authoritative/Canon/Ontology/Documentation-Ontology.md](./Authoritative/Canon/Ontology/Documentation-Ontology.md). That document defines what `Authoritative`, `Planning`, `Reviews`, `Exploratory`, and `Releases` actually mean, what they are safe to use for, and how they should interact when they disagree.
 
 The canonical definition of project mission, scope, and strategic boundaries now lives in [docs/Authoritative/Identity/Context-Atlas-Charter.md](./Authoritative/Identity/Context-Atlas-Charter.md). The project-specific operational model now lives in [docs/Authoritative/Identity/Context-Atlas-System-Model.md](./Authoritative/Identity/Context-Atlas-System-Model.md).
 
-The reusable Craig Architecture canon now has its own directory index at [docs/Authoritative/Architecture/README.md](./Authoritative/Architecture/README.md). Contributors looking for the architecture set as a whole should start there before diving into individual supplements.
+The reusable Craig Architecture canon now has its own directory index at [docs/Authoritative/Canon/Architecture/README.md](./Authoritative/Canon/Architecture/README.md). Contributors looking for the architecture set as a whole should start there before diving into individual supplements.
 
 The reusable, runtime-agnostic agentic-development canon now has its own
-directory index at [docs/Authoritative/AgenticDevelopment/README.md](./Authoritative/AgenticDevelopment/README.md).
+directory index at [docs/Authoritative/Canon/AgenticDevelopment/README.md](./Authoritative/Canon/AgenticDevelopment/README.md).
 Contributors working on roles, modes, skills, protocols, or runtime
 materialization should start there before writing project-specific bindings or
 runtime assets.
 
 The reusable repo-management canon now has its own directory index at
-[docs/Authoritative/RepoManagement/README.md](./Authoritative/RepoManagement/README.md).
+[docs/Authoritative/Canon/RepoManagement/README.md](./Authoritative/Canon/RepoManagement/README.md).
 Contributors working on repository principals, permissions, branch-target
 policy, review surfaces, or audit identities should start there before writing
 project-specific provider bindings.
@@ -47,7 +52,7 @@ That order matters:
   portable surfaces
 - `Planning` defines how we intend to deliver those choices
 
-The canonical planning and decomposition reference now lives in [docs/Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
+The canonical planning and decomposition reference now lives in [docs/Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
 
 The intended documentation ontology is:
 
@@ -58,3 +63,4 @@ The intended documentation ontology is:
 - `Releases` for operational and release-history context
 
 This file exists to orient contributors toward the ontology and template canon before they author new project artifacts.
+

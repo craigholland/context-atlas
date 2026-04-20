@@ -14,8 +14,8 @@ tags: [mvp, product, planning, codex, chatbot]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../Authoritative/Architecture/Craig-Architecture.md
-  - ../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -37,8 +37,8 @@ The MVP is successful only if all three experiences clearly rely on the same Atl
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
-- [Documentation Ontology](../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Craig Architecture](../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Documentation Ontology](../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - Current starter implementation in `src/context_atlas/`
 - Current review feedback that Atlas is closer to a core engine than an adoptable MVP product
 
@@ -278,11 +278,12 @@ The broader MVP effort is complete when:
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
-- [Documentation Ontology](../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Craig Architecture](../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Documentation Ontology](../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - [Story 1 - Engine To Product Surface](./Stories/story_1_engine_to_product_surface.md)
 - [Story 2 - Shared Source Coverage](./Stories/story_2_shared_source_coverage.md)
 - [Story 3 - Codex Repository Workflow](./Stories/story_3_codex_repository_workflow.md)
 - [Story 4 - Documents Plus Database Workflow](./Stories/story_4_documents_plus_database_workflow.md)
 - [Story 5 - Low-Code Workflow](./Stories/story_5_low_code_workflow.md)
 - [Story 6 - MVP Proof](./Stories/story_6_mvp_proof.md)
+

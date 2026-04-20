@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, chatbot, docs, database, workflow]
 related:
   - ../story_4_documents_plus_database_workflow.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - outputs from Story 2 source-coverage work
 
 ## Proposed Work
@@ -118,3 +118,4 @@ IMPLEMENTED
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

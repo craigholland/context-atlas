@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, delegation, handoff, escalation]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/AgenticDevelopment/Delegation-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Delegation Model](../../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Delegation Model](../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
 - the core workflow protocol set from Task 5.2
 
 ## Proposed Work
@@ -45,7 +45,7 @@ IMPLEMENTED
 - require the contract shape to be machine-readable rather than prose-only
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
@@ -65,12 +65,12 @@ IMPLEMENTED
 - make the contracts explicit enough to support later validation
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Escalation-Protocol.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Escalation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Escalation-Model.md`
 
 #### Update AI files
 - `.`
@@ -89,9 +89,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Planning-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Review-Protocol.md`
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
 
 #### Update AI files
@@ -123,4 +123,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Delegation Model](../../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Delegation Model](../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
+

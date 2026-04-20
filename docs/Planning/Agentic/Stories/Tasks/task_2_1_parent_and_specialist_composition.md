@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, parent-agent, specialist]
 related:
   - ../story_2_agent_and_skill_structure.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the portable authority and glossary model from Story 1
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - document the scope limits that keep specialists bounded
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Delegation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Delegation-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_2_agent_and_skill_structure.md`
@@ -59,11 +59,11 @@ IMPLEMENTED
 - prevent specialist definitions from growing into alternate parent agents
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Agent-Composition-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Agent-Authority-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Delegation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Delegation-Model.md`
 
 #### Update AI files
 - `.`
@@ -107,3 +107,4 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+

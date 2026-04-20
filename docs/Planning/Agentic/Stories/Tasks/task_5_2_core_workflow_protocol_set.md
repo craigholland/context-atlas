@@ -45,8 +45,8 @@ IMPLEMENTED
 - make entry conditions, outputs, and gates explicit
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Planning-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
@@ -66,13 +66,13 @@ IMPLEMENTED
   treating them as separate protocols or modes
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Review-Pass-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Review-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Rework-Protocol.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Protocols/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/README.md`
 
 #### Update AI files
 - `.`
@@ -89,7 +89,7 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Protocols/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/README.md`
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
 - `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
@@ -122,3 +122,4 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+
