@@ -57,6 +57,7 @@ The initial canon surface is centered on:
 - [Escalation-Model.md](./Escalation-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+- [Discovery-Model.md](./Discovery-Model.md)
 
 ## How To Read This Set
 
@@ -78,6 +79,7 @@ For most readers, the intended order is:
 14. [Escalation-Model.md](./Escalation-Model.md)
 15. [Boundary-Model.md](./Boundary-Model.md)
 16. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+17. [Discovery-Model.md](./Discovery-Model.md)
 
 This ordering is intentional:
 
@@ -101,6 +103,9 @@ This ordering is intentional:
   parent-owned, become a skill addition, or justify a bounded specialist
 - the later supplements refine adjacent concerns without replacing those
   foundations
+- the discovery model then defines what later runtime bindings must make
+  discoverable before any environment chooses concrete folder conventions or
+  indexing strategies
 
 ## Why This Surface Comes First
 
