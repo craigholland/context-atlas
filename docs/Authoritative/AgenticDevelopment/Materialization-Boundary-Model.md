@@ -120,6 +120,10 @@ Typical examples include:
 - traceability metadata additions
 - regeneration metadata additions
 
+Template contracts remain upstream of platform-specific runtime files even
+though they are already part of the materialization layer. A platform binding
+should inherit those contracts rather than quietly redefining them.
+
 ## Constraints
 
 - Runtime-facing assets must remain downstream of authoritative semantics.
