@@ -54,6 +54,8 @@ or execution environment.
 - `Specialist`: a focused agent with bounded authority and curated skills that
   performs a narrow delegated scope on behalf of a parent agent.
 - `Role`: the accountability concept an agent embodies.
+- `Role archetype`: a portable reusable role template that downstream
+  applications may refine into project-specific roles.
 - `Protocol`: the workflow path that governs entry conditions, gates, required
   outputs, handoffs, and exit criteria.
 - `Mode`: the execution state an agent is currently operating in while
@@ -62,10 +64,18 @@ or execution environment.
   specialist to perform bounded work.
 - `Delegation`: the bounded assignment of work from one agent to another
   without automatically transferring overall accountability.
+- `Handoff contract`: a structured machine-readable artifact, typically
+  representable as YAML or JSON, that records the information required for a
+  protocol-governed transfer of workflow ownership or readiness state.
 - `Handoff`: an explicit transfer of workflow ownership from one eligible actor
-  to another according to a protocol.
+  to another according to a protocol, carried through a valid handoff
+  contract rather than prose-only implication.
+- `Return contract`: a structured machine-readable artifact, typically
+  representable as YAML or JSON, that records what delegated or review work
+  was completed, what remains unresolved, and what next action is required.
 - `Escalation`: the return of a decision, risk, exception, or blocked state to
-  a broader authority boundary.
+  a broader authority boundary, carried through a valid return contract rather
+  than prose-only implication.
 - `Execution capacity`: the planning-time description of how many independent
   execution slots are available to pick up work.
 - `Application binding`: the layer that declares which portable concepts a
@@ -86,8 +96,11 @@ or execution environment.
 - Application-specific role names, current workflow gates, current capacity
   values, and environment-specific conventions do not belong in this glossary.
 - Definitions here must distinguish accountability (`role`), workflow
-  structure (`protocol`), execution state (`mode`), and reusable capability
-  (`skill`) rather than allowing those concepts to collapse into one another.
+  structure (`protocol`), execution state (`mode`), reusable capability
+  (`skill`), and portable role template (`role archetype`) rather than
+  allowing those concepts to collapse into one another.
+- Handoff and escalation state should be expressed through structured
+  machine-readable contracts rather than freeform conversational status alone.
 - This glossary must not encode concrete role names, mode names, workflow
   gates, or environment conventions from any specific application.
 - Materialized assets are not defined here as source-of-truth artifacts; they

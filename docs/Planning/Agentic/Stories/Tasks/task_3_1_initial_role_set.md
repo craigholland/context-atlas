@@ -14,6 +14,7 @@ tags: [agentic-development, task, pr-plan, roles, governance]
 related:
   - ../story_3_context_atlas_role_model.md
   - ../../agentic_development_product_definition.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
@@ -26,12 +27,14 @@ Define the initial project-specific role set for Context Atlas agentic developme
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+- [Role Archetypes](../../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - the structural binding from Story 2
 
@@ -42,9 +45,11 @@ PLANNED
 - define the first project role set:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
+- bind those project roles as refinements of the portable role-archetype
+  catalog
 - explain why these roles are distinct and why a generic implementation role is insufficient
 - keep the role set small enough to govern clearly
 
@@ -113,4 +118,5 @@ PLANNED
 ## Related Artifacts
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
+- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)

@@ -14,6 +14,8 @@ tags: [agentic-development, planning, product, protocols, automation]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
+  - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
   - ../../Authoritative/Architecture/Craig-Architecture.md
   - ../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
@@ -47,6 +49,8 @@ Atlas.
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Role Archetypes](../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
@@ -66,6 +70,8 @@ That means the project should have:
 
 - an authoritative, portable vocabulary for agents, specialists, modes, skills,
   protocols, handoffs, escalation, and runtime capacity
+- a portable role-archetype catalog that downstream applications can refine
+  into project-specific roles
 - a project-specific profile that says exactly which of those concepts Context
   Atlas uses
 - platform-specific materialization rules that explain how those abstract
@@ -95,9 +101,12 @@ The epic should establish these capability areas:
 
 - portable definitions for agents, parent agents, specialists, modes, skills,
   protocols, handoffs, escalation, and runtime capacity
+- a portable catalog of reusable role archetypes
 - project-specific bindings that define what Context Atlas actually uses
 - workflow protocols for planning, execution, review, rework, recovery,
   delegation, handoff, and escalation
+- structured handoff and review contracts that are machine-readable rather than
+  prose-only status transitions
 - runtime-capacity planning inputs that let decomposition work reflect the
   number of independent AI runtimes currently available
 - platform-specific materialization guidance so concrete runtime assets can be
@@ -152,10 +161,10 @@ The first target users for this epic are internal to Context Atlas delivery.
 - Value from this epic: knows what role it occupies, what modes it can enter,
   what artifacts it can mutate, and how to hand work off correctly
 
-`3. Frontend Role`
+`3. Documentation/UAT Role`
 
-- Primary job: execute frontend-oriented implementation work without losing
-  workflow discipline
+- Primary job: own user-facing documentation, guided evaluation surfaces, and
+  user-acceptance-oriented walkthroughs without losing workflow discipline
 - Value from this epic: knows what role it occupies, what modes it can enter,
   what artifacts it can mutate, and how to hand work off correctly
 
@@ -186,11 +195,13 @@ The first target users for this epic are internal to Context Atlas delivery.
 This epic should ultimately produce:
 
 - a new authoritative `docs/Authoritative/AgenticDevelopment/` canon
+- a reusable role-archetype catalog under
+  `docs/Authoritative/AgenticDevelopment/RoleArchetypes/`
 - a project-specific Context Atlas agentic-development profile
 - a project-specific role model that explicitly defines:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 - a project-specific mode model that defines which execution states Context
@@ -253,7 +264,7 @@ This Epic definition is ready to guide implementation when:
 - the initial Context Atlas top-level role set is accepted:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 
@@ -266,6 +277,8 @@ The broader epic is complete when:
 - runtime-capacity planning is machine-readable and usable during decomposition
 - shared workflow protocols define not only task execution but inter-agent
   handoff and escalation
+- inter-agent handoff and review state is represented through structured
+  YAML/JSON-style contracts rather than ad hoc prose or tool-specific comments
 - at least one runtime materialization path is concretely supported without
   becoming the source of truth
 - the resulting runtime assets are discoverable, governed, and resistant to
@@ -275,6 +288,7 @@ The broader epic is complete when:
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

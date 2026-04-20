@@ -42,6 +42,7 @@ This surface should define portable concepts and invariant rules such as:
 The initial canon surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
+- [RoleArchetypes/README.md](./RoleArchetypes/README.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Delegation-Model.md](./Delegation-Model.md)
 - [Agent-Composition-Model.md](./Agent-Composition-Model.md)
@@ -59,21 +60,24 @@ For most readers, the intended order is:
 
 1. this README
 2. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
-3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-4. [Delegation-Model.md](./Delegation-Model.md)
-5. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
-6. [Skill-Contract.md](./Skill-Contract.md)
-7. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-8. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
-9. [Escalation-Model.md](./Escalation-Model.md)
-10. [Mode-Model.md](./Mode-Model.md)
-11. [Boundary-Model.md](./Boundary-Model.md)
-12. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+3. [RoleArchetypes/README.md](./RoleArchetypes/README.md)
+4. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+5. [Delegation-Model.md](./Delegation-Model.md)
+6. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
+7. [Skill-Contract.md](./Skill-Contract.md)
+8. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+9. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+10. [Escalation-Model.md](./Escalation-Model.md)
+11. [Mode-Model.md](./Mode-Model.md)
+12. [Boundary-Model.md](./Boundary-Model.md)
+13. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
 - the README explains the purpose and scope of the canon surface
 - the glossary defines the vocabulary
+- the role-archetype catalog provides reusable professional role templates that
+  downstream bindings may refine
 - the authority model defines the invariant relationship chain built on that
   vocabulary
 - the delegation and composition docs refine how parent agents and specialists

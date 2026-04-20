@@ -48,6 +48,9 @@ environment-specific delegate-discovery mechanism.
   - the constraints that apply while it is performed
   - the expected return shape
   - the escalation conditions that return control upward
+- Delegation should be expressed in a structured contract shape rather than
+  freeform prose so the bounded scope and expected return can be resumed or
+  validated later.
 - A specialist performs delegated work inside a constrained scope and returns
   results, findings, or blocked-state information to the parent boundary.
 - Delegation should not be treated as a silent transfer of:

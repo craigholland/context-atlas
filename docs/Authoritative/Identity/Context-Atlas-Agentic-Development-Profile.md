@@ -14,6 +14,10 @@ tags: [context-atlas, agentic-development, identity, structural-binding, profile
 related:
   - ./Context-Atlas-Charter.md
   - ./Context-Atlas-System-Model.md
+  - ./AgenticDevelopment/Role-Model.md
+  - ./AgenticDevelopment/Role-Accountability-Matrix.md
+  - ./AgenticDevelopment/Role-Authority-Matrix.md
+  - ./AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -90,6 +94,58 @@ this profile as the project-specific structural source of truth.
 They should not bypass it by binding directly from the portable canon to
 environment-facing assets.
 
+### 7. Named Roles Must Bind At The Parent Layer
+
+When Context Atlas defines named project roles, those roles should bind at the
+parent-agent layer described by this profile.
+
+That means the project role roster should be interpreted as top-level
+accountability carried by parent agents, while specialists remain subordinate
+delegates beneath those parent-owned roles.
+
+### 8. Specialist Participation Does Not Change Role Ownership
+
+When specialists contribute to a workstream, they do so beneath a
+parent-owned role.
+
+That means planning artifacts remain Planner/Decomp-owned, engine
+implementation remains Backend-owned, user-facing documentation and evaluation
+surfaces remain Documentation/UAT-owned, governed validation remains QA-owned,
+and operational delivery remains DevOps-owned unless a later authority or
+protocol artifact explicitly changes the handoff state.
+
+### 9. Authority Must Stay Bound To Parent-Owned Roles Until Explicit Handoff
+
+Context Atlas should treat approval, merge, release, and operational workflow
+authority as role-bound parent-agent authority rather than as an ambient
+capability available to any participant in the work.
+
+That means delegation and escalation may route work or decisions, but they
+should not implicitly reassign authority without an explicit downstream
+contract.
+
+### 10. Handoff State Changes Must Be Structured, Not Conversational
+
+Context Atlas should treat inter-agent handoff, review, escalation, and return
+state as changed only when a valid structured contract artifact exists.
+
+That means:
+
+- role transitions should not depend on prose-only status updates
+- review intake should not depend on ad hoc tool-invocation comments
+- YAML or JSON should be the expected contract shape, even when a later
+  runtime materialization projects that contract onto a PR review or comment
+  surface
+
+### 11. Role Bindings Must Remain Separate From Runtime Materialization
+
+Context Atlas should define role-to-parent bindings at the project-identity
+layer before any environment-specific files attempt to materialize those
+bindings.
+
+That keeps the project's accountability model readable even when later runtime
+assets use different naming conventions or file layouts.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -110,6 +166,10 @@ environment-facing assets.
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
+- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

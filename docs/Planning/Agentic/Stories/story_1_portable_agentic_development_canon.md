@@ -48,6 +48,8 @@ runtime-materialization scheme.
 - define the portable meanings of agent, parent agent, specialist, role, mode,
   skill, protocol, handoff, escalation, delegation, runtime capacity, and
   materialization
+- define the portable meaning of a role archetype as a reusable template that
+  downstream applications refine into project-specific roles
 - define the fundamental relationship chain explicitly:
   - a parent agent embodies a role
   - a parent agent follows protocols
@@ -64,6 +66,8 @@ runtime-materialization scheme.
 - define the authoritative folder shape under `docs/Authoritative/AgenticDevelopment/`
 - identify which core documents belong in the initial canon versus which ones
   should wait for later stories
+- include a portable role-archetype catalog so downstream bindings do not have
+  to invent project roles without a reusable role vocabulary
 - ensure the new canon is clearly positioned alongside Craig Architecture
   rather than treated as a secondary prompt bundle
 
@@ -107,6 +111,7 @@ runtime-materialization scheme.
 ## Exit Criteria
 
 - a portable agentic-development vocabulary exists and is internally coherent
+- a portable role-archetype catalog exists for downstream project bindings
 - the parent agent -> role -> protocol -> mode -> skill -> specialist
   relationship model is stated explicitly in the canon
 - invariant rules for portability, authority, and derived materialization are
@@ -135,6 +140,7 @@ runtime-materialization scheme.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Agentic Development README](../../../Authoritative/AgenticDevelopment/README.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
 - [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Platform Materialization Model](../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)

@@ -15,6 +15,10 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_2_agent_and_skill_structure.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
@@ -29,16 +33,24 @@ supersedes: []
 ## Objective
 
 Define the Context Atlas project-specific role model so the repository has a
-clear answer for who is accountable for planning, backend delivery, frontend
-delivery, QA review, and DevOps-oriented operational work, while keeping it
+clear answer for who is accountable for planning, backend delivery,
+documentation and UAT-oriented delivery, QA review, and DevOps-oriented
+operational work, while keeping it
 explicit that a role is the accountability concept embodied by a parent agent
-rather than the runtime actor itself.
+rather than the runtime actor itself and that the project role model is a
+refinement of portable role archetypes rather than the first place role
+concepts are invented.
 
 ## Inputs
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
@@ -52,11 +64,13 @@ rather than the runtime actor itself.
 - define the initial Context Atlas top-level roles:
   - Planner/Decomp
   - Backend
-  - Frontend
+  - Documentation/UAT
   - QA
   - DevOps
 - explain why those roles exist as distinct project accountabilities instead of
   falling back to a generic implementation role
+- bind those project roles as refinements of portable role archetypes instead
+  of treating the project role model as a fresh role catalog
 - keep the role set small enough to govern clearly at the MVP stage
 
 ### Task 2: Role Accountabilities And Ownership
@@ -139,6 +153,11 @@ rather than the runtime actor itself.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
