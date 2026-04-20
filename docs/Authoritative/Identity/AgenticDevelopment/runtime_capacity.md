@@ -14,10 +14,10 @@ tags: [context-atlas, agentic-development, identity, runtime-capacity, planning]
 related:
   - ./runtime_capacity.yaml
   - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../AgenticDevelopment/Runtime-Capacity-Model.md
-  - ../../AgenticDevelopment/Parallel-Decomposition-Model.md
-  - ../../AgenticDevelopment/Drift-Model.md
-  - ../../AgenticDevelopment/Validation-Model.md
+  - ../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md
+  - ../../Canon/AgenticDevelopment/Drift-Model.md
+  - ../../Canon/AgenticDevelopment/Validation-Model.md
 supersedes: []
 ---
 
@@ -140,7 +140,8 @@ artifact model is wrong.
 
 - [Context Atlas Runtime Capacity Artifact](./runtime_capacity.yaml)
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Runtime Capacity Model](../../AgenticDevelopment/Runtime-Capacity-Model.md)
-- [Parallel Decomposition Model](../../AgenticDevelopment/Parallel-Decomposition-Model.md)
-- [Drift Model](../../AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../AgenticDevelopment/Validation-Model.md)
+- [Runtime Capacity Model](../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Drift Model](../../Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../Canon/AgenticDevelopment/Validation-Model.md)
+

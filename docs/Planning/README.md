@@ -2,7 +2,7 @@
 
 This directory holds forward-looking execution intent for Context Atlas.
 
-Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
+Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
 
 The expected planning stack is:
 
@@ -33,13 +33,13 @@ The current agentic-development planning surface lives under [Agentic](./Agentic
 - [Task PR plans](./Agentic/Stories/Tasks/)
 
 Those planning artifacts should derive their portable vocabulary and boundary
-rules from [docs/Authoritative/AgenticDevelopment/README.md](../Authoritative/AgenticDevelopment/README.md)
+rules from [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
 and its neighboring canon docs instead of redefining those concepts at the
 planning layer.
 
 When planning depends on repository principals, permissions, review surfaces,
 branch-target policy, or audit identity, those semantics should derive from
-[docs/Authoritative/RepoManagement/README.md](../Authoritative/RepoManagement/README.md)
+[docs/Authoritative/Canon/RepoManagement/README.md](../Authoritative/Canon/RepoManagement/README.md)
 and the downstream project binding under
 [docs/Authoritative/Identity/RepoManagement/](../Authoritative/Identity/RepoManagement/)
 rather than being invented in Story prose or runtime-materialization docs.
@@ -67,9 +67,9 @@ source of truth.
 If planning depends on drift detection, validation boundaries, or governed
 change paths for the agentic stack, those expectations should derive from:
 
-- [docs/Authoritative/AgenticDevelopment/Drift-Model.md](../Authoritative/AgenticDevelopment/Drift-Model.md)
-- [docs/Authoritative/AgenticDevelopment/Validation-Model.md](../Authoritative/AgenticDevelopment/Validation-Model.md)
-- [docs/Authoritative/AgenticDevelopment/Change-Management-Model.md](../Authoritative/AgenticDevelopment/Change-Management-Model.md)
+- [docs/Authoritative/Canon/AgenticDevelopment/Drift-Model.md](../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [docs/Authoritative/Canon/AgenticDevelopment/Validation-Model.md](../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [docs/Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md](../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
 
 Planning docs should reference those models rather than introducing a second
 validation or drift vocabulary in story/task prose.
@@ -82,3 +82,4 @@ Contributors should prefer planning artifacts that move from:
 - concrete code-touch expectations at the PR-plan layer
 
 Planning documents are not authoritative project truth in the same sense as the `Authoritative` docs. They describe intended work, sequencing, and decomposition, and they must yield to the authoritative canon when conflicts appear.
+

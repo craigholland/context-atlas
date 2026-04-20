@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, traceability, regeneration]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 - outputs from Tasks 7.1 through 7.3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - make it explicit what a reviewer should compare when drift is suspected
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
@@ -62,9 +62,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Platform-Materialization-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Template-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Template-Model.md`
 
 #### Update AI files
 - `.`
@@ -107,4 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+

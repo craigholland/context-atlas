@@ -14,9 +14,9 @@ tags: [context-atlas, agentic-development, identity, review, qa, gates]
 related:
   - ./Role-Authority-Matrix.md
   - ./Protocol-Role-Bindings.md
-  - ../RepoManagement/GitHub/Agentic-Integration-Model.md
-  - ../../AgenticDevelopment/Protocols/Review-Pass-Model.md
-  - ../../AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../Canon/RepoManagement/GitHub/Agentic-Integration-Model.md
+  - ../../Canon/AgenticDevelopment/Protocols/Review-Pass-Model.md
+  - ../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
 supersedes: []
 ---
 
@@ -131,6 +131,7 @@ integration remain downstream concerns defined by the RepoManagement binding.
 
 - [Context Atlas Role Authority Matrix](./Role-Authority-Matrix.md)
 - [Protocol Role Bindings](./Protocol-Role-Bindings.md)
-- [GitHub Agentic Integration Model](../RepoManagement/GitHub/Agentic-Integration-Model.md)
-- [Review Pass Model](../../AgenticDevelopment/Protocols/Review-Pass-Model.md)
-- [Review Protocol](../../AgenticDevelopment/Protocols/Review-Protocol.md)
+- [GitHub Agentic Integration Model](../Canon/RepoManagement/GitHub/Agentic-Integration-Model.md)
+- [Review Pass Model](../../Canon/AgenticDevelopment/Protocols/Review-Pass-Model.md)
+- [Review Protocol](../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
+

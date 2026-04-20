@@ -14,7 +14,7 @@ tags: [context-atlas, repo-management, github, audit, identities]
 related:
   - ./Principal-Binding-Model.md
   - ./Agentic-Integration-Model.md
-  - ../../../RepoManagement/Audit-Identity-Model.md
+  - ../../../Canon/RepoManagement/Audit-Identity-Model.md
 supersedes: []
 ---
 
@@ -77,3 +77,4 @@ instance participated.
 - Structured event data should remain machine-readable and easy to parse.
 - The audit model should remain aligned with the portable audit-identity
   model.
+

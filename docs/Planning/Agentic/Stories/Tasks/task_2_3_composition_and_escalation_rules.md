@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, composition, escalation]
 related:
   - ../story_2_agent_and_skill_structure.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the parent/specialist and skill contract work from Tasks 2.1 and 2.2
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - ensure the rules are project-usable without becoming runtime-specific
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Composition-Decision-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Composition-Decision-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_2_agent_and_skill_structure.md`
@@ -59,11 +59,11 @@ IMPLEMENTED
 - prevent specialist sprawl by making escalation a first-class structural concern
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Escalation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Escalation-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Composition-Decision-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Delegation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Composition-Decision-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Delegation-Model.md`
 
 #### Update AI files
 - `.`
@@ -107,3 +107,4 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+

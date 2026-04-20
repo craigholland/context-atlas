@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, protocols, template]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - current protocol-related assumptions in the Story layer
 
 ## Proposed Work
@@ -48,7 +48,7 @@ IMPLEMENTED
 - keep the shape general enough for multiple protocol types
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Protocol-Template.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
@@ -63,11 +63,11 @@ IMPLEMENTED
 - align the template with the authoritative doc conventions used elsewhere in the repo
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Protocols/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/README.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md`
-- `docs/Authoritative/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Protocols/Protocol-Template.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
 
 #### Update AI files
 - `.`
@@ -115,4 +115,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+

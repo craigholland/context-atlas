@@ -65,7 +65,7 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md`
-- `docs/Authoritative/AgenticDevelopment/Escalation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Escalation-Model.md`
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
 
 #### Update AI files
@@ -112,3 +112,4 @@ IMPLEMENTED
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+

@@ -15,8 +15,8 @@ related:
   - ./Context-Atlas-Agentic-Development-Profile.md
   - ./AgenticDevelopment/Role-Model.md
   - ./Context-Atlas-Charter.md
-  - ../Architecture/Craig-Architecture.md
-  - ../Ontology/Documentation-Ontology.md
+  - ../Canon/Architecture/Craig-Architecture.md
+  - ../Canon/Ontology/Documentation-Ontology.md
   - ../../README.md
 supersedes: []
 ---
@@ -196,7 +196,7 @@ The intended responsibilities are:
 - `adapters/`: filesystem, repository, ticketing, tokenizer, embedding, model-facing, and other external integration adapters
 - `rendering/`: derived output renderers such as prompt-ready packet views, reports, or exports
 
-This is the standalone package variant of the Python layout described in [Craig Architecture - Python](../Architecture/Craig-Architecture-Python.md), adapted to Context Atlas as a single primary package.
+This is the standalone package variant of the Python layout described in [Craig Architecture - Python](../Canon/Architecture/Craig-Architecture-Python.md), adapted to Context Atlas as a single primary package.
 
 ### 10. Canonical And Derived Data Must Stay Distinguishable
 
@@ -284,6 +284,7 @@ runtime-specific file names used to materialize parent agents.
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](./Context-Atlas-Agentic-Development-Profile.md)
 - [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
-- [Craig Architecture](../Architecture/Craig-Architecture.md)
-- [Documentation Ontology](../Ontology/Documentation-Ontology.md)
+- [Craig Architecture](../Canon/Architecture/Craig-Architecture.md)
+- [Documentation Ontology](../Canon/Ontology/Documentation-Ontology.md)
 - [Documentation](../../README.md)
+

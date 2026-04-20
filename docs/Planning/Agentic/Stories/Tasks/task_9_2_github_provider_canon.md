@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, github]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/RepoManagement/README.md
+  - ../../../../Authoritative/Canon/RepoManagement/README.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [RepoManagement README](../../../../Authoritative/RepoManagement/README.md)
+- [RepoManagement README](../../../../Authoritative/Canon/RepoManagement/README.md)
 - the portable repo-management canon from Task 9.1
 
 ## Proposed Work
@@ -47,8 +47,8 @@ IMPLEMENTED
   Atlas yet
 
 #### Expected New Files
-- `docs/Authoritative/RepoManagement/GitHub/README.md`
-- `docs/Authoritative/RepoManagement/GitHub/GitHub-App-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/README.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/GitHub-App-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_9_repo_management.md`
@@ -65,12 +65,12 @@ IMPLEMENTED
 - tie the GitHub guidance back to the portable repo-management models
 
 #### Expected New Files
-- `docs/Authoritative/RepoManagement/GitHub/Pull-Request-Operation-Model.md`
-- `docs/Authoritative/RepoManagement/GitHub/Branch-Protection-Model.md`
-- `docs/Authoritative/RepoManagement/GitHub/Audit-Identity-Guidance.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/Pull-Request-Operation-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/Branch-Protection-Model.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/Audit-Identity-Guidance.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/RepoManagement/GitHub/README.md`
+- `docs/Authoritative/Canon/RepoManagement/GitHub/README.md`
 
 #### Update AI files
 - `.`
@@ -116,4 +116,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [RepoManagement README](../../../../Authoritative/RepoManagement/README.md)
+- [RepoManagement README](../../../../Authoritative/Canon/RepoManagement/README.md)
+

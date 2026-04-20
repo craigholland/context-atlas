@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, canon, glossary]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - current repo patterns for roles, modes, skills, protocols, and task review gates
 
 ## Proposed Work
@@ -46,7 +46,7 @@ IMPLEMENTED
 - identify terms that should remain outside the initial canon until later Stories
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md`
@@ -62,10 +62,10 @@ IMPLEMENTED
 - reinforce the distinction between accountability, workflow state, and reusable capability
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Agent-Authority-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md`
 - `docs/Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md`
 
 #### Update AI files
@@ -82,9 +82,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/README.md`
-- `docs/Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md`
-- `docs/Authoritative/AgenticDevelopment/Agent-Authority-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md`
 - `docs/Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md`
 
 #### Update AI files
@@ -112,3 +112,4 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+

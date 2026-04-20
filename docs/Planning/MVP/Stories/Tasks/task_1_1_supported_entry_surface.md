@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, api, surface]
 related:
   - ../story_1_engine_to_product_surface.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - current exports under `src/context_atlas/`
 
 ## Proposed Work
@@ -119,3 +119,4 @@ IMPLEMENTED
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

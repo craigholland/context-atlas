@@ -14,7 +14,7 @@ tags: [mvp, story, codex, repository, workflow]
 related:
   - ../mvp_product_defintiion.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -28,7 +28,7 @@ Deliver the flagship workflow that shows Context Atlas improving repository-awar
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - filesystem docs adapter and starter assembly service
 
 ## Proposed Tasks
@@ -86,4 +86,5 @@ Deliver the flagship workflow that shows Context Atlas improving repository-awar
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

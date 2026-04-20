@@ -16,15 +16,15 @@ related:
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
   - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
   - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
-  - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
-  - ../../Authoritative/AgenticDevelopment/Drift-Model.md
-  - ../../Authoritative/AgenticDevelopment/Validation-Model.md
-  - ../../Authoritative/AgenticDevelopment/Change-Management-Model.md
+  - ../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md
+  - ../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
   - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../Authoritative/Architecture/Craig-Architecture.md
-  - ../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
-  - ../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -54,12 +54,12 @@ Atlas.
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Role Archetypes](../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
+- [Role Archetypes](../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
-- [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- [Documentation Ontology](../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Craig Architecture](../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Documentation Ontology](../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - Current Context Atlas MVP planning and delivery patterns under `docs/Planning/MVP/`
 - Current local experience with role-guided planning, execution slices,
   review gates, and AI-governed artifact ownership
@@ -90,7 +90,7 @@ That means the project should have:
 The target product shape is:
 
 - one runtime-agnostic `AgenticDevelopment` canon under
-  `docs/Authoritative/AgenticDevelopment/`
+  `docs/Authoritative/Canon/AgenticDevelopment/`
 - one Context Atlas project profile that binds the canon to this repository's
   real delivery model
 - one or more platform materialization surfaces that can turn the abstract
@@ -217,9 +217,9 @@ The first target users for this epic are internal to Context Atlas delivery.
 
 This epic should ultimately produce:
 
-- a new authoritative `docs/Authoritative/AgenticDevelopment/` canon
+- a new authoritative `docs/Authoritative/Canon/AgenticDevelopment/` canon
 - a reusable role-archetype catalog under
-  `docs/Authoritative/AgenticDevelopment/RoleArchetypes/`
+  `docs/Authoritative/Canon/AgenticDevelopment/RoleArchetypes/`
 - a project-specific Context Atlas agentic-development profile
 - a project-specific role model that explicitly defines:
   - Planner/Decomp
@@ -236,7 +236,7 @@ This epic should ultimately produce:
 - project-specific runtime-capacity update and trust guidance at
   `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
 - a protocol set that covers agent execution and inter-agent handoffs
-- a reusable `docs/Authoritative/RepoManagement/` canon plus provider-specific
+- a reusable `docs/Authoritative/Canon/RepoManagement/` canon plus provider-specific
   subdirectories such as `GitHub/`
 - a project-specific `docs/Authoritative/Identity/RepoManagement/` binding
   surface for the chosen repository provider
@@ -337,7 +337,8 @@ The broader epic is complete when:
 - [Context Atlas Runtime Capacity Artifact](../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
-- [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- [Documentation Ontology](../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Craig Architecture](../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Documentation Ontology](../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - [MVP Product Definition](../MVP/mvp_product_defintiion.md)
+

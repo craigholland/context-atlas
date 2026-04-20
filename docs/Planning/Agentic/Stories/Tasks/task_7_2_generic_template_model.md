@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, templates, materialization]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 - the materialization-boundary model from Task 7.1
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - avoid baking any vendor folder conventions into the template layer
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Template-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Template-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
@@ -59,11 +59,11 @@ IMPLEMENTED
 - keep templates traceable to the upstream canon and project bindings
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Templates/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Templates/README.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Template-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Template-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md`
 
 #### Update AI files
 - `.`
@@ -105,4 +105,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Platform Materialization Model](../../../../Authoritative/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+

@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, validation, preflight]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the drift model from Task 10.1 and existing repo validation patterns
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - keep the initial scope realistic for the current repo
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Validation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Validation-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
@@ -62,7 +62,7 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Validation-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Validation-Model.md`
 - `__ai__.md`
 - `docs/Planning/README.md`
 
@@ -109,4 +109,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

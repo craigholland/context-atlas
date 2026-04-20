@@ -15,7 +15,7 @@ related:
   - ./folder_layout.md
   - ./creation_guidance.md
   - ./governance.md
-  - ../../RepoManagement/GitHub/README.md
+  - ../../Canon/RepoManagement/GitHub/README.md
   - ../Role-Model.md
   - ../Role-Agent-Binding-Model.md
   - ../Mode-Model.md
@@ -23,12 +23,12 @@ related:
   - ../Protocol-Mode-Bindings.md
   - ../Gate-Review-Pass-Matrix.md
   - ../../Context-Atlas-Agentic-Development-Profile.md
-  - ../../../AgenticDevelopment/Platform-Materialization-Model.md
-  - ../../../AgenticDevelopment/Materialization-Boundary-Model.md
-  - ../../../AgenticDevelopment/Template-Model.md
-  - ../../../AgenticDevelopment/Templates/README.md
-  - ../../../AgenticDevelopment/Discovery-Model.md
-  - ../../../AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../Canon/AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../Canon/AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../Canon/AgenticDevelopment/Template-Model.md
+  - ../../../Canon/AgenticDevelopment/Templates/README.md
+  - ../../../Canon/AgenticDevelopment/Discovery-Model.md
+  - ../../../Canon/AgenticDevelopment/Materialization-Traceability-Model.md
 supersedes: []
 ---
 
@@ -206,16 +206,17 @@ Those concerns remain defined by the Context Atlas RepoManagement binding.
 - [Context Atlas Codex Folder Layout](./folder_layout.md)
 - [Context Atlas Codex Creation Guidance](./creation_guidance.md)
 - [Context Atlas Codex Governance](./governance.md)
-- [Context Atlas GitHub Binding](../../RepoManagement/GitHub/README.md)
+- [Context Atlas GitHub Binding](../../Canon/RepoManagement/GitHub/README.md)
 - [Role Model](../Role-Model.md)
 - [Role-Agent Binding Model](../Role-Agent-Binding-Model.md)
 - [Mode Model](../Mode-Model.md)
 - [Protocol Role Bindings](../Protocol-Role-Bindings.md)
 - [Protocol Mode Bindings](../Protocol-Mode-Bindings.md)
 - [Gate Review Pass Matrix](../Gate-Review-Pass-Matrix.md)
-- [Platform Materialization Model](../../../AgenticDevelopment/Platform-Materialization-Model.md)
-- [Materialization Boundary Model](../../../AgenticDevelopment/Materialization-Boundary-Model.md)
-- [Template Model](../../../AgenticDevelopment/Template-Model.md)
-- [Generic Template Contracts](../../../AgenticDevelopment/Templates/README.md)
-- [Discovery Model](../../../AgenticDevelopment/Discovery-Model.md)
-- [Materialization Traceability Model](../../../AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Platform Materialization Model](../../../Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Materialization Boundary Model](../../../Canon/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Canon/AgenticDevelopment/Template-Model.md)
+- [Generic Template Contracts](../../../Canon/AgenticDevelopment/Templates/README.md)
+- [Discovery Model](../../../Canon/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+

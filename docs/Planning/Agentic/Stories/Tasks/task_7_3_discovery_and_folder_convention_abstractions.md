@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, discovery, folders]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/AgenticDevelopment/Template-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Template Model](../../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
 - the materialization and boundary work from Tasks 7.1 and 7.2
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - separate discovery concepts from any concrete folder names
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Discovery-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Discovery-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
@@ -62,9 +62,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Discovery-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Template-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Platform-Materialization-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Discovery-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Template-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md`
 
 #### Update AI files
 - `.`
@@ -107,4 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Template Model](../../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
+

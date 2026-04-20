@@ -14,7 +14,7 @@ tags: [context-atlas, repo-management, github, branch-policy, merges]
 related:
   - ./Principal-Binding-Model.md
   - ./Operation-Matrix.md
-  - ../../AgenticDevelopment/Gate-Review-Pass-Matrix.md
+  - ../../Canon/AgenticDevelopment/Gate-Review-Pass-Matrix.md
 supersedes: []
 ---
 
@@ -68,3 +68,4 @@ the project is ready to automate that path.
   this document defines the target governed policy surface.
 - Later automation should treat this matrix as the branch-target source of
   truth for the current ladder.
+

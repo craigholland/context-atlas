@@ -14,7 +14,7 @@ tags: [mvp, story, low-code, presets, configuration]
 related:
   - ../mvp_product_defintiion.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -28,7 +28,7 @@ Create a simplified configuration and preset-driven path that lets a lower-code 
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - Stories 1 through 4, especially the stabilized product surface and source adapters
 
 ## Proposed Tasks
@@ -84,4 +84,5 @@ Create a simplified configuration and preset-driven path that lets a lower-code 
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

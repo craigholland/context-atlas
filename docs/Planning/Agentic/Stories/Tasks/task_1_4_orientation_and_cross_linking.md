@@ -47,7 +47,7 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
 - `docs/Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md`
 
 #### Update AI files
@@ -64,8 +64,8 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/README.md`
-- `docs/Authoritative/Architecture/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/Architecture/README.md`
 - `docs/README.md`
 - `docs/Planning/README.md`
 
@@ -112,3 +112,4 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+

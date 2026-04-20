@@ -16,11 +16,11 @@ related:
   - ./Role-Accountability-Matrix.md
   - ./Role-Mode-Matrix.md
   - ./Gate-Review-Pass-Matrix.md
-  - ../RepoManagement/GitHub/Operation-Matrix.md
-  - ../RepoManagement/GitHub/Branch-Target-Policy.md
-  - ../RepoManagement/GitHub/Agentic-Integration-Model.md
+  - ../Canon/RepoManagement/GitHub/Operation-Matrix.md
+  - ../Canon/RepoManagement/GitHub/Branch-Target-Policy.md
+  - ../Canon/RepoManagement/GitHub/Agentic-Integration-Model.md
   - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../AgenticDevelopment/Escalation-Model.md
+  - ../../Canon/AgenticDevelopment/Escalation-Model.md
 supersedes: []
 ---
 
@@ -197,8 +197,9 @@ the protocol story.
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
 - [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
 - [Gate Review Pass Matrix](./Gate-Review-Pass-Matrix.md)
-- [GitHub Operation Matrix](../RepoManagement/GitHub/Operation-Matrix.md)
-- [GitHub Branch-Target Policy](../RepoManagement/GitHub/Branch-Target-Policy.md)
-- [GitHub Agentic Integration Model](../RepoManagement/GitHub/Agentic-Integration-Model.md)
+- [GitHub Operation Matrix](../Canon/RepoManagement/GitHub/Operation-Matrix.md)
+- [GitHub Branch-Target Policy](../Canon/RepoManagement/GitHub/Branch-Target-Policy.md)
+- [GitHub Agentic Integration Model](../Canon/RepoManagement/GitHub/Agentic-Integration-Model.md)
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Escalation Model](../../AgenticDevelopment/Escalation-Model.md)
+- [Escalation Model](../../Canon/AgenticDevelopment/Escalation-Model.md)
+

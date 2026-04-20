@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, codex, workflow, repository]
 related:
   - ../story_3_codex_repository_workflow.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 3 - Codex Repository Workflow](../story_3_codex_repository_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - current filesystem docs adapter and starter assembly service
 
 ## Proposed Work
@@ -117,3 +117,4 @@ IMPLEMENTED
 
 - [Story 3 - Codex Repository Workflow](../story_3_codex_repository_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

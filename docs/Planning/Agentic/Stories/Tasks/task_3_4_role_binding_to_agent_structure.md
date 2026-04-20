@@ -65,7 +65,7 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md`
-- `docs/Authoritative/AgenticDevelopment/Agent-Composition-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md`
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
 
 #### Update AI files
@@ -111,3 +111,4 @@ IMPLEMENTED
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+

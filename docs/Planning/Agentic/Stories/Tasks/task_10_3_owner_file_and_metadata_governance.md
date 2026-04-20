@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, __ai__, metadata]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Ontology/base_metadata.md
+  - ../../../../Authoritative/Canon/Ontology/base_metadata.md
 supersedes: []
 ---
 
@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [base_metadata](../../../../Authoritative/Ontology/base_metadata.md)
+- [base_metadata](../../../../Authoritative/Canon/Ontology/base_metadata.md)
 - current repo `__ai__.md` and metadata-governance patterns
 
 ## Proposed Work
@@ -46,8 +46,8 @@ IMPLEMENTED
 - keep the owner-file model aligned with repo-wide contract practices
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/__ai__.md`
-- `docs/Authoritative/RepoManagement/__ai__.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/__ai__.md`
+- `docs/Authoritative/Canon/RepoManagement/__ai__.md`
 
 #### Expected Existing Files Updated
 - `__ai__.md`
@@ -69,9 +69,9 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/__ai__.md`
-- `docs/Authoritative/RepoManagement/__ai__.md`
-- `docs/Authoritative/Ontology/base_metadata.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/__ai__.md`
+- `docs/Authoritative/Canon/RepoManagement/__ai__.md`
+- `docs/Authoritative/Canon/Ontology/base_metadata.md`
 - `__ai__.template.md`
 
 #### Update AI files
@@ -93,8 +93,8 @@ IMPLEMENTED
 - `docs/Planning/README.md`
 - `docs/Planning/Agentic/agentic_development_product_definition.md`
 - `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
-- `docs/Authoritative/AgenticDevelopment/README.md`
-- `docs/Authoritative/RepoManagement/README.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/README.md`
+- `docs/Authoritative/Canon/RepoManagement/README.md`
 
 #### Update AI files
 - `.`
@@ -125,4 +125,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [base_metadata](../../../../Authoritative/Ontology/base_metadata.md)
+- [base_metadata](../../../../Authoritative/Canon/Ontology/base_metadata.md)
+

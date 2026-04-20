@@ -14,8 +14,8 @@ tags: [context-atlas, agentic-development, identity, codex, folders]
 related:
   - ./README.md
   - ../../Context-Atlas-Agentic-Development-Profile.md
-  - ../../../AgenticDevelopment/Discovery-Model.md
-  - ../../../AgenticDevelopment/Template-Model.md
+  - ../../../Canon/AgenticDevelopment/Discovery-Model.md
+  - ../../../Canon/AgenticDevelopment/Template-Model.md
 supersedes: []
 ---
 
@@ -204,5 +204,6 @@ That keeps the shared format from collapsing the upstream distinctions.
 
 - [Context Atlas Codex Binding](./README.md)
 - [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
-- [Discovery Model](../../../AgenticDevelopment/Discovery-Model.md)
-- [Template Model](../../../AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../Canon/AgenticDevelopment/Discovery-Model.md)
+- [Template Model](../../../Canon/AgenticDevelopment/Template-Model.md)
+

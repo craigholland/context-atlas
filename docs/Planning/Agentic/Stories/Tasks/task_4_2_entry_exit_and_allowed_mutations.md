@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, modes, mutation-rules]
 related:
   - ../story_4_context_atlas_mode_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the canonical mode set from Task 4.1
 
 ## Proposed Work
@@ -106,4 +106,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

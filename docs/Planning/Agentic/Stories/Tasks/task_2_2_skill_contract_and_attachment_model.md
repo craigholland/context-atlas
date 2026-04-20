@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, skills, composition]
 related:
   - ../story_2_agent_and_skill_structure.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the portable glossary and authority model from Story 1
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - prevent skill docs from silently absorbing role, mode, or protocol responsibilities
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Skill-Contract.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Skill-Contract.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_2_agent_and_skill_structure.md`
@@ -59,11 +59,11 @@ IMPLEMENTED
 - make attachment rules portable enough to survive later platform materialization
 
 #### Expected New Files
-- `docs/Authoritative/AgenticDevelopment/Skill-Attachment-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Skill-Attachment-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/AgenticDevelopment/Skill-Contract.md`
-- `docs/Authoritative/AgenticDevelopment/Agent-Composition-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Skill-Contract.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md`
 
 #### Update AI files
 - `.`
@@ -107,3 +107,4 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+

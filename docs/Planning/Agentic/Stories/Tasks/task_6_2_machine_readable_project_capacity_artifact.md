@@ -64,7 +64,7 @@ IMPLEMENTED
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml`
-- `docs/Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md`
+- `docs/Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md`
 
 #### Update AI files
 - `.`
@@ -108,3 +108,4 @@ IMPLEMENTED
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+
