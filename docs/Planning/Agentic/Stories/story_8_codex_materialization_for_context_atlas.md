@@ -146,6 +146,9 @@ the explicit distinction between:
   specialist, mode, protocol, and skill explicit
 - Codex materialization stays clearly downstream of the portable canon and the
   Context Atlas project profile
+- the Identity-layer Codex binding README remains the single entrypoint for
+  what Codex consumes before later docs explain how Codex stores or refreshes
+  those assets
 
 ## Definition Of Done
 

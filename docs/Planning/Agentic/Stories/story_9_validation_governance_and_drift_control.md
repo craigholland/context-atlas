@@ -102,6 +102,9 @@ materializations aligned over time.
   without bypassing the canon
 - keep governance strong enough to scale without making small updates
   prohibitively heavy
+- keep later Codex validation and drift rules explicitly downstream of the
+  Identity-layer Codex binding entrypoint rather than letting runtime docs
+  define their own shadow binding model
 
 ## Sequencing
 
