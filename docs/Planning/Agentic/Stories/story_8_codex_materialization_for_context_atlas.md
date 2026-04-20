@@ -106,8 +106,12 @@ the explicit distinction between:
 
 - define the project-specific templates or instructions needed to create Codex
   runtime assets from the authoritative docs
+- keep the initial Codex template set aligned with the actual concept families
+  being materialized instead of leaving role or protocol surfaces template-less
 - make it possible for an AI contributor to generate or refresh Codex assets
   without reverse-engineering the repo each time
+- make the copied-versus-adapted-versus-derived boundary explicit so refresh
+  work stays governed rather than ad hoc
 - ensure the guidance remains explicit about what is copied from canon versus
   what is Codex-specific adaptation
 - require Codex template choices to bind to Story 7's generic template model
@@ -155,6 +159,9 @@ the explicit distinction between:
 - the Identity-layer Codex binding README remains the single entrypoint for
   what Codex consumes before later docs explain how Codex stores or refreshes
   those assets
+- the Codex creation guidance remains the repeatable source for copied,
+  adapted, and derived content expectations when assets are created or
+  refreshed
 
 ## Definition Of Done
 

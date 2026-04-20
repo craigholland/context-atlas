@@ -142,6 +142,33 @@ preserve upstream distinctions such as:
 
 Codex naming should help make the upstream model more legible, not obscure it.
 
+### 9. Codex Template Surfaces Should Mirror The Materialized Concept Families
+
+The Codex binding should provide repeatable template surfaces or creation
+instructions for the runtime-facing assets it expects contributors to create.
+
+The initial template set should cover:
+
+- `.codex/AGENTS.md`
+- `.codex/roles/*.md`
+- `.codex/agents/*.toml`
+- `.codex/modes/*.md`
+- `.codex/protocols/*.md`
+- `.agents/skills/*/SKILL.md`
+
+Those templates remain downstream Codex bindings, not substitutes for the
+portable template canon from Story 7.
+
+### 10. Codex Asset Creation Should State What Is Copied, Adapted, And Derived
+
+Later creation guidance should make it explicit which parts of a Codex asset:
+
+- copy stable upstream vocabulary directly
+- adapt upstream meaning into Codex-facing guidance
+- derive traceability, maintenance, and file-layout details locally
+
+That separation helps keep the Codex layer honest during refresh work.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of
