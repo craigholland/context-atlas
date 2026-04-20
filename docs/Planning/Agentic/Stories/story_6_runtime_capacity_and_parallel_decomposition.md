@@ -53,6 +53,8 @@ actually available for an Epic, Story, or Task.
 
 - define the project-specific machine-readable artifact that stores current
   planning capacity
+- anchor that artifact at one stable path under the Identity layer so later
+  planning docs do not invent parallel sources of truth
 - keep the artifact simple enough for a human operator to edit safely
 - ensure the file can drive decomposition without becoming a hidden runtime
   scheduler
@@ -94,6 +96,7 @@ actually available for an Epic, Story, or Task.
 
 - Context Atlas has a documented runtime-capacity model
 - the project has a planned machine-readable capacity artifact shape
+- the project has one explicit machine-readable planning-capacity artifact path
 - decomposition guidance explains how capacity affects parallel Story and Task
   planning
 - update and validation expectations are explicit enough to trust the artifact
