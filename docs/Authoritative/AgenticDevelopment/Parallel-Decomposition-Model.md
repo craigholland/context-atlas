@@ -107,6 +107,31 @@ judgment still decides:
 - what should remain sequential
 - when a lane split would create more merge risk than delivery value
 
+### 8. The Planner Should Read Capacity Before Proposing Parallel Lanes
+
+When a project maintains a governed planning-capacity artifact, the planner
+should read that input before proposing parallel lane counts.
+
+That read should happen before the planner finalizes:
+
+- Story fan-out from an Epic
+- Task fan-out from a Story
+- parallel PR fan-out from a Task
+
+### 9. Capacity Consumption Should Be Narrow And Explicit
+
+The planner should use the capacity input to answer a narrow question:
+
+`How many independent lanes may be planned safely at this level?`
+
+The capacity input should not be treated as if it answers:
+
+- who is currently free right now
+- which queue should run next
+- which exact runtime instance must receive a lane
+
+Those are operational questions, not decomposition questions.
+
 ## Constraints
 
 - Base work should be identified before parallel fan-out is proposed.

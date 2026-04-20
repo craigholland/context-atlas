@@ -232,6 +232,14 @@ treat that input as a stable decomposition constraint rather than as a live
 scheduler feed. The point is to bound safe parallel planning, not to simulate
 moment-by-moment runtime availability.
 
+In practice, that usually means:
+
+- identify base or blocking work first
+- read the governed planning-capacity input before proposing parallel fan-out
+- avoid planning more independent lanes than usable capacity supports
+- still prefer fewer lanes when reviewability or architectural cohesion would
+  otherwise suffer
+
 ### 9. Code Shape Governance
 
 Craig Architecture treats code shape as an architectural concern rather than a mere style preference.

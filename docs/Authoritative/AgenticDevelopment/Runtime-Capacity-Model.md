@@ -102,6 +102,13 @@ That does not mean every planning step must parallelize aggressively.
 It means the planner should have one stable capacity input before deciding how
 much parallel structure is safe.
 
+The normal consumption rule is:
+
+- identify base or blocking work first
+- read the governed capacity input
+- bound any proposed parallel fan-out by usable planning capacity
+- choose less than the available ceiling when architectural independence is weak
+
 ### 7. The Portable Model Must Stay Vendor-Agnostic
 
 The portable runtime-capacity concept must remain valid regardless of whether
