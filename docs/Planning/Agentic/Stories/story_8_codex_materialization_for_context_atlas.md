@@ -18,6 +18,7 @@ related:
   - ./story_7_platform_materialization_model.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
@@ -49,6 +50,7 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
@@ -64,8 +66,12 @@ the explicit distinction between:
 
 - document that Context Atlas currently supports Codex as the first concrete
   runtime materialization target
+- bind that decision to one explicit Identity-layer Codex entrypoint instead
+  of scattering the decision across later layout and template docs
 - define what parts of the abstract model must be represented for Codex to use
   them effectively
+- make the upstream dependency categories explicit so later Codex layout and
+  template docs consume one stable input set
 - keep the Story framed as a platform binding, not as a rewrite of the generic
   canon in Codex language
 - treat the portable canon and project-specific bindings as upstream sources
@@ -140,6 +146,9 @@ the explicit distinction between:
   specialist, mode, protocol, and skill explicit
 - Codex materialization stays clearly downstream of the portable canon and the
   Context Atlas project profile
+- the Identity-layer Codex binding README remains the single entrypoint for
+  what Codex consumes before later docs explain how Codex stores or refreshes
+  those assets
 
 ## Definition Of Done
 
@@ -164,6 +173,7 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)

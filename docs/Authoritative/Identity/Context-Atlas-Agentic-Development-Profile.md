@@ -27,6 +27,7 @@ related:
   - ./AgenticDevelopment/Mode-Mutation-Matrix.md
   - ./AgenticDevelopment/Role-Mode-Matrix.md
   - ./AgenticDevelopment/Mode-Transition-Graph.md
+  - ./AgenticDevelopment/codex/README.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -193,6 +194,16 @@ That means later tooling may validate or consume the file, but it should not
 silently overwrite the planning input based on queue state, PR state, or
 momentary worker availability.
 
+### 16. Environment Bindings Must Consume This Profile Explicitly
+
+When Context Atlas binds its agentic-development model into a concrete runtime
+environment, that environment-specific binding should cite this profile as one
+of its upstream authoritative inputs.
+
+That keeps the project-specific structural choices readable before any
+environment translates them into runtime-facing folders, templates, or helper
+assets.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -201,6 +212,8 @@ momentary worker availability.
   one-off task convenience.
 - Project-specific structural bindings must remain distinct from later
   environment-specific materialization choices.
+- Environment-specific binding docs should inherit from this profile rather
+  than restating the structural model ad hoc.
 
 ## Non-Goals
 
@@ -208,6 +221,7 @@ momentary worker availability.
 - Define the detailed project mode set, transitions, or mutation rules.
 - Define the project's workflow protocol set.
 - Define concrete environment-discovery files or folder layouts.
+- Replace the later environment-binding docs that consume this profile.
 
 ## Related Artifacts
 
@@ -226,6 +240,7 @@ momentary worker availability.
 - [Mode Mutation Matrix](./AgenticDevelopment/Mode-Mutation-Matrix.md)
 - [Context Atlas Role-Mode Matrix](./AgenticDevelopment/Role-Mode-Matrix.md)
 - [Mode Transition Graph](./AgenticDevelopment/Mode-Transition-Graph.md)
+- [Context Atlas Codex Binding](./AgenticDevelopment/codex/README.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)
