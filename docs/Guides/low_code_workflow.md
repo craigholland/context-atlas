@@ -6,6 +6,9 @@ The goal is to show how a less-technical builder can reach a working Atlas flow
 through one supported preset-driven path without implying that Atlas is already
 a broad no-code platform.
 
+If you want the broader user-help index first, start with
+[Guides/README.md](./README.md).
+
 ## What You Will Do
 
 You will:
@@ -51,7 +54,7 @@ This workflow does not yet:
 
 ## Prerequisites
 
-- Python `3.14+`
+- Python `3.12+`
 - a local checkout of this repository
 
 ## Install
@@ -59,7 +62,7 @@ This workflow does not yet:
 From the repository root:
 
 ```powershell
-py -3.14 -m venv .venv
+py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e .[dev]
 ```
@@ -191,9 +194,8 @@ as `request_workflow`, `request_low_code_preset`, `request_docs_root`, and
 `request_records_file` should remain visible so the example can explain which
 outer path produced the packet.
 
-If this guide, [README](../../README.md), and
-[examples/low_code_workflow/README.md](../../examples/low_code_workflow/README.md)
-stop telling the same story, or if the tracked TOML artifacts start implying a
-loader Atlas does not actually provide, the low-code product surface is
-drifting and should be corrected before more presets or wrapper behavior are
-added.
+If this guide, [README](../../README.md), and the
+[Guides index](./README.md) stop telling the same story, or if the tracked TOML
+artifacts start implying a loader Atlas does not actually provide, the
+low-code product surface is drifting and should be corrected before more
+presets or wrapper behavior are added.

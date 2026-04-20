@@ -1,8 +1,15 @@
 # Examples
 
-This directory holds small, focused usage examples for the supported MVP starter path.
+This directory holds runnable companion artifacts for the supported MVP
+surfaces.
 
-Current examples should prefer the curated `context_atlas.api` surface rather than deep internal imports.
+If you are looking for setup or workflow help, start with
+[docs/Guides/README.md](/context-atlas/docs/Guides/README.md). Guides are the
+primary user-facing help surface; `examples/` is where the runnable scripts,
+sample payloads, and proof inputs live.
+
+Current examples should prefer the curated `context_atlas.api` surface rather
+than deep internal imports.
 
 ## Starter Flow
 
@@ -12,7 +19,8 @@ The recommended first example is:
 python examples/starter_context_flow.py
 ```
 
-That flow is also documented in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
+That flow is the runnable companion to
+[docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
 
 It demonstrates:
 
@@ -22,7 +30,9 @@ It demonstrates:
 - packet inspection output
 - trace inspection output
 
-This is the intended onboarding example after an editable install. It defaults to the repository `docs/` directory and a starter query, and it keeps logs quieter unless you explicitly raise `CONTEXT_ATLAS_LOG_LEVEL`.
+This is the intended runnable companion after an editable install. It defaults
+to the repository `docs/` directory and a starter query, and it keeps logs
+quieter unless you explicitly raise `CONTEXT_ATLAS_LOG_LEVEL`.
 
 ## Smoke Flow
 
@@ -41,7 +51,10 @@ The smoke example demonstrates the supported MVP path:
 - assemble a `ContextPacket` through `build_starter_context_assembly_service`
 - render packet context and inspect the resulting packet/trace surfaces
 
-This sequence should stay aligned with the root `README.md` golden path. If examples start requiring extra hidden setup or deep internal imports, the example surface should be corrected before more product-facing guidance is added.
+This sequence should stay aligned with the root `README.md` golden path and the
+guides index. If examples start requiring extra hidden setup or deep internal
+imports, the example surface should be corrected before more product-facing
+guidance is added.
 
 ## Codex Repository Workflow Shape
 

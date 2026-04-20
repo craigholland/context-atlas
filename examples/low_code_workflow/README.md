@@ -2,6 +2,10 @@
 
 This example demonstrates the current low-code workflow for Context Atlas.
 
+For product-facing setup guidance, start with
+[docs/Guides/low_code_workflow.md](/context-atlas/docs/Guides/low_code_workflow.md).
+This README is the runnable companion artifact for that guide.
+
 Current supported shape:
 
 - one supported preset: `chatbot_docs_records`

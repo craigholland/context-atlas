@@ -4,6 +4,9 @@ This guide walks through the current MVP starter path for Context Atlas.
 
 The goal is to get from a local checkout to a first assembled packet using the supported starter surface, not to showcase every future workflow.
 
+If you want the broader user-help index first, start with
+[Guides/README.md](./README.md).
+
 ## What You Will Do
 
 You will:
@@ -16,7 +19,7 @@ You will:
 
 ## Prerequisites
 
-- Python `3.14+`
+- Python `3.12+`
 - a local checkout of this repository
 
 ## Install
@@ -24,7 +27,7 @@ You will:
 From the repository root:
 
 ```powershell
-py -3.14 -m venv .venv
+py -3.12 -m venv .venv
 .\\.venv\\Scripts\\Activate.ps1
 python -m pip install -e .[dev]
 ```
@@ -72,7 +75,20 @@ public config. That knob is exposed as
 
 ## Run The Starter Context Flow
 
-The supported starter example is:
+The current installable starter command is:
+
+```powershell
+context-atlas-starter docs --query "How should planning docs be treated?"
+```
+
+That command works after an editable install and does not require you to run a
+repository-local example script directly.
+
+If you are not working from this repository, replace `docs` with the path to
+your own governed documentation directory.
+
+If you are working from a repository checkout, the supported runnable companion
+example is:
 
 - [examples/starter_context_flow.py](../../examples/starter_context_flow.py)
 
@@ -139,6 +155,12 @@ On a successful run, you should see:
 - a packet summary that shows selected sources, budget state, and compression
 - a trace summary that shows why sources were included, excluded, or transformed
 
-If the output feels confusing, the root [README](../../README.md) and [examples/README.md](../../examples/README.md) should describe the same starter story. If they do not, the docs are drifting and should be corrected before adding more guidance.
+If the output feels confusing, the root [README](../../README.md) and the
+[Guides index](./README.md) should describe the same starter story. If they do
+not, the product-facing docs are drifting and should be corrected before adding
+more guidance.
 
-The smaller [examples/starter_api_smoke.py](../../examples/starter_api_smoke.py) script is still useful for smoke validation, but `starter_context_flow.py` is the recommended onboarding path.
+The smaller [examples/starter_api_smoke.py](../../examples/starter_api_smoke.py)
+script is still useful for smoke validation, but `starter_context_flow.py` is
+the recommended repository-local companion example. The installable starter
+command remains the smallest package-facing onboarding path.

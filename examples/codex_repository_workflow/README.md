@@ -2,6 +2,10 @@
 
 This example demonstrates the current flagship repository workflow for Context Atlas.
 
+For product-facing setup guidance, start with
+[docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
+This README is the runnable companion artifact for that guide.
+
 Current supported shape:
 
 - start from a repository root
