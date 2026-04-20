@@ -144,6 +144,8 @@ the explicit distinction between:
 
 - Context Atlas has a documented Codex materialization path
 - the Codex folder and naming conventions are explicit
+- the Codex folder layout remains readable as a downstream discovery mapping
+  rather than as a replacement for the portable discovery model
 - project-specific creation guidance exists for generating or updating the
   Codex assets
 - the Codex binding keeps the distinctions between role, parent agent,
