@@ -137,8 +137,9 @@ before project roles and runtime-specific files are introduced.
 - the Story preserves the distinction between structural composition, role
   accountability, and mode governance
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - any structural templates or examples introduced by the Story remain derived
   from the canon rather than becoming a competing source of truth
 

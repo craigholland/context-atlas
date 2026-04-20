@@ -39,7 +39,8 @@ operational work, while keeping it
 explicit that a role is the accountability concept embodied by a parent agent
 rather than the runtime actor itself and that the project role model is a
 refinement of portable role archetypes rather than the first place role
-concepts are invented.
+concepts are invented, and while making it explicit that QA owns the execution
+of review passes rather than relying on ad hoc review-trigger comments.
 
 ## Inputs
 
@@ -77,6 +78,9 @@ concepts are invented.
 
 - define what each role is primarily responsible for
 - identify which artifacts and decisions each role may own directly
+- define QA as the role that executes review passes and publishes findings,
+  while implementation roles respond through patch or rationale instead of
+  self-closing review concerns
 - make it explicit that specialists do not define an alternate project role set
   and instead operate as bounded delegates under parent-agent accountability
 - keep the role model inheriting the parent-versus-specialist contract shape
@@ -92,6 +96,8 @@ concepts are invented.
   - request or perform review
   - approve merge/release actions
   - own operational workflow changes
+- make it explicit that review-pass execution belongs to QA, while implementation
+  roles may only emit structured completion handoffs and respond to findings
 - make the role-level authority boundaries explicit before protocol docs define
   the workflow sequences that use them
 - keep role-level authority boundaries aligned with the explicit
@@ -130,8 +136,8 @@ concepts are invented.
 - Context Atlas has a documented project-specific role set
 - each role has clear accountabilities and ownership expectations
 - the distinction between role, parent agent, and specialist is explicit
-- authority boundaries between planning, implementation, QA, and DevOps are
-  explicit
+- authority boundaries between planning, implementation, QA review-pass
+  execution, and DevOps are explicit
 - later stories can reference roles as stable project concepts
 
 ## Definition Of Done
@@ -143,8 +149,9 @@ concepts are invented.
 - the role model stays project-specific without absorbing runtime-specific file
   conventions
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - any role-to-agent mapping introduced by the Story preserves the distinction
   between project accountability and runtime materialization
 

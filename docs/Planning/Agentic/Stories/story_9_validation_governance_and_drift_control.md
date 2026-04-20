@@ -110,8 +110,9 @@ materializations aligned over time.
 - the Story keeps validation, governance, and change-management concerns tied
   back to the authoritative canon instead of inventing a parallel process layer
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - the resulting validation approach is concrete enough to support later task and
   PR-plan decomposition without becoming tool-specific too early
 

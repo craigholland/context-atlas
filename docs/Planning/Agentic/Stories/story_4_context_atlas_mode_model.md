@@ -62,6 +62,8 @@ alternate role definitions.
 - define the initial project mode set for Context Atlas
 - distinguish execution state from role accountability so modes do not become
   alternate role names
+- make it explicit that review passes are evaluation lenses used inside review
+  workflow behavior rather than additional modes
 - define modes in a way that allows the same mode to appear inside multiple
   protocols rather than treating each protocol step as a unique mode
 - keep the initial mode set bounded enough to govern clearly
@@ -85,6 +87,8 @@ alternate role definitions.
 - define the allowed transitions between modes
 - make rework, review, recovery, and release-oriented movement explicit rather
   than implied
+- make it explicit that multiple review passes may execute within the same
+  review-mode span without forcing a mode transition for each pass
 - make it explicit that a protocol may contain several steps in the same mode
   and that not every protocol step implies a mode transition
 - position the protocol story to build on a stable mode state model
@@ -124,8 +128,9 @@ alternate role definitions.
 - the mode model stays project-specific and workflow-oriented rather than
   drifting into runtime-specific file conventions
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - mode definitions include enough transition detail to support later protocol
   and validation work without prematurely becoming task-level implementation
 

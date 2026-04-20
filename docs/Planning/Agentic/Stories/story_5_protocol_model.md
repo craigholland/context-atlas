@@ -34,7 +34,9 @@ Define the shared workflow protocols that govern how work is performed and
 handed off across Context Atlas agentic development so execution logic lives in
 first-class protocols rather than fragmented role notes or runtime prompts, and
 so it is explicit that agents follow protocols while embodying roles and
-entering modes during protocol execution.
+entering modes during protocol execution, and so QA review is modeled as one
+review workflow with explicit review passes that vary by gate instead of as an
+ad hoc tool-trigger convention.
 
 ## Inputs
 
@@ -62,6 +64,8 @@ entering modes during protocol execution.
 - make protocol docs consistent in how they express actors, triggers,
   preconditions, allowed mutations, required outputs, exit criteria, and
   handoff targets
+- make the shared shape explicit about gate context, required review passes,
+  review outcomes, and the structured contracts that carry those values
 - keep protocol docs consuming already-defined skill attachments rather than
   redefining skills inline as protocol-local behavior
 - keep protocols discoverable and reviewable as first-class workflow surfaces
@@ -74,6 +78,9 @@ entering modes during protocol execution.
   - review
   - rework
   - recovery
+- define a reusable review-pass model for QA that distinguishes Code,
+  Architecture, Security, and Product passes without turning those passes into
+  separate roles, modes, or protocols
 - treat protocols as workflow definitions that parent agents follow while
   embodying their roles, with specialists participating only through bounded
   delegation
@@ -87,6 +94,8 @@ entering modes during protocol execution.
 - define how work is delegated to specialists or other roles
 - define what a valid handoff must communicate and require that it be expressed
   as a structured machine-readable contract rather than prose
+- require completion and review contracts to carry the requested review passes
+  and the resulting review outcome state explicitly
 - define when escalation is required and what information must accompany it
 - keep escalation inheriting the structural return-contract model rather than
   treating it as protocol-only improvisation
@@ -96,6 +105,12 @@ entering modes during protocol execution.
 ### Task 4: Role And Mode Bindings
 
 - bind the shared protocols to the project role and mode model
+- bind the default review-pass requirements to the project gates:
+  - `Task -> Story`: Code Pass
+  - `Story -> Epic`: Architecture Pass and Security Pass
+  - `Epic -> development`: Product Pass
+- allow additional earlier passes only by risk or escalation rather than by
+  duplicating the review model at each gate
 - prevent protocol documents from becoming free-floating abstractions with no
   operational meaning in Context Atlas
 - preserve the distinction between:
@@ -122,6 +137,10 @@ entering modes during protocol execution.
   automation and runtime materialization will be brittle.
 - If escalation rules are vague, later runtime materialization will be hard to
   enforce consistently.
+- Review passes could drift into pseudo-roles or pseudo-modes if the review
+  model is not kept explicit.
+- Gate-to-pass mapping could become inconsistent if the protocol docs do not
+  state the default pass expectations clearly.
 
 ## Exit Criteria
 
@@ -129,6 +148,8 @@ entering modes during protocol execution.
 - the initial shared workflow protocols are defined
 - delegation, handoff, and escalation have explicit structured contract
   expectations
+- the review protocol, review-pass model, and gate-to-pass bindings are
+  explicit and internally coherent
 - protocols are clearly bound to project roles and modes without collapsing the
   distinction between those layers
 - the relationship between protocol execution and mode entry/transition is
@@ -143,12 +164,16 @@ entering modes during protocol execution.
 - protocol docs stay workflow-centered and do not become role-specific
   replacements or runtime prompt dumps
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - handoff and escalation expectations are explicit enough to support later
   runtime materialization and validation work
 - inter-agent state transitions are defined as structured contracts so later QA
   automation does not depend on prose-only triggers
+- the Story captures a stable distinction between review workflow, review
+  passes, and gate-specific pass requirements so later Tasks do not reinvent
+  review semantics ad hoc
 
 ## Related Artifacts
 

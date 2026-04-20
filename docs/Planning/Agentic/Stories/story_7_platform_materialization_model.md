@@ -108,8 +108,9 @@ given AI environment without making those runtime assets authoritative.
 - the materialization model stays platform-agnostic and does not leak Codex-only
   assumptions into the generic layer
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - traceability between canon, project bindings, and runtime artifacts is
   explicit enough to support later validation and drift-control work
 - the Story continues to read as downstream materialization guidance rather

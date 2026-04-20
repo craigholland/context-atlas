@@ -22,7 +22,8 @@ supersedes: []
 
 ## Objective
 
-Define the first shared workflow protocol set for planning, execution, review, rework, and recovery.
+Define the first shared workflow protocol set for planning, execution, review,
+rework, and recovery, including the reusable QA review-pass model.
 
 ## Task Status
 
@@ -56,10 +57,16 @@ PLANNED
 ### PR - B: Review, Rework, And Recovery Protocols
 
 - define the review, rework, and recovery protocols
+- define the reusable review-pass model used inside QA review, including Code,
+  Architecture, Security, and Product passes
 - keep them aligned with the same shared template and role/mode model
-- make the review loop and failure-recovery paths first-class rather than implied
+- make the review loop and failure-recovery paths first-class rather than
+  implied
+- keep review passes as evaluation lenses within review work rather than
+  treating them as separate protocols or modes
 
 #### Expected New Files
+- `docs/Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md`
 - `docs/Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md`
 - `docs/Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md`
 - `docs/Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md`
@@ -74,6 +81,8 @@ PLANNED
 
 - cross-link the protocol set to the role and mode model
 - make sure the initial protocol set reads as one coherent workflow family
+- make the relationship between the review protocol and the review-pass model
+  explicit
 - document any future protocol gaps that should remain out of scope for now
 
 #### Expected New Files
@@ -97,11 +106,15 @@ PLANNED
 
 - Protocols may become role-specific if the shared structure is not enforced.
 - Review and recovery paths may remain weak if treated as secondary concerns.
-- Later handoff/escalation work may force rewrites if the core protocol set is underspecified.
+- Later handoff/escalation work may force rewrites if the core protocol set is
+  underspecified.
+- Review passes may drift into pseudo-protocols if the shared review model is
+  not explicit enough.
 
 ## Exit Criteria
 
 - the initial shared workflow protocol set exists
+- the reusable QA review-pass model exists
 - the protocol set is aligned with the role and mode model
 - later protocol Tasks can extend the set without redefining its foundation
 

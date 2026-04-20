@@ -46,14 +46,16 @@ runtime-materialization scheme.
 ### Task 1: Core Terminology And Invariants
 
 - define the portable meanings of agent, parent agent, specialist, role, mode,
-  skill, protocol, handoff, escalation, delegation, runtime capacity, and
-  materialization
+  skill, protocol, review pass, handoff, escalation, delegation, runtime
+  capacity, and materialization
 - define the portable meaning of a role archetype as a reusable template that
   downstream applications refine into project-specific roles
 - define the fundamental relationship chain explicitly:
   - a parent agent embodies a role
   - a parent agent follows protocols
   - a parent agent enters modes while executing a protocol
+  - a review protocol may apply one or more review passes without turning those
+    passes into separate roles or modes
   - a parent or specialist uses skills to perform work
   - a parent agent may delegate bounded work to specialists
 - capture the invariant rules that should hold across AI environments rather
@@ -110,7 +112,8 @@ runtime-materialization scheme.
 
 ## Exit Criteria
 
-- a portable agentic-development vocabulary exists and is internally coherent
+- a portable agentic-development vocabulary exists and is internally coherent,
+  including review-pass vocabulary for later protocol work
 - a portable role-archetype catalog exists for downstream project bindings
 - the parent agent -> role -> protocol -> mode -> skill -> specialist
   relationship model is stated explicitly in the canon
@@ -128,8 +131,9 @@ runtime-materialization scheme.
 - the new portable canon stays runtime-agnostic and does not silently absorb
   project-specific or platform-specific interpretation details
 - `py -3 scripts/preflight.py` passes on the Story feature branch before review
-- the Story feature PR receives `@codex review`, and any review findings are
-  resolved on that same feature branch before human merge
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
 - any new glossary or canon documents include enough cross-linking to be usable
   as a discoverable entrypoint rather than an isolated document set
 - the AgenticDevelopment directory README remains a credible "start here"

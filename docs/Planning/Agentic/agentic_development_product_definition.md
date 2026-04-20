@@ -105,6 +105,11 @@ The epic should establish these capability areas:
 - project-specific bindings that define what Context Atlas actually uses
 - workflow protocols for planning, execution, review, rework, recovery,
   delegation, handoff, and escalation
+- a gate-based QA review-pass model that uses:
+  - Code Pass at the `Task -> Story` gate
+  - Architecture Pass and Security Pass at the `Story -> Epic` gate
+  - Product Pass at the `Epic -> development` gate
+  - additional earlier passes only when risk or escalation warrants them
 - structured handoff and review contracts that are machine-readable rather than
   prose-only status transitions
 - runtime-capacity planning inputs that let decomposition work reflect the
@@ -279,6 +284,8 @@ The broader epic is complete when:
 - runtime-capacity planning is machine-readable and usable during decomposition
 - shared workflow protocols define not only task execution but inter-agent
   handoff and escalation
+- QA review is expressed as one review workflow with gate-specific passes rather
+  than as ad hoc tool-trigger comments or a separate review-role split
 - inter-agent handoff and review state is represented through structured
   YAML/JSON-style contracts rather than ad hoc prose or tool-specific comments
 - at least one runtime materialization path is concretely supported without
