@@ -81,6 +81,37 @@ If live conditions change materially, the correct response is usually to update
 the planning artifact intentionally rather than letting ad hoc runtime state
 become the new hidden source of truth.
 
+## Validation Expectations
+
+### 1. Structural Validation Should Be Automatic
+
+Future validation may check:
+
+- required keys are present
+- numeric capacity fields are non-negative and internally coherent
+- `usable_runtimes` does not exceed `total_runtimes - reserved_runtimes`
+- runtime profiles follow the expected schema
+- decomposition-policy fields stay within the expected structure
+
+### 2. Planning Truth Still Requires Human Review
+
+Validation should not claim to prove that the current live environment actually
+matches the file.
+
+Human review is still required for questions such as:
+
+- whether the declared runtimes are truly available for planning
+- whether a specialization field still reflects reality
+- whether a reserved lane should remain reserved
+
+### 3. Staleness Should Be Surfaced, Not Silently Corrected
+
+If the artifact looks stale, the correct response is to surface that problem to
+the planner or human operator.
+
+Tooling should not silently rewrite the planning input based on ambient
+runtime state.
+
 ## Constraints
 
 - The guidance should remain simple enough for a human to follow without extra
