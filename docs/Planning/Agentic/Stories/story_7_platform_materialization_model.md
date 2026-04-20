@@ -20,6 +20,8 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Template-Model.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Drift-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Validation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -40,6 +42,8 @@ given AI environment without making those runtime assets authoritative.
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -129,6 +133,8 @@ given AI environment without making those runtime assets authoritative.
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream
   change model instead of reconstructing it from planning prose
+- later drift and validation work can reason about materialized assets through
+  one stable vocabulary instead of inventing Codex-only terminology
 
 ## Definition Of Done
 
@@ -155,6 +161,8 @@ given AI environment without making those runtime assets authoritative.
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)

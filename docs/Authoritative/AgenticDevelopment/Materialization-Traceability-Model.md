@@ -15,6 +15,8 @@ related:
   - ./Platform-Materialization-Model.md
   - ./Template-Model.md
   - ./Discovery-Model.md
+  - ./Drift-Model.md
+  - ./Validation-Model.md
 supersedes: []
 ---
 
@@ -118,6 +120,19 @@ able to tell:
 
 Mixed maintenance should not become an excuse for blurry ownership.
 
+### 9. Traceability Should Support Drift Detection
+
+Traceability declarations should make it possible for later validators and
+reviewers to detect:
+
+- missing authoritative-source lineage
+- stale provenance after a binding changes
+- runtime assets whose stated maintenance mode no longer matches reality
+- discovery surfaces that still claim authority they no longer satisfy
+
+Traceability should therefore support drift review directly, not only historic
+provenance.
+
 ## Constraints
 
 - Traceability rules must remain portable across multiple environments.
@@ -139,3 +154,5 @@ Mixed maintenance should not become an excuse for blurry ownership.
 - [Platform Materialization Model](./Platform-Materialization-Model.md)
 - [Template Model](./Template-Model.md)
 - [Discovery Model](./Discovery-Model.md)
+- [Drift Model](./Drift-Model.md)
+- [Validation Model](./Validation-Model.md)

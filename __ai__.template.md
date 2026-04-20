@@ -20,6 +20,7 @@
 - <what this folder is allowed to do>
 - <what this folder must not do>
 - <important runtime / import-safety / layering rules>
+- <for documentation/governance surfaces, how metadata review and authoritative-source lineage should stay explicit>
 
 ## Allowed Dependencies
 - may depend on:
@@ -54,6 +55,7 @@
 ## Cross-Folder Contracts
 - <folder or module>: <assumption this folder relies on>
 - <folder or module>: <boundary or behavioral expectation>
+- <folder or module>: <which upstream authoritative sources or machine-readable artifacts this folder must stay traceable to>
 
 ## Verification Contract
 ```yaml

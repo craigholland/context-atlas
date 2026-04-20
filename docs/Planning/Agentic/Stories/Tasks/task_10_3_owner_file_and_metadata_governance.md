@@ -27,7 +27,7 @@ to the new agentic-development and repo-management surfaces.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

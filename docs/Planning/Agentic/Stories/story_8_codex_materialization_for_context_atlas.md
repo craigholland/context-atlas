@@ -19,6 +19,8 @@ related:
   - ./story_9_repo_management.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Drift-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Validation-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
   - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
   - ../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
@@ -53,6 +55,8 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
 - [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
 - [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
@@ -171,6 +175,9 @@ the explicit distinction between:
   refreshed
 - the Codex governance doc remains the review and refresh entrypoint for
   keeping runtime-facing Codex assets aligned after Story 8 lands
+- the resulting Codex assets are concrete enough that later drift and
+  validation work can check bound paths, naming, traceability, and maintenance
+  mode without inventing a second Codex-only governance layer
 
 ## Definition Of Done
 
@@ -196,6 +203,8 @@ the explicit distinction between:
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
 - [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
 - [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
