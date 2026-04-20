@@ -15,6 +15,7 @@ related:
   - ./Agent-Authority-Model.md
   - ./Delegation-Model.md
   - ./Skill-Contract.md
+  - ./Skill-Attachment-Model.md
   - ./Agentic-Development-Glossary.md
 supersedes: []
 ---
@@ -40,12 +41,12 @@ environment-specific manifest format.
 
 - A parent agent is a broader accountable actor composed from:
   - a role-bearing authority boundary
-  - direct reusable skills
+  - direct reusable skills attached for its own use
   - delegation rights over narrower specialists
   - responsibility for workflow continuity
 - A specialist is a narrower actor composed from:
   - a focused scope
-  - curated skills selected for that scope
+  - curated skills attached for that focused scope
   - explicit constraints
   - explicit return and escalation expectations
 - Parent and specialist definitions should not differ only by name; they should
@@ -89,4 +90,5 @@ environment-specific manifest format.
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Delegation Model](./Delegation-Model.md)
 - [Skill Contract](./Skill-Contract.md)
+- [Skill Attachment Model](./Skill-Attachment-Model.md)
 - [Agentic Development Glossary](./Agentic-Development-Glossary.md)

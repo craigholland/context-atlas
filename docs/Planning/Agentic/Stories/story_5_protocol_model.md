@@ -50,6 +50,8 @@ entering modes during protocol execution.
 - make protocol docs consistent in how they express actors, triggers,
   preconditions, allowed mutations, required outputs, exit criteria, and
   handoff targets
+- keep protocol docs consuming already-defined skill attachments rather than
+  redefining skills inline as protocol-local behavior
 - keep protocols discoverable and reviewable as first-class workflow surfaces
 
 ### Task 2: Core Workflow Protocol Set
@@ -133,3 +135,4 @@ entering modes during protocol execution.
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)

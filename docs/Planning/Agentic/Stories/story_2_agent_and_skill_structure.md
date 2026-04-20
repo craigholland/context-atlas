@@ -17,6 +17,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Contract.md
+  - ../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture.md
 supersedes: []
@@ -61,6 +62,8 @@ before project roles and runtime-specific files are introduced.
   consume rather than as alternate role or workflow definitions
 - establish how skills attach to parents or specialists without becoming a
   second copy of the role, mode, or protocol model
+- define a portable attachment vocabulary that distinguishes baseline and
+  conditional skill use without turning attachment into workflow logic
 - keep skills focused on reusable work procedures instead of letting them turn
   into ad hoc role definitions
 
@@ -140,4 +143,5 @@ before project roles and runtime-specific files are introduced.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
+- [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)

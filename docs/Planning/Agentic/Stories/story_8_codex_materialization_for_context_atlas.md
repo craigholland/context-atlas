@@ -17,6 +17,7 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md
 supersedes: []
 ---
 
@@ -64,6 +65,8 @@ the explicit distinction between:
 - map abstract concepts like parent agents, specialists, skills, roles, modes,
   and protocols onto concrete Codex file surfaces without collapsing them into
   one file type
+- preserve the distinction between a skill definition and an actor's attached
+  skill inventory as the abstract model becomes concrete files
 - keep those mappings clearly subordinate to the generic materialization model
 
 ### Task 3: Codex Templates And Creation Guidance
@@ -132,3 +135,4 @@ the explicit distinction between:
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
+- [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
