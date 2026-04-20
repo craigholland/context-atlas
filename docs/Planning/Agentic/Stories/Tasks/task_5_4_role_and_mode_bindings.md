@@ -40,10 +40,13 @@ PLANNED
 ### PR - A: Role Participation Binding
 
 - define which roles participate in which protocols and in what capacity
+- define how QA owns review-pass execution while implementation roles own
+  completion handoff emission and response to findings
 - keep role participation distinct from role ownership or authority
 - prevent protocol docs from becoming implicit role definitions
 
 #### Expected New Files
+- `docs/Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md`
 
 #### Expected Existing Files Updated
@@ -56,12 +59,15 @@ PLANNED
 
 - define which modes are expected or allowed within each protocol
 - make it explicit where multiple protocol steps may share one mode
+- make it explicit that multiple review passes may occur within one review-mode
+  span
 - keep the binding precise enough to support later materialization and validation
 
 #### Expected New Files
 - `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md`
 
 #### Expected Existing Files Updated
+- `docs/Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md`
 
@@ -72,6 +78,8 @@ PLANNED
 
 - align the role, mode, and protocol Stories with the binding model
 - ensure Story text now treats roles, protocols, and modes as connected but non-collapsed layers
+- ensure Story text treats review passes as gate-bound review lenses rather than
+  as additional roles or modes
 - document any binding edges that should remain platform-specific rather than canon-level
 
 #### Expected New Files
@@ -96,12 +104,15 @@ PLANNED
 
 - Protocol participation may be confused with authority if bindings are not careful.
 - Mode bindings may drift into one-to-one step mappings if kept too coarse.
+- Review-pass bindings may be confused with role or mode bindings if the gate
+  model is not kept explicit.
 - Later platform work may misinterpret the bindings if Story reinforcement is weak.
 
 ## Exit Criteria
 
 - role participation in protocols is explicit
 - mode participation in protocols is explicit
+- gate-to-review-pass expectations are explicit
 - the role, mode, and protocol Stories now align around one binding model
 
 ## Related Artifacts

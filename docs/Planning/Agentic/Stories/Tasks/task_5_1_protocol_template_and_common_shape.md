@@ -22,7 +22,9 @@ supersedes: []
 
 ## Objective
 
-Define the reusable shape that all workflow protocol docs should follow so protocol guidance remains consistent and reviewable.
+Define the reusable shape that all workflow protocol docs should follow so
+protocol guidance remains consistent, reviewable, and explicit about gate and
+review-pass expectations.
 
 ## Task Status
 
@@ -41,6 +43,8 @@ PLANNED
 
 - define the canonical sections every protocol document should contain
 - make the template explicit about actors, triggers, preconditions, mutations, outputs, exit criteria, and handoffs
+- make the template explicit about gate scope, required review passes, and
+  structured review outcomes where relevant
 - keep the shape general enough for multiple protocol types
 
 #### Expected New Files
@@ -72,7 +76,8 @@ PLANNED
 
 - align the protocol Story and neighboring Stories with the chosen template
 - reduce the chance that later Task docs invent protocol-specific shapes ad hoc
-- document any template fields that may need validation support later
+- document any template fields that may need validation support later,
+  especially gate and review-pass fields
 
 #### Expected New Files
 - none expected
@@ -95,12 +100,16 @@ PLANNED
 
 - Protocol docs may still diverge if the template is too loose.
 - The template may become too rigid if it anticipates too many future cases.
-- Later validation work may be harder if the common shape is not explicit enough.
+- Later validation work may be harder if the common shape is not explicit
+  enough.
+- QA review automation will drift if protocol templates do not reserve a stable
+  place for required pass and outcome data.
 
 ## Exit Criteria
 
 - a reusable protocol template exists
 - the protocol doc surface has a clear common shape
+- the common shape reserves explicit space for review-pass and gate semantics
 - later protocol Tasks can build on the same structure
 
 ## Related Artifacts

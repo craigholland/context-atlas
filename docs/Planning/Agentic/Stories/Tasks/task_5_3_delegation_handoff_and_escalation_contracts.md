@@ -60,6 +60,8 @@ PLANNED
 - require handoff and escalation contracts to be representable as YAML or JSON
 - make `implementation_complete -> QA review intake` a first-class structured
   contract path instead of a comment-driven convention
+- require completion and QA-review contracts to carry the requested review
+  passes and the resulting review outcome state
 - make the contracts explicit enough to support later validation
 
 #### Expected New Files
@@ -78,6 +80,8 @@ PLANNED
 - align the core workflow protocols with the new delegation, handoff, and escalation contracts
 - ensure the role and mode Stories reference these contracts instead of describing ad hoc behavior
 - identify any contract fields that should later become machine-validated
+- make it explicit where requested and completed review-pass state belongs in
+  those contracts
 - make it explicit where QA review outcomes should be projected onto later
   runtime review surfaces without changing the structured source contract
 
@@ -105,11 +109,14 @@ PLANNED
 - Handoff contracts may be too weak to support recovery or validation later.
 - If the contracts are not structured enough, QA review dispatch will drift back
   toward prose-only triggers.
+- If the contracts omit requested or completed review-pass state, later QA
+  automation will not know which gate expectations were actually satisfied.
 - Escalation may overlap with authority rules unless the boundary stays explicit.
 
 ## Exit Criteria
 
 - delegation, handoff, and escalation are explicit structured contracts
+- review intake and review outcome contracts carry explicit pass state
 - the contracts are reinforced across the workflow protocols
 - later validation work has a stable contract surface to build on
 
