@@ -59,6 +59,7 @@
 - When editing the portable agentic canon, contributors should treat Context Atlas role names, current mode selections, concrete workflow gates, current capacity values, and vendor-specific layouts as downstream binding-layer content rather than portable definitions.
 - The agentic planning stack for Stories 7 and 8 should continue to treat the portable boundary model as upstream authoritative guidance; materialization planning should bind to Story 1 rather than restating or replacing it.
 - Broader doc indexes such as `docs/README.md`, `docs/Authoritative/Architecture/README.md`, and `docs/Planning/README.md` should surface the AgenticDevelopment canon explicitly so contributors can discover it before writing project-specific bindings or runtime assets.
+- The `docs/Authoritative/AgenticDevelopment/README.md` file should remain the portable entrypoint for human readers; later Story docs should inherit that orientation instead of compensating for a weak canon index.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
 - There is no currently active MVP task; Story 7 is complete and the current baseline is the merged `MVP Ready` recommendation plus its standing proof scenarios.
