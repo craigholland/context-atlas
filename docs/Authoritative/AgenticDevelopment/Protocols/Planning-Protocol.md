@@ -14,6 +14,7 @@ tags: [agentic-development, protocols, planning, decomposition, workflow]
 related:
   - ./Protocol-Template.md
   - ./Execution-Slice-Protocol.md
+  - ./Handoff-Protocol.md
   - ./Recovery-Protocol.md
   - ../Agent-Authority-Model.md
 supersedes: []
@@ -74,6 +75,10 @@ This protocol should not be used for ordinary deliverable-producing mutations.
 - stated dependencies, risks, and blocked conditions
 - a named downstream handoff target when one is ready
 
+Planning output should follow the structured handoff semantics defined in
+[Handoff Protocol](./Handoff-Protocol.md) when it is moving directly into
+downstream workflow.
+
 ## Exit Criteria
 
 - the work has a governed next shape
@@ -109,5 +114,6 @@ This protocol should not be used for ordinary deliverable-producing mutations.
 
 - [Protocol Template](./Protocol-Template.md)
 - [Execution Slice Protocol](./Execution-Slice-Protocol.md)
+- [Handoff Protocol](./Handoff-Protocol.md)
 - [Recovery Protocol](./Recovery-Protocol.md)
 - [Agent Authority Model](../Agent-Authority-Model.md)
