@@ -129,6 +129,19 @@ it materializes them very differently.
 That means the Codex binding should record which upstream categories it needs
 without pretending those categories are unique to Codex itself.
 
+### 8. Codex Naming Rules Must Stay Traceable To Upstream Vocabulary
+
+Later Codex folder-layout and template docs should use naming conventions that
+preserve upstream distinctions such as:
+
+- role versus parent agent
+- parent agent versus specialist
+- mode vocabulary
+- protocol vocabulary
+- project-local skill namespace
+
+Codex naming should help make the upstream model more legible, not obscure it.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of

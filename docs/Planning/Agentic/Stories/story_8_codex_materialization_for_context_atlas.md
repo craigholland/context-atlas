@@ -19,6 +19,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
@@ -51,6 +52,7 @@ the explicit distinction between:
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
@@ -81,6 +83,8 @@ the explicit distinction between:
 
 - define the expected folder structure and naming conventions for Codex
   discovery
+- bind those discovery choices to one explicit Codex folder-layout doc before
+  later templates or governance docs add more runtime detail
 - map abstract concepts like parent agents, specialists, skills, roles, modes,
   and protocols onto concrete Codex file surfaces without collapsing them into
   one file type
@@ -174,6 +178,7 @@ the explicit distinction between:
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
