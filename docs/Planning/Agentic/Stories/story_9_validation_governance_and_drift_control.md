@@ -89,6 +89,9 @@ materializations aligned over time.
   their cited upstream sources
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
+- keep Codex-specific validation and governance discoverable through the
+  Codex binding docs instead of letting planning prose become the only
+  operational memory for the Codex surface
 - preserve the distinction between content validation and workflow-state review
 
 ### Task 3: Owner-File And Metadata Governance

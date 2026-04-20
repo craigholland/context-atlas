@@ -37,6 +37,13 @@ rules from [docs/Authoritative/AgenticDevelopment/README.md](../Authoritative/Ag
 and its neighboring canon docs instead of redefining those concepts at the
 planning layer.
 
+For the Codex materialization Story in the agentic-development stack, the
+project-specific runtime binding, layout, template, creation, and governance
+surfaces live under
+[docs/Authoritative/Identity/AgenticDevelopment/codex/](../Authoritative/Identity/AgenticDevelopment/codex/).
+Planning docs should treat that directory as the downstream Codex entrypoint
+rather than restating Codex runtime conventions in planning prose.
+
 When planning depends on machine-readable governance input, that input should
 live in the authoritative layers rather than inside planning docs themselves.
 For the agentic-development stack, runtime-capacity planning input belongs in
