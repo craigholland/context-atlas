@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, docs, database, integration]
 related:
   - ../story_4_documents_plus_database_workflow.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - output from Task 4.1
 
 ## Proposed Work
@@ -115,3 +115,4 @@ IMPLEMENTED
 
 - [Story 4 - Documents Plus Database Workflow](../story_4_documents_plus_database_workflow.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

@@ -39,7 +39,11 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
         with TemporaryDirectory() as temp_dir:
             docs_root = Path(temp_dir)
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Craig-Architecture.md",
+                docs_root
+                / "Authoritative"
+                / "Canon"
+                / "Architecture"
+                / "Craig-Architecture.md",
                 """
                 # Craig Architecture
 
@@ -67,7 +71,7 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
             source_by_id = {source.source_id: source for source in sources}
 
             authoritative = source_by_id[
-                "Authoritative/Architecture/Craig-Architecture.md"
+                "Authoritative/Canon/Architecture/Craig-Architecture.md"
             ]
             planning = source_by_id["Planning/Roadmap.md"]
             release = source_by_id["Releases/v0.1.0.md"]
@@ -166,7 +170,7 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
         with TemporaryDirectory() as temp_dir:
             docs_root = Path(temp_dir)
             self._write_doc(
-                docs_root / "Authoritative" / "Architecture" / "Canon.md",
+                docs_root / "Authoritative" / "Canon" / "Architecture" / "Canon.md",
                 """
                 # Canon
 
@@ -203,7 +207,7 @@ class FilesystemDocumentSourceAdapterTests(unittest.TestCase):
             packet = service.assemble(
                 query="context authority packet assembly explicit auditable"
             )
-            authoritative_source_id = "Authoritative/Architecture/Canon.md"
+            authoritative_source_id = "Authoritative/Canon/Architecture/Canon.md"
             authoritative_decision = next(
                 decision
                 for decision in packet.trace.decisions

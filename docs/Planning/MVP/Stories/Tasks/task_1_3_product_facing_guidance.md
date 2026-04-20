@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, docs, guidance, onboarding]
 related:
   - ../story_1_engine_to_product_surface.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Documentation Ontology](../../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - existing `README.md`, examples, and `.env.example`
 
 ## Proposed Work
@@ -116,3 +116,4 @@ IMPLEMENTED
 
 - [Story 1 - Engine To Product Surface](../story_1_engine_to_product_surface.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
+

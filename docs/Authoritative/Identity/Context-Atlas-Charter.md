@@ -8,13 +8,14 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-17
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [charter, context-atlas, context-governance, architecture, scope]
 related:
+  - ./Context-Atlas-Agentic-Development-Profile.md
   - ./Context-Atlas-System-Model.md
-  - ../Architecture/Craig-Architecture.md
-  - ../Ontology/Documentation-Ontology.md
+  - ../Canon/Architecture/Craig-Architecture.md
+  - ../Canon/Ontology/Documentation-Ontology.md
   - ../../README.md
 supersedes: []
 ---
@@ -172,6 +173,19 @@ The project's early phase should prioritize:
 
 The project should not chase broad feature coverage before those foundations exist.
 
+### 13. Governed Agentic Development Should Preserve The Same Structural Boundaries
+
+When Context Atlas formalizes its own agentic-development system, it should use
+the same kind of explicit structural boundaries it expects elsewhere:
+
+- top-level accountable actors should stay distinct from bounded delegates
+- bounded delegates should stay distinct from atomic reusable capabilities
+- project-specific bindings should stay distinct from environment-specific
+  materialization
+
+That keeps the internal agentic-development surface aligned with the same
+governance values the product is trying to embody.
+
 ## Constraints
 
 - Context Atlas must remain conceptually and architecturally standalone from any one downstream consumer.
@@ -194,6 +208,8 @@ The project should not chase broad feature coverage before those foundations exi
 ## Related Artifacts
 
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
-- [Craig Architecture](../Architecture/Craig-Architecture.md)
-- [Documentation Ontology](../Ontology/Documentation-Ontology.md)
+- [Context Atlas Agentic Development Profile](./Context-Atlas-Agentic-Development-Profile.md)
+- [Craig Architecture](../Canon/Architecture/Craig-Architecture.md)
+- [Documentation Ontology](../Canon/Ontology/Documentation-Ontology.md)
 - [Documentation](../../README.md)
+

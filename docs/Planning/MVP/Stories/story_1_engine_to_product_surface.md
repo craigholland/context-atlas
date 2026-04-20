@@ -14,7 +14,7 @@ tags: [mvp, story, surface, api, inspection]
 related:
   - ../mvp_product_defintiion.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -28,7 +28,7 @@ Make the current starter implementation feel like a supported product surface ra
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - Current package surface in `src/context_atlas/`
 - Current runtime settings surface in `.env.example`
 
@@ -93,4 +93,5 @@ Make the current starter implementation feel like a supported product surface ra
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

@@ -14,7 +14,7 @@ tags: [mvp, task, pr-plan, adapters, database, records]
 related:
   - ../story_2_shared_source_coverage.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)
 - [Context Atlas MVP Product Definition](../../mvp_product_defintiion.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - evolving structured-record adapter work
 
 ## Proposed Work
@@ -114,4 +114,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 2 - Shared Source Coverage](../story_2_shared_source_coverage.md)
-- [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

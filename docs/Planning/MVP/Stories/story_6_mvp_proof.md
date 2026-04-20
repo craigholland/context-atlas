@@ -14,7 +14,7 @@ tags: [mvp, story, proof, evaluation, assessment]
 related:
   - ../mvp_product_defintiion.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -28,7 +28,7 @@ Produce grounded evidence that Context Atlas has moved from a core engine to an 
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - completed outcomes from Stories 1 through 5
 
 ## Proposed Tasks
@@ -90,4 +90,5 @@ Produce grounded evidence that Context Atlas has moved from a core engine to an 
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

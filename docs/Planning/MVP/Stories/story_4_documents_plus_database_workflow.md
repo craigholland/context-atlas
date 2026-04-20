@@ -14,7 +14,7 @@ tags: [mvp, story, chatbot, docs, database]
 related:
   - ../mvp_product_defintiion.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -28,7 +28,7 @@ Show that Context Atlas can act as a reusable context-governance component for a
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - Story 2 source-coverage outcomes
 
 ## Proposed Tasks
@@ -86,4 +86,5 @@ Show that Context Atlas can act as a reusable context-governance component for a
 
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

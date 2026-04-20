@@ -2,7 +2,20 @@
 
 This directory holds the reusable Craig Architecture canon for Context Atlas.
 
-These documents are intentionally more general than the project-specific artifacts under [`docs/Authoritative/Identity`](../Identity/). They define the architectural philosophy, implementation guidance, AI-collaboration rules, planning/decomposition model, and local `__ai__.md` contract shape that downstream projects can copy and adapt.
+These documents are intentionally more general than the project-specific artifacts under [`docs/Authoritative/Identity`](../../Identity/). They define the architectural philosophy, implementation guidance, AI-collaboration rules, planning/decomposition model, and local `__ai__.md` contract shape that downstream projects can copy and adapt.
+
+The neighboring runtime-agnostic agentic-development canon lives under
+[`docs/Authoritative/Canon/AgenticDevelopment`](../AgenticDevelopment/README.md).
+When a change concerns agent roles, modes, skills, protocols, or runtime
+materialization concepts, contributors should read that set alongside Craig
+Architecture rather than forcing those concepts into the architecture docs.
+
+In practice:
+
+- Craig Architecture explains reusable architectural philosophy and delivery
+  governance
+- AgenticDevelopment explains reusable agentic vocabulary, authority,
+  boundaries, and materialization concepts
 
 ## What Lives Here
 
@@ -27,4 +40,4 @@ For most contributors, the recommended order is:
 
 This directory should stay focused on reusable architectural canon.
 
-Project-specific identity, mission, scope, and first-class system definition belong under [`docs/Authoritative/Identity`](../Identity/). Forward-looking work decomposition belongs under [`docs/Planning`](../../Planning/), but should derive its shape from [Craig-Architecture-Planning-And-Decomposition.md](./Craig-Architecture-Planning-And-Decomposition.md).
+Project-specific identity, mission, scope, and first-class system definition belong under [`docs/Authoritative/Identity`](../../Identity/). Forward-looking work decomposition belongs under [`docs/Planning`](../../../Planning/), but should derive its shape from [Craig-Architecture-Planning-And-Decomposition.md](./Craig-Architecture-Planning-And-Decomposition.md).

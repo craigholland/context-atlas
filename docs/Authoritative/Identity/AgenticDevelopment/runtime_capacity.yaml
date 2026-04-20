@@ -1,0 +1,37 @@
+# Context Atlas planning-time runtime capacity.
+# This file is authoritative planning input, not live scheduler state.
+# Update guidance lives in docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md.
+
+version: 1
+last_reviewed: 2026-04-20
+
+planning_capacity:
+  total_runtimes: 3
+  reserved_runtimes: 0
+  usable_runtimes: 3
+
+runtime_profiles:
+  - id: runtime_1
+    platform: codex
+    enabled: true
+    specialization: general
+  - id: runtime_2
+    platform: codex
+    enabled: true
+    specialization: general
+  - id: runtime_3
+    platform: codex
+    enabled: true
+    specialization: general
+
+decomposition_policy:
+  require_base_work_first: true
+  allow_parallel_story_lanes_after_base: true
+  max_parallel_story_lanes: 3
+  max_parallel_task_lanes: 3
+
+planner_rules:
+  - "Read this file during Epic, Story, and Task decomposition when bounded parallelism is being considered."
+  - "Do not plan more simultaneous independent work lanes than usable_runtimes allows."
+  - "Treat base or blocking work as sequential even when spare capacity exists."
+  - "Use runtime_profiles only when specialization materially changes eligible work ownership."

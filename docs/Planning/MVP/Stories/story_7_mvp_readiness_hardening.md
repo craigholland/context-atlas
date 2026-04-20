@@ -16,7 +16,7 @@ related:
   - ./story_6_mvp_proof.md
   - ../../../Reviews/MVP/mvp_readiness_assessment.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ Close the remaining gaps called out in the MVP readiness assessment so Context A
 - [Story 6 - MVP Proof](./story_6_mvp_proof.md)
 - [Context Atlas MVP Readiness Assessment](../../../Reviews/MVP/mvp_readiness_assessment.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - completed outcomes from Stories 1 through 6
 
 ## Proposed Tasks
@@ -112,4 +112,5 @@ Close the remaining gaps called out in the MVP readiness assessment so Context A
 - [Context Atlas MVP Product Definition](../mvp_product_defintiion.md)
 - [Story 6 - MVP Proof](./story_6_mvp_proof.md)
 - [Context Atlas MVP Readiness Assessment](../../../Reviews/MVP/mvp_readiness_assessment.md)
-- [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+

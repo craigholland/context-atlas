@@ -15,7 +15,7 @@ related:
   - ../story_7_mvp_readiness_hardening.md
   - ../../../Reviews/MVP/mvp_readiness_assessment.md
   - ../../mvp_product_defintiion.md
-  - ../../../../Authoritative/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -143,3 +143,4 @@ IMPLEMENTED
 
 - [Story 7 - MVP Readiness Hardening](../story_7_mvp_readiness_hardening.md)
 - [Context Atlas MVP Readiness Assessment](../../../Reviews/MVP/mvp_readiness_assessment.md)
+

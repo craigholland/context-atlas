@@ -109,12 +109,12 @@ The current active template set is:
 - `planning_content@1.0.0`
 - `general_content@1.0.0`
 
-In the future, we expect to add `docs/Authoritative/Ontology/versioned/` to preserve older template revisions. The likely structure is one directory per template artifact, with versioned files beneath it.
+In the future, we expect to add `docs/Authoritative/Canon/Ontology/versioned/` to preserve older template revisions. The likely structure is one directory per template artifact, with versioned files beneath it.
 
 Example:
 
 ```text
-docs/Authoritative/Ontology/versioned/
+docs/Authoritative/Canon/Ontology/versioned/
   base_metadata/
     1.0.0.md
   authoritative_content/
@@ -138,3 +138,4 @@ We should treat template versions as semver-like:
 These templates remain part of the ontology scaffold, not the entire ontology by themselves.
 
 The canonical class semantics are now defined in [Documentation-Ontology.md](./Documentation-Ontology.md). We should still expect to refine the templates further as the project charter and future class-specific document patterns are written.
+

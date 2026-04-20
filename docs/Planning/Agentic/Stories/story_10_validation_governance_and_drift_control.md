@@ -1,0 +1,192 @@
+---
+id: context-atlas-agentic-story-10-validation-governance-and-drift-control
+title: Story 10 - Validation, Governance, And Drift Control
+summary: Defines how Context Atlas should validate, review, and keep its agentic-development and repo-management canon, bindings, and runtime materializations from drifting apart over time.
+doc_class: planning
+template_refs:
+  metadata: base_metadata@1.0.0
+  content: planning_content@1.0.0
+status: active
+created: 2026-04-19
+last_reviewed: 2026-04-20
+owners: [core]
+tags: [agentic-development, story, validation, governance, drift-control]
+related:
+  - ../agentic_development_product_definition.md
+  - ./story_4_context_atlas_mode_model.md
+  - ./story_5_protocol_model.md
+  - ./story_6_runtime_capacity_and_parallel_decomposition.md
+  - ./story_7_platform_materialization_model.md
+  - ./story_8_codex_materialization_for_context_atlas.md
+  - ./story_9_repo_management.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
+supersedes: []
+---
+
+# Story 10 - Validation, Governance, And Drift Control
+
+## Objective
+
+Define the validation and governance model that keeps the agentic-development
+and repo-management canon, project-specific bindings, machine-readable planning
+inputs, and runtime materializations aligned over time.
+
+## Inputs
+
+- [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
+- [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
+- [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
+- [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
+- [Story 9 - RepoManagement](./story_9_repo_management.md)
+- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+- Current repository validation and `__ai__.md` governance patterns
+
+## Proposed Tasks
+
+### Task 1: Drift Detection Model
+
+- define what kinds of drift matter between:
+  - portable canon
+  - project-specific bindings
+  - runtime-capacity artifacts
+  - runtime materializations
+- identify which drift conditions should be caught automatically versus surfaced
+  through review guidance
+- keep drift detection focused on meaningful mismatches rather than cosmetic
+  wording differences
+- treat unauthorized downstream semantic edits to runtime-facing assets as a
+  first-class drift condition once materialization work begins
+- treat downstream discovery mechanics that no longer match the portable
+  discovery model as a first-class drift condition once environment bindings
+  exist
+- treat missing, stale, or contradictory provenance and maintenance-mode
+  declarations as first-class drift conditions once runtime assets are
+  materialized
+
+### Task 2: Validation And Preflight Integration
+
+- define how the agentic-development surfaces should participate in repository
+  validation and preflight over time
+- identify the checks needed to keep materialized runtime assets aligned with
+  their authoritative sources
+- identify how future validation should detect missing required protocol
+  sections or missing gate/review-pass fields where the protocol template says
+  they belong
+- identify how future validation should check that the core protocol set stays
+  present and linked from the protocol surface README
+- identify how future validation should detect stale, malformed, or
+  out-of-bound runtime-capacity planning inputs without turning those checks
+  into a live scheduler
+- identify how future validation should check that environment-specific folder
+  conventions, manifests, or indexes remain traceable to the portable
+  discovery classes they claim to satisfy
+- identify how future validation should check that runtime assets still declare
+  their authoritative sources and maintenance mode in a way that matches the
+  portable traceability model
+- identify how future validation should check that Codex runtime assets still
+  follow the project creation-guidance contract for copied, adapted, and
+  derived content instead of drifting into memory-authored local conventions
+- identify how future validation should detect Codex assets that now live at
+  the wrong bound paths, use stale naming conventions, or no longer reflect
+  their cited upstream sources
+- identify how future validation should distinguish structural capacity-artifact
+  checks from human-reviewed claims about real-world runtime availability
+- keep Codex-specific validation and governance discoverable through the
+  Codex binding docs instead of letting planning prose become the only
+  operational memory for the Codex surface
+- preserve the distinction between content validation and workflow-state review
+
+### Task 3: Owner-File And Metadata Governance
+
+- define how `__ai__.md` files and front matter metadata should stay aligned
+  with the new agentic-development surfaces
+- ensure future updates to agentic docs or materialized assets also refresh the
+  right local governance files
+- prevent the new surfaces from bypassing the contract system already used
+  elsewhere in the repo
+
+### Task 4: Review, Recovery, And Change Management
+
+- define how agentic-development changes should be reviewed and recovered when
+  the system drifts or when platform bindings evolve
+- establish how new roles, modes, skills, or protocols should be introduced
+  without bypassing the canon
+- keep governance strong enough to scale without making small updates
+  prohibitively heavy
+- keep later Codex validation and drift rules explicitly downstream of the
+  Identity-layer Codex binding entrypoint rather than letting runtime docs
+  define their own shadow binding model
+
+### Task 5: Canon And Identity Directory Split
+
+- make the top-tier reusable surfaces explicitly live under
+  `docs/Authoritative/Canon/`
+- keep `docs/Authoritative/Identity/` as the sibling project-binding layer
+- update links, planning references, owner files, examples, and tests so the
+  new split is reflected in both prose and runnable fixtures
+- keep the refactor structural rather than semantic: the move should clarify
+  layer boundaries without redefining the canon itself
+
+## Sequencing
+
+- define the drift model and what mismatches matter
+- define validation and preflight integration expectations
+- bind the new surfaces into owner-file and metadata governance
+- define change-management and recovery expectations for future evolution
+- keep the top-tier directory split between reusable canon and project-specific
+  identity explicit as the authoritative surface grows
+
+## Risks And Unknowns
+
+- Validation could become too shallow and miss meaningful drift if only file
+  presence is checked.
+- Governance could become too heavy if every small runtime-file update requires
+  excessive ceremony.
+- If owner-file integration is weak, the new agentic surfaces may silently
+  bypass the repo's existing contract model.
+
+## Exit Criteria
+
+- Context Atlas has a documented drift-control model for agentic development
+  and repo management
+- the repo has a clear validation and preflight path for the new surfaces
+- owner-file and metadata governance expectations are explicit
+- the project has a governed way to review, recover, and evolve the agentic
+  system over time
+
+## Definition Of Done
+
+- the Story's scoped Tasks are either completed or intentionally deferred with
+  the reason documented
+- all merged PR slices for the Story update the relevant local `__ai__.md`
+  files in the same slice
+- the Story keeps validation, governance, and change-management concerns tied
+  back to the authoritative canon instead of inventing a parallel process layer
+- `py -3 scripts/preflight.py` passes on the Story feature branch before review
+- the Story feature PR receives the QA Architecture Pass and Security Pass
+  required for the `Story -> Epic` gate, and any findings are resolved on that
+  same feature branch before human merge
+- the resulting validation approach is concrete enough to support later task and
+  PR-plan decomposition without becoming tool-specific too early
+- runtime-capacity validation remains bounded to structural trustworthiness and
+  does not drift into ungoverned live-state inference
+
+## Related Artifacts
+
+- [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
+- [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
+- [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
+- [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
+- [Story 9 - RepoManagement](./story_9_repo_management.md)
+- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+

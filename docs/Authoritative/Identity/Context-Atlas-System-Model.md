@@ -8,13 +8,15 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-17
-last_reviewed: 2026-04-17
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [system-model, context-atlas, domain, package-architecture, components]
 related:
+  - ./Context-Atlas-Agentic-Development-Profile.md
+  - ./AgenticDevelopment/Role-Model.md
   - ./Context-Atlas-Charter.md
-  - ../Architecture/Craig-Architecture.md
-  - ../Ontology/Documentation-Ontology.md
+  - ../Canon/Architecture/Craig-Architecture.md
+  - ../Canon/Ontology/Documentation-Ontology.md
   - ../../README.md
 supersedes: []
 ---
@@ -194,7 +196,7 @@ The intended responsibilities are:
 - `adapters/`: filesystem, repository, ticketing, tokenizer, embedding, model-facing, and other external integration adapters
 - `rendering/`: derived output renderers such as prompt-ready packet views, reports, or exports
 
-This is the standalone package variant of the Python layout described in [Craig Architecture - Python](../Architecture/Craig-Architecture-Python.md), adapted to Context Atlas as a single primary package.
+This is the standalone package variant of the Python layout described in [Craig Architecture - Python](../Canon/Architecture/Craig-Architecture-Python.md), adapted to Context Atlas as a single primary package.
 
 ### 10. Canonical And Derived Data Must Stay Distinguishable
 
@@ -226,6 +228,40 @@ Good early slices are likely to include:
 
 Early slices should prefer architectural proof over breadth of integrations.
 
+### 13. The Project-Specific Agentic Development Binding Lives In Identity
+
+Context Atlas's own agentic-development structure is also part of the
+project-specific operational model.
+
+That binding should live in the Identity layer as a project profile that says:
+
+- the project uses parent agents as top-level accountable actors
+- the project uses specialists as bounded delegates rather than a second role
+  layer
+- the project uses skills as atomic reusable capabilities attached to those
+  actors
+
+Later role, mode, protocol, and environment-materialization artifacts should
+bind through that project profile rather than skipping directly from portable
+canon to concrete runtime assets.
+
+### 14. The Initial Agentic Role Roster Is Also Project-Specific Identity
+
+Context Atlas's initial agentic role roster is part of the same
+project-specific identity layer.
+
+That role model should live alongside the structural profile and define the
+top-level project accountabilities for:
+
+- Planner/Decomp
+- Backend
+- Documentation/UAT
+- QA
+- DevOps
+
+Those roles should remain distinct from specialist labels and from any future
+runtime-specific file names used to materialize parent agents.
+
 ## Constraints
 
 - The system model must remain consistent with the Context Atlas charter.
@@ -246,6 +282,9 @@ Early slices should prefer architectural proof over breadth of integrations.
 ## Related Artifacts
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
-- [Craig Architecture](../Architecture/Craig-Architecture.md)
-- [Documentation Ontology](../Ontology/Documentation-Ontology.md)
+- [Context Atlas Agentic Development Profile](./Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
+- [Craig Architecture](../Canon/Architecture/Craig-Architecture.md)
+- [Documentation Ontology](../Canon/Ontology/Documentation-Ontology.md)
 - [Documentation](../../README.md)
+

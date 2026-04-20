@@ -213,6 +213,7 @@
     - `context_atlas.infrastructure`
   - invariants:
     - tests should prove documentation ontology classes map into canonical source authority and durability fields
+    - tests should prove authoritative filesystem fixtures continue to use the `Authoritative/Canon/...` path shape rather than drifting back to a flattened authoritative root
     - tests should prove filesystem documents now consume shared domain source-semantics helpers rather than adapter-local default tables
     - tests should prove classified source provenance remains visible enough to influence downstream packet traces
     - tests should prove filesystem adapters do not restate canonical source class through adapter-local tags when that meaning already lives in canonical source semantics
@@ -263,6 +264,7 @@
     - `context_atlas.services`
   - invariants:
     - tests should prove the workflow example can assemble packet, trace, and rendered context from a temporary governed-doc repository
+    - tests should prove the sample-repo and temporary governed-doc fixtures stay aligned with the `Authoritative/Canon/...` directory split used by the repo's top-tier canon
     - tests should prove supported workflow metadata remains visible in trace inspection output instead of being hidden in example-only print logic
     - tests should prove relative `--docs-root` arguments resolve from the selected repository root instead of the caller's shell working directory
     - tests should prove the CLI help surface points back to the minimal sample-repo artifact so the documented workflow shape stays discoverable
