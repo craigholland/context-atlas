@@ -48,6 +48,9 @@ runtime platform.
   actually uses.
 - The `runtime-specific materialization` layer expresses the canon and project
   bindings as discoverable runtime-facing assets for a specific AI environment.
+- Project-specific bindings are the first layer where Context Atlas-specific
+  role names, concrete mode sets, protocol selections, capacity settings, and
+  platform choices may appear.
 - Runtime assets are derived operational artifacts, not the source of truth for
   agentic-development concepts.
 - Project-specific role names, workflow gates, current capacity numbers, and
@@ -72,6 +75,8 @@ runtime platform.
 ## Related Artifacts
 
 - [README.md](./README.md)
+- [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
+- [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 - [Context Atlas Agentic Development Product Definition](../../Planning/Agentic/agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)
