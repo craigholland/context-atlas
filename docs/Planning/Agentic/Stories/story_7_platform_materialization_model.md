@@ -16,6 +16,7 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -32,6 +33,7 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -41,6 +43,8 @@ given AI environment without making those runtime assets authoritative.
 
 ### Task 1: Materialization Concepts And Boundaries
 
+- bind Story 7 to one explicit materialization-boundary model instead of
+  letting later platform stories restate the source-of-truth rules ad hoc
 - define what it means to materialize an abstract agentic concept into a
   platform-specific runtime artifact
 - keep the source-of-truth boundary explicit so generated or maintained runtime
@@ -98,6 +102,8 @@ given AI environment without making those runtime assets authoritative.
 - the template/discovery model is defined without assuming one vendor
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
+- Story 8 and later validation work inherit one clear upstream-versus-downstream
+  change model instead of reconstructing it from planning prose
 
 ## Definition Of Done
 
@@ -120,6 +126,7 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)

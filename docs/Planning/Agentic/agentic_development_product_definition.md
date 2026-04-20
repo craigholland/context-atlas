@@ -97,6 +97,9 @@ The important rule is that Context Atlas should not confuse:
 - the vendor/runtime-specific file format used to materialize that role
 - the portable canon that defines those concepts in the first place
 
+And when semantics must change, the change should originate in the authoritative
+canon or project binding layer before the runtime-facing assets are updated.
+
 ### Core Capability Areas
 
 The epic should establish these capability areas:
