@@ -17,6 +17,7 @@ related:
   - ./story_2_agent_and_skill_structure.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
@@ -61,6 +62,8 @@ rather than the runtime actor itself.
 - identify which artifacts and decisions each role may own directly
 - make it explicit that specialists do not define an alternate project role set
   and instead operate as bounded delegates under parent-agent accountability
+- keep the role model inheriting the parent-versus-specialist contract shape
+  rather than redefining it as a role concern
 - ensure the role model reflects real repository work rather than aspirational
   job titles
 
@@ -131,4 +134,5 @@ rather than the runtime actor itself.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)

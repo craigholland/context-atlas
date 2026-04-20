@@ -17,6 +17,7 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
@@ -62,6 +63,8 @@ entering modes during protocol execution.
 - treat protocols as workflow definitions that parent agents follow while
   embodying their roles, with specialists participating only through bounded
   delegation
+- keep protocol ownership aligned with the parent-versus-specialist delegation
+  boundary rather than letting specialists grow into parallel workflow owners
 - make it explicit that protocols define gates, transitions, handoffs, and exit
   criteria rather than replacing the role or mode model
 
@@ -129,3 +132,4 @@ entering modes during protocol execution.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
+- [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)

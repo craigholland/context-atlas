@@ -16,6 +16,8 @@ related:
   - ./Mode-Model.md
   - ./Skill-Contract.md
   - ./Boundary-Model.md
+  - ./Delegation-Model.md
+  - ./Agent-Composition-Model.md
   - ../Architecture/Craig-Architecture.md
 supersedes: []
 ---
@@ -57,6 +59,8 @@ project uses.
   workflow path.
 - Delegation transfers bounded execution responsibility, but does not
   automatically transfer the parent agent's overall accountability.
+- Parent agents and specialists should therefore differ in structural contract,
+  not only in the breadth of work they happen to perform.
 - Handoff is the explicit protocol-governed transfer of workflow ownership
   between eligible actors.
 - Escalation returns decisions or blocked states to a broader authority
@@ -85,4 +89,6 @@ project uses.
 ## Related Artifacts
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
+- [Delegation-Model.md](./Delegation-Model.md)
+- [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
