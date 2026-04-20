@@ -18,6 +18,12 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ../../../Authoritative/AgenticDevelopment/Protocols/README.md
   - ../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
@@ -58,6 +64,12 @@ ad hoc tool-trigger convention.
 - [Mode Model](../../../Authoritative/AgenticDevelopment/Mode-Model.md)
 - [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
 - [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
+- [Planning Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Pass Model](../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md)
+- [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
 
 ## Proposed Tasks
@@ -200,3 +212,9 @@ ad hoc tool-trigger convention.
 - [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
 - [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
 - [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
+- [Planning Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Pass Model](../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md)
+- [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
