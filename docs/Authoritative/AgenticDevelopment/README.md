@@ -56,7 +56,10 @@ The initial canon surface is centered on:
 - [Composition-Decision-Model.md](./Composition-Decision-Model.md)
 - [Escalation-Model.md](./Escalation-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
+- [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+- [Template-Model.md](./Template-Model.md)
+- [Templates/README.md](./Templates/README.md)
 - [Discovery-Model.md](./Discovery-Model.md)
 - [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
 
@@ -79,9 +82,12 @@ For most readers, the intended order is:
 13. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
 14. [Escalation-Model.md](./Escalation-Model.md)
 15. [Boundary-Model.md](./Boundary-Model.md)
-16. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-17. [Discovery-Model.md](./Discovery-Model.md)
-18. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
+16. [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
+17. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+18. [Template-Model.md](./Template-Model.md)
+19. [Templates/README.md](./Templates/README.md)
+20. [Discovery-Model.md](./Discovery-Model.md)
+21. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
 
 This ordering is intentional:
 
@@ -105,6 +111,11 @@ This ordering is intentional:
   parent-owned, become a skill addition, or justify a bounded specialist
 - the later supplements refine adjacent concerns without replacing those
   foundations
+- the materialization-boundary and platform-materialization docs then define
+  how later runtime-facing assets stay downstream of canon and project
+  bindings
+- the template model and template-contract surface then define what kinds of
+  runtime-facing projections later environments are allowed to use
 - the discovery model then defines what later runtime bindings must make
   discoverable before any environment chooses concrete folder conventions or
   indexing strategies
