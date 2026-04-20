@@ -42,6 +42,7 @@ stateDiagram-v2
     [*] --> implementation
     [*] --> operational_delivery
 
+    planning --> implementation
     planning --> review
     planning --> recovery
 
@@ -81,7 +82,16 @@ A protocol may:
 - revisit a mode more than once
 - require a structured contract without requiring a fresh mode shift
 
-### 2. Review Is A Convergence State For Submitted Work
+### 2. Planning May Route Directly Into Implementation
+
+Context Atlas should allow `planning` to route directly into `implementation`
+when decomposition or sequencing work has produced a valid downstream handoff
+for deliverable creation.
+
+That direct transition is part of the normal workflow shape, not an exception
+that requires recovery or a fresh protocol start.
+
+### 3. Review Is A Convergence State For Submitted Work
 
 `review` is the primary convergence point for work that has been submitted for
 governed assessment.
@@ -89,7 +99,7 @@ governed assessment.
 That means several productive modes may hand off into review, but review
 itself does not replace those productive modes.
 
-### 3. Rework Loops Through Review
+### 4. Rework Loops Through Review
 
 Context Atlas should treat `rework` as returned work that normally flows back
 into `review` when complete.
@@ -97,13 +107,13 @@ into `review` when complete.
 That keeps rework accountable to the same governed assessment surface instead
 of becoming an untracked parallel implementation stream.
 
-### 4. Recovery Routes Back Into Stable Modes
+### 5. Recovery Routes Back Into Stable Modes
 
 `recovery` exists to restore a safe path, so its main transition job is to
 route work back into a stable next mode once the blocked or ambiguous state is
 resolved.
 
-### 5. Protocol Exit Is Not A Mode
+### 6. Protocol Exit Is Not A Mode
 
 The terminal state shown in the graph is a protocol exit, not a seventh mode.
 
