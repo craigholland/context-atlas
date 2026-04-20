@@ -17,6 +17,7 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
   - ../../../Authoritative/Architecture/Craig-Architecture.md
 supersedes: []
@@ -39,6 +40,7 @@ alternate role definitions.
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
 - Current repository workflow expectations around planning, implementation, review, rework, recovery, and release-oriented work
@@ -124,5 +126,6 @@ alternate role definitions.
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)

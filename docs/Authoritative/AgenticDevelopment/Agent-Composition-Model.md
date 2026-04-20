@@ -51,6 +51,9 @@ environment-specific manifest format.
   - explicit return and escalation expectations
 - Parent and specialist definitions should not differ only by name; they should
   differ in accountable shape.
+- Downstream project bindings should make explicit how project roles attach to
+  parent agents instead of assuming that a runtime worker name, specialist
+  label, or file artifact already expresses that relationship.
 
 ### Parent-Agent Contract Shape
 

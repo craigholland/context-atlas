@@ -17,6 +17,7 @@ related:
   - ./AgenticDevelopment/Role-Model.md
   - ./AgenticDevelopment/Role-Accountability-Matrix.md
   - ./AgenticDevelopment/Role-Authority-Matrix.md
+  - ./AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -123,6 +124,15 @@ That means delegation and escalation may route work or decisions, but they
 should not implicitly reassign authority without an explicit downstream
 contract.
 
+### 10. Role Bindings Must Remain Separate From Runtime Materialization
+
+Context Atlas should define role-to-parent bindings at the project-identity
+layer before any environment-specific files attempt to materialize those
+bindings.
+
+That keeps the project's accountability model readable even when later runtime
+assets use different naming conventions or file layouts.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -146,6 +156,7 @@ contract.
 - [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

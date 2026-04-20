@@ -18,6 +18,7 @@ related:
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
@@ -45,6 +46,7 @@ rather than the runtime actor itself.
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
@@ -148,6 +150,7 @@ rather than the runtime actor itself.
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
