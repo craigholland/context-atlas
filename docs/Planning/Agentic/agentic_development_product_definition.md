@@ -85,6 +85,7 @@ The important rule is that Context Atlas should not confuse:
 - the concept of a role
 - the project's chosen roles
 - the vendor/runtime-specific file format used to materialize that role
+- the portable canon that defines those concepts in the first place
 
 ### Core Capability Areas
 
