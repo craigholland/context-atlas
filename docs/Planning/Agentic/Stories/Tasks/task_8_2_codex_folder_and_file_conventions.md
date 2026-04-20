@@ -26,7 +26,7 @@ Define the folder and file conventions that let Codex discover materialized agen
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
