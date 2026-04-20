@@ -16,6 +16,7 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
+  - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
 
@@ -31,6 +32,7 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - Current repository experience with authoritative docs, project bindings, and executable operational artifacts
@@ -44,6 +46,8 @@ given AI environment without making those runtime assets authoritative.
 - keep the source-of-truth boundary explicit so generated or maintained runtime
   files remain downstream of canon and project bindings
 - define the inputs and outputs of a materialization step in a portable way
+- treat Story 1 and the authoritative boundary model as upstream definitions
+  rather than re-describing those layers in materialization language
 
 ### Task 2: Generic Template Model
 
@@ -108,10 +112,13 @@ given AI environment without making those runtime assets authoritative.
   resolved on that same feature branch before human merge
 - traceability between canon, project bindings, and runtime artifacts is
   explicit enough to support later validation and drift-control work
+- the Story continues to read as downstream materialization guidance rather
+  than a second portable canon
 
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
