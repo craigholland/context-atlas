@@ -54,6 +54,7 @@
 - The current agentic-development planning surface now includes an Epic doc, Story docs, and Task PR plans under `docs/Planning/Agentic/`; contributors should keep those layers aligned rather than treating the Task docs as a separate planning system.
 - The new `docs/Authoritative/AgenticDevelopment/` surface is the portable, runtime-agnostic canon for agentic-development concepts; project-specific bindings and runtime-specific materialization details should not be authored there unless the authoritative boundary model changes first.
 - The `docs/Authoritative/AgenticDevelopment/` canon should remain readable from its directory-level README so contributors do not have to reverse-engineer later project bindings or runtime assets just to understand the portable layer.
+- The portable agentic canon should keep authority, mode, skill, and materialization concerns in separate authoritative docs rather than collapsing them back into one general narrative.
 - The planning stack under `docs/Planning/` should include an orienting README, and Story docs should carry a lightweight Definition Of Done so review expectations stay visible before implementation starts.
 - MVP Task PR-plan docs should carry a basic `Task Status` field using `PLANNED`, `WORKING`, or `IMPLEMENTED` so task-level progress remains visible before contributors open individual PR-plan slices.
 - There is no currently active MVP task; Story 7 is complete and the current baseline is the merged `MVP Ready` recommendation plus its standing proof scenarios.
