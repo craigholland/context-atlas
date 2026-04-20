@@ -32,10 +32,19 @@ Contributors working on roles, modes, skills, protocols, or runtime
 materialization should start there before writing project-specific bindings or
 runtime assets.
 
+The reusable repo-management canon now has its own directory index at
+[docs/Authoritative/RepoManagement/README.md](./Authoritative/RepoManagement/README.md).
+Contributors working on repository principals, permissions, branch-target
+policy, review surfaces, or audit identities should start there before writing
+project-specific provider bindings.
+
 That order matters:
 
 - `AgenticDevelopment` defines portable concepts and boundaries
-- `Identity` defines what Context Atlas actually chooses to use
+- `RepoManagement` defines portable repository-operation concepts and
+  boundaries
+- `Identity` defines what Context Atlas actually chooses to use from both
+  portable surfaces
 - `Planning` defines how we intend to deliver those choices
 
 The canonical planning and decomposition reference now lives in [docs/Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.

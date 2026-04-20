@@ -37,6 +37,13 @@ rules from [docs/Authoritative/AgenticDevelopment/README.md](../Authoritative/Ag
 and its neighboring canon docs instead of redefining those concepts at the
 planning layer.
 
+When planning depends on repository principals, permissions, review surfaces,
+branch-target policy, or audit identity, those semantics should derive from
+[docs/Authoritative/RepoManagement/README.md](../Authoritative/RepoManagement/README.md)
+and the downstream project binding under
+[docs/Authoritative/Identity/RepoManagement/](../Authoritative/Identity/RepoManagement/)
+rather than being invented in Story prose or runtime-materialization docs.
+
 For the Codex materialization Story in the agentic-development stack, the
 project-specific runtime binding, layout, template, creation, and governance
 surfaces live under
