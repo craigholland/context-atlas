@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, story, materialization, portability, templates]
 related:
@@ -59,6 +59,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define the generic template surfaces needed for agents, skills, modes,
   protocols, and related runtime guidance
+- define those template surfaces as portable materialization contracts before
+  any platform story maps them into concrete file layouts
 - keep the template model platform-agnostic so later platform bindings can map
   it into vendor-specific file shapes
 - make the template model traceable back to the portable canon and project
@@ -102,6 +104,8 @@ given AI environment without making those runtime assets authoritative.
 - Context Atlas has a documented generic materialization model
 - the boundary between authoritative docs and runtime artifacts is explicit
 - the template/discovery model is defined without assuming one vendor
+- the generic template model is explicit enough that Story 8 can bind to it
+  instead of inventing a runtime-shaped substitute
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream
