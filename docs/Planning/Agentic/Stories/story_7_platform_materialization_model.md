@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, story, materialization, portability, templates]
 related:
@@ -17,6 +17,7 @@ related:
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Template-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -34,6 +35,7 @@ given AI environment without making those runtime assets authoritative.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -57,6 +59,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define the generic template surfaces needed for agents, skills, modes,
   protocols, and related runtime guidance
+- define those template surfaces as portable materialization contracts before
+  any platform story maps them into concrete file layouts
 - keep the template model platform-agnostic so later platform bindings can map
   it into vendor-specific file shapes
 - make the template model traceable back to the portable canon and project
@@ -100,6 +104,8 @@ given AI environment without making those runtime assets authoritative.
 - Context Atlas has a documented generic materialization model
 - the boundary between authoritative docs and runtime artifacts is explicit
 - the template/discovery model is defined without assuming one vendor
+- the generic template model is explicit enough that Story 8 can bind to it
+  instead of inventing a runtime-shaped substitute
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream
@@ -127,6 +133,7 @@ given AI environment without making those runtime assets authoritative.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
