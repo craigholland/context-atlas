@@ -59,7 +59,8 @@ That means:
 
 #### Exit
 
-- when a structured planning-output handoff is emitted for downstream work
+- when a structured planning-output handoff is emitted for downstream work such
+  as implementation or another protocol-defined next step
 - when work is returned for rework or forced into recovery
 
 ### 3. Implementation
