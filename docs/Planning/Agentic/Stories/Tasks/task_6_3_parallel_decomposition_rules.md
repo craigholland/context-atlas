@@ -26,7 +26,7 @@ Define how planners should use runtime capacity to separate blocking base work f
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

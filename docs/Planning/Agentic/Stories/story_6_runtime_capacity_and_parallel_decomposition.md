@@ -8,13 +8,17 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, story, runtime-capacity, planning, decomposition]
 related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
+  - ../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
@@ -32,6 +36,10 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
+- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
@@ -39,6 +47,8 @@ actually available for an Epic, Story, or Task.
 
 ### Task 1: Runtime Capacity Model
 
+- bind Story 6 to one portable runtime-capacity definition rather than letting
+  later bindings invent new concept language
 - define what runtime capacity means at planning time
 - distinguish planning capacity from live operational availability so the model
   does not confuse stable planning input with ephemeral runtime state
@@ -49,6 +59,8 @@ actually available for an Epic, Story, or Task.
 
 - define the project-specific machine-readable artifact that stores current
   planning capacity
+- anchor that artifact at one stable path under the Identity layer so later
+  planning docs do not invent parallel sources of truth
 - keep the artifact simple enough for a human operator to edit safely
 - ensure the file can drive decomposition without becoming a hidden runtime
   scheduler
@@ -58,6 +70,8 @@ actually available for an Epic, Story, or Task.
 - define how planners should identify:
   - base or blocking work that must happen first
   - independent work lanes that may happen in parallel
+- require planners to read the governed planning-capacity artifact before
+  finalizing lane count when bounded parallelism is being considered
 - ensure the number of planned parallel lanes does not exceed usable runtime
   capacity
 - preserve Craig Architecture decomposition quality even when parallelism is
@@ -90,9 +104,12 @@ actually available for an Epic, Story, or Task.
 
 - Context Atlas has a documented runtime-capacity model
 - the project has a planned machine-readable capacity artifact shape
+- the project has one explicit machine-readable planning-capacity artifact path
 - decomposition guidance explains how capacity affects parallel Story and Task
   planning
 - update and validation expectations are explicit enough to trust the artifact
+- later stories can inherit the same runtime-capacity definition without
+  reconstructing it from planning prose
 
 ## Definition Of Done
 
@@ -108,10 +125,16 @@ actually available for an Epic, Story, or Task.
   same feature branch before human merge
 - any machine-readable capacity artifact introduced by the Story is documented
   well enough for later validation and human editing
+- the Story points to one governed update path for runtime-capacity planning
+  input rather than leaving the artifact as a free-floating file
 
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
+- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

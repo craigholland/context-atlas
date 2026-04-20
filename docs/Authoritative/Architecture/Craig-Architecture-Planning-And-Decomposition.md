@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-18
-last_reviewed: 2026-04-18
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [architecture, planning, decomposition, delivery, governance]
 related:
@@ -221,10 +221,24 @@ Useful checks include:
 - whether a planned change is likely to push a file toward an unreviewable size
 - whether a plan relies on growing helper chains instead of introducing missing concepts, objects, policies, or submodules
 - whether each planned PR identifies the local `__ai__.md` files that should be updated as part of the same slice
+- whether the plan assumes more simultaneous independent work lanes than the project's governed planning-capacity input actually supports
 
 These checks are not intended to create planning ceremony for its own sake.
 
 They exist because brittle implementation plans often reveal themselves before coding starts, especially when work is being decomposed for AI-assisted execution.
+
+When a project maintains an explicit planning-capacity input, planners should
+treat that input as a stable decomposition constraint rather than as a live
+scheduler feed. The point is to bound safe parallel planning, not to simulate
+moment-by-moment runtime availability.
+
+In practice, that usually means:
+
+- identify base or blocking work first
+- read the governed planning-capacity input before proposing parallel fan-out
+- avoid planning more independent lanes than usable capacity supports
+- still prefer fewer lanes when reviewability or architectural cohesion would
+  otherwise suffer
 
 ### 9. Code Shape Governance
 

@@ -14,6 +14,8 @@ tags: [agentic-development, planning, product, protocols, automation]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
+  - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
   - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
@@ -114,6 +116,10 @@ The epic should establish these capability areas:
   prose-only status transitions
 - runtime-capacity planning inputs that let decomposition work reflect the
   number of independent AI runtimes currently available
+  while staying explicitly separate from live operational availability or
+  scheduler state
+- parallel-decomposition rules that identify base work first and only fan out
+  into lanes that are both capacity-bounded and architecturally independent
 - platform-specific materialization guidance so concrete runtime assets can be
   created consistently instead of ad hoc
 
@@ -214,6 +220,9 @@ This epic should ultimately produce:
 - a project-specific mode binding surface that defines transition rules,
   mutation scopes, and role-to-mode applicability
 - a project-specific runtime-capacity artifact for decomposition planning
+  at `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml`
+- project-specific runtime-capacity update and trust guidance at
+  `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
 - a protocol set that covers agent execution and inter-agent handoffs
 - one or more platform materialization guides and templates
 - generated or governed runtime-specific assets that are explicitly tied back
@@ -282,6 +291,8 @@ The broader epic is complete when:
 - the repository has an explicit role model and explicit mode model rather than
   blending those concepts into one layer
 - runtime-capacity planning is machine-readable and usable during decomposition
+- runtime-capacity planning remains governed as planning input rather than
+  drifting into live runtime orchestration semantics
 - shared workflow protocols define not only task execution but inter-agent
   handoff and escalation
 - QA review is expressed as one review workflow with gate-specific passes rather
@@ -297,6 +308,8 @@ The broader epic is complete when:
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Runtime Capacity Guidance](../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
+- [Context Atlas Runtime Capacity Artifact](../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)

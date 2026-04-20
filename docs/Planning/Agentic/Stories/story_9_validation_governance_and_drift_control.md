@@ -15,6 +15,7 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_4_context_atlas_mode_model.md
   - ./story_5_protocol_model.md
+  - ./story_6_runtime_capacity_and_parallel_decomposition.md
   - ./story_7_platform_materialization_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
 supersedes: []
@@ -33,6 +34,7 @@ materializations aligned over time.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - Current repository validation and `__ai__.md` governance patterns
@@ -62,6 +64,11 @@ materializations aligned over time.
   they belong
 - identify how future validation should check that the core protocol set stays
   present and linked from the protocol surface README
+- identify how future validation should detect stale, malformed, or
+  out-of-bound runtime-capacity planning inputs without turning those checks
+  into a live scheduler
+- identify how future validation should distinguish structural capacity-artifact
+  checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review
 
 ### Task 3: Owner-File And Metadata Governance
@@ -120,11 +127,14 @@ materializations aligned over time.
   same feature branch before human merge
 - the resulting validation approach is concrete enough to support later task and
   PR-plan decomposition without becoming tool-specific too early
+- runtime-capacity validation remains bounded to structural trustworthiness and
+  does not drift into ungoverned live-state inference
 
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
