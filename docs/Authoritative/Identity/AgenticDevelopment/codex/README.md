@@ -1,0 +1,139 @@
+---
+id: context-atlas-codex-binding-readme
+title: Context Atlas Codex Binding
+summary: Defines Codex as the first concrete runtime materialization target for Context Atlas and positions the Codex-specific surfaces as downstream bindings of the portable canon and project identity layer.
+doc_class: authoritative
+template_refs:
+  metadata: base_metadata@1.0.0
+  content: authoritative_content@1.0.0
+status: active
+created: 2026-04-20
+last_reviewed: 2026-04-20
+owners: [core]
+tags: [context-atlas, agentic-development, identity, codex, materialization]
+related:
+  - ../Role-Model.md
+  - ../Role-Agent-Binding-Model.md
+  - ../Mode-Model.md
+  - ../Protocol-Role-Bindings.md
+  - ../Protocol-Mode-Bindings.md
+  - ../Gate-Review-Pass-Matrix.md
+  - ../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../../AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../AgenticDevelopment/Template-Model.md
+  - ../../../AgenticDevelopment/Templates/README.md
+  - ../../../AgenticDevelopment/Discovery-Model.md
+  - ../../../AgenticDevelopment/Materialization-Traceability-Model.md
+supersedes: []
+---
+
+# Context Atlas Codex Binding
+
+## Purpose
+
+Define Codex as the first concrete runtime materialization target for Context
+Atlas and establish the project-specific binding surface that later Codex
+folder, template, and governance docs should extend.
+
+## Scope
+
+This document governs the decision to support Codex first, the upstream
+authoritative surfaces that Codex materialization must consume, and the
+boundary between Codex-specific artifacts and the portable canon.
+
+It does not redefine the portable concepts themselves, and it does not replace
+later Codex layout, template, or governance docs.
+
+## Binding Decisions
+
+### 1. Context Atlas Supports Codex As Its First Runtime Materialization Target
+
+Context Atlas will use Codex as its first concrete environment for
+materializing the project's agentic-development model into runtime-facing
+assets.
+
+That decision is a project binding, not a portable canon claim.
+
+### 2. Codex Binding Is Downstream Of The Portable Canon And The Identity Layer
+
+The Codex surface must inherit meaning from:
+
+- the portable AgenticDevelopment canon
+- the Context Atlas Identity bindings
+- the Story 7 materialization boundary, template, discovery, and traceability
+  model
+
+Codex assets must not become a substitute source of truth for roles, modes,
+protocols, skills, or materialization semantics.
+
+### 3. Codex Binding Must Materialize Distinct Concept Families Explicitly
+
+Codex materialization should preserve the explicit distinctions between:
+
+- roles as accountability
+- parent agents as materialized accountable actors
+- specialists as bounded delegates
+- skills as atomic reusable capabilities
+- modes as execution states
+- protocols as workflow paths
+
+Codex convenience surfaces may aggregate or cross-reference those concepts, but
+they should not erase the upstream distinctions that authorize them.
+
+### 4. Codex Is The First Binding, Not The Final Binding
+
+Context Atlas is not declaring Codex to be the only valid future runtime
+target.
+
+The Codex binding should therefore:
+
+- remain clearly project-specific
+- inherit the generic materialization model
+- leave room for later non-Codex bindings without forcing Codex mechanics back
+  into the portable layer
+
+### 5. Later Codex Docs Must Make The Binding Mechanically Usable
+
+The downstream Codex surface should eventually make it possible for a
+contributor to answer:
+
+- which Codex-discoverable folders and files exist
+- which abstract concepts each Codex surface expresses
+- which templates or creation instructions generate or refresh those surfaces
+- which governance hooks keep those assets aligned over time
+
+Those details belong in the later Codex binding docs, not in this initial
+decision record.
+
+## Constraints
+
+- Codex-specific wording should stay in the Codex binding layer instead of
+  leaking upward into the portable canon.
+- The Codex binding should cite its upstream sources explicitly rather than
+  relying on implicit project memory.
+- The Codex binding should stay compatible with the Story 7 materialization
+  rules around boundary, template, discovery, traceability, and regeneration.
+
+## Non-Goals
+
+- Define the full Codex folder layout.
+- Define the final Codex templates.
+- Define the final Codex governance hooks.
+- Materialize the runtime-facing Codex assets themselves.
+
+## Related Artifacts
+
+- [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
+- [Role Model](../Role-Model.md)
+- [Role-Agent Binding Model](../Role-Agent-Binding-Model.md)
+- [Mode Model](../Mode-Model.md)
+- [Protocol Role Bindings](../Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](../Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](../Gate-Review-Pass-Matrix.md)
+- [Platform Materialization Model](../../../AgenticDevelopment/Platform-Materialization-Model.md)
+- [Materialization Boundary Model](../../../AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../AgenticDevelopment/Template-Model.md)
+- [Generic Template Contracts](../../../AgenticDevelopment/Templates/README.md)
+- [Discovery Model](../../../AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../AgenticDevelopment/Materialization-Traceability-Model.md)
