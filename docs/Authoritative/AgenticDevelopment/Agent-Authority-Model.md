@@ -83,5 +83,7 @@ project uses.
 ## Related Artifacts
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
+- [Mode-Model.md](./Mode-Model.md)
+- [Skill-Contract.md](./Skill-Contract.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
 - [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)
