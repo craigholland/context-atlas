@@ -13,8 +13,10 @@ owners: [core]
 tags: [agentic-development, authority, canon, delegation, handoff]
 related:
   - ./Agentic-Development-Glossary.md
+  - ./Mode-Model.md
+  - ./Skill-Contract.md
+  - ./Boundary-Model.md
   - ../Architecture/Craig-Architecture.md
-  - ../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md
 supersedes: []
 ---
 
@@ -22,9 +24,9 @@ supersedes: []
 
 ## Purpose
 
-Define the invariant relationship model for agentic development so later
-project-specific bindings and runtime materializations preserve the same
-authority chain across AI environments.
+Define the invariant relationship model for agentic development so downstream
+bindings and materializations preserve the same authority chain across
+environments.
 
 ## Scope
 
@@ -70,21 +72,17 @@ project uses.
   accountability and workflow structure.
 - Mode transitions must not be treated as implicit substitutes for handoff,
   escalation, or delegation.
-- The authority model must remain portable and must not assume one vendor's
-  runtime layout or discovery semantics.
+- The authority model must remain portable and must not assume one
+  environment's layout or discovery semantics.
 
 ## Non-Goals
 
-- Define the project-specific role roster for Context Atlas.
-- Define the concrete workflow protocols a project chooses to adopt.
+- Define an application-specific role roster.
+- Define the concrete workflow protocols an application chooses to adopt.
 - Select current mode names or current skill libraries.
-- Bind these rules to any specific AI runtime.
+- Bind these rules to any specific execution environment.
 
 ## Related Artifacts
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
-- [Mode-Model.md](./Mode-Model.md)
-- [Skill-Contract.md](./Skill-Contract.md)
-- [Boundary-Model.md](./Boundary-Model.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
-- [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)

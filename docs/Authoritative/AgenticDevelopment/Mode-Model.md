@@ -15,7 +15,6 @@ related:
   - ./Agentic-Development-Glossary.md
   - ./Agent-Authority-Model.md
   - ./Skill-Contract.md
-  - ../../Planning/Agentic/Stories/story_4_context_atlas_mode_model.md
 supersedes: []
 ---
 
@@ -23,7 +22,7 @@ supersedes: []
 
 ## Purpose
 
-Define the portable meaning of a mode so later project-specific bindings can
+Define the portable meaning of a mode so later application-specific bindings can
 choose concrete modes without redefining what a mode is.
 
 ## Scope
@@ -31,8 +30,7 @@ choose concrete modes without redefining what a mode is.
 This document governs the semantics of modes as execution states used while an
 agent follows a protocol.
 
-It does not choose a project's current mode set or name specific modes for
-Context Atlas.
+It does not choose an application's current mode set or name specific modes.
 
 ## Binding Decisions
 
@@ -54,20 +52,19 @@ Context Atlas.
 ## Constraints
 
 - Portable mode semantics must stay runtime-agnostic.
-- Mode definitions must not silently absorb project-specific workflow gates or
-  vendor-specific file conventions.
+- Mode definitions must not silently absorb application-specific workflow gates
+  or environment-specific file conventions.
 - Mode semantics should remain reusable across roles instead of becoming
   role-specific mini-protocols.
 
 ## Non-Goals
 
-- Choose Context Atlas's initial mode set.
+- Choose an application's initial mode set.
 - Define protocol-specific gates or step sequences.
-- Define vendor-specific runtime files for mode discovery.
+- Define environment-specific files for mode discovery.
 
 ## Related Artifacts
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
-- [Story 4 - Context Atlas Mode Model](../../Planning/Agentic/Stories/story_4_context_atlas_mode_model.md)

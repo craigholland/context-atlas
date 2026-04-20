@@ -1,7 +1,7 @@
 ---
 id: craig-agentic-development-boundary-model
 title: Boundary Model
-summary: Defines the three-layer boundary between portable agentic canon, project-specific bindings, and runtime-specific materialization.
+summary: Defines the three-layer boundary between portable agentic canon, application-specific bindings, and environment-specific materialization.
 doc_class: authoritative
 template_refs:
   metadata: base_metadata@1.0.0
@@ -13,9 +13,9 @@ owners: [core]
 tags: [agentic-development, boundaries, canon, materialization]
 related:
   - ./README.md
+  - ./Agentic-Development-Glossary.md
+  - ./Agent-Authority-Model.md
   - ./Platform-Materialization-Model.md
-  - ../../Planning/Agentic/agentic_development_product_definition.md
-  - ../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md
 supersedes: []
 ---
 
@@ -24,59 +24,59 @@ supersedes: []
 ## Purpose
 
 Define the three-layer boundary that keeps portable agentic canon,
-project-specific bindings, and runtime-specific materialization distinct.
+application-specific bindings, and environment-specific materialization
+distinct.
 
 ## Scope
 
 This document governs where agentic-development content belongs when moving
-from generic definitions toward Context Atlas-specific interpretation and then
-to runtime-facing assets.
+from generic definitions toward application-specific interpretation and then to
+environment-facing assets.
 
-It does not choose Context Atlas's actual role set, current modes, or current
-runtime platform.
+It does not choose any application's actual role set, current modes, or
+current execution environment.
 
 ## Binding Decisions
 
 - The agentic-development system is separated into three layers:
   - portable canon
-  - project-specific bindings
-  - runtime-specific materialization
+  - application-specific bindings
+  - environment-specific materialization
 - The `portable canon` defines vocabulary, invariant rules, and reusable
   boundary concepts.
-- The `project-specific bindings` declare which roles, modes, protocols,
-  specialists, skills, runtime-capacity inputs, and platform choices a project
-  actually uses.
-- The `runtime-specific materialization` layer expresses the canon and project
-  bindings as discoverable runtime-facing assets for a specific AI environment.
-- Project-specific bindings are the first layer where Context Atlas-specific
-  role names, concrete mode sets, protocol selections, capacity settings, and
-  platform choices may appear.
+- The `application-specific bindings` declare which roles, modes, protocols,
+  specialists, skills, runtime-capacity inputs, and environment choices a
+  system actually uses.
+- The `environment-specific materialization` layer expresses the canon and
+  bindings as discoverable environment-facing assets for a specific execution
+  environment.
+- Application-specific bindings are the first layer where concrete role names,
+  concrete mode sets, protocol selections, capacity settings, and environment
+  choices may appear.
 - Runtime assets are derived operational artifacts, not the source of truth for
   agentic-development concepts.
-- Project-specific role names, workflow gates, current capacity numbers, and
-  vendor-specific folder conventions do not belong in the portable canon.
+- Application-specific role names, workflow gates, current capacity numbers,
+  and environment-specific folder conventions do not belong in the portable
+  canon.
 
 ## Constraints
 
-- Portable canon documents must remain reusable across projects and AI
+- Portable canon documents must remain reusable across applications and
   environments.
-- Project-specific bindings must not be mistaken for universal definitions.
-- Runtime-specific materialization must preserve traceability back to the
-  project bindings and portable canon that it expresses.
-- Changes to runtime-facing assets must not silently redefine the canon.
+- Application-specific bindings must not be mistaken for universal
+  definitions.
+- Environment-specific materialization must preserve traceability back to the
+  bindings and portable canon that it expresses.
+- Changes to environment-facing assets must not silently redefine the canon.
 
 ## Non-Goals
 
-- Replace project-specific bindings with a fully generic meta-model.
-- Treat runtime-discoverable files as the canonical semantics for agentic
+- Replace application-specific bindings with a fully generic meta-model.
+- Treat environment-discoverable files as the canonical semantics for agentic
   development.
-- Define the concrete Codex, Claude, or other platform layouts here.
+- Define any concrete environment layout here.
 
 ## Related Artifacts
 
 - [README.md](./README.md)
-- [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
-- [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-- [Context Atlas Agentic Development Product Definition](../../Planning/Agentic/agentic_development_product_definition.md)
-- [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)

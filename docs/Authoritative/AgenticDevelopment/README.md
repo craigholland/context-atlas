@@ -1,18 +1,17 @@
 # Agentic Development
 
-This directory holds the portable, runtime-agnostic agentic-development canon
-for Context Atlas.
+This directory holds the portable, environment-agnostic agentic-development canon.
 
-These documents are intentionally more general than the project-specific
-artifacts that will later bind the canon to Context Atlas's chosen roles,
-modes, protocols, runtime-capacity inputs, and platform materializations.
+These documents are intentionally more general than the binding-layer artifacts
+that later choose concrete roles, modes, protocols, capacity inputs, and
+environment materializations.
 
 This set should be read alongside the reusable Craig Architecture canon, not as
-an isolated prompt bundle or runtime-specific helper surface.
+an isolated prompt bundle or environment-specific helper surface.
 
-The portable canon ends where project-specific bindings begin. This directory
-defines portable terms and invariants, not Context Atlas's chosen role roster,
-workflow gates, runtime-capacity values, or vendor-specific layouts.
+The portable canon ends where binding-layer documents begin. This directory
+defines portable terms and invariants, not an application's chosen role
+roster, workflow gates, capacity values, or environment-specific layouts.
 
 ## Start Here
 
@@ -24,22 +23,23 @@ The intended progression is:
 1. understand what this directory is responsible for
 2. learn the portable vocabulary
 3. learn the invariant relationship and boundary rules
-4. only then move into project-specific bindings or runtime-specific
-   materialization guidance
+4. only then move into downstream binding or materialization guidance
 
 ## What Lives Here
 
 This surface should define portable concepts and invariant rules such as:
 
 - core terminology for agents, roles, specialists, modes, skills, protocols,
-  delegation, handoff, escalation, runtime capacity, and materialization
+  delegation, handoff, escalation, execution capacity, and materialization
 - stable authority and relationship rules
 - portable mode semantics
 - portable skill semantics
-- portable boundary rules between canon, project bindings, and runtime assets
-- portable materialization concepts that remain valid across AI environments
+- portable boundary rules between canon, application bindings, and materialized
+  assets
+- portable materialization concepts that remain valid across execution
+  environments
 
-The initial Story 1 surface is centered on:
+The initial canon surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
@@ -71,32 +71,32 @@ This ordering is intentional:
 
 ## Why This Surface Comes First
 
-Later Context Atlas docs will choose:
+Later binding-layer docs may choose:
 
-- actual roles
-- actual modes
-- actual protocols
-- actual runtime-capacity inputs
-- actual platform materializations
+- concrete roles
+- concrete modes
+- concrete protocols
+- concrete capacity inputs
+- concrete environment materializations
 
 Those later documents should bind to this canon, not redefine it. If a reader
 cannot understand the portable layer from this directory alone, later planning
-and runtime docs will start carrying canon concepts they should be inheriting
-instead.
+and environment-facing docs will start carrying canon concepts they should be
+inheriting instead.
 
 ## What Does Not Live Here
 
 This directory should not be used for:
 
-- Context Atlas's chosen role roster
-- Context Atlas's chosen mode set
-- Context Atlas's chosen protocol set
-- current runtime-capacity numbers for this repo
-- vendor-specific discovery folders, prompts, config files, or platform naming
+- an application's chosen role roster
+- an application's chosen mode set
+- an application's chosen protocol set
+- current capacity numbers for a specific system
+- environment-specific discovery folders, prompts, config files, or naming
   conventions
 
-Those concerns belong in downstream project-specific bindings and
-runtime-specific materialization guidance, not in the portable canon.
+Those concerns belong in downstream binding-layer docs and
+environment-specific materialization guidance, not in the portable canon.
 
 ## Neighboring Canon
 
@@ -104,15 +104,12 @@ The most relevant adjacent authoritative surfaces are:
 
 - [../Architecture/README.md](../Architecture/README.md): reusable architectural
   philosophy, planning/decomposition guidance, and AI-collaboration rules
-- [../Identity/Context-Atlas-System-Model.md](../Identity/Context-Atlas-System-Model.md):
-  the project-specific operational model for Context Atlas, including
-  downstream project choices that do not belong in the portable canon
 - [../Ontology/README.md](../Ontology/README.md): metadata and document-class
   guidance for authoring authoritative artifacts
 
 When deciding where to read next:
 
 - stay in this directory if you are still learning the portable concepts
-- move to `Identity` when you need Context Atlas's chosen bindings
-- move to planning docs only after the portable canon is clear enough that the
-  planning layer does not have to redefine it
+- move to a binding layer only when you need concrete application choices
+- move to planning only after the portable canon is clear enough that planning
+  docs do not have to redefine it

@@ -15,7 +15,6 @@ related:
   - ./Agentic-Development-Glossary.md
   - ./Agent-Authority-Model.md
   - ./Mode-Model.md
-  - ../../Planning/Agentic/Stories/story_2_agent_and_skill_structure.md
 supersedes: []
 ---
 
@@ -32,8 +31,8 @@ into roles, modes, or protocols.
 This document governs the portable meaning of a skill and the expectations that
 follow from treating skills as atomic reusable capability units.
 
-It does not define Context Atlas's initial skill library or any vendor-specific
-skill file format.
+It does not define any application's initial skill library or any
+environment-specific skill file format.
 
 ## Binding Decisions
 
@@ -57,14 +56,14 @@ skill file format.
 - Skill definitions must remain distinct from role definitions, protocol
   definitions, and mode definitions.
 - Skills must not silently expand into disguised specialists or parent agents.
-- Portable skill semantics must remain valid even when the eventual runtime
-  materializes them through different file layouts or discovery mechanisms.
+- Portable skill semantics must remain valid even when a downstream
+  environment materializes them through different file layouts or discovery
+  mechanisms.
 
 ## Non-Goals
 
-- Choose the current specialist roster or parent-agent roster for Context
-  Atlas.
-- Define a vendor-specific `SKILL.md` layout or prompt syntax.
+- Choose an application's current specialist roster or parent-agent roster.
+- Define an environment-specific `SKILL.md` layout or prompt syntax.
 - Define protocol ownership or workflow gate logic.
 
 ## Related Artifacts
@@ -72,4 +71,3 @@ skill file format.
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
-- [Story 2 - Agent And Skill Structure](../../Planning/Agentic/Stories/story_2_agent_and_skill_structure.md)

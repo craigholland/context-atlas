@@ -1,7 +1,7 @@
 ---
 id: craig-agentic-development-glossary
 title: Agentic Development Glossary
-summary: Defines the portable vocabulary for agentic-development concepts so later project bindings and runtime materializations can build on shared terms.
+summary: Defines the portable vocabulary for agentic-development concepts so downstream bindings and materializations can build on shared terms.
 doc_class: authoritative
 template_refs:
   metadata: base_metadata@1.0.0
@@ -13,9 +13,12 @@ owners: [core]
 tags: [agentic-development, glossary, canon, portability]
 related:
   - ./Agent-Authority-Model.md
+  - ./Mode-Model.md
+  - ./Skill-Contract.md
+  - ./Boundary-Model.md
+  - ./Platform-Materialization-Model.md
   - ../Architecture/Craig-Architecture.md
   - ../Ontology/Documentation-Ontology.md
-  - ../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md
 supersedes: []
 ---
 
@@ -23,12 +26,12 @@ supersedes: []
 
 ## Purpose
 
-Define the portable vocabulary for agentic development so project-specific
-bindings and runtime-specific materializations can build on one stable set of
-terms.
+Define the portable vocabulary for agentic development so downstream bindings
+and materializations can build on one stable set of terms.
 
-This glossary is intentionally runtime-agnostic and project-agnostic. It
-defines concepts, not Context Atlas's chosen instantiations of those concepts.
+This glossary is intentionally environment-agnostic and application-agnostic. It
+defines concepts, not any application's chosen instantiations of those
+concepts.
 
 ## Scope
 
@@ -36,10 +39,11 @@ This document governs the meanings of the core agentic-development terms that
 will recur across the wider `AgenticDevelopment` canon.
 
 It covers the portable definitions for agents, roles, protocols, modes,
-skills, delegation, handoff, escalation, runtime capacity, and materialization.
+skills, delegation, handoff, escalation, execution capacity, and
+materialization.
 
-It does not choose Context Atlas's actual role set, mode set, protocol set, or
-runtime platform.
+It does not choose any application's actual role set, mode set, protocol set,
+or execution environment.
 
 ## Binding Decisions
 
@@ -62,47 +66,42 @@ runtime platform.
   to another according to a protocol.
 - `Escalation`: the return of a decision, risk, exception, or blocked state to
   a broader authority boundary.
-- `Runtime capacity`: the planning-time description of how many independent AI
-  runtimes are available to pick up work.
-- `Project-specific binding`: the layer that declares which portable concepts a
-  specific project actually uses.
-- `Runtime platform`: the AI environment whose discovery rules and file
+- `Execution capacity`: the planning-time description of how many independent
+  execution slots are available to pick up work.
+- `Application binding`: the layer that declares which portable concepts a
+  specific application actually uses.
+- `Execution environment`: the environment whose discovery rules and file
   conventions receive materialized assets.
-- `Materialization`: the process of expressing portable and project-specific
-  agentic definitions as runtime-specific files, folders, prompts, templates,
-  or other discoverable assets.
-- `Runtime asset`: a concrete runtime-facing artifact produced through
-  materialization.
+- `Materialization`: the process of expressing portable and application-bound
+  agentic definitions as environment-facing files, folders, prompts,
+  templates, or other discoverable assets.
+- `Materialized asset`: a concrete environment-facing artifact produced
+  through materialization.
 
 ## Constraints
 
-- Terms in this glossary should remain portable across AI environments rather
-  than drifting toward one vendor's file layout or discovery rules.
-- Project-specific role names, current workflow gates, current runtime-capacity
-  values, and vendor-specific runtime conventions do not belong in this
-  glossary.
+- Terms in this glossary should remain portable across execution environments
+  rather than drifting toward one environment's file layout or discovery
+  rules.
+- Application-specific role names, current workflow gates, current capacity
+  values, and environment-specific conventions do not belong in this glossary.
 - Definitions here must distinguish accountability (`role`), workflow
   structure (`protocol`), execution state (`mode`), and reusable capability
   (`skill`) rather than allowing those concepts to collapse into one another.
-- This glossary must not encode Context Atlas's chosen role names, mode names,
-  workflow gates, or runtime platform conventions.
-- Runtime assets are not defined here as source-of-truth artifacts; they are
-  downstream expressions of higher-level canon and bindings.
+- This glossary must not encode concrete role names, mode names, workflow
+  gates, or environment conventions from any specific application.
+- Materialized assets are not defined here as source-of-truth artifacts; they
+  are downstream expressions of higher-level canon and bindings.
 
 ## Non-Goals
 
-- Choose the initial Context Atlas role set or specialist roster.
-- Define the current Context Atlas workflow protocol set.
-- Pick a vendor-specific folder layout or prompt format.
-- Describe live runtime scheduling, orchestration, or worker discovery.
+- Choose an application's initial role set or specialist roster.
+- Define a specific application's current workflow protocol set.
+- Pick an environment-specific folder layout or prompt format.
+- Describe live execution scheduling, orchestration, or worker discovery.
 
 ## Related Artifacts
 
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-- [Mode-Model.md](./Mode-Model.md)
-- [Skill-Contract.md](./Skill-Contract.md)
-- [Boundary-Model.md](./Boundary-Model.md)
-- [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
 - [Documentation-Ontology.md](../Ontology/Documentation-Ontology.md)
-- [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)
