@@ -206,6 +206,8 @@ This epic should ultimately produce:
   - DevOps
 - a project-specific mode model that defines which execution states Context
   Atlas actually uses
+- a project-specific mode binding surface that defines transition rules,
+  mutation scopes, and role-to-mode applicability
 - a project-specific runtime-capacity artifact for decomposition planning
 - a protocol set that covers agent execution and inter-agent handoffs
 - one or more platform materialization guides and templates

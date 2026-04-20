@@ -14,6 +14,7 @@ tags: [context-atlas, agentic-development, identity, roles, authority, approvals
 related:
   - ./Role-Model.md
   - ./Role-Accountability-Matrix.md
+  - ./Role-Mode-Matrix.md
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../../AgenticDevelopment/Escalation-Model.md
 supersedes: []
@@ -159,6 +160,8 @@ the protocol story.
 - Authority boundaries should stay explicit before protocol sequencing deepens.
 - Approval surfaces should remain narrow enough that merges and releases do not
   become implicit side effects of ordinary implementation work.
+- Role-to-mode applicability should further narrow these authorities where the
+  shared mode model introduces role-specific constraints.
 - The matrix should not drift into a role-by-role protocol narrative.
 
 ## Non-Goals
@@ -171,5 +174,6 @@ the protocol story.
 
 - [Context Atlas Role Model](./Role-Model.md)
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
+- [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Escalation Model](../../AgenticDevelopment/Escalation-Model.md)
