@@ -10,6 +10,10 @@ modes, protocols, runtime-capacity inputs, and platform materializations.
 This set should be read alongside the reusable Craig Architecture canon, not as
 an isolated prompt bundle or runtime-specific helper surface.
 
+The portable canon ends where project-specific bindings begin. This directory
+defines portable terms and invariants, not Context Atlas's chosen role roster,
+workflow gates, runtime-capacity values, or vendor-specific layouts.
+
 ## What Lives Here
 
 This surface should define portable concepts and invariant rules such as:
@@ -28,11 +32,8 @@ The initial Story 1 surface is centered on:
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
+- [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-
-Story 1 will still expand this same directory with a dedicated boundary model
-that locks the line between portable canon, project-specific bindings, and
-runtime-specific materialization.
 
 ## How To Read This Set
 
@@ -43,8 +44,8 @@ For most readers, the intended order is:
 3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 4. [Mode-Model.md](./Mode-Model.md)
 5. [Skill-Contract.md](./Skill-Contract.md)
-6. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-7. the boundary model once Story 1 adds it
+6. [Boundary-Model.md](./Boundary-Model.md)
+7. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -76,6 +77,7 @@ The most relevant adjacent authoritative surfaces are:
 - [../Architecture/README.md](../Architecture/README.md): reusable architectural
   philosophy, planning/decomposition guidance, and AI-collaboration rules
 - [../Identity/Context-Atlas-System-Model.md](../Identity/Context-Atlas-System-Model.md):
-  the project-specific operational model for Context Atlas
+  the project-specific operational model for Context Atlas, including
+  downstream project choices that do not belong in the portable canon
 - [../Ontology/README.md](../Ontology/README.md): metadata and document-class
   guidance for authoring authoritative artifacts
