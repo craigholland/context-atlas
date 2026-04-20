@@ -26,7 +26,7 @@ Document Codex as the first concrete runtime binding for Context Atlas while kee
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
