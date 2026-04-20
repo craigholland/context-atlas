@@ -34,6 +34,8 @@ runtime-materialization scheme.
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - [Documentation Ontology](../../../Authoritative/Ontology/Documentation-Ontology.md)
+- [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
 - Current Craig Architecture split between portable canon, project-specific bindings, and executable surfaces
 
 ## Proposed Tasks
@@ -122,6 +124,8 @@ runtime-materialization scheme.
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
+- [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - [Documentation Ontology](../../../Authoritative/Ontology/Documentation-Ontology.md)
