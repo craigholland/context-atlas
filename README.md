@@ -41,6 +41,9 @@ Those guides are the primary user-facing help surface. The `examples/`
 directory contains runnable companion artifacts, sample payloads, and proof
 inputs that support the guides rather than replacing them.
 
+If you are contributing documentation or authoritative canon, start with
+[CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
+
 ## Principles
 
 - Standalone and reusable

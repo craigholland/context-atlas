@@ -2,6 +2,12 @@
 
 This directory holds the canonical project documentation for Context Atlas.
 
+## Contributing Docs
+
+If you are trying to add or update a document correctly, start with
+[CONTRIBUTING.md](../CONTRIBUTING.md) and then continue into the ontology docs
+linked below.
+
 ## Guides
 
 User-facing setup and workflow help now lives under
@@ -63,5 +69,6 @@ The intended documentation ontology is:
 - `Exploratory` for speculative investigation and prototypes
 - `Releases` for operational and release-history context
 
-This file exists to orient contributors toward the ontology and template canon before they author new project artifacts.
+This file exists to orient contributors toward the ontology and template canon
+before they author new project artifacts.
 

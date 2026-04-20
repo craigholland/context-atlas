@@ -9,6 +9,7 @@
 - folder: .
 - included:
   - "README.md"
+  - "CONTRIBUTING.md"
   - "pyproject.toml"
   - ".gitignore"
   - ".env.example"
@@ -34,6 +35,7 @@
 - Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
 - Treats canonical domain artifacts as part of the visible package contract when the domain model standard shifts from starter dataclasses to frozen Pydantic models.
 - Treats public policy request/result/configuration objects as part of the same modeling contract so the repo does not drift back to mixed boundary styles.
+- Provides the contributor on-ramp for using the ontology system correctly when adding new project documents.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -116,6 +118,7 @@
 - Product-facing setup guidance should point users to `docs/Guides/` first; runnable artifacts under `examples/` are companion material and should not become the primary setup surface.
 - Shipped release summaries should now live in `docs/Release/` as in-repo `releases`-class artifacts instead of existing only as GitHub release text or ad hoc status notes.
 - The release-history surface should stay discoverable through `docs/Release/README.md`, and the current shipped release note should move forward deliberately rather than leaving the root README pinned to an older release forever.
+- The root `CONTRIBUTING.md` file should stay aligned with the ontology and directory model so a new contributor can get from "I want to add a document" to the correct class, template, and destination without reverse-engineering the doc system.
 - The guides under `docs/Guides/` should stay aligned with the actual runnable example boundaries, including which workflows support one-shot budget overrides or proof-artifact emission and which ones do not.
 - The technical-builder documents-plus-database workflow is now a first-class product-facing guide path alongside the starter and repository workflows; repo-facing docs should keep its already-fetched-record boundary and shared runtime-knob story aligned across README, examples, and guide docs.
 - The starter inspection story should surface packet and trace views as derived renderers under `context_atlas.rendering`, not as alternate canonical models or prompt-first strings.
@@ -133,6 +136,8 @@
 ## Public API / Key Exports
 - `pyproject.toml`:
   - project metadata, author info, Python floor, dev-tool declarations, and installable starter script
+- `CONTRIBUTING.md`:
+  - root contributor on-ramp for choosing the right document class, template, and destination
 - `__ai__.template.md`:
   - baseline authoring template for local contract files
 - `.env.example`:
@@ -148,6 +153,11 @@
   - invariants:
     - Python floor here should match active CI and local preflight assumptions
     - runtime validation libraries added here should correspond to real package behavior, not speculative future plans
+- `CONTRIBUTING.md`:
+  - responsibility: gives contributors one clear path into the ontology/template system before they author new repo documents
+  - invariants:
+    - should point to the current ontology canon rather than restating a parallel document-class system
+    - should keep Canon versus Identity placement guidance explicit for contributors adding authoritative docs
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:
