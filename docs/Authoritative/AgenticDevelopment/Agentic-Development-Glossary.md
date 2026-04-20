@@ -78,6 +78,9 @@ runtime platform.
 
 - Terms in this glossary should remain portable across AI environments rather
   than drifting toward one vendor's file layout or discovery rules.
+- Project-specific role names, current workflow gates, current runtime-capacity
+  values, and vendor-specific runtime conventions do not belong in this
+  glossary.
 - Definitions here must distinguish accountability (`role`), workflow
   structure (`protocol`), execution state (`mode`), and reusable capability
   (`skill`) rather than allowing those concepts to collapse into one another.
@@ -98,6 +101,7 @@ runtime platform.
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
+- [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
 - [Documentation-Ontology.md](../Ontology/Documentation-Ontology.md)
