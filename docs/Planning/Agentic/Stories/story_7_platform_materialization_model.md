@@ -18,6 +18,7 @@ related:
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
   - ../../../Authoritative/AgenticDevelopment/Template-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -36,6 +37,7 @@ given AI environment without making those runtime assets authoritative.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -70,6 +72,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define the abstract discovery requirements that a runtime materialization
   must satisfy
+- bind those discovery requirements to one portable discovery model before any
+  environment story chooses concrete folders or file names
 - separate those abstract discovery needs from platform-specific folder naming
   conventions
 - position later platform stories to bind discovery rules without redefining
@@ -134,6 +138,7 @@ given AI environment without making those runtime assets authoritative.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
 - [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
