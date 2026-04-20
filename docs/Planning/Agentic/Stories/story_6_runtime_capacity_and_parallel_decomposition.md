@@ -68,6 +68,8 @@ actually available for an Epic, Story, or Task.
 - define how planners should identify:
   - base or blocking work that must happen first
   - independent work lanes that may happen in parallel
+- require planners to read the governed planning-capacity artifact before
+  finalizing lane count when bounded parallelism is being considered
 - ensure the number of planned parallel lanes does not exceed usable runtime
   capacity
 - preserve Craig Architecture decomposition quality even when parallelism is

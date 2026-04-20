@@ -113,6 +113,9 @@ ad hoc tool-trigger convention.
   boundary rather than letting specialists grow into parallel workflow owners
 - make it explicit that protocols define gates, transitions, handoffs, and exit
   criteria rather than replacing the role or mode model
+- ensure the planning protocol can consume governed runtime-capacity input when
+  shaping base work versus parallel lanes without turning protocol guidance into
+  live scheduling logic
 
 ### Task 3: Delegation, Handoff, And Escalation Contracts
 

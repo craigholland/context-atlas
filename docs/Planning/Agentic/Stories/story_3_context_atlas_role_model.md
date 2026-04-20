@@ -102,6 +102,9 @@ of review passes rather than relying on ad hoc review-trigger comments.
   the workflow sequences that use them
 - keep role-level authority boundaries aligned with the explicit
   skill-versus-specialist-versus-parent-owned decision rules from Story 2
+- keep it explicit that `Planner/Decomp` owns bounded decomposition judgment,
+  including when available runtime capacity justifies real parallel lanes and
+  when work must remain sequential
 
 ### Task 4: Role Binding To Agent Structure
 
