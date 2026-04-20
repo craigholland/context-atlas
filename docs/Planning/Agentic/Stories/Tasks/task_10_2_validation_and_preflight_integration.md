@@ -1,7 +1,7 @@
 ---
-id: context-atlas-agentic-task-9-2-validation-and-preflight-integration
-title: Task 9.2 - Validation And Preflight Integration PR Plan
-summary: Defines the PR sequence for bringing the new agentic-development surfaces into repository validation and preflight.
+id: context-atlas-agentic-task-10-2-validation-and-preflight-integration
+title: Task 10.2 - Validation And Preflight Integration PR Plan
+summary: Defines the PR sequence for bringing the new agentic-development and repo-management surfaces into repository validation and preflight.
 doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
@@ -12,17 +12,17 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, task, pr-plan, validation, preflight]
 related:
-  - ../story_9_validation_governance_and_drift_control.md
+  - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
   - ../../../../Authoritative/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
-# Task 9.2 - Validation And Preflight Integration PR Plan
+# Task 10.2 - Validation And Preflight Integration PR Plan
 
 ## Objective
 
-Define how the agentic-development surfaces should be validated and eventually integrated into repo preflight.
+Define how the agentic-development and repo-management surfaces should be validated and eventually integrated into repo preflight.
 
 ## Task Status
 
@@ -30,16 +30,16 @@ PLANNED
 
 ## Inputs
 
-- [Story 9 - Validation, Governance, And Drift Control](../story_9_validation_governance_and_drift_control.md)
+- [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
 - [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)
-- the drift model from Task 9.1 and existing repo validation patterns
+- the drift model from Task 10.1 and existing repo validation patterns
 
 ## Proposed Work
 
 ### PR - A: Validation-Surface Decision
 
-- identify which agentic-development artifacts should participate in validation first
+- identify which agentic-development and repo-management artifacts should participate in validation first
 - distinguish structural validation from workflow-state or human-review checks
 - keep the initial scope realistic for the current repo
 
@@ -47,7 +47,7 @@ PLANNED
 - `docs/Authoritative/AgenticDevelopment/Validation-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`
@@ -71,7 +71,7 @@ PLANNED
 
 ### PR - C: Story Reinforcement
 
-- align the capacity, materialization, and validation Stories with the new validation model
+- align the capacity, materialization, repo-management, and validation Stories with the new validation model
 - reduce the chance that later Tasks wire validation inconsistently
 - document any validation gaps that intentionally remain out of scope for now
 
@@ -82,7 +82,8 @@ PLANNED
 - `docs/Planning/Agentic/Stories/story_6_runtime_capacity_and_parallel_decomposition.md`
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
 - `docs/Planning/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_9_repo_management.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`
@@ -107,5 +108,5 @@ PLANNED
 
 ## Related Artifacts
 
-- [Story 9 - Validation, Governance, And Drift Control](../story_9_validation_governance_and_drift_control.md)
+- [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Craig Architecture](../../../../Authoritative/Architecture/Craig-Architecture.md)

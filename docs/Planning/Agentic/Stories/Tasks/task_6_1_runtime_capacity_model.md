@@ -80,7 +80,7 @@ IMPLEMENTED
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/agentic_development_product_definition.md`
 - `docs/Planning/Agentic/Stories/story_6_runtime_capacity_and_parallel_decomposition.md`
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`

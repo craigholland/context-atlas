@@ -81,7 +81,7 @@ IMPLEMENTED
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
 - `docs/Planning/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`

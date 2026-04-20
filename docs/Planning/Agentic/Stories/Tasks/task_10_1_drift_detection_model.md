@@ -1,7 +1,7 @@
 ---
-id: context-atlas-agentic-task-9-1-drift-detection-model
-title: Task 9.1 - Drift Detection Model PR Plan
-summary: Defines the PR sequence for identifying the meaningful forms of drift between canon, bindings, capacity inputs, and runtime assets.
+id: context-atlas-agentic-task-10-1-drift-detection-model
+title: Task 10.1 - Drift Detection Model PR Plan
+summary: Defines the PR sequence for identifying the meaningful forms of drift between the agentic-development and repo-management canon, their bindings, capacity inputs, and runtime assets.
 doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
@@ -12,17 +12,17 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, task, pr-plan, drift, validation]
 related:
-  - ../story_9_validation_governance_and_drift_control.md
+  - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
   - ../../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
 supersedes: []
 ---
 
-# Task 9.1 - Drift Detection Model PR Plan
+# Task 10.1 - Drift Detection Model PR Plan
 
 ## Objective
 
-Define which forms of drift matter between the portable canon, project bindings, runtime-capacity inputs, and runtime materializations.
+Define which forms of drift matter between the portable agentic-development and repo-management canon, project bindings, runtime-capacity inputs, and runtime materializations.
 
 ## Task Status
 
@@ -30,10 +30,10 @@ PLANNED
 
 ## Inputs
 
-- [Story 9 - Validation, Governance, And Drift Control](../story_9_validation_governance_and_drift_control.md)
+- [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
 - [Materialization Traceability Model](../../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
-- the upstream canon, binding, and materialization models from Stories 1 through 8
+- the upstream canon, binding, and materialization models from Stories 1 through 9
 
 ## Proposed Work
 
@@ -47,7 +47,7 @@ PLANNED
 - `docs/Authoritative/AgenticDevelopment/Drift-Model.md`
 
 #### Expected Existing Files Updated
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`
@@ -71,7 +71,7 @@ PLANNED
 
 ### PR - C: Story Reinforcement
 
-- align the platform, Codex, and validation Stories with the new drift model
+- align the platform, Codex, repo-management, and validation Stories with the new drift model
 - reduce the chance that later validation Tasks invent a second drift vocabulary
 - document any future automation cases without making them required now
 
@@ -81,7 +81,8 @@ PLANNED
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_7_platform_materialization_model.md`
 - `docs/Planning/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_9_repo_management.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`
@@ -106,5 +107,5 @@ PLANNED
 
 ## Related Artifacts
 
-- [Story 9 - Validation, Governance, And Drift Control](../story_9_validation_governance_and_drift_control.md)
+- [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Materialization Traceability Model](../../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)

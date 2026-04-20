@@ -1,7 +1,7 @@
 ---
 id: context-atlas-agentic-development-product-definition
 title: Context Atlas Agentic Development Product Definition
-summary: Defines the Context Atlas epic for establishing a portable agentic-development canon, project-specific bindings, and concrete runtime materialization paths.
+summary: Defines the Context Atlas epic for establishing a portable agentic-development canon, repo-management governance, project-specific bindings, and concrete runtime materialization paths.
 doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
@@ -10,7 +10,7 @@ status: active
 created: 2026-04-19
 last_reviewed: 2026-04-20
 owners: [core]
-tags: [agentic-development, planning, product, protocols, automation]
+tags: [agentic-development, planning, product, protocols, automation, repo-management]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
@@ -78,6 +78,9 @@ That means the project should have:
   Atlas uses
 - platform-specific materialization rules that explain how those abstract
   concepts become real runtime files for a given AI environment
+- repository-management rules that explain how agentic roles interact with
+  external repo systems through scoped principals, permissions, and audit
+  identities
 
 ### Product Shape
 
@@ -130,7 +133,7 @@ The epic should establish these capability areas:
 
 This document should be treated as an Agentic Development Epic.
 
-The Epic consists of nine Stories:
+The Epic consists of ten Stories:
 
 - Story 1: Portable Agentic Development Canon
 - Story 2: Agent And Skill Structure
@@ -140,7 +143,8 @@ The Epic consists of nine Stories:
 - Story 6: Runtime Capacity And Parallel Decomposition
 - Story 7: Platform Materialization Model
 - Story 8: Codex Materialization For Context Atlas
-- Story 9: Validation, Governance, And Drift Control
+- Story 9: RepoManagement
+- Story 10: Validation, Governance, And Drift Control
 
 Each Story should preserve Craig Architecture boundaries:
 
@@ -227,6 +231,10 @@ This epic should ultimately produce:
 - project-specific runtime-capacity update and trust guidance at
   `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
 - a protocol set that covers agent execution and inter-agent handoffs
+- a reusable `docs/Authoritative/RepoManagement/` canon plus provider-specific
+  subdirectories such as `GitHub/`
+- a project-specific `docs/Authoritative/Identity/RepoManagement/` binding
+  surface for the chosen repository provider
 - one or more platform materialization guides and templates
 - generated or governed runtime-specific assets that are explicitly tied back
   to the canon and project profile
@@ -302,6 +310,9 @@ The broader epic is complete when:
   than as ad hoc tool-trigger comments or a separate review-role split
 - inter-agent handoff and review state is represented through structured
   YAML/JSON-style contracts rather than ad hoc prose or tool-specific comments
+- repository-system interaction is governed through an explicit repo-management
+  layer instead of being hidden inside runtime-specific prompts, role notes, or
+  provider-specific operational folklore
 - at least one runtime materialization path is concretely supported without
   becoming the source of truth
 - the resulting runtime assets are discoverable, governed, and resistant to

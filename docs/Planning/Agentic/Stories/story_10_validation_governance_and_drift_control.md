@@ -1,7 +1,7 @@
 ---
-id: context-atlas-agentic-story-9-validation-governance-and-drift-control
-title: Story 9 - Validation, Governance, And Drift Control
-summary: Defines how Context Atlas should validate, review, and keep its agentic-development canon, bindings, and runtime materializations from drifting apart over time.
+id: context-atlas-agentic-story-10-validation-governance-and-drift-control
+title: Story 10 - Validation, Governance, And Drift Control
+summary: Defines how Context Atlas should validate, review, and keep its agentic-development and repo-management canon, bindings, and runtime materializations from drifting apart over time.
 doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
@@ -18,16 +18,17 @@ related:
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
   - ./story_7_platform_materialization_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
+  - ./story_9_repo_management.md
 supersedes: []
 ---
 
-# Story 9 - Validation, Governance, And Drift Control
+# Story 10 - Validation, Governance, And Drift Control
 
 ## Objective
 
 Define the validation and governance model that keeps the agentic-development
-canon, project-specific bindings, machine-readable planning inputs, and runtime
-materializations aligned over time.
+and repo-management canon, project-specific bindings, machine-readable planning
+inputs, and runtime materializations aligned over time.
 
 ## Inputs
 
@@ -37,6 +38,7 @@ materializations aligned over time.
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
+- [Story 9 - RepoManagement](./story_9_repo_management.md)
 - Current repository validation and `__ai__.md` governance patterns
 
 ## Proposed Tasks
@@ -134,6 +136,7 @@ materializations aligned over time.
 ## Exit Criteria
 
 - Context Atlas has a documented drift-control model for agentic development
+  and repo management
 - the repo has a clear validation and preflight path for the new surfaces
 - owner-file and metadata governance expectations are explicit
 - the project has a governed way to review, recover, and evolve the agentic
@@ -164,3 +167,4 @@ materializations aligned over time.
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
+- [Story 9 - RepoManagement](./story_9_repo_management.md)

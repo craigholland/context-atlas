@@ -91,7 +91,7 @@ IMPLEMENTED
 #### Expected Existing Files Updated
 - `docs/Authoritative/AgenticDevelopment/Protocols/README.md`
 - `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
-- `docs/Planning/Agentic/Stories/story_9_validation_governance_and_drift_control.md`
+- `docs/Planning/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
 - `.`
