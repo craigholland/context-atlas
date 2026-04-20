@@ -48,6 +48,8 @@ PLANNED
 - `docs/Authoritative/Identity/AgenticDevelopment/codex/agent.template.toml`
 - `docs/Authoritative/Identity/AgenticDevelopment/codex/mode.template.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/codex/skill.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/codex/role.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/codex/protocol.template.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
