@@ -18,6 +18,7 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
@@ -43,6 +44,7 @@ entering modes during protocol execution.
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Mode Model](../../../Authoritative/AgenticDevelopment/Mode-Model.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
@@ -143,6 +145,7 @@ entering modes during protocol execution.
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
 - [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
