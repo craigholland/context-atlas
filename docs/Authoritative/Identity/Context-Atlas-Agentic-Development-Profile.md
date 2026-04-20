@@ -18,6 +18,11 @@ related:
   - ./AgenticDevelopment/Role-Accountability-Matrix.md
   - ./AgenticDevelopment/Role-Authority-Matrix.md
   - ./AgenticDevelopment/Role-Agent-Binding-Model.md
+  - ./AgenticDevelopment/Mode-Model.md
+  - ./AgenticDevelopment/Mode-Transition-Rules.md
+  - ./AgenticDevelopment/Mode-Mutation-Matrix.md
+  - ./AgenticDevelopment/Role-Mode-Matrix.md
+  - ./AgenticDevelopment/Mode-Transition-Graph.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -34,11 +39,11 @@ parent-agent, specialist, and skill canon to Context Atlas.
 ## Scope
 
 This document governs the structural shape that Context Atlas intends to use
-for agentic development before named roles, modes, protocols, or
-environment-specific materialization files are chosen.
+for agentic development beneath the later role, mode, protocol, and
+environment-specific materialization layers.
 
-It does not define the full role roster, mode set, protocol catalog, or any
-environment-specific file layout.
+It does not replace the later role roster, mode model, protocol catalog, or
+any environment-specific file layout.
 
 ## Binding Decisions
 
@@ -137,7 +142,14 @@ That means:
   runtime materialization projects that contract onto a PR review or comment
   surface
 
-### 11. Role Bindings Must Remain Separate From Runtime Materialization
+### 11. Mode Bindings Must Stay Downstream Of The Structural Profile
+
+Context Atlas should define project-specific modes, transition rules, mutation
+rules, and role-to-mode bindings as downstream bindings on top of this
+structural profile rather than mixing those concerns back into the parent
+versus specialist model itself.
+
+### 12. Role Bindings Must Remain Separate From Runtime Materialization
 
 Context Atlas should define role-to-parent bindings at the project-identity
 layer before any environment-specific files attempt to materialize those
@@ -158,7 +170,7 @@ assets use different naming conventions or file layouts.
 ## Non-Goals
 
 - Define the final named parent-agent role roster.
-- Define the project's execution modes.
+- Define the detailed project mode set, transitions, or mutation rules.
 - Define the project's workflow protocol set.
 - Define concrete environment-discovery files or folder layouts.
 
@@ -170,6 +182,11 @@ assets use different naming conventions or file layouts.
 - [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Role-Agent-Binding-Model.md)
+- [Context Atlas Mode Model](./AgenticDevelopment/Mode-Model.md)
+- [Mode Transition Rules](./AgenticDevelopment/Mode-Transition-Rules.md)
+- [Mode Mutation Matrix](./AgenticDevelopment/Mode-Mutation-Matrix.md)
+- [Context Atlas Role-Mode Matrix](./AgenticDevelopment/Role-Mode-Matrix.md)
+- [Mode Transition Graph](./AgenticDevelopment/Mode-Transition-Graph.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

@@ -8,11 +8,12 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, story, validation, governance, drift-control]
 related:
   - ../agentic_development_product_definition.md
+  - ./story_4_context_atlas_mode_model.md
   - ./story_5_protocol_model.md
   - ./story_7_platform_materialization_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
@@ -30,6 +31,7 @@ materializations aligned over time.
 ## Inputs
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
+- [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
@@ -116,6 +118,7 @@ materializations aligned over time.
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
+- [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)

@@ -26,7 +26,7 @@ Define the allowed transitions between modes and make the relationship between p
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -64,7 +64,8 @@ PLANNED
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md`
 - `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md`
-- `docs/Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md`
+- `docs/Planning/Agentic/Stories/story_5_protocol_model.md`
+- `docs/Planning/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
 
 #### Update AI files
 - `.`

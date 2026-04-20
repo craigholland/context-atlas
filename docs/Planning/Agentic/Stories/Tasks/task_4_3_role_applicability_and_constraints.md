@@ -26,7 +26,7 @@ Define which roles may operate in which modes and what additional constraints ap
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
