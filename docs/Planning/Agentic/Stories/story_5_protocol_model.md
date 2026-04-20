@@ -16,6 +16,8 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/README.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
@@ -54,6 +56,8 @@ ad hoc tool-trigger convention.
 - [Mode Transition Graph](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Mode Model](../../../Authoritative/AgenticDevelopment/Mode-Model.md)
+- [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
+- [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
 
 ## Proposed Tasks
@@ -154,6 +158,8 @@ ad hoc tool-trigger convention.
   distinction between those layers
 - the relationship between protocol execution and mode entry/transition is
   explicit enough to prevent later task-level drift
+- the protocol layer has a reusable authoritative template and entrypoint
+  instead of relying on planning docs to describe protocol shape ad hoc
 
 ## Definition Of Done
 
@@ -192,3 +198,5 @@ ad hoc tool-trigger convention.
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
 - [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
+- [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
+- [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
