@@ -91,6 +91,33 @@ Codex assets should continue to declare:
 Review should treat missing or contradictory provenance as a governance issue,
 not as a cosmetic omission.
 
+### 5. Codex Assets Should Refresh After Meaningful Upstream Changes
+
+Codex assets should be reviewed for refresh when upstream changes affect:
+
+- role ownership or authority
+- parent-agent versus specialist structure
+- mode vocabulary or transition/mutation rules
+- protocol bindings or review-pass expectations
+- Codex folder layout or naming conventions
+- Codex templates or creation-guidance rules
+
+The refresh trigger is the upstream semantic or binding change, not just a
+desire to keep runtime files cosmetically recent.
+
+### 6. Codex Drift Should Be Defined Explicitly
+
+For the Codex surface, drift includes at least:
+
+- an asset living at the wrong bound path
+- names or ids that no longer follow the Codex naming conventions
+- copied content that no longer matches its upstream source
+- adapted content that now changes meaning instead of presentation
+- missing or stale traceability declarations
+- missing or stale maintenance-mode declarations
+- Codex assets that no longer follow the creation guidance or folder-layout
+  rules
+
 ## Review Checklist
 
 When Codex-binding assets change, reviewers should check:
@@ -101,6 +128,13 @@ When Codex-binding assets change, reviewers should check:
 - upstream sources are still cited accurately
 - copied/adapted/derived content still follows the creation guidance
 - the asset does not redefine portable or Identity-layer semantics locally
+
+## Refresh Expectations
+
+- refresh the affected Codex assets when upstream binding meaning changes
+- refresh the affected Codex assets when the Codex folder layout, templates, or
+  creation guidance changes in a way that invalidates current files
+- do not refresh unrelated Codex assets only to create artificial churn
 
 ## Constraints
 

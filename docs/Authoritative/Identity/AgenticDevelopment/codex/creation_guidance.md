@@ -180,6 +180,16 @@ Derived data should clarify provenance, not invent new semantics.
 - check that Codex wording does not silently redefine portable or Identity-layer
   semantics
 
+## Refresh Triggers
+
+Refresh or re-review an affected Codex asset when:
+
+- one of its cited upstream authoritative sources changes meaning
+- the Codex folder layout or naming rules change
+- the Codex templates change in a way that invalidates the current asset
+- the creation guidance changes how copied, adapted, or derived content should
+  be expressed
+
 ## Non-Goals
 
 - Define one automation mechanism for generating every Codex asset.
