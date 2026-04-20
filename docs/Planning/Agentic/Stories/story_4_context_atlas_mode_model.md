@@ -91,6 +91,8 @@ alternate role definitions.
   review-mode span without forcing a mode transition for each pass
 - make it explicit that a protocol may contain several steps in the same mode
   and that not every protocol step implies a mode transition
+- make later protocol docs inherit a common workflow shape so mode language
+  does not get restated differently in each protocol artifact
 - position the protocol story to build on a stable mode state model
 
 ## Sequencing
