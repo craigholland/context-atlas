@@ -26,7 +26,7 @@ Define what runtime capacity means at planning time and keep it explicitly separ
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
