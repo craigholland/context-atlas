@@ -120,6 +120,11 @@ given AI environment without making those runtime assets authoritative.
 - the traceability and regeneration model is explicit enough that Story 8 can
   declare provenance and maintenance mode without inventing a platform-local
   provenance scheme
+- Story 8 binds through one explicit Identity-layer Codex entrypoint before it
+  defines downstream folder layouts, templates, or governance hooks
+- Story 8's concrete Codex folder and file conventions remain explicitly
+  downstream of the portable discovery and template model rather than becoming
+  alternate discovery canon
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream

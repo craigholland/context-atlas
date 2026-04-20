@@ -26,7 +26,7 @@ Define the governance hooks that keep the Codex materialized surface aligned wit
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

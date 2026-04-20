@@ -1,0 +1,37 @@
+# Agent Descriptor Template
+
+# Use this template when materializing:
+# - `.codex/agents/parent-<role-id>.toml`
+# - `.codex/agents/specialist-<specialist-id>.toml`
+
+id = "replace-me"
+title = "Replace Me"
+summary = "Describe the materialized actor briefly."
+agent_kind = "parent" # parent | specialist
+maintenance_mode = "hand-maintained" # hand-maintained | generated | mixed
+
+[traceability]
+project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"
+binding_sources = []
+template_source = "docs/Authoritative/Identity/AgenticDevelopment/codex/agent.template.toml"
+
+[role_binding]
+role_id = "replace-me-or-none"
+authority_scope = "Summarize the role-bound authority this agent carries."
+
+[skill_attachment]
+skills = []
+
+[protocol_participation]
+protocols = []
+
+[mode_participation]
+modes = []
+
+[delegation]
+delegates_to = []
+returns_to = "replace-me"
+
+[notes]
+constraints = []
+non_goals = []

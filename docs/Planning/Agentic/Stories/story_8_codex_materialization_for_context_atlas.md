@@ -18,6 +18,8 @@ related:
   - ./story_7_platform_materialization_model.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
   - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
@@ -49,6 +51,8 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
@@ -64,8 +68,12 @@ the explicit distinction between:
 
 - document that Context Atlas currently supports Codex as the first concrete
   runtime materialization target
+- bind that decision to one explicit Identity-layer Codex entrypoint instead
+  of scattering the decision across later layout and template docs
 - define what parts of the abstract model must be represented for Codex to use
   them effectively
+- make the upstream dependency categories explicit so later Codex layout and
+  template docs consume one stable input set
 - keep the Story framed as a platform binding, not as a rewrite of the generic
   canon in Codex language
 - treat the portable canon and project-specific bindings as upstream sources
@@ -75,6 +83,8 @@ the explicit distinction between:
 
 - define the expected folder structure and naming conventions for Codex
   discovery
+- bind those discovery choices to one explicit Codex folder-layout doc before
+  later templates or governance docs add more runtime detail
 - map abstract concepts like parent agents, specialists, skills, roles, modes,
   and protocols onto concrete Codex file surfaces without collapsing them into
   one file type
@@ -96,8 +106,12 @@ the explicit distinction between:
 
 - define the project-specific templates or instructions needed to create Codex
   runtime assets from the authoritative docs
+- keep the initial Codex template set aligned with the actual concept families
+  being materialized instead of leaving role or protocol surfaces template-less
 - make it possible for an AI contributor to generate or refresh Codex assets
   without reverse-engineering the repo each time
+- make the copied-versus-adapted-versus-derived boundary explicit so refresh
+  work stays governed rather than ad hoc
 - ensure the guidance remains explicit about what is copied from canon versus
   what is Codex-specific adaptation
 - require Codex template choices to bind to Story 7's generic template model
@@ -109,6 +123,8 @@ the explicit distinction between:
 
 - define how Codex materialized assets are kept aligned with the project role,
   mode, and protocol model
+- bind those review expectations to one explicit Codex governance surface
+  before later refresh guidance or validation rules expand them
 - identify the validation or review hooks needed to keep the Codex surface from
   drifting
 - preserve room for future non-Codex bindings without forcing Codex patterns
@@ -134,12 +150,22 @@ the explicit distinction between:
 
 - Context Atlas has a documented Codex materialization path
 - the Codex folder and naming conventions are explicit
+- the Codex folder layout remains readable as a downstream discovery mapping
+  rather than as a replacement for the portable discovery model
 - project-specific creation guidance exists for generating or updating the
   Codex assets
 - the Codex binding keeps the distinctions between role, parent agent,
   specialist, mode, protocol, and skill explicit
 - Codex materialization stays clearly downstream of the portable canon and the
   Context Atlas project profile
+- the Identity-layer Codex binding README remains the single entrypoint for
+  what Codex consumes before later docs explain how Codex stores or refreshes
+  those assets
+- the Codex creation guidance remains the repeatable source for copied,
+  adapted, and derived content expectations when assets are created or
+  refreshed
+- the Codex governance doc remains the review and refresh entrypoint for
+  keeping runtime-facing Codex assets aligned after Story 8 lands
 
 ## Definition Of Done
 
@@ -164,6 +190,8 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
 - [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
+- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
