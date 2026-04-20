@@ -52,6 +52,14 @@ materializations aligned over time.
   through review guidance
 - keep drift detection focused on meaningful mismatches rather than cosmetic
   wording differences
+- treat unauthorized downstream semantic edits to runtime-facing assets as a
+  first-class drift condition once materialization work begins
+- treat downstream discovery mechanics that no longer match the portable
+  discovery model as a first-class drift condition once environment bindings
+  exist
+- treat missing, stale, or contradictory provenance and maintenance-mode
+  declarations as first-class drift conditions once runtime assets are
+  materialized
 
 ### Task 2: Validation And Preflight Integration
 
@@ -67,6 +75,12 @@ materializations aligned over time.
 - identify how future validation should detect stale, malformed, or
   out-of-bound runtime-capacity planning inputs without turning those checks
   into a live scheduler
+- identify how future validation should check that environment-specific folder
+  conventions, manifests, or indexes remain traceable to the portable
+  discovery classes they claim to satisfy
+- identify how future validation should check that runtime assets still declare
+  their authoritative sources and maintenance mode in a way that matches the
+  portable traceability model
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review

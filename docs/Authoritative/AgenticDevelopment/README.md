@@ -57,6 +57,8 @@ The initial canon surface is centered on:
 - [Escalation-Model.md](./Escalation-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+- [Discovery-Model.md](./Discovery-Model.md)
+- [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
 
 ## How To Read This Set
 
@@ -78,6 +80,8 @@ For most readers, the intended order is:
 14. [Escalation-Model.md](./Escalation-Model.md)
 15. [Boundary-Model.md](./Boundary-Model.md)
 16. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+17. [Discovery-Model.md](./Discovery-Model.md)
+18. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
 
 This ordering is intentional:
 
@@ -101,6 +105,11 @@ This ordering is intentional:
   parent-owned, become a skill addition, or justify a bounded specialist
 - the later supplements refine adjacent concerns without replacing those
   foundations
+- the discovery model then defines what later runtime bindings must make
+  discoverable before any environment chooses concrete folder conventions or
+  indexing strategies
+- the traceability model then defines how later runtime assets remain reviewable
+  against the canon, bindings, and template surfaces that authorize them
 
 ## Why This Surface Comes First
 

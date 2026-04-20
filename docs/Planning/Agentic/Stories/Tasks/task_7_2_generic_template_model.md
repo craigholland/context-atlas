@@ -26,7 +26,7 @@ Define the generic template surfaces used to represent agents, skills, modes, pr
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

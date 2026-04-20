@@ -16,6 +16,8 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
+  - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
@@ -45,6 +47,8 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
@@ -77,11 +81,16 @@ the explicit distinction between:
 - make later Codex assets capable of reflecting the project-specific
   protocol-role, protocol-mode, and gate-review-pass bindings without turning
   those bindings into one runtime-only blob
+- require Codex discovery mechanics to satisfy Story 7's abstract discovery
+  model before choosing concrete folder names or index surfaces
 - require Codex bindings to reuse the stable project mode vocabulary instead of
   inventing runtime-only mode names casually
 - preserve the distinction between a skill definition and an actor's attached
   skill inventory as the abstract model becomes concrete files
 - keep those mappings clearly subordinate to the generic materialization model
+- require any Codex-specific runtime-file semantics to originate in Story 7's
+  generic materialization boundary and template model before the Codex binding
+  projects them into concrete assets
 
 ### Task 3: Codex Templates And Creation Guidance
 
@@ -91,6 +100,10 @@ the explicit distinction between:
   without reverse-engineering the repo each time
 - ensure the guidance remains explicit about what is copied from canon versus
   what is Codex-specific adaptation
+- require Codex template choices to bind to Story 7's generic template model
+  rather than defining a new template taxonomy inside the Codex layer
+- require Codex runtime assets to carry an explicit provenance and maintenance
+  story that binds back to Story 7's traceability and regeneration model
 
 ### Task 4: Codex Governance Hooks
 
@@ -149,6 +162,8 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)

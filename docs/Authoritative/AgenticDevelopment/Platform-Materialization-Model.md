@@ -36,12 +36,17 @@ It does not choose any specific execution environment.
 
 ## Binding Decisions
 
+### 1. Materialization Is Downstream Of Authoritative Semantics
+
 - Materialization is downstream of:
   - portable canon
   - application-specific bindings
   - environment-specific conventions
 - Materialized assets are operational artifacts, not the authoritative source
   of truth for agentic-development concepts.
+
+### 2. Materialization May Produce Runtime-Facing Asset Surfaces
+
 - Materialization may produce environment-facing artifacts such as:
   - agent descriptors
   - mode descriptors
@@ -55,6 +60,67 @@ It does not choose any specific execution environment.
 - Environment materialization should preserve traceability back to the canon
   and bindings that it expresses.
 
+### 3. Upstream Semantic Changes Must Originate Upstream
+
+If a change affects:
+
+- the meaning of a role, mode, skill, protocol, capacity rule, or boundary
+- the project's chosen bindings
+- the intended semantics of a runtime-facing artifact
+
+then the change should originate in the relevant upstream authoritative layer
+before the materialized assets are updated.
+
+### 4. Runtime-Facing Updates Should Not Quietly Redefine Meaning
+
+If a runtime-facing artifact appears to require meaning that is not already
+authorized upstream, the correct response is to update the canon or binding
+layer first.
+
+Materialization should not become an informal place where semantic drift is
+introduced and only discovered later during review.
+
+### 5. Materialization Updates May Originate Downstream Only When Semantics Stay Stable
+
+Some changes are legitimately downstream-first, such as:
+
+- formatting changes
+- non-semantic template refinements
+- environment-specific layout adjustments that do not change meaning
+- traceability or regeneration metadata refinements
+
+Those changes are acceptable so long as they do not implicitly redefine the
+underlying authoritative semantics.
+
+### 6. Discovery Mechanics Are Bound Downstream From The Portable Model
+
+The portable materialization layer may define what asset classes must be
+discoverable, but the concrete discovery mechanics that satisfy that need
+belong downstream.
+
+That includes choices such as:
+
+- folder conventions
+- filenames
+- manifests
+- indexes
+- explicit configuration hooks
+
+Those choices should bind to the portable discovery model rather than replace
+it.
+
+### 7. Maintenance Mode And Regeneration Expectations Should Be Declared
+
+Materialization should make it possible for downstream bindings to declare
+whether runtime-facing assets are:
+
+- hand-maintained
+- generated
+- mixed
+
+That declaration belongs downstream, but the expectation that it be explicit
+belongs in the portable materialization model.
+
 ## Constraints
 
 - Portable materialization rules must not hard-code an environment-specific
@@ -62,6 +128,11 @@ It does not choose any specific execution environment.
   layout.
 - Asset discovery rules belong to the environment-specific layer, not the
   portable canon.
+- Downstream discovery mechanics should document how they satisfy the portable
+  discovery model and template vocabulary.
+- Downstream regeneration or maintenance choices should preserve traceability
+  back to the canon, bindings, and template surfaces that authorize the
+  runtime-facing asset.
 - A system should be able to change execution environments or support more than
   one environment without rewriting the portable definitions.
 

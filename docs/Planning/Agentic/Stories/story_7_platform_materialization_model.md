@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [agentic-development, story, materialization, portability, templates]
 related:
@@ -16,6 +16,10 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Template-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
@@ -32,6 +36,10 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
@@ -41,6 +49,8 @@ given AI environment without making those runtime assets authoritative.
 
 ### Task 1: Materialization Concepts And Boundaries
 
+- bind Story 7 to one explicit materialization-boundary model instead of
+  letting later platform stories restate the source-of-truth rules ad hoc
 - define what it means to materialize an abstract agentic concept into a
   platform-specific runtime artifact
 - keep the source-of-truth boundary explicit so generated or maintained runtime
@@ -53,6 +63,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define the generic template surfaces needed for agents, skills, modes,
   protocols, and related runtime guidance
+- define those template surfaces as portable materialization contracts before
+  any platform story maps them into concrete file layouts
 - keep the template model platform-agnostic so later platform bindings can map
   it into vendor-specific file shapes
 - make the template model traceable back to the portable canon and project
@@ -62,6 +74,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define the abstract discovery requirements that a runtime materialization
   must satisfy
+- bind those discovery requirements to one portable discovery model before any
+  environment story chooses concrete folders or file names
 - separate those abstract discovery needs from platform-specific folder naming
   conventions
 - position later platform stories to bind discovery rules without redefining
@@ -71,6 +85,8 @@ given AI environment without making those runtime assets authoritative.
 
 - define how a human operator or later validation step should tell whether
   runtime artifacts still match the authoritative docs
+- bind those reviewer expectations to one portable traceability model before
+  any platform story chooses a concrete metadata or manifest strategy
 - clarify whether materialized assets are hand-maintained, generated, or
   partially generated
 - make regeneration and update expectations explicit before the first concrete
@@ -96,8 +112,18 @@ given AI environment without making those runtime assets authoritative.
 - Context Atlas has a documented generic materialization model
 - the boundary between authoritative docs and runtime artifacts is explicit
 - the template/discovery model is defined without assuming one vendor
+- the generic template model is explicit enough that Story 8 can bind to it
+  instead of inventing a runtime-shaped substitute
+- the abstract discovery model is explicit enough that Story 8 can choose
+  folders, manifests, or indexes without inventing alternate discovery
+  semantics
+- the traceability and regeneration model is explicit enough that Story 8 can
+  declare provenance and maintenance mode without inventing a platform-local
+  provenance scheme
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
+- Story 8 and later validation work inherit one clear upstream-versus-downstream
+  change model instead of reconstructing it from planning prose
 
 ## Definition Of Done
 
@@ -120,6 +146,10 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Materialization Boundary Model](../../../Authoritative/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../Authoritative/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
