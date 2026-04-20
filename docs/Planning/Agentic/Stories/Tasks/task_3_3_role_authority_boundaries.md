@@ -14,6 +14,7 @@ tags: [agentic-development, task, pr-plan, authority, roles]
 related:
   - ../story_3_context_atlas_role_model.md
   - ../../agentic_development_product_definition.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
@@ -26,12 +27,13 @@ Define what each role may authorize, approve, mutate, delegate, or escalate so r
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the role-accountability matrix from Task 3.2
 
@@ -108,4 +110,5 @@ PLANNED
 ## Related Artifacts
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)

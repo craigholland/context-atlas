@@ -16,6 +16,7 @@ related:
   - ./Context-Atlas-System-Model.md
   - ./AgenticDevelopment/Role-Model.md
   - ./AgenticDevelopment/Role-Accountability-Matrix.md
+  - ./AgenticDevelopment/Role-Authority-Matrix.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -112,6 +113,16 @@ Frontend-owned, governed validation remains QA-owned, and operational delivery
 remains DevOps-owned unless a later authority or protocol artifact explicitly
 changes the handoff state.
 
+### 9. Authority Must Stay Bound To Parent-Owned Roles Until Explicit Handoff
+
+Context Atlas should treat approval, merge, release, and operational workflow
+authority as role-bound parent-agent authority rather than as an ambient
+capability available to any participant in the work.
+
+That means delegation and escalation may route work or decisions, but they
+should not implicitly reassign authority without an explicit downstream
+contract.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -134,6 +145,7 @@ changes the handoff state.
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
 - [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

@@ -58,6 +58,8 @@ review workflow.
   authority.
 - Return contracts should be explicit enough that the parent boundary can
   resume work without reconstructing the delegated context from scratch.
+- Escalation should not silently transfer approval or ownership authority;
+  those boundaries must remain explicit in the downstream binding layer.
 - Frequent predictable escalation may indicate that the work should remain
   parent-owned or be restructured.
 
