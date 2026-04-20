@@ -14,6 +14,7 @@ tags: [agentic-development, planning, product, protocols, automation]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
   - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
   - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
@@ -220,6 +221,8 @@ This epic should ultimately produce:
   mutation scopes, and role-to-mode applicability
 - a project-specific runtime-capacity artifact for decomposition planning
   at `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml`
+- project-specific runtime-capacity update and trust guidance at
+  `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
 - a protocol set that covers agent execution and inter-agent handoffs
 - one or more platform materialization guides and templates
 - generated or governed runtime-specific assets that are explicitly tied back
@@ -305,6 +308,7 @@ The broader epic is complete when:
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Runtime Capacity Guidance](../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
 - [Context Atlas Runtime Capacity Artifact](../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
 - [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)

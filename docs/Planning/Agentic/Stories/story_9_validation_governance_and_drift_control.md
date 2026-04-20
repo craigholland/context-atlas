@@ -127,6 +127,8 @@ materializations aligned over time.
   same feature branch before human merge
 - the resulting validation approach is concrete enough to support later task and
   PR-plan decomposition without becoming tool-specific too early
+- runtime-capacity validation remains bounded to structural trustworthiness and
+  does not drift into ungoverned live-state inference
 
 ## Related Artifacts
 
