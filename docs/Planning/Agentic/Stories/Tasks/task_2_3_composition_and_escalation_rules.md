@@ -26,7 +26,7 @@ Define the decision rules for when a new need should be handled by adding a skil
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

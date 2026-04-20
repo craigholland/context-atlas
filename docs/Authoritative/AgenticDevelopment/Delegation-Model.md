@@ -14,6 +14,8 @@ tags: [agentic-development, delegation, parent-agent, specialist, canon]
 related:
   - ./Agent-Authority-Model.md
   - ./Agentic-Development-Glossary.md
+  - ./Composition-Decision-Model.md
+  - ./Escalation-Model.md
   - ./Boundary-Model.md
   - ../Architecture/Craig-Architecture.md
 supersedes: []
@@ -53,6 +55,9 @@ environment-specific delegate-discovery mechanism.
   - protocol control
   - role accountability
   - unrestricted mutation authority
+- Delegation should include a clear return path so a broader boundary can resume
+  work without guessing whether delegated scope has ended cleanly or by
+  escalation.
 - When a system distinguishes parent agents from specialists, the distinction
   should reflect real authority asymmetry rather than mere naming preference.
 
@@ -74,5 +79,7 @@ environment-specific delegate-discovery mechanism.
 
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Agentic Development Glossary](./Agentic-Development-Glossary.md)
+- [Composition Decision Model](./Composition-Decision-Model.md)
+- [Escalation Model](./Escalation-Model.md)
 - [Boundary Model](./Boundary-Model.md)
 - [Craig Architecture](../Architecture/Craig-Architecture.md)

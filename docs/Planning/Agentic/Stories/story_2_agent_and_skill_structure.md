@@ -18,6 +18,8 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Contract.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture.md
 supersedes: []
@@ -121,6 +123,8 @@ before project roles and runtime-specific files are introduced.
 - there are clear decision rules for when a new need should be handled by
   adding a skill, introducing a specialist, or keeping responsibility
   parent-owned
+- escalation and return-contract constraints reinforce those structural
+  decisions instead of leaving them implicit
 - later role and mode stories can build on this structure without redefining it
 
 ## Definition Of Done
@@ -144,4 +148,6 @@ before project roles and runtime-specific files are introduced.
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
+- [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
+- [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)

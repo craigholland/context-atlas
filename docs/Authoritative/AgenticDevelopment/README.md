@@ -48,6 +48,8 @@ The initial canon surface is centered on:
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
 - [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+- [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+- [Escalation-Model.md](./Escalation-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
@@ -62,9 +64,11 @@ For most readers, the intended order is:
 5. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 6. [Skill-Contract.md](./Skill-Contract.md)
 7. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-8. [Mode-Model.md](./Mode-Model.md)
-9. [Boundary-Model.md](./Boundary-Model.md)
-10. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+8. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+9. [Escalation-Model.md](./Escalation-Model.md)
+10. [Mode-Model.md](./Mode-Model.md)
+11. [Boundary-Model.md](./Boundary-Model.md)
+12. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -76,6 +80,8 @@ This ordering is intentional:
   stay structurally distinct inside that relationship chain
 - the skill docs refine what a skill may contain and how skills attach to
   parent agents and specialists without becoming role or protocol surrogates
+- the composition-decision and escalation docs define when work should stay
+  parent-owned, become a skill addition, or justify a bounded specialist
 - the later supplements refine adjacent concerns without replacing those
   foundations
 
