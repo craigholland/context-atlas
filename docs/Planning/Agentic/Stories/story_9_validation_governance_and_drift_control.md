@@ -54,6 +54,9 @@ materializations aligned over time.
   wording differences
 - treat unauthorized downstream semantic edits to runtime-facing assets as a
   first-class drift condition once materialization work begins
+- treat downstream discovery mechanics that no longer match the portable
+  discovery model as a first-class drift condition once environment bindings
+  exist
 
 ### Task 2: Validation And Preflight Integration
 
@@ -69,6 +72,9 @@ materializations aligned over time.
 - identify how future validation should detect stale, malformed, or
   out-of-bound runtime-capacity planning inputs without turning those checks
   into a live scheduler
+- identify how future validation should check that environment-specific folder
+  conventions, manifests, or indexes remain traceable to the portable
+  discovery classes they claim to satisfy
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review

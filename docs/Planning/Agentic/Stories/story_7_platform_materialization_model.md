@@ -110,6 +110,9 @@ given AI environment without making those runtime assets authoritative.
 - the template/discovery model is defined without assuming one vendor
 - the generic template model is explicit enough that Story 8 can bind to it
   instead of inventing a runtime-shaped substitute
+- the abstract discovery model is explicit enough that Story 8 can choose
+  folders, manifests, or indexes without inventing alternate discovery
+  semantics
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream
