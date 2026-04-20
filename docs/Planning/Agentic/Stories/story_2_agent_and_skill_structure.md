@@ -14,7 +14,13 @@ tags: [agentic-development, story, agents, specialists, skills]
 related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
+  - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Contract.md
+  - ../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture.md
 supersedes: []
@@ -46,6 +52,8 @@ before project roles and runtime-specific files are introduced.
   a flat list of peer workers
 - capture the authority difference between a parent that owns workflow state
   and a specialist that performs bounded delegated work
+- make the structural asymmetry explicit enough that later role and protocol
+  docs inherit it rather than rediscovering it
 - prevent specialists from quietly accumulating lifecycle authority that should
   stay with the parent layer
 
@@ -57,6 +65,8 @@ before project roles and runtime-specific files are introduced.
   consume rather than as alternate role or workflow definitions
 - establish how skills attach to parents or specialists without becoming a
   second copy of the role, mode, or protocol model
+- define a portable attachment vocabulary that distinguishes baseline and
+  conditional skill use without turning attachment into workflow logic
 - keep skills focused on reusable work procedures instead of letting them turn
   into ad hoc role definitions
 
@@ -104,6 +114,8 @@ before project roles and runtime-specific files are introduced.
 - Context Atlas has one documented structural model for parent agents,
   specialists, and skills
 - the boundary between skill definition and agent definition is explicit
+- the boundary between parent-agent and specialist-agent contract shapes is
+  explicit
 - skills are explicitly treated as atomic reusable units
 - specialists are explicitly treated as focused agents built from curated
   skills plus bounded authority
@@ -112,6 +124,8 @@ before project roles and runtime-specific files are introduced.
 - there are clear decision rules for when a new need should be handled by
   adding a skill, introducing a specialist, or keeping responsibility
   parent-owned
+- escalation and return-contract constraints reinforce those structural
+  decisions instead of leaving them implicit
 - later role and mode stories can build on this structure without redefining it
 
 ## Definition Of Done
@@ -132,4 +146,10 @@ before project roles and runtime-specific files are introduced.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
+- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
+- [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
+- [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
+- [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
 - [Craig Architecture](../../../Authoritative/Architecture/Craig-Architecture.md)

@@ -43,8 +43,13 @@ The initial canon surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+- [Delegation-Model.md](./Delegation-Model.md)
+- [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
+- [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+- [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+- [Escalation-Model.md](./Escalation-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
@@ -55,10 +60,15 @@ For most readers, the intended order is:
 1. this README
 2. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-4. [Mode-Model.md](./Mode-Model.md)
-5. [Skill-Contract.md](./Skill-Contract.md)
-6. [Boundary-Model.md](./Boundary-Model.md)
-7. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+4. [Delegation-Model.md](./Delegation-Model.md)
+5. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
+6. [Skill-Contract.md](./Skill-Contract.md)
+7. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+8. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+9. [Escalation-Model.md](./Escalation-Model.md)
+10. [Mode-Model.md](./Mode-Model.md)
+11. [Boundary-Model.md](./Boundary-Model.md)
+12. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -66,6 +76,12 @@ This ordering is intentional:
 - the glossary defines the vocabulary
 - the authority model defines the invariant relationship chain built on that
   vocabulary
+- the delegation and composition docs refine how parent agents and specialists
+  stay structurally distinct inside that relationship chain
+- the skill docs refine what a skill may contain and how skills attach to
+  parent agents and specialists without becoming role or protocol surrogates
+- the composition-decision and escalation docs define when work should stay
+  parent-owned, become a skill addition, or justify a bounded specialist
 - the later supplements refine adjacent concerns without replacing those
   foundations
 

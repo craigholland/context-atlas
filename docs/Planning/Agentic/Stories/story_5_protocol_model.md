@@ -17,6 +17,8 @@ related:
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
@@ -49,6 +51,8 @@ entering modes during protocol execution.
 - make protocol docs consistent in how they express actors, triggers,
   preconditions, allowed mutations, required outputs, exit criteria, and
   handoff targets
+- keep protocol docs consuming already-defined skill attachments rather than
+  redefining skills inline as protocol-local behavior
 - keep protocols discoverable and reviewable as first-class workflow surfaces
 
 ### Task 2: Core Workflow Protocol Set
@@ -62,6 +66,8 @@ entering modes during protocol execution.
 - treat protocols as workflow definitions that parent agents follow while
   embodying their roles, with specialists participating only through bounded
   delegation
+- keep protocol ownership aligned with the parent-versus-specialist delegation
+  boundary rather than letting specialists grow into parallel workflow owners
 - make it explicit that protocols define gates, transitions, handoffs, and exit
   criteria rather than replacing the role or mode model
 
@@ -70,6 +76,8 @@ entering modes during protocol execution.
 - define how work is delegated to specialists or other roles
 - define what a valid handoff must communicate
 - define when escalation is required and what information must accompany it
+- keep escalation inheriting the structural return-contract model rather than
+  treating it as protocol-only improvisation
 
 ### Task 4: Role And Mode Bindings
 
@@ -129,3 +137,6 @@ entering modes during protocol execution.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
+- [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
+- [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
+- [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)

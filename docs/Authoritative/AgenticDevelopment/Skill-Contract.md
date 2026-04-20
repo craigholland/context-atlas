@@ -14,6 +14,8 @@ tags: [agentic-development, skills, canon, capability]
 related:
   - ./Agentic-Development-Glossary.md
   - ./Agent-Authority-Model.md
+  - ./Agent-Composition-Model.md
+  - ./Skill-Attachment-Model.md
   - ./Mode-Model.md
 supersedes: []
 ---
@@ -40,6 +42,8 @@ environment-specific skill file format.
 - A skill may encode bounded procedure, technique, knowledge, or verification
   guidance.
 - A skill may be used directly by a parent agent or curated into a specialist.
+- A skill definition should remain reusable across more than one actor whenever
+  the underlying capability truly repeats.
 - A skill does not, by itself, own workflow continuity, role accountability,
   protocol transitions, or handoff authority.
 - A reusable skill should keep its scope narrow enough that it can be composed
@@ -56,6 +60,8 @@ environment-specific skill file format.
 - Skill definitions must remain distinct from role definitions, protocol
   definitions, and mode definitions.
 - Skills must not silently expand into disguised specialists or parent agents.
+- Skill definitions should not depend on one actor's identity in order to make
+  sense as reusable capability units.
 - Portable skill semantics must remain valid even when a downstream
   environment materializes them through different file layouts or discovery
   mechanisms.
@@ -70,4 +76,6 @@ environment-specific skill file format.
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+- [Agent-Composition-Model.md](./Agent-Composition-Model.md)
+- [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
