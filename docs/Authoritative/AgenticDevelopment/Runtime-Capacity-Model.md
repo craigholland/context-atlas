@@ -123,6 +123,20 @@ That means:
 - live queue state or transient availability should not silently override the
   governed planning input during decomposition
 
+### 9. Downstream Bindings Should Choose One Machine-Readable Source
+
+When a project decides to materialize runtime-capacity input, it should expose
+that planning input through one authoritative machine-readable artifact.
+
+That artifact should be:
+
+- easy for a human operator to inspect
+- simple enough to edit intentionally
+- explicit enough that later validation can reason about its structure
+
+Projects should avoid scattering planning-capacity truth across multiple
+uncoordinated notes, prompts, or runtime-specific state files.
+
 ## Constraints
 
 - Runtime capacity should remain a planning concept rather than an operational
