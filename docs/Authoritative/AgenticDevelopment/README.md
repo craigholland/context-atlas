@@ -47,6 +47,7 @@ The initial canon surface is centered on:
 - [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
 - [Skill-Contract.md](./Skill-Contract.md)
+- [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
@@ -59,10 +60,11 @@ For most readers, the intended order is:
 3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 4. [Delegation-Model.md](./Delegation-Model.md)
 5. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
-6. [Mode-Model.md](./Mode-Model.md)
-7. [Skill-Contract.md](./Skill-Contract.md)
-8. [Boundary-Model.md](./Boundary-Model.md)
-9. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+6. [Skill-Contract.md](./Skill-Contract.md)
+7. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+8. [Mode-Model.md](./Mode-Model.md)
+9. [Boundary-Model.md](./Boundary-Model.md)
+10. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -72,6 +74,8 @@ This ordering is intentional:
   vocabulary
 - the delegation and composition docs refine how parent agents and specialists
   stay structurally distinct inside that relationship chain
+- the skill docs refine what a skill may contain and how skills attach to
+  parent agents and specialists without becoming role or protocol surrogates
 - the later supplements refine adjacent concerns without replacing those
   foundations
 
