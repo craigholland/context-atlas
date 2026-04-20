@@ -109,6 +109,18 @@ That includes choices such as:
 Those choices should bind to the portable discovery model rather than replace
 it.
 
+### 7. Maintenance Mode And Regeneration Expectations Should Be Declared
+
+Materialization should make it possible for downstream bindings to declare
+whether runtime-facing assets are:
+
+- hand-maintained
+- generated
+- mixed
+
+That declaration belongs downstream, but the expectation that it be explicit
+belongs in the portable materialization model.
+
 ## Constraints
 
 - Portable materialization rules must not hard-code an environment-specific
@@ -118,6 +130,9 @@ it.
   portable canon.
 - Downstream discovery mechanics should document how they satisfy the portable
   discovery model and template vocabulary.
+- Downstream regeneration or maintenance choices should preserve traceability
+  back to the canon, bindings, and template surfaces that authorize the
+  runtime-facing asset.
 - A system should be able to change execution environments or support more than
   one environment without rewriting the portable definitions.
 

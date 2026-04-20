@@ -17,6 +17,7 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
   - ../../../Authoritative/AgenticDevelopment/Discovery-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
@@ -47,6 +48,7 @@ the explicit distinction between:
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
@@ -100,6 +102,8 @@ the explicit distinction between:
   what is Codex-specific adaptation
 - require Codex template choices to bind to Story 7's generic template model
   rather than defining a new template taxonomy inside the Codex layer
+- require Codex runtime assets to carry an explicit provenance and maintenance
+  story that binds back to Story 7's traceability and regeneration model
 
 ### Task 4: Codex Governance Hooks
 
@@ -159,6 +163,7 @@ the explicit distinction between:
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Discovery Model](../../../Authoritative/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../Authoritative/AgenticDevelopment/Materialization-Traceability-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
