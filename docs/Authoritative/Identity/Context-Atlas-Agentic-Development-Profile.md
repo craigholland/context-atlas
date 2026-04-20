@@ -14,6 +14,7 @@ tags: [context-atlas, agentic-development, identity, structural-binding, profile
 related:
   - ./Context-Atlas-Charter.md
   - ./Context-Atlas-System-Model.md
+  - ./AgenticDevelopment/Role-Model.md
   - ../AgenticDevelopment/Agent-Composition-Model.md
   - ../AgenticDevelopment/Composition-Decision-Model.md
   - ../AgenticDevelopment/Boundary-Model.md
@@ -90,6 +91,15 @@ this profile as the project-specific structural source of truth.
 They should not bypass it by binding directly from the portable canon to
 environment-facing assets.
 
+### 7. Named Roles Must Bind At The Parent Layer
+
+When Context Atlas defines named project roles, those roles should bind at the
+parent-agent layer described by this profile.
+
+That means the project role roster should be interpreted as top-level
+accountability carried by parent agents, while specialists remain subordinate
+delegates beneath those parent-owned roles.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -110,6 +120,7 @@ environment-facing assets.
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
+- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
 - [Agent Composition Model](../AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../AgenticDevelopment/Boundary-Model.md)

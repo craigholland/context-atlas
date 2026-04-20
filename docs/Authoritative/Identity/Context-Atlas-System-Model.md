@@ -13,6 +13,7 @@ owners: [core]
 tags: [system-model, context-atlas, domain, package-architecture, components]
 related:
   - ./Context-Atlas-Agentic-Development-Profile.md
+  - ./AgenticDevelopment/Role-Model.md
   - ./Context-Atlas-Charter.md
   - ../Architecture/Craig-Architecture.md
   - ../Ontology/Documentation-Ontology.md
@@ -244,6 +245,23 @@ Later role, mode, protocol, and environment-materialization artifacts should
 bind through that project profile rather than skipping directly from portable
 canon to concrete runtime assets.
 
+### 14. The Initial Agentic Role Roster Is Also Project-Specific Identity
+
+Context Atlas's initial agentic role roster is part of the same
+project-specific identity layer.
+
+That role model should live alongside the structural profile and define the
+top-level project accountabilities for:
+
+- Planner/Decomp
+- Backend
+- Frontend
+- QA
+- DevOps
+
+Those roles should remain distinct from specialist labels and from any future
+runtime-specific file names used to materialize parent agents.
+
 ## Constraints
 
 - The system model must remain consistent with the Context Atlas charter.
@@ -265,6 +283,7 @@ canon to concrete runtime assets.
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](./Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
 - [Craig Architecture](../Architecture/Craig-Architecture.md)
 - [Documentation Ontology](../Ontology/Documentation-Ontology.md)
 - [Documentation](../../README.md)

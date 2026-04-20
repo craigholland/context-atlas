@@ -14,6 +14,7 @@ tags: [agentic-development, planning, product, protocols, automation]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
   - ../../Authoritative/Architecture/Craig-Architecture.md
   - ../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
@@ -47,6 +48,7 @@ Atlas.
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
@@ -275,6 +277,7 @@ The broader epic is complete when:
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
