@@ -57,6 +57,11 @@ materializations aligned over time.
   validation and preflight over time
 - identify the checks needed to keep materialized runtime assets aligned with
   their authoritative sources
+- identify how future validation should detect missing required protocol
+  sections or missing gate/review-pass fields where the protocol template says
+  they belong
+- identify how future validation should check that the core protocol set stays
+  present and linked from the protocol surface README
 - preserve the distinction between content validation and workflow-state review
 
 ### Task 3: Owner-File And Metadata Governance

@@ -74,6 +74,9 @@ the explicit distinction between:
 - map abstract concepts like parent agents, specialists, skills, roles, modes,
   and protocols onto concrete Codex file surfaces without collapsing them into
   one file type
+- make later Codex assets capable of reflecting the project-specific
+  protocol-role, protocol-mode, and gate-review-pass bindings without turning
+  those bindings into one runtime-only blob
 - require Codex bindings to reuse the stable project mode vocabulary instead of
   inventing runtime-only mode names casually
 - preserve the distinction between a skill definition and an actor's attached

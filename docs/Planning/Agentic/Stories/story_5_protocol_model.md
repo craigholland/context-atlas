@@ -16,9 +16,23 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_3_context_atlas_role_model.md
   - ./story_4_context_atlas_mode_model.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/README.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
@@ -54,6 +68,17 @@ ad hoc tool-trigger convention.
 - [Mode Transition Graph](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Mode Model](../../../Authoritative/AgenticDevelopment/Mode-Model.md)
+- [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
+- [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
+- [Planning Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Pass Model](../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md)
+- [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Delegation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md)
+- [Handoff Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md)
+- [Escalation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
 
 ## Proposed Tasks
@@ -154,6 +179,10 @@ ad hoc tool-trigger convention.
   distinction between those layers
 - the relationship between protocol execution and mode entry/transition is
   explicit enough to prevent later task-level drift
+- the protocol layer has a reusable authoritative template and entrypoint
+  instead of relying on planning docs to describe protocol shape ad hoc
+- the project-specific role bindings, mode bindings, and gate-to-pass bindings
+  are explicitly documented rather than inferred
 
 ## Definition Of Done
 
@@ -184,6 +213,9 @@ ad hoc tool-trigger convention.
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Protocol Role Bindings](../../../Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](../../../Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
 - [Context Atlas Mode Model](../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md)
 - [Mode Transition Rules](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md)
 - [Mode Mutation Matrix](../../../Authoritative/Identity/AgenticDevelopment/Mode-Mutation-Matrix.md)
@@ -192,3 +224,14 @@ ad hoc tool-trigger convention.
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
 - [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)
+- [Protocols README](../../../Authoritative/AgenticDevelopment/Protocols/README.md)
+- [Protocol Template](../../../Authoritative/AgenticDevelopment/Protocols/Protocol-Template.md)
+- [Planning Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Pass Model](../../../Authoritative/AgenticDevelopment/Protocols/Review-Pass-Model.md)
+- [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Delegation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md)
+- [Handoff Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md)
+- [Escalation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md)

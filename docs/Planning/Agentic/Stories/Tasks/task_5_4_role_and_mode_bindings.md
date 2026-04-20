@@ -26,7 +26,7 @@ Bind the shared workflow protocols back to the role and mode model so protocol p
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

@@ -15,6 +15,7 @@ related:
   - ./Role-Model.md
   - ./Role-Accountability-Matrix.md
   - ./Role-Mode-Matrix.md
+  - ./Gate-Review-Pass-Matrix.md
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../../AgenticDevelopment/Escalation-Model.md
 supersedes: []
@@ -110,6 +111,8 @@ the protocol story.
 #### May
 
 - perform governed review
+- execute the review passes required by the current structured review-intake
+  contract and gate binding
 - publish governed review findings directly on the active review surface
   selected by the current runtime materialization
 - record findings, acceptance analysis, and rework requests
@@ -175,5 +178,6 @@ the protocol story.
 - [Context Atlas Role Model](./Role-Model.md)
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
 - [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
+- [Gate Review Pass Matrix](./Gate-Review-Pass-Matrix.md)
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Escalation Model](../../AgenticDevelopment/Escalation-Model.md)

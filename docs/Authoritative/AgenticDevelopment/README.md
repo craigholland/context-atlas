@@ -33,6 +33,7 @@ This surface should define portable concepts and invariant rules such as:
   delegation, handoff, escalation, execution capacity, and materialization
 - stable authority and relationship rules
 - portable mode semantics
+- portable protocol semantics and reusable protocol shapes
 - portable skill semantics
 - portable boundary rules between canon, application bindings, and materialized
   assets
@@ -47,6 +48,7 @@ The initial canon surface is centered on:
 - [Delegation-Model.md](./Delegation-Model.md)
 - [Agent-Composition-Model.md](./Agent-Composition-Model.md)
 - [Mode-Model.md](./Mode-Model.md)
+- [Protocols/README.md](./Protocols/README.md)
 - [Skill-Contract.md](./Skill-Contract.md)
 - [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
 - [Composition-Decision-Model.md](./Composition-Decision-Model.md)
@@ -64,13 +66,14 @@ For most readers, the intended order is:
 4. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 5. [Delegation-Model.md](./Delegation-Model.md)
 6. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
-7. [Skill-Contract.md](./Skill-Contract.md)
-8. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-9. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
-10. [Escalation-Model.md](./Escalation-Model.md)
-11. [Mode-Model.md](./Mode-Model.md)
-12. [Boundary-Model.md](./Boundary-Model.md)
-13. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+7. [Mode-Model.md](./Mode-Model.md)
+8. [Protocols/README.md](./Protocols/README.md)
+9. [Skill-Contract.md](./Skill-Contract.md)
+10. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+11. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+12. [Escalation-Model.md](./Escalation-Model.md)
+13. [Boundary-Model.md](./Boundary-Model.md)
+14. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
 This ordering is intentional:
 
@@ -82,6 +85,9 @@ This ordering is intentional:
   vocabulary
 - the delegation and composition docs refine how parent agents and specialists
   stay structurally distinct inside that relationship chain
+- the mode and protocol docs define portable execution-state and workflow-path
+  semantics before any downstream application binds them to concrete roles,
+  gates, or runtime assets
 - the skill docs refine what a skill may contain and how skills attach to
   parent agents and specialists without becoming role or protocol surrogates
 - the composition-decision and escalation docs define when work should stay
