@@ -19,6 +19,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
   - ../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md
+  - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
@@ -38,6 +39,7 @@ rather than the runtime actor itself.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
@@ -139,4 +141,5 @@ rather than the runtime actor itself.
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
+- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
