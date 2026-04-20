@@ -142,6 +142,23 @@ preserve upstream distinctions such as:
 
 Codex naming should help make the upstream model more legible, not obscure it.
 
+### 9. Codex Template Surfaces Should Mirror The Materialized Concept Families
+
+The Codex binding should provide repeatable template surfaces or creation
+instructions for the runtime-facing assets it expects contributors to create.
+
+The initial template set should cover:
+
+- `.codex/AGENTS.md`
+- `.codex/roles/*.md`
+- `.codex/agents/*.toml`
+- `.codex/modes/*.md`
+- `.codex/protocols/*.md`
+- `.agents/skills/*/SKILL.md`
+
+Those templates remain downstream Codex bindings, not substitutes for the
+portable template canon from Story 7.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of

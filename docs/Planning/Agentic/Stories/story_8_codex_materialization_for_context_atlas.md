@@ -106,6 +106,8 @@ the explicit distinction between:
 
 - define the project-specific templates or instructions needed to create Codex
   runtime assets from the authoritative docs
+- keep the initial Codex template set aligned with the actual concept families
+  being materialized instead of leaving role or protocol surfaces template-less
 - make it possible for an AI contributor to generate or refresh Codex assets
   without reverse-engineering the repo each time
 - ensure the guidance remains explicit about what is copied from canon versus
