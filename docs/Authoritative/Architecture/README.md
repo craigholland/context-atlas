@@ -10,6 +10,13 @@ When a change concerns agent roles, modes, skills, protocols, or runtime
 materialization concepts, contributors should read that set alongside Craig
 Architecture rather than forcing those concepts into the architecture docs.
 
+In practice:
+
+- Craig Architecture explains reusable architectural philosophy and delivery
+  governance
+- AgenticDevelopment explains reusable agentic vocabulary, authority,
+  boundaries, and materialization concepts
+
 ## What Lives Here
 
 - [Craig-Architecture.md](./Craig-Architecture.md): the core language-agnostic Craig Architecture philosophy

@@ -14,6 +14,19 @@ The portable canon ends where project-specific bindings begin. This directory
 defines portable terms and invariants, not Context Atlas's chosen role roster,
 workflow gates, runtime-capacity values, or vendor-specific layouts.
 
+## Start Here
+
+If you are new to the agentic-development model, start with this README before
+reading the individual canon documents.
+
+The intended progression is:
+
+1. understand what this directory is responsible for
+2. learn the portable vocabulary
+3. learn the invariant relationship and boundary rules
+4. only then move into project-specific bindings or runtime-specific
+   materialization guidance
+
 ## What Lives Here
 
 This surface should define portable concepts and invariant rules such as:
@@ -56,6 +69,21 @@ This ordering is intentional:
 - the later supplements refine adjacent concerns without replacing those
   foundations
 
+## Why This Surface Comes First
+
+Later Context Atlas docs will choose:
+
+- actual roles
+- actual modes
+- actual protocols
+- actual runtime-capacity inputs
+- actual platform materializations
+
+Those later documents should bind to this canon, not redefine it. If a reader
+cannot understand the portable layer from this directory alone, later planning
+and runtime docs will start carrying canon concepts they should be inheriting
+instead.
+
 ## What Does Not Live Here
 
 This directory should not be used for:
@@ -81,3 +109,10 @@ The most relevant adjacent authoritative surfaces are:
   downstream project choices that do not belong in the portable canon
 - [../Ontology/README.md](../Ontology/README.md): metadata and document-class
   guidance for authoring authoritative artifacts
+
+When deciding where to read next:
+
+- stay in this directory if you are still learning the portable concepts
+- move to `Identity` when you need Context Atlas's chosen bindings
+- move to planning docs only after the portable canon is clear enough that the
+  planning layer does not have to redefine it

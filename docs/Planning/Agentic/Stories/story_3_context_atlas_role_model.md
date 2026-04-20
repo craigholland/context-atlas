@@ -15,6 +15,8 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_2_agent_and_skill_structure.md
+  - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
@@ -34,6 +36,8 @@ rather than the runtime actor itself.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Agentic Development Glossary](../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - Current repo delivery expectations around planning, implementation, review, merge, and release work
 
