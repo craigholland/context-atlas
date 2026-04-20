@@ -14,6 +14,7 @@ tags: [agentic-development, planning, product, protocols, automation]
 related:
   - ../../Authoritative/Identity/Context-Atlas-Charter.md
   - ../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
   - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
   - ../../Authoritative/Architecture/Craig-Architecture.md
@@ -48,6 +49,7 @@ Atlas.
 
 - [Context Atlas Charter](../../Authoritative/Identity/Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Role Archetypes](../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../Authoritative/Architecture/Craig-Architecture.md)
@@ -68,6 +70,8 @@ That means the project should have:
 
 - an authoritative, portable vocabulary for agents, specialists, modes, skills,
   protocols, handoffs, escalation, and runtime capacity
+- a portable role-archetype catalog that downstream applications can refine
+  into project-specific roles
 - a project-specific profile that says exactly which of those concepts Context
   Atlas uses
 - platform-specific materialization rules that explain how those abstract
@@ -97,6 +101,7 @@ The epic should establish these capability areas:
 
 - portable definitions for agents, parent agents, specialists, modes, skills,
   protocols, handoffs, escalation, and runtime capacity
+- a portable catalog of reusable role archetypes
 - project-specific bindings that define what Context Atlas actually uses
 - workflow protocols for planning, execution, review, rework, recovery,
   delegation, handoff, and escalation
@@ -188,6 +193,8 @@ The first target users for this epic are internal to Context Atlas delivery.
 This epic should ultimately produce:
 
 - a new authoritative `docs/Authoritative/AgenticDevelopment/` canon
+- a reusable role-archetype catalog under
+  `docs/Authoritative/AgenticDevelopment/RoleArchetypes/`
 - a project-specific Context Atlas agentic-development profile
 - a project-specific role model that explicitly defines:
   - Planner/Decomp

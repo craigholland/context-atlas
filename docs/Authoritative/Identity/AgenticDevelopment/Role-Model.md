@@ -15,6 +15,13 @@ related:
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../Context-Atlas-System-Model.md
   - ./Role-Accountability-Matrix.md
+  - ../../AgenticDevelopment/RoleArchetypes/README.md
+  - ../../AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md
+  - ../../AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md
+  - ../../AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md
+  - ../../AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md
+  - ../../AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md
+  - ../../AgenticDevelopment/RoleArchetypes/devops-engineer.md
   - ../../AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../AgenticDevelopment/Agent-Authority-Model.md
   - ../../AgenticDevelopment/Agent-Composition-Model.md
@@ -42,6 +49,9 @@ files, or specialist roster.
 It also does not replace the portable canon for what a role is. Instead, it
 binds that canon to the project-specific roles Context Atlas chooses to use.
 
+This means the project role model is downstream of the portable role-archetype
+catalog under `docs/Authoritative/AgenticDevelopment/RoleArchetypes/`.
+
 ## Binding Decisions
 
 ### 1. Roles Are Project Accountabilities Embodied By Parent Agents
@@ -65,6 +75,27 @@ The initial top-level role set for Context Atlas is:
 This roster is intentionally small enough to govern clearly while still
 covering the distinct categories of planning, implementation, review, and
 operational delivery that already exist in the repository.
+
+### 2a. The Project Role Roster Refines Portable Role Archetypes
+
+The initial Context Atlas role roster refines the following portable role
+archetypes:
+
+- `Planner/Decomp` refines
+  [Planning And Decomposition Lead](../../AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md)
+- `Backend` refines
+  [Backend Staff Engineer](../../AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md)
+- `Documentation/UAT` refines both
+  [Technical Documentation Writer](../../AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md)
+  and
+  [User Acceptance Tester](../../AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md)
+- `QA` refines
+  [Quality Assurance Engineer](../../AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md)
+- `DevOps` refines
+  [DevOps Engineer](../../AgenticDevelopment/RoleArchetypes/devops-engineer.md)
+
+The project role roster is therefore a refinement layer, not a replacement for
+the portable catalog.
 
 ### 3. Context Atlas Does Not Use A Generic Implementation Role
 
@@ -144,6 +175,7 @@ does not become overloaded with artifact-level ownership details.
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Context Atlas System Model](../Context-Atlas-System-Model.md)
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
+- [Role Archetypes](../../AgenticDevelopment/RoleArchetypes/README.md)
 - [Agentic Development Glossary](../../AgenticDevelopment/Agentic-Development-Glossary.md)
 - [Agent Authority Model](../../AgenticDevelopment/Agent-Authority-Model.md)
 - [Agent Composition Model](../../AgenticDevelopment/Agent-Composition-Model.md)

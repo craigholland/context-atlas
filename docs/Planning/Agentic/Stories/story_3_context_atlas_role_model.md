@@ -37,13 +37,16 @@ clear answer for who is accountable for planning, backend delivery,
 documentation and UAT-oriented delivery, QA review, and DevOps-oriented
 operational work, while keeping it
 explicit that a role is the accountability concept embodied by a parent agent
-rather than the runtime actor itself.
+rather than the runtime actor itself and that the project role model is a
+refinement of portable role archetypes rather than the first place role
+concepts are invented.
 
 ## Inputs
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
@@ -66,6 +69,8 @@ rather than the runtime actor itself.
   - DevOps
 - explain why those roles exist as distinct project accountabilities instead of
   falling back to a generic implementation role
+- bind those project roles as refinements of portable role archetypes instead
+  of treating the project role model as a fresh role catalog
 - keep the role set small enough to govern clearly at the MVP stage
 
 ### Task 2: Role Accountabilities And Ownership
@@ -148,6 +153,7 @@ rather than the runtime actor itself.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
+- [Role Archetypes](../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)

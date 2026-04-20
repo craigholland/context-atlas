@@ -54,6 +54,8 @@ or execution environment.
 - `Specialist`: a focused agent with bounded authority and curated skills that
   performs a narrow delegated scope on behalf of a parent agent.
 - `Role`: the accountability concept an agent embodies.
+- `Role archetype`: a portable reusable role template that downstream
+  applications may refine into project-specific roles.
 - `Protocol`: the workflow path that governs entry conditions, gates, required
   outputs, handoffs, and exit criteria.
 - `Mode`: the execution state an agent is currently operating in while
@@ -86,8 +88,9 @@ or execution environment.
 - Application-specific role names, current workflow gates, current capacity
   values, and environment-specific conventions do not belong in this glossary.
 - Definitions here must distinguish accountability (`role`), workflow
-  structure (`protocol`), execution state (`mode`), and reusable capability
-  (`skill`) rather than allowing those concepts to collapse into one another.
+  structure (`protocol`), execution state (`mode`), reusable capability
+  (`skill`), and portable role template (`role archetype`) rather than
+  allowing those concepts to collapse into one another.
 - This glossary must not encode concrete role names, mode names, workflow
   gates, or environment conventions from any specific application.
 - Materialized assets are not defined here as source-of-truth artifacts; they

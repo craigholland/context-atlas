@@ -33,6 +33,7 @@ IMPLEMENTED
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
+- [Role Archetypes](../../../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md)
 - [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
 - [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - the structural binding from Story 2
@@ -47,6 +48,8 @@ IMPLEMENTED
   - Documentation/UAT
   - QA
   - DevOps
+- bind those project roles as refinements of the portable role-archetype
+  catalog
 - explain why these roles are distinct and why a generic implementation role is insufficient
 - keep the role set small enough to govern clearly
 
