@@ -24,6 +24,9 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md
   - ../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md
   - ../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md
+  - ../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
@@ -70,6 +73,9 @@ ad hoc tool-trigger convention.
 - [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
 - [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
 - [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Delegation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md)
+- [Handoff Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md)
+- [Escalation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md)
 - Current repo experience with planning, slice execution, review gating, rework, and recovery
 
 ## Proposed Tasks
@@ -218,3 +224,6 @@ ad hoc tool-trigger convention.
 - [Review Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Review-Protocol.md)
 - [Rework Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Rework-Protocol.md)
 - [Recovery Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Delegation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Delegation-Protocol.md)
+- [Handoff Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Handoff-Protocol.md)
+- [Escalation Protocol](../../../Authoritative/AgenticDevelopment/Protocols/Escalation-Protocol.md)

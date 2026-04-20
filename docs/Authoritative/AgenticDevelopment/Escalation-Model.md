@@ -16,6 +16,7 @@ related:
   - ./Composition-Decision-Model.md
   - ./Agent-Authority-Model.md
   - ./Agent-Composition-Model.md
+  - ./Protocols/Escalation-Protocol.md
 supersedes: []
 ---
 
@@ -34,6 +35,9 @@ scope.
 
 It does not define protocol-specific escalation steps or a project's concrete
 review workflow.
+
+The protocol-specific workflow and contract shape for escalation live
+downstream in [Protocols/Escalation-Protocol.md](./Protocols/Escalation-Protocol.md).
 
 ## Binding Decisions
 
@@ -78,3 +82,4 @@ review workflow.
 - [Composition Decision Model](./Composition-Decision-Model.md)
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Agent Composition Model](./Agent-Composition-Model.md)
+- [Escalation Protocol](./Protocols/Escalation-Protocol.md)

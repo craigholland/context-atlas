@@ -16,6 +16,7 @@ related:
   - ./Agentic-Development-Glossary.md
   - ./Composition-Decision-Model.md
   - ./Escalation-Model.md
+  - ./Protocols/Delegation-Protocol.md
   - ./Boundary-Model.md
   - ../Architecture/Craig-Architecture.md
 supersedes: []
@@ -36,6 +37,9 @@ authority boundaries.
 
 It does not define an application's role roster, workflow protocols, or
 environment-specific delegate-discovery mechanism.
+
+The protocol-specific workflow and contract shape for delegation live
+downstream in [Protocols/Delegation-Protocol.md](./Protocols/Delegation-Protocol.md).
 
 ## Binding Decisions
 
@@ -84,5 +88,6 @@ environment-specific delegate-discovery mechanism.
 - [Agentic Development Glossary](./Agentic-Development-Glossary.md)
 - [Composition Decision Model](./Composition-Decision-Model.md)
 - [Escalation Model](./Escalation-Model.md)
+- [Delegation Protocol](./Protocols/Delegation-Protocol.md)
 - [Boundary Model](./Boundary-Model.md)
 - [Craig Architecture](../Architecture/Craig-Architecture.md)

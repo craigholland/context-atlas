@@ -14,6 +14,8 @@ tags: [agentic-development, protocols, review, qa, workflow]
 related:
   - ./Protocol-Template.md
   - ./Review-Pass-Model.md
+  - ./Handoff-Protocol.md
+  - ./Escalation-Protocol.md
   - ./Rework-Protocol.md
   - ./Recovery-Protocol.md
 supersedes: []
@@ -80,6 +82,10 @@ substitute for returning findings or outcome state.
 - any verification evidence referenced by the intake
 - requested review passes when the workflow uses explicit pass selection
 
+Review intake should follow the structured handoff semantics from
+[Handoff Protocol](./Handoff-Protocol.md) when review is entered from upstream
+completion state.
+
 ## Required Outputs
 
 - a structured review-outcome contract
@@ -137,5 +143,7 @@ remains structured.
 
 - [Protocol Template](./Protocol-Template.md)
 - [Review Pass Model](./Review-Pass-Model.md)
+- [Handoff Protocol](./Handoff-Protocol.md)
+- [Escalation Protocol](./Escalation-Protocol.md)
 - [Rework Protocol](./Rework-Protocol.md)
 - [Recovery Protocol](./Recovery-Protocol.md)

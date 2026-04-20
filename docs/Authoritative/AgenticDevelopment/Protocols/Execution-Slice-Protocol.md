@@ -14,6 +14,7 @@ tags: [agentic-development, protocols, execution, implementation, workflow]
 related:
   - ./Protocol-Template.md
   - ./Planning-Protocol.md
+  - ./Handoff-Protocol.md
   - ./Review-Protocol.md
   - ./Rework-Protocol.md
 supersedes: []
@@ -73,6 +74,10 @@ surfaces merely because they are nearby.
 - stated verification or evidence results
 - any declared risks, assumptions, or unresolved follow-up needs
 
+When review is the next step, completion output should use the structured
+handoff semantics from [Handoff Protocol](./Handoff-Protocol.md), including any
+requested review passes.
+
 ## Exit Criteria
 
 - the producing boundary has finished its bounded slice
@@ -109,5 +114,6 @@ surfaces merely because they are nearby.
 
 - [Protocol Template](./Protocol-Template.md)
 - [Planning Protocol](./Planning-Protocol.md)
+- [Handoff Protocol](./Handoff-Protocol.md)
 - [Review Protocol](./Review-Protocol.md)
 - [Rework Protocol](./Rework-Protocol.md)
