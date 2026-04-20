@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, review, qa, gates]
 related:
@@ -37,9 +37,9 @@ runtime-specific PR comment or automation behavior.
 
 | Workflow Gate | Required Review Passes | Typical Intake Contract | Default QA Outcome Target |
 | --- | --- | --- | --- |
-| `Task -> Story` | `code` | `implementation_complete` | readiness for Story-branch integration |
-| `Story -> Epic` | `architecture`, `security` | `story_complete` | readiness for Epic-branch integration |
-| `Epic -> development` | `product` | `epic_complete` | readiness for `development` merge |
+| `Task -> Story` | `code` | `implementation_complete` with `scope_level: task` | readiness for Story-branch integration |
+| `Story -> Epic` | `architecture`, `security` | `implementation_complete` with `scope_level: story` | readiness for Epic-branch integration |
+| `Epic -> development` | `product` | `implementation_complete` with `scope_level: epic` | readiness for `development` merge |
 
 ## Binding Decisions
 
@@ -81,7 +81,23 @@ when:
 Those earlier passes should be explicit in the structured review-intake
 contract rather than assumed informally.
 
-### 5. Gate Mapping Does Not Create New Roles Or Modes
+### 5. Gate Level Should Be Carried By `scope_level`
+
+This gate map does not create separate completion contract types for each
+workflow gate.
+
+The normal structured review-intake contract remains
+`implementation_complete`, and the gate level should be carried through
+`scope_level`, for example:
+
+- `task`
+- `story`
+- `epic`
+
+This keeps the portable contract catalog small while still allowing downstream
+bindings and validators to distinguish gate-specific review requirements.
+
+### 6. Gate Mapping Does Not Create New Roles Or Modes
 
 This matrix maps QA review passes onto workflow gates.
 

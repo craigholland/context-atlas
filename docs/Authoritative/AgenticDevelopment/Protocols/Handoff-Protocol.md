@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [agentic-development, protocols, handoff, contracts, workflow]
 related:
@@ -95,6 +95,24 @@ open_risks:
   - none
 requested_next_action: review_intake
 ```
+
+### `implementation_complete` Scope Semantics
+
+`implementation_complete` is the portable completion-handoff contract type for
+work that has reached a governed review or downstream-intake boundary.
+
+Projects should reuse that contract type across multiple workflow levels
+instead of inventing a different completion contract type for each gate.
+
+The workflow level should be carried by `scope_level`, for example:
+
+- `task` for task-completion intake
+- `story` for story-completion intake
+- `epic` for epic-completion intake
+
+When review is the next action, downstream bindings may use `scope_level`
+together with `required_review_passes` to determine which governed review work
+must occur at the receiving gate.
 
 ## Exit Criteria
 

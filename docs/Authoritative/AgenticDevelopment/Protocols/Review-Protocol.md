@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [agentic-development, protocols, review, qa, workflow]
 related:
@@ -85,6 +85,10 @@ substitute for returning findings or outcome state.
 Review intake should follow the structured handoff semantics from
 [Handoff Protocol](./Handoff-Protocol.md) when review is entered from upstream
 completion state.
+
+When the incoming review-intake contract uses `implementation_complete`,
+projects should carry review-gate scope through fields such as `scope_level`
+rather than inventing ad hoc completion contract types for each workflow gate.
 
 ## Required Outputs
 
