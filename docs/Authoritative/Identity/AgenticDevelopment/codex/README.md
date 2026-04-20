@@ -159,6 +159,16 @@ The initial template set should cover:
 Those templates remain downstream Codex bindings, not substitutes for the
 portable template canon from Story 7.
 
+### 10. Codex Asset Creation Should State What Is Copied, Adapted, And Derived
+
+Later creation guidance should make it explicit which parts of a Codex asset:
+
+- copy stable upstream vocabulary directly
+- adapt upstream meaning into Codex-facing guidance
+- derive traceability, maintenance, and file-layout details locally
+
+That separation helps keep the Codex layer honest during refresh work.
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of

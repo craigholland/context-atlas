@@ -44,6 +44,8 @@ rather than redefining them.
 - identify the upstream authoritative sources this runtime orientation surface
   depends on
 - state the maintenance mode for the file
+- briefly distinguish which sections are copied, adapted, or locally derived
+  when that would help later refresh work
 
 ## Authoring Rules
 
