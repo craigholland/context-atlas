@@ -18,6 +18,7 @@ related:
   - ./story_7_platform_materialization_model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
   - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
   - ../../../Authoritative/AgenticDevelopment/Boundary-Model.md
   - ../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md
 supersedes: []
@@ -46,6 +47,7 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - Current Codex discovery expectations for agent, skill, mode, and runtime config files
 
@@ -140,5 +142,6 @@ the explicit distinction between:
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
 - [Boundary Model](../../../Authoritative/AgenticDevelopment/Boundary-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
