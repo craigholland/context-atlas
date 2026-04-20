@@ -20,6 +20,9 @@ related:
   - ./Audit-Identity-Model.md
   - ./GitHub/README.md
   - ../AgenticDevelopment/README.md
+  - ../AgenticDevelopment/Drift-Model.md
+  - ../AgenticDevelopment/Validation-Model.md
+  - ../AgenticDevelopment/Change-Management-Model.md
   - ../Architecture/README.md
 supersedes: []
 ---
@@ -105,6 +108,12 @@ The most relevant adjacent surfaces are:
 - [../AgenticDevelopment/README.md](../AgenticDevelopment/README.md): portable
   agentic-development canon for roles, protocols, modes, skills, and
   handoffs
+- [../AgenticDevelopment/Drift-Model.md](../AgenticDevelopment/Drift-Model.md):
+  portable drift vocabulary for reviewing canon, bindings, and runtime assets
+- [../AgenticDevelopment/Validation-Model.md](../AgenticDevelopment/Validation-Model.md):
+  structural validation expectations for governed surfaces
+- [../AgenticDevelopment/Change-Management-Model.md](../AgenticDevelopment/Change-Management-Model.md):
+  governed path for introducing and recovering changes
 - [../Architecture/README.md](../Architecture/README.md): reusable Craig
   Architecture philosophy and planning/decomposition guidance
 

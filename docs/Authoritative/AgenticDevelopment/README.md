@@ -62,6 +62,9 @@ The initial canon surface is centered on:
 - [Templates/README.md](./Templates/README.md)
 - [Discovery-Model.md](./Discovery-Model.md)
 - [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
+- [Drift-Model.md](./Drift-Model.md)
+- [Validation-Model.md](./Validation-Model.md)
+- [Change-Management-Model.md](./Change-Management-Model.md)
 
 ## How To Read This Set
 
@@ -88,6 +91,9 @@ For most readers, the intended order is:
 19. [Templates/README.md](./Templates/README.md)
 20. [Discovery-Model.md](./Discovery-Model.md)
 21. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
+22. [Drift-Model.md](./Drift-Model.md)
+23. [Validation-Model.md](./Validation-Model.md)
+24. [Change-Management-Model.md](./Change-Management-Model.md)
 
 This ordering is intentional:
 
@@ -121,6 +127,9 @@ This ordering is intentional:
   indexing strategies
 - the traceability model then defines how later runtime assets remain reviewable
   against the canon, bindings, and template surfaces that authorize them
+- the drift, validation, and change-management docs then define how later
+  bindings and runtime assets should be checked, reviewed, recovered, and
+  evolved without inventing a second governance vocabulary elsewhere
 
 ## Why This Surface Comes First
 

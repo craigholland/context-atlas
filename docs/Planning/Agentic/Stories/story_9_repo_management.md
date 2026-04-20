@@ -17,6 +17,9 @@ related:
   - ./story_5_protocol_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
   - ./story_10_validation_governance_and_drift_control.md
+  - ../../../Authoritative/AgenticDevelopment/Drift-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Validation-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Change-Management-Model.md
   - ../../../Authoritative/RepoManagement/README.md
   - ../../../Authoritative/RepoManagement/GitHub/README.md
   - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
@@ -41,6 +44,9 @@ provider-specific bindings, and auditable operational identities.
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 10 - Validation, Governance, And Drift Control](./story_10_validation_governance_and_drift_control.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/AgenticDevelopment/Change-Management-Model.md)
 - [Repo Management](../../../Authoritative/RepoManagement/README.md)
 - [GitHub RepoManagement Canon](../../../Authoritative/RepoManagement/GitHub/README.md)
 - [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
@@ -114,6 +120,9 @@ provider-specific bindings, and auditable operational identities.
 - the agentic workflow now has a governed path for GitHub comments, reviews,
   pushes, merges, and related handoffs instead of treating them as ambient
   runtime powers
+- the repo-management layer is concrete enough that later drift, validation,
+  and change-management work can reason about principals, permissions, and
+  branch-target policy without reconstructing them from PR folklore
 
 ## Definition Of Done
 
@@ -139,6 +148,9 @@ provider-specific bindings, and auditable operational identities.
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 10 - Validation, Governance, And Drift Control](./story_10_validation_governance_and_drift_control.md)
+- [Drift Model](../../../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../Authoritative/AgenticDevelopment/Change-Management-Model.md)
 - [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - [Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
 - [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)

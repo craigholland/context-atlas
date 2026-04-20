@@ -16,6 +16,8 @@ related:
   - ../Context-Atlas-Agentic-Development-Profile.md
   - ../../AgenticDevelopment/Runtime-Capacity-Model.md
   - ../../AgenticDevelopment/Parallel-Decomposition-Model.md
+  - ../../AgenticDevelopment/Drift-Model.md
+  - ../../AgenticDevelopment/Validation-Model.md
 supersedes: []
 ---
 
@@ -112,6 +114,15 @@ the planner or human operator.
 Tooling should not silently rewrite the planning input based on ambient
 runtime state.
 
+### 4. Structural Drift Should Be Distinguished From Live Availability
+
+If the artifact fails structural checks, that is governed planning-input
+drift.
+
+If the artifact is well-formed but live runtime availability has changed, that
+is an operator or planner update problem, not proof that the structural
+artifact model is wrong.
+
 ## Constraints
 
 - The guidance should remain simple enough for a human to follow without extra
@@ -131,3 +142,5 @@ runtime state.
 - [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
 - [Runtime Capacity Model](../../AgenticDevelopment/Runtime-Capacity-Model.md)
 - [Parallel Decomposition Model](../../AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Drift Model](../../AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../AgenticDevelopment/Validation-Model.md)

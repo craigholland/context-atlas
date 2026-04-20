@@ -19,6 +19,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md
   - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
   - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
+  - ../../../Authoritative/AgenticDevelopment/Validation-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
@@ -40,6 +41,7 @@ actually available for an Epic, Story, or Task.
 - [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
 - [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
 - [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
@@ -110,6 +112,8 @@ actually available for an Epic, Story, or Task.
 - update and validation expectations are explicit enough to trust the artifact
 - later stories can inherit the same runtime-capacity definition without
   reconstructing it from planning prose
+- later validation work stays bounded to structural trustworthiness instead of
+  drifting into live scheduler claims
 
 ## Definition Of Done
 
@@ -137,4 +141,5 @@ actually available for an Epic, Story, or Task.
 - [Parallel Decomposition Model](../../../Authoritative/AgenticDevelopment/Parallel-Decomposition-Model.md)
 - [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
 - [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
+- [Validation Model](../../../Authoritative/AgenticDevelopment/Validation-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

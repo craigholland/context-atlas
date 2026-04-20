@@ -17,6 +17,9 @@ related:
   - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
   - ../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
   - ../../Authoritative/AgenticDevelopment/RoleArchetypes/README.md
+  - ../../Authoritative/AgenticDevelopment/Drift-Model.md
+  - ../../Authoritative/AgenticDevelopment/Validation-Model.md
+  - ../../Authoritative/AgenticDevelopment/Change-Management-Model.md
   - ../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
   - ../../Authoritative/Identity/Context-Atlas-System-Model.md
   - ../../Authoritative/Architecture/Craig-Architecture.md
@@ -128,6 +131,8 @@ The epic should establish these capability areas:
   into lanes that are both capacity-bounded and architecturally independent
 - platform-specific materialization guidance so concrete runtime assets can be
   created consistently instead of ad hoc
+- drift, validation, and change-management guidance that keeps the canon,
+  bindings, planning inputs, and runtime assets from separating over time
 
 ### Epic Structure
 
@@ -236,6 +241,8 @@ This epic should ultimately produce:
 - a project-specific `docs/Authoritative/Identity/RepoManagement/` binding
   surface for the chosen repository provider
 - one or more platform materialization guides and templates
+- drift, validation, and change-management models that govern how the whole
+  agentic and repo-management system evolves
 - generated or governed runtime-specific assets that are explicitly tied back
   to the canon and project profile
 
@@ -317,6 +324,10 @@ The broader epic is complete when:
   becoming the source of truth
 - the resulting runtime assets are discoverable, governed, and resistant to
   drift
+- the repo has one explicit governed path for drift detection, structural
+  validation, owner-file/metadata governance, review, recovery, and future
+  change introduction across the agentic-development and repo-management
+  surfaces
 
 ## Related Artifacts
 

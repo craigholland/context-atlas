@@ -64,6 +64,16 @@ materialization layer means, the first fix should usually be to improve the
 AgenticDevelopment canon rather than expanding the planning doc into a second
 source of truth.
 
+If planning depends on drift detection, validation boundaries, or governed
+change paths for the agentic stack, those expectations should derive from:
+
+- [docs/Authoritative/AgenticDevelopment/Drift-Model.md](../Authoritative/AgenticDevelopment/Drift-Model.md)
+- [docs/Authoritative/AgenticDevelopment/Validation-Model.md](../Authoritative/AgenticDevelopment/Validation-Model.md)
+- [docs/Authoritative/AgenticDevelopment/Change-Management-Model.md](../Authoritative/AgenticDevelopment/Change-Management-Model.md)
+
+Planning docs should reference those models rather than introducing a second
+validation or drift vocabulary in story/task prose.
+
 Contributors should prefer planning artifacts that move from:
 
 - product-level intent at the Epic layer
