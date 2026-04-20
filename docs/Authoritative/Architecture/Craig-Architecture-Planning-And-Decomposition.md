@@ -221,10 +221,16 @@ Useful checks include:
 - whether a planned change is likely to push a file toward an unreviewable size
 - whether a plan relies on growing helper chains instead of introducing missing concepts, objects, policies, or submodules
 - whether each planned PR identifies the local `__ai__.md` files that should be updated as part of the same slice
+- whether the plan assumes more simultaneous independent work lanes than the project's governed planning-capacity input actually supports
 
 These checks are not intended to create planning ceremony for its own sake.
 
 They exist because brittle implementation plans often reveal themselves before coding starts, especially when work is being decomposed for AI-assisted execution.
+
+When a project maintains an explicit planning-capacity input, planners should
+treat that input as a stable decomposition constraint rather than as a live
+scheduler feed. The point is to bound safe parallel planning, not to simulate
+moment-by-moment runtime availability.
 
 ### 9. Code Shape Governance
 

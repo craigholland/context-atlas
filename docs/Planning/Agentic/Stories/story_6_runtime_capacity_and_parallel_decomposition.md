@@ -15,6 +15,7 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
+  - ../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md
   - ../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
@@ -32,6 +33,7 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
@@ -39,6 +41,8 @@ actually available for an Epic, Story, or Task.
 
 ### Task 1: Runtime Capacity Model
 
+- bind Story 6 to one portable runtime-capacity definition rather than letting
+  later bindings invent new concept language
 - define what runtime capacity means at planning time
 - distinguish planning capacity from live operational availability so the model
   does not confuse stable planning input with ephemeral runtime state
@@ -93,6 +97,8 @@ actually available for an Epic, Story, or Task.
 - decomposition guidance explains how capacity affects parallel Story and Task
   planning
 - update and validation expectations are explicit enough to trust the artifact
+- later stories can inherit the same runtime-capacity definition without
+  reconstructing it from planning prose
 
 ## Definition Of Done
 
@@ -114,4 +120,5 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
+- [Runtime Capacity Model](../../../Authoritative/AgenticDevelopment/Runtime-Capacity-Model.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
