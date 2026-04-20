@@ -110,6 +110,8 @@ the explicit distinction between:
   being materialized instead of leaving role or protocol surfaces template-less
 - make it possible for an AI contributor to generate or refresh Codex assets
   without reverse-engineering the repo each time
+- make the copied-versus-adapted-versus-derived boundary explicit so refresh
+  work stays governed rather than ad hoc
 - ensure the guidance remains explicit about what is copied from canon versus
   what is Codex-specific adaptation
 - require Codex template choices to bind to Story 7's generic template model

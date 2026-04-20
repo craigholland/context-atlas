@@ -29,6 +29,8 @@ Use this template when creating `.agents/skills/context-atlas-<skill-id>/SKILL.m
 
 - list the authoritative and binding sources the skill derives from
 - declare the maintenance mode
+- note any copied versus adapted wording that should stay stable across refresh
+  work
 
 ## Authoring Rules
 
