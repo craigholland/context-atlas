@@ -45,6 +45,7 @@
 - Product-facing guides and examples should treat `context_atlas.api` as the starter import surface and `context_atlas.rendering` as the supported home of derived packet/trace inspection renderers.
 - `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
 - The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
+- The exported `context_atlas.__version__` surface should stay aligned with the release version in `pyproject.toml` and the current in-repo release history, rather than drifting into a stale package-local constant.
 
 ## Allowed Dependencies
 - may depend on:
