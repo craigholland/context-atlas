@@ -12,7 +12,8 @@ before reading `examples/` or the deeper architecture/planning canon.
 
 ## Release Notes
 
-In-repo release summaries now live under [docs/Release](./Release/).
+In-repo release summaries now live under
+[docs/Release/README.md](./Release/README.md).
 
 Those artifacts are the repository home for `releases`-class product summaries
 such as shipped-version notes, operational release state, and versioned product

@@ -6,12 +6,13 @@ doc_class: releases
 template_refs:
   metadata: base_metadata@1.0.0
   content: general_content@1.0.0
-status: active
+status: superseded
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-20
 owners: [core]
 tags: [releases, mvp, version-0-1-0, product-surface]
 related:
+  - ./release_0_1_1.md
   - ../Reviews/MVP/mvp_readiness_assessment.md
   - ../Reviews/MVP/mvp_evaluation_rubric.md
   - ../Guides/README.md

@@ -42,7 +42,7 @@ class StarterCliTests(unittest.TestCase):
         self.assertIn("=== Trace Inspection ===", rendered)
 
     def test_package_version_reflects_the_current_mvp_release(self) -> None:
-        self.assertEqual(__version__, "0.1.0")
+        self.assertEqual(__version__, "0.1.1")
 
 
 class _temporary_environment:
