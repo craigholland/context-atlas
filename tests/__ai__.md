@@ -31,6 +31,7 @@
 - Tests may import internal project modules to verify behavior, but they must not become an alternate runtime API or hide bad package boundaries.
 - Keep fast unit tests here; broader integration or environment-specific test suites should be introduced deliberately rather than mixed in by accident.
 - Test helpers should not reimplement production semantics when assertions can exercise the real code directly.
+- Release-facing tests should keep the exported package version aligned with `pyproject.toml` and the current shipped release note rather than freezing a stale version expectation.
 
 ## Allowed Dependencies
 - may depend on:

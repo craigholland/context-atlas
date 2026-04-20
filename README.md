@@ -25,8 +25,10 @@ product surface truthful, preserving packet-and-trace-centered evidence,
 strengthening configuration and boundary discipline, and widening scenario and
 integration coverage without forking the shared engine path.
 
-The in-repo summary for the first shipped MVP release now lives at
-[docs/Release/release_0_1_0.md](/context-atlas/docs/Release/release_0_1_0.md).
+The in-repo release-history index now lives at
+[docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
+shipped release summary is
+[docs/Release/release_0_1_1.md](/context-atlas/docs/Release/release_0_1_1.md).
 
 ## Start Here
 
