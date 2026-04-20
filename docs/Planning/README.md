@@ -26,6 +26,12 @@ The current MVP planning stack lives under [MVP](./MVP/):
 - [Story docs](./MVP/Stories/)
 - [Task PR plans](./MVP/Stories/Tasks/)
 
+The current agentic-development planning surface lives under [Agentic](./Agentic/):
+
+- [Agentic Development Product Definition](./Agentic/agentic_development_product_definition.md)
+- [Story docs](./Agentic/Stories/)
+- [Task PR plans](./Agentic/Stories/Tasks/)
+
 Contributors should prefer planning artifacts that move from:
 
 - product-level intent at the Epic layer
