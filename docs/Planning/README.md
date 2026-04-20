@@ -32,6 +32,10 @@ The current agentic-development planning surface lives under [Agentic](./Agentic
 - [Story docs](./Agentic/Stories/)
 - [Task PR plans](./Agentic/Stories/Tasks/)
 
+The current post-MVP hardening planning surface begins under [Hardening](./Hardening/):
+
+- [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
+
 Those planning artifacts should derive their portable vocabulary and boundary
 rules from [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
 and its neighboring canon docs instead of redefining those concepts at the
