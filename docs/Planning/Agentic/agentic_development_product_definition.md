@@ -124,6 +124,8 @@ Each Story should preserve Craig Architecture boundaries:
   vendor-specific implementation details
 - runtime materialization should stay outward and derived from canon rather
   than becoming the source of truth
+- later Stories should read as downstream bindings or materialization work, not
+  as alternate canons that redefine Story 1 terms
 - guidance should deepen progressively from:
   - product intent at the Epic layer
   - architectural shape at the Story layer
