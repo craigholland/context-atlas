@@ -94,6 +94,8 @@ the explicit distinction between:
   without reverse-engineering the repo each time
 - ensure the guidance remains explicit about what is copied from canon versus
   what is Codex-specific adaptation
+- require Codex template choices to bind to Story 7's generic template model
+  rather than defining a new template taxonomy inside the Codex layer
 
 ### Task 4: Codex Governance Hooks
 
