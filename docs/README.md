@@ -32,6 +32,12 @@ Contributors working on roles, modes, skills, protocols, or runtime
 materialization should start there before writing project-specific bindings or
 runtime assets.
 
+That order matters:
+
+- `AgenticDevelopment` defines portable concepts and boundaries
+- `Identity` defines what Context Atlas actually chooses to use
+- `Planning` defines how we intend to deliver those choices
+
 The canonical planning and decomposition reference now lives in [docs/Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
 
 The intended documentation ontology is:

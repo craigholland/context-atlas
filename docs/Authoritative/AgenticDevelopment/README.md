@@ -109,3 +109,10 @@ The most relevant adjacent authoritative surfaces are:
   downstream project choices that do not belong in the portable canon
 - [../Ontology/README.md](../Ontology/README.md): metadata and document-class
   guidance for authoring authoritative artifacts
+
+When deciding where to read next:
+
+- stay in this directory if you are still learning the portable concepts
+- move to `Identity` when you need Context Atlas's chosen bindings
+- move to planning docs only after the portable canon is clear enough that the
+  planning layer does not have to redefine it
