@@ -117,6 +117,9 @@ given AI environment without making those runtime assets authoritative.
 - the abstract discovery model is explicit enough that Story 8 can choose
   folders, manifests, or indexes without inventing alternate discovery
   semantics
+- the traceability and regeneration model is explicit enough that Story 8 can
+  declare provenance and maintenance mode without inventing a platform-local
+  provenance scheme
 - later platform-specific stories can bind to the model instead of inventing
   their own materialization rules
 - Story 8 and later validation work inherit one clear upstream-versus-downstream

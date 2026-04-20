@@ -57,6 +57,9 @@ materializations aligned over time.
 - treat downstream discovery mechanics that no longer match the portable
   discovery model as a first-class drift condition once environment bindings
   exist
+- treat missing, stale, or contradictory provenance and maintenance-mode
+  declarations as first-class drift conditions once runtime assets are
+  materialized
 
 ### Task 2: Validation And Preflight Integration
 
@@ -75,6 +78,9 @@ materializations aligned over time.
 - identify how future validation should check that environment-specific folder
   conventions, manifests, or indexes remain traceable to the portable
   discovery classes they claim to satisfy
+- identify how future validation should check that runtime assets still declare
+  their authoritative sources and maintenance mode in a way that matches the
+  portable traceability model
 - identify how future validation should distinguish structural capacity-artifact
   checks from human-reviewed claims about real-world runtime availability
 - preserve the distinction between content validation and workflow-state review
