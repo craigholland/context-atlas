@@ -18,6 +18,9 @@ related:
   - ./AgenticDevelopment/Role-Accountability-Matrix.md
   - ./AgenticDevelopment/Role-Authority-Matrix.md
   - ./AgenticDevelopment/Role-Agent-Binding-Model.md
+  - ./AgenticDevelopment/Protocol-Role-Bindings.md
+  - ./AgenticDevelopment/Protocol-Mode-Bindings.md
+  - ./AgenticDevelopment/Gate-Review-Pass-Matrix.md
   - ./AgenticDevelopment/Mode-Model.md
   - ./AgenticDevelopment/Mode-Transition-Rules.md
   - ./AgenticDevelopment/Mode-Mutation-Matrix.md
@@ -158,6 +161,12 @@ bindings.
 That keeps the project's accountability model readable even when later runtime
 assets use different naming conventions or file layouts.
 
+### 13. Protocol Bindings Must Remain Separate From Portable Protocol Definitions
+
+Context Atlas should bind the portable protocol family to project roles, modes,
+and review gates in the Identity layer rather than pushing those project
+choices back into the portable protocol canon.
+
 ## Constraints
 
 - Context Atlas should keep the parent layer small enough that top-level
@@ -182,6 +191,9 @@ assets use different naming conventions or file layouts.
 - [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
 - [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
 - [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Role-Agent-Binding-Model.md)
+- [Protocol Role Bindings](./AgenticDevelopment/Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](./AgenticDevelopment/Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](./AgenticDevelopment/Gate-Review-Pass-Matrix.md)
 - [Context Atlas Mode Model](./AgenticDevelopment/Mode-Model.md)
 - [Mode Transition Rules](./AgenticDevelopment/Mode-Transition-Rules.md)
 - [Mode Mutation Matrix](./AgenticDevelopment/Mode-Mutation-Matrix.md)

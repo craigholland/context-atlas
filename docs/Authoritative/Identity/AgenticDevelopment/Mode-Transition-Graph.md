@@ -15,6 +15,7 @@ related:
   - ./Mode-Model.md
   - ./Mode-Transition-Rules.md
   - ./Role-Mode-Matrix.md
+  - ./Protocol-Mode-Bindings.md
   - ../../AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
@@ -99,6 +100,9 @@ governed assessment.
 That means several productive modes may hand off into review, but review
 itself does not replace those productive modes.
 
+Multiple review passes may occur inside that same review state. Those passes
+do not add extra review-mode nodes to the graph.
+
 ### 4. Rework Loops Through Review
 
 Context Atlas should treat `rework` as returned work that normally flows back
@@ -139,4 +143,5 @@ workstream without implying that a new execution mode has been entered.
 - [Context Atlas Mode Model](./Mode-Model.md)
 - [Mode Transition Rules](./Mode-Transition-Rules.md)
 - [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
+- [Protocol Mode Bindings](./Protocol-Mode-Bindings.md)
 - [Portable Mode Model](../../AgenticDevelopment/Mode-Model.md)

@@ -81,6 +81,8 @@ context.
 ### QA
 
 - `review` is the primary QA mode.
+- multiple required review passes may execute within the same `review` span
+  without changing modes.
 - `rework` is conditional and should be limited to QA-owned validation or
   review artifacts rather than core product implementation.
 - if core deliverable changes are required, QA should return the work to the
