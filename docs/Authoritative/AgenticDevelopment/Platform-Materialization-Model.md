@@ -92,6 +92,23 @@ Some changes are legitimately downstream-first, such as:
 Those changes are acceptable so long as they do not implicitly redefine the
 underlying authoritative semantics.
 
+### 6. Discovery Mechanics Are Bound Downstream From The Portable Model
+
+The portable materialization layer may define what asset classes must be
+discoverable, but the concrete discovery mechanics that satisfy that need
+belong downstream.
+
+That includes choices such as:
+
+- folder conventions
+- filenames
+- manifests
+- indexes
+- explicit configuration hooks
+
+Those choices should bind to the portable discovery model rather than replace
+it.
+
 ## Constraints
 
 - Portable materialization rules must not hard-code an environment-specific
@@ -99,6 +116,8 @@ underlying authoritative semantics.
   layout.
 - Asset discovery rules belong to the environment-specific layer, not the
   portable canon.
+- Downstream discovery mechanics should document how they satisfy the portable
+  discovery model and template vocabulary.
 - A system should be able to change execution environments or support more than
   one environment without rewriting the portable definitions.
 

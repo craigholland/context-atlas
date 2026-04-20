@@ -88,6 +88,25 @@ binding decisions.
 They may satisfy the discovery model, but they are not the portable discovery
 model itself.
 
+### 6. Downstream Bindings Should Document Their Discovery Mapping
+
+When an environment chooses folder conventions, registries, manifests, or
+other discovery mechanics, it should document how those concrete surfaces map
+back to the portable discovery classes they satisfy.
+
+That mapping belongs in the downstream binding or environment-materialization
+layer rather than in the portable canon.
+
+### 7. Discovery Mechanics Must Not Collapse Unrelated Asset Classes Casually
+
+Downstream discovery mechanics may package multiple asset classes together, but
+they should not do so in a way that erases meaningful distinctions inherited
+from the canon, application bindings, or template contracts.
+
+If a runtime needs a coarser discovery surface, that projection should be
+documented as a downstream convenience rather than treated as the new portable
+shape.
+
 ## Constraints
 
 - Portable discovery rules must not hard-code one environment's folder layout.
@@ -95,6 +114,8 @@ model itself.
   shaped.
 - Discovery guidance must stay subordinate to the upstream canon and
   application-binding layers.
+- Discovery abstractions should be portable across folder-based, manifest-
+  based, configuration-based, or mixed discovery strategies.
 
 ## Non-Goals
 

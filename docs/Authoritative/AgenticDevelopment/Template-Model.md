@@ -93,11 +93,23 @@ that template is projected into a platform-specific file layout.
 Those contracts belong in a portable template-contract surface rather than
 being rediscovered independently by each platform binding.
 
+### 7. Template Types Stay Upstream Of Discovery Mechanics
+
+Template types should remain defined in terms of the concept family they
+project, not in terms of the folder, filename, or registry mechanism that a
+later environment uses to discover them.
+
+Downstream bindings may map one or more template types into concrete discovery
+surfaces, but that mapping should not replace the upstream template
+vocabulary.
+
 ## Constraints
 
 - Templates must not replace authoritative canon or bindings.
 - Template types should remain broad enough to map to multiple environments.
 - Template inventory should stay concept-shaped rather than folder-shaped.
+- Template definitions should remain valid even when later environments satisfy
+  discovery through manifests, indexes, or mixed layouts instead of folders.
 
 ## Non-Goals
 
