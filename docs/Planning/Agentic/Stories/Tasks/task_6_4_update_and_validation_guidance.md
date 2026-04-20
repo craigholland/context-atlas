@@ -26,7 +26,7 @@ Define how the runtime-capacity artifact should be updated, trusted, and eventua
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
