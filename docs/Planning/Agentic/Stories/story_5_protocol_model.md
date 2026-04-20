@@ -18,6 +18,7 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Delegation-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Escalation-Model.md
   - ../../../Authoritative/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
@@ -75,6 +76,8 @@ entering modes during protocol execution.
 - define how work is delegated to specialists or other roles
 - define what a valid handoff must communicate
 - define when escalation is required and what information must accompany it
+- keep escalation inheriting the structural return-contract model rather than
+  treating it as protocol-only improvisation
 
 ### Task 4: Role And Mode Bindings
 
@@ -136,3 +139,4 @@ entering modes during protocol execution.
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Delegation Model](../../../Authoritative/AgenticDevelopment/Delegation-Model.md)
 - [Skill Attachment Model](../../../Authoritative/AgenticDevelopment/Skill-Attachment-Model.md)
+- [Escalation Model](../../../Authoritative/AgenticDevelopment/Escalation-Model.md)

@@ -18,6 +18,7 @@ related:
   - ../../../Authoritative/AgenticDevelopment/Agentic-Development-Glossary.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Authority-Model.md
   - ../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md
+  - ../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md
   - ../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
@@ -77,6 +78,8 @@ rather than the runtime actor itself.
   - own operational workflow changes
 - make the role-level authority boundaries explicit before protocol docs define
   the workflow sequences that use them
+- keep role-level authority boundaries aligned with the explicit
+  skill-versus-specialist-versus-parent-owned decision rules from Story 2
 
 ### Task 4: Role Binding To Agent Structure
 
@@ -135,4 +138,5 @@ rather than the runtime actor itself.
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 2 - Agent And Skill Structure](./story_2_agent_and_skill_structure.md)
 - [Agent Composition Model](../../../Authoritative/AgenticDevelopment/Agent-Composition-Model.md)
+- [Composition Decision Model](../../../Authoritative/AgenticDevelopment/Composition-Decision-Model.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
