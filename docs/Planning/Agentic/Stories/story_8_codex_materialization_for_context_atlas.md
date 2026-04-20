@@ -123,6 +123,8 @@ the explicit distinction between:
 
 - define how Codex materialized assets are kept aligned with the project role,
   mode, and protocol model
+- bind those review expectations to one explicit Codex governance surface
+  before later refresh guidance or validation rules expand them
 - identify the validation or review hooks needed to keep the Codex surface from
   drifting
 - preserve room for future non-Codex bindings without forcing Codex patterns
