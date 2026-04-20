@@ -64,6 +64,10 @@ runtime platform.
   a broader authority boundary.
 - `Runtime capacity`: the planning-time description of how many independent AI
   runtimes are available to pick up work.
+- `Project-specific binding`: the layer that declares which portable concepts a
+  specific project actually uses.
+- `Runtime platform`: the AI environment whose discovery rules and file
+  conventions receive materialized assets.
 - `Materialization`: the process of expressing portable and project-specific
   agentic definitions as runtime-specific files, folders, prompts, templates,
   or other discoverable assets.
@@ -92,6 +96,9 @@ runtime platform.
 ## Related Artifacts
 
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+- [Mode-Model.md](./Mode-Model.md)
+- [Skill-Contract.md](./Skill-Contract.md)
+- [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 - [Craig-Architecture.md](../Architecture/Craig-Architecture.md)
 - [Documentation-Ontology.md](../Ontology/Documentation-Ontology.md)
 - [Story 1 - Portable Agentic Development Canon](../../Planning/Agentic/Stories/story_1_portable_agentic_development_canon.md)

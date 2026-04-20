@@ -23,9 +23,13 @@ The initial Story 1 surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+- [Mode-Model.md](./Mode-Model.md)
+- [Skill-Contract.md](./Skill-Contract.md)
+- [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
 
-Story 1 will expand this same directory with additional portable canon docs for
-mode semantics, skill contracts, boundary rules, and platform materialization.
+Story 1 will still expand this same directory with a dedicated boundary model
+that locks the line between portable canon, project-specific bindings, and
+runtime-specific materialization.
 
 ## How To Read This Set
 
@@ -34,7 +38,10 @@ For most readers, the intended order is:
 1. this README
 2. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 3. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-4. the remaining Story 1 canon supplements once they exist
+4. [Mode-Model.md](./Mode-Model.md)
+5. [Skill-Contract.md](./Skill-Contract.md)
+6. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+7. the boundary model once Story 1 adds it
 
 This ordering is intentional:
 
@@ -42,7 +49,7 @@ This ordering is intentional:
 - the glossary defines the vocabulary
 - the authority model defines the invariant relationship chain built on that
   vocabulary
-- later supplements refine adjacent concerns without replacing those
+- the later supplements refine adjacent concerns without replacing those
   foundations
 
 ## What Does Not Live Here
