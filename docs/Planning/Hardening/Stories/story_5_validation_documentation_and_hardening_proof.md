@@ -58,6 +58,10 @@ implementation details.
   bar and its reviewed "better than exact full-text" and "better than
   prefix-equality" proof cases rather than renegotiating the duplicate
   baseline during Story 5
+- keep the final regression anchor set easy to find by naming the Story 5
+  baseline tests explicitly across retrieval, ranking, memory, budgeting,
+  service, packet, and trace surfaces rather than duplicating Story-specific
+  coverage in a second proof-only suite
 
 ### Task 2: Reviewable Proof Surfaces
 
@@ -110,6 +114,9 @@ implementation details.
 - inherit the closed acceptance bars from Stories 1 through 4 instead of
   rediscovering them during proof authoring or doc refresh
 - establish regression coverage first
+- use the `test_story_5_hardening_baseline_*` regressions in `tests/` as the
+  explicit review anchor for Stories 1 through 4 rather than inventing a
+  parallel hardening-only harness
 - build bounded proof surfaces next where they add real review value
 - update guides and examples only after the hardened contracts are stable
 - close out the Epic last with integrated evidence and docs
