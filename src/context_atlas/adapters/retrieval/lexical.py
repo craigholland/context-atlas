@@ -128,13 +128,14 @@ class LexicalRetriever:
             return ()
 
         sources = self._registry.list_sources()
+        index_snapshot_state = "not_applicable"
 
         if self.mode is LexicalRetrievalMode.KEYWORD:
             candidates = self._keyword_retrieve(
                 query_tokens, sources=sources, top_k=top_k
             )
         else:
-            candidates = self._tfidf_retrieve(
+            candidates, index_snapshot_state = self._tfidf_retrieve(
                 query_tokens, sources=sources, top_k=top_k
             )
 
@@ -146,6 +147,10 @@ class LexicalRetriever:
             mode=self.mode,
             query=query,
             candidate_count=len(candidates),
+            query_token_count=len(query_tokens),
+            source_count=len(sources),
+            registry_revision=self._registry.revision,
+            index_snapshot_state=index_snapshot_state,
         )
         return candidates
 
@@ -175,11 +180,11 @@ class LexicalRetriever:
         *,
         sources: tuple[ContextSource, ...],
         top_k: int,
-    ) -> tuple[ContextCandidate, ...]:
+    ) -> tuple[tuple[ContextCandidate, ...], str]:
         """Rank sources by sparse TF-IDF cosine similarity."""
 
         query_tf = _term_frequency(query_tokens)
-        index_snapshot = self._get_tfidf_index_snapshot(sources)
+        index_snapshot, index_snapshot_state = self._get_tfidf_index_snapshot(sources)
         inverse_document_frequency = index_snapshot.inverse_document_frequency
         missing_term_inverse_document_frequency = (
             index_snapshot.missing_term_inverse_document_frequency
@@ -208,12 +213,15 @@ class LexicalRetriever:
                 continue
             scored.append((score, source))
 
-        return _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k)
+        return (
+            _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k),
+            index_snapshot_state,
+        )
 
     def _get_tfidf_index_snapshot(
         self,
         sources: tuple[ContextSource, ...],
-    ) -> LexicalIndexSnapshot:
+    ) -> tuple[LexicalIndexSnapshot, str]:
         """Return a registry-revision-aligned index snapshot for TF-IDF work."""
 
         if (
@@ -225,7 +233,8 @@ class LexicalRetriever:
                 registry_revision=self._registry.revision,
                 tokenize=_tokenize,
             )
-        return self._tfidf_index_snapshot
+            return self._tfidf_index_snapshot, "rebuilt"
+        return self._tfidf_index_snapshot, "warm"
 
 
 def _emit_log_message(

@@ -101,6 +101,7 @@
     - lexical retrieval should consume canonical sources through the registry surface rather than owning source registration itself
     - the retriever may cache one baseline index snapshot, but it should invalidate that cache strictly through the registry revision rather than inventing a second source-tracking mechanism
     - repeated-query retrieval should still enter through one fresh registry source listing per call even when the index snapshot is warm, so cache reuse cannot become a hidden second source-loading path
+    - retrieval-completed logging may expose a small bounded proof surface such as `index_snapshot_state`, but that proof should remain attached to the shared adapter path rather than creating benchmark-only or demo-only retrieval instrumentation
 - `docs/filesystem.py`:
   - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
   - defines:
@@ -153,7 +154,7 @@
 ## Known Gaps / Future-State Notes
 - This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
 - Lexical retrieval hardening now separates source ownership, index-shape construction, and retrieval behavior, and the repeated-query TF-IDF path stays on one registry-driven retrieval surface instead of creating a second warm-cache engine mode.
-- The current retrieval baseline now caches corpus-wide IDF state plus source-side TF-IDF vector state inside one registry-revision-aligned snapshot while still taking one fresh registry source listing per retrieval call; deeper observability/proof work and broader retrieval backends still remain future work.
+- The current retrieval baseline now caches corpus-wide IDF state plus source-side TF-IDF vector state inside one registry-revision-aligned snapshot while still taking one fresh registry source listing per retrieval call; the bounded proof surface is now the shared retrieval-completed log signal plus regression coverage rather than timing-based benchmark output, while broader retrieval backends still remain future work.
 - Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
 - If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 
