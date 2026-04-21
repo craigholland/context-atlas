@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, token-estimation, tokenizer, decision-gate]
 related:
@@ -28,7 +28,7 @@ to solve both concerns halfway in the same increment.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 

@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, token-estimation, tokenizer, budgeting, compression]
 related:
@@ -53,12 +53,47 @@ decision about which of those two concerns leads implementation.
 - prevent the Story from delivering a half-improved heuristic and a half-formed
   seam in the same increment
 
+## Recorded Kickoff Decision
+
+- decision: `heuristic-first`
+- recorded_on: `2026-04-21`
+- rationale:
+  - the active runtime problem is the blunt `chars_per_token = 4` heuristic in
+    the current starter path, so improving that behavior first produces direct
+    product truthfulness without waiting on a broader seam integration
+  - a bounded improved heuristic can stay deterministic and provider-agnostic
+    while still making Story 4's later budget/compression truthfulness work
+    more credible
+  - the tokenizer seam remains important, but it should stay a complementary
+    outward contract in this Story rather than becoming a second co-equal
+    primary track
+- success_for_this_choice:
+  - Story 3 first delivers a bounded improved starter heuristic in the current
+    supported path
+  - any tokenizer seam added in the same Story must remain provider-agnostic,
+    outward, and explicitly secondary to that heuristic improvement
+  - Story 3 should not claim provider-integrated token counting or delay the
+    heuristic correction while building architecture-only seam scaffolding
+- bounded_non_leading_concern:
+  - Task 3.3 may define a future-safe tokenizer contract seam only insofar as
+    it does not reopen Story 3 as a tokenizer-led implementation story
+
 ### Task 2: Starter Estimation Improvement
 
 - define a bounded improved starter heuristic that better distinguishes prose,
   code, markdown-heavy content, or other obvious content-shape differences
 - keep the starter estimation deterministic and provider-agnostic
 - avoid turning the heuristic into a hidden provider-specific token model
+- keep the bounded baseline explicit: prose stays on the configured starter
+  baseline, code/markdown-heavy text may tighten that baseline modestly, and
+  non-Latin-heavy text may tighten it further without introducing provider
+  token tables
+- current delivered lead-path result:
+  - `estimate_tokens()` is now content-shape-aware in the starter path
+  - prose keeps the configured starter baseline
+  - structured code/markup tightens that baseline modestly
+  - non-Latin-heavy text tightens it further
+  - no provider-specific tokenizer tables were introduced inward
 
 ### Task 3: Tokenizer Contract Seam
 
@@ -68,6 +103,14 @@ decision about which of those two concerns leads implementation.
   infrastructure layers
 - make the seam explicit enough that a future integration can bind to it
   without reworking domain-layer policy semantics
+- current delivered complementary result:
+  - `StarterCompressionPolicy` now accepts a provider-agnostic callable token
+    estimator seam while preserving the bounded starter heuristic as the
+    default path
+  - starter infrastructure composition now exposes that seam outward through
+    the supported assembly helpers
+  - no provider SDK, tokenizer table, or provider-selection logic moved into
+    the domain layer
 
 ### Task 4: Validation And Configuration Alignment
 
@@ -76,6 +119,15 @@ decision about which of those two concerns leads implementation.
   introduces a supported operator-facing knob
 - keep the Story's docs honest about whether Atlas is using an improved
   heuristic, a tokenizer seam, or both
+- current delivered validation/alignment result:
+  - packet-facing validation now proves the default starter path surfaces
+    `starter_heuristic` through compression metadata and trace metadata
+  - outward-bound custom estimators now remain visible through packet and trace
+    metadata without implying an env-backed tokenizer selector
+  - runtime docs now state that
+    `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is the baseline control for the
+    starter heuristic, not a claim that Atlas uses one flat estimate for every
+    content shape
 
 ## Sequencing
 
@@ -105,6 +157,13 @@ decision about which of those two concerns leads implementation.
   layer
 - tests and docs make the delivered estimation story legible enough that
   callers do not need to infer it from implementation details
+- delivered Story 3 contract:
+  - starter estimation is shape-aware by default through the
+    `starter_heuristic`
+  - custom token estimation may be bound outward through a provider-agnostic
+    callable seam
+  - Atlas does not yet expose an env-backed tokenizer selector or provider
+    binding knob
 
 ## Definition Of Done
 

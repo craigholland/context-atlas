@@ -7,7 +7,12 @@ from .budgeting import (
     ContextBudgetAllocationPolicy,
     StarterBudgetAllocationPolicy,
 )
-from .compression import CompressionOutcome, CompressionPolicy, StarterCompressionPolicy
+from .compression import (
+    CompressionOutcome,
+    CompressionPolicy,
+    StarterCompressionPolicy,
+    TokenEstimator,
+)
 from .memory import (
     MemoryRetentionPolicy,
     MemorySelectionOutcome,
@@ -34,4 +39,5 @@ __all__ = [
     "StarterCompressionPolicy",
     "StarterMemoryRetentionPolicy",
     "StarterCandidateRankingPolicy",
+    "TokenEstimator",
 ]

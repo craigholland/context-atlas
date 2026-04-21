@@ -78,6 +78,10 @@ implementation details.
   present
 - ensure product-facing docs explain the engine truthfully without forcing
   readers to parse implementation details
+- keep the Story 3 documentation baseline explicit:
+  - the starter path is shape-aware by default through `starter_heuristic`
+  - custom token estimation remains an outward callable seam
+  - there is still no env-backed tokenizer selector
 
 ### Task 4: Final Hardening Closeout
 

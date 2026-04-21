@@ -160,6 +160,12 @@
     - budget reductions and compression fallback should remain explicit and deterministic
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
     - tests should prove non-applied compression artifacts do not silently replace canonical selected-candidate content in starter rendering
+    - tests should prove the starter token-estimation heuristic tightens only for bounded content-shape differences such as structured code/markup and non-Latin-heavy text, and that compression fit checks consume the same estimate
+    - tests should prove compressed output is trimmed back under budget when output shape is denser than the original input shape that seeded the initial character cap
+    - tests should prove compression prefix-fitting logic remains correct even when a token estimator is non-monotonic across prefixes, so Story 3 does not silently over-trim medium-length fits after a regime switch
+    - tests should prove an outward-bound custom token estimator can tighten compression behavior without introducing provider-specific logic into domain policy tests
+    - tests should prove custom token-estimator labels are rejected when no estimator is actually bound and auto-labeled truthfully when a direct policy caller binds a custom estimator without naming it
+    - tests should prove the default starter path still reports `starter_heuristic` truthfully through compression metadata rather than forcing reviewers to infer the active estimator from config alone
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:
@@ -211,6 +217,7 @@
     - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove packet-facing compression metadata and trace metadata expose the active token-estimator label for both the default starter heuristic and outward-bound custom estimator bindings
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
 - `test_filesystem_document_adapter.py`:

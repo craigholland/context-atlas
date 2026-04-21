@@ -96,6 +96,16 @@ documents-vs-memory balance without turning canonical slot identifiers into
 public config. That knob is exposed as
 `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`.
 
+`CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the supported baseline
+control for the starter token-estimation heuristic. Atlas now tightens that
+estimate automatically for obviously structured code/markup and non-Latin-heavy
+text, so the runtime story is no longer "one global 4 chars per token"
+everywhere. Atlas does not yet expose a provider-specific tokenizer selector as
+an env-backed runtime knob. Advanced Python integrations may bind a custom
+callable estimator through `build_starter_context_assembly_service(...)` or
+`assemble_with_starter_context_service(...)`, but that stays an outward
+composition seam rather than a starter operator setting.
+
 ## Run The Starter Context Flow
 
 The current installable starter command is:

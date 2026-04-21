@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, tokenizer, seam, contracts]
 related:
@@ -28,15 +28,18 @@ into the domain layer.
 If Task 3.1 instead records a heuristic-first kickoff decision, this Task
 should stay complementary and bounded rather than expanding into a second
 parallel primary track.
+Task 3.1 has now recorded `heuristic-first`, so this Task is explicitly the
+bounded complementary follow-on path rather than the primary Story 3 track.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
 - [Story 3 - Token Estimation And Tokenizer Seam](../story_3_token_estimation_and_tokenizer_seam.md)
 - Story 3 kickoff decision from Task 3.1
+- recorded kickoff decision: `heuristic-first`
 - recorded Task 3.1 decision showing whether the seam is the lead path or the
   bounded follow-on path
 - current domain and infrastructure estimation surfaces
@@ -109,8 +112,8 @@ PLANNED
 - define seam placement and contract shape first
 - wire the outward binding integration second
 - reinforce boundaries and non-goals last
-- let the Task 3.1 kickoff decision determine whether this Task is the lead
-  Story 3 path or the bounded complementary follow-on path
+- treat this Task as the bounded complementary follow-on path because Task 3.1
+  recorded heuristic-first at the Story layer
 
 ## Risks And Unknowns
 
@@ -124,6 +127,12 @@ PLANNED
 - a provider-agnostic tokenizer seam exists
 - the seam binds outward without leaking provider specifics inward
 - the starter path remains truthful about what is and is not supported
+- delivered shape:
+  - the seam is a generic callable token-estimation contract on
+    `StarterCompressionPolicy`
+  - starter infrastructure assembly helpers may bind that contract outward
+    while defaulting to the current heuristic when none is supplied
+  - no provider-specific tokenizer selection or SDK integration was introduced
 
 ## Related Artifacts
 

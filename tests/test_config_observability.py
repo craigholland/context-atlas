@@ -9,13 +9,14 @@ import unittest
 
 from pydantic import ValidationError
 
-from context_atlas.domain.errors import ConfigurationError, ErrorCode
+from context_atlas.domain.errors import ConfigurationError, ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
 from context_atlas.infrastructure.config import (
     ContextAtlasSettings,
     CompressionStrategy,
     load_settings_from_env,
 )
+from context_atlas.infrastructure.assembly import build_starter_context_assembly_service
 from context_atlas.infrastructure.config.settings import (
     AssemblySettings,
     LoggingSettings,
@@ -63,6 +64,10 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         self.assertAlmostEqual(settings.assembly.ranking_minimum_score, 0.15)
         self.assertEqual(settings.assembly.compression_chars_per_token, 5)
         self.assertEqual(settings.assembly.compression_min_chunk_chars, 18)
+        self.assertEqual(
+            settings.assembly.compression_token_estimator_name,
+            "starter_heuristic",
+        )
         self.assertEqual(settings.memory.short_term_count, 6)
         self.assertAlmostEqual(settings.memory.decay_rate, 0.0025)
         self.assertAlmostEqual(settings.memory.dedup_threshold, 0.81)
@@ -220,6 +225,46 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             settings.with_assembly_overrides(default_memory_budget_fraction=1.0)
 
+    def test_starter_assembly_accepts_custom_token_estimator_binding(self) -> None:
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        service = build_starter_context_assembly_service(
+            retriever=_StubRetriever(),
+            token_estimator=estimate_words,
+            token_estimator_name="word_count",
+        )
+
+        self.assertIs(service._compression_policy.token_estimator, estimate_words)
+        self.assertEqual(service._compression_policy.token_estimator_name, "word_count")
+
+    def test_starter_assembly_defaults_to_starter_heuristic_without_binding(
+        self,
+    ) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=_StubRetriever(),
+        )
+
+        self.assertIsNone(service._compression_policy.token_estimator)
+        self.assertEqual(
+            service._compression_policy.token_estimator_name,
+            "starter_heuristic",
+        )
+
+    def test_starter_assembly_rejects_custom_estimator_label_without_binding(
+        self,
+    ) -> None:
+        with self.assertRaises(ContextAtlasError) as context:
+            build_starter_context_assembly_service(
+                retriever=_StubRetriever(),
+                token_estimator_name="word_count",
+            )
+
+        self.assertEqual(context.exception.code, ErrorCode.INVALID_ASSEMBLY_REQUEST)
+        self.assertIn(
+            "token_estimator_name requires token_estimator", str(context.exception)
+        )
+
 
 class _temporary_environment:
     """Temporarily set and later restore selected environment variables."""
@@ -239,6 +284,13 @@ class _temporary_environment:
                 os.environ.pop(key, None)
             else:
                 os.environ[key] = previous
+
+
+class _StubRetriever:
+    """Minimal retriever stub for outward assembly wiring tests."""
+
+    def retrieve(self, query: str, *, top_k: int = 5) -> tuple[object, ...]:
+        return ()
 
 
 if __name__ == "__main__":

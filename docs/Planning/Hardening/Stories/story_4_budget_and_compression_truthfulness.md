@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, budgeting, compression, semantics, trace]
 related:
@@ -48,6 +48,16 @@ secondary metadata keys.
   - `src/context_atlas/rendering/context.py`
   - `src/context_atlas/rendering/packet.py`
   - `src/context_atlas/rendering/trace.py`
+- Story 3 kickoff decision:
+  - `heuristic-first`, meaning Story 4 should expect the starter estimation
+    correction to land before any tokenizer seam becomes more than bounded
+    complementary support work
+- Story 3 delivered contract:
+  - the default starter path now reports `starter_heuristic` as the active
+    token-estimation label in packet-facing compression metadata and trace
+    metadata
+  - outward-bound custom estimators remain supported only through the callable
+    composition seam, not through env-backed tokenizer selection
 
 ## Proposed Tasks
 
@@ -92,6 +102,8 @@ secondary metadata keys.
 ## Sequencing
 
 - clarify budget artifact semantics first
+- inherit Story 3's heuristic-first lead path instead of assuming a tokenizer
+  seam changes the budget/compression truth model first
 - settle elastic-slot caller contracts before adjusting trace or renderer output
 - define compression result truthfulness next
 - align service, trace, and rendering surfaces last once the canonical
