@@ -52,10 +52,10 @@ The output shows:
 Use the hardened top-level packet and trace fields when reviewing those
 inspection surfaces:
 
-- `fixed_reserved_tokens`
-- `unreserved_tokens`
-- `unallocated_tokens`
-- `compression_strategy`
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
 - optional `configured_compression_strategy`
 
 ## Intended Architectural Reading

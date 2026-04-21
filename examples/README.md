@@ -69,8 +69,11 @@ The shared hardening story now applies here too:
 
 - the starter engine uses a shape-aware token-estimation heuristic by default
   rather than one flat chars-per-token assumption
-- packet and trace inspection should prefer the truthful budget vocabulary
+- packet inspection should prefer the truthful budget vocabulary
   `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`
+- trace inspection should prefer the matching metadata keys
+  `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`, and
+  `budget_unallocated_tokens`
 - packet and trace inspection should also prefer the truthful compression
   vocabulary `compression_strategy` and optional
   `configured_compression_strategy`
@@ -104,10 +107,10 @@ python examples/codex_repository_workflow/run.py --repo-root .
 When reviewing packet and trace output for this workflow, prefer the truthful
 top-level budget and compression fields introduced by the hardening pass:
 
-- `fixed_reserved_tokens`
-- `unreserved_tokens`
-- `unallocated_tokens`
-- `compression_strategy`
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
 - optional `configured_compression_strategy`
 
 The current product-facing setup guide for that path is [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
@@ -139,8 +142,8 @@ The product-facing setup guide for that same workflow now lives at [docs/Guides/
 That mixed-source inspection story should use the same truthful top-level
 budget and compression fields:
 
-- `fixed_reserved_tokens`
-- `unreserved_tokens`
-- `unallocated_tokens`
-- `compression_strategy`
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
 - optional `configured_compression_strategy`

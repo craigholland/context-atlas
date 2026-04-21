@@ -34,10 +34,12 @@ That hardening work has now settled a few important outward-facing truths:
   prefix-only shortcuts
 - starter token estimation is shape-aware by default instead of assuming one
   global flat ratio for all content
-- packet and trace inspection now prefer truthful budget and compression
-  vocabulary such as `fixed_reserved_tokens`, `unreserved_tokens`,
-  `unallocated_tokens`, `compression_strategy`, and optional
-  `configured_compression_strategy`
+- packet inspection now prefers truthful budget vocabulary such as
+  `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`,
+  while trace inspection surfaces the matching `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens` metadata keys
+- packet and trace inspection both surface truthful compression vocabulary such
+  as `compression_strategy` and optional `configured_compression_strategy`
 
 The in-repo release-history index now lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
@@ -476,7 +478,9 @@ For MVP users, packet inspection should emphasize:
 - budget state
 - whether compression was applied
 - truthful surfaced budget/compression fields when they are present, especially
-  `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`,
+  packet-facing `fixed_reserved_tokens`, `unreserved_tokens`,
+  `unallocated_tokens`, trace-facing `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, `budget_unallocated_tokens`,
   `compression_strategy`, and optional `configured_compression_strategy`
 
 Trace inspection should emphasize:
@@ -484,8 +488,9 @@ Trace inspection should emphasize:
 - inclusion, exclusion, transformation, and deferred decisions
 - why a source was rejected or transformed
 - trace metadata that explains ranking, budgeting, compression, and memory behavior
-- the same truthful top-level budget/compression vocabulary used by packet
-  inspection, rather than older ambiguous aliases such as `remaining_tokens`
+- truthful budget/compression vocabulary, including `budget_...` budget keys
+  and the top-level `compression_strategy` surface, rather than older
+  ambiguous aliases such as `remaining_tokens`
 
 Those inspection surfaces should live under `context_atlas.rendering` and remain read-only views over `ContextPacket` and `ContextTrace`.
 

@@ -111,6 +111,8 @@ Story 4 vocabulary:
 
 - packet budget state should surface `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state should surface `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
 - compression state should surface the effective `compression_strategy`, plus
   `configured_compression_strategy` only when fallback or intent needs to be
   shown explicitly
@@ -207,9 +209,11 @@ On a successful run, you should see:
 More concretely, the hardened starter path should now make it easy to point at:
 
 - `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens` in the
-  packet or trace view when budgeting matters
+  packet view when budgeting matters
+- `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`, and
+  `budget_unallocated_tokens` in the trace view when budgeting matters
 - `compression_strategy` and optional `configured_compression_strategy` when
-  compression fallback truth matters
+  compression fallback truth matters across either inspection view
 - the shared packet/trace story rather than a second demo-only artifact path
 
 If the output feels confusing, the root [README](../../README.md) and the

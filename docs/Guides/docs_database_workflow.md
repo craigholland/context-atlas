@@ -208,8 +208,10 @@ On a successful run, you should see:
 
 The hardened mixed-source path should now make it easy to point at:
 
-- truthful budget state through `fixed_reserved_tokens`,
+- packet budget state through `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state through `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
 - truthful compression state through `compression_strategy` and optional
   `configured_compression_strategy`
 - workflow metadata such as `request_workflow`, `request_docs_root`,

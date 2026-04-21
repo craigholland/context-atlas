@@ -129,9 +129,13 @@ The same hardening semantics from the shared starter engine still apply here:
 
 - `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is a baseline control for the
   shape-aware starter estimator, not a promise of one flat ratio everywhere
-- packet and trace views should prefer truthful budget/compression labels such
-  as `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`,
-  `compression_strategy`, and optional `configured_compression_strategy`
+- packet and trace views should prefer truthful budget/compression labels
+- packet budget state should surface `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state should surface `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
+- compression state should surface `compression_strategy` and optional
+  `configured_compression_strategy`
 
 ## Run The Low-Code Workflow
 
@@ -224,8 +228,10 @@ On a successful run, you should see:
 
 The hardened low-code path should now make it easy to point at:
 
-- truthful budget state through `fixed_reserved_tokens`,
+- packet budget state through `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state through `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
 - truthful compression state through `compression_strategy` and optional
   `configured_compression_strategy`
 - low-code workflow metadata such as `request_workflow`,

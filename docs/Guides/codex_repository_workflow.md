@@ -190,8 +190,10 @@ On a successful run, you should see:
 The hardened repository path should also make a few concrete packet/trace
 surfaces easy to review:
 
-- truthful budget state through `fixed_reserved_tokens`,
+- packet budget state through `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state through `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
 - truthful compression state through `compression_strategy` and optional
   `configured_compression_strategy`
 - repository-workflow metadata such as `request_workflow`,

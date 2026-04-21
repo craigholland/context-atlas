@@ -71,10 +71,10 @@ The output shows:
 Interpret those packet and trace views using the same hardened vocabulary as
 the other workflows:
 
-- `fixed_reserved_tokens`
-- `unreserved_tokens`
-- `unallocated_tokens`
-- `compression_strategy`
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
 - optional `configured_compression_strategy`
 
 Tracked reference artifacts for this path also live here:
