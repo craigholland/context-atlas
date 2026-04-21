@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, token-estimation, tokenizer, budgeting, compression]
 related:
@@ -52,6 +52,31 @@ decision about which of those two concerns leads implementation.
 - define what success means for the chosen lead path
 - prevent the Story from delivering a half-improved heuristic and a half-formed
   seam in the same increment
+
+## Recorded Kickoff Decision
+
+- decision: `heuristic-first`
+- recorded_on: `2026-04-21`
+- rationale:
+  - the active runtime problem is the blunt `chars_per_token = 4` heuristic in
+    the current starter path, so improving that behavior first produces direct
+    product truthfulness without waiting on a broader seam integration
+  - a bounded improved heuristic can stay deterministic and provider-agnostic
+    while still making Story 4's later budget/compression truthfulness work
+    more credible
+  - the tokenizer seam remains important, but it should stay a complementary
+    outward contract in this Story rather than becoming a second co-equal
+    primary track
+- success_for_this_choice:
+  - Story 3 first delivers a bounded improved starter heuristic in the current
+    supported path
+  - any tokenizer seam added in the same Story must remain provider-agnostic,
+    outward, and explicitly secondary to that heuristic improvement
+  - Story 3 should not claim provider-integrated token counting or delay the
+    heuristic correction while building architecture-only seam scaffolding
+- bounded_non_leading_concern:
+  - Task 3.3 may define a future-safe tokenizer contract seam only insofar as
+    it does not reopen Story 3 as a tokenizer-led implementation story
 
 ### Task 2: Starter Estimation Improvement
 
