@@ -73,6 +73,14 @@ implementation details.
   query regression bundle plus the shared retrieval-completed
   `index_snapshot_state` signal should be extended only if later hardening work
   truly needs more reviewability
+- keep the human-readable proof scope explicit:
+  - retrieval index reuse stays anchored by named regressions plus the shared
+    `index_snapshot_state` signal rather than by a new bundle family
+  - duplicate acceptance-bar behavior stays anchored by the named Story 5
+    ranking and memory regressions rather than by a duplicate-demo artifact
+  - bounded human-readable proof should focus on packet/trace-visible budget,
+    compression, and document-authority behavior where reviewers materially
+    benefit from opening canonical artifacts directly
 
 ### Task 3: Documentation And Example Alignment
 
@@ -118,6 +126,11 @@ implementation details.
   explicit review anchor for Stories 1 through 4 rather than inventing a
   parallel hardening-only harness
 - build bounded proof surfaces next where they add real review value
+- keep the final proof inventory explicit:
+  - bundle-backed human-readable proof: budget/compression tradeoff review and
+    document-authority contrast review through `examples/mvp_proof/`
+  - test-backed proof only: retrieval index reuse and duplicate acceptance-bar
+    behavior through the named `test_story_5_hardening_baseline_*` regressions
 - update guides and examples only after the hardened contracts are stable
 - close out the Epic last with integrated evidence and docs
 
@@ -138,6 +151,9 @@ implementation details.
   behavior is covered by reviewable regression tests
 - any new proof or inspection artifacts derive from the shared packet and trace
   story rather than from bespoke demo logic
+- the final proof story distinguishes clearly between:
+  - bundle-backed human-readable proof surfaces
+  - test-backed proof that does not need a second artifact family
 - product-facing docs and examples describe the hardened semantics truthfully
 - the hardening Epic can close without leaving the original review findings as
   standing caveats about current runtime behavior

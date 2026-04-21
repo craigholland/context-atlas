@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, proof, packet, trace]
 related:
@@ -28,7 +28,7 @@ the same canonical packet and trace story as the rest of Atlas.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -106,6 +106,19 @@ PLANNED
 - any added proof surface remains bounded and canonical
 - proof-facing artifacts demonstrate the hardened semantics honestly
 - Story 5 names the final proof story clearly enough for reviewers
+
+## Implementation Notes
+
+- `examples/mvp_proof/README.md` now names the bounded Story 5 proof inventory
+  directly so reviewers can distinguish bundle-backed human-readable proof from
+  test-backed proof.
+- `examples/mvp_proof/inputs/README.md` and
+  `examples/mvp_proof/evidence/README.md` now treat the hardening budget and
+  authority scenarios as canonical packet/trace bundle review surfaces rather
+  than as seeds for a second proof-only artifact family.
+- retrieval index reuse and duplicate acceptance remain intentionally
+  regression-backed through the named `test_story_5_hardening_baseline_*`
+  anchor set.
 
 ## Related Artifacts
 
