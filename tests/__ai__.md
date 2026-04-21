@@ -331,6 +331,7 @@
 - Those duplicate-handling regressions should include at least one non-ASCII token-overlap case so Unicode text stays covered by the shared helper.
 - Those same regressions should also include Atlas-style front-matter and shared-header cases so boilerplate normalization stays reviewable instead of drifting behind generic text fixtures.
 - Those same regressions should also cover metadata-only front-matter sources so ranking does not silently deduplicate unrelated documents through an empty normalized key.
+- Ranking regressions should also prove at least one near-duplicate token-overlap case now flows through the shared assessment path rather than exact-key-only dedupe.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.
