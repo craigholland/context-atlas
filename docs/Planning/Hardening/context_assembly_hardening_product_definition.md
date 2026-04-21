@@ -139,6 +139,28 @@ Each Story should preserve Craig Architecture boundaries:
 - later docs, guides, and proof updates should inherit the hardened semantics
   rather than narrating around stale artifacts
 
+### Execution Model
+
+This hardening Epic should execute through one long-lived Epic branch off
+`development`, with one Story branch per Story and one Task feature branch per
+Task.
+
+The intended delivery path is:
+
+- Epic branch: accumulates completed Story branches and carries the Epic PR into
+  `development`
+- Story branch: accumulates completed Task feature branches and carries the
+  Story PR into the Epic branch once that Story is finished
+- Task feature branch: carries the full Task implementation and receives the
+  Task-level review gate before merge into the Story branch
+- PR-slice branches: branch from the Task feature branch and merge back into the
+  Task feature branch as bounded implementation slices
+
+For this Epic, the review gate is at the Task feature PR rather than waiting
+until the whole Story is complete. Story PRs should therefore be assembled from
+Tasks that have already finished their Task-level implementation, preflight, and
+review cycle.
+
 ### Target Users
 
 The first target users for this epic are internal and integration-oriented.
