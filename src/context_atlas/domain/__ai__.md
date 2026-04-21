@@ -206,8 +206,9 @@
     - `build_duplicate_content_key`
     - `assess_duplicate_content`
   - invariants:
-    - duplicate assessment should stay bounded to lexical or structural signals and must not imply hidden semantic-similarity behavior
-    - shared duplicate helpers should live here instead of letting ranking and memory drift into separate normalization paths
+- duplicate assessment should stay bounded to lexical or structural signals and must not imply hidden semantic-similarity behavior
+- shared duplicate helpers should live here instead of letting ranking and memory drift into separate normalization paths
+- duplicate normalization may strip bounded top-of-file front matter and discount a bounded shared leading line prefix, but it should stay generic rather than turning into a document-type encyclopedic parser
 - `policies/budgeting.py`:
   - responsibility: allocates token demand across fixed and elastic slots
   - defines:
@@ -252,6 +253,8 @@
 - The current shared duplicate baseline is deliberately lexical only: exact normalized-key matches, normalized containment, and token overlap. Semantic similarity remains out of scope until a future story explicitly reopens that boundary.
 - Task 2.2 and Task 2.3 should refine normalization and policy integration around that baseline, not invent additional duplicate-comparison families in parallel.
 - Token-overlap matching inside that baseline should remain Unicode-aware so non-English text is not silently excluded from duplicate handling.
+- Boilerplate handling inside that baseline should stay bounded to front matter and shared leading prefixes; later work should not grow a format-specific stripping matrix without first updating the Story boundary.
+- Front-matter stripping inside that baseline should preserve the original content when stripping would erase the whole document, so metadata-only sources do not collapse to empty duplicate keys.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-20
 last_reviewed: 2026-04-20
 owners: [core]
@@ -26,7 +26,7 @@ and repeated template prefixes do not overwhelm the near-duplicate baseline.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -105,6 +105,9 @@ PLANNED
 - boilerplate and front matter are handled explicitly in duplicate detection
 - shared prefixes alone no longer dominate duplicate outcomes
 - Story 2 keeps a bounded normalization story instead of widening scope
+- the supported normalization boundary is explicit: strip bounded top-of-file
+  front matter and discount a bounded shared leading line prefix only when both
+  sides still retain meaningful body content
 
 ## Related Artifacts
 

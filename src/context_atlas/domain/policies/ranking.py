@@ -191,8 +191,9 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         """Return the retained winner if a duplicate candidate has already been kept.
 
         Ranking currently consumes the normalized exact-key facet of the shared
-        duplicate baseline. Broader near-duplicate integration is handled in a
-        later hardening task so this path stays deterministic and reviewable.
+        duplicate baseline, including bounded front-matter stripping. Broader
+        near-duplicate integration is handled in a later hardening task so this
+        path stays deterministic and reviewable.
         """
 
         retained = retained_by_source_id.get(candidate.source_id)
@@ -255,7 +256,9 @@ class _RankableCandidate:
             source_id=candidate.source.source_id,
             # Task 2.1 intentionally keeps ranking on the normalized exact-key
             # subset of the shared lexical baseline until Task 2.3 broadens
-            # the policy to shared near-duplicate comparisons.
+            # the policy to shared near-duplicate comparisons. Task 2.2 still
+            # allows this key to ignore bounded front matter so governed docs
+            # do not drift on metadata alone.
             content_key=build_duplicate_content_key(candidate.source.content),
             authority_order=_AUTHORITY_ORDER[authority],
         )
