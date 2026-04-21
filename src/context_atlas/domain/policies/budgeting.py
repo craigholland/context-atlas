@@ -127,6 +127,12 @@ class BudgetAllocationOutcome(CanonicalDomainModel):
 
         return sum(allocation.allocated_tokens for allocation in self.allocations)
 
+    @property
+    def unallocated_tokens(self) -> int:
+        """Return the true post-allocation remainder."""
+
+        return self.remaining_tokens
+
 
 class StarterBudgetAllocationPolicy:
     """Starter policy for fixed and elastic slot allocation."""
@@ -216,7 +222,10 @@ class StarterBudgetAllocationPolicy:
             decisions=tuple(decisions),
             metadata={
                 "budget_total_tokens": str(budget.total_tokens),
+                "fixed_reserved_tokens": str(budget.fixed_reserved_tokens),
+                "unreserved_tokens": str(budget.unreserved_tokens),
                 "allocated_tokens": str(sum(a.allocated_tokens for a in allocations)),
+                "unallocated_tokens": str(remaining_tokens),
                 "remaining_tokens": str(remaining_tokens),
             },
         )

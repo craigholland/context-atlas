@@ -58,6 +58,15 @@ secondary metadata keys.
   allocations, and which represent post-allocation remainder
 - resolve the current elastic-slot tension without narrating around misleading
   property names
+- current delivered Task 4.1 result:
+  - `ContextBudget` now distinguishes fixed-slot reservation
+    (`fixed_reserved_tokens`) from pre-allocation unreserved capacity
+    (`unreserved_tokens`)
+  - `BudgetAllocationOutcome` now exposes true post-allocation remainder as
+    `unallocated_tokens`
+  - compatibility aliases remain temporarily in place for
+    `reserved_tokens` and `remaining_tokens` so Task 4.2 can finish the
+    caller-facing contract cleanup without breaking downstream Story work
 
 ### Task 2: Elastic Slot Behavior And Caller Contracts
 

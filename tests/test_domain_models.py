@@ -192,6 +192,8 @@ class DomainModelTests(unittest.TestCase):
         fixed_docs = ContextBudgetSlot(slot_name="docs", token_limit=400)
 
         budget = ContextBudget(total_tokens=800, slots=(fixed_history, fixed_docs))
+        self.assertEqual(budget.fixed_reserved_tokens, 600)
+        self.assertEqual(budget.unreserved_tokens, 200)
         self.assertEqual(budget.reserved_tokens, 600)
         self.assertEqual(budget.remaining_tokens, 200)
 
@@ -235,6 +237,8 @@ class DomainModelTests(unittest.TestCase):
             ),
         )
 
+        self.assertEqual(budget.fixed_reserved_tokens, 120)
+        self.assertEqual(budget.unreserved_tokens, 180)
         self.assertEqual(budget.reserved_tokens, 120)
         self.assertEqual(budget.remaining_tokens, 180)
 

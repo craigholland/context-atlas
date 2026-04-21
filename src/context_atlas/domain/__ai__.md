@@ -155,6 +155,7 @@
     - fixed-slot reservations must not silently exceed total budget
     - slot names must stay unique within a single budget
     - budget artifacts should reject invalid state during Pydantic model initialization rather than through later service checks
+    - canonical budget vocabulary should distinguish fixed-slot reservation, pre-allocation unreserved capacity, and post-allocation unallocated remainder explicitly instead of overloading one generic "remaining" term everywhere
 - `models/assembly.py`:
   - responsibility: defines canonical assembly decisions, traces, and packets
   - defines:
@@ -211,6 +212,7 @@
     - slot-allocation reductions should be visible through structured decisions
     - duplicate or unknown slot requests should fail explicitly
     - `StarterBudgetAllocationPolicy` is intentionally a plain behavior class because it currently carries no structured configuration state of its own
+    - allocation outcomes should expose true post-allocation remainder explicitly enough that later caller-facing surfaces do not confuse it with pre-allocation elastic headroom
 - `policies/compression.py`:
   - responsibility: compresses candidate content into structured compression results
   - defines:

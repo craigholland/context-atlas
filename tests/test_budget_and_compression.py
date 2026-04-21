@@ -99,6 +99,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
 
         self.assertEqual(outcome.total_allocated_tokens, 1000)
+        self.assertEqual(outcome.unallocated_tokens, 0)
         self.assertEqual(outcome.remaining_tokens, 0)
         allocation_by_slot = {
             allocation.slot_name: allocation for allocation in outcome.allocations
@@ -107,6 +108,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(allocation_by_slot["memory"].allocated_tokens, 400)
         self.assertEqual(allocation_by_slot["docs"].allocated_tokens, 180)
         self.assertTrue(allocation_by_slot["docs"].was_reduced)
+        self.assertEqual(outcome.trace.metadata["fixed_reserved_tokens"], "450")
+        self.assertEqual(outcome.trace.metadata["unreserved_tokens"], "550")
+        self.assertEqual(outcome.trace.metadata["unallocated_tokens"], "0")
         self.assertEqual(outcome.trace.metadata["remaining_tokens"], "0")
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
