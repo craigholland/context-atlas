@@ -15,7 +15,7 @@ than deep internal imports.
 
 The recommended first example is:
 
-```powershell
+```bash
 python examples/starter_context_flow.py
 ```
 
@@ -38,9 +38,18 @@ quieter unless you explicitly raise `CONTEXT_ATLAS_LOG_LEVEL`.
 
 Run the starter smoke example against a docs directory:
 
+PowerShell:
+
 ```powershell
 $env:PYTHONPATH = "src"
 py -3 examples/starter_api_smoke.py docs "How should planning docs be treated?"
+```
+
+bash:
+
+```bash
+export PYTHONPATH=src
+python examples/starter_api_smoke.py docs "How should planning docs be treated?"
 ```
 
 The smoke example demonstrates the supported MVP path:
@@ -75,7 +84,7 @@ The dedicated runnable example for that workflow lands in the Story 3 task slice
 
 Run the repository-oriented example directly:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
@@ -87,7 +96,7 @@ See [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex
 
 Run the mixed-source example after an editable install:
 
-```powershell
+```bash
 python examples/mixed_source_registry.py
 ```
 

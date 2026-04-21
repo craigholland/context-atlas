@@ -118,6 +118,7 @@
 - Product-facing docs should not imply that `.env.example` or a copied `.env` file is loaded automatically; the current runtime settings loader reads the live process environment only.
 - Product-facing docs should keep the supported env-backed surface intentionally narrow and should not imply that every starter constant in `domain/policies/` or `services/` is automatically a public runtime knob.
 - Product-facing setup guidance should point users to `docs/Guides/` first; runnable artifacts under `examples/` are companion material and should not become the primary setup surface.
+- Product-facing guides and runnable example READMEs should avoid Windows-only operator assumptions; if PowerShell-specific activation or environment syntax is shown, the same surface should also give at least one bash/Linux/macOS analog.
 - Shipped release summaries should now live in `docs/Release/` as in-repo `releases`-class artifacts instead of existing only as GitHub release text or ad hoc status notes.
 - The release-history surface should stay discoverable through `docs/Release/README.md`, and the current shipped release note should move forward deliberately rather than leaving the root README pinned to an older release forever.
 - The root `CONTRIBUTING.md` file should stay aligned with the ontology and directory model so a new contributor can get from "I want to add a document" to the correct class, template, and destination without reverse-engineering the doc system.

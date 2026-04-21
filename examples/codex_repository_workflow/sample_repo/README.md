@@ -60,8 +60,8 @@ This sample repo now includes that tracked authority contrast under:
 
 ## Example Command
 
-```powershell
-python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo
+```bash
+python examples/codex_repository_workflow/run.py --repo-root /repos/my-repo
 ```
 
 If the docs live somewhere other than `<repo_root>/docs`, pass `--docs-root`.
@@ -73,9 +73,9 @@ instead of only one advisory subfolder.
 
 You can run that authority-proof scenario directly with:
 
-```powershell
-python examples/codex_repository_workflow/run.py `
-  --repo-root examples/codex_repository_workflow/sample_repo `
+```bash
+python examples/codex_repository_workflow/run.py \
+  --repo-root examples/codex_repository_workflow/sample_repo \
   --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?"
 ```
 

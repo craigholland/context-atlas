@@ -45,9 +45,19 @@ This workflow does not yet:
 
 From the repository root:
 
+PowerShell:
+
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+Bash:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 ```
 
@@ -62,16 +72,30 @@ reference surface for supported settings, not an automatically loaded dotenv fil
 
 If you want a visible local reference file:
 
+PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-If you want to set a few values explicitly in PowerShell:
+bash:
+
+```bash
+cp .env.example .env
+```
+
+Set a few values explicitly if you want to override defaults:
 
 ```powershell
 $env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
 $env:CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET = "1024"
 $env:CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K = "8"
+```
+
+```bash
+export CONTEXT_ATLAS_LOG_LEVEL="INFO"
+export CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024"
+export CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="8"
 ```
 
 ## Atlas Boundary For Records
@@ -110,7 +134,7 @@ The current runnable example is:
 
 From the repository root:
 
-```powershell
+```bash
 python examples/docs_database_workflow/run.py
 ```
 
@@ -119,26 +143,26 @@ tracked `examples/docs_database_workflow/sample_records.json` payload.
 
 Override the docs root or chatbot question:
 
-```powershell
-python examples/docs_database_workflow/run.py --docs-root C:\repos\my-app\docs --query "How should a builder configure Atlas and troubleshoot preflight failures?"
+```bash
+python examples/docs_database_workflow/run.py --docs-root /repos/my-app/docs --query "How should a builder configure Atlas and troubleshoot preflight failures?"
 ```
 
 Override the sample record payload with your own already-fetched rows:
 
-```powershell
-python examples/docs_database_workflow/run.py --records-file C:\repos\my-app\data\support_rows.json
+```bash
+python examples/docs_database_workflow/run.py --records-file /repos/my-app/data/support_rows.json
 ```
 
 If you want one run to make budget tradeoffs more obvious:
 
-```powershell
+```bash
 python examples/docs_database_workflow/run.py --total-budget 128
 ```
 
 If you want the standard proof artifacts for the same run:
 
-```powershell
-python examples/docs_database_workflow/run.py --proof-artifacts-dir tmp\mvp_proof\docs_database_demo
+```bash
+python examples/docs_database_workflow/run.py --proof-artifacts-dir tmp/mvp_proof/docs_database_demo
 ```
 
 ## What The Workflow Does

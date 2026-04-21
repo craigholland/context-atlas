@@ -32,6 +32,7 @@
 - Keep fast unit tests here; broader integration or environment-specific test suites should be introduced deliberately rather than mixed in by accident.
 - Test helpers should not reimplement production semantics when assertions can exercise the real code directly.
 - Release-facing tests should keep the exported package version aligned with `pyproject.toml` and the current shipped release note rather than freezing a stale version expectation.
+- Cross-platform path-safety tests should cover both Windows-style and POSIX-style traversal inputs when the production code is expected to guard against either form.
 
 ## Allowed Dependencies
 - may depend on:
@@ -336,14 +337,19 @@
 steps:
   - name: compile_tests
     run: |
+      # Linux/macOS analog: python3 -m compileall tests
       py -3 -m compileall tests
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest
       py -3 -m pytest
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
       $env:PYTHONPATH='src'
       py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```

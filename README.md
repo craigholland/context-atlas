@@ -199,14 +199,14 @@ The current low-code boundary is now intentionally explicit:
 
 Run the current low-code example from the repository root:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py
 ```
 
 To inspect one source family in isolation, disable one side of the preset-driven
 input surface:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --no-documents
 python examples/low_code_workflow/run.py --no-records
 ```
@@ -347,7 +347,7 @@ The starter surface is available in two forms:
 
 - installable command-line entrypoint:
 
-```powershell
+```bash
 context-atlas-starter docs --query "How should planning docs be treated?"
 ```
 

@@ -166,34 +166,36 @@ class MvpProofCaptureTests(unittest.TestCase):
             )
 
     def test_resolve_output_paths_rejects_unsafe_bundle_component(self) -> None:
-        args = _CAPTURE_MODULE.build_parser().parse_args(
-            [
-                "--workflow",
-                "..\\outside",
-                "--scenario",
-                "repo_governed_docs_update",
-                "--query",
-                "How should repository planning docs be updated?",
-                "--input-summary",
-                "docs_root=docs/Guides",
-                "--baseline-rendered",
-                str(_REPO_ROOT / "README.md"),
-                "--atlas-packet",
-                str(_REPO_ROOT / "README.md"),
-                "--atlas-trace",
-                str(_REPO_ROOT / "README.md"),
-                "--atlas-rendered",
-                str(_REPO_ROOT / "README.md"),
-                "--bundle-root",
-                str(_REPO_ROOT / "tmp"),
-            ]
-        )
+        for unsafe_component in ("..\\outside", "../outside"):
+            with self.subTest(unsafe_component=unsafe_component):
+                args = _CAPTURE_MODULE.build_parser().parse_args(
+                    [
+                        "--workflow",
+                        unsafe_component,
+                        "--scenario",
+                        "repo_governed_docs_update",
+                        "--query",
+                        "How should repository planning docs be updated?",
+                        "--input-summary",
+                        "docs_root=docs/Guides",
+                        "--baseline-rendered",
+                        str(_REPO_ROOT / "README.md"),
+                        "--atlas-packet",
+                        str(_REPO_ROOT / "README.md"),
+                        "--atlas-trace",
+                        str(_REPO_ROOT / "README.md"),
+                        "--atlas-rendered",
+                        str(_REPO_ROOT / "README.md"),
+                        "--bundle-root",
+                        str(_REPO_ROOT / "tmp"),
+                    ]
+                )
 
-        with self.assertRaisesRegex(
-            ValueError,
-            "workflow must be a single relative path segment",
-        ):
-            _CAPTURE_MODULE._resolve_output_paths(args)
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "workflow must be a single relative path segment",
+                ):
+                    _CAPTURE_MODULE._resolve_output_paths(args)
 
     def test_build_evidence_package_rejects_mismatched_workflow_metadata(self) -> None:
         with TemporaryDirectory() as temp_dir:

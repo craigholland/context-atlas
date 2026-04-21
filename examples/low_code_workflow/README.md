@@ -38,25 +38,25 @@ That keeps the experience legible without overstating maturity:
 
 After an editable install:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py
 ```
 
 Override the query:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --query "How should a low-code builder validate Atlas output?"
 ```
 
 Resolve relative overrides from a chosen repo root:
 
-```powershell
-python examples/low_code_workflow/run.py --repo-root C:\repos\my-app --docs-root docs\Guides --records-file data\support_rows.json
+```bash
+python examples/low_code_workflow/run.py --repo-root /repos/my-app --docs-root docs/Guides --records-file data/support_rows.json
 ```
 
 Inspect one source family in isolation:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --no-documents
 python examples/low_code_workflow/run.py --no-records
 ```

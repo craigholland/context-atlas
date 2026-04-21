@@ -26,20 +26,20 @@ The runnable demo stays honest about the boundary:
 
 After an editable install:
 
-```powershell
+```bash
 python examples/docs_database_workflow/run.py
 ```
 
 Override the docs root or chatbot question:
 
-```powershell
-python examples/docs_database_workflow/run.py --docs-root C:\repos\my-app\docs --query "How should I configure Atlas and troubleshoot preflight failures?"
+```bash
+python examples/docs_database_workflow/run.py --docs-root /repos/my-app/docs --query "How should I configure Atlas and troubleshoot preflight failures?"
 ```
 
 Point the example at your own already-fetched rows:
 
-```powershell
-python examples/docs_database_workflow/run.py --records-file C:\repos\my-app\data\support_rows.json
+```bash
+python examples/docs_database_workflow/run.py --records-file /repos/my-app/data/support_rows.json
 ```
 
 The output shows:

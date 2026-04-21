@@ -130,7 +130,7 @@ runtime-materialization scheme.
   files in the same slice
 - the new portable canon stays runtime-agnostic and does not silently absorb
   project-specific or platform-specific interpretation details
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
+- The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that
   same feature branch before human merge

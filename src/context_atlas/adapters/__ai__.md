@@ -145,14 +145,19 @@
 steps:
   - name: compile_adapters
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/adapters
       py -3 -m compileall src/context_atlas/adapters
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py tests/test_record_adapter_shape.py
       py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py tests/test_record_adapter_shape.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter; from context_atlas.adapters.records import StructuredRecordPayload"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter; from context_atlas.adapters.records import StructuredRecordPayload"
 ```

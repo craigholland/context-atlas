@@ -92,6 +92,12 @@ Examples:
 Owner files should reflect new rules, files, or contributor expectations rather
 than lagging behind the repo state.
 
+7. Keep command examples cross-platform when shell syntax differs.
+
+If you show PowerShell-specific launcher or environment syntax, add a nearby
+Bash/Linux/macOS analog so the docs do not force contributors into Windows-only
+workflows.
+
 ## Common Pitfalls
 
 - Do not put Context Atlas-specific choices into `docs/Authoritative/Canon/`.
@@ -99,6 +105,7 @@ than lagging behind the repo state.
 - Do not treat `Planning` as if it overrides `Authoritative`.
 - Do not leave stale metadata after changing a document's meaning.
 - Do not create a new document class ad hoc when an existing class already fits.
+- Do not publish Windows-only command guidance without a Linux/macOS analog when shell syntax differs.
 
 ## If You Are Unsure
 

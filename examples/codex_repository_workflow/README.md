@@ -25,20 +25,20 @@ The example is intentionally honest about scope:
 
 After an editable install:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
 Override the engineering question:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root . --query "What should planning docs be treated as during implementation?"
 ```
 
 When `--docs-root` is relative, it is resolved from the selected `--repo-root`:
 
-```powershell
-python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
+```bash
+python examples/codex_repository_workflow/run.py --repo-root /repos/my-repo --docs-root docs
 ```
 
 The output shows:
@@ -54,7 +54,7 @@ That makes the workflow suitable both for local experimentation and for internal
 For a more demonstration-oriented output that keeps rendered context plus trace
 visibility front and center:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/show_trace.py --repo-root .
 ```
 
