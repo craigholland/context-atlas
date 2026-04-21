@@ -51,6 +51,9 @@ deterministic, and Atlas-owned.
 - treat the current intended home for that shared surface as `domain/policies/`
   or a directly adjacent inward helper module so contributors do not have to
   infer package placement during Task decomposition
+- treat `domain/policies/deduplication.py` as the baseline inward home once
+  Task 2.1 lands, so later tasks extend one shared helper surface instead of
+  re-inventing duplicate logic inside ranking or memory separately
 - keep the shared semantics inward and reusable rather than letting workflow
   logic fork silently between ranking and memory
 - make the supported baseline explicitly lexical or structural rather than

@@ -199,6 +199,15 @@
     - ranking should stay deterministic for identical inputs
     - deduplication should record explicit exclusion decisions rather than silently dropping candidates
     - `_RankableCandidate` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
+- `policies/deduplication.py`:
+  - responsibility: defines the shared lexical/structural duplicate-detection helper surface used by inward policy code
+  - defines:
+    - `DuplicateContentAssessment`
+    - `build_duplicate_content_key`
+    - `assess_duplicate_content`
+  - invariants:
+    - duplicate assessment should stay bounded to lexical or structural signals and must not imply hidden semantic-similarity behavior
+    - shared duplicate helpers should live here instead of letting ranking and memory drift into separate normalization paths
 - `policies/budgeting.py`:
   - responsibility: allocates token demand across fixed and elastic slots
   - defines:
@@ -239,6 +248,7 @@
 - Some names and policies remain intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current domain layer provides canonical structures plus starter policies, but it is not yet a full long-term domain model for every future provider, storage, or workflow surface.
 - The message/error surface is still pragmatic and relatively thin; richer audit projections or more formal event/read-model patterns remain future work.
+- Duplicate detection is now beginning to converge on one shared inward helper surface, but Story 2 still needs later work for boilerplate handling, full ranking integration, and a tighter final acceptance bar.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.
