@@ -73,7 +73,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
             )
         )
 
-    def test_budget_allocation_respects_fixed_and_elastic_slots(self) -> None:
+    def test_story_5_hardening_baseline_keeps_budget_allocation_truthful(
+        self,
+    ) -> None:
         budget = ContextBudget(
             total_tokens=1000,
             slots=(
@@ -192,7 +194,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
             CompressionStrategy.SENTENCE.value,
         )
 
-    def test_extractive_compression_falls_back_to_truncate_when_needed(self) -> None:
+    def test_story_5_hardening_baseline_keeps_compression_fallback_truthful(
+        self,
+    ) -> None:
         candidates = LexicalRetriever(
             self.registry,
             mode=LexicalRetrievalMode.KEYWORD,
@@ -369,7 +373,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
             CompressionStrategy.TRUNCATE.value,
         )
 
-    def test_prefix_budget_helpers_handle_non_monotonic_estimators(self) -> None:
+    def test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation(
+        self,
+    ) -> None:
         text = "abcdefghijkl"
 
         def non_monotonic_estimator(candidate: str) -> int:
@@ -438,7 +444,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["token_estimator"], "word_count")
 
-    def test_compression_defaults_to_starter_heuristic_metadata_label(self) -> None:
+    def test_story_5_hardening_baseline_labels_default_estimator_truthfully(
+        self,
+    ) -> None:
         candidate = ContextCandidate(
             source=ContextSource(
                 source_id="starter-heuristic",

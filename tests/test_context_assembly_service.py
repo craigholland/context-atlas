@@ -228,7 +228,7 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             packet.compression_result.strategy_used.value,
         )
 
-    def test_zero_document_budget_uses_truthful_effective_compression_strategy(
+    def test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy(
         self,
     ) -> None:
         service = build_starter_context_assembly_service(
@@ -400,7 +400,9 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             "extractive",
         )
 
-    def test_service_trace_uses_starter_heuristic_label_by_default(self) -> None:
+    def test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default(
+        self,
+    ) -> None:
         service = build_starter_context_assembly_service(
             retriever=self.retriever,
             settings=self.settings.model_copy(
@@ -674,7 +676,7 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertIn("compression", decision_source_ids)
         self.assertIn("memory-drop", decision_source_ids)
 
-    def test_service_trace_keeps_canonical_budget_summary_when_budget_trace_disagrees(
+    def test_story_5_hardening_baseline_keeps_canonical_service_budget_summary(
         self,
     ) -> None:
         class ConflictingBudgetPolicy:

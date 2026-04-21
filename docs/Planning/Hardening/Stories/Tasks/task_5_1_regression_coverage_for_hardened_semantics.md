@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, regression, validation, tests]
 related:
@@ -31,7 +31,7 @@ standard test suite.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -48,6 +48,8 @@ PLANNED
   duplicate-detection behavior
 - ensure Story 1 and Story 2 expectations are reflected in normal regression
   tests
+- make the strongest retrieval, ranking, and memory regressions easy to find by
+  promoting them into a named `test_story_5_hardening_baseline_*` anchor set
 
 #### Expected New Files
 - none expected
@@ -65,6 +67,8 @@ PLANNED
 - extend tests for Story 3 and Story 4 semantics
 - keep the tests focused on canonical engine behavior rather than one-off proof
   shortcuts
+- use the same explicit `test_story_5_hardening_baseline_*` naming pattern for
+  the budget, compression, service, packet, and trace anchor tests
 
 #### Expected New Files
 - none expected
@@ -83,6 +87,8 @@ PLANNED
 - align Story 5 language and nearby owner guidance with the final regression
   baseline
 - ensure later contributors can tell which tests anchor the hardening contract
+- document the named Story 5 baseline tests as the review surface contributors
+  should extend before adding new hardening-only proof scaffolding
 
 #### Expected New Files
 - none expected
@@ -113,6 +119,8 @@ PLANNED
 - the shared engine path is validated without requiring bespoke proof-only
   execution
 - Story 5 has a clear test baseline to inherit for final closeout
+- the Story 5 baseline tests are explicitly named and documented so reviewers
+  can find the hardened contract quickly
 
 ## Related Artifacts
 
