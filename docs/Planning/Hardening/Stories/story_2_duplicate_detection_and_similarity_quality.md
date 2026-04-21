@@ -70,6 +70,13 @@ deterministic, and Atlas-owned.
 - make it explicit how front matter, repeated templates, and shared prefixes
   should be treated before duplicate logic is applied
 - avoid preserving the current prefix-equality shortcut as a standing baseline
+- Task 2.2 should close with one bounded normalization rule only:
+  top-of-file front matter may be stripped, and pairwise comparison may
+  discount a bounded shared leading line prefix when both sides still retain
+  meaningful body content
+- Task 2.2 should not introduce format-specific stripping matrices, mid-document
+  boilerplate removal, or template encyclopedias; those remain intentionally
+  unsupported unless the Story boundary changes first
 
 ### Task 3: Ranking And Memory Integration
 
