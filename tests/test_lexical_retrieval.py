@@ -59,6 +59,19 @@ class LexicalRetrievalTests(unittest.TestCase):
             ),
         )
 
+    def _candidate_signature(
+        self, results: tuple
+    ) -> tuple[tuple[str, float, int, tuple[str, ...]], ...]:
+        return tuple(
+            (
+                candidate.source.source_id,
+                candidate.score,
+                candidate.rank,
+                candidate.signals,
+            )
+            for candidate in results
+        )
+
     def test_registry_rejects_duplicate_source_identifiers(self) -> None:
         registry = InMemorySourceRegistry(self.sources[:1])
 
@@ -203,6 +216,29 @@ class LexicalRetrievalTests(unittest.TestCase):
 
         self.assertEqual(list_sources.call_count, 2)
         self.assertEqual(builder.call_count, 1)
+
+    def test_tfidf_repeated_query_semantics_stay_deterministic(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        initial_results = retriever.retrieve(
+            "tf idf retrieval document ranking", top_k=3
+        )
+        interleaved_results = retriever.retrieve(
+            "context governance architecture", top_k=3
+        )
+        repeated_results = retriever.retrieve(
+            "tf idf retrieval document ranking", top_k=3
+        )
+
+        self.assertNotEqual(
+            self._candidate_signature(initial_results),
+            self._candidate_signature(interleaved_results),
+        )
+        self.assertEqual(
+            self._candidate_signature(initial_results),
+            self._candidate_signature(repeated_results),
+        )
 
     def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
         self,
