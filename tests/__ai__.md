@@ -132,6 +132,7 @@
     - tests should prove the baseline snapshot carries corpus-wide IDF state so retrieval does not need to rebuild document-frequency-derived weighting on every query
     - tests should prove source-side TF-IDF vector work is reused from the snapshot so per-query retrieval only rebuilds query-local weighting state
     - tests should prove a steady-state repeated query reuses both corpus-wide and source-side snapshot layers together rather than only one reuse path at a time
+    - tests should prove repeated warm-cache retrieval still consults the registry source-listing boundary on each call rather than turning cache reuse into a second hidden source-loading path
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:

@@ -127,10 +127,16 @@ class LexicalRetriever:
         if not query_tokens:
             return ()
 
+        sources = self._registry.list_sources()
+
         if self.mode is LexicalRetrievalMode.KEYWORD:
-            candidates = self._keyword_retrieve(query_tokens, top_k=top_k)
+            candidates = self._keyword_retrieve(
+                query_tokens, sources=sources, top_k=top_k
+            )
         else:
-            candidates = self._tfidf_retrieve(query_tokens, top_k=top_k)
+            candidates = self._tfidf_retrieve(
+                query_tokens, sources=sources, top_k=top_k
+            )
 
         _emit_log_message(
             LogMessage.RETRIEVAL_COMPLETED,
@@ -147,13 +153,14 @@ class LexicalRetriever:
         self,
         query_tokens: list[str],
         *,
+        sources: tuple[ContextSource, ...],
         top_k: int,
     ) -> tuple[ContextCandidate, ...]:
         """Rank sources by query-token overlap."""
 
         query_token_set = set(query_tokens)
         scored: list[tuple[float, ContextSource]] = []
-        for source in self._registry.list_sources():
+        for source in sources:
             source_token_set = set(_tokenize(source.content))
             overlap = query_token_set & source_token_set
             if not overlap:
@@ -166,12 +173,12 @@ class LexicalRetriever:
         self,
         query_tokens: list[str],
         *,
+        sources: tuple[ContextSource, ...],
         top_k: int,
     ) -> tuple[ContextCandidate, ...]:
         """Rank sources by sparse TF-IDF cosine similarity."""
 
         query_tf = _term_frequency(query_tokens)
-        sources = self._registry.list_sources()
         index_snapshot = self._get_tfidf_index_snapshot(sources)
         inverse_document_frequency = index_snapshot.inverse_document_frequency
         missing_term_inverse_document_frequency = (

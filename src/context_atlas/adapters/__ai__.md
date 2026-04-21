@@ -100,6 +100,7 @@
     - empty queries should fail soft with no candidates rather than inventing placeholder data
     - lexical retrieval should consume canonical sources through the registry surface rather than owning source registration itself
     - the retriever may cache one baseline index snapshot, but it should invalidate that cache strictly through the registry revision rather than inventing a second source-tracking mechanism
+    - repeated-query retrieval should still enter through one fresh registry source listing per call even when the index snapshot is warm, so cache reuse cannot become a hidden second source-loading path
 - `docs/filesystem.py`:
   - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
   - defines:

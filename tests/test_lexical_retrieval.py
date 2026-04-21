@@ -185,6 +185,25 @@ class LexicalRetrievalTests(unittest.TestCase):
         self.assertEqual(builder.call_count, 0)
         self.assertEqual(term_frequency.call_count, 1)
 
+    def test_tfidf_repeated_queries_stay_on_shared_registry_path(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        with (
+            patch.object(
+                registry, "list_sources", wraps=registry.list_sources
+            ) as list_sources,
+            patch(
+                "context_atlas.adapters.retrieval.lexical.build_lexical_index_snapshot",
+                wraps=build_lexical_index_snapshot,
+            ) as builder,
+        ):
+            retriever.retrieve("tf idf retrieval", top_k=2)
+            retriever.retrieve("document ranking context", top_k=2)
+
+        self.assertEqual(list_sources.call_count, 2)
+        self.assertEqual(builder.call_count, 1)
+
     def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
         self,
     ) -> None:
