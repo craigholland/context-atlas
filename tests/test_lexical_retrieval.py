@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from unittest.mock import patch
 import unittest
 
 from context_atlas.adapters import (
@@ -9,6 +10,7 @@ from context_atlas.adapters import (
     LexicalRetrievalMode,
     LexicalRetriever,
 )
+from context_atlas.adapters.retrieval.lexical import build_lexical_index_snapshot
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
@@ -101,6 +103,45 @@ class LexicalRetrievalTests(unittest.TestCase):
             retriever.retrieve("context atlas", top_k=0)
 
         self.assertEqual(context.exception.code, ErrorCode.INVALID_RETRIEVAL_REQUEST)
+
+    def test_registry_revision_increments_as_sources_are_registered(self) -> None:
+        registry = InMemorySourceRegistry()
+
+        self.assertEqual(registry.revision, 0)
+
+        registry.add_source(self.sources[0])
+        registry.add_source(self.sources[1])
+
+        self.assertEqual(registry.revision, 2)
+
+    def test_tfidf_index_snapshot_is_reused_for_repeated_queries(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        with patch(
+            "context_atlas.adapters.retrieval.lexical.build_lexical_index_snapshot",
+            wraps=build_lexical_index_snapshot,
+        ) as builder:
+            retriever.retrieve("tf idf retrieval", top_k=2)
+            retriever.retrieve("document ranking context", top_k=2)
+
+        self.assertEqual(builder.call_count, 1)
+
+    def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
+        self,
+    ) -> None:
+        registry = InMemorySourceRegistry(self.sources[:2])
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        with patch(
+            "context_atlas.adapters.retrieval.lexical.build_lexical_index_snapshot",
+            wraps=build_lexical_index_snapshot,
+        ) as builder:
+            retriever.retrieve("context governance", top_k=2)
+            registry.add_source(self.sources[2])
+            retriever.retrieve("tf idf retrieval", top_k=2)
+
+        self.assertEqual(builder.call_count, 2)
 
     def test_retrieval_events_and_templates_are_registered(self) -> None:
         self.assertEqual(

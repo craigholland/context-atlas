@@ -128,6 +128,7 @@
   - invariants:
     - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
     - empty-query and invalid-request behavior should stay explicit and deterministic
+    - tests should prove the lexical retriever reuses one baseline index snapshot while the registry revision is stable and rebuilds it only after source registration changes that revision
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:

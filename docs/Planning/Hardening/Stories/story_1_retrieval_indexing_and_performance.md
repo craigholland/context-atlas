@@ -18,6 +18,8 @@ related:
   - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
   - ../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
   - ../../../../src/context_atlas/adapters/retrieval/lexical.py
+  - ../../../../src/context_atlas/adapters/retrieval/registry.py
+  - ../../../../src/context_atlas/adapters/retrieval/indexing.py
 supersedes: []
 ---
 
@@ -37,7 +39,8 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- current lexical retrieval and registry code under `src/context_atlas/adapters/retrieval/`
+- current lexical retrieval, registry, and index-shape code under
+  `src/context_atlas/adapters/retrieval/`
 - current lexical retrieval regression coverage in `tests/test_lexical_retrieval.py`
 
 ## Proposed Tasks
@@ -48,10 +51,12 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   lexical retrieval
 - make it explicit which reusable state belongs to the retriever versus the
   source registry versus a dedicated helper object
-- treat today's `InMemorySourceRegistry` location in `lexical.py` as the
-  current baseline; if a separate registry helper file is introduced during
-  implementation, that file should be treated as a new outward adapter surface
-  rather than assumed to exist already
+- keep canonical source ownership in the registry surface while letting the
+  baseline lexical index shape live in a dedicated outward retrieval helper
+  instead of hiding both concerns in one file
+- treat the current `registry.py` plus `indexing.py` split as the baseline
+  outward adapter surface established by Task 1.1, with `lexical.py`
+  remaining the consumer/orchestrator rather than reclaiming both concerns
 - keep the index outward in the adapter layer rather than inventing a new
   inward domain artifact for retrieval mechanics
 
@@ -125,3 +130,5 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - [Context Assembly Hardening Product Definition](../context_assembly_hardening_product_definition.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- `src/context_atlas/adapters/retrieval/registry.py`
+- `src/context_atlas/adapters/retrieval/indexing.py`
