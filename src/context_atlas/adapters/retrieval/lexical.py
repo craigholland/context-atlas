@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from collections.abc import Mapping
 from enum import Enum, StrEnum
 import logging
 import math
@@ -172,33 +173,30 @@ class LexicalRetriever:
         query_tf = _term_frequency(query_tokens)
         sources = self._registry.list_sources()
         index_snapshot = self._get_tfidf_index_snapshot(sources)
-        document_frequency = Counter(index_snapshot.document_frequency)
+        inverse_document_frequency = index_snapshot.inverse_document_frequency
+        missing_term_inverse_document_frequency = (
+            index_snapshot.missing_term_inverse_document_frequency
+        )
         query_vector = {
             term: term_frequency
-            * _inverse_document_frequency(
+            * inverse_document_frequency.get(
                 term,
-                document_frequency=document_frequency,
-                source_count=index_snapshot.source_count,
+                missing_term_inverse_document_frequency,
             )
             for term, term_frequency in query_tf.items()
         }
 
         scored: list[tuple[float, ContextSource]] = []
         for source in sources:
-            tokens = list(index_snapshot.source_tokens[source.source_id])
-            if not tokens:
+            source_vector = index_snapshot.source_tfidf_vectors[source.source_id]
+            source_vector_norm = index_snapshot.source_vector_norms[source.source_id]
+            if source_vector_norm == 0.0:
                 continue
-            source_tf = _term_frequency(tokens)
-            source_vector = {
-                term: term_frequency
-                * _inverse_document_frequency(
-                    term,
-                    document_frequency=document_frequency,
-                    source_count=index_snapshot.source_count,
-                )
-                for term, term_frequency in source_tf.items()
-            }
-            score = _cosine_similarity(query_vector, source_vector)
+            score = _cosine_similarity(
+                query_vector,
+                source_vector,
+                right_norm=source_vector_norm,
+            )
             if score <= 0.0:
                 continue
             scored.append((score, source))
@@ -300,20 +298,11 @@ def _term_frequency(tokens: list[str]) -> dict[str, float]:
     }
 
 
-def _inverse_document_frequency(
-    term: str,
-    *,
-    document_frequency: Counter[str],
-    source_count: int,
-) -> float:
-    """Compute a smoothed inverse-document-frequency score."""
-
-    return math.log((1 + source_count) / (1 + document_frequency.get(term, 0))) + 1.0
-
-
 def _cosine_similarity(
-    left_vector: dict[str, float],
-    right_vector: dict[str, float],
+    left_vector: Mapping[str, float],
+    right_vector: Mapping[str, float],
+    *,
+    right_norm: float | None = None,
 ) -> float:
     """Compute cosine similarity between two sparse weighted vectors."""
 
@@ -321,7 +310,11 @@ def _cosine_similarity(
         left_vector.get(term, 0.0) * right_vector.get(term, 0.0) for term in left_vector
     )
     left_norm = math.sqrt(sum(weight**2 for weight in left_vector.values()))
-    right_norm = math.sqrt(sum(weight**2 for weight in right_vector.values()))
-    if left_norm == 0.0 or right_norm == 0.0:
+    effective_right_norm = (
+        right_norm
+        if right_norm is not None
+        else math.sqrt(sum(weight**2 for weight in right_vector.values()))
+    )
+    if left_norm == 0.0 or effective_right_norm == 0.0:
         return 0.0
-    return dot_product / (left_norm * right_norm)
+    return dot_product / (left_norm * effective_right_norm)

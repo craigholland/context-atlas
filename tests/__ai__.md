@@ -129,6 +129,9 @@
     - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
     - empty-query and invalid-request behavior should stay explicit and deterministic
     - tests should prove the lexical retriever reuses one baseline index snapshot while the registry revision is stable and rebuilds it only after source registration changes that revision
+    - tests should prove the baseline snapshot carries corpus-wide IDF state so retrieval does not need to rebuild document-frequency-derived weighting on every query
+    - tests should prove source-side TF-IDF vector work is reused from the snapshot so per-query retrieval only rebuilds query-local weighting state
+    - tests should prove a steady-state repeated query reuses both corpus-wide and source-side snapshot layers together rather than only one reuse path at a time
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:
