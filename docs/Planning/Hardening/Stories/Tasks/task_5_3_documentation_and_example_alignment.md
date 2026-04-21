@@ -15,7 +15,7 @@ related:
   - ../story_5_validation_documentation_and_hardening_proof.md
   - ../../context_assembly_hardening_product_definition.md
   - ../../../../README.md
-  - ../../../../docs/Guides/getting_started.md
+  - ../../../../../docs/Guides/getting_started.md
 supersedes: []
 ---
 
@@ -113,4 +113,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 5 - Validation, Documentation, And Hardening Proof](../story_5_validation_documentation_and_hardening_proof.md)
-

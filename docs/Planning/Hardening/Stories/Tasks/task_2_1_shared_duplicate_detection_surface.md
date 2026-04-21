@@ -14,8 +14,8 @@ tags: [hardening, task, pr-plan, deduplication, ranking, memory]
 related:
   - ../story_2_duplicate_detection_and_similarity_quality.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../src/context_atlas/domain/policies/ranking.py
-  - ../../../../src/context_atlas/domain/policies/memory.py
+  - ../../../../../src/context_atlas/domain/policies/ranking.py
+  - ../../../../../src/context_atlas/domain/policies/memory.py
 supersedes: []
 ---
 
@@ -117,4 +117,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 2 - Duplicate Detection And Similarity Quality](../story_2_duplicate_detection_and_similarity_quality.md)
-

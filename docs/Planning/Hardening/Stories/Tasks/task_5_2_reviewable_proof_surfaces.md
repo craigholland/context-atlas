@@ -14,7 +14,7 @@ tags: [hardening, task, pr-plan, proof, packet, trace]
 related:
   - ../story_5_validation_documentation_and_hardening_proof.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../examples/mvp_proof/README.md
+  - ../../../../../examples/mvp_proof/README.md
 supersedes: []
 ---
 
@@ -110,4 +110,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 5 - Validation, Documentation, And Hardening Proof](../story_5_validation_documentation_and_hardening_proof.md)
-

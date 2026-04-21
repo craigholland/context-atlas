@@ -14,7 +14,7 @@ tags: [hardening, task, pr-plan, tokenizer, seam, contracts]
 related:
   - ../story_3_token_estimation_and_tokenizer_seam.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../src/context_atlas/infrastructure/config/settings.py
+  - ../../../../../src/context_atlas/infrastructure/config/settings.py
 supersedes: []
 ---
 
@@ -117,4 +117,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 3 - Token Estimation And Tokenizer Seam](../story_3_token_estimation_and_tokenizer_seam.md)
-

@@ -14,7 +14,7 @@ tags: [hardening, task, pr-plan, budgeting, elastic-slots, caller-contracts]
 related:
   - ../story_4_budget_and_compression_truthfulness.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../src/context_atlas/domain/models/budget.py
+  - ../../../../../src/context_atlas/domain/models/budget.py
 supersedes: []
 ---
 
@@ -116,4 +116,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 4 - Budget And Compression Truthfulness](../story_4_budget_and_compression_truthfulness.md)
-

@@ -14,10 +14,10 @@ tags: [hardening, task, pr-plan, trace, rendering, services]
 related:
   - ../story_4_budget_and_compression_truthfulness.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../src/context_atlas/services/assembly.py
-  - ../../../../src/context_atlas/rendering/context.py
-  - ../../../../src/context_atlas/rendering/packet.py
-  - ../../../../src/context_atlas/rendering/trace.py
+  - ../../../../../src/context_atlas/services/assembly.py
+  - ../../../../../src/context_atlas/rendering/context.py
+  - ../../../../../src/context_atlas/rendering/packet.py
+  - ../../../../../src/context_atlas/rendering/trace.py
 supersedes: []
 ---
 
@@ -123,4 +123,3 @@ PLANNED
 
 - [Story 4 - Budget And Compression Truthfulness](../story_4_budget_and_compression_truthfulness.md)
 - [Story 5 - Validation, Documentation, And Hardening Proof](../story_5_validation_documentation_and_hardening_proof.md)
-

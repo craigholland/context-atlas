@@ -14,7 +14,7 @@ tags: [hardening, task, pr-plan, retrieval, boundaries]
 related:
   - ../story_1_retrieval_indexing_and_performance.md
   - ../../context_assembly_hardening_product_definition.md
-  - ../../../../src/context_atlas/adapters/retrieval/lexical.py
+  - ../../../../../src/context_atlas/adapters/retrieval/lexical.py
 supersedes: []
 ---
 
@@ -112,4 +112,3 @@ PLANNED
 ## Related Artifacts
 
 - [Story 1 - Retrieval Indexing And Performance](../story_1_retrieval_indexing_and_performance.md)
-
