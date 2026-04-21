@@ -254,6 +254,7 @@
 - Task 2.2 and Task 2.3 should refine normalization and policy integration around that baseline, not invent additional duplicate-comparison families in parallel.
 - Token-overlap matching inside that baseline should remain Unicode-aware so non-English text is not silently excluded from duplicate handling.
 - Boilerplate handling inside that baseline should stay bounded to front matter and shared leading prefixes; later work should not grow a format-specific stripping matrix without first updating the Story boundary.
+- Front-matter stripping inside that baseline should preserve the original content when stripping would erase the whole document, so metadata-only sources do not collapse to empty duplicate keys.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

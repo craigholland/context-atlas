@@ -132,7 +132,10 @@ def _strip_leading_front_matter(content: str) -> str:
     search_limit = min(len(lines), _MAX_FRONT_MATTER_LINES)
     for index in range(1, search_limit):
         if lines[index].strip() in _FRONT_MATTER_TERMINATORS:
-            remainder = "\n".join(lines[index + 1 :])
+            remainder_lines = lines[index + 1 :]
+            if not any(_normalize_line(line) for line in remainder_lines):
+                return content
+            remainder = "\n".join(remainder_lines)
             return remainder.lstrip()
     return content
 

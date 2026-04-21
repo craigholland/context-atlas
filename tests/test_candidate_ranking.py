@@ -223,6 +223,51 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "1")
 
+    def test_ranking_keeps_distinct_metadata_only_sources(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="metadata-only-authoritative",
+                    content=(
+                        "---\n"
+                        "title: Atlas Canon\n"
+                        "owners: [core]\n"
+                        "status: approved\n"
+                        "---\n"
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="metadata-only-planning",
+                    content=(
+                        "---\n"
+                        "title: Atlas Working Notes\n"
+                        "owners: [planning]\n"
+                        "status: draft\n"
+                        "---\n"
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve("atlas title status owners", top_k=2)
+
+        outcome = StarterCandidateRankingPolicy().rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2d",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("metadata-only-authoritative", "metadata-only-planning"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(

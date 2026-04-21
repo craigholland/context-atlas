@@ -330,6 +330,7 @@
 - Story 2 duplicate-handling regressions should stay centered on the bounded lexical baseline: normalized exact matches, containment, token overlap, and clearly non-duplicate related text.
 - Those duplicate-handling regressions should include at least one non-ASCII token-overlap case so Unicode text stays covered by the shared helper.
 - Those same regressions should also include Atlas-style front-matter and shared-header cases so boilerplate normalization stays reviewable instead of drifting behind generic text fixtures.
+- Those same regressions should also cover metadata-only front-matter sources so ranking does not silently deduplicate unrelated documents through an empty normalized key.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.
