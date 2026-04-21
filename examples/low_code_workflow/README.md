@@ -68,6 +68,15 @@ The output shows:
 - trace highlights
 - trace inspection
 
+Interpret those packet and trace views using the same hardened vocabulary as
+the other workflows:
+
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
+- optional `configured_compression_strategy`
+
 Tracked reference artifacts for this path also live here:
 
 - [config.example.toml](./config.example.toml)
@@ -78,3 +87,10 @@ auto-loaded by Atlas today.
 
 That makes the workflow suitable both for product-facing MVP evaluation and for
 internal review of how the preset wrapper still delegates to the shared engine.
+
+The low-code wrapper also inherits the same shared-engine hardening truths:
+
+- the starter estimator is shape-aware by default
+- the wrapper does not introduce a second budgeting or compression model
+- retrieval reuse and duplicate-acceptance proof remain regression-backed
+  rather than moving into a separate low-code proof artifact family

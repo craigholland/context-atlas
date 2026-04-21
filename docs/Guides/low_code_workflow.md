@@ -125,6 +125,18 @@ export CONTEXT_ATLAS_LOW_CODE_DOCS_ROOT="docs/Guides"
 export CONTEXT_ATLAS_LOW_CODE_RECORDS_FILE="examples/docs_database_workflow/sample_records.json"
 ```
 
+The same hardening semantics from the shared starter engine still apply here:
+
+- `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is a baseline control for the
+  shape-aware starter estimator, not a promise of one flat ratio everywhere
+- packet and trace views should prefer truthful budget/compression labels
+- packet budget state should surface `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state should surface `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
+- compression state should surface `compression_strategy` and optional
+  `configured_compression_strategy`
+
 ## Run The Low-Code Workflow
 
 The current runnable example is:
@@ -213,6 +225,17 @@ On a successful run, you should see:
 - `=== Packet Inspection ===`
 - `=== Trace Highlights ===`
 - `=== Trace Inspection ===`
+
+The hardened low-code path should now make it easy to point at:
+
+- packet budget state through `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state through `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
+- truthful compression state through `compression_strategy` and optional
+  `configured_compression_strategy`
+- low-code workflow metadata such as `request_workflow`,
+  `request_low_code_preset`, `request_docs_root`, and `request_records_file`
 
 The trace output should also make the workflow itself inspectable. Metadata such
 as `request_workflow`, `request_low_code_preset`, `request_docs_root`, and
