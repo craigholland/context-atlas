@@ -162,6 +162,7 @@ class MemoryPolicyTests(unittest.TestCase):
             "duplicate",
             tuple(reason.value for reason in duplicate_decision.reason_codes),
         )
+        self.assertIn("exact_key_match", duplicate_decision.explanation or "")
 
     def test_memory_policy_deduplicates_reordered_token_variants(self) -> None:
         entries = (
@@ -209,6 +210,61 @@ class MemoryPolicyTests(unittest.TestCase):
             "duplicate",
             tuple(reason.value for reason in duplicate_decision.reason_codes),
         )
+        self.assertIn("token_overlap", duplicate_decision.explanation or "")
+
+    def test_memory_policy_deduplicates_matching_bodies_despite_front_matter(
+        self,
+    ) -> None:
+        entries = (
+            _memory_entry(
+                "older-front-matter",
+                (
+                    "---\n"
+                    "title: Atlas Canon\n"
+                    "owners: [core]\n"
+                    "---\n"
+                    "Atlas duplicate handling should stay traceable after "
+                    "front matter normalization."
+                ),
+                recorded_at=self.now - 540,
+                importance=1.5,
+            ),
+            _memory_entry(
+                "recent-front-matter",
+                (
+                    "---\n"
+                    "title: Working Notes\n"
+                    "owners: [planning]\n"
+                    "---\n"
+                    "Atlas duplicate handling should stay traceable after "
+                    "front matter normalization."
+                ),
+                recorded_at=self.now - 15,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2f",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-front-matter",),
+        )
+        duplicate_decision = next(
+            decision
+            for decision in outcome.trace.decisions
+            if decision.source_id == "older-front-matter"
+        )
+        self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
+        self.assertIn("exact_key_match", duplicate_decision.explanation or "")
 
     def test_memory_policy_deduplicates_unicode_token_variants(self) -> None:
         entries = (
