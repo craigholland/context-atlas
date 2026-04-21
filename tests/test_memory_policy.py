@@ -438,7 +438,9 @@ class MemoryPolicyTests(unittest.TestCase):
         ]
         self.assertEqual(excluded_decisions, [])
 
-    def test_memory_duplicate_proof_beats_reviewed_prior_baselines(self) -> None:
+    def test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar(
+        self,
+    ) -> None:
         with self.subTest("front_matter_variants_beat_exact_full_text_baseline"):
             older_content = (
                 "---\n"

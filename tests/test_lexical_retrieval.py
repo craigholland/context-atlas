@@ -268,7 +268,9 @@ class LexicalRetrievalTests(unittest.TestCase):
             self._candidate_signature(repeated_results),
         )
 
-    def test_tfidf_repeated_query_proof_bundle_is_reviewable(self) -> None:
+    def test_story_5_hardening_baseline_keeps_repeated_query_proof_bundle_reviewable(
+        self,
+    ) -> None:
         registry = InMemorySourceRegistry(self.sources)
         retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
 
