@@ -128,6 +128,14 @@
   - invariants:
     - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
     - empty-query and invalid-request behavior should stay explicit and deterministic
+    - tests should prove the lexical retriever reuses one baseline index snapshot while the registry revision is stable and rebuilds it only after source registration changes that revision
+    - tests should prove the baseline snapshot carries corpus-wide IDF state so retrieval does not need to rebuild document-frequency-derived weighting on every query
+    - tests should prove source-side TF-IDF vector work is reused from the snapshot so per-query retrieval only rebuilds query-local weighting state
+    - tests should prove a steady-state repeated query reuses both corpus-wide and source-side snapshot layers together rather than only one reuse path at a time
+    - tests should prove repeated warm-cache retrieval still consults the registry source-listing boundary on each call rather than turning cache reuse into a second hidden source-loading path
+    - tests should prove interleaved repeated queries over a stable registry preserve the same public TF-IDF ranking semantics for the same query rather than letting warm cached state skew later answers
+    - tests should keep one concise repeated-query proof bundle reviewable enough that a reviewer can see shared-registry listing, zero snapshot rebuilds, and one query-local TF recomputation without reading the retriever implementation line by line
+    - tests should also keep the bounded human-readable proof surface explicit by proving the shared retrieval-completed event shows `index_snapshot_state` moving from `rebuilt` to `warm` on repeated TF-IDF queries instead of inventing a separate benchmark-only artifact
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:
