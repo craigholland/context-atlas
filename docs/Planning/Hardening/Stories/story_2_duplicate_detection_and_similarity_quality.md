@@ -151,6 +151,9 @@ deterministic, and Atlas-owned.
   files in the same slice
 - duplicate-detection semantics stay shared and inward rather than being
   re-forked by ranking versus memory behavior
+- Story 5 should inherit this Story's explicit duplicate-handling acceptance
+  bar and reviewed proof cases instead of renegotiating the duplicate baseline
+  during later validation or documentation work
 - The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that
