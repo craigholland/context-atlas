@@ -157,6 +157,7 @@
     - low-code wrappers should prefer `ContextAtlasSettings.with_low_code_overrides(...)`, `build_low_code_workflow_plan(...)`, and `assemble_with_starter_sources(...)` over wrapper-local setting merges or metadata packing
     - proof-artifact writing should stay on one shared outer helper here rather than being duplicated across runnable workflow examples
     - tokenizer seams bound here must stay provider-agnostic at the function signature level and must default cleanly to the starter heuristic when no external estimator is supplied
+    - custom tokenizer-estimator labels passed through starter assembly helpers must require a real estimator binding so trace and compression metadata cannot misreport which estimator actually ran
 
 ## Known Gaps / Future-State Notes
 - Infrastructure still focuses on config, logging, and shared assembly helpers; persistence, audit sinks, memory stores, and broader integration infrastructure remain future work.

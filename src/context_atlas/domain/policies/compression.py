@@ -80,6 +80,20 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
                 message_args=(ErrorMessage.MIN_CHUNK_CHARS_MUST_BE_AT_LEAST_ONE,),
             )
+        token_estimator_name_was_provided = (
+            "token_estimator_name" in self.model_fields_set
+        )
+        if self.token_estimator is None:
+            if token_estimator_name_was_provided and (
+                self.token_estimator_name != "starter_heuristic"
+            ):
+                raise ContextAtlasError(
+                    code=ErrorCode.INVALID_COMPRESSION_REQUEST,
+                    message_args=("token_estimator_name requires token_estimator",),
+                )
+            return
+        if not token_estimator_name_was_provided:
+            object.__setattr__(self, "token_estimator_name", "external_binding")
 
     def compress_candidates(
         self,

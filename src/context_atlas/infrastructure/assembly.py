@@ -37,6 +37,7 @@ from ..adapters import (
     InMemorySourceRegistry,
     LexicalRetriever,
 )
+from ..domain.errors import ContextAtlasError, ErrorCode
 from ..domain.models import (
     ContextBudget,
     ContextMemoryEntry,
@@ -80,10 +81,15 @@ def build_starter_context_assembly_service(
 
     active_settings = settings or ContextAtlasSettings()
     active_logger = logger or configure_logger(active_settings.logging)
-    active_token_estimator_name = token_estimator_name or (
-        "external_binding"
-        if token_estimator is not None
-        else active_settings.assembly.compression_token_estimator_name
+    if token_estimator is None and token_estimator_name is not None:
+        raise ContextAtlasError(
+            code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
+            message_args=("token_estimator_name requires token_estimator",),
+        )
+    active_token_estimator_name = (
+        active_settings.assembly.compression_token_estimator_name
+        if token_estimator is None
+        else (token_estimator_name or "external_binding")
     )
 
     return ContextAssemblyService(

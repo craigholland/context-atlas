@@ -376,6 +376,43 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["token_estimator"], "word_count")
 
+    def test_compression_auto_labels_custom_estimator_when_name_is_omitted(
+        self,
+    ) -> None:
+        candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="tokenizer-auto-label",
+                content="alpha beta gamma delta epsilon zeta eta",
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.TRUNCATE,
+            chars_per_token=20,
+            token_estimator=estimate_words,
+        ).compress_candidates(
+            (candidate,),
+            trace_id="trace-compression-tokenizer-seam-2",
+            max_tokens=3,
+            query="alpha beta",
+        )
+
+        self.assertEqual(
+            outcome.compression_result.metadata["token_estimator"],
+            "external_binding",
+        )
+        self.assertEqual(
+            outcome.trace.metadata["token_estimator"],
+            "external_binding",
+        )
+
     def test_compression_keeps_short_candidates_when_they_fit_budget(self) -> None:
         short_registry = InMemorySourceRegistry(
             (

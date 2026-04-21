@@ -9,7 +9,7 @@ import unittest
 
 from pydantic import ValidationError
 
-from context_atlas.domain.errors import ConfigurationError, ErrorCode
+from context_atlas.domain.errors import ConfigurationError, ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
 from context_atlas.infrastructure.config import (
     ContextAtlasSettings,
@@ -237,6 +237,20 @@ class ConfigAndObservabilityTests(unittest.TestCase):
 
         self.assertIs(service._compression_policy.token_estimator, estimate_words)
         self.assertEqual(service._compression_policy.token_estimator_name, "word_count")
+
+    def test_starter_assembly_rejects_custom_estimator_label_without_binding(
+        self,
+    ) -> None:
+        with self.assertRaises(ContextAtlasError) as context:
+            build_starter_context_assembly_service(
+                retriever=_StubRetriever(),
+                token_estimator_name="word_count",
+            )
+
+        self.assertEqual(context.exception.code, ErrorCode.INVALID_ASSEMBLY_REQUEST)
+        self.assertIn(
+            "token_estimator_name requires token_estimator", str(context.exception)
+        )
 
 
 class _temporary_environment:
