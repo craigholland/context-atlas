@@ -83,6 +83,7 @@
     - index snapshots should stay outward adapter helpers rather than new inward domain artifacts
     - the baseline snapshot should remain the smallest shape needed for later reuse work
     - corpus-wide document-frequency and inverse-document-frequency state should be computed once per registry revision inside the snapshot rather than rebuilt during each retrieval call
+    - reusable per-document TF-IDF vectors and norms may live in the snapshot when they stay tied to the same registry revision and do not create a parallel retrieval engine surface
 - `retrieval/lexical.py`:
   - responsibility: produces lexical retrieval candidates from registry-owned sources and retrieval-owned index helpers
   - defines:
@@ -152,7 +153,7 @@
 - This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
 - Lexical retrieval hardening now separates source ownership, index-shape construction, and retrieval behavior, but repeated-query reuse still remains future work until the hardening tasks extend those surfaces.
 - The current retrieval baseline now reuses one registry-revision-aligned index snapshot for TF-IDF work, but per-document TF/vector reuse and deeper steady-state optimization still remain future hardening work.
-- The current retrieval baseline now also caches corpus-wide IDF state inside that snapshot, but per-document TF/vector reuse and deeper steady-state optimization still remain future hardening work.
+- The current retrieval baseline now caches both corpus-wide IDF state and source-side TF-IDF vector state inside one registry-revision-aligned snapshot, but deeper steady-state optimization and broader retrieval backends still remain future work.
 - Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
 - If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 

@@ -11,6 +11,7 @@ from context_atlas.adapters import (
     LexicalRetrievalMode,
     LexicalRetriever,
 )
+from context_atlas.adapters.retrieval import lexical as lexical_module
 from context_atlas.adapters.retrieval.indexing import build_lexical_index_snapshot
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
@@ -146,6 +147,22 @@ class LexicalRetrievalTests(unittest.TestCase):
             snapshot.missing_term_inverse_document_frequency,
             math.log(1 + snapshot.source_count) + 1.0,
         )
+        self.assertIn("retrieval-study", snapshot.source_tfidf_vectors)
+        self.assertGreater(snapshot.source_vector_norms["retrieval-study"], 0.0)
+
+    def test_tfidf_retrieval_reuses_source_side_vector_state(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        retriever.retrieve("tf idf retrieval", top_k=2)
+
+        with patch(
+            "context_atlas.adapters.retrieval.lexical._term_frequency",
+            wraps=lexical_module._term_frequency,
+        ) as term_frequency:
+            retriever.retrieve("document ranking context", top_k=2)
+
+        self.assertEqual(term_frequency.call_count, 1)
 
     def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
         self,
