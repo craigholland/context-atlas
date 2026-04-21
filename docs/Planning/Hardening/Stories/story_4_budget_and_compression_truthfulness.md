@@ -103,6 +103,13 @@ secondary metadata keys.
   consuming rather than redefining those meanings
 - settle these semantics cleanly enough that Story 5 can validate and document
   them without targeting a moving contract
+- current delivered Task 4.4 result:
+  - service packet and trace metadata now expose truthful top-level
+    compression strategy fields alongside the settled budget vocabulary
+  - packet and trace inspection renderers now surface
+    `unallocated_tokens`, `effective_strategy`, and optional
+    `configured_strategy` directly from canonical artifacts and service
+    metadata
 
 ## Sequencing
 

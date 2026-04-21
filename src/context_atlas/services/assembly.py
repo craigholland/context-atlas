@@ -354,9 +354,21 @@ class ContextAssemblyService:
                     "budget_unallocated_tokens": str(budget_outcome.unallocated_tokens),
                     "document_budget_tokens": str(document_budget_tokens),
                     "memory_budget_tokens": str(memory_budget_tokens),
+                    "compression_present": str(compression_outcome is not None).lower(),
                     "compression_applied": str(compression_applied).lower(),
                 }
             )
+            if compression_outcome is not None:
+                packet_metadata["compression_strategy"] = (
+                    compression_outcome.compression_result.strategy_used.value
+                )
+                configured_strategy = (
+                    compression_outcome.compression_result.configured_strategy
+                )
+                if configured_strategy is not None:
+                    packet_metadata["configured_compression_strategy"] = (
+                        configured_strategy.value
+                    )
 
             packet = ContextPacket(
                 packet_id=active_packet_id,
@@ -710,6 +722,9 @@ class ContextAssemblyService:
             "selected_memory_count": str(selected_memory_count),
             "budget_total_tokens": str(budget.total_tokens),
             "budget_slot_count": str(len(budget.slots)),
+            "budget_fixed_reserved_tokens": str(budget.fixed_reserved_tokens),
+            "budget_unreserved_tokens": str(budget.unreserved_tokens),
+            "budget_unallocated_tokens": str(budget_outcome.unallocated_tokens),
             "compression_present": str(compression_outcome is not None).lower(),
             "compression_applied": str(compression_applied).lower(),
             "selected_source_classes": ",".join(
@@ -754,6 +769,15 @@ class ContextAssemblyService:
                 )
             ),
         }
+        if compression_outcome is not None:
+            metadata["compression_strategy"] = (
+                compression_outcome.compression_result.strategy_used.value
+            )
+            configured_strategy = (
+                compression_outcome.compression_result.configured_strategy
+            )
+            if configured_strategy is not None:
+                metadata["configured_compression_strategy"] = configured_strategy.value
         metadata.update(self._prefix_metadata("request", request_metadata))
         metadata.update(
             self._prefix_metadata("ranking", ranking_outcome.trace.metadata)

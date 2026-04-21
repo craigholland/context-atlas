@@ -64,13 +64,16 @@
   - invariants:
     - emphasize canonical packet state such as selected sources, memory, budget, and compression
     - budget inspection should prefer truthful budget vocabulary like `fixed_reserved_tokens` and `unreserved_tokens` instead of re-exporting legacy alias names as the primary display contract
+    - packet inspection should show `unallocated_tokens` when the service provides that post-allocation remainder explicitly
     - reflect actual compression application state rather than just the presence of a `CompressionResult`
+    - compression inspection should distinguish effective runtime strategy from optional configured strategy when fallback changed the actual behavior
     - remain a read-only formatter over canonical packet artifacts
 - `trace.py`:
   - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos
   - invariants:
     - emphasize included, excluded, transformed, and deferred decisions plus trace metadata
     - concise highlight views should stay derived from canonical trace metadata and counts rather than introducing a second summary model
+    - trace-facing summaries should prefer the settled top-level service metadata keys for budget and compression semantics instead of forcing readers through duplicated prefixed stage metadata
     - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes

@@ -90,6 +90,11 @@ implementation details.
 - inherit the Story 4 compression truth model as well: later proof/docs work
   should treat `strategy_used` as the effective runtime strategy and only rely
   on `configured_strategy` when fallback behavior needs to be shown explicitly
+- inherit the settled Story 4 service/renderer vocabulary too: later proof/docs
+  work should treat top-level `compression_strategy` and optional
+  `configured_compression_strategy` as the preferred trace-facing compression
+  metadata, and packet/trace inspection examples should show
+  `unallocated_tokens` where service output provides it
 - establish regression coverage first
 - build bounded proof surfaces next where they add real review value
 - update guides and examples only after the hardened contracts are stable

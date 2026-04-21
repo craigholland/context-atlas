@@ -166,6 +166,7 @@
   - invariants:
     - tests should verify packet inspection highlights selected sources, retained memory, budget state, and compression
     - tests should verify packet inspection distinguishes actual compression application from mere compression-result presence
+    - tests should verify packet inspection shows `unallocated_tokens` and distinguishes effective from configured compression strategy when those semantics are present
     - tests should verify packet inspection stays read-only over canonical packet artifacts
     - tests should verify generic packet-context rendering defaults stay generic while workflow-facing labels remain caller-supplied
 - `test_trace_rendering.py`:
@@ -180,6 +181,7 @@
   - invariants:
     - tests should verify trace inspection groups included, excluded, transformed, and deferred decisions clearly
     - tests should verify service-produced traces carry stable decision positions for inspection renderers
+    - tests should verify trace summaries and highlight views surface the settled top-level budget and compression semantics directly
     - tests should verify any concise trace-highlight surface remains derived from canonical trace metadata and counts
 - `test_memory_policy.py`:
   - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
@@ -207,6 +209,7 @@
     - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove service packet and trace metadata expose top-level effective compression strategy fields so downstream renderers do not need to infer them from prefixed stage metadata alone
     - tests should prove service-owned zero-document-budget compression outcomes report truncation as the effective strategy while preserving the configured starter strategy separately when needed
     - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
