@@ -119,6 +119,15 @@ decision about which of those two concerns leads implementation.
   introduces a supported operator-facing knob
 - keep the Story's docs honest about whether Atlas is using an improved
   heuristic, a tokenizer seam, or both
+- current delivered validation/alignment result:
+  - packet-facing validation now proves the default starter path surfaces
+    `starter_heuristic` through compression metadata and trace metadata
+  - outward-bound custom estimators now remain visible through packet and trace
+    metadata without implying an env-backed tokenizer selector
+  - runtime docs now state that
+    `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is the baseline control for the
+    starter heuristic, not a claim that Atlas uses one flat estimate for every
+    content shape
 
 ## Sequencing
 
@@ -148,6 +157,13 @@ decision about which of those two concerns leads implementation.
   layer
 - tests and docs make the delivered estimation story legible enough that
   callers do not need to infer it from implementation details
+- delivered Story 3 contract:
+  - starter estimation is shape-aware by default through the
+    `starter_heuristic`
+  - custom token estimation may be bound outward through a provider-agnostic
+    callable seam
+  - Atlas does not yet expose an env-backed tokenizer selector or provider
+    binding knob
 
 ## Definition Of Done
 

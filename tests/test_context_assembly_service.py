@@ -198,6 +198,63 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertEqual(packet.trace.metadata["compression_present"], "true")
         self.assertEqual(packet.trace.metadata["compression_applied"], "true")
 
+    def test_service_trace_uses_starter_heuristic_label_by_default(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=64,
+                        default_retrieval_top_k=3,
+                    )
+                }
+            ),
+        )
+
+        packet = service.assemble(
+            query="context packet compression retrieval authority planning review"
+        )
+
+        self.assertIsNotNone(packet.compression_result)
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_token_estimator"],
+            "starter_heuristic",
+        )
+
+    def test_one_shot_helper_propagates_bound_token_estimator_label(self) -> None:
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        packet = assemble_with_starter_context_service(
+            retriever=self.retriever,
+            query="context packet compression retrieval authority planning review",
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=64,
+                        default_retrieval_top_k=3,
+                    )
+                }
+            ),
+            token_estimator=estimate_words,
+            token_estimator_name="word_count",
+        )
+
+        self.assertIsNotNone(packet.compression_result)
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.metadata["token_estimator"],
+            "word_count",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_token_estimator"], "word_count"
+        )
+
     def test_assemble_includes_memory_entries_in_packet_and_rendered_output(
         self,
     ) -> None:

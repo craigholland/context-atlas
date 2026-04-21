@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, validation, docs, proof, regression]
 related:
@@ -70,6 +70,10 @@ implementation details.
   present
 - ensure product-facing docs explain the engine truthfully without forcing
   readers to parse implementation details
+- keep the Story 3 documentation baseline explicit:
+  - the starter path is shape-aware by default through `starter_heuristic`
+  - custom token estimation remains an outward callable seam
+  - there is still no env-backed tokenizer selector
 
 ### Task 4: Final Hardening Closeout
 
