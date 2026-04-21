@@ -13,10 +13,10 @@ owners: [core]
 tags: [mvp, review, assessment, evidence, recommendation, hardening]
 related:
   - ./mvp_evaluation_rubric.md
-  - ../../Planning/MVP/Stories/story_6_mvp_proof.md
-  - ../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md
-  - ../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md
-  - ../../Planning/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md
+  - ../../Planning/completed/MVP/Stories/story_6_mvp_proof.md
+  - ../../Planning/completed/MVP/Stories/story_7_mvp_readiness_hardening.md
+  - ../../Planning/completed/MVP/Stories/Tasks/task_6_3_product_deliverables.md
+  - ../../Planning/completed/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md
   - ../../../examples/mvp_proof/README.md
   - ../../../examples/mvp_proof/evidence/README.md
 supersedes: []
@@ -32,10 +32,10 @@ result from the Story 6 MVP proof work plus the Story 7 hardening reassessment.
 ## Inputs
 
 - [Context Atlas MVP Evaluation Rubric](./mvp_evaluation_rubric.md)
-- [Story 6 - MVP Proof](../../Planning/MVP/Stories/story_6_mvp_proof.md)
-- [Story 7 - MVP Readiness Hardening](../../Planning/MVP/Stories/story_7_mvp_readiness_hardening.md)
-- [Task 6.3 - Product Deliverables PR Plan](../../Planning/MVP/Stories/Tasks/task_6_3_product_deliverables.md)
-- [Task 7.4 - MVP Readiness Reassessment PR Plan](../../Planning/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md)
+- [Story 6 - MVP Proof](../../Planning/completed/MVP/Stories/story_6_mvp_proof.md)
+- [Story 7 - MVP Readiness Hardening](../../Planning/completed/MVP/Stories/story_7_mvp_readiness_hardening.md)
+- [Task 6.3 - Product Deliverables PR Plan](../../Planning/completed/MVP/Stories/Tasks/task_6_3_product_deliverables.md)
+- [Task 7.4 - MVP Readiness Reassessment PR Plan](../../Planning/completed/MVP/Stories/Tasks/task_7_4_mvp_readiness_reassessment.md)
 - packaged workflow evidence generated through
   [`scripts/mvp_proof/capture_evidence.py`](/context-atlas/scripts/mvp_proof/capture_evidence.py)
 

@@ -89,7 +89,7 @@
 - docs/Authoritative/Canon/RepoManagement: sibling canon for repository-provider concepts that agentic-development may rely on but must not absorb.
 - docs/Authoritative/Identity/AgenticDevelopment: project-specific binding layer that refines, but must not redefine, the portable canon.
 - docs/Authoritative/Identity/RepoManagement: project-specific repo-provider bindings that must stay downstream of this canon and the RepoManagement canon.
-- docs/Planning/Agentic: planning surfaces should inherit vocabulary and governance from this folder rather than creating a second source of truth.
+- docs/Planning/completed/Agentic: planning surfaces should inherit vocabulary and governance from this folder rather than creating a second source of truth.
 
 ## Verification Contract
 ```yaml
