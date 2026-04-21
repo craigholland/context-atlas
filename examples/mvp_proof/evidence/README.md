@@ -8,7 +8,7 @@ template_refs:
   content: guide_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [mvp, proof, evidence, bundles, review]
 related:
@@ -75,7 +75,7 @@ Use the same bundle-root pattern for the current selected workflows:
 - `docs_database_builder` / `builder_support_troubleshooting`
 - `low_code_chatbot` / `low_code_validation`
 
-Story 7 also adds one constrained hardening target:
+The hardening proof pass also adds one constrained budget/compression target:
 
 - `codex_repository` / `repo_budget_pressure_tradeoffs`
 
@@ -83,7 +83,7 @@ That bundle should be packaged with `--expect-budget-pressure` so capture fails
 unless the packet and trace artifacts show visible pressure metadata or
 budget-pressure decisions.
 
-Story 7 also adds one document-authority hardening target:
+The hardening proof pass also adds one document-authority target:
 
 - `codex_repository` / `repo_document_authority_precedence`
 
@@ -94,6 +94,22 @@ of lower-authority repository documents in the same scenario.
 The canonical workflow commands and scenario inputs for generating the Atlas
 artifact directories still live in
 [examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md).
+
+## Hardening Proof Inventory
+
+For Story 5, keep the human-readable proof inventory bounded:
+
+- bundle-backed human-readable proof:
+  - `codex_repository / repo_budget_pressure_tradeoffs`
+  - `codex_repository / repo_document_authority_precedence`
+- test-backed proof only:
+  - retrieval index reuse
+  - duplicate acceptance-bar behavior
+
+That split is intentional. Reviewers should open generated packet, trace,
+rendered-context, and evidence-package artifacts where those surfaces add real
+clarity, but they should not create a second retrieval-demo or duplicate-demo
+artifact family when the named Story 5 baseline tests already carry that proof.
 
 The canonical human-readable assessment record that should reference these
 bundles lives in
@@ -121,7 +137,7 @@ Those bundle directories are generated, not tracked. Recreate them with the
 commands in [../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
 plus the `--bundle-root tmp/mvp_proof/evidence` capture step shown above.
 
-## Story 7 Budget-Pressure Hardening Bundle
+## Hardening Budget-Pressure Bundle
 
 The first hardening bundle that should be added next is:
 
@@ -148,7 +164,18 @@ python scripts/mvp_proof/capture_evidence.py \
 That keeps the hardening bundle on the same reviewable layout as the original
 Story 6 proof set while making the constrained-budget expectation explicit.
 
-## Story 7 Document-Authority Hardening Bundle
+When reviewing this bundle, the canonical human-readable proof should come from
+the packaged Atlas packet and Atlas trace. Prefer confirming:
+
+- `budget_fixed_reserved_tokens`
+- `budget_unreserved_tokens`
+- `budget_unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy`
+
+there instead of writing a second summary artifact.
+
+## Hardening Document-Authority Bundle
 
 The first authority hardening bundle that should be added next is:
 
@@ -175,3 +202,7 @@ python scripts/mvp_proof/capture_evidence.py \
 That keeps the authority hardening bundle on the same reviewable layout as the
 original proof set while making the expected document-authority contrast
 explicit.
+
+When reviewing this bundle, the canonical human-readable proof should come from
+the selected packet ordering plus the Atlas trace reasoning, not from a second
+authority-summary artifact.
