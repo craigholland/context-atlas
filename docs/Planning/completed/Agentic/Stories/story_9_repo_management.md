@@ -17,15 +17,15 @@ related:
   - ./story_5_protocol_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
   - ./story_10_validation_governance_and_drift_control.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
-  - ../../../Authoritative/Canon/RepoManagement/README.md
-  - ../../../Authoritative/Canon/RepoManagement/GitHub/README.md
-  - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
-  - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
+  - ../../../../Authoritative/Canon/RepoManagement/README.md
+  - ../../../../Authoritative/Canon/RepoManagement/GitHub/README.md
+  - ../../../../Authoritative/Identity/RepoManagement/GitHub/README.md
+  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md
 supersedes: []
 ---
 
@@ -44,15 +44,15 @@ provider-specific bindings, and auditable operational identities.
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 10 - Validation, Governance, And Drift Control](./story_10_validation_governance_and_drift_control.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
-- [Repo Management](../../../Authoritative/Canon/RepoManagement/README.md)
-- [GitHub RepoManagement Canon](../../../Authoritative/Canon/RepoManagement/GitHub/README.md)
-- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
-- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+- [Repo Management](../../../../Authoritative/Canon/RepoManagement/README.md)
+- [GitHub RepoManagement Canon](../../../../Authoritative/Canon/RepoManagement/GitHub/README.md)
+- [Context Atlas GitHub Binding](../../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
+- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Gate Review Pass Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md)
 - Current repository delivery model using GitHub branches, PR reviews, and
   human merges
 
@@ -148,10 +148,11 @@ provider-specific bindings, and auditable operational identities.
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 10 - Validation, Governance, And Drift Control](./story_10_validation_governance_and_drift_control.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
-- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Gate Review Pass Matrix](../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Gate Review Pass Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md)
+
 

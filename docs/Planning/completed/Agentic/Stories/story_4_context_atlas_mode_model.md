@@ -15,16 +15,16 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_3_context_atlas_role_model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Mode-Mutation-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md
-  - ../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
-  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md
+  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -43,16 +43,16 @@ alternate role definitions.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
-- [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
-- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Mode Model](../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md)
-- [Mode Transition Rules](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md)
-- [Mode Mutation Matrix](../../../Authoritative/Identity/AgenticDevelopment/Mode-Mutation-Matrix.md)
-- [Context Atlas Role-Mode Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md)
-- [Mode Transition Graph](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md)
-- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Mode Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md)
+- [Mode Transition Rules](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md)
+- [Mode Mutation Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md)
+- [Context Atlas Role-Mode Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md)
+- [Mode Transition Graph](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md)
+- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - Current repository workflow expectations around planning, implementation, review, rework, recovery, and release-oriented work
 
 ## Proposed Tasks
@@ -143,9 +143,10 @@ alternate role definitions.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
-- [Context Atlas Role Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
-- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Agentic Development Profile](../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+
 

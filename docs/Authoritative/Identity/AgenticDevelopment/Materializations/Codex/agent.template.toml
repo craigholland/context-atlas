@@ -13,7 +13,7 @@ maintenance_mode = "hand-maintained" # hand-maintained | generated | mixed
 [traceability]
 project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"
 binding_sources = []
-template_source = "docs/Authoritative/Identity/AgenticDevelopment/codex/agent.template.toml"
+template_source = "docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/agent.template.toml"
 
 [role_binding]
 role_id = "replace-me-or-none"

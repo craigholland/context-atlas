@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, modes, mutation-rules]
 related:
   - ../story_4_context_atlas_mode_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the canonical mode set from Task 4.1
 
 ## Proposed Work
@@ -44,10 +44,10 @@ IMPLEMENTED
 - keep the rules compatible with later protocol binding
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md`
 - `docs/Planning/completed/Agentic/Stories/story_4_context_atlas_mode_model.md`
 
 #### Update AI files
@@ -60,10 +60,10 @@ IMPLEMENTED
 - keep the matrix concrete enough to support later validation and platform binding
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Mutation-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
 
 #### Update AI files
 - `.`
@@ -106,5 +106,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 

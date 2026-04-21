@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, protocols, template]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
+  - ../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - current protocol-related assumptions in the Story layer
 
 ## Proposed Work
@@ -115,5 +115,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 

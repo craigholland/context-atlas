@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, materialization, boundaries]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md
+  - ../../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 - the portable canon and project profile layers from earlier Stories
 
 ## Proposed Work
@@ -107,5 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Platform Materialization Model](../../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 

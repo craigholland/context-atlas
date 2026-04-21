@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, codex, templates]
 related:
   - ../story_8_codex_materialization_for_context_atlas.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
+  - ../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 8 - Codex Materialization For Context Atlas](../story_8_codex_materialization_for_context_atlas.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Codex Folder Layout](../../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
+- [Codex Folder Layout](../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md)
 - the generic template model from Story 7
 
 ## Proposed Work
@@ -44,12 +44,12 @@ IMPLEMENTED
 - make the creation path explicit enough for an AI contributor to follow repeatedly
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/AGENTS.template.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/agent.template.toml`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/mode.template.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/skill.template.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/role.template.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/protocol.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/AGENTS.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/agent.template.toml`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/mode.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/skill.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/role.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/protocol.template.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
@@ -64,12 +64,12 @@ IMPLEMENTED
 - keep the instructions project-specific without turning them into the canon themselves
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/creation_guidance.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/README.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/AGENTS.template.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/skill.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/AGENTS.template.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/skill.template.md`
 
 #### Update AI files
 - `.`
@@ -111,4 +111,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 8 - Codex Materialization For Context Atlas](../story_8_codex_materialization_for_context_atlas.md)
-- [Codex Folder Layout](../../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
+- [Codex Folder Layout](../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md)

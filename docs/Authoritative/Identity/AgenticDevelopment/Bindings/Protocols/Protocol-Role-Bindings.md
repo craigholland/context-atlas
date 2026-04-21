@@ -12,17 +12,17 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, protocols, roles]
 related:
-  - ./Role-Model.md
-  - ./Role-Authority-Matrix.md
+  - ../Roles/Role-Model.md
+  - ../Roles/Role-Authority-Matrix.md
   - ./Gate-Review-Pass-Matrix.md
-  - ../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Escalation-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Escalation-Protocol.md
 supersedes: []
 ---
 
@@ -44,14 +44,14 @@ semantics.
 ### 1. Planning Protocol Is Planner/Decomp-Owned
 
 `Planner/Decomp` is the normal owning role for the
-[Planning Protocol](../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md).
+[Planning Protocol](../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md).
 
 `Backend` and `Documentation/UAT` may participate in bounded planning work
 through explicit delegation, but they do not become planning owners by default.
 
 ### 2. Execution Slice Protocol Is Deliverable-Owner-Owned
 
-The [Execution Slice Protocol](../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+The [Execution Slice Protocol](../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
 is normally owned by the role that owns the deliverable surface.
 
 For the current repository, that means:
@@ -66,7 +66,7 @@ for those surfaces.
 ### 3. Review Protocol Is QA-Owned
 
 `QA` is the owning role for the
-[Review Protocol](../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md).
+[Review Protocol](../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md).
 
 Producing roles participate as:
 
@@ -78,7 +78,7 @@ work.
 
 ### 4. Rework Protocol Returns To The Owning Producing Role
 
-The [Rework Protocol](../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
+The [Rework Protocol](../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
 normally returns work to the role that owns the affected deliverable surface.
 
 That means:
@@ -92,7 +92,7 @@ That means:
 
 ### 5. Recovery Protocol Is Context-Dependent But Not Ownership-Free
 
-The [Recovery Protocol](../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+The [Recovery Protocol](../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
 may be entered by multiple roles, but recovery ownership should remain with the
 role closest to the broken workflow state unless explicit escalation changes
 that.
@@ -141,15 +141,16 @@ state instead of bypassing it.
 
 ## Related Artifacts
 
-- [Context Atlas Role Model](./Role-Model.md)
-- [Context Atlas Role Authority Matrix](./Role-Authority-Matrix.md)
+- [Context Atlas Role Model](../Roles/Role-Model.md)
+- [Context Atlas Role Authority Matrix](../Roles/Role-Authority-Matrix.md)
 - [Gate Review Pass Matrix](./Gate-Review-Pass-Matrix.md)
-- [Planning Protocol](../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
-- [Execution Slice Protocol](../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
-- [Review Protocol](../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
-- [Rework Protocol](../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
-- [Recovery Protocol](../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
-- [Delegation Protocol](../../Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md)
-- [Handoff Protocol](../../Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md)
-- [Escalation Protocol](../../Canon/AgenticDevelopment/Protocols/Escalation-Protocol.md)
+- [Planning Protocol](../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Protocol](../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Delegation Protocol](../../../../Canon/AgenticDevelopment/Protocols/Delegation-Protocol.md)
+- [Handoff Protocol](../../../../Canon/AgenticDevelopment/Protocols/Handoff-Protocol.md)
+- [Escalation Protocol](../../../../Canon/AgenticDevelopment/Protocols/Escalation-Protocol.md)
+
 

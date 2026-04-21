@@ -12,13 +12,13 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, modes, workflow-state]
 related:
-  - ../Context-Atlas-Agentic-Development-Profile.md
-  - ./Role-Model.md
-  - ./Role-Mode-Matrix.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
+  - ../Roles/Role-Model.md
+  - ../Roles/Role-Mode-Matrix.md
   - ./Mode-Transition-Rules.md
   - ./Mode-Mutation-Matrix.md
   - ./Mode-Transition-Graph.md
-  - ../../Canon/AgenticDevelopment/Mode-Model.md
+  - ../../../../Canon/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
 
@@ -157,11 +157,12 @@ artifacts and protocol rules rather than reconstructed from freeform comments.
 
 ## Related Artifacts
 
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Context Atlas Role Model](./Role-Model.md)
-- [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role Model](../Roles/Role-Model.md)
+- [Context Atlas Role-Mode Matrix](../Roles/Role-Mode-Matrix.md)
 - [Mode Transition Rules](./Mode-Transition-Rules.md)
 - [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
 - [Mode Transition Graph](./Mode-Transition-Graph.md)
-- [Portable Mode Model](../../Canon/AgenticDevelopment/Mode-Model.md)
+- [Portable Mode Model](../../../../Canon/AgenticDevelopment/Mode-Model.md)
+
 

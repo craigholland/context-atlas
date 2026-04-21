@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, github, identity]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the role-authority and QA review-pass model from Stories 3 and 5
 - the portable RepoManagement canon and reusable GitHub canon from Tasks 9.1
   and 9.2
@@ -74,7 +74,7 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/RepoManagement/GitHub/README.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md`
 
 #### Update AI files
 - `.`
@@ -122,4 +122,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)

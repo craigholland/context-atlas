@@ -83,7 +83,7 @@ rather than being invented in Story prose or runtime-materialization docs.
 For the Codex materialization Story in the agentic-development stack, the
 project-specific runtime binding, layout, template, creation, and governance
 surfaces live under
-[docs/Authoritative/Identity/AgenticDevelopment/codex/](../Authoritative/Identity/AgenticDevelopment/codex/).
+[docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/).
 Planning docs should treat that directory as the downstream Codex entrypoint
 rather than restating Codex runtime conventions in planning prose.
 
@@ -93,7 +93,7 @@ For the agentic-development stack, runtime-capacity planning input belongs in
 the Identity layer artifact at
 [runtime_capacity.yaml](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml),
 with its human update/trust model defined in
-[runtime_capacity.md](../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md).
+[runtime_capacity.md](../Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md).
 
 If a planning artifact needs to explain what a role, mode, skill, protocol, or
 materialization layer means, the first fix should usually be to improve the

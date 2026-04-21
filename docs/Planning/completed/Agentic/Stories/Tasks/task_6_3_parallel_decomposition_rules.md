@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, decomposition, parallelism]
 related:
   - ../story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - the runtime-capacity model and capacity artifact from Tasks 6.1 and 6.2
 
 ## Proposed Work
@@ -108,5 +108,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 

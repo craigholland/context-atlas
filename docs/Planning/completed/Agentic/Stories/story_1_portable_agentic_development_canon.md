@@ -13,9 +13,9 @@ owners: [core]
 tags: [agentic-development, story, canon, glossary, governance]
 related:
   - ../agentic_development_product_definition.md
-  - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
-  - ../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
-  - ../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -31,14 +31,14 @@ runtime-materialization scheme.
 ## Inputs
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
-- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
-- [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- [Documentation Ontology](../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
-- [Agentic Development README](../../../Authoritative/Canon/AgenticDevelopment/README.md)
-- [Agentic Development Glossary](../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
-- [Agent Authority Model](../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
-- [Platform Materialization Model](../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Agentic Development README](../../../../Authoritative/Canon/AgenticDevelopment/README.md)
+- [Agentic Development Glossary](../../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
 - Current Craig Architecture split between portable canon, project-specific bindings, and executable surfaces
 
 ## Proposed Tasks
@@ -142,13 +142,14 @@ runtime-materialization scheme.
 ## Related Artifacts
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
-- [Agentic Development README](../../../Authoritative/Canon/AgenticDevelopment/README.md)
-- [Agentic Development Glossary](../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
-- [Role Archetypes](../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
-- [Agent Authority Model](../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
-- [Platform Materialization Model](../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
-- [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
-- [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- [Documentation Ontology](../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Agentic Development README](../../../../Authoritative/Canon/AgenticDevelopment/README.md)
+- [Agentic Development Glossary](../../../../Authoritative/Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Role Archetypes](../../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
+- [Agent Authority Model](../../../../Authoritative/Canon/AgenticDevelopment/Agent-Authority-Model.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Platform Materialization Model](../../../../Authoritative/Canon/AgenticDevelopment/Platform-Materialization-Model.md)
+- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+
 

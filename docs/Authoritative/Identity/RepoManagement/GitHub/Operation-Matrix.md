@@ -14,7 +14,7 @@ tags: [context-atlas, repo-management, github, operations, permissions]
 related:
   - ./Principal-Binding-Model.md
   - ./Branch-Target-Policy.md
-  - ../../Canon/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
 supersedes: []
 ---
 
@@ -72,4 +72,5 @@ Those surfaces remain future work unless a later binding makes them explicit.
   publication rights.
 - Later automation should consume this matrix rather than inventing a second
   permission table.
+
 

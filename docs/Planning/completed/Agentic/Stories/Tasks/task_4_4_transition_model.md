@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, transitions, modes]
 related:
   - ../story_4_context_atlas_mode_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - outputs from Tasks 4.1 through 4.3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - prevent ad hoc mode jumps from becoming implicit defaults
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_4_context_atlas_mode_model.md`
@@ -62,8 +62,8 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
 - `docs/Planning/completed/Agentic/Stories/story_5_protocol_model.md`
 - `docs/Planning/completed/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
 
@@ -108,4 +108,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)

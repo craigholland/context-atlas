@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, delegation, handoff, escalation]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md
+  - ../../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Delegation Model](../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
+- [Delegation Model](../../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
 - the core workflow protocol set from Task 5.2
 
 ## Proposed Work
@@ -123,5 +123,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Delegation Model](../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
+- [Delegation Model](../../../../../Authoritative/Canon/AgenticDevelopment/Delegation-Model.md)
 

@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, runtime-capacity, validation]
 related:
   - ../story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Runtime Capacity Model](../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Runtime Capacity Model](../../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
 - the capacity artifact and decomposition rules from Tasks 6.2 and 6.3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - keep the update model simple enough for routine use by a human operator or planner
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md`
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml`
@@ -64,7 +64,7 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md`
 - `docs/Planning/completed/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
@@ -109,5 +109,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
-- [Runtime Capacity Model](../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Runtime Capacity Model](../../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
 

@@ -12,19 +12,19 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, roles, accountability]
 related:
-  - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../Context-Atlas-System-Model.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../../Context-Atlas-System-Model.md
   - ./Role-Accountability-Matrix.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/README.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md
-  - ../../Canon/AgenticDevelopment/RoleArchetypes/devops-engineer.md
-  - ../../Canon/AgenticDevelopment/Agentic-Development-Glossary.md
-  - ../../Canon/AgenticDevelopment/Agent-Authority-Model.md
-  - ../../Canon/AgenticDevelopment/Agent-Composition-Model.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/README.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md
+  - ../../../../Canon/AgenticDevelopment/RoleArchetypes/devops-engineer.md
+  - ../../../../Canon/AgenticDevelopment/Agentic-Development-Glossary.md
+  - ../../../../Canon/AgenticDevelopment/Agent-Authority-Model.md
+  - ../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md
 supersedes: []
 ---
 
@@ -82,17 +82,17 @@ The initial Context Atlas role roster refines the following portable role
 archetypes:
 
 - `Planner/Decomp` refines
-  [Planning And Decomposition Lead](../../Canon/AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md)
+  [Planning And Decomposition Lead](../../../../Canon/AgenticDevelopment/RoleArchetypes/planning-decomposition-lead.md)
 - `Backend` refines
-  [Backend Staff Engineer](../../Canon/AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md)
+  [Backend Staff Engineer](../../../../Canon/AgenticDevelopment/RoleArchetypes/backend-staff-engineer.md)
 - `Documentation/UAT` refines both
-  [Technical Documentation Writer](../../Canon/AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md)
+  [Technical Documentation Writer](../../../../Canon/AgenticDevelopment/RoleArchetypes/technical-documentation-writer.md)
   and
-  [User Acceptance Tester](../../Canon/AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md)
+  [User Acceptance Tester](../../../../Canon/AgenticDevelopment/RoleArchetypes/user-acceptance-tester.md)
 - `QA` refines
-  [Quality Assurance Engineer](../../Canon/AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md)
+  [Quality Assurance Engineer](../../../../Canon/AgenticDevelopment/RoleArchetypes/quality-assurance-engineer.md)
 - `DevOps` refines
-  [DevOps Engineer](../../Canon/AgenticDevelopment/RoleArchetypes/devops-engineer.md)
+  [DevOps Engineer](../../../../Canon/AgenticDevelopment/RoleArchetypes/devops-engineer.md)
 
 The project role roster is therefore a refinement layer, not a replacement for
 the portable catalog.
@@ -172,11 +172,13 @@ does not become overloaded with artifact-level ownership details.
 
 ## Related Artifacts
 
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Context Atlas System Model](../Context-Atlas-System-Model.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas System Model](../../../Context-Atlas-System-Model.md)
 - [Context Atlas Role Accountability Matrix](./Role-Accountability-Matrix.md)
-- [Role Archetypes](../../Canon/AgenticDevelopment/RoleArchetypes/README.md)
-- [Agentic Development Glossary](../../Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
-- [Agent Authority Model](../../Canon/AgenticDevelopment/Agent-Authority-Model.md)
-- [Agent Composition Model](../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+- [Role Archetypes](../../../../Canon/AgenticDevelopment/RoleArchetypes/README.md)
+- [Agentic Development Glossary](../../../../Canon/AgenticDevelopment/Agentic-Development-Glossary.md)
+- [Agent Authority Model](../../../../Canon/AgenticDevelopment/Agent-Authority-Model.md)
+- [Agent Composition Model](../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+
+
 

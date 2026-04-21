@@ -1,6 +1,6 @@
 # Context Atlas planning-time runtime capacity.
 # This file is authoritative planning input, not live scheduler state.
-# Update guidance lives in docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md.
+# Update guidance lives in docs/Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md.
 
 version: 1
 last_reviewed: 2026-04-20

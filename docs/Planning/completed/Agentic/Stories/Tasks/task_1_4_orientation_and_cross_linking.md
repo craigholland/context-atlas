@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, orientation, navigation]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-System-Model.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - current authoritative navigation patterns in the repo
 
 ## Proposed Work
@@ -111,5 +111,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 

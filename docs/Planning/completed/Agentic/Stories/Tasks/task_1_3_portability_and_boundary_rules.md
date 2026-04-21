@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, portability, boundaries]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - current repo pattern for separating portable philosophy from project bindings
 
 ## Proposed Work

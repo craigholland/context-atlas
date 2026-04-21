@@ -13,9 +13,9 @@ owners: [core]
 tags: [context-atlas, agentic-development, identity, roles, accountability, ownership]
 related:
   - ./Role-Model.md
-  - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../Canon/AgenticDevelopment/Agent-Composition-Model.md
-  - ../../Canon/AgenticDevelopment/Delegation-Model.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md
+  - ../../../../Canon/AgenticDevelopment/Delegation-Model.md
 supersedes: []
 ---
 
@@ -220,7 +220,8 @@ change.
 ## Related Artifacts
 
 - [Context Atlas Role Model](./Role-Model.md)
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Agent Composition Model](../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
-- [Delegation Model](../../Canon/AgenticDevelopment/Delegation-Model.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+- [Agent Composition Model](../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+- [Delegation Model](../../../../Canon/AgenticDevelopment/Delegation-Model.md)
+
 

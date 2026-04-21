@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, canon]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the current Context Atlas branch/PR workflow and role authority model
 
 ## Proposed Work
@@ -120,5 +120,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 

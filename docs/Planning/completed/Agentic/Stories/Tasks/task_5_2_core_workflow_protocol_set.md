@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, protocols, workflow]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the protocol template from Task 5.1
 
 ## Proposed Work
@@ -121,5 +121,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 

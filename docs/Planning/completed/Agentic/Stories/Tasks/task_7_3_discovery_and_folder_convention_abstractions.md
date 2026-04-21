@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, discovery, folders]
 related:
   - ../story_7_platform_materialization_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md
+  - ../../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
+- [Template Model](../../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
 - the materialization and boundary work from Tasks 7.1 and 7.2
 
 ## Proposed Work
@@ -107,5 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 7 - Platform Materialization Model](../story_7_platform_materialization_model.md)
-- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
+- [Template Model](../../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
 

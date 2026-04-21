@@ -14,8 +14,8 @@ tags: [agentic-development, task, pr-plan, roles, governance]
 related:
   - ../story_3_context_atlas_role_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md
-  - ../../../../Authoritative/Identity/Context-Atlas-System-Model.md
+  - ../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
 
@@ -33,9 +33,9 @@ IMPLEMENTED
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Role Archetypes](../../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
-- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Role Archetypes](../../../../../Authoritative/Canon/AgenticDevelopment/RoleArchetypes/README.md)
+- [Context Atlas Role Model](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - the structural binding from Story 2
 
 ## Proposed Work
@@ -54,7 +54,7 @@ IMPLEMENTED
 - keep the role set small enough to govern clearly
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_3_context_atlas_role_model.md`
@@ -73,7 +73,7 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md`
 - `docs/Authoritative/Identity/Context-Atlas-System-Model.md`
 
 #### Update AI files
@@ -118,6 +118,6 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
-- [Context Atlas Role Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Model.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Context Atlas Role Model](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 
