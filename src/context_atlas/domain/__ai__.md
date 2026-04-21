@@ -222,6 +222,7 @@
     - fallback behavior should remain explicit in metadata and trace
     - compressed text is a transformation artifact, not the canonical packet itself
     - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
+    - starter token estimation should remain provider-agnostic and bounded to content-shape distinctions such as prose baseline, structured code/markup tightening, and non-Latin-heavy tightening rather than hidden tokenizer tables
 - `policies/memory.py`:
   - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
   - defines:

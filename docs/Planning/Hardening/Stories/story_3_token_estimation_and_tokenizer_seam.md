@@ -84,6 +84,10 @@ decision about which of those two concerns leads implementation.
   code, markdown-heavy content, or other obvious content-shape differences
 - keep the starter estimation deterministic and provider-agnostic
 - avoid turning the heuristic into a hidden provider-specific token model
+- keep the bounded baseline explicit: prose stays on the configured starter
+  baseline, code/markdown-heavy text may tighten that baseline modestly, and
+  non-Latin-heavy text may tighten it further without introducing provider
+  token tables
 
 ### Task 3: Tokenizer Contract Seam
 
