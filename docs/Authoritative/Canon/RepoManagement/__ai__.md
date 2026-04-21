@@ -78,7 +78,7 @@
 ## Cross-Folder Contracts
 - docs/Authoritative/Canon/AgenticDevelopment: sibling canon for roles, protocols, modes, and handoffs that repo-management bindings must align with but not absorb.
 - docs/Authoritative/Identity/RepoManagement: project-specific provider bindings that refine this folder's canon into one application's concrete policy.
-- docs/Planning/Agentic: planning surfaces should reference this folder for repo principals and permissions rather than recreating repo-management policy in planning prose.
+- docs/Planning/completed/Agentic: planning surfaces should reference this folder for repo principals and permissions rather than recreating repo-management policy in planning prose.
 - docs/Authoritative/Identity/AgenticDevelopment: role and gate bindings that repo-management policy must respect when defining principals, review surfaces, and merge scope.
 
 ## Verification Contract

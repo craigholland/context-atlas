@@ -59,7 +59,7 @@ That order matters:
   portable surfaces
 - `Planning` defines how we intend to deliver those choices
 
-The canonical planning and decomposition reference now lives in [docs/Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document.
+The canonical planning and decomposition reference now lives in [docs/Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md](./Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md). Project planning artifacts under [docs/Planning](./Planning/) should derive their decomposition model from that document, while completed planning stacks now live under [docs/Planning/completed](./Planning/completed/).
 
 The intended documentation ontology is:
 

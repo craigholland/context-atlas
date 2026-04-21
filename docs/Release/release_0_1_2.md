@@ -13,7 +13,7 @@ owners: [core]
 tags: [releases, hardening, version-0-1-2, context-assembly, product-surface]
 related:
   - ./release_0_1_1.md
-  - ../Planning/Hardening/context_assembly_hardening_product_definition.md
+  - ../Planning/completed/Hardening/context_assembly_hardening_product_definition.md
   - ../Guides/README.md
   - ../../README.md
 supersedes:
@@ -185,6 +185,6 @@ reintroduce ambiguous budget fields, hidden fallback behavior, or proof drift.
 ## Related Artifacts
 
 - [Release 0.1.1](./release_0_1_1.md)
-- [Context Assembly Hardening Product Definition](../Planning/Hardening/context_assembly_hardening_product_definition.md)
+- [Context Assembly Hardening Product Definition](../Planning/completed/Hardening/context_assembly_hardening_product_definition.md)
 - [Guides Index](../Guides/README.md)
 - [Repository README](../../README.md)

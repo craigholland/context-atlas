@@ -13,9 +13,9 @@ owners: [core]
 tags: [mvp, review, rubric, evidence, evaluation]
 related:
   - ./mvp_readiness_assessment.md
-  - ../../Planning/MVP/mvp_product_defintiion.md
-  - ../../Planning/MVP/Stories/story_6_mvp_proof.md
-  - ../../Planning/MVP/Stories/Tasks/task_6_1_evidence_shape.md
+  - ../../Planning/completed/MVP/mvp_product_defintiion.md
+  - ../../Planning/completed/MVP/Stories/story_6_mvp_proof.md
+  - ../../Planning/completed/MVP/Stories/Tasks/task_6_1_evidence_shape.md
 supersedes: []
 ---
 
@@ -27,8 +27,8 @@ Define the minimum evidence dimensions that must be reviewed before Context Atla
 
 ## Inputs
 
-- [Context Atlas MVP Product Definition](../../Planning/MVP/mvp_product_defintiion.md)
-- [Story 6 - MVP Proof](../../Planning/MVP/Stories/story_6_mvp_proof.md)
+- [Context Atlas MVP Product Definition](../../Planning/completed/MVP/mvp_product_defintiion.md)
+- [Story 6 - MVP Proof](../../Planning/completed/MVP/Stories/story_6_mvp_proof.md)
 - completed workflow outputs from Stories 1 through 5
 
 ## Evaluation Dimensions

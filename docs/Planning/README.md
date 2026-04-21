@@ -2,6 +2,12 @@
 
 This directory holds forward-looking execution intent for Context Atlas.
 
+Active planning work should live directly under `docs/Planning/` until it is
+completed. Once an Epic and its downstream Story/Task decomposition are no
+longer the active future-planning surface, move that stack under
+`docs/Planning/completed/` so contributors can distinguish upcoming work from
+historical execution intent at a glance.
+
 Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
 
 The expected planning stack is:
@@ -20,30 +26,43 @@ The expected execution loop for a Task is:
 - run local preflight on the feature branch, request `@codex review`, and resolve findings there
 - hand the clean feature PR to a human reviewer before starting the next Task unless an explicit parallelization decision has been made
 
-The current MVP planning stack lives under [MVP](./MVP/):
+Completed planning stacks now live under [completed](./completed/):
 
-- [MVP Product Definition](./MVP/mvp_product_defintiion.md)
-- [Story docs](./MVP/Stories/)
-- [Task PR plans](./MVP/Stories/Tasks/)
+- [MVP](./completed/MVP/)
+  This archive contains the shipped MVP product definition, Story docs, and
+  Task PR plans.
+- [Agentic](./completed/Agentic/)
+  This archive contains the completed agentic-development planning stack.
+- [Hardening](./completed/Hardening/)
+  This archive contains the completed context-assembly hardening planning
+  stack.
 
-The current agentic-development planning surface lives under [Agentic](./Agentic/):
+The completed MVP planning stack lives under [MVP](./completed/MVP/):
 
-- [Agentic Development Product Definition](./Agentic/agentic_development_product_definition.md)
-- [Story docs](./Agentic/Stories/)
-- [Task PR plans](./Agentic/Stories/Tasks/)
+- [MVP Product Definition](./completed/MVP/mvp_product_defintiion.md)
+- [Story docs](./completed/MVP/Stories/)
+- [Task PR plans](./completed/MVP/Stories/Tasks/)
 
-The current post-MVP hardening planning surface begins under [Hardening](./Hardening/):
+The completed agentic-development planning surface lives under
+[Agentic](./completed/Agentic/):
 
-- [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
-- [Story docs](./Hardening/Stories/)
-- [Task PR plans](./Hardening/Stories/Tasks/)
+- [Agentic Development Product Definition](./completed/Agentic/agentic_development_product_definition.md)
+- [Story docs](./completed/Agentic/Stories/)
+- [Task PR plans](./completed/Agentic/Stories/Tasks/)
+
+The completed post-MVP hardening planning surface begins under
+[Hardening](./completed/Hardening/):
+
+- [Context Assembly Hardening Product Definition](./completed/Hardening/context_assembly_hardening_product_definition.md)
+- [Story docs](./completed/Hardening/Stories/)
+- [Task PR plans](./completed/Hardening/Stories/Tasks/)
 
 The Hardening stack now also has an explicit closeout evidence path:
 
 - the integrated Epic-level resolution map lives in
-  [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
+  [Context Assembly Hardening Product Definition](./completed/Hardening/context_assembly_hardening_product_definition.md)
 - the Story-level review path and proof split live in
-  [Story 5 - Validation, Documentation, And Hardening Proof](./Hardening/Stories/story_5_validation_documentation_and_hardening_proof.md)
+  [Story 5 - Validation, Documentation, And Hardening Proof](./completed/Hardening/Stories/story_5_validation_documentation_and_hardening_proof.md)
 - the named `test_story_5_hardening_baseline_*` regressions in `tests/` are
   the primary executable review anchors
 - bounded human-readable proof remains under `examples/mvp_proof/` rather than
