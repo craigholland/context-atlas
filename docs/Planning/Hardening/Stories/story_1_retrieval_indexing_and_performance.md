@@ -67,6 +67,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - prevent a partial fix that caches the IDF table but still rebuilds
   per-document TF/vector state on every query
 - keep invalidation or rebuild rules explicit and small
+- treat the supported steady-state reuse shape as one registry-revision-aligned
+  lexical snapshot carrying corpus-wide IDF plus source-side TF-IDF vectors and
+  norms, rather than parallel caches split across multiple adapter surfaces
 
 ### Task 3: Repeated-Query Behavior And Boundaries
 
