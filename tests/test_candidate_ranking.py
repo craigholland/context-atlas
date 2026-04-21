@@ -128,6 +128,51 @@ class CandidateRankingTests(unittest.TestCase):
             ["alpha-source", "beta-source"],
         )
 
+    def test_ranking_deduplicates_case_and_whitespace_variants(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-shape",
+                    content=(
+                        "Atlas duplicate handling should prefer bounded lexical "
+                        "normalization."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-shape",
+                    content=(
+                        "  atlas   duplicate handling should prefer bounded lexical "
+                        "normalization.  "
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "duplicate handling lexical normalization",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy().rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2b",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-shape",),
+        )
+        self.assertEqual(
+            outcome.trace.metadata["deduplicated_candidate_count"],
+            "1",
+        )
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(

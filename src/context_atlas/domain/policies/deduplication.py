@@ -1,4 +1,13 @@
-"""Shared lexical/structural duplicate-detection helpers for policy code."""
+"""Shared lexical/structural duplicate-detection helpers for policy code.
+
+The bounded baseline intentionally stays narrow:
+- exact normalized text equality
+- normalized containment
+- token-overlap comparison
+
+It does not attempt embeddings, semantic similarity, or provider-specific
+matching.
+"""
 
 from __future__ import annotations
 
