@@ -23,7 +23,11 @@ from context_atlas.domain.policies import (
     StarterBudgetAllocationPolicy,
     StarterCompressionPolicy,
 )
-from context_atlas.domain.policies.compression import estimate_tokens
+from context_atlas.domain.policies.compression import (
+    _fit_text_within_token_budget,
+    _max_chars_for_token_budget,
+    estimate_tokens,
+)
 from context_atlas.rendering import render_packet_context
 from context_atlas.adapters import (
     InMemorySourceRegistry,
@@ -337,6 +341,38 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(
             outcome.compression_result.metadata["fallback_strategy"],
             CompressionStrategy.TRUNCATE.value,
+        )
+
+    def test_prefix_budget_helpers_handle_non_monotonic_estimators(self) -> None:
+        text = "abcdefghijkl"
+
+        def non_monotonic_estimator(candidate: str) -> int:
+            length = len(candidate)
+            if length == 0:
+                return 0
+            if length < 4:
+                return 1
+            if length < 8:
+                return 5
+            if length <= 10:
+                return 4
+            return 6
+
+        self.assertEqual(
+            _max_chars_for_token_budget(
+                text,
+                max_tokens=4,
+                token_estimator=non_monotonic_estimator,
+            ),
+            10,
+        )
+        self.assertEqual(
+            _fit_text_within_token_budget(
+                text,
+                max_tokens=4,
+                token_estimator=non_monotonic_estimator,
+            ),
+            ("abcdefghij", True),
         )
 
     def test_compression_uses_bound_token_estimator_when_supplied(self) -> None:

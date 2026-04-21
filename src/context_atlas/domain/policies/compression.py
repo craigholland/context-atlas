@@ -395,18 +395,11 @@ def _fit_text_within_token_budget(
     if token_estimator(text) <= max_tokens:
         return text, False
 
-    low = 0
-    high = len(text)
-    best = ""
-    while low <= high:
-        midpoint = (low + high) // 2
-        candidate = text[:midpoint].strip()
+    for prefix_length in range(len(text), -1, -1):
+        candidate = text[:prefix_length].strip()
         if token_estimator(candidate) <= max_tokens:
-            best = candidate
-            low = midpoint + 1
-        else:
-            high = midpoint - 1
-    return best, True
+            return candidate, True
+    return "", True
 
 
 def _max_chars_for_token_budget(
@@ -422,17 +415,10 @@ def _max_chars_for_token_budget(
     if token_estimator(text) <= max_tokens:
         return len(text)
 
-    low = 0
-    high = len(text)
-    best = 0
-    while low <= high:
-        midpoint = (low + high) // 2
-        if token_estimator(text[:midpoint]) <= max_tokens:
-            best = midpoint
-            low = midpoint + 1
-        else:
-            high = midpoint - 1
-    return best
+    for prefix_length in range(len(text), -1, -1):
+        if token_estimator(text[:prefix_length]) <= max_tokens:
+            return prefix_length
+    return 0
 
 
 def _sentence_preserving(chunks: list[str], *, max_chars: int) -> str:
