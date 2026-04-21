@@ -38,10 +38,18 @@ class DuplicateContentAssessment:
     right_key: str
 
 
+@dataclass(frozen=True, slots=True)
+class _NormalizedContent:
+    """Normalized content plus comparison-relevant front-matter state."""
+
+    lines: tuple[str, ...]
+    metadata_only_front_matter: bool
+
+
 def build_duplicate_content_key(content: str) -> str:
     """Return the normalized text key used by shared duplicate handling."""
 
-    return _join_normalized_lines(_normalized_content_lines(content))
+    return _join_normalized_lines(_normalized_content(content).lines)
 
 
 def assess_duplicate_content(
@@ -52,8 +60,10 @@ def assess_duplicate_content(
 ) -> DuplicateContentAssessment:
     """Apply the bounded lexical/structural duplicate baseline."""
 
-    left_lines = _normalized_content_lines(content_a)
-    right_lines = _normalized_content_lines(content_b)
+    left_content = _normalized_content(content_a)
+    right_content = _normalized_content(content_b)
+    left_lines = left_content.lines
+    right_lines = right_content.lines
     left_key = _join_normalized_lines(left_lines)
     right_key = _join_normalized_lines(right_lines)
     if not left_key or not right_key:
@@ -70,6 +80,18 @@ def assess_duplicate_content(
             is_duplicate=True,
             match_kind="exact_key_match",
             overlap_ratio=1.0,
+            left_key=left_key,
+            right_key=right_key,
+        )
+
+    if (
+        left_content.metadata_only_front_matter
+        and right_content.metadata_only_front_matter
+    ):
+        return DuplicateContentAssessment(
+            is_duplicate=False,
+            match_kind=None,
+            overlap_ratio=0.0,
             left_key=left_key,
             right_key=right_key,
         )
@@ -114,30 +136,41 @@ def _jaccard_token_overlap(left_key: str, right_key: str) -> float:
     return len(tokens_a & tokens_b) / union_size
 
 
-def _normalized_content_lines(content: str) -> tuple[str, ...]:
-    """Return normalized non-empty lines after bounded front-matter stripping."""
+def _normalized_content(content: str) -> _NormalizedContent:
+    """Return normalized content plus bounded front-matter state."""
 
-    stripped_content = _strip_leading_front_matter(content)
+    stripped_content, metadata_only_front_matter = _strip_leading_front_matter(content)
     normalized_lines = [_normalize_line(line) for line in stripped_content.splitlines()]
-    return tuple(line for line in normalized_lines if line)
+    return _NormalizedContent(
+        lines=tuple(line for line in normalized_lines if line),
+        metadata_only_front_matter=metadata_only_front_matter,
+    )
 
 
-def _strip_leading_front_matter(content: str) -> str:
+def _strip_leading_front_matter(content: str) -> tuple[str, bool]:
     """Remove a small YAML-style front-matter block when it appears at the top."""
 
     lines = content.splitlines()
-    if not lines or lines[0].strip() != _FRONT_MATTER_DELIMITER:
-        return content
+    if not lines or not _is_column_zero_fence(
+        lines[0], delimiters={_FRONT_MATTER_DELIMITER}
+    ):
+        return content, False
 
     search_limit = min(len(lines), _MAX_FRONT_MATTER_LINES)
     for index in range(1, search_limit):
-        if lines[index].strip() in _FRONT_MATTER_TERMINATORS:
+        if _is_column_zero_fence(lines[index], delimiters=_FRONT_MATTER_TERMINATORS):
             remainder_lines = lines[index + 1 :]
             if not any(_normalize_line(line) for line in remainder_lines):
-                return content
+                return content, True
             remainder = "\n".join(remainder_lines)
-            return remainder.lstrip()
-    return content
+            return remainder.lstrip(), False
+    return content, False
+
+
+def _is_column_zero_fence(line: str, *, delimiters: set[str]) -> bool:
+    """Return whether a line is an unindented front-matter fence."""
+
+    return line == line.lstrip() and line.strip() in delimiters
 
 
 def _trim_shared_leading_prefix(

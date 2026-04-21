@@ -209,6 +209,8 @@
 - duplicate assessment should stay bounded to lexical or structural signals and must not imply hidden semantic-similarity behavior
 - shared duplicate helpers should live here instead of letting ranking and memory drift into separate normalization paths
 - duplicate normalization may strip bounded top-of-file front matter and discount a bounded shared leading line prefix, but it should stay generic rather than turning into a document-type encyclopedic parser
+- front-matter stripping inside that baseline should only treat column-zero fences as delimiters, so indented `---` or `...` lines inside YAML scalar content do not terminate metadata early
+- when both compared inputs are metadata-only front matter, the shared helper should allow only exact normalized-key matches to collapse them; fuzzy containment or token-overlap matching must not erase distinct metadata-only sources
 - `policies/budgeting.py`:
   - responsibility: allocates token demand across fixed and elastic slots
   - defines:

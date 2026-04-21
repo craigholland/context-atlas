@@ -225,6 +225,61 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "1")
 
+    def test_ranking_deduplicates_when_front_matter_contains_indented_fence_text(
+        self,
+    ) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-indented-fence",
+                    content=(
+                        "---\n"
+                        "title: Atlas Canon\n"
+                        "notes: |\n"
+                        "  ---\n"
+                        "  This indented fence-like line belongs to metadata.\n"
+                        "owners: [core]\n"
+                        "---\n"
+                        "Atlas duplicate handling should stay traceable after "
+                        "front matter normalization."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-indented-fence",
+                    content=(
+                        "---\n"
+                        "title: Working Notes\n"
+                        "owners: [planning]\n"
+                        "---\n"
+                        "Atlas duplicate handling should stay traceable after "
+                        "front matter normalization."
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "duplicate handling traceable front matter normalization",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy().rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2c-indented-fence",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-indented-fence",),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "1")
+
     def test_ranking_keeps_distinct_metadata_only_sources(self) -> None:
         registry = InMemorySourceRegistry(
             (
@@ -267,6 +322,39 @@ class CandidateRankingTests(unittest.TestCase):
                 candidate.source.source_id for candidate in outcome.ranked_candidates
             ),
             ("metadata-only-authoritative", "metadata-only-planning"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
+
+    def test_ranking_keeps_metadata_only_title_variants_distinct(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="metadata-title-canon",
+                    content=("---\ntitle: Atlas Canon\nowners: [core]\n---\n"),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="metadata-title-canon-draft",
+                    content=("---\ntitle: Atlas Canon Draft\nowners: [core]\n---\n"),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve("atlas canon draft core", top_k=2)
+
+        outcome = StarterCandidateRankingPolicy(
+            dedup_threshold=0.72,
+        ).rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2e-metadata-title-variants",
+        )
+
+        self.assertEqual(
+            {candidate.source.source_id for candidate in outcome.ranked_candidates},
+            {"metadata-title-canon", "metadata-title-canon-draft"},
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
 

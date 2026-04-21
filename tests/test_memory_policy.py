@@ -266,6 +266,38 @@ class MemoryPolicyTests(unittest.TestCase):
         self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
         self.assertIn("exact_key_match", duplicate_decision.explanation or "")
 
+    def test_memory_policy_keeps_metadata_only_title_variants_distinct(self) -> None:
+        entries = (
+            _memory_entry(
+                "metadata-title-canon",
+                ("---\ntitle: Atlas Canon\nowners: [core]\n---\n"),
+                recorded_at=self.now - 550,
+                importance=1.6,
+            ),
+            _memory_entry(
+                "metadata-title-canon-draft",
+                ("---\ntitle: Atlas Canon Draft\nowners: [core]\n---\n"),
+                recorded_at=self.now - 10,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2g",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("metadata-title-canon-draft", "metadata-title-canon"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_entry_count"], "0")
+
     def test_memory_policy_deduplicates_unicode_token_variants(self) -> None:
         entries = (
             _memory_entry(
