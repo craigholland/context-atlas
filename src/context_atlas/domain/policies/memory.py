@@ -18,6 +18,7 @@ from ..models import (
     ExclusionReasonCode,
     InclusionReasonCode,
 )
+from .deduplication import assess_duplicate_content
 
 _DEFAULT_MINIMUM_EFFECTIVE_SCORE = 0.1
 _DEFAULT_QUERY_BOOST_WEIGHT = 0.35
@@ -347,25 +348,11 @@ def _find_duplicate_entry(
 def _is_duplicate_content(content_a: str, content_b: str, *, threshold: float) -> bool:
     """Apply starter duplicate detection."""
 
-    normalized_a = content_a.strip().lower()
-    normalized_b = content_b.strip().lower()
-    if not normalized_a or not normalized_b:
-        return False
-    if normalized_a in normalized_b or normalized_b in normalized_a:
-        return True
-
-    half = len(normalized_a) // 2
-    if len(normalized_a) > 10 and len(normalized_b) >= half and half > 0:
-        if normalized_a[:half] == normalized_b[:half]:
-            return True
-
-    tokens_a = set(normalized_a.split())
-    tokens_b = set(normalized_b.split())
-    union_size = len(tokens_a | tokens_b)
-    if union_size == 0:
-        return False
-    jaccard = len(tokens_a & tokens_b) / union_size
-    return jaccard >= threshold
+    return assess_duplicate_content(
+        content_a,
+        content_b,
+        threshold=threshold,
+    ).is_duplicate
 
 
 def _relevance_boost(query: str, content: str, *, weight: float) -> float:

@@ -19,6 +19,7 @@ from ..models import (
     ExclusionReasonCode,
     InclusionReasonCode,
 )
+from .deduplication import build_duplicate_content_key
 
 _DEFAULT_MINIMUM_SCORE = 0.0
 _AUTHORITY_BONUS_BY_LEVEL: dict[ContextSourceAuthority, float] = {
@@ -247,7 +248,7 @@ class _RankableCandidate:
             authority_bonus=authority_bonus,
             ranking_score=ranking_score,
             source_id=candidate.source.source_id,
-            content_key=candidate.source.content.casefold(),
+            content_key=build_duplicate_content_key(candidate.source.content),
             authority_order=_AUTHORITY_ORDER[authority],
         )
 
