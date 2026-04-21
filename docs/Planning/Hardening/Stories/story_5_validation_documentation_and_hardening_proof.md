@@ -215,6 +215,26 @@ hardened behavior rather than as workaround narration around MVP-era shortcuts.
 Those follow-ons remain out of scope for this epic, but they are no longer the
 same thing as leaving the original six hardening findings unresolved.
 
+## Current Handoff State
+
+Task 5.4 is the final execution closeout for this Story.
+
+- Tasks 5.1 through 5.4 together now define the settled review path for the
+  hardening Epic:
+  - named `test_story_5_hardening_baseline_*` regressions in `tests/`
+  - bounded human-readable packet/trace proof under `examples/mvp_proof/`
+  - outward-facing guide, example, and release-surface alignment
+  - integrated Epic closeout assessment in
+    `docs/Planning/Hardening/context_assembly_hardening_product_definition.md`
+- Once Task 5.4 merges into the Story 5 branch, Story 5 should be treated as
+  execution-complete and review-pending rather than as an open implementation
+  Story.
+- The remaining work after that point is Story-level review on the Story 5 PR
+  and then the `Story -> Epic` merge.
+- Later hardening follow-on work should begin from this explicit evidence path
+  and its named anchors instead of reopening the original six review findings
+  as the starting problem statement.
+
 ## Definition Of Done
 
 - the Story's scoped Tasks are either completed or intentionally deferred with
