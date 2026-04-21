@@ -376,6 +376,39 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["token_estimator"], "word_count")
 
+    def test_compression_defaults_to_starter_heuristic_metadata_label(self) -> None:
+        candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="starter-heuristic",
+                content=(
+                    "Context Atlas keeps the starter estimator provider-agnostic while "
+                    "still tightening obvious code and markup shapes under pressure."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.TRUNCATE,
+        ).compress_candidates(
+            (candidate,),
+            trace_id="trace-compression-tokenizer-seam-1a",
+            max_tokens=6,
+            query="starter estimator pressure",
+        )
+
+        self.assertEqual(
+            outcome.compression_result.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+        self.assertEqual(
+            outcome.trace.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+
     def test_compression_auto_labels_custom_estimator_when_name_is_omitted(
         self,
     ) -> None:

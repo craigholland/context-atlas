@@ -52,6 +52,12 @@ secondary metadata keys.
   - `heuristic-first`, meaning Story 4 should expect the starter estimation
     correction to land before any tokenizer seam becomes more than bounded
     complementary support work
+- Story 3 delivered contract:
+  - the default starter path now reports `starter_heuristic` as the active
+    token-estimation label in packet-facing compression metadata and trace
+    metadata
+  - outward-bound custom estimators remain supported only through the callable
+    composition seam, not through env-backed tokenizer selection
 
 ## Proposed Tasks
 

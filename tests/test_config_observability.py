@@ -238,6 +238,19 @@ class ConfigAndObservabilityTests(unittest.TestCase):
         self.assertIs(service._compression_policy.token_estimator, estimate_words)
         self.assertEqual(service._compression_policy.token_estimator_name, "word_count")
 
+    def test_starter_assembly_defaults_to_starter_heuristic_without_binding(
+        self,
+    ) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=_StubRetriever(),
+        )
+
+        self.assertIsNone(service._compression_policy.token_estimator)
+        self.assertEqual(
+            service._compression_policy.token_estimator_name,
+            "starter_heuristic",
+        )
+
     def test_starter_assembly_rejects_custom_estimator_label_without_binding(
         self,
     ) -> None:
