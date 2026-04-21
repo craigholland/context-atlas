@@ -173,6 +173,56 @@ class CandidateRankingTests(unittest.TestCase):
             "1",
         )
 
+    def test_ranking_deduplicates_matching_bodies_despite_front_matter(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-front-matter",
+                    content=(
+                        "---\n"
+                        "title: Atlas Canon\n"
+                        "owners: [core]\n"
+                        "---\n"
+                        "Atlas duplicate handling should stay traceable after "
+                        "front matter normalization."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-front-matter",
+                    content=(
+                        "---\n"
+                        "title: Working Notes\n"
+                        "owners: [planning]\n"
+                        "---\n"
+                        "Atlas duplicate handling should stay traceable after "
+                        "front matter normalization."
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "duplicate handling traceable front matter normalization",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy().rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2c",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-front-matter",),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "1")
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(
