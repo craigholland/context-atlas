@@ -87,6 +87,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - update regression coverage so the indexed path is visible and reviewable
 - add bounded proof or instrumentation surfaces that show reuse behavior
   without turning this Story into a benchmark framework initiative
+- treat the shared retrieval-completed event plus regression coverage as the
+  preferred bounded proof surface, so reviewers can see `rebuilt` versus
+  `warm` snapshot behavior without a second retrieval or proof-only path
 - refresh the nearest docs or owner files if retrieval ownership boundaries or
   expectations change
 
@@ -106,6 +109,8 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   frequency while still rebuilding most of the expensive per-document work.
 - Performance-oriented proof can drift into benchmark theater unless it stays
   focused on index reuse and architectural trustworthiness.
+- Proof surfaces can become noisy if they expose too many adapter internals
+  instead of one small human-readable reuse signal on the shared path.
 
 ## Exit Criteria
 
@@ -117,6 +122,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   second engine path
 - tests and review surfaces make the indexed behavior visible enough to verify
   it without relying on implementation folklore
+- the Story 1 proof baseline is explicit and bounded: one repeated-query
+  regression bundle plus the shared retrieval-completed `index_snapshot_state`
+  signal showing `rebuilt` versus `warm` behavior on the canonical adapter path
 
 ## Definition Of Done
 
