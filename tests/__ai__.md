@@ -32,6 +32,7 @@
 - Keep fast unit tests here; broader integration or environment-specific test suites should be introduced deliberately rather than mixed in by accident.
 - Test helpers should not reimplement production semantics when assertions can exercise the real code directly.
 - Release-facing tests should keep the exported package version aligned with `pyproject.toml` and the current shipped release note rather than freezing a stale version expectation.
+- When the shipped release version moves forward, `StarterCliTests` should advance with that same shipped release note instead of lagging one tag behind the package metadata.
 - Cross-platform path-safety tests should cover both Windows-style and POSIX-style traversal inputs when the production code is expected to guard against either form.
 
 ## Allowed Dependencies

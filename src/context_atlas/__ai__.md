@@ -46,6 +46,7 @@
 - `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
 - The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
 - The exported `context_atlas.__version__` surface should stay aligned with the release version in `pyproject.toml` and the current in-repo release history, rather than drifting into a stale package-local constant.
+- Release-prep edits to `__version__` should move in lockstep with `pyproject.toml`, `docs/Release/README.md`, and the current shipped release note rather than being treated as a package-local tweak.
 
 ## Allowed Dependencies
 - may depend on:

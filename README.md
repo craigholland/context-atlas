@@ -20,10 +20,11 @@ source modeling, retrieval, ranking, budgeting, compression, memory retention,
 packet assembly, ontology-aware filesystem document ingestion, structured-record
 ingestion, and three supported workflow surfaces.
 
-The current focus is post-MVP hardening and expansion: keeping the supported
-product surface truthful, preserving packet-and-trace-centered evidence,
-strengthening configuration and boundary discipline, and widening scenario and
-integration coverage without forking the shared engine path.
+The `0.1.2` release now packages the first full context-assembly hardening
+pass. The current focus is the next post-hardening expansion phase: preserving
+those truthful packet, trace, retrieval, and compression contracts while
+widening scenario and integration coverage without forking the shared engine
+path.
 
 That hardening work has now settled a few important outward-facing truths:
 
@@ -44,7 +45,7 @@ That hardening work has now settled a few important outward-facing truths:
 The in-repo release-history index now lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
 shipped release summary is
-[docs/Release/release_0_1_1.md](/context-atlas/docs/Release/release_0_1_1.md).
+[docs/Release/release_0_1_2.md](/context-atlas/docs/Release/release_0_1_2.md).
 
 ## Start Here
 

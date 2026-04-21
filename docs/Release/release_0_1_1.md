@@ -6,12 +6,13 @@ doc_class: releases
 template_refs:
   metadata: base_metadata@1.0.0
   content: general_content@1.0.0
-status: active
+status: superseded
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [releases, post-mvp, version-0-1-1, agentic-development, repo-management]
 related:
+  - ./release_0_1_2.md
   - ./release_0_1_0.md
   - ../Reviews/MVP/mvp_readiness_assessment.md
   - ../Guides/README.md

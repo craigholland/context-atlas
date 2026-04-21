@@ -10,10 +10,12 @@ published.
 
 Start with the latest shipped release:
 
-- [Release 0.1.1](./release_0_1_1.md)
-  - current post-MVP governance and operating-model release
+- [Release 0.1.2](./release_0_1_2.md)
+  - current context-assembly hardening release
 
 Earlier release history:
 
+- [Release 0.1.1](./release_0_1_1.md)
+  - first post-MVP governance and operating-model release
 - [Release 0.1.0](./release_0_1_0.md)
   - first shipped `MVP Ready` release
