@@ -107,6 +107,7 @@
     - tests should verify frozen Pydantic behavior explicitly enough that a future contributor cannot mistake dataclasses for the preferred model style
     - tests should verify canonical per-class source semantics stay domain-owned and merge overrides consistently before adapters consume them
     - tests should verify canonical sources can be built from one resolved semantic profile instead of adapter-style piecemeal semantic arguments
+    - tests should verify budget artifacts distinguish fixed reservation from pre-allocation unreserved capacity rather than collapsing both into one ambiguous label
 - `test_config_observability.py`:
   - responsibility: verifies Pydantic-backed configuration defaults and observability helpers
   - defines:
@@ -150,6 +151,7 @@
   - invariants:
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
+    - tests should prove budget-allocation outcomes distinguish pre-allocation fixed reservation from true post-allocation unallocated remainder
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
     - tests should prove non-applied compression artifacts do not silently replace canonical selected-candidate content in starter rendering
 - `test_packet_rendering.py`:

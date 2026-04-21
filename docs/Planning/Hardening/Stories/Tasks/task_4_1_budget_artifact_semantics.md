@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, budgeting, semantics, artifacts]
 related:
@@ -29,7 +29,7 @@ blurred behind misleading names.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -112,6 +112,14 @@ PLANNED
   remainder semantics
 - domain models and policies align with that vocabulary
 - later Story 4 Tasks inherit one stable budget language
+- delivered shape:
+  - `ContextBudget` now exposes `fixed_reserved_tokens` and
+    `unreserved_tokens` as the truthful pre-allocation budget vocabulary
+  - `BudgetAllocationOutcome` now exposes `unallocated_tokens` as the truthful
+    post-allocation remainder
+  - compatibility aliases remain in place temporarily for
+    `reserved_tokens` and `remaining_tokens` until Task 4.2 finishes the
+    caller-facing contract cleanup
 
 ## Related Artifacts
 
