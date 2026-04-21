@@ -328,6 +328,7 @@
 - The current workflow tests prove supported boundaries and artifact shapes, but they do not yet represent load, concurrency, or long-running operational behavior.
 - As test volume grows further, this folder may need more granular owner files or sub-suites so one local contract does not become too broad to govern well.
 - Story 2 duplicate-handling regressions should stay centered on the bounded lexical baseline: normalized exact matches, containment, token overlap, and clearly non-duplicate related text.
+- Those duplicate-handling regressions should include at least one non-ASCII token-overlap case so Unicode text stays covered by the shared helper.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.
