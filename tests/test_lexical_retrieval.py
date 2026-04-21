@@ -72,6 +72,32 @@ class LexicalRetrievalTests(unittest.TestCase):
             for candidate in results
         )
 
+    def _collect_repeated_query_proof_bundle(
+        self, retriever: LexicalRetriever
+    ) -> dict[str, int]:
+        with (
+            patch.object(
+                retriever._registry,
+                "list_sources",
+                wraps=retriever._registry.list_sources,
+            ) as list_sources,
+            patch(
+                "context_atlas.adapters.retrieval.lexical.build_lexical_index_snapshot",
+                wraps=build_lexical_index_snapshot,
+            ) as builder,
+            patch(
+                "context_atlas.adapters.retrieval.lexical._term_frequency",
+                wraps=lexical_module._term_frequency,
+            ) as term_frequency,
+        ):
+            retriever.retrieve("document ranking context", top_k=2)
+
+        return {
+            "registry_source_listings": list_sources.call_count,
+            "snapshot_rebuilds": builder.call_count,
+            "query_term_frequency_recomputations": term_frequency.call_count,
+        }
+
     def test_registry_rejects_duplicate_source_identifiers(self) -> None:
         registry = InMemorySourceRegistry(self.sources[:1])
 
@@ -238,6 +264,21 @@ class LexicalRetrievalTests(unittest.TestCase):
         self.assertEqual(
             self._candidate_signature(initial_results),
             self._candidate_signature(repeated_results),
+        )
+
+    def test_tfidf_repeated_query_proof_bundle_is_reviewable(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+
+        retriever.retrieve("tf idf retrieval", top_k=2)
+
+        self.assertEqual(
+            self._collect_repeated_query_proof_bundle(retriever),
+            {
+                "registry_source_listings": 1,
+                "snapshot_rebuilds": 0,
+                "query_term_frequency_recomputations": 1,
+            },
         )
 
     def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
