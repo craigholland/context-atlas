@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
@@ -12,6 +13,7 @@ from context_atlas.domain.models import (
     ContextBudget,
     ContextBudgetSlot,
     ContextBudgetSlotMode,
+    ContextCandidate,
     ContextPacket,
     ContextSource,
     ContextSourceAuthority,
@@ -21,6 +23,11 @@ from context_atlas.domain.policies import (
     BudgetRequest,
     StarterBudgetAllocationPolicy,
     StarterCompressionPolicy,
+)
+from context_atlas.domain.policies.compression import (
+    _fit_text_within_token_budget,
+    _max_chars_for_token_budget,
+    estimate_tokens,
 )
 from context_atlas.rendering import render_packet_context
 from context_atlas.adapters import (
@@ -66,7 +73,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
             )
         )
 
-    def test_budget_allocation_respects_fixed_and_elastic_slots(self) -> None:
+    def test_story_5_hardening_baseline_keeps_budget_allocation_truthful(
+        self,
+    ) -> None:
         budget = ContextBudget(
             total_tokens=1000,
             slots=(
@@ -99,7 +108,12 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
 
         self.assertEqual(outcome.total_allocated_tokens, 1000)
-        self.assertEqual(outcome.remaining_tokens, 0)
+        self.assertEqual(outcome.unallocated_tokens, 0)
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always", DeprecationWarning)
+            self.assertEqual(outcome.remaining_tokens, 0)
+        self.assertEqual(len(captured), 1)
+        self.assertIn("unallocated_tokens", str(captured[0].message))
         allocation_by_slot = {
             allocation.slot_name: allocation for allocation in outcome.allocations
         }
@@ -107,7 +121,10 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(allocation_by_slot["memory"].allocated_tokens, 400)
         self.assertEqual(allocation_by_slot["docs"].allocated_tokens, 180)
         self.assertTrue(allocation_by_slot["docs"].was_reduced)
-        self.assertEqual(outcome.trace.metadata["remaining_tokens"], "0")
+        self.assertEqual(outcome.trace.metadata["fixed_reserved_tokens"], "450")
+        self.assertEqual(outcome.trace.metadata["unreserved_tokens"], "550")
+        self.assertEqual(outcome.trace.metadata["unallocated_tokens"], "0")
+        self.assertNotIn("remaining_tokens", outcome.trace.metadata)
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
             outcome.trace.decisions[-1].reason_codes,
@@ -116,6 +133,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
             outcome.model_dump()["allocations"][0]["slot_name"],
             "system",
         )
+        self.assertEqual(outcome.model_dump()["unallocated_tokens"], 0)
 
     def test_budget_allocation_rejects_unknown_slot_requests(self) -> None:
         budget = ContextBudget(
@@ -176,7 +194,9 @@ class BudgetAndCompressionTests(unittest.TestCase):
             CompressionStrategy.SENTENCE.value,
         )
 
-    def test_extractive_compression_falls_back_to_truncate_when_needed(self) -> None:
+    def test_story_5_hardening_baseline_keeps_compression_fallback_truthful(
+        self,
+    ) -> None:
         candidates = LexicalRetriever(
             self.registry,
             mode=LexicalRetrievalMode.KEYWORD,
@@ -193,8 +213,24 @@ class BudgetAndCompressionTests(unittest.TestCase):
 
         self.assertTrue(outcome.compression_result.was_applied)
         self.assertEqual(
+            outcome.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            outcome.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
             outcome.compression_result.metadata["fallback_strategy"],
             CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["compression_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["configured_compression_strategy"],
+            CompressionStrategy.EXTRACTIVE.value,
         )
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
@@ -216,6 +252,268 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(
             invalid_chunk_size.exception.code,
             ErrorCode.INVALID_COMPRESSION_REQUEST,
+        )
+
+    def test_estimate_tokens_tightens_for_structured_and_non_latin_text(self) -> None:
+        prose = "Context Atlas explains budget tradeoffs in plain prose for reviewers."
+        markdown = (
+            "# Budget Notes\n"
+            "- keep packet scope visible\n"
+            "- preserve trace clarity\n"
+            "`inline` [guide](x)"
+        )
+        code = (
+            "def estimate_budget(total_tokens: int) -> int:\n"
+            "    return max(1, total_tokens // 4)\n"
+        )
+        non_latin = "这是一个关于上下文治理和预算分配的说明文档。"
+
+        self.assertEqual(estimate_tokens(prose, chars_per_token=4), len(prose) // 4)
+        self.assertGreater(
+            estimate_tokens(markdown, chars_per_token=4),
+            len(markdown) // 4,
+        )
+        self.assertGreater(
+            estimate_tokens(code, chars_per_token=4),
+            len(code) // 4,
+        )
+        self.assertGreater(
+            estimate_tokens(non_latin, chars_per_token=4),
+            len(non_latin) // 4,
+        )
+
+    def test_compression_fit_check_uses_shape_aware_estimation(self) -> None:
+        prose_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="prose",
+                content=(
+                    "Context Atlas explains budget tradeoffs in plain prose for "
+                    "reviewers."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+        code_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="code",
+                content=(
+                    "def estimate_budget(total_tokens: int) -> int:\n"
+                    "    return max(1, total_tokens // 4)\n"
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+        policy = StarterCompressionPolicy(strategy=CompressionStrategy.TRUNCATE)
+
+        prose_outcome = policy.compress_candidates(
+            (prose_candidate,),
+            trace_id="trace-compression-shape-1",
+            max_tokens=18,
+            query="budget tradeoffs",
+        )
+        code_outcome = policy.compress_candidates(
+            (code_candidate,),
+            trace_id="trace-compression-shape-2",
+            max_tokens=18,
+            query="estimate budget",
+        )
+
+        self.assertFalse(prose_outcome.compression_result.was_applied)
+        self.assertEqual(
+            prose_outcome.compression_result.metadata["outcome"],
+            "fits_budget",
+        )
+        self.assertTrue(code_outcome.compression_result.was_applied)
+        self.assertLess(
+            code_outcome.compression_result.compressed_chars,
+            code_outcome.compression_result.original_chars,
+        )
+
+    def test_compression_bounds_dense_output_by_output_token_estimate(self) -> None:
+        mixed_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="mixed-shape",
+                content=(
+                    "\u8fd9\u662f\u4e00\u4e2a\u5173\u4e8e\u4e0a\u4e0b\u6587"
+                    "\u6cbb\u7406\u548c\u9884\u7b97\u5206\u914d\u7684\u8bf4"
+                    "\u660e\u6587\u6863. Plain English prose about budgets, packet "
+                    "reviews, architecture, and delivery workflows for maintainers."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.EXTRACTIVE
+        ).compress_candidates(
+            (mixed_candidate,),
+            trace_id="trace-compression-shape-3",
+            max_tokens=6,
+            query="",
+        )
+
+        self.assertLessEqual(
+            estimate_tokens(
+                outcome.compression_result.text,
+                chars_per_token=4,
+            ),
+            6,
+        )
+        self.assertEqual(
+            outcome.compression_result.metadata["fallback_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+
+    def test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation(
+        self,
+    ) -> None:
+        text = "abcdefghijkl"
+
+        def non_monotonic_estimator(candidate: str) -> int:
+            length = len(candidate)
+            if length == 0:
+                return 0
+            if length < 4:
+                return 1
+            if length < 8:
+                return 5
+            if length <= 10:
+                return 4
+            return 6
+
+        self.assertEqual(
+            _max_chars_for_token_budget(
+                text,
+                max_tokens=4,
+                token_estimator=non_monotonic_estimator,
+            ),
+            10,
+        )
+        self.assertEqual(
+            _fit_text_within_token_budget(
+                text,
+                max_tokens=4,
+                token_estimator=non_monotonic_estimator,
+            ),
+            ("abcdefghij", True),
+        )
+
+    def test_compression_uses_bound_token_estimator_when_supplied(self) -> None:
+        candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="tokenizer-boundary",
+                content=(
+                    "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda"
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.TRUNCATE,
+            chars_per_token=20,
+            token_estimator=estimate_words,
+            token_estimator_name="word_count",
+        ).compress_candidates(
+            (candidate,),
+            trace_id="trace-compression-tokenizer-seam-1",
+            max_tokens=4,
+            query="alpha beta",
+        )
+
+        self.assertTrue(outcome.compression_result.was_applied)
+        self.assertLessEqual(estimate_words(outcome.compression_result.text), 4)
+        self.assertEqual(
+            outcome.compression_result.metadata["token_estimator"],
+            "word_count",
+        )
+        self.assertEqual(outcome.trace.metadata["token_estimator"], "word_count")
+
+    def test_story_5_hardening_baseline_labels_default_estimator_truthfully(
+        self,
+    ) -> None:
+        candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="starter-heuristic",
+                content=(
+                    "Context Atlas keeps the starter estimator provider-agnostic while "
+                    "still tightening obvious code and markup shapes under pressure."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.TRUNCATE,
+        ).compress_candidates(
+            (candidate,),
+            trace_id="trace-compression-tokenizer-seam-1a",
+            max_tokens=6,
+            query="starter estimator pressure",
+        )
+
+        self.assertEqual(
+            outcome.compression_result.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+        self.assertEqual(
+            outcome.trace.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+
+    def test_compression_auto_labels_custom_estimator_when_name_is_omitted(
+        self,
+    ) -> None:
+        candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="tokenizer-auto-label",
+                content="alpha beta gamma delta epsilon zeta eta",
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.TRUNCATE,
+            chars_per_token=20,
+            token_estimator=estimate_words,
+        ).compress_candidates(
+            (candidate,),
+            trace_id="trace-compression-tokenizer-seam-2",
+            max_tokens=3,
+            query="alpha beta",
+        )
+
+        self.assertEqual(
+            outcome.compression_result.metadata["token_estimator"],
+            "external_binding",
+        )
+        self.assertEqual(
+            outcome.trace.metadata["token_estimator"],
+            "external_binding",
         )
 
     def test_compression_keeps_short_candidates_when_they_fit_budget(self) -> None:
@@ -322,7 +620,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(
             packet.metadata["compression_strategy"],
-            CompressionStrategy.EXTRACTIVE.value,
+            packet.compression_result.strategy_used.value,
         )
 
     def test_render_packet_context_uses_selected_candidates_when_compression_was_not_applied(

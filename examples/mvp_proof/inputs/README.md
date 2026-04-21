@@ -8,7 +8,7 @@ template_refs:
   content: guide_content@1.0.0
 status: active
 created: 2026-04-19
-last_reviewed: 2026-04-19
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [mvp, proof, workflows, examples, inputs]
 related:
@@ -29,11 +29,11 @@ The selected workflows and scenarios are:
 - `docs_database_builder`: `builder_support_troubleshooting`
 - `low_code_chatbot`: `low_code_validation`
 
-The first Story 7 budget-pressure hardening target is:
+The current hardening budget-pressure target is:
 
 - `codex_repository`: `repo_budget_pressure_tradeoffs`
 
-The first Story 7 document-authority hardening target is:
+The current hardening document-authority target is:
 
 - `codex_repository`: `repo_document_authority_precedence`
 
@@ -134,9 +134,10 @@ Use the same pattern for the other selected workflows by changing:
 - the baseline rendered artifact path
 - the Atlas artifact directory
 
-## Story 7 Hardening Target
+## Hardening Budget-Pressure Target
 
-The constrained repository scenario for Story 7 should use this supported run:
+The constrained repository scenario for the hardening proof pass should use
+this supported run:
 
 - workflow id: `codex_repository`
 - scenario id: `repo_budget_pressure_tradeoffs`
@@ -173,10 +174,21 @@ python scripts/mvp_proof/capture_evidence.py \
   --refresh-bundle
 ```
 
-## Story 7 Authority Hardening Target
+When reviewing that hardening bundle, treat the packet and trace artifacts as
+the canonical proof surfaces for:
 
-The first document-authority scenario for Story 7 should use this supported
-run:
+- `budget_fixed_reserved_tokens`
+- `budget_unreserved_tokens`
+- `budget_unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy` when fallback truth matters
+
+Do not add a second hardening summary artifact just to restate those fields.
+
+## Hardening Document-Authority Target
+
+The document-authority scenario for the hardening proof pass should use this
+supported run:
 
 - workflow id: `codex_repository`
 - scenario id: `repo_document_authority_precedence`
@@ -212,3 +224,9 @@ python scripts/mvp_proof/capture_evidence.py \
   --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
+
+When reviewing that hardening bundle, treat the packet ordering and trace
+reasoning as the canonical proof surfaces for authoritative repository
+documents appearing ahead of lower-authority repository material. Do not create
+an alternate authority-proof artifact family outside the standard packet/trace
+bundle.

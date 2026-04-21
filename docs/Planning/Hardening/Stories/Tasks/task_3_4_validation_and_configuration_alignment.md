@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, validation, configuration, token-estimation]
 related:
@@ -28,7 +28,7 @@ supported knob, a seam, or only internal heuristic changes.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -50,6 +50,7 @@ PLANNED
 #### Expected Existing Files Updated
 - `tests/test_budget_and_compression.py`
 - `tests/test_config_observability.py`
+- `tests/test_context_assembly_service.py`
 
 #### Update AI files
 - `tests/`
@@ -107,6 +108,15 @@ PLANNED
 - Story 3 has validation coverage that matches the actual chosen path
 - runtime docs and config surfaces say only what the code now supports
 - Stories 4 and 5 inherit a clear estimation/tokenizer baseline
+- delivered shape:
+  - packet-facing validation now proves the default starter path emits
+    `starter_heuristic` and outward-bound custom estimators emit their bound
+    label through packet and trace metadata
+  - product-facing docs now state that
+    `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is the baseline control for the
+    starter heuristic rather than a promise of one flat estimate everywhere
+  - Atlas still exposes no env-backed tokenizer selector; the custom estimator
+    seam remains an outward callable binding surface only
 
 ## Related Artifacts
 

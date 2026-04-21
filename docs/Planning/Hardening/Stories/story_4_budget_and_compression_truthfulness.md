@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, budgeting, compression, semantics, trace]
 related:
@@ -48,6 +48,16 @@ secondary metadata keys.
   - `src/context_atlas/rendering/context.py`
   - `src/context_atlas/rendering/packet.py`
   - `src/context_atlas/rendering/trace.py`
+- Story 3 kickoff decision:
+  - `heuristic-first`, meaning Story 4 should expect the starter estimation
+    correction to land before any tokenizer seam becomes more than bounded
+    complementary support work
+- Story 3 delivered contract:
+  - the default starter path now reports `starter_heuristic` as the active
+    token-estimation label in packet-facing compression metadata and trace
+    metadata
+  - outward-bound custom estimators remain supported only through the callable
+    composition seam, not through env-backed tokenizer selection
 
 ## Proposed Tasks
 
@@ -58,6 +68,15 @@ secondary metadata keys.
   allocations, and which represent post-allocation remainder
 - resolve the current elastic-slot tension without narrating around misleading
   property names
+- current delivered Task 4.1 result:
+  - `ContextBudget` now distinguishes fixed-slot reservation
+    (`fixed_reserved_tokens`) from pre-allocation unreserved capacity
+    (`unreserved_tokens`)
+  - `BudgetAllocationOutcome` now exposes true post-allocation remainder as
+    `unallocated_tokens`
+  - compatibility aliases remain temporarily in place for
+    `reserved_tokens` and `remaining_tokens` so Task 4.2 can finish the
+    caller-facing contract cleanup without breaking downstream Story work
 
 ### Task 2: Elastic Slot Behavior And Caller Contracts
 
@@ -67,6 +86,9 @@ secondary metadata keys.
   correct
 - change names, properties, or trace semantics where contract truth requires
   it rather than leaving the ambiguity in place
+- Task 4.2 should treat `ContextBudget.reserved_tokens`,
+  `ContextBudget.remaining_tokens`, and outward `remaining_tokens` metadata keys
+  as legacy compatibility surfaces rather than the preferred caller contract
 
 ### Task 3: Compression Result Truthfulness
 
@@ -76,6 +98,9 @@ secondary metadata keys.
   runtime action was truncation
 - keep fallback visibility in the primary artifact surface rather than hiding it
   only in secondary metadata
+- Task 4.3 should make `strategy_used` truthful for the effective runtime
+  strategy and use a separate configured-strategy surface only where fallback
+  needs to remain visible
 
 ### Task 4: Trace, Renderer, And Service Alignment
 
@@ -88,10 +113,19 @@ secondary metadata keys.
   consuming rather than redefining those meanings
 - settle these semantics cleanly enough that Story 5 can validate and document
   them without targeting a moving contract
+- current delivered Task 4.4 result:
+  - service packet and trace metadata now expose truthful top-level
+    compression strategy fields alongside the settled budget vocabulary
+  - packet and trace inspection renderers now surface
+    `unallocated_tokens`, `effective_strategy`, and optional
+    `configured_strategy` directly from canonical artifacts and service
+    metadata
 
 ## Sequencing
 
 - clarify budget artifact semantics first
+- inherit Story 3's heuristic-first lead path instead of assuming a tokenizer
+  seam changes the budget/compression truth model first
 - settle elastic-slot caller contracts before adjusting trace or renderer output
 - define compression result truthfulness next
 - align service, trace, and rendering surfaces last once the canonical

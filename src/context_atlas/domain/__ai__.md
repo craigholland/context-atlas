@@ -155,6 +155,8 @@
     - fixed-slot reservations must not silently exceed total budget
     - slot names must stay unique within a single budget
     - budget artifacts should reject invalid state during Pydantic model initialization rather than through later service checks
+    - canonical budget vocabulary should distinguish fixed-slot reservation, pre-allocation unreserved capacity, and post-allocation unallocated remainder explicitly instead of overloading one generic "remaining" term everywhere
+    - legacy compatibility aliases like `reserved_tokens` and `remaining_tokens` should not regain first-class contract status once truthful names exist
 - `models/assembly.py`:
   - responsibility: defines canonical assembly decisions, traces, and packets
   - defines:
@@ -179,6 +181,7 @@
     - `CompressionResult`
   - invariants:
     - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
+    - compression results should distinguish effective runtime strategy from configured fallback intent when fallback occurs rather than hiding that distinction only in metadata
 - `models/memory.py`:
   - responsibility: defines canonical retained-memory entry artifacts
   - defines:
@@ -199,6 +202,18 @@
     - ranking should stay deterministic for identical inputs
     - deduplication should record explicit exclusion decisions rather than silently dropping candidates
     - `_RankableCandidate` may remain a private dataclass helper while it stays local, validation-light, and absent from the package surface
+- `policies/deduplication.py`:
+  - responsibility: defines the shared lexical/structural duplicate-detection helper surface used by inward policy code
+  - defines:
+    - `DuplicateContentAssessment`
+    - `build_duplicate_content_key`
+    - `assess_duplicate_content`
+  - invariants:
+- duplicate assessment should stay bounded to lexical or structural signals and must not imply hidden semantic-similarity behavior
+- shared duplicate helpers should live here instead of letting ranking and memory drift into separate normalization paths
+- duplicate normalization may strip bounded top-of-file front matter and discount a bounded shared leading line prefix, but it should stay generic rather than turning into a document-type encyclopedic parser
+- front-matter stripping inside that baseline should only treat column-zero fences as delimiters, so indented `---` or `...` lines inside YAML scalar content do not terminate metadata early
+- when both compared inputs are metadata-only front matter, the shared helper should allow only exact normalized-key matches to collapse them; fuzzy containment or token-overlap matching must not erase distinct metadata-only sources
 - `policies/budgeting.py`:
   - responsibility: allocates token demand across fixed and elastic slots
   - defines:
@@ -211,6 +226,8 @@
     - slot-allocation reductions should be visible through structured decisions
     - duplicate or unknown slot requests should fail explicitly
     - `StarterBudgetAllocationPolicy` is intentionally a plain behavior class because it currently carries no structured configuration state of its own
+    - allocation outcomes should expose true post-allocation remainder explicitly enough that later caller-facing surfaces do not confuse it with pre-allocation elastic headroom
+    - trace metadata emitted from allocation outcomes should prefer `unallocated_tokens` over ambiguous `remaining_tokens` labels once the truthful field is available
 - `policies/compression.py`:
   - responsibility: compresses candidate content into structured compression results
   - defines:
@@ -219,9 +236,14 @@
     - `StarterCompressionPolicy`
     - `estimate_tokens`
   - invariants:
-    - fallback behavior should remain explicit in metadata and trace
+    - fallback behavior should remain explicit in the primary result surface and in trace metadata rather than living only in secondary metadata keys
     - compressed text is a transformation artifact, not the canonical packet itself
     - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
+    - starter token estimation should remain provider-agnostic and bounded to content-shape distinctions such as prose baseline, structured code/markup tightening, and non-Latin-heavy tightening rather than hidden tokenizer tables
+    - final compression output must still fit the requested token budget according to the output text's own estimated token shape, even when the compressed text is denser than the original input
+    - prefix-budget helpers for compression must not assume token-estimator monotonicity; Story 3's shape-aware starter heuristic and outward callable estimators may both change regimes across prefixes, so longest-fitting-prefix logic must stay correctness-first
+    - any tokenizer seam consumed inward here must remain a generic callable token-estimation contract; provider SDKs, model names, or tokenizer-selection policy must stay outside the domain layer
+    - token-estimator labels emitted from compression metadata must reflect a real bound estimator; direct policy use should default custom callables to `external_binding` rather than falsely claiming `starter_heuristic`
 - `policies/memory.py`:
   - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
   - defines:
@@ -239,6 +261,15 @@
 - Some names and policies remain intentionally starter-oriented and may evolve as richer domain concepts harden.
 - The current domain layer provides canonical structures plus starter policies, but it is not yet a full long-term domain model for every future provider, storage, or workflow surface.
 - The message/error surface is still pragmatic and relatively thin; richer audit projections or more formal event/read-model patterns remain future work.
+- Duplicate detection is now beginning to converge on one shared inward helper surface, but Story 2 still needs later work for boilerplate handling, full ranking integration, and a tighter final acceptance bar.
+- The current shared duplicate baseline is deliberately lexical only: exact normalized-key matches, normalized containment, and token overlap. Semantic similarity remains out of scope until a future story explicitly reopens that boundary.
+- Task 2.2 and Task 2.3 should refine normalization and policy integration around that baseline, not invent additional duplicate-comparison families in parallel.
+- Ranking should now consume the shared duplicate assessment with an explicit `dedup_threshold` surface instead of silently staying on exact-key-only dedupe, but duplicate elimination should remain source-family-aware so mixed document/record provenance is not erased.
+- Memory duplicate decisions should now describe the shared duplicate-assessment match kind directly rather than hiding that path behind a local boolean-only wrapper or prefix heuristic.
+- Task 2.3 should now be treated as the point where ranking and memory both consume the same bounded duplicate semantics; later Story 2 work should tighten acceptance coverage rather than re-forking policy-local duplicate rules.
+- Token-overlap matching inside that baseline should remain Unicode-aware so non-English text is not silently excluded from duplicate handling.
+- Boilerplate handling inside that baseline should stay bounded to front matter and shared leading prefixes; later work should not grow a format-specific stripping matrix without first updating the Story boundary.
+- Front-matter stripping inside that baseline should preserve the original content when stripping would erase the whole document, so metadata-only sources do not collapse to empty duplicate keys.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

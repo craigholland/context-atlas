@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, closeout, reviews, evidence]
 related:
@@ -31,7 +31,7 @@ caveats about current Atlas behavior.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -114,6 +114,20 @@ PLANNED
 - the review/evidence path across the Epic is explicit
 - the Hardening planning stack is ready for the next execution phase without
   rediscovering Story-level decisions
+
+## Final Handoff State
+
+- This Task is the execution closeout for Story 5 and the Hardening Epic.
+- The integrated closeout assessment now lives in
+  `docs/Planning/Hardening/context_assembly_hardening_product_definition.md`.
+- The Story-level review and proof split now lives in
+  `docs/Planning/Hardening/Stories/story_5_validation_documentation_and_hardening_proof.md`.
+- Once this Task branch merges into the Story 5 branch, the remaining work is
+  Story-level review on the Story 5 PR and then the `Story -> Epic` merge.
+- Follow-on hardening or engine-improvement work should begin from that
+  integrated evidence path and the named `test_story_5_hardening_baseline_*`
+  anchors, not from the original six review findings as if they were still
+  open current-state defects.
 
 ## Related Artifacts
 

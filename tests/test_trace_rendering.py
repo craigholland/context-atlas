@@ -28,7 +28,9 @@ from context_atlas.rendering import (
 class TraceRenderingTests(unittest.TestCase):
     """Verify the first-class trace inspection surface."""
 
-    def test_trace_inspection_groups_decisions_and_metadata(self) -> None:
+    def test_story_5_hardening_baseline_groups_truthful_trace_metadata(
+        self,
+    ) -> None:
         trace = ContextTrace(
             trace_id="trace-render-1",
             decisions=(
@@ -50,6 +52,11 @@ class TraceRenderingTests(unittest.TestCase):
             metadata={
                 "service": "context_assembly_service",
                 "budget_total_tokens": "128",
+                "budget_fixed_reserved_tokens": "32",
+                "budget_unreserved_tokens": "96",
+                "budget_unallocated_tokens": "80",
+                "compression_strategy": "truncate",
+                "configured_compression_strategy": "extractive",
             },
         )
 
@@ -57,6 +64,12 @@ class TraceRenderingTests(unittest.TestCase):
 
         self.assertIn("Trace", rendered)
         self.assertIn("- trace_id: trace-render-1", rendered)
+        self.assertIn("- budget_total_tokens: 128", rendered)
+        self.assertIn("- budget_fixed_reserved_tokens: 32", rendered)
+        self.assertIn("- budget_unreserved_tokens: 96", rendered)
+        self.assertIn("- budget_unallocated_tokens: 80", rendered)
+        self.assertIn("- compression_strategy: truncate", rendered)
+        self.assertIn("- configured_compression_strategy: extractive", rendered)
         self.assertIn("Included Decisions", rendered)
         self.assertIn("[1] charter; action=included", rendered)
         self.assertIn("Excluded Decisions", rendered)
@@ -107,7 +120,12 @@ class TraceRenderingTests(unittest.TestCase):
                 "request_docs_root": "K:/repo/docs",
                 "selected_source_classes": "authoritative,planning",
                 "selected_source_families": "document",
+                "budget_fixed_reserved_tokens": "32",
+                "budget_unreserved_tokens": "96",
+                "budget_unallocated_tokens": "64",
                 "compression_applied": "true",
+                "compression_strategy": "truncate",
+                "configured_compression_strategy": "extractive",
             },
         )
 
@@ -117,7 +135,12 @@ class TraceRenderingTests(unittest.TestCase):
         self.assertIn("- workflow: codex_repository", rendered)
         self.assertIn("- selected_source_classes: authoritative,planning", rendered)
         self.assertIn("- selected_source_families: document", rendered)
+        self.assertIn("- budget_fixed_reserved_tokens: 32", rendered)
+        self.assertIn("- budget_unreserved_tokens: 96", rendered)
+        self.assertIn("- budget_unallocated_tokens: 64", rendered)
         self.assertIn("- compression_applied: true", rendered)
+        self.assertIn("- compression_strategy: truncate", rendered)
+        self.assertIn("- configured_compression_strategy: extractive", rendered)
 
 
 if __name__ == "__main__":

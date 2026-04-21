@@ -28,7 +28,7 @@ Story into a benchmark framework or alternate proof-only path.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -61,6 +61,9 @@ PLANNED
   a demo-only retrieval flow
 - ensure the proof surface is narrow enough to avoid becoming performance
   theater
+- use the shared retrieval-completed event plus `index_snapshot_state`
+  (`rebuilt` / `warm`) as the bounded proof surface rather than timing output
+  or a second retrieval-only demonstration path
 
 #### Expected New Files
 - none expected
@@ -107,6 +110,8 @@ PLANNED
 - indexed retrieval behavior is reviewable through normal repository tests
 - any added proof surface remains bounded and subordinate to the shared path
 - Story 5 inherits a clear validation baseline for retrieval indexing
+- the final Story 1 proof baseline is explicit: one repeated-query regression
+  bundle plus the shared retrieval-completed `index_snapshot_state` signal
 
 ## Related Artifacts
 

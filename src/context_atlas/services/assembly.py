@@ -42,6 +42,39 @@ _DOCUMENT_SLOT_NAME = "documents"
 _MEMORY_SLOT_NAME = "memory"
 
 
+def _normalize_compression_strategy(
+    value: object,
+) -> CompressionStrategy | None:
+    """Return a supported compression strategy enum when one can be derived."""
+
+    if isinstance(value, CompressionStrategy):
+        return value
+    if isinstance(value, str):
+        candidate = value.strip().casefold()
+        for strategy in CompressionStrategy:
+            if candidate in {strategy.value.casefold(), strategy.name.casefold()}:
+                return strategy
+        return None
+    raw_value = getattr(value, "value", None)
+    if isinstance(raw_value, str):
+        return _normalize_compression_strategy(raw_value)
+    return None
+
+
+def _compression_strategy_label(value: object) -> str | None:
+    """Return a safe string label for configured strategy metadata."""
+
+    normalized = _normalize_compression_strategy(value)
+    if normalized is not None:
+        return normalized.value
+    raw_value = getattr(value, "value", None)
+    if isinstance(raw_value, str) and raw_value.strip():
+        return raw_value.strip()
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
+
+
 class CandidateRetriever(Protocol):
     """Inward-safe contract for producing raw candidates from a query."""
 
@@ -222,10 +255,11 @@ class ContextAssemblyService:
                 LogMessage.BUDGET_ALLOCATED,
                 active_trace_id,
                 active_budget.total_tokens,
-                budget_outcome.remaining_tokens,
+                budget_outcome.unallocated_tokens,
                 trace_id=active_trace_id,
                 total_tokens=active_budget.total_tokens,
-                remaining_tokens=budget_outcome.remaining_tokens,
+                remaining_tokens=budget_outcome.unallocated_tokens,
+                unallocated_tokens=budget_outcome.unallocated_tokens,
             )
 
             memory_budget_tokens = self._allocated_tokens(
@@ -313,11 +347,28 @@ class ContextAssemblyService:
                     "retrieved_candidate_count": str(len(gathered_candidates)),
                     "ranked_candidate_count": str(ranking_outcome.included_count),
                     "selected_memory_count": str(len(selected_memory_entries)),
+                    "budget_fixed_reserved_tokens": str(
+                        active_budget.fixed_reserved_tokens
+                    ),
+                    "budget_unreserved_tokens": str(active_budget.unreserved_tokens),
+                    "budget_unallocated_tokens": str(budget_outcome.unallocated_tokens),
                     "document_budget_tokens": str(document_budget_tokens),
                     "memory_budget_tokens": str(memory_budget_tokens),
+                    "compression_present": str(compression_outcome is not None).lower(),
                     "compression_applied": str(compression_applied).lower(),
                 }
             )
+            if compression_outcome is not None:
+                packet_metadata["compression_strategy"] = (
+                    compression_outcome.compression_result.strategy_used.value
+                )
+                configured_strategy = (
+                    compression_outcome.compression_result.configured_strategy
+                )
+                if configured_strategy is not None:
+                    packet_metadata["configured_compression_strategy"] = (
+                        configured_strategy.value
+                    )
 
             packet = ContextPacket(
                 packet_id=active_packet_id,
@@ -571,16 +622,30 @@ class ContextAssemblyService:
             return None
 
         if max_tokens < 1:
+            raw_configured_strategy = getattr(
+                self._compression_policy,
+                "strategy",
+                CompressionStrategy.TRUNCATE,
+            )
+            configured_strategy = _normalize_compression_strategy(
+                raw_configured_strategy
+            )
+            configured_strategy_label = _compression_strategy_label(
+                raw_configured_strategy
+            )
+            if configured_strategy_label == CompressionStrategy.TRUNCATE.value:
+                configured_strategy_label = None
             original_text = "\n\n".join(
                 candidate.source.content for candidate in candidates
             )
             return CompressionOutcome(
                 compression_result=CompressionResult(
                     text="",
-                    strategy_used=getattr(
-                        self._compression_policy,
-                        "strategy",
-                        CompressionStrategy.TRUNCATE,
+                    strategy_used=CompressionStrategy.TRUNCATE,
+                    configured_strategy=(
+                        None
+                        if configured_strategy_label is None
+                        else configured_strategy
                     ),
                     original_chars=len(original_text),
                     compressed_chars=0,
@@ -609,10 +674,15 @@ class ContextAssemblyService:
                         ),
                     ),
                     metadata={
-                        "compression_strategy": getattr(
-                            getattr(self._compression_policy, "strategy", None),
-                            "value",
-                            CompressionStrategy.TRUNCATE.value,
+                        "compression_strategy": CompressionStrategy.TRUNCATE.value,
+                        **(
+                            {}
+                            if configured_strategy_label is None
+                            else {
+                                "configured_compression_strategy": (
+                                    configured_strategy_label
+                                )
+                            }
                         ),
                         "max_tokens": str(max_tokens),
                         "source_count": str(len(candidates)),
@@ -652,6 +722,9 @@ class ContextAssemblyService:
             "selected_memory_count": str(selected_memory_count),
             "budget_total_tokens": str(budget.total_tokens),
             "budget_slot_count": str(len(budget.slots)),
+            "budget_fixed_reserved_tokens": str(budget.fixed_reserved_tokens),
+            "budget_unreserved_tokens": str(budget.unreserved_tokens),
+            "budget_unallocated_tokens": str(budget_outcome.unallocated_tokens),
             "compression_present": str(compression_outcome is not None).lower(),
             "compression_applied": str(compression_applied).lower(),
             "selected_source_classes": ",".join(
@@ -696,12 +769,31 @@ class ContextAssemblyService:
                 )
             ),
         }
+        if compression_outcome is not None:
+            metadata["compression_strategy"] = (
+                compression_outcome.compression_result.strategy_used.value
+            )
+            configured_strategy = (
+                compression_outcome.compression_result.configured_strategy
+            )
+            if configured_strategy is not None:
+                metadata["configured_compression_strategy"] = configured_strategy.value
         metadata.update(self._prefix_metadata("request", request_metadata))
         metadata.update(
             self._prefix_metadata("ranking", ranking_outcome.trace.metadata)
         )
         metadata.update(self._prefix_metadata("memory", memory_outcome.trace.metadata))
-        metadata.update(self._prefix_metadata("budget", budget_outcome.trace.metadata))
+        metadata.update(
+            self._prefix_metadata(
+                "budget",
+                budget_outcome.trace.metadata,
+                exclude_keys={
+                    "fixed_reserved_tokens",
+                    "unreserved_tokens",
+                    "unallocated_tokens",
+                },
+            )
+        )
         if compression_outcome is not None:
             metadata.update(
                 self._prefix_metadata("compression", compression_outcome.trace.metadata)
@@ -778,10 +870,17 @@ class ContextAssemblyService:
         self,
         prefix: str,
         metadata: Mapping[str, str],
+        *,
+        exclude_keys: set[str] | None = None,
     ) -> dict[str, str]:
         """Prefix trace-metadata keys so stage-level values remain unambiguous."""
 
-        return {f"{prefix}_{key}": value for key, value in metadata.items()}
+        excluded = exclude_keys or set()
+        return {
+            f"{prefix}_{key}": value
+            for key, value in metadata.items()
+            if key not in excluded
+        }
 
     def _with_decision_positions(
         self,

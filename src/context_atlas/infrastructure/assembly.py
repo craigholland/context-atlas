@@ -37,6 +37,7 @@ from ..adapters import (
     InMemorySourceRegistry,
     LexicalRetriever,
 )
+from ..domain.errors import ContextAtlasError, ErrorCode
 from ..domain.models import (
     ContextBudget,
     ContextMemoryEntry,
@@ -48,6 +49,7 @@ from ..domain.policies import (
     StarterCandidateRankingPolicy,
     StarterCompressionPolicy,
     StarterMemoryRetentionPolicy,
+    TokenEstimator,
 )
 from ..services.assembly import CandidateRetriever, ContextAssemblyService
 from .config import ContextAtlasSettings, build_low_code_workflow_plan
@@ -59,6 +61,8 @@ def build_starter_context_assembly_service(
     retriever: CandidateRetriever,
     settings: ContextAtlasSettings | None = None,
     logger: logging.Logger | None = None,
+    token_estimator: TokenEstimator | None = None,
+    token_estimator_name: str | None = None,
 ) -> ContextAssemblyService:
     """Build the supported starter assembly service from validated settings.
 
@@ -77,6 +81,16 @@ def build_starter_context_assembly_service(
 
     active_settings = settings or ContextAtlasSettings()
     active_logger = logger or configure_logger(active_settings.logging)
+    if token_estimator is None and token_estimator_name is not None:
+        raise ContextAtlasError(
+            code=ErrorCode.INVALID_ASSEMBLY_REQUEST,
+            message_args=("token_estimator_name requires token_estimator",),
+        )
+    active_token_estimator_name = (
+        active_settings.assembly.compression_token_estimator_name
+        if token_estimator is None
+        else (token_estimator_name or "external_binding")
+    )
 
     return ContextAssemblyService(
         retriever=retriever,
@@ -88,6 +102,8 @@ def build_starter_context_assembly_service(
             strategy=active_settings.assembly.default_compression_strategy,
             chars_per_token=active_settings.assembly.compression_chars_per_token,
             min_chunk_chars=active_settings.assembly.compression_min_chunk_chars,
+            token_estimator=token_estimator,
+            token_estimator_name=active_token_estimator_name,
         ),
         memory_policy=StarterMemoryRetentionPolicy(
             short_term_count=active_settings.memory.short_term_count,
@@ -118,6 +134,8 @@ def assemble_with_starter_context_service(
     trace_id: str | None = None,
     metadata: Mapping[str, object] | None = None,
     now_epoch_seconds: float | None = None,
+    token_estimator: TokenEstimator | None = None,
+    token_estimator_name: str | None = None,
 ) -> ContextPacket:
     """Build the supported starter service and assemble one canonical packet.
 
@@ -131,6 +149,8 @@ def assemble_with_starter_context_service(
         retriever=retriever,
         settings=settings,
         logger=logger,
+        token_estimator=token_estimator,
+        token_estimator_name=token_estimator_name,
     )
     return service.assemble(
         query=query,
@@ -157,6 +177,8 @@ def assemble_with_starter_sources(
     trace_id: str | None = None,
     metadata: Mapping[str, object] | None = None,
     now_epoch_seconds: float | None = None,
+    token_estimator: TokenEstimator | None = None,
+    token_estimator_name: str | None = None,
 ) -> ContextPacket:
     """Assemble one packet from canonical sources through the shared starter path."""
 
@@ -173,6 +195,8 @@ def assemble_with_starter_sources(
         trace_id=trace_id,
         metadata=metadata,
         now_epoch_seconds=now_epoch_seconds,
+        token_estimator=token_estimator,
+        token_estimator_name=token_estimator_name,
     )
 
 
@@ -187,6 +211,8 @@ def assemble_with_low_code_workflow(
     trace_id: str | None = None,
     metadata: Mapping[str, object] | None = None,
     now_epoch_seconds: float | None = None,
+    token_estimator: TokenEstimator | None = None,
+    token_estimator_name: str | None = None,
 ) -> ContextPacket:
     """Assemble one packet through the supported low-code wrapper path.
 
@@ -238,6 +264,8 @@ def assemble_with_low_code_workflow(
         trace_id=trace_id,
         metadata=workflow_metadata,
         now_epoch_seconds=now_epoch_seconds,
+        token_estimator=token_estimator,
+        token_estimator_name=token_estimator_name,
     )
 
 
