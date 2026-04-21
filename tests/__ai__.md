@@ -153,6 +153,7 @@
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
     - tests should prove non-applied compression artifacts do not silently replace canonical selected-candidate content in starter rendering
     - tests should prove the starter token-estimation heuristic tightens only for bounded content-shape differences such as structured code/markup and non-Latin-heavy text, and that compression fit checks consume the same estimate
+    - tests should prove compressed output is trimmed back under budget when output shape is denser than the original input shape that seeded the initial character cap
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:

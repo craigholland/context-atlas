@@ -301,6 +301,44 @@ class BudgetAndCompressionTests(unittest.TestCase):
             code_outcome.compression_result.original_chars,
         )
 
+    def test_compression_bounds_dense_output_by_output_token_estimate(self) -> None:
+        mixed_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="mixed-shape",
+                content=(
+                    "\u8fd9\u662f\u4e00\u4e2a\u5173\u4e8e\u4e0a\u4e0b\u6587"
+                    "\u6cbb\u7406\u548c\u9884\u7b97\u5206\u914d\u7684\u8bf4"
+                    "\u660e\u6587\u6863. Plain English prose about budgets, packet "
+                    "reviews, architecture, and delivery workflows for maintainers."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.EXTRACTIVE
+        ).compress_candidates(
+            (mixed_candidate,),
+            trace_id="trace-compression-shape-3",
+            max_tokens=6,
+            query="",
+        )
+
+        self.assertLessEqual(
+            estimate_tokens(
+                outcome.compression_result.text,
+                chars_per_token=4,
+            ),
+            6,
+        )
+        self.assertEqual(
+            outcome.compression_result.metadata["fallback_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+
     def test_compression_keeps_short_candidates_when_they_fit_budget(self) -> None:
         short_registry = InMemorySourceRegistry(
             (

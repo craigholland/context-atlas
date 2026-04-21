@@ -168,6 +168,13 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 query=query,
                 max_chars=max_chars,
             )
+        compressed_text, budget_trimmed = _fit_text_within_token_budget(
+            compressed_text,
+            max_tokens=max_tokens,
+            chars_per_token=self.chars_per_token,
+        )
+        if budget_trimmed and fallback_used is None:
+            fallback_used = CompressionStrategy.TRUNCATE
 
         compressed_chars = len(compressed_text)
         estimated_tokens_saved = max(
@@ -325,6 +332,31 @@ def _truncate_chunks(chunks: list[str], *, max_chars: int) -> str:
     budget_per_chunk = max_chars // max(len(chunks), 1)
     joined = "\n\n".join(chunk[:budget_per_chunk] for chunk in chunks)
     return joined[:max_chars].strip()
+
+
+def _fit_text_within_token_budget(
+    text: str,
+    *,
+    max_tokens: int,
+    chars_per_token: int,
+) -> tuple[str, bool]:
+    """Trim text until its estimated token count fits the requested budget."""
+
+    if estimate_tokens(text, chars_per_token=chars_per_token) <= max_tokens:
+        return text, False
+
+    low = 0
+    high = len(text)
+    best = ""
+    while low <= high:
+        midpoint = (low + high) // 2
+        candidate = text[:midpoint].strip()
+        if estimate_tokens(candidate, chars_per_token=chars_per_token) <= max_tokens:
+            best = candidate
+            low = midpoint + 1
+        else:
+            high = midpoint - 1
+    return best, True
 
 
 def _sentence_preserving(chunks: list[str], *, max_chars: int) -> str:
