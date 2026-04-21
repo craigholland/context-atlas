@@ -90,6 +90,8 @@ implementation details.
   present
 - ensure product-facing docs explain the engine truthfully without forcing
   readers to parse implementation details
+- keep shipped release history distinct from current development-branch
+  hardening guidance so `docs/Release/` does not overclaim unreleased behavior
 - keep the Story 3 documentation baseline explicit:
   - the starter path is shape-aware by default through `starter_heuristic`
   - custom token estimation remains an outward callable seam
