@@ -47,7 +47,22 @@ The output shows:
 - packet inspection
 - trace inspection
 
+Read those packet and trace surfaces using the hardened top-level vocabulary:
+
+- `fixed_reserved_tokens`
+- `unreserved_tokens`
+- `unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy`
+
 That makes the workflow suitable both for local experimentation and for internal MVP review.
+
+The shared hardening story is the same one described in the guides:
+
+- the repository workflow still runs through the shared starter engine
+- the starter estimator is shape-aware by default
+- retrieval reuse and duplicate-acceptance proof remain regression-backed
+  rather than moving into a second demonstration-only artifact family
 
 ## Demo-Focused Trace View
 

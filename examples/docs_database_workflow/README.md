@@ -49,12 +49,23 @@ The output shows:
 - trace highlights
 - full trace inspection
 
+Use the hardened top-level packet and trace fields when reviewing those
+inspection surfaces:
+
+- `fixed_reserved_tokens`
+- `unreserved_tokens`
+- `unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy`
+
 ## Intended Architectural Reading
 
 This example should teach one specific lesson:
 
 - Atlas can operate as a real pipeline component over mixed source families
 - the engine path stays shared with the rest of the product
+- the starter estimator is shape-aware by default rather than one flat global
+  chars-per-token assumption
 - database access remains an outer application concern
 - payload-file loading remains an outer workflow concern too
 - packet and trace remain the authoritative outputs

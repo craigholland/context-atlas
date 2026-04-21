@@ -65,6 +65,19 @@ guides index. If examples start requiring extra hidden setup or deep internal
 imports, the example surface should be corrected before more product-facing
 guidance is added.
 
+The shared hardening story now applies here too:
+
+- the starter engine uses a shape-aware token-estimation heuristic by default
+  rather than one flat chars-per-token assumption
+- packet and trace inspection should prefer the truthful budget vocabulary
+  `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`
+- packet and trace inspection should also prefer the truthful compression
+  vocabulary `compression_strategy` and optional
+  `configured_compression_strategy`
+- retrieval index reuse and duplicate-acceptance review stay anchored by the
+  named Story 5 baseline regressions rather than by a second proof-only example
+  family
+
 ## Codex Repository Workflow Shape
 
 The flagship Codex repository workflow currently uses the same shared starter engine, but with a repository-oriented outer composition boundary:
@@ -87,6 +100,15 @@ Run the repository-oriented example directly:
 ```bash
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
+
+When reviewing packet and trace output for this workflow, prefer the truthful
+top-level budget and compression fields introduced by the hardening pass:
+
+- `fixed_reserved_tokens`
+- `unreserved_tokens`
+- `unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy`
 
 The current product-facing setup guide for that path is [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
 
@@ -113,3 +135,12 @@ The current Story 4 technical-builder scenario builds on that same boundary. It 
 The dedicated runnable example for that path now lives at [examples/docs_database_workflow/README.md](/context-atlas/examples/docs_database_workflow/README.md).
 
 The product-facing setup guide for that same workflow now lives at [docs/Guides/docs_database_workflow.md](/context-atlas/docs/Guides/docs_database_workflow.md).
+
+That mixed-source inspection story should use the same truthful top-level
+budget and compression fields:
+
+- `fixed_reserved_tokens`
+- `unreserved_tokens`
+- `unallocated_tokens`
+- `compression_strategy`
+- optional `configured_compression_strategy`
