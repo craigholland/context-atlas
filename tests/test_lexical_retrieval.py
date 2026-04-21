@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import io
+import logging
 import math
 from unittest.mock import patch
 import unittest
@@ -281,6 +283,47 @@ class LexicalRetrievalTests(unittest.TestCase):
             },
         )
 
+    def test_tfidf_retrieval_logs_bounded_snapshot_reuse_signal(self) -> None:
+        registry = InMemorySourceRegistry(self.sources)
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.TFIDF)
+        stream = io.StringIO()
+        handler = logging.StreamHandler(stream)
+        handler.setFormatter(
+            logging.Formatter(
+                "%(event)s|%(index_snapshot_state)s|%(registry_revision)s|"
+                "%(source_count)s|%(query_token_count)s|%(message)s"
+            )
+        )
+        logger = logging.getLogger("context_atlas.adapters.retrieval.lexical")
+        previous_handlers = logger.handlers[:]
+        previous_level = logger.level
+        previous_propagate = logger.propagate
+        self.addCleanup(
+            self._restore_logger,
+            logger,
+            previous_handlers,
+            previous_level,
+            previous_propagate,
+        )
+        logger.handlers = [handler]
+        logger.setLevel(logging.INFO)
+        logger.propagate = False
+
+        retriever.retrieve("tf idf retrieval", top_k=2)
+        retriever.retrieve("document ranking context", top_k=2)
+
+        self.assertEqual(
+            stream.getvalue().strip().splitlines(),
+            [
+                "retrieval_completed|rebuilt|3|3|3|"
+                "Retrieval completed: mode=tfidf, query=tf idf retrieval, "
+                "candidate_count=2",
+                "retrieval_completed|warm|3|3|3|"
+                "Retrieval completed: mode=tfidf, query=document ranking context, "
+                "candidate_count=2",
+            ],
+        )
+
     def test_tfidf_index_snapshot_rebuilds_after_registry_revision_changes(
         self,
     ) -> None:
@@ -306,6 +349,17 @@ class LexicalRetrievalTests(unittest.TestCase):
             LogMessage.RETRIEVAL_COMPLETED,
             "Retrieval completed: mode=%s, query=%s, candidate_count=%d",
         )
+
+    @staticmethod
+    def _restore_logger(
+        logger: logging.Logger,
+        handlers: list[logging.Handler],
+        level: int,
+        propagate: bool,
+    ) -> None:
+        logger.handlers = handlers
+        logger.setLevel(level)
+        logger.propagate = propagate
 
 
 if __name__ == "__main__":
