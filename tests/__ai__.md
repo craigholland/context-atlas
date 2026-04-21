@@ -137,6 +137,7 @@
     - tests should prove interleaved repeated queries over a stable registry preserve the same public TF-IDF ranking semantics for the same query rather than letting warm cached state skew later answers
     - tests should keep one concise repeated-query proof bundle reviewable enough that a reviewer can see shared-registry listing, zero snapshot rebuilds, and one query-local TF recomputation without reading the retriever implementation line by line
     - tests should also keep the bounded human-readable proof surface explicit by proving the shared retrieval-completed event shows `index_snapshot_state` moving from `rebuilt` to `warm` on repeated TF-IDF queries instead of inventing a separate benchmark-only artifact
+    - Story 5 treats `test_story_5_hardening_baseline_keeps_repeated_query_proof_bundle_reviewable` as the retrieval anchor contributors should extend before adding new hardening-only cache proof
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:
@@ -148,6 +149,7 @@
   - invariants:
     - tests should prove ranking remains deterministic for identical inputs
     - exclusion decisions should be trace-visible rather than silent side effects
+    - Story 5 treats `test_story_5_hardening_baseline_proves_duplicate_acceptance_bar` as the ranking-side duplicate anchor for front-matter equivalence and shared-header false-positive rejection
 - `test_budget_and_compression.py`:
   - responsibility: verifies PR 5 budget/compression policies and packet rendering derivation
   - defines:
@@ -170,6 +172,7 @@
     - tests should prove an outward-bound custom token estimator can tighten compression behavior without introducing provider-specific logic into domain policy tests
     - tests should prove custom token-estimator labels are rejected when no estimator is actually bound and auto-labeled truthfully when a direct policy caller binds a custom estimator without naming it
     - tests should prove the default starter path still reports `starter_heuristic` truthfully through compression metadata rather than forcing reviewers to infer the active estimator from config alone
+    - Story 5 treats the `test_story_5_hardening_baseline_*` regressions in this file as the primary anchor for truthful budget labels, fallback strategy truth, non-monotonic prefix fitting, and default estimator labeling
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:
@@ -183,6 +186,7 @@
     - tests should verify packet inspection shows `unallocated_tokens` and distinguishes effective from configured compression strategy when those semantics are present
     - tests should verify packet inspection stays read-only over canonical packet artifacts
     - tests should verify generic packet-context rendering defaults stay generic while workflow-facing labels remain caller-supplied
+    - Story 5 treats `test_story_5_hardening_baseline_highlights_packet_budget_and_compression_state` as the packet-inspection anchor for surfaced hardening semantics
 - `test_trace_rendering.py`:
   - responsibility: verifies trace inspection rendering stays derived, ordered, and useful for debugging
   - defines:
@@ -197,6 +201,7 @@
     - tests should verify service-produced traces carry stable decision positions for inspection renderers
     - tests should verify trace summaries and highlight views surface the settled top-level budget and compression semantics directly
     - tests should verify any concise trace-highlight surface remains derived from canonical trace metadata and counts
+    - Story 5 treats `test_story_5_hardening_baseline_groups_truthful_trace_metadata` as the trace-rendering anchor for surfaced hardening semantics
 - `test_memory_policy.py`:
   - responsibility: verifies PR 6 memory artifacts, starter retention scoring, and trace visibility
   - defines:
@@ -207,6 +212,7 @@
     - tests should prove short-term retention, decay sensitivity, deduplication, and query boosts remain deterministic
     - tests should prove the short-term retention window is ordered newest-first before downstream budget trimming occurs
     - memory decisions should stay visible in structured traces rather than collapsing into opaque prompt strings
+    - Story 5 treats `test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar` as the memory-side duplicate anchor for the shared Story 2 acceptance bar
 - `test_context_assembly_service.py`:
   - responsibility: verifies the starter service orchestration and settings-driven infrastructure factory
   - defines:
@@ -233,6 +239,7 @@
     - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
+    - Story 5 treats the `test_story_5_hardening_baseline_*` service regressions in this file as the canonical packet/trace contract anchor for truthful top-level budget, compression, and estimator metadata
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:
