@@ -42,6 +42,39 @@ _DOCUMENT_SLOT_NAME = "documents"
 _MEMORY_SLOT_NAME = "memory"
 
 
+def _normalize_compression_strategy(
+    value: object,
+) -> CompressionStrategy | None:
+    """Return a supported compression strategy enum when one can be derived."""
+
+    if isinstance(value, CompressionStrategy):
+        return value
+    if isinstance(value, str):
+        candidate = value.strip().casefold()
+        for strategy in CompressionStrategy:
+            if candidate in {strategy.value.casefold(), strategy.name.casefold()}:
+                return strategy
+        return None
+    raw_value = getattr(value, "value", None)
+    if isinstance(raw_value, str):
+        return _normalize_compression_strategy(raw_value)
+    return None
+
+
+def _compression_strategy_label(value: object) -> str | None:
+    """Return a safe string label for configured strategy metadata."""
+
+    normalized = _normalize_compression_strategy(value)
+    if normalized is not None:
+        return normalized.value
+    raw_value = getattr(value, "value", None)
+    if isinstance(raw_value, str) and raw_value.strip():
+        return raw_value.strip()
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    return None
+
+
 class CandidateRetriever(Protocol):
     """Inward-safe contract for producing raw candidates from a query."""
 
@@ -577,11 +610,19 @@ class ContextAssemblyService:
             return None
 
         if max_tokens < 1:
-            configured_strategy = getattr(
+            raw_configured_strategy = getattr(
                 self._compression_policy,
                 "strategy",
                 CompressionStrategy.TRUNCATE,
             )
+            configured_strategy = _normalize_compression_strategy(
+                raw_configured_strategy
+            )
+            configured_strategy_label = _compression_strategy_label(
+                raw_configured_strategy
+            )
+            if configured_strategy_label == CompressionStrategy.TRUNCATE.value:
+                configured_strategy_label = None
             original_text = "\n\n".join(
                 candidate.source.content for candidate in candidates
             )
@@ -591,7 +632,7 @@ class ContextAssemblyService:
                     strategy_used=CompressionStrategy.TRUNCATE,
                     configured_strategy=(
                         None
-                        if configured_strategy is CompressionStrategy.TRUNCATE
+                        if configured_strategy_label is None
                         else configured_strategy
                     ),
                     original_chars=len(original_text),
@@ -624,9 +665,11 @@ class ContextAssemblyService:
                         "compression_strategy": CompressionStrategy.TRUNCATE.value,
                         **(
                             {}
-                            if configured_strategy is CompressionStrategy.TRUNCATE
+                            if configured_strategy_label is None
                             else {
-                                "configured_compression_strategy": configured_strategy.value
+                                "configured_compression_strategy": (
+                                    configured_strategy_label
+                                )
                             }
                         ),
                         "max_tokens": str(max_tokens),
