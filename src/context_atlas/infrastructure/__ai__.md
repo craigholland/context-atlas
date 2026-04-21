@@ -89,6 +89,7 @@
     - the starter memory-budget split is now part of that operator-facing assembly surface and should stay mirrored across validated settings, `.env.example`, and starter assembly wiring
     - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
     - validated override helpers should reuse model validation rather than `model_copy(update=...)` when changing user-facing assembly defaults such as total budget
+    - outward tokenizer-binding defaults may be named here for composition clarity, but they must not become a provider-selection or SDK-binding surface unless the supported runtime contract expands first
 - `config/environment.py`:
   - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:
@@ -155,6 +156,7 @@
     - low-code convenience here may choose a supported preset, docs root, and payload file, but it should still cross into the same registry/retriever/service path rather than creating alternate packet semantics
     - low-code wrappers should prefer `ContextAtlasSettings.with_low_code_overrides(...)`, `build_low_code_workflow_plan(...)`, and `assemble_with_starter_sources(...)` over wrapper-local setting merges or metadata packing
     - proof-artifact writing should stay on one shared outer helper here rather than being duplicated across runnable workflow examples
+    - tokenizer seams bound here must stay provider-agnostic at the function signature level and must default cleanly to the starter heuristic when no external estimator is supplied
 
 ## Known Gaps / Future-State Notes
 - Infrastructure still focuses on config, logging, and shared assembly helpers; persistence, audit sinks, memory stores, and broader integration infrastructure remain future work.

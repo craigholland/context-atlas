@@ -103,6 +103,14 @@ decision about which of those two concerns leads implementation.
   infrastructure layers
 - make the seam explicit enough that a future integration can bind to it
   without reworking domain-layer policy semantics
+- current delivered complementary result:
+  - `StarterCompressionPolicy` now accepts a provider-agnostic callable token
+    estimator seam while preserving the bounded starter heuristic as the
+    default path
+  - starter infrastructure composition now exposes that seam outward through
+    the supported assembly helpers
+  - no provider SDK, tokenizer table, or provider-selection logic moved into
+    the domain layer
 
 ### Task 4: Validation And Configuration Alignment
 
