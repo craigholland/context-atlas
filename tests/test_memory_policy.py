@@ -399,6 +399,12 @@ class MemoryPolicyTests(unittest.TestCase):
             ("recent-shared-header", "older-shared-header"),
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_entry_count"], "0")
+        excluded_decisions = [
+            decision
+            for decision in outcome.trace.decisions
+            if decision.action is ContextDecisionAction.EXCLUDED
+        ]
+        self.assertEqual(excluded_decisions, [])
 
     def test_query_relevance_boost_can_rescue_a_decayed_memory_entry(self) -> None:
         entries = (

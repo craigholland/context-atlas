@@ -369,6 +369,65 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
 
+    def test_ranking_keeps_shared_header_entries_with_distinct_bodies(self) -> None:
+        shared_prefix = (
+            "---\n"
+            "doc_class: guide\n"
+            "owners: [core]\n"
+            "---\n"
+            "# Context Atlas Hardening\n"
+            "Audience: Internal\n"
+            "Workflow: Hardening\n"
+        )
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-shared-header",
+                    content=shared_prefix
+                    + (
+                        "\n"
+                        "Duplicate normalization should strip front matter before "
+                        "comparison.\n"
+                        "This note focuses on repeated header handling in governed "
+                        "docs."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-shared-header",
+                    content=shared_prefix
+                    + (
+                        "\n"
+                        "Token estimation should stay provider-agnostic and query "
+                        "aware.\n"
+                        "This note focuses on tokenizer seams rather than duplicate "
+                        "handling."
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "context atlas hardening workflow duplicate token estimation",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy(dedup_threshold=0.72).rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2g",
+        )
+
+        self.assertCountEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-shared-header", "planning-shared-header"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(
