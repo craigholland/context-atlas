@@ -73,6 +73,14 @@ implementation details.
   query regression bundle plus the shared retrieval-completed
   `index_snapshot_state` signal should be extended only if later hardening work
   truly needs more reviewability
+- keep the human-readable proof scope explicit:
+  - retrieval index reuse stays anchored by named regressions plus the shared
+    `index_snapshot_state` signal rather than by a new bundle family
+  - duplicate acceptance-bar behavior stays anchored by the named Story 5
+    ranking and memory regressions rather than by a duplicate-demo artifact
+  - bounded human-readable proof should focus on packet/trace-visible budget,
+    compression, and document-authority behavior where reviewers materially
+    benefit from opening canonical artifacts directly
 
 ### Task 3: Documentation And Example Alignment
 
