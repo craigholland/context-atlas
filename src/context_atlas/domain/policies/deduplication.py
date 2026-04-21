@@ -15,6 +15,9 @@ from dataclasses import dataclass
 import re
 
 
+_UNICODE_TOKEN_PATTERN = re.compile(r"[^\W_]+", flags=re.UNICODE)
+
+
 @dataclass(frozen=True, slots=True)
 class DuplicateContentAssessment:
     """Structured result of comparing two content strings for duplication."""
@@ -82,8 +85,8 @@ def assess_duplicate_content(
 def _jaccard_token_overlap(left_key: str, right_key: str) -> float:
     """Return a simple lexical overlap ratio for normalized content."""
 
-    tokens_a = set(re.findall(r"[a-z0-9]+", left_key))
-    tokens_b = set(re.findall(r"[a-z0-9]+", right_key))
+    tokens_a = set(_UNICODE_TOKEN_PATTERN.findall(left_key))
+    tokens_b = set(_UNICODE_TOKEN_PATTERN.findall(right_key))
     union_size = len(tokens_a | tokens_b)
     if union_size == 0:
         return 0.0

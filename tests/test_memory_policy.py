@@ -210,6 +210,53 @@ class MemoryPolicyTests(unittest.TestCase):
             tuple(reason.value for reason in duplicate_decision.reason_codes),
         )
 
+    def test_memory_policy_deduplicates_unicode_token_variants(self) -> None:
+        entries = (
+            _memory_entry(
+                "older-unicode-overlap",
+                (
+                    "Атлас сохраняет долговременный контекст планирования, когда "
+                    "политика выбирает состояние памяти."
+                ),
+                recorded_at=self.now - 650,
+                importance=1.9,
+            ),
+            _memory_entry(
+                "recent-unicode-overlap",
+                (
+                    "Политика выбирает состояние памяти, когда Атлас сохраняет "
+                    "долговременный контекст планирования."
+                ),
+                recorded_at=self.now - 12,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2d",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-unicode-overlap",),
+        )
+        duplicate_decision = next(
+            decision
+            for decision in outcome.trace.decisions
+            if decision.source_id == "older-unicode-overlap"
+        )
+        self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
+        self.assertIn(
+            "duplicate",
+            tuple(reason.value for reason in duplicate_decision.reason_codes),
+        )
+
     def test_memory_policy_keeps_lexically_distinct_related_entries(self) -> None:
         entries = (
             _memory_entry(
