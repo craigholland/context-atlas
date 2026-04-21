@@ -208,6 +208,7 @@
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
     - tests should prove service-owned zero-document-budget compression outcomes report truncation as the effective strategy while preserving the configured starter strategy separately when needed
+    - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
 - `test_filesystem_document_adapter.py`:
