@@ -12,6 +12,7 @@ from context_atlas.domain.models import (
     ContextBudget,
     ContextBudgetSlot,
     ContextBudgetSlotMode,
+    ContextCandidate,
     ContextPacket,
     ContextSource,
     ContextSourceAuthority,
@@ -22,6 +23,7 @@ from context_atlas.domain.policies import (
     StarterBudgetAllocationPolicy,
     StarterCompressionPolicy,
 )
+from context_atlas.domain.policies.compression import estimate_tokens
 from context_atlas.rendering import render_packet_context
 from context_atlas.adapters import (
     InMemorySourceRegistry,
@@ -216,6 +218,125 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(
             invalid_chunk_size.exception.code,
             ErrorCode.INVALID_COMPRESSION_REQUEST,
+        )
+
+    def test_estimate_tokens_tightens_for_structured_and_non_latin_text(self) -> None:
+        prose = "Context Atlas explains budget tradeoffs in plain prose for reviewers."
+        markdown = (
+            "# Budget Notes\n"
+            "- keep packet scope visible\n"
+            "- preserve trace clarity\n"
+            "`inline` [guide](x)"
+        )
+        code = (
+            "def estimate_budget(total_tokens: int) -> int:\n"
+            "    return max(1, total_tokens // 4)\n"
+        )
+        non_latin = "这是一个关于上下文治理和预算分配的说明文档。"
+
+        self.assertEqual(estimate_tokens(prose, chars_per_token=4), len(prose) // 4)
+        self.assertGreater(
+            estimate_tokens(markdown, chars_per_token=4),
+            len(markdown) // 4,
+        )
+        self.assertGreater(
+            estimate_tokens(code, chars_per_token=4),
+            len(code) // 4,
+        )
+        self.assertGreater(
+            estimate_tokens(non_latin, chars_per_token=4),
+            len(non_latin) // 4,
+        )
+
+    def test_compression_fit_check_uses_shape_aware_estimation(self) -> None:
+        prose_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="prose",
+                content=(
+                    "Context Atlas explains budget tradeoffs in plain prose for "
+                    "reviewers."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+        code_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="code",
+                content=(
+                    "def estimate_budget(total_tokens: int) -> int:\n"
+                    "    return max(1, total_tokens // 4)\n"
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+        policy = StarterCompressionPolicy(strategy=CompressionStrategy.TRUNCATE)
+
+        prose_outcome = policy.compress_candidates(
+            (prose_candidate,),
+            trace_id="trace-compression-shape-1",
+            max_tokens=18,
+            query="budget tradeoffs",
+        )
+        code_outcome = policy.compress_candidates(
+            (code_candidate,),
+            trace_id="trace-compression-shape-2",
+            max_tokens=18,
+            query="estimate budget",
+        )
+
+        self.assertFalse(prose_outcome.compression_result.was_applied)
+        self.assertEqual(
+            prose_outcome.compression_result.metadata["outcome"],
+            "fits_budget",
+        )
+        self.assertTrue(code_outcome.compression_result.was_applied)
+        self.assertLess(
+            code_outcome.compression_result.compressed_chars,
+            code_outcome.compression_result.original_chars,
+        )
+
+    def test_compression_bounds_dense_output_by_output_token_estimate(self) -> None:
+        mixed_candidate = ContextCandidate(
+            source=ContextSource(
+                source_id="mixed-shape",
+                content=(
+                    "\u8fd9\u662f\u4e00\u4e2a\u5173\u4e8e\u4e0a\u4e0b\u6587"
+                    "\u6cbb\u7406\u548c\u9884\u7b97\u5206\u914d\u7684\u8bf4"
+                    "\u660e\u6587\u6863. Plain English prose about budgets, packet "
+                    "reviews, architecture, and delivery workflows for maintainers."
+                ),
+                source_class=ContextSourceClass.AUTHORITATIVE,
+                authority=ContextSourceAuthority.BINDING,
+            ),
+            score=1.0,
+            rank=1,
+        )
+
+        outcome = StarterCompressionPolicy(
+            strategy=CompressionStrategy.EXTRACTIVE
+        ).compress_candidates(
+            (mixed_candidate,),
+            trace_id="trace-compression-shape-3",
+            max_tokens=6,
+            query="",
+        )
+
+        self.assertLessEqual(
+            estimate_tokens(
+                outcome.compression_result.text,
+                chars_per_token=4,
+            ),
+            6,
+        )
+        self.assertEqual(
+            outcome.compression_result.metadata["fallback_strategy"],
+            CompressionStrategy.TRUNCATE.value,
         )
 
     def test_compression_keeps_short_candidates_when_they_fit_budget(self) -> None:

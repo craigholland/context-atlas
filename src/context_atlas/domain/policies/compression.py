@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import re
 from typing import Iterable, Protocol
 
@@ -111,9 +112,18 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         chunks = [candidate.source.content for candidate in candidate_tuple]
         original_text = "\n\n".join(chunks)
         original_chars = len(original_text)
-        max_chars = max_tokens * self.chars_per_token
+        max_chars = max_tokens * _effective_chars_per_token(
+            original_text,
+            baseline_chars_per_token=self.chars_per_token,
+        )
 
-        if original_chars <= max_chars:
+        if (
+            estimate_tokens(
+                original_text,
+                chars_per_token=self.chars_per_token,
+            )
+            <= max_tokens
+        ):
             result = CompressionResult(
                 text=original_text,
                 strategy_used=self.strategy,
@@ -158,6 +168,13 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 query=query,
                 max_chars=max_chars,
             )
+        compressed_text, budget_trimmed = _fit_text_within_token_budget(
+            compressed_text,
+            max_tokens=max_tokens,
+            chars_per_token=self.chars_per_token,
+        )
+        if budget_trimmed and fallback_used is None:
+            fallback_used = CompressionStrategy.TRUNCATE
 
         compressed_chars = len(compressed_text)
         estimated_tokens_saved = max(
@@ -240,7 +257,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
 
 
 def estimate_tokens(text: str, *, chars_per_token: int = 4) -> int:
-    """Estimate token count using a coarse chars-per-token heuristic."""
+    """Estimate token count using a bounded content-shape-aware starter heuristic."""
 
     if chars_per_token < 1:
         raise ContextAtlasError(
@@ -250,7 +267,63 @@ def estimate_tokens(text: str, *, chars_per_token: int = 4) -> int:
                 % (chars_per_token,),
             ),
         )
-    return len(text) // chars_per_token
+    if not text:
+        return 0
+    return len(text) // _effective_chars_per_token(
+        text,
+        baseline_chars_per_token=chars_per_token,
+    )
+
+
+def _effective_chars_per_token(
+    text: str,
+    *,
+    baseline_chars_per_token: int,
+) -> int:
+    """Return a bounded starter chars-per-token estimate for obvious content shapes."""
+
+    effective = baseline_chars_per_token
+    if _looks_like_structured_text(text):
+        effective = min(effective, max(1, baseline_chars_per_token - 1))
+    if _looks_non_latin_heavy(text):
+        effective = min(effective, max(1, math.ceil(baseline_chars_per_token / 2)))
+    return effective
+
+
+def _looks_like_structured_text(text: str) -> bool:
+    """Detect code- or markup-heavy text without introducing provider assumptions."""
+
+    stripped = text.strip()
+    if not stripped:
+        return False
+
+    line_count = stripped.count("\n") + 1
+    markdown_marker_count = sum(
+        1
+        for line in stripped.splitlines()
+        if re.match(r"^\s{0,3}(#{1,6}\s|[-*+]\s|>\s|\d+[.)]\s|```|~~~)", line)
+    )
+    code_signal_count = len(re.findall(r"```|~~~|::|->|=>|[{}[\]();<>]", stripped))
+    structural_char_count = sum(1 for char in stripped if char in "#*_`[](){}<>-|\\/")
+    structural_ratio = structural_char_count / len(stripped)
+
+    return (
+        markdown_marker_count >= 2
+        or (line_count >= 3 and markdown_marker_count >= 1)
+        or code_signal_count >= 8
+        or (line_count >= 3 and code_signal_count >= 4)
+        or structural_ratio >= 0.10
+    )
+
+
+def _looks_non_latin_heavy(text: str) -> bool:
+    """Detect text where alphabetic content is dominated by non-ASCII characters."""
+
+    alphabetic_chars = [char for char in text if char.isalpha()]
+    if not alphabetic_chars:
+        return False
+    non_ascii_alpha = sum(1 for char in alphabetic_chars if ord(char) > 127)
+    return (non_ascii_alpha / len(alphabetic_chars)) >= 0.35
 
 
 def _truncate_chunks(chunks: list[str], *, max_chars: int) -> str:
@@ -259,6 +332,31 @@ def _truncate_chunks(chunks: list[str], *, max_chars: int) -> str:
     budget_per_chunk = max_chars // max(len(chunks), 1)
     joined = "\n\n".join(chunk[:budget_per_chunk] for chunk in chunks)
     return joined[:max_chars].strip()
+
+
+def _fit_text_within_token_budget(
+    text: str,
+    *,
+    max_tokens: int,
+    chars_per_token: int,
+) -> tuple[str, bool]:
+    """Trim text until its estimated token count fits the requested budget."""
+
+    if estimate_tokens(text, chars_per_token=chars_per_token) <= max_tokens:
+        return text, False
+
+    low = 0
+    high = len(text)
+    best = ""
+    while low <= high:
+        midpoint = (low + high) // 2
+        candidate = text[:midpoint].strip()
+        if estimate_tokens(candidate, chars_per_token=chars_per_token) <= max_tokens:
+            best = candidate
+            low = midpoint + 1
+        else:
+            high = midpoint - 1
+    return best, True
 
 
 def _sentence_preserving(chunks: list[str], *, max_chars: int) -> str:
