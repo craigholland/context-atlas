@@ -249,6 +249,7 @@
 - The current domain layer provides canonical structures plus starter policies, but it is not yet a full long-term domain model for every future provider, storage, or workflow surface.
 - The message/error surface is still pragmatic and relatively thin; richer audit projections or more formal event/read-model patterns remain future work.
 - Duplicate detection is now beginning to converge on one shared inward helper surface, but Story 2 still needs later work for boilerplate handling, full ranking integration, and a tighter final acceptance bar.
+- The current shared duplicate baseline is deliberately lexical only: exact normalized-key matches, normalized containment, and token overlap. Semantic similarity remains out of scope until a future story explicitly reopens that boundary.
 
 ## Cross-Folder Contracts
 - `infrastructure/`: may use `ErrorCode`, `ConfigurationError`, and centralized message constants, but must not redefine those semantics locally.

@@ -346,7 +346,7 @@ def _find_duplicate_entry(
 
 
 def _is_duplicate_content(content_a: str, content_b: str, *, threshold: float) -> bool:
-    """Apply starter duplicate detection."""
+    """Apply the shared lexical duplicate baseline, not semantic similarity."""
 
     return assess_duplicate_content(
         content_a,

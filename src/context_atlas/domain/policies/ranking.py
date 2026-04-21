@@ -188,7 +188,12 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         retained_by_source_id: dict[str, "_RankableCandidate"],
         retained_by_content_key: dict[str, "_RankableCandidate"],
     ) -> "_RankableCandidate | None":
-        """Return the retained winner if a duplicate candidate has already been kept."""
+        """Return the retained winner if a duplicate candidate has already been kept.
+
+        Ranking currently consumes the normalized exact-key facet of the shared
+        duplicate baseline. Broader near-duplicate integration is handled in a
+        later hardening task so this path stays deterministic and reviewable.
+        """
 
         retained = retained_by_source_id.get(candidate.source_id)
         if retained is not None:
@@ -248,6 +253,9 @@ class _RankableCandidate:
             authority_bonus=authority_bonus,
             ranking_score=ranking_score,
             source_id=candidate.source.source_id,
+            # Task 2.1 intentionally keeps ranking on the normalized exact-key
+            # subset of the shared lexical baseline until Task 2.3 broadens
+            # the policy to shared near-duplicate comparisons.
             content_key=build_duplicate_content_key(candidate.source.content),
             authority_order=_AUTHORITY_ORDER[authority],
         )
