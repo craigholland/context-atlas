@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, planning, performance, retrieval, ranking, budgeting, compression]
 related:
@@ -259,6 +259,17 @@ This epic should ultimately produce:
     similarity initiative
   - this Story should not expand into embeddings, provider-specific similarity
     services, or a generalized content-clustering system
+- Acceptance bar:
+  - the bounded baseline should collapse near-duplicate Atlas-owned text when
+    the meaningful body differs only by case/whitespace normalization, bounded
+    top-of-file front matter, normalized containment, or reordered lexical
+    tokens within threshold
+  - the same baseline should preserve distinct text when the apparent
+    similarity is driven mostly by shared boilerplate/header material,
+    metadata-only front matter, or cross-source-family provenance in ranking
+  - exact full-text equality and the former prefix-equality shortcut should be
+    treated as rejected baselines, not as acceptable standing strategies or
+    fallbacks
 - Expected outcome: near-duplicate documents with minor wording changes are less
   likely to crowd the same packet, while boilerplate or front-matter prefixes
   alone no longer trigger easy false positives.
@@ -347,7 +358,7 @@ This epic should ultimately produce:
 
 - repeated lexical TF-IDF retrieval over a static registry no longer recomputes
   full corpus weights on every query
-- ranking and memory duplicate handling use a shared improved semantic surface
+- ranking and memory duplicate handling use a shared improved duplicate surface
   or contract rather than exact full-text matching on one side and a fragile
   prefix heuristic on the other
 - the starter token-estimation story is more realistic than one global

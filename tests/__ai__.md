@@ -129,6 +129,14 @@
   - invariants:
     - tests should prove adapter retrieval returns canonical `ContextCandidate` artifacts
     - empty-query and invalid-request behavior should stay explicit and deterministic
+    - tests should prove the lexical retriever reuses one baseline index snapshot while the registry revision is stable and rebuilds it only after source registration changes that revision
+    - tests should prove the baseline snapshot carries corpus-wide IDF state so retrieval does not need to rebuild document-frequency-derived weighting on every query
+    - tests should prove source-side TF-IDF vector work is reused from the snapshot so per-query retrieval only rebuilds query-local weighting state
+    - tests should prove a steady-state repeated query reuses both corpus-wide and source-side snapshot layers together rather than only one reuse path at a time
+    - tests should prove repeated warm-cache retrieval still consults the registry source-listing boundary on each call rather than turning cache reuse into a second hidden source-loading path
+    - tests should prove interleaved repeated queries over a stable registry preserve the same public TF-IDF ranking semantics for the same query rather than letting warm cached state skew later answers
+    - tests should keep one concise repeated-query proof bundle reviewable enough that a reviewer can see shared-registry listing, zero snapshot rebuilds, and one query-local TF recomputation without reading the retriever implementation line by line
+    - tests should also keep the bounded human-readable proof surface explicit by proving the shared retrieval-completed event shows `index_snapshot_state` moving from `rebuilt` to `warm` on repeated TF-IDF queries instead of inventing a separate benchmark-only artifact
 - `test_candidate_ranking.py`:
   - responsibility: verifies PR 4 ranking, deduplication, and decision tracing
   - defines:
@@ -156,6 +164,12 @@
     - tests should treat legacy budget aliases like `remaining_tokens` as compatibility shims and prove the preferred caller-visible metadata uses truthful names instead
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
     - tests should prove non-applied compression artifacts do not silently replace canonical selected-candidate content in starter rendering
+    - tests should prove the starter token-estimation heuristic tightens only for bounded content-shape differences such as structured code/markup and non-Latin-heavy text, and that compression fit checks consume the same estimate
+    - tests should prove compressed output is trimmed back under budget when output shape is denser than the original input shape that seeded the initial character cap
+    - tests should prove compression prefix-fitting logic remains correct even when a token estimator is non-monotonic across prefixes, so Story 3 does not silently over-trim medium-length fits after a regime switch
+    - tests should prove an outward-bound custom token estimator can tighten compression behavior without introducing provider-specific logic into domain policy tests
+    - tests should prove custom token-estimator labels are rejected when no estimator is actually bound and auto-labeled truthfully when a direct policy caller binds a custom estimator without naming it
+    - tests should prove the default starter path still reports `starter_heuristic` truthfully through compression metadata rather than forcing reviewers to infer the active estimator from config alone
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:
@@ -209,6 +223,11 @@
     - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove service packet and trace metadata expose top-level effective compression strategy fields so downstream renderers do not need to infer them from prefixed stage metadata alone
+    - tests should prove service-owned zero-document-budget compression outcomes report truncation as the effective strategy while preserving the configured starter strategy separately when needed
+    - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
+    - tests should prove packet-facing compression metadata and trace metadata expose the active token-estimator label for both the default starter heuristic and outward-bound custom estimator bindings
+    - tests should prove packet-facing compression metadata and trace metadata expose the active token-estimator label for both the default starter heuristic and outward-bound custom estimator bindings
     - tests should prove service packet and trace metadata expose top-level effective compression strategy fields so downstream renderers do not need to infer them from prefixed stage metadata alone
     - tests should prove service-owned zero-document-budget compression outcomes report truncation as the effective strategy while preserving the configured starter strategy separately when needed
     - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
@@ -336,6 +355,16 @@
 - The suite is strong for the current local MVP workflows, but it is still centered on tracked local examples and sample artifacts rather than broader external-service or production-style integration coverage.
 - The current workflow tests prove supported boundaries and artifact shapes, but they do not yet represent load, concurrency, or long-running operational behavior.
 - As test volume grows further, this folder may need more granular owner files or sub-suites so one local contract does not become too broad to govern well.
+- Story 2 duplicate-handling regressions should stay centered on the bounded lexical baseline: normalized exact matches, containment, token overlap, and clearly non-duplicate related text.
+- Those duplicate-handling regressions should include at least one non-ASCII token-overlap case so Unicode text stays covered by the shared helper.
+- Those same regressions should also include Atlas-style front-matter and shared-header cases so boilerplate normalization stays reviewable instead of drifting behind generic text fixtures.
+- Those same regressions should also cover metadata-only front-matter sources so ranking does not silently deduplicate unrelated documents through an empty normalized key.
+- Those same regressions should also cover metadata-only title variants so fuzzy overlap does not collapse distinct metadata-only sources when exact-key equality is absent.
+- Those same regressions should also cover indented fence-like lines inside YAML front matter so only column-zero fences terminate the bounded metadata block.
+- Ranking regressions should also prove at least one near-duplicate token-overlap case now flows through the shared assessment path rather than exact-key-only dedupe.
+- Memory regressions should also make the shared duplicate-assessment match kind visible in duplicate decisions so the policy cannot drift back to a hidden local duplicate shortcut.
+- Cross-policy Story 2 regressions should keep at least one shared-header-distinct-body case visible in both ranking and memory so the bounded boilerplate rule stays aligned across the two policies.
+- Story 2 proof regressions should also compare the current duplicate outcomes against the rejected exact-full-text and historical prefix-equality baselines explicitly, so the hardening gain stays reviewable without re-reading old implementations.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.

@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, validation, docs, proof, regression]
 related:
@@ -54,6 +54,10 @@ implementation details.
 - keep validation centered on the shared engine path rather than creating a
   proof-only or benchmark-only path
 - ensure the hardened behavior is reviewable through normal repository testing
+- for duplicate handling specifically, inherit Story 2's explicit acceptance
+  bar and its reviewed "better than exact full-text" and "better than
+  prefix-equality" proof cases rather than renegotiating the duplicate
+  baseline during Story 5
 
 ### Task 2: Reviewable Proof Surfaces
 
@@ -61,6 +65,10 @@ implementation details.
   materially benefits from human-readable evidence
 - keep proof surfaces tied to the canonical packet and trace model
 - avoid introducing a second artifact model just for hardening demonstrations
+- inherit Story 1's retrieval proof baseline as already settled: the repeated-
+  query regression bundle plus the shared retrieval-completed
+  `index_snapshot_state` signal should be extended only if later hardening work
+  truly needs more reviewability
 
 ### Task 3: Documentation And Example Alignment
 
@@ -70,6 +78,10 @@ implementation details.
   present
 - ensure product-facing docs explain the engine truthfully without forcing
   readers to parse implementation details
+- keep the Story 3 documentation baseline explicit:
+  - the starter path is shape-aware by default through `starter_heuristic`
+  - custom token estimation remains an outward callable seam
+  - there is still no env-backed tokenizer selector
 
 ### Task 4: Final Hardening Closeout
 
@@ -95,6 +107,8 @@ implementation details.
   `configured_compression_strategy` as the preferred trace-facing compression
   metadata, and packet/trace inspection examples should show
   `unallocated_tokens` where service output provides it
+- inherit the closed acceptance bars from Stories 1 through 4 instead of
+  rediscovering them during proof authoring or doc refresh
 - establish regression coverage first
 - build bounded proof surfaces next where they add real review value
 - update guides and examples only after the hardened contracts are stable
@@ -106,6 +120,8 @@ implementation details.
   semantics from Stories 1 through 4 are actually stable.
 - Proof surfaces can drift from the shared engine path if they are optimized
   only for demonstration.
+- Retrieval-index proof can drift back into benchmark theater if Story 5
+  reopens Story 1 instead of inheriting the bounded `rebuilt`/`warm` baseline.
 - Documentation refresh can accidentally preserve old caveats if contributors
   update wording without checking the final packet and trace behavior.
 

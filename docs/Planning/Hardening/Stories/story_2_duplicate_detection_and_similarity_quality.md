@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, deduplication, ranking, memory, similarity]
 related:
@@ -51,10 +51,17 @@ deterministic, and Atlas-owned.
 - treat the current intended home for that shared surface as `domain/policies/`
   or a directly adjacent inward helper module so contributors do not have to
   infer package placement during Task decomposition
+- treat `domain/policies/deduplication.py` as the baseline inward home once
+  Task 2.1 lands, so later tasks extend one shared helper surface instead of
+  re-inventing duplicate logic inside ranking or memory separately
 - keep the shared semantics inward and reusable rather than letting workflow
   logic fork silently between ranking and memory
 - make the supported baseline explicitly lexical or structural rather than
   leaving room for hidden semantic-similarity assumptions
+- Task 2.1 should close with one explicit baseline only: normalized exact-key
+  matching, normalized containment, and token overlap; later tasks may refine
+  normalization and integration, but they should not silently introduce new
+  comparison families
 
 ### Task 2: Boilerplate And Front-Matter Handling
 
@@ -63,6 +70,13 @@ deterministic, and Atlas-owned.
 - make it explicit how front matter, repeated templates, and shared prefixes
   should be treated before duplicate logic is applied
 - avoid preserving the current prefix-equality shortcut as a standing baseline
+- Task 2.2 should close with one bounded normalization rule only:
+  top-of-file front matter may be stripped, and pairwise comparison may
+  discount a bounded shared leading line prefix when both sides still retain
+  meaningful body content
+- Task 2.2 should not introduce format-specific stripping matrices, mid-document
+  boilerplate removal, or template encyclopedias; those remain intentionally
+  unsupported unless the Story boundary changes first
 
 ### Task 3: Ranking And Memory Integration
 
@@ -71,6 +85,10 @@ deterministic, and Atlas-owned.
   improved contract
 - keep the integration deterministic and reviewable instead of introducing a
   fuzzy scoring scheme that is hard to reason about
+- Task 2.3 should close with one explicit integration rule: ranking uses the
+  shared duplicate assessment through an explicit `dedup_threshold` and remains
+  source-family-aware, while memory exposes the shared duplicate match kind
+  directly in duplicate decisions instead of hiding a second local shortcut
 
 ### Task 4: Scope Ceiling And Regression Proof
 
@@ -80,6 +98,17 @@ deterministic, and Atlas-owned.
   or provider-similarity initiative
 - add regressions that prove the new shared surface is better than both prior
   approaches on the targeted failure cases
+- Task 2.4 should close with one explicit acceptance bar: Atlas should
+  collapse near-duplicate text when the meaningful body differs only by
+  case/whitespace normalization, bounded top-of-file front matter,
+  normalized containment, or reordered lexical tokens within the configured
+  threshold
+- the same acceptance bar should preserve distinct text when the apparent
+  similarity is driven mostly by shared boilerplate/header material,
+  metadata-only front matter, or cross-source-family provenance in ranking
+- exact full-text equality and the former prefix-equality shortcut are now
+  historical failure baselines, not acceptable standing duplicate strategies
+  or fallback modes
 
 ## Sequencing
 
@@ -89,6 +118,8 @@ deterministic, and Atlas-owned.
 - integrate ranking and memory after the bounded semantic surface is explicit
 - lock the Story with regressions that prove the new baseline is better than
   both prior heuristics
+- keep Task 2.1 focused on defining and proving the shared lexical baseline
+  before boilerplate handling or full ranking integration begins
 
 ## Risks And Unknowns
 
@@ -107,6 +138,8 @@ deterministic, and Atlas-owned.
   than the current fragile prefix heuristic on the reviewed failure modes
 - boilerplate or front-matter prefixes alone no longer dominate duplicate
   decisions
+- the Story leaves one explicit acceptance bar naming what should collapse and
+  what must remain distinct, so later work does not reopen Story 2 implicitly
 - the Story remains bounded to one lexical or structural near-duplicate
   baseline rather than drifting into a broader semantic-similarity initiative
 
@@ -118,6 +151,9 @@ deterministic, and Atlas-owned.
   files in the same slice
 - duplicate-detection semantics stay shared and inward rather than being
   re-forked by ranking versus memory behavior
+- Story 5 should inherit this Story's explicit duplicate-handling acceptance
+  bar and reviewed proof cases instead of renegotiating the duplicate baseline
+  during later validation or documentation work
 - The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that

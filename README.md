@@ -494,6 +494,16 @@ The current supported-surface decision is intentionally narrow:
 
 That keeps [`.env.example`](/context-atlas/.env.example) as a truthful product surface rather than turning every starter constant into a public tuning key.
 
+`CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the supported baseline
+control for the starter token-estimation heuristic, not a promise that Atlas
+uses one global flat estimate for every content shape. The default starter
+path now tightens estimates automatically for obviously structured code/markup
+and non-Latin-heavy text while staying provider-agnostic. Atlas still does not
+expose a provider-specific tokenizer selector as an env-backed runtime knob.
+Advanced Python integrations may bind a custom callable token estimator through
+the starter assembly helpers, but that seam remains an outward composition
+surface rather than part of the product-facing env contract.
+
 ## License
 
 MPL-2.0

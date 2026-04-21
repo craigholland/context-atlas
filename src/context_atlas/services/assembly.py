@@ -783,7 +783,17 @@ class ContextAssemblyService:
             self._prefix_metadata("ranking", ranking_outcome.trace.metadata)
         )
         metadata.update(self._prefix_metadata("memory", memory_outcome.trace.metadata))
-        metadata.update(self._prefix_metadata("budget", budget_outcome.trace.metadata))
+        metadata.update(
+            self._prefix_metadata(
+                "budget",
+                budget_outcome.trace.metadata,
+                exclude_keys={
+                    "fixed_reserved_tokens",
+                    "unreserved_tokens",
+                    "unallocated_tokens",
+                },
+            )
+        )
         if compression_outcome is not None:
             metadata.update(
                 self._prefix_metadata("compression", compression_outcome.trace.metadata)
@@ -860,10 +870,17 @@ class ContextAssemblyService:
         self,
         prefix: str,
         metadata: Mapping[str, str],
+        *,
+        exclude_keys: set[str] | None = None,
     ) -> dict[str, str]:
         """Prefix trace-metadata keys so stage-level values remain unambiguous."""
 
-        return {f"{prefix}_{key}": value for key, value in metadata.items()}
+        excluded = exclude_keys or set()
+        return {
+            f"{prefix}_{key}": value
+            for key, value in metadata.items()
+            if key not in excluded
+        }
 
     def _with_decision_positions(
         self,

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -24,8 +25,10 @@ from context_atlas.domain.models import (
     ContextSourceClass,
 )
 from context_atlas.domain.policies import (
+    BudgetRequest,
     StarterBudgetAllocationPolicy,
     StarterCandidateRankingPolicy,
+    StarterCompressionPolicy,
     StarterMemoryRetentionPolicy,
 )
 from context_atlas.infrastructure.assembly import (
@@ -397,6 +400,63 @@ class ContextAssemblyServiceTests(unittest.TestCase):
             "extractive",
         )
 
+    def test_service_trace_uses_starter_heuristic_label_by_default(self) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=64,
+                        default_retrieval_top_k=3,
+                    )
+                }
+            ),
+        )
+
+        packet = service.assemble(
+            query="context packet compression retrieval authority planning review"
+        )
+
+        self.assertIsNotNone(packet.compression_result)
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.metadata["token_estimator"],
+            "starter_heuristic",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_token_estimator"],
+            "starter_heuristic",
+        )
+
+    def test_one_shot_helper_propagates_bound_token_estimator_label(self) -> None:
+        def estimate_words(text: str) -> int:
+            return len([token for token in text.split() if token])
+
+        packet = assemble_with_starter_context_service(
+            retriever=self.retriever,
+            query="context packet compression retrieval authority planning review",
+            settings=self.settings.model_copy(
+                update={
+                    "assembly": AssemblySettings(
+                        default_total_budget=64,
+                        default_retrieval_top_k=3,
+                    )
+                }
+            ),
+            token_estimator=estimate_words,
+            token_estimator_name="word_count",
+        )
+
+        self.assertIsNotNone(packet.compression_result)
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.metadata["token_estimator"],
+            "word_count",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_token_estimator"], "word_count"
+        )
+
     def test_assemble_includes_memory_entries_in_packet_and_rendered_output(
         self,
     ) -> None:
@@ -613,6 +673,67 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertIn("budget:documents", decision_source_ids)
         self.assertIn("compression", decision_source_ids)
         self.assertIn("memory-drop", decision_source_ids)
+
+    def test_service_trace_keeps_canonical_budget_summary_when_budget_trace_disagrees(
+        self,
+    ) -> None:
+        class ConflictingBudgetPolicy:
+            def __init__(self) -> None:
+                self._delegate = StarterBudgetAllocationPolicy()
+
+            def allocate_budget(
+                self,
+                budget: ContextBudget,
+                *,
+                requests: Iterable[BudgetRequest],
+                trace_id: str,
+            ):
+                outcome = self._delegate.allocate_budget(
+                    budget,
+                    requests=requests,
+                    trace_id=trace_id,
+                )
+                conflicting_trace = outcome.trace.model_copy(
+                    update={
+                        "metadata": {
+                            **outcome.trace.metadata,
+                            "fixed_reserved_tokens": "999",
+                            "unreserved_tokens": "777",
+                            "unallocated_tokens": "555",
+                        }
+                    }
+                )
+                return outcome.model_copy(update={"trace": conflicting_trace})
+
+        service = ContextAssemblyService(
+            retriever=self.retriever,
+            ranking_policy=StarterCandidateRankingPolicy(),
+            budget_policy=ConflictingBudgetPolicy(),
+            compression_policy=StarterCompressionPolicy(),
+            memory_policy=StarterMemoryRetentionPolicy(
+                short_term_count=self.settings.memory.short_term_count,
+                decay_rate=self.settings.memory.decay_rate,
+                dedup_threshold=self.settings.memory.dedup_threshold,
+            ),
+            default_top_k=self.settings.assembly.default_retrieval_top_k,
+            default_total_budget=self.settings.assembly.default_total_budget,
+            default_memory_budget_fraction=self.settings.assembly.default_memory_budget_fraction,
+        )
+
+        packet = service.assemble(query="authoritative packet assembly")
+
+        self.assertEqual(packet.trace.metadata["budget_fixed_reserved_tokens"], "32")
+        self.assertEqual(packet.trace.metadata["budget_unreserved_tokens"], "96")
+        self.assertEqual(
+            packet.trace.metadata["budget_unallocated_tokens"],
+            packet.metadata["budget_unallocated_tokens"],
+        )
+        self.assertEqual(packet.trace.metadata["budget_budget_total_tokens"], "128")
+        self.assertNotEqual(
+            packet.trace.metadata["budget_fixed_reserved_tokens"], "999"
+        )
+        self.assertNotEqual(packet.trace.metadata["budget_unreserved_tokens"], "777")
+        self.assertNotEqual(packet.trace.metadata["budget_unallocated_tokens"], "555")
 
     def test_short_term_memory_survives_tight_memory_slot_budget(self) -> None:
         service = build_starter_context_assembly_service(

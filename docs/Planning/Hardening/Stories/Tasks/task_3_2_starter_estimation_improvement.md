@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, token-estimation, heuristic]
 related:
@@ -28,15 +28,18 @@ code, and markup-heavy content as one global ratio.
 If Task 3.1 instead records a tokenizer-seam-first kickoff decision, this Task
 should become explicitly subordinate follow-on work rather than proceeding as an
 equally active parallel path.
+Task 3.1 has now recorded `heuristic-first`, so this Task is the active Story 3
+lead path.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
 - [Story 3 - Token Estimation And Tokenizer Seam](../story_3_token_estimation_and_tokenizer_seam.md)
 - Story 3 kickoff decision from Task 3.1
+- recorded kickoff decision: `heuristic-first`
 - recorded Task 3.1 decision showing this heuristic path is active or deferred
 - current compression and estimation behavior under
   `src/context_atlas/domain/policies/compression.py`
@@ -105,8 +108,8 @@ PLANNED
 - define the improved heuristic first
 - integrate it second
 - reinforce validation and Story boundaries last
-- do not treat this Task as active until Task 3.1 records the heuristic-first
-  path in the Story doc
+- treat this Task as the active implementation track because Task 3.1 has
+  already recorded the heuristic-first path in the Story doc
 
 ## Risks And Unknowns
 
@@ -120,6 +123,10 @@ PLANNED
   the starter path
 - the improved heuristic remains provider-agnostic and bounded
 - tests make the new heuristic behavior visible enough to review
+- the delivered bounded baseline is explicit: prose uses the configured
+  starter baseline, structured code/markup tightens that baseline modestly,
+  and non-Latin-heavy text tightens it further without introducing provider
+  token tables
 
 ## Related Artifacts
 

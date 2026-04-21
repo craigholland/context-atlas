@@ -117,6 +117,18 @@ class AssemblySettings(BaseModel):
             raise ValueError(f"COMPRESSION_MIN_CHUNK_CHARS must be >= 1, got {value}")
         return value
 
+    @property
+    def compression_token_estimator_name(self) -> str:
+        """Return the default outward token-estimator label for starter assembly.
+
+        This is intentionally not an env-backed operator knob yet. It exists so
+        outer composition helpers can name the active estimator binding without
+        implying that Atlas already supports provider-specific tokenizer
+        selection through runtime configuration.
+        """
+
+        return "starter_heuristic"
+
     def with_overrides(
         self,
         *,
