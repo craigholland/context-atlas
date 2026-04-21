@@ -88,6 +88,12 @@ decision about which of those two concerns leads implementation.
   baseline, code/markdown-heavy text may tighten that baseline modestly, and
   non-Latin-heavy text may tighten it further without introducing provider
   token tables
+- current delivered lead-path result:
+  - `estimate_tokens()` is now content-shape-aware in the starter path
+  - prose keeps the configured starter baseline
+  - structured code/markup tightens that baseline modestly
+  - non-Latin-heavy text tightens it further
+  - no provider-specific tokenizer tables were introduced inward
 
 ### Task 3: Tokenizer Contract Seam
 
