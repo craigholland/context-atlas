@@ -47,6 +47,8 @@ decision about which of those two concerns leads implementation.
 
 - record an explicit Story-level decision of `heuristic-first` or
   `tokenizer-seam-first` before implementation begins
+- record that decision in this Story doc before Task 2 starts, and restate it
+  in the first Task-level plan or PR slice that implements the chosen path
 - define what success means for the chosen lead path
 - prevent the Story from delivering a half-improved heuristic and a half-formed
   seam in the same increment
@@ -122,4 +124,3 @@ decision about which of those two concerns leads implementation.
 - [Context Assembly Hardening Product Definition](../context_assembly_hardening_product_definition.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
-

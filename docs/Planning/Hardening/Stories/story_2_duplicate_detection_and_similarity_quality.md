@@ -48,6 +48,9 @@ deterministic, and Atlas-owned.
 
 - define one reusable duplicate-detection contract or helper surface for both
   ranking and memory
+- treat the current intended home for that shared surface as `domain/policies/`
+  or a directly adjacent inward helper module so contributors do not have to
+  infer package placement during Task decomposition
 - keep the shared semantics inward and reusable rather than letting workflow
   logic fork silently between ranking and memory
 - make the supported baseline explicitly lexical or structural rather than
@@ -125,4 +128,3 @@ deterministic, and Atlas-owned.
 - [Context Assembly Hardening Product Definition](../context_assembly_hardening_product_definition.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
-

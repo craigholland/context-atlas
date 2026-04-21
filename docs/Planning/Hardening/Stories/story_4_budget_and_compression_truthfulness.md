@@ -44,6 +44,10 @@ secondary metadata keys.
 - current budget models, policies, compression models, and service trace code
   under `src/context_atlas/domain/` and `src/context_atlas/services/`
 - current packet/trace rendering expectations under `src/context_atlas/rendering/`
+- current derived renderers in:
+  - `src/context_atlas/rendering/context.py`
+  - `src/context_atlas/rendering/packet.py`
+  - `src/context_atlas/rendering/trace.py`
 
 ## Proposed Tasks
 
@@ -77,6 +81,9 @@ secondary metadata keys.
 
 - align service-layer trace metadata, packet surfaces, and derived renderers
   with the clarified budget and compression semantics
+- treat `rendering/context.py`, `rendering/packet.py`, and
+  `rendering/trace.py` as explicit in-scope renderer surfaces rather than
+  leaving renderer impact implied
 - keep the canonical truth in the domain and service artifacts, with renderers
   consuming rather than redefining those meanings
 - settle these semantics cleanly enough that Story 5 can validate and document
@@ -129,4 +136,3 @@ secondary metadata keys.
 - [Context Assembly Hardening Product Definition](../context_assembly_hardening_product_definition.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
-
