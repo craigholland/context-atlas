@@ -172,13 +172,15 @@ class LexicalRetriever:
         query_tf = _term_frequency(query_tokens)
         sources = self._registry.list_sources()
         index_snapshot = self._get_tfidf_index_snapshot(sources)
-        document_frequency = Counter(index_snapshot.document_frequency)
+        inverse_document_frequency = index_snapshot.inverse_document_frequency
+        missing_term_inverse_document_frequency = (
+            index_snapshot.missing_term_inverse_document_frequency
+        )
         query_vector = {
             term: term_frequency
-            * _inverse_document_frequency(
+            * inverse_document_frequency.get(
                 term,
-                document_frequency=document_frequency,
-                source_count=index_snapshot.source_count,
+                missing_term_inverse_document_frequency,
             )
             for term, term_frequency in query_tf.items()
         }
@@ -191,10 +193,9 @@ class LexicalRetriever:
             source_tf = _term_frequency(tokens)
             source_vector = {
                 term: term_frequency
-                * _inverse_document_frequency(
+                * inverse_document_frequency.get(
                     term,
-                    document_frequency=document_frequency,
-                    source_count=index_snapshot.source_count,
+                    missing_term_inverse_document_frequency,
                 )
                 for term, term_frequency in source_tf.items()
             }
@@ -298,17 +299,6 @@ def _term_frequency(tokens: list[str]) -> dict[str, float]:
         term: occurrence_count / token_count
         for term, occurrence_count in counts.items()
     }
-
-
-def _inverse_document_frequency(
-    term: str,
-    *,
-    document_frequency: Counter[str],
-    source_count: int,
-) -> float:
-    """Compute a smoothed inverse-document-frequency score."""
-
-    return math.log((1 + source_count) / (1 + document_frequency.get(term, 0))) + 1.0
 
 
 def _cosine_similarity(
