@@ -21,6 +21,8 @@ class LexicalIndexSnapshot:
     document_frequency: Mapping[str, int]
     inverse_document_frequency: Mapping[str, float]
     missing_term_inverse_document_frequency: float
+    source_tfidf_vectors: Mapping[str, Mapping[str, float]]
+    source_vector_norms: Mapping[str, float]
 
     @property
     def source_count(self) -> int:
@@ -50,6 +52,14 @@ def build_lexical_index_snapshot(
         term: math.log((1 + source_count) / (1 + frequency)) + 1.0
         for term, frequency in document_frequency.items()
     }
+    source_tfidf_vectors = {
+        source_id: _build_tfidf_vector(tokens, inverse_document_frequency)
+        for source_id, tokens in source_tokens.items()
+    }
+    source_vector_norms = {
+        source_id: _vector_norm(vector)
+        for source_id, vector in source_tfidf_vectors.items()
+    }
 
     return LexicalIndexSnapshot(
         registry_revision=registry_revision,
@@ -58,4 +68,44 @@ def build_lexical_index_snapshot(
         document_frequency=MappingProxyType(dict(document_frequency)),
         inverse_document_frequency=MappingProxyType(inverse_document_frequency),
         missing_term_inverse_document_frequency=math.log(1 + source_count) + 1.0,
+        source_tfidf_vectors=MappingProxyType(
+            {
+                source_id: MappingProxyType(vector)
+                for source_id, vector in source_tfidf_vectors.items()
+            }
+        ),
+        source_vector_norms=MappingProxyType(source_vector_norms),
     )
+
+
+def _build_tfidf_vector(
+    tokens: tuple[str, ...],
+    inverse_document_frequency: Mapping[str, float],
+) -> dict[str, float]:
+    """Build one sparse TF-IDF vector from cached corpus-wide IDF state."""
+
+    term_frequency = _term_frequency(tokens)
+    return {
+        term: weight * inverse_document_frequency[term]
+        for term, weight in term_frequency.items()
+    }
+
+
+def _term_frequency(tokens: tuple[str, ...]) -> dict[str, float]:
+    """Compute sparse term-frequency weights from normalized tokens."""
+
+    if not tokens:
+        return {}
+
+    counts = Counter(tokens)
+    token_count = len(tokens)
+    return {
+        term: occurrence_count / token_count
+        for term, occurrence_count in counts.items()
+    }
+
+
+def _vector_norm(vector: Mapping[str, float]) -> float:
+    """Return the Euclidean norm for one sparse weighted vector."""
+
+    return math.sqrt(sum(weight**2 for weight in vector.values()))
