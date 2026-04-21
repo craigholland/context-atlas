@@ -14,6 +14,7 @@ from context_atlas.adapters import (
 )
 from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
+    CompressionStrategy,
     ContextBudget,
     ContextBudgetSlot,
     ContextBudgetSlotMode,
@@ -204,6 +205,69 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         )
         self.assertEqual(packet.trace.metadata["compression_present"], "true")
         self.assertEqual(packet.trace.metadata["compression_applied"], "true")
+
+    def test_zero_document_budget_uses_truthful_effective_compression_strategy(
+        self,
+    ) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings,
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-budget-sink",
+                source=ContextSource(
+                    source_id="memory-budget-sink-source",
+                    content=(
+                        "Retained memory should consume the fixed memory slot before "
+                        "documents are allocated when the budget is extremely small."
+                    ),
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=100.0,
+                importance=1.0,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=16,
+                slots=(
+                    ContextBudgetSlot(
+                        slot_name="memory",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.FIXED,
+                    ),
+                    ContextBudgetSlot(
+                        slot_name="documents",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+        )
+
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            packet.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_compression_strategy"],
+            "truncate",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_configured_compression_strategy"],
+            "extractive",
+        )
 
     def test_assemble_includes_memory_entries_in_packet_and_rendered_output(
         self,

@@ -203,8 +203,24 @@ class BudgetAndCompressionTests(unittest.TestCase):
 
         self.assertTrue(outcome.compression_result.was_applied)
         self.assertEqual(
+            outcome.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            outcome.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
             outcome.compression_result.metadata["fallback_strategy"],
             CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["compression_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["configured_compression_strategy"],
+            CompressionStrategy.EXTRACTIVE.value,
         )
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
@@ -332,7 +348,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(
             packet.metadata["compression_strategy"],
-            CompressionStrategy.EXTRACTIVE.value,
+            packet.compression_result.strategy_used.value,
         )
 
     def test_render_packet_context_uses_selected_candidates_when_compression_was_not_applied(

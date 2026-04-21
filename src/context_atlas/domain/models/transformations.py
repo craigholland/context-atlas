@@ -24,6 +24,7 @@ class CompressionResult(CanonicalDomainModel):
 
     text: str
     strategy_used: CompressionStrategy
+    configured_strategy: CompressionStrategy | None = None
     original_chars: int
     compressed_chars: int
     estimated_tokens_saved: int

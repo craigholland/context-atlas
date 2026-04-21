@@ -151,6 +151,7 @@
   - invariants:
     - tests should prove compression results remain structured even when rendered text is produced
     - budget reductions and compression fallback should remain explicit and deterministic
+    - tests should prove fallback compression records the effective runtime strategy in the primary result surface while preserving configured strategy only when that distinction matters
     - tests should prove budget-allocation outcomes distinguish pre-allocation fixed reservation from true post-allocation unallocated remainder
     - tests should treat legacy budget aliases like `remaining_tokens` as compatibility shims and prove the preferred caller-visible metadata uses truthful names instead
     - tests should prove short-but-valid candidates are not dropped just because they fall below the starter compression chunk threshold
@@ -206,6 +207,7 @@
     - tests should prove shared proof-artifact emission stays on one infrastructure helper rather than drifting into per-example writer implementations
     - tests should prove short-term retained memory survives ahead of lower-priority long-term memory when the memory slot is tight
     - tests should prove service trace metadata distinguishes compression presence from actual compression application
+    - tests should prove service-owned zero-document-budget compression outcomes report truncation as the effective strategy while preserving the configured starter strategy separately when needed
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
 - `test_filesystem_document_adapter.py`:

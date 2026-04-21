@@ -577,16 +577,22 @@ class ContextAssemblyService:
             return None
 
         if max_tokens < 1:
+            configured_strategy = getattr(
+                self._compression_policy,
+                "strategy",
+                CompressionStrategy.TRUNCATE,
+            )
             original_text = "\n\n".join(
                 candidate.source.content for candidate in candidates
             )
             return CompressionOutcome(
                 compression_result=CompressionResult(
                     text="",
-                    strategy_used=getattr(
-                        self._compression_policy,
-                        "strategy",
-                        CompressionStrategy.TRUNCATE,
+                    strategy_used=CompressionStrategy.TRUNCATE,
+                    configured_strategy=(
+                        None
+                        if configured_strategy is CompressionStrategy.TRUNCATE
+                        else configured_strategy
                     ),
                     original_chars=len(original_text),
                     compressed_chars=0,
@@ -615,10 +621,13 @@ class ContextAssemblyService:
                         ),
                     ),
                     metadata={
-                        "compression_strategy": getattr(
-                            getattr(self._compression_policy, "strategy", None),
-                            "value",
-                            CompressionStrategy.TRUNCATE.value,
+                        "compression_strategy": CompressionStrategy.TRUNCATE.value,
+                        **(
+                            {}
+                            if configured_strategy is CompressionStrategy.TRUNCATE
+                            else {
+                                "configured_compression_strategy": configured_strategy.value
+                            }
                         ),
                         "max_tokens": str(max_tokens),
                         "source_count": str(len(candidates)),
