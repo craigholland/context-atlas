@@ -15,8 +15,8 @@ related:
   - ./Mode-Model.md
   - ./Mode-Transition-Graph.md
   - ./Mode-Mutation-Matrix.md
-  - ./Role-Mode-Matrix.md
-  - ../Context-Atlas-Agentic-Development-Profile.md
+  - ../Roles/Role-Mode-Matrix.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -152,5 +152,6 @@ That means:
 - [Context Atlas Mode Model](./Mode-Model.md)
 - [Mode Transition Graph](./Mode-Transition-Graph.md)
 - [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
-- [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role-Mode Matrix](../Roles/Role-Mode-Matrix.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+

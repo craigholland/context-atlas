@@ -15,7 +15,7 @@ related:
   - ./README.md
   - ./Operation-Matrix.md
   - ./Branch-Target-Policy.md
-  - ../../Canon/AgenticDevelopment/Role-Authority-Matrix.md
+  - ../../AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
 supersedes: []
 ---
 
@@ -84,4 +84,5 @@ here.
 - Define GitHub App registration details.
 - Define the full operation matrix by itself.
 - Define release principals beyond the current task/story/epic merge tiers.
+
 

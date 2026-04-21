@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, handoff, github]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md
+  - ../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Gate Review Pass Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
+- [Gate Review Pass Matrix](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md)
 - the role, protocol, and GitHub-binding work from Stories 3, 5, and Task 9.3
 
 ## Proposed Work
@@ -71,8 +71,8 @@ IMPLEMENTED
 
 #### Expected Existing Files Updated
 - `docs/Authoritative/Identity/RepoManagement/GitHub/Agentic-Integration-Model.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md`
 - `docs/Planning/completed/Agentic/Stories/story_5_protocol_model.md`
 
 #### Update AI files
@@ -125,4 +125,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [Gate Review Pass Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md)
+- [Gate Review Pass Matrix](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md)

@@ -46,7 +46,7 @@ When creating or refreshing a Codex asset, begin with:
 
 - the portable AgenticDevelopment canon
 - the Context Atlas Identity bindings
-- the Codex binding docs under `docs/Authoritative/Identity/AgenticDevelopment/codex/`
+- the Codex binding docs under `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/`
 
 Existing runtime-facing assets may help confirm current layout or wording, but
 they should not become the primary source of truth.

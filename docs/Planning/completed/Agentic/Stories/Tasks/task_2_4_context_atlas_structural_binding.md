@@ -14,8 +14,8 @@ tags: [agentic-development, task, pr-plan, structure, bindings]
 related:
   - ../story_2_agent_and_skill_structure.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
-  - ../../../../Authoritative/Identity/Context-Atlas-System-Model.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-System-Model.md
 supersedes: []
 ---
 
@@ -33,8 +33,8 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - outputs from Tasks 2.1 through 2.3
 
 ## Proposed Work
@@ -110,5 +110,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
-- [Context Atlas System Model](../../../../Authoritative/Identity/Context-Atlas-System-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas System Model](../../../../../Authoritative/Identity/Context-Atlas-System-Model.md)

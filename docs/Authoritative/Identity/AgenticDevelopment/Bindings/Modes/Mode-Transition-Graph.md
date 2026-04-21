@@ -14,9 +14,9 @@ tags: [context-atlas, agentic-development, identity, modes, transitions, graph]
 related:
   - ./Mode-Model.md
   - ./Mode-Transition-Rules.md
-  - ./Role-Mode-Matrix.md
-  - ./Protocol-Mode-Bindings.md
-  - ../../Canon/AgenticDevelopment/Mode-Model.md
+  - ../Roles/Role-Mode-Matrix.md
+  - ../Protocols/Protocol-Mode-Bindings.md
+  - ../../../../Canon/AgenticDevelopment/Mode-Model.md
 supersedes: []
 ---
 
@@ -142,7 +142,8 @@ workstream without implying that a new execution mode has been entered.
 
 - [Context Atlas Mode Model](./Mode-Model.md)
 - [Mode Transition Rules](./Mode-Transition-Rules.md)
-- [Context Atlas Role-Mode Matrix](./Role-Mode-Matrix.md)
-- [Protocol Mode Bindings](./Protocol-Mode-Bindings.md)
-- [Portable Mode Model](../../Canon/AgenticDevelopment/Mode-Model.md)
+- [Context Atlas Role-Mode Matrix](../Roles/Role-Mode-Matrix.md)
+- [Protocol Mode Bindings](../Protocols/Protocol-Mode-Bindings.md)
+- [Portable Mode Model](../../../../Canon/AgenticDevelopment/Mode-Model.md)
+
 

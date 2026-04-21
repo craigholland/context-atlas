@@ -12,14 +12,14 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, protocols, modes]
 related:
-  - ./Mode-Model.md
-  - ./Mode-Transition-Graph.md
+  - ../Modes/Mode-Model.md
+  - ../Modes/Mode-Transition-Graph.md
   - ./Protocol-Role-Bindings.md
-  - ../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md
-  - ../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md
+  - ../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md
 supersedes: []
 ---
 
@@ -39,17 +39,17 @@ It does not redefine the mode catalog or the protocol catalog. It binds them.
 
 ### 1. Planning Protocol Primarily Uses `planning`
 
-The [Planning Protocol](../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
+The [Planning Protocol](../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
 normally executes inside `planning`.
 
 ### 2. Execution Slice Protocol Primarily Uses `implementation`
 
-The [Execution Slice Protocol](../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+The [Execution Slice Protocol](../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
 normally executes inside `implementation`.
 
 ### 3. Review Protocol Primarily Uses `review`
 
-The [Review Protocol](../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
+The [Review Protocol](../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
 normally executes inside `review`.
 
 Multiple review passes may occur inside the same review-mode span. Context
@@ -57,12 +57,12 @@ Atlas should not create a new mode transition for each pass.
 
 ### 4. Rework Protocol Primarily Uses `rework`
 
-The [Rework Protocol](../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
+The [Rework Protocol](../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
 normally executes inside `rework`.
 
 ### 5. Recovery Protocol Primarily Uses `recovery`
 
-The [Recovery Protocol](../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+The [Recovery Protocol](../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
 normally executes inside `recovery`.
 
 ### 6. Delegation, Handoff, And Escalation Are Mode-Spanning Contract Protocols
@@ -103,12 +103,13 @@ binds operational delivery into its own governed protocol surface.
 
 ## Related Artifacts
 
-- [Context Atlas Mode Model](./Mode-Model.md)
-- [Mode Transition Graph](./Mode-Transition-Graph.md)
+- [Context Atlas Mode Model](../Modes/Mode-Model.md)
+- [Mode Transition Graph](../Modes/Mode-Transition-Graph.md)
 - [Protocol Role Bindings](./Protocol-Role-Bindings.md)
-- [Planning Protocol](../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
-- [Execution Slice Protocol](../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
-- [Review Protocol](../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
-- [Rework Protocol](../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
-- [Recovery Protocol](../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+- [Planning Protocol](../../../../Canon/AgenticDevelopment/Protocols/Planning-Protocol.md)
+- [Execution Slice Protocol](../../../../Canon/AgenticDevelopment/Protocols/Execution-Slice-Protocol.md)
+- [Review Protocol](../../../../Canon/AgenticDevelopment/Protocols/Review-Protocol.md)
+- [Rework Protocol](../../../../Canon/AgenticDevelopment/Protocols/Rework-Protocol.md)
+- [Recovery Protocol](../../../../Canon/AgenticDevelopment/Protocols/Recovery-Protocol.md)
+
 

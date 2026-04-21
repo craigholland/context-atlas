@@ -16,13 +16,13 @@ related:
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
   - ./story_6_runtime_capacity_and_parallel_decomposition.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md
 supersedes: []
 ---
 
@@ -38,13 +38,13 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
-- [Materialization Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md)
-- [Template Model](../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
-- [Discovery Model](../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
-- [Materialization Traceability Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Materialization Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
 - Current repository experience with authoritative docs, project bindings, and executable operational artifacts
@@ -157,13 +157,14 @@ given AI environment without making those runtime assets authoritative.
 
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
-- [Materialization Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md)
-- [Template Model](../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
-- [Discovery Model](../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
-- [Materialization Traceability Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Materialization Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Boundary-Model.md)
+- [Template Model](../../../../Authoritative/Canon/AgenticDevelopment/Template-Model.md)
+- [Discovery Model](../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
 - [Story 6 - Runtime Capacity And Parallel Decomposition](./story_6_runtime_capacity_and_parallel_decomposition.md)
+
 

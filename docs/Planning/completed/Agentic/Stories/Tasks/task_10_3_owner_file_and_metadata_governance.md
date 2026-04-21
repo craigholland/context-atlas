@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, __ai__, metadata]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Ontology/base_metadata.md
+  - ../../../../../Authoritative/Canon/Ontology/base_metadata.md
 supersedes: []
 ---
 
@@ -33,7 +33,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [base_metadata](../../../../Authoritative/Canon/Ontology/base_metadata.md)
+- [base_metadata](../../../../../Authoritative/Canon/Ontology/base_metadata.md)
 - current repo `__ai__.md` and metadata-governance patterns
 
 ## Proposed Work
@@ -125,5 +125,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [base_metadata](../../../../Authoritative/Canon/Ontology/base_metadata.md)
+- [base_metadata](../../../../../Authoritative/Canon/Ontology/base_metadata.md)
 

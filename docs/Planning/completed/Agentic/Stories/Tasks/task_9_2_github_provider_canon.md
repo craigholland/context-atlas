@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, repo-management, github]
 related:
   - ../story_9_repo_management.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/RepoManagement/README.md
+  - ../../../../../Authoritative/Canon/RepoManagement/README.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [RepoManagement README](../../../../Authoritative/Canon/RepoManagement/README.md)
+- [RepoManagement README](../../../../../Authoritative/Canon/RepoManagement/README.md)
 - the portable repo-management canon from Task 9.1
 
 ## Proposed Work
@@ -116,5 +116,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 9 - RepoManagement](../story_9_repo_management.md)
-- [RepoManagement README](../../../../Authoritative/Canon/RepoManagement/README.md)
+- [RepoManagement README](../../../../../Authoritative/Canon/RepoManagement/README.md)
 

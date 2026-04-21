@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, drift, validation]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Materialization Traceability Model](../../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
 - the upstream canon, binding, and materialization models from Stories 1 through 9
 
 ## Proposed Work
@@ -64,7 +64,7 @@ IMPLEMENTED
 #### Expected Existing Files Updated
 - `docs/Authoritative/Canon/AgenticDevelopment/Drift-Model.md`
 - `docs/Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md`
 
 #### Update AI files
 - `.`
@@ -108,5 +108,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Materialization Traceability Model](../../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
 

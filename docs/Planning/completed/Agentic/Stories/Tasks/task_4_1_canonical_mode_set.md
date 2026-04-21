@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, modes, workflow-state]
 related:
   - ../story_4_context_atlas_mode_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 4 - Context Atlas Mode Model](../story_4_context_atlas_mode_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the role model from Story 3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - prevent protocol steps or role names from being mistaken for modes
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_4_context_atlas_mode_model.md`
@@ -62,7 +62,7 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md`
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
 
 #### Update AI files

@@ -15,12 +15,12 @@ related:
   - ../agentic_development_product_definition.md
   - ./story_1_portable_agentic_development_canon.md
   - ./story_5_protocol_model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
-  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
 
@@ -37,12 +37,12 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
-- [Runtime Capacity Model](../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
-- [Parallel Decomposition Model](../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
-- [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
-- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Runtime Capacity Model](../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Context Atlas Runtime Capacity Guidance](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md)
+- [Context Atlas Runtime Capacity Artifact](../../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - Current repository planning patterns around feature branches, task gating, and bounded parallel work
 
 ## Proposed Tasks
@@ -137,10 +137,11 @@ actually available for an Epic, Story, or Task.
 - [Context Atlas Agentic Development Product Definition](../agentic_development_product_definition.md)
 - [Story 1 - Portable Agentic Development Canon](./story_1_portable_agentic_development_canon.md)
 - [Story 5 - Protocol Model](./story_5_protocol_model.md)
-- [Runtime Capacity Model](../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
-- [Parallel Decomposition Model](../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
-- [Context Atlas Runtime Capacity Guidance](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.md)
-- [Context Atlas Runtime Capacity Artifact](../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Runtime Capacity Model](../../../../Authoritative/Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../../Authoritative/Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Context Atlas Runtime Capacity Guidance](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/runtime_capacity.md)
+- [Context Atlas Runtime Capacity Artifact](../../../../Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+
 

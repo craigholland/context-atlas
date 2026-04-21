@@ -1,0 +1,93 @@
+# Context Atlas runtime materialization manifest.
+# This file is the authoritative machine-readable input for first-pass runtime
+# materialization decisions. It does not replace the human-readable binding and
+# materialization docs under docs/Authoritative/Identity/AgenticDevelopment/.
+
+version: 1
+last_reviewed: 2026-04-21
+
+project:
+  id: context-atlas
+  display_name: Context Atlas
+
+authoritative_inputs:
+  structural_profile: docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  runtime_capacity: docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml
+  bindings_root: docs/Authoritative/Identity/AgenticDevelopment/Bindings/
+  codex_binding_root: docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/
+
+materializations:
+  - platform: Codex
+    enabled: true
+    runtime_root: .codex
+    skills_root: .agents/skills
+    orientation_surface: .codex/AGENTS.md
+    config_surface: .codex/config.toml
+
+roles:
+  - id: planner-decomp
+    source_name: Planner/Decomp
+    parent_agent_id: parent-planner-decomp
+  - id: backend
+    source_name: Backend
+    parent_agent_id: parent-backend
+  - id: documentation-uat
+    source_name: Documentation/UAT
+    parent_agent_id: parent-documentation-uat
+  - id: qa
+    source_name: QA
+    parent_agent_id: parent-qa
+  - id: devops
+    source_name: DevOps
+    parent_agent_id: parent-devops
+
+parent_agents:
+  - id: parent-planner-decomp
+    role_id: planner-decomp
+    type: parent
+  - id: parent-backend
+    role_id: backend
+    type: parent
+  - id: parent-documentation-uat
+    role_id: documentation-uat
+    type: parent
+  - id: parent-qa
+    role_id: qa
+    type: parent
+  - id: parent-devops
+    role_id: devops
+    type: parent
+
+modes:
+  - id: planning
+    source_name: planning
+  - id: implementation
+    source_name: implementation
+  - id: review
+    source_name: review
+  - id: rework
+    source_name: rework
+  - id: recovery
+    source_name: recovery
+  - id: operational-delivery
+    source_name: operational_delivery
+
+protocols:
+  - id: planning
+    source_name: planning
+  - id: execution-slice
+    source_name: execution_slice
+  - id: review
+    source_name: review
+  - id: rework
+    source_name: rework
+  - id: recovery
+    source_name: recovery
+
+specialists: []
+skills: []
+
+materialization_rules:
+  initial_specialist_policy: none-until-explicitly-bound
+  initial_skill_policy: none-until-explicitly-bound
+  derive_paths_from_binding_docs: true

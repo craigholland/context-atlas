@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, skills, composition]
 related:
   - ../story_2_agent_and_skill_structure.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 2 - Agent And Skill Structure](../story_2_agent_and_skill_structure.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture](../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- [Craig Architecture](../../../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - the portable glossary and authority model from Story 1
 
 ## Proposed Work

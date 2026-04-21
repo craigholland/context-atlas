@@ -15,19 +15,20 @@ related:
   - ./Context-Atlas-Charter.md
   - ./Context-Atlas-System-Model.md
   - ./AgenticDevelopment/runtime_capacity.yaml
-  - ./AgenticDevelopment/Role-Model.md
-  - ./AgenticDevelopment/Role-Accountability-Matrix.md
-  - ./AgenticDevelopment/Role-Authority-Matrix.md
-  - ./AgenticDevelopment/Role-Agent-Binding-Model.md
-  - ./AgenticDevelopment/Protocol-Role-Bindings.md
-  - ./AgenticDevelopment/Protocol-Mode-Bindings.md
-  - ./AgenticDevelopment/Gate-Review-Pass-Matrix.md
-  - ./AgenticDevelopment/Mode-Model.md
-  - ./AgenticDevelopment/Mode-Transition-Rules.md
-  - ./AgenticDevelopment/Mode-Mutation-Matrix.md
-  - ./AgenticDevelopment/Role-Mode-Matrix.md
-  - ./AgenticDevelopment/Mode-Transition-Graph.md
-  - ./AgenticDevelopment/codex/README.md
+  - ./AgenticDevelopment/materialization_manifest.yaml
+  - ./AgenticDevelopment/Bindings/Roles/Role-Model.md
+  - ./AgenticDevelopment/Bindings/Roles/Role-Accountability-Matrix.md
+  - ./AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
+  - ./AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md
+  - ./AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md
+  - ./AgenticDevelopment/Bindings/Protocols/Protocol-Mode-Bindings.md
+  - ./AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md
+  - ./AgenticDevelopment/Bindings/Modes/Mode-Model.md
+  - ./AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md
+  - ./AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md
+  - ./AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md
+  - ./AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md
+  - ./AgenticDevelopment/Materializations/Codex/README.md
   - ./RepoManagement/GitHub/README.md
   - ../Canon/AgenticDevelopment/Agent-Composition-Model.md
   - ../Canon/AgenticDevelopment/Composition-Decision-Model.md
@@ -195,7 +196,24 @@ That means later tooling may validate or consume the file, but it should not
 silently overwrite the planning input based on queue state, PR state, or
 momentary worker availability.
 
-### 16. Environment Bindings Must Consume This Profile Explicitly
+### 16. Runtime Materialization Must Bind Through One Authoritative Artifact
+
+Context Atlas should bind project-specific runtime materialization choices
+through one machine-readable artifact at:
+
+`docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
+
+That artifact is the authoritative project-specific input for deciding which
+roles, parent agents, modes, protocols, specialists, and skills are currently
+in scope for runtime materialization.
+
+It should remain:
+
+- human-editable
+- project-specific
+- separate from platform-specific template bodies and generated runtime assets
+
+### 17. Environment Bindings Must Consume This Profile Explicitly
 
 When Context Atlas binds its agentic-development model into a concrete runtime
 environment, that environment-specific binding should cite this profile as one
@@ -205,7 +223,7 @@ That keeps the project-specific structural choices readable before any
 environment translates them into runtime-facing folders, templates, or helper
 assets.
 
-### 17. Repo-Management Authority Must Bind Through Its Own Identity Layer
+### 18. Repo-Management Authority Must Bind Through Its Own Identity Layer
 
 When Context Atlas roles need to comment, review, push, or merge through an
 external repository provider, those permissions should bind through
@@ -240,19 +258,20 @@ assets become the de facto source of repository authority.
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas System Model](./Context-Atlas-System-Model.md)
 - [Context Atlas Runtime Capacity Artifact](./AgenticDevelopment/runtime_capacity.yaml)
-- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
-- [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Role-Accountability-Matrix.md)
-- [Context Atlas Role Authority Matrix](./AgenticDevelopment/Role-Authority-Matrix.md)
-- [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Protocol Role Bindings](./AgenticDevelopment/Protocol-Role-Bindings.md)
-- [Protocol Mode Bindings](./AgenticDevelopment/Protocol-Mode-Bindings.md)
-- [Gate Review Pass Matrix](./AgenticDevelopment/Gate-Review-Pass-Matrix.md)
-- [Context Atlas Mode Model](./AgenticDevelopment/Mode-Model.md)
-- [Mode Transition Rules](./AgenticDevelopment/Mode-Transition-Rules.md)
-- [Mode Mutation Matrix](./AgenticDevelopment/Mode-Mutation-Matrix.md)
-- [Context Atlas Role-Mode Matrix](./AgenticDevelopment/Role-Mode-Matrix.md)
-- [Mode Transition Graph](./AgenticDevelopment/Mode-Transition-Graph.md)
-- [Context Atlas Codex Binding](./AgenticDevelopment/codex/README.md)
+- [Context Atlas Materialization Manifest](./AgenticDevelopment/materialization_manifest.yaml)
+- [Context Atlas Role Model](./AgenticDevelopment/Bindings/Roles/Role-Model.md)
+- [Context Atlas Role Accountability Matrix](./AgenticDevelopment/Bindings/Roles/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](./AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](./AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Protocol Role Bindings](./AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](./AgenticDevelopment/Bindings/Protocols/Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](./AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md)
+- [Context Atlas Mode Model](./AgenticDevelopment/Bindings/Modes/Mode-Model.md)
+- [Mode Transition Rules](./AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md)
+- [Mode Mutation Matrix](./AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md)
+- [Context Atlas Role-Mode Matrix](./AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md)
+- [Mode Transition Graph](./AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md)
+- [Context Atlas Codex Binding](./AgenticDevelopment/Materializations/Codex/README.md)
 - [Context Atlas GitHub Binding](./RepoManagement/GitHub/README.md)
 - [Agent Composition Model](../Canon/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../Canon/AgenticDevelopment/Composition-Decision-Model.md)

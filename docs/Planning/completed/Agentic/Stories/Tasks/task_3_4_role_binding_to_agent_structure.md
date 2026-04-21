@@ -14,8 +14,8 @@ tags: [agentic-development, task, pr-plan, roles, bindings]
 related:
   - ../story_3_context_atlas_role_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -33,8 +33,8 @@ IMPLEMENTED
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role-Agent Binding Model](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the structural model from Story 2 and role matrices from Tasks 3.1 through 3.3
 
 ## Proposed Work
@@ -46,7 +46,7 @@ IMPLEMENTED
 - prevent the binding from slipping into platform-specific file assumptions
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_3_context_atlas_role_model.md`
@@ -64,7 +64,7 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md`
 - `docs/Authoritative/Canon/AgenticDevelopment/Agent-Composition-Model.md`
 - `docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md`
 
@@ -109,6 +109,6 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 3 - Context Atlas Role Model](../story_3_context_atlas_role_model.md)
-- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Role-Agent Binding Model](../../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 

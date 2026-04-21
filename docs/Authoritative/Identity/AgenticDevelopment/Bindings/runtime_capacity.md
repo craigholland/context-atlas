@@ -12,12 +12,12 @@ last_reviewed: 2026-04-20
 owners: [core]
 tags: [context-atlas, agentic-development, identity, runtime-capacity, planning]
 related:
-  - ./runtime_capacity.yaml
-  - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md
-  - ../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md
-  - ../../Canon/AgenticDevelopment/Drift-Model.md
-  - ../../Canon/AgenticDevelopment/Validation-Model.md
+  - ../runtime_capacity.yaml
+  - ../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md
+  - ../../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md
+  - ../../../Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../Canon/AgenticDevelopment/Validation-Model.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ artifact.
 
 This document governs the human-facing update and trust model for:
 
-- [runtime_capacity.yaml](./runtime_capacity.yaml)
+- [runtime_capacity.yaml](../runtime_capacity.yaml)
 
 It does not define live worker scheduling or runtime-materialization behavior.
 
@@ -138,10 +138,12 @@ artifact model is wrong.
 
 ## Related Artifacts
 
-- [Context Atlas Runtime Capacity Artifact](./runtime_capacity.yaml)
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Runtime Capacity Model](../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
-- [Parallel Decomposition Model](../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
-- [Drift Model](../../Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../Canon/AgenticDevelopment/Validation-Model.md)
+- [Context Atlas Runtime Capacity Artifact](../runtime_capacity.yaml)
+- [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
+- [Runtime Capacity Model](../../../Canon/AgenticDevelopment/Runtime-Capacity-Model.md)
+- [Parallel Decomposition Model](../../../Canon/AgenticDevelopment/Parallel-Decomposition-Model.md)
+- [Drift Model](../../../Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../Canon/AgenticDevelopment/Validation-Model.md)
+
+
 

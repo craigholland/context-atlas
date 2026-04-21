@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, protocols, bindings]
 related:
   - ../story_5_protocol_model.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - outputs from Tasks 5.1 through 5.3
 
 ## Proposed Work
@@ -46,8 +46,8 @@ IMPLEMENTED
 - prevent protocol docs from becoming implicit role definitions
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_5_protocol_model.md`
@@ -64,12 +64,12 @@ IMPLEMENTED
 - keep the binding precise enough to support later materialization and validation
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Mode-Bindings.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Mode-Bindings.md`
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/Gate-Review-Pass-Matrix.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Protocol-Role-Bindings.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/Mode-Transition-Graph.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Graph.md`
 
 #### Update AI files
 - `.`
@@ -118,4 +118,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 5 - Protocol Model](../story_5_protocol_model.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)

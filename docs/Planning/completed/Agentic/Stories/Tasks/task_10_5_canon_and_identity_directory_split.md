@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, canon, identity, refactor]
 related:
   - ../story_10_validation_governance_and_drift_control.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
+  - ../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
 supersedes: []
 ---
 
@@ -34,7 +34,7 @@ IMPLEMENTED
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
 - the already-established distinction between portable canon and project-specific identity bindings
 
 ## Proposed Work
@@ -119,4 +119,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 10 - Validation, Governance, And Drift Control](../story_10_validation_governance_and_drift_control.md)
-- [Craig Architecture - Planning And Decomposition](../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
+- [Craig Architecture - Planning And Decomposition](../../../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)

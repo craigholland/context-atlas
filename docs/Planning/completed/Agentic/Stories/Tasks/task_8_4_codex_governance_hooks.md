@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, codex, governance]
 related:
   - ../story_8_codex_materialization_for_context_atlas.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/AgenticDevelopment/codex/creation_guidance.md
+  - ../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 8 - Codex Materialization For Context Atlas](../story_8_codex_materialization_for_context_atlas.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Codex Creation Guidance](../../../../Authoritative/Identity/AgenticDevelopment/codex/creation_guidance.md)
+- [Codex Creation Guidance](../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)
 - the Codex layout and template work from Tasks 8.1 through 8.3
 
 ## Proposed Work
@@ -44,7 +44,7 @@ IMPLEMENTED
 - keep the hooks lightweight enough for routine use
 
 #### Expected New Files
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/governance.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md`
 
 #### Expected Existing Files Updated
 - `docs/Planning/completed/Agentic/Stories/story_8_codex_materialization_for_context_atlas.md`
@@ -62,8 +62,8 @@ IMPLEMENTED
 - none expected
 
 #### Expected Existing Files Updated
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/governance.md`
-- `docs/Authoritative/Identity/AgenticDevelopment/codex/creation_guidance.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md`
 - `docs/Planning/completed/Agentic/Stories/story_10_validation_governance_and_drift_control.md`
 
 #### Update AI files
@@ -107,4 +107,4 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 8 - Codex Materialization For Context Atlas](../story_8_codex_materialization_for_context_atlas.md)
-- [Codex Creation Guidance](../../../../Authoritative/Identity/AgenticDevelopment/codex/creation_guidance.md)
+- [Codex Creation Guidance](../../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)

@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, canon, docs]
 related:
   - ../story_1_portable_agentic_development_canon.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
+  - ../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
 - current authoritative-doc structure under `docs/Authoritative/Canon/Architecture/`
 
 ## Proposed Work
@@ -111,5 +111,6 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 1 - Portable Agentic Development Canon](../story_1_portable_agentic_development_canon.md)
-- [Documentation Ontology](../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [Documentation Ontology](../../../../../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+
 

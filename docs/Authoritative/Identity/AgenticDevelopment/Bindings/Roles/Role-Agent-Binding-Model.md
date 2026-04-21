@@ -14,8 +14,8 @@ tags: [context-atlas, agentic-development, identity, roles, parent-agents, bindi
 related:
   - ./Role-Model.md
   - ./Role-Authority-Matrix.md
-  - ../Context-Atlas-Agentic-Development-Profile.md
-  - ../../Canon/AgenticDevelopment/Agent-Composition-Model.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md
 supersedes: []
 ---
 
@@ -116,6 +116,7 @@ roles, parent agents, or specialists ad hoc.
 
 - [Context Atlas Role Model](./Role-Model.md)
 - [Context Atlas Role Authority Matrix](./Role-Authority-Matrix.md)
-- [Context Atlas Agentic Development Profile](../Context-Atlas-Agentic-Development-Profile.md)
-- [Agent Composition Model](../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+- [Agent Composition Model](../../../../Canon/AgenticDevelopment/Agent-Composition-Model.md)
+
 

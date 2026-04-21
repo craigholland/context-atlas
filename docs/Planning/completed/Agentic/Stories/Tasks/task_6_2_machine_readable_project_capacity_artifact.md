@@ -14,7 +14,7 @@ tags: [agentic-development, task, pr-plan, runtime-capacity, yaml]
 related:
   - ../story_6_runtime_capacity_and_parallel_decomposition.md
   - ../../agentic_development_product_definition.md
-  - ../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
+  - ../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md
 supersedes: []
 ---
 
@@ -32,7 +32,7 @@ IMPLEMENTED
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
 - [Context Atlas Agentic Development Product Definition](../../agentic_development_product_definition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 - the runtime-capacity concept model from Task 6.1
 
 ## Proposed Work
@@ -107,5 +107,5 @@ IMPLEMENTED
 ## Related Artifacts
 
 - [Story 6 - Runtime Capacity And Parallel Decomposition](../story_6_runtime_capacity_and_parallel_decomposition.md)
-- [Context Atlas Agentic Development Profile](../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+- [Context Atlas Agentic Development Profile](../../../../../Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 

@@ -15,12 +15,12 @@ related:
   - ./README.md
   - ./folder_layout.md
   - ./creation_guidance.md
-  - ../../Context-Atlas-Agentic-Development-Profile.md
-  - ../Role-Model.md
-  - ../Mode-Model.md
-  - ../Protocol-Role-Bindings.md
-  - ../Protocol-Mode-Bindings.md
-  - ../Gate-Review-Pass-Matrix.md
+  - ../../../Context-Atlas-Agentic-Development-Profile.md
+  - ../../Bindings/Roles/Role-Model.md
+  - ../../Bindings/Modes/Mode-Model.md
+  - ../../Bindings/Protocols/Protocol-Role-Bindings.md
+  - ../../Bindings/Protocols/Protocol-Mode-Bindings.md
+  - ../../Bindings/Protocols/Gate-Review-Pass-Matrix.md
 supersedes: []
 ---
 
@@ -38,7 +38,7 @@ This document governs how Codex binding artifacts should be reviewed and what
 they must stay aligned with over time.
 
 It does not replace the generic drift-control model from Story 10 or the
-portable [Drift Model](../../../Canon/AgenticDevelopment/Drift-Model.md).
+portable [Drift Model](../../../../Canon/AgenticDevelopment/Drift-Model.md).
 
 ## Binding Decisions
 
@@ -155,9 +155,10 @@ When Codex-binding assets change, reviewers should check:
 - [Context Atlas Codex Binding](./README.md)
 - [Context Atlas Codex Folder Layout](./folder_layout.md)
 - [Context Atlas Codex Creation Guidance](./creation_guidance.md)
-- [Context Atlas Agentic Development Profile](../../Context-Atlas-Agentic-Development-Profile.md)
-- [Role Model](../Role-Model.md)
-- [Mode Model](../Mode-Model.md)
-- [Protocol Role Bindings](../Protocol-Role-Bindings.md)
-- [Protocol Mode Bindings](../Protocol-Mode-Bindings.md)
-- [Gate Review Pass Matrix](../Gate-Review-Pass-Matrix.md)
+- [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+- [Role Model](../../Bindings/Roles/Role-Model.md)
+- [Mode Model](../../Bindings/Modes/Mode-Model.md)
+- [Protocol Role Bindings](../../Bindings/Protocols/Protocol-Role-Bindings.md)
+- [Protocol Mode Bindings](../../Bindings/Protocols/Protocol-Mode-Bindings.md)
+- [Gate Review Pass Matrix](../../Bindings/Protocols/Gate-Review-Pass-Matrix.md)
+

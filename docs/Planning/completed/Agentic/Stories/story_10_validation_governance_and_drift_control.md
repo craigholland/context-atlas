@@ -19,9 +19,9 @@ related:
   - ./story_7_platform_materialization_model.md
   - ./story_8_codex_materialization_for_context_atlas.md
   - ./story_9_repo_management.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md
 supersedes: []
 ---
 
@@ -42,9 +42,9 @@ inputs, and runtime materializations aligned over time.
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
 - Current repository validation and `__ai__.md` governance patterns
 
 ## Proposed Tasks
@@ -186,7 +186,8 @@ inputs, and runtime materializations aligned over time.
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 8 - Codex Materialization For Context Atlas](./story_8_codex_materialization_for_context_atlas.md)
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Change-Management Model](../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Change-Management Model](../../../../Authoritative/Canon/AgenticDevelopment/Change-Management-Model.md)
+
 

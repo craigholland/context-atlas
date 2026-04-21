@@ -13,7 +13,7 @@ owners: [core]
 tags: [system-model, context-atlas, domain, package-architecture, components]
 related:
   - ./Context-Atlas-Agentic-Development-Profile.md
-  - ./AgenticDevelopment/Role-Model.md
+  - ./AgenticDevelopment/Bindings/Roles/Role-Model.md
   - ./Context-Atlas-Charter.md
   - ../Canon/Architecture/Craig-Architecture.md
   - ../Canon/Ontology/Documentation-Ontology.md
@@ -283,7 +283,7 @@ runtime-specific file names used to materialize parent agents.
 
 - [Context Atlas Charter](./Context-Atlas-Charter.md)
 - [Context Atlas Agentic Development Profile](./Context-Atlas-Agentic-Development-Profile.md)
-- [Context Atlas Role Model](./AgenticDevelopment/Role-Model.md)
+- [Context Atlas Role Model](./AgenticDevelopment/Bindings/Roles/Role-Model.md)
 - [Craig Architecture](../Canon/Architecture/Craig-Architecture.md)
 - [Documentation Ontology](../Canon/Ontology/Documentation-Ontology.md)
 - [Documentation](../../README.md)

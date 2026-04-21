@@ -14,9 +14,9 @@ tags: [context-atlas, agentic-development, identity, roles, modes]
 related:
   - ./Role-Model.md
   - ./Role-Authority-Matrix.md
-  - ./Mode-Model.md
-  - ./Mode-Mutation-Matrix.md
-  - ./Mode-Transition-Rules.md
+  - ../Modes/Mode-Model.md
+  - ../Modes/Mode-Mutation-Matrix.md
+  - ../Modes/Mode-Transition-Rules.md
 supersedes: []
 ---
 
@@ -114,6 +114,7 @@ context.
 
 - [Context Atlas Role Model](./Role-Model.md)
 - [Context Atlas Role Authority Matrix](./Role-Authority-Matrix.md)
-- [Context Atlas Mode Model](./Mode-Model.md)
-- [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
-- [Mode Transition Rules](./Mode-Transition-Rules.md)
+- [Context Atlas Mode Model](../Modes/Mode-Model.md)
+- [Mode Mutation Matrix](../Modes/Mode-Mutation-Matrix.md)
+- [Mode Transition Rules](../Modes/Mode-Transition-Rules.md)
+

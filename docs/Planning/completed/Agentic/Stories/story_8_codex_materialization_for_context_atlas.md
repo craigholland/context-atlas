@@ -17,18 +17,18 @@ related:
   - ./story_4_context_atlas_mode_model.md
   - ./story_7_platform_materialization_model.md
   - ./story_9_repo_management.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/codex/README.md
-  - ../../../Authoritative/Identity/RepoManagement/GitHub/README.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md
-  - ../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md
-  - ../../../Authoritative/Canon/AgenticDevelopment/Skill-Attachment-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md
+  - ../../../../Authoritative/Identity/RepoManagement/GitHub/README.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Accountability-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md
+  - ../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md
+  - ../../../../Authoritative/Canon/AgenticDevelopment/Skill-Attachment-Model.md
 supersedes: []
 ---
 
@@ -53,20 +53,20 @@ the explicit distinction between:
 - [Story 3 - Context Atlas Role Model](./story_3_context_atlas_role_model.md)
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
-- [Discovery Model](../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
-- [Materialization Traceability Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
-- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
-- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
-- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
-- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Mode Model](../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md)
-- [Mode Transition Rules](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md)
-- [Context Atlas Role-Mode Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Discovery Model](../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Context Atlas Codex Binding](../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- [Context Atlas GitHub Binding](../../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
+- [Context Atlas Codex Folder Layout](../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md)
+- [Context Atlas Role Accountability Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Mode Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md)
+- [Mode Transition Rules](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md)
+- [Context Atlas Role-Mode Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
 - Current Codex discovery expectations for agent, skill, mode, and runtime config files
 
 ## Proposed Tasks
@@ -201,19 +201,20 @@ the explicit distinction between:
 - [Story 4 - Context Atlas Mode Model](./story_4_context_atlas_mode_model.md)
 - [Story 7 - Platform Materialization Model](./story_7_platform_materialization_model.md)
 - [Story 9 - RepoManagement](./story_9_repo_management.md)
-- [Discovery Model](../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
-- [Materialization Traceability Model](../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
-- [Drift Model](../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
-- [Validation Model](../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
-- [Context Atlas Codex Binding](../../../Authoritative/Identity/AgenticDevelopment/codex/README.md)
-- [Context Atlas GitHub Binding](../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
-- [Context Atlas Codex Folder Layout](../../../Authoritative/Identity/AgenticDevelopment/codex/folder_layout.md)
-- [Context Atlas Role Accountability Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Accountability-Matrix.md)
-- [Context Atlas Role Authority Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Authority-Matrix.md)
-- [Context Atlas Role-Agent Binding Model](../../../Authoritative/Identity/AgenticDevelopment/Role-Agent-Binding-Model.md)
-- [Context Atlas Mode Model](../../../Authoritative/Identity/AgenticDevelopment/Mode-Model.md)
-- [Mode Transition Rules](../../../Authoritative/Identity/AgenticDevelopment/Mode-Transition-Rules.md)
-- [Context Atlas Role-Mode Matrix](../../../Authoritative/Identity/AgenticDevelopment/Role-Mode-Matrix.md)
-- [Boundary Model](../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
-- [Skill Attachment Model](../../../Authoritative/Canon/AgenticDevelopment/Skill-Attachment-Model.md)
+- [Discovery Model](../../../../Authoritative/Canon/AgenticDevelopment/Discovery-Model.md)
+- [Materialization Traceability Model](../../../../Authoritative/Canon/AgenticDevelopment/Materialization-Traceability-Model.md)
+- [Drift Model](../../../../Authoritative/Canon/AgenticDevelopment/Drift-Model.md)
+- [Validation Model](../../../../Authoritative/Canon/AgenticDevelopment/Validation-Model.md)
+- [Context Atlas Codex Binding](../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- [Context Atlas GitHub Binding](../../../../Authoritative/Identity/RepoManagement/GitHub/README.md)
+- [Context Atlas Codex Folder Layout](../../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/folder_layout.md)
+- [Context Atlas Role Accountability Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Accountability-Matrix.md)
+- [Context Atlas Role Authority Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md)
+- [Context Atlas Role-Agent Binding Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md)
+- [Context Atlas Mode Model](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md)
+- [Mode Transition Rules](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md)
+- [Context Atlas Role-Mode Matrix](../../../../Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md)
+- [Boundary Model](../../../../Authoritative/Canon/AgenticDevelopment/Boundary-Model.md)
+- [Skill Attachment Model](../../../../Authoritative/Canon/AgenticDevelopment/Skill-Attachment-Model.md)
+
 
