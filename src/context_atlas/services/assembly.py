@@ -222,10 +222,11 @@ class ContextAssemblyService:
                 LogMessage.BUDGET_ALLOCATED,
                 active_trace_id,
                 active_budget.total_tokens,
-                budget_outcome.remaining_tokens,
+                budget_outcome.unallocated_tokens,
                 trace_id=active_trace_id,
                 total_tokens=active_budget.total_tokens,
-                remaining_tokens=budget_outcome.remaining_tokens,
+                remaining_tokens=budget_outcome.unallocated_tokens,
+                unallocated_tokens=budget_outcome.unallocated_tokens,
             )
 
             memory_budget_tokens = self._allocated_tokens(
@@ -313,6 +314,11 @@ class ContextAssemblyService:
                     "retrieved_candidate_count": str(len(gathered_candidates)),
                     "ranked_candidate_count": str(ranking_outcome.included_count),
                     "selected_memory_count": str(len(selected_memory_entries)),
+                    "budget_fixed_reserved_tokens": str(
+                        active_budget.fixed_reserved_tokens
+                    ),
+                    "budget_unreserved_tokens": str(active_budget.unreserved_tokens),
+                    "budget_unallocated_tokens": str(budget_outcome.unallocated_tokens),
                     "document_budget_tokens": str(document_budget_tokens),
                     "memory_budget_tokens": str(memory_budget_tokens),
                     "compression_applied": str(compression_applied).lower(),

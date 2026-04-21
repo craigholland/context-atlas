@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 
 from pydantic import ValidationError
 
@@ -194,8 +195,17 @@ class DomainModelTests(unittest.TestCase):
         budget = ContextBudget(total_tokens=800, slots=(fixed_history, fixed_docs))
         self.assertEqual(budget.fixed_reserved_tokens, 600)
         self.assertEqual(budget.unreserved_tokens, 200)
-        self.assertEqual(budget.reserved_tokens, 600)
-        self.assertEqual(budget.remaining_tokens, 200)
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always", DeprecationWarning)
+            self.assertEqual(budget.reserved_tokens, 600)
+            self.assertEqual(budget.remaining_tokens, 200)
+        self.assertEqual(len(captured), 2)
+        self.assertTrue(
+            any("fixed_reserved_tokens" in str(warning.message) for warning in captured)
+        )
+        self.assertTrue(
+            any("unreserved_tokens" in str(warning.message) for warning in captured)
+        )
 
         with self.assertRaises(ContextAtlasError) as duplicate_context:
             ContextBudget(
@@ -239,8 +249,11 @@ class DomainModelTests(unittest.TestCase):
 
         self.assertEqual(budget.fixed_reserved_tokens, 120)
         self.assertEqual(budget.unreserved_tokens, 180)
-        self.assertEqual(budget.reserved_tokens, 120)
-        self.assertEqual(budget.remaining_tokens, 180)
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always", DeprecationWarning)
+            self.assertEqual(budget.reserved_tokens, 120)
+            self.assertEqual(budget.remaining_tokens, 180)
+        self.assertEqual(len(captured), 2)
 
     def test_context_assembly_decision_requires_reason_codes(self) -> None:
         with self.assertRaises(ContextAtlasError) as context:

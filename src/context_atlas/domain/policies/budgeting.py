@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 from typing import Iterable, Protocol
+import warnings
+
+from pydantic import AliasChoices, Field
 
 from ..errors import ContextAtlasError, ErrorCode
 from ..messages import ErrorMessage
@@ -112,13 +115,15 @@ class BudgetAllocationOutcome(CanonicalDomainModel):
 
     allocations: tuple[BudgetAllocation, ...]
     trace: ContextTrace
-    remaining_tokens: int
+    unallocated_tokens: int = Field(
+        validation_alias=AliasChoices("unallocated_tokens", "remaining_tokens")
+    )
 
     def model_post_init(self, __context: object) -> None:
-        if self.remaining_tokens < 0:
+        if self.unallocated_tokens < 0:
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_BUDGET_ALLOCATION,
-                message_args=(ErrorMessage.REMAINING_TOKENS_MUST_BE_NON_NEGATIVE,),
+                message_args=(ErrorMessage.UNALLOCATED_TOKENS_MUST_BE_NON_NEGATIVE,),
             )
 
     @property
@@ -128,10 +133,16 @@ class BudgetAllocationOutcome(CanonicalDomainModel):
         return sum(allocation.allocated_tokens for allocation in self.allocations)
 
     @property
-    def unallocated_tokens(self) -> int:
-        """Return the true post-allocation remainder."""
+    def remaining_tokens(self) -> int:
+        """Compatibility alias for the true post-allocation remainder."""
 
-        return self.remaining_tokens
+        warnings.warn(
+            "BudgetAllocationOutcome.remaining_tokens is a legacy alias for "
+            "BudgetAllocationOutcome.unallocated_tokens.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.unallocated_tokens
 
 
 class StarterBudgetAllocationPolicy:
@@ -226,13 +237,12 @@ class StarterBudgetAllocationPolicy:
                 "unreserved_tokens": str(budget.unreserved_tokens),
                 "allocated_tokens": str(sum(a.allocated_tokens for a in allocations)),
                 "unallocated_tokens": str(remaining_tokens),
-                "remaining_tokens": str(remaining_tokens),
             },
         )
         return BudgetAllocationOutcome(
             allocations=tuple(allocations),
             trace=trace,
-            remaining_tokens=remaining_tokens,
+            unallocated_tokens=remaining_tokens,
         )
 
 

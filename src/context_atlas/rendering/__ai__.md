@@ -63,6 +63,7 @@
   - responsibility: renders packet inspection sections for product-facing debugging and demos
   - invariants:
     - emphasize canonical packet state such as selected sources, memory, budget, and compression
+    - budget inspection should prefer truthful budget vocabulary like `fixed_reserved_tokens` and `unreserved_tokens` instead of re-exporting legacy alias names as the primary display contract
     - reflect actual compression application state rather than just the presence of a `CompressionResult`
     - remain a read-only formatter over canonical packet artifacts
 - `trace.py`:
