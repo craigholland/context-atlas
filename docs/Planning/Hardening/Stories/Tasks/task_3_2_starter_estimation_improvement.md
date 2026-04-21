@@ -33,7 +33,7 @@ lead path.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -123,6 +123,10 @@ PLANNED
   the starter path
 - the improved heuristic remains provider-agnostic and bounded
 - tests make the new heuristic behavior visible enough to review
+- the delivered bounded baseline is explicit: prose uses the configured
+  starter baseline, structured code/markup tightens that baseline modestly,
+  and non-Latin-heavy text tightens it further without introducing provider
+  token tables
 
 ## Related Artifacts
 
