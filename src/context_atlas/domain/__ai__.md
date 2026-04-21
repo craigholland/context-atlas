@@ -252,6 +252,9 @@
 - Duplicate detection is now beginning to converge on one shared inward helper surface, but Story 2 still needs later work for boilerplate handling, full ranking integration, and a tighter final acceptance bar.
 - The current shared duplicate baseline is deliberately lexical only: exact normalized-key matches, normalized containment, and token overlap. Semantic similarity remains out of scope until a future story explicitly reopens that boundary.
 - Task 2.2 and Task 2.3 should refine normalization and policy integration around that baseline, not invent additional duplicate-comparison families in parallel.
+- Ranking should now consume the shared duplicate assessment with an explicit `dedup_threshold` surface instead of silently staying on exact-key-only dedupe, but duplicate elimination should remain source-family-aware so mixed document/record provenance is not erased.
+- Memory duplicate decisions should now describe the shared duplicate-assessment match kind directly rather than hiding that path behind a local boolean-only wrapper or prefix heuristic.
+- Task 2.3 should now be treated as the point where ranking and memory both consume the same bounded duplicate semantics; later Story 2 work should tighten acceptance coverage rather than re-forking policy-local duplicate rules.
 - Token-overlap matching inside that baseline should remain Unicode-aware so non-English text is not silently excluded from duplicate handling.
 - Boilerplate handling inside that baseline should stay bounded to front matter and shared leading prefixes; later work should not grow a format-specific stripping matrix without first updating the Story boundary.
 - Front-matter stripping inside that baseline should preserve the original content when stripping would erase the whole document, so metadata-only sources do not collapse to empty duplicate keys.

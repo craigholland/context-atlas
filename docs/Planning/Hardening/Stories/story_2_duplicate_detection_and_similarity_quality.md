@@ -85,6 +85,10 @@ deterministic, and Atlas-owned.
   improved contract
 - keep the integration deterministic and reviewable instead of introducing a
   fuzzy scoring scheme that is hard to reason about
+- Task 2.3 should close with one explicit integration rule: ranking uses the
+  shared duplicate assessment through an explicit `dedup_threshold` and remains
+  source-family-aware, while memory exposes the shared duplicate match kind
+  directly in duplicate decisions instead of hiding a second local shortcut
 
 ### Task 4: Scope Ceiling And Regression Proof
 

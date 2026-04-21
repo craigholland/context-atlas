@@ -14,14 +14,16 @@ from ..models import (
     ContextAssemblyDecision,
     ContextCandidate,
     ContextDecisionAction,
+    ContextSourceFamily,
     ContextSourceAuthority,
     ContextTrace,
     ExclusionReasonCode,
     InclusionReasonCode,
 )
-from .deduplication import build_duplicate_content_key
+from .deduplication import assess_duplicate_content, build_duplicate_content_key
 
 _DEFAULT_MINIMUM_SCORE = 0.0
+_DEFAULT_DEDUP_THRESHOLD = 0.72
 _AUTHORITY_BONUS_BY_LEVEL: dict[ContextSourceAuthority, float] = {
     ContextSourceAuthority.BINDING: 0.12,
     ContextSourceAuthority.PREFERRED: 0.06,
@@ -69,6 +71,7 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
     """Starter ranking policy combining candidate score and authority priority."""
 
     minimum_score: float = _DEFAULT_MINIMUM_SCORE
+    dedup_threshold: float = _DEFAULT_DEDUP_THRESHOLD
     deduplicate_by_content: bool = True
 
     def model_post_init(self, __context: object) -> None:
@@ -76,6 +79,15 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
             raise ContextAtlasError(
                 code=ErrorCode.INVALID_RANKING_REQUEST,
                 message_args=(ErrorMessage.MINIMUM_SCORE_MUST_BE_FINITE,),
+            )
+        if not math.isfinite(self.dedup_threshold) or not (
+            0.0 <= self.dedup_threshold <= 1.0
+        ):
+            raise ContextAtlasError(
+                code=ErrorCode.INVALID_RANKING_REQUEST,
+                message_args=(
+                    ErrorMessage.DEDUP_THRESHOLD_MUST_BE_WITHIN_UNIT_INTERVAL,
+                ),
             )
 
     def rank_candidates(
@@ -99,7 +111,11 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         )
 
         retained_by_source_id: dict[str, _RankableCandidate] = {}
-        retained_by_content_key: dict[str, _RankableCandidate] = {}
+        retained_by_content_key: dict[
+            tuple[ContextSourceFamily, str],
+            _RankableCandidate,
+        ] = {}
+        retained_ranked_candidates: list[_RankableCandidate] = []
         included_candidates: list[ContextCandidate] = []
         decisions: list[ContextAssemblyDecision] = []
         deduplicated_count = 0
@@ -109,13 +125,15 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
                 rankable_candidate,
                 retained_by_source_id=retained_by_source_id,
                 retained_by_content_key=retained_by_content_key,
+                retained_ranked_candidates=retained_ranked_candidates,
             )
             if duplicate_of is not None:
                 deduplicated_count += 1
                 decisions.append(
                     self._build_duplicate_decision(
                         rankable_candidate,
-                        duplicate_of=duplicate_of,
+                        duplicate_of=duplicate_of.retained_candidate,
+                        match_kind=duplicate_of.match_kind,
                     )
                 )
                 continue
@@ -147,7 +165,11 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
                 continue
 
             retained_by_source_id[rankable_candidate.source_id] = rankable_candidate
-            retained_by_content_key[rankable_candidate.content_key] = rankable_candidate
+            if rankable_candidate.content_key:
+                retained_by_content_key[
+                    (rankable_candidate.source_family, rankable_candidate.content_key)
+                ] = rankable_candidate
+            retained_ranked_candidates.append(rankable_candidate)
 
             included_candidate = rankable_candidate.to_ranked_candidate(
                 rank=len(included_candidates) + 1
@@ -174,6 +196,7 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
                     len(decisions) - len(included_candidates)
                 ),
                 "deduplicated_candidate_count": str(deduplicated_count),
+                "dedup_threshold": f"{self.dedup_threshold:.2f}",
             },
         )
         return CandidateRankingOutcome(
@@ -186,21 +209,50 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         candidate: "_RankableCandidate",
         *,
         retained_by_source_id: dict[str, "_RankableCandidate"],
-        retained_by_content_key: dict[str, "_RankableCandidate"],
-    ) -> "_RankableCandidate | None":
+        retained_by_content_key: dict[
+            tuple[ContextSourceFamily, str],
+            "_RankableCandidate",
+        ],
+        retained_ranked_candidates: Iterable["_RankableCandidate"],
+    ) -> "_DuplicateMatch | None":
         """Return the retained winner if a duplicate candidate has already been kept.
 
-        Ranking currently consumes the normalized exact-key facet of the shared
-        duplicate baseline, including bounded front-matter stripping. Broader
-        near-duplicate integration is handled in a later hardening task so this
-        path stays deterministic and reviewable.
+        Ranking first short-circuits on source identifier and normalized
+        exact-key matches, then applies the shared duplicate assessment to the
+        already retained winners in ranking order. That keeps winner selection
+        deterministic while broadening beyond exact full-text equality.
         """
 
         retained = retained_by_source_id.get(candidate.source_id)
         if retained is not None:
-            return retained
+            return _DuplicateMatch(
+                retained_candidate=retained,
+                match_kind="source_id_match",
+            )
+        if self.deduplicate_by_content and candidate.content_key:
+            retained = retained_by_content_key.get(
+                (candidate.source_family, candidate.content_key)
+            )
+            if retained is not None:
+                return _DuplicateMatch(
+                    retained_candidate=retained,
+                    match_kind="exact_key_match",
+                )
         if self.deduplicate_by_content:
-            return retained_by_content_key.get(candidate.content_key)
+            candidate_content = candidate.candidate.source.content
+            for retained in retained_ranked_candidates:
+                if retained.source_family is not candidate.source_family:
+                    continue
+                assessment = assess_duplicate_content(
+                    candidate_content,
+                    retained.candidate.source.content,
+                    threshold=self.dedup_threshold,
+                )
+                if assessment.is_duplicate:
+                    return _DuplicateMatch(
+                        retained_candidate=retained,
+                        match_kind=assessment.match_kind or "duplicate_match",
+                    )
         return None
 
     def _build_duplicate_decision(
@@ -208,6 +260,7 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         candidate: "_RankableCandidate",
         *,
         duplicate_of: "_RankableCandidate",
+        match_kind: str,
     ) -> ContextAssemblyDecision:
         """Build an exclusion decision for a deduplicated candidate."""
 
@@ -217,7 +270,8 @@ class StarterCandidateRankingPolicy(CanonicalDomainModel):
         if candidate.authority_order < duplicate_of.authority_order:
             reason_codes.append(AuthorityPrecedenceReasonCode.LOWER_AUTHORITY_DEMOTED)
         explanation = (
-            f"Duplicate candidate was removed in favor of '{duplicate_of.source_id}'."
+            f"Duplicate candidate was removed in favor of '{duplicate_of.source_id}' "
+            f"via {match_kind}."
         )
         return ContextAssemblyDecision(
             source_id=candidate.source_id,
@@ -238,6 +292,7 @@ class _RankableCandidate:
     ranking_score: float
     source_id: str
     content_key: str
+    source_family: ContextSourceFamily
     authority_order: int
 
     @classmethod
@@ -260,6 +315,7 @@ class _RankableCandidate:
             # allows this key to ignore bounded front matter so governed docs
             # do not drift on metadata alone.
             content_key=build_duplicate_content_key(candidate.source.content),
+            source_family=candidate.source.source_family,
             authority_order=_AUTHORITY_ORDER[authority],
         )
 
@@ -304,3 +360,11 @@ class _RankableCandidate:
             signals=signals,
             metadata=metadata,
         )
+
+
+@dataclass(frozen=True, slots=True)
+class _DuplicateMatch:
+    """Internal helper describing which retained candidate won and why."""
+
+    retained_candidate: _RankableCandidate
+    match_kind: str

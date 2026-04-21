@@ -14,6 +14,8 @@ from context_atlas.domain.models import (
     ContextSource,
     ContextSourceAuthority,
     ContextSourceClass,
+    ContextSourceFamily,
+    ContextSourceProvenance,
     ExclusionReasonCode,
 )
 from context_atlas.domain.policies import StarterCandidateRankingPolicy
@@ -268,6 +270,164 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
 
+    def test_ranking_deduplicates_reordered_token_variants(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-token-overlap",
+                    content=(
+                        "Atlas retains durable planning context when the ranking "
+                        "policy keeps duplicate governance deterministic."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-token-overlap",
+                    content=(
+                        "Ranking policy keeps duplicate governance deterministic "
+                        "when Atlas retains durable planning context."
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "atlas ranking duplicate governance durable planning context",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy(
+            dedup_threshold=0.72,
+        ).rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2e",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-token-overlap",),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "1")
+        duplicate_decision = next(
+            decision
+            for decision in outcome.trace.decisions
+            if decision.source_id == "planning-token-overlap"
+        )
+        self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
+        self.assertIn("token_overlap", duplicate_decision.explanation or "")
+
+    def test_ranking_keeps_matching_content_across_source_families(self) -> None:
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="document-review",
+                    content=(
+                        "Shared review evidence should stay canonical across "
+                        "source families."
+                    ),
+                    source_class=ContextSourceClass.REVIEWS,
+                    authority=ContextSourceAuthority.ADVISORY,
+                    provenance=ContextSourceProvenance(
+                        source_family=ContextSourceFamily.DOCUMENT,
+                    ),
+                ),
+                ContextSource(
+                    source_id="record-review",
+                    content=(
+                        "Shared review evidence should stay canonical across "
+                        "source families."
+                    ),
+                    source_class=ContextSourceClass.REVIEWS,
+                    authority=ContextSourceAuthority.ADVISORY,
+                    provenance=ContextSourceProvenance(
+                        source_family=ContextSourceFamily.STRUCTURED_RECORD,
+                    ),
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "shared review evidence canonical source families",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy().rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2f",
+        )
+
+        self.assertEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("document-review", "record-review"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
+
+    def test_ranking_keeps_shared_header_entries_with_distinct_bodies(self) -> None:
+        shared_prefix = (
+            "---\n"
+            "doc_class: guide\n"
+            "owners: [core]\n"
+            "---\n"
+            "# Context Atlas Hardening\n"
+            "Audience: Internal\n"
+            "Workflow: Hardening\n"
+        )
+        registry = InMemorySourceRegistry(
+            (
+                ContextSource(
+                    source_id="authoritative-shared-header",
+                    content=shared_prefix
+                    + (
+                        "\n"
+                        "Duplicate normalization should strip front matter before "
+                        "comparison.\n"
+                        "This note focuses on repeated header handling in governed "
+                        "docs."
+                    ),
+                    source_class=ContextSourceClass.AUTHORITATIVE,
+                    authority=ContextSourceAuthority.BINDING,
+                ),
+                ContextSource(
+                    source_id="planning-shared-header",
+                    content=shared_prefix
+                    + (
+                        "\n"
+                        "Token estimation should stay provider-agnostic and query "
+                        "aware.\n"
+                        "This note focuses on tokenizer seams rather than duplicate "
+                        "handling."
+                    ),
+                    source_class=ContextSourceClass.PLANNING,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+            )
+        )
+        retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+        candidates = retriever.retrieve(
+            "context atlas hardening workflow duplicate token estimation",
+            top_k=2,
+        )
+
+        outcome = StarterCandidateRankingPolicy(dedup_threshold=0.72).rank_candidates(
+            candidates,
+            trace_id="trace-ranking-2g",
+        )
+
+        self.assertCountEqual(
+            tuple(
+                candidate.source.source_id for candidate in outcome.ranked_candidates
+            ),
+            ("authoritative-shared-header", "planning-shared-header"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(
@@ -290,6 +450,14 @@ class CandidateRankingTests(unittest.TestCase):
         self.assertEqual(outcome.trace.metadata["included_candidate_count"], "1")
 
     def test_ranking_policy_validates_configuration_inputs(self) -> None:
+        with self.assertRaises(ContextAtlasError) as invalid_dedup_threshold:
+            StarterCandidateRankingPolicy(dedup_threshold=1.1)
+
+        self.assertEqual(
+            invalid_dedup_threshold.exception.code,
+            ErrorCode.INVALID_RANKING_REQUEST,
+        )
+
         with self.assertRaises(ContextAtlasError) as invalid_score:
             StarterCandidateRankingPolicy(minimum_score=float("nan"))
 
