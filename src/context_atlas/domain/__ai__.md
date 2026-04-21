@@ -224,6 +224,8 @@
     - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
     - starter token estimation should remain provider-agnostic and bounded to content-shape distinctions such as prose baseline, structured code/markup tightening, and non-Latin-heavy tightening rather than hidden tokenizer tables
     - final compression output must still fit the requested token budget according to the output text's own estimated token shape, even when the compressed text is denser than the original input
+    - any tokenizer seam consumed inward here must remain a generic callable token-estimation contract; provider SDKs, model names, or tokenizer-selection policy must stay outside the domain layer
+    - token-estimator labels emitted from compression metadata must reflect a real bound estimator; direct policy use should default custom callables to `external_binding` rather than falsely claiming `starter_heuristic`
 - `policies/memory.py`:
   - responsibility: retains memory entries through deterministic starter scoring, deduplication, and trace recording
   - defines:

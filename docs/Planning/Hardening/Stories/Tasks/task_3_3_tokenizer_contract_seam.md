@@ -33,7 +33,7 @@ bounded complementary follow-on path rather than the primary Story 3 track.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -127,6 +127,12 @@ PLANNED
 - a provider-agnostic tokenizer seam exists
 - the seam binds outward without leaking provider specifics inward
 - the starter path remains truthful about what is and is not supported
+- delivered shape:
+  - the seam is a generic callable token-estimation contract on
+    `StarterCompressionPolicy`
+  - starter infrastructure assembly helpers may bind that contract outward
+    while defaulting to the current heuristic when none is supplied
+  - no provider-specific tokenizer selection or SDK integration was introduced
 
 ## Related Artifacts
 

@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import math
 import re
+from typing import Callable
 from typing import Iterable, Protocol
+
+from pydantic import Field, field_validator
 
 from ..errors import ContextAtlasError, ErrorCode
 from ..messages import ErrorMessage
@@ -19,6 +22,9 @@ from ..models import (
     ContextTrace,
     InclusionReasonCode,
 )
+
+
+TokenEstimator = Callable[[str], int]
 
 
 class CompressionPolicy(Protocol):
@@ -48,6 +54,20 @@ class StarterCompressionPolicy(CanonicalDomainModel):
     strategy: CompressionStrategy = CompressionStrategy.EXTRACTIVE
     chars_per_token: int = 4
     min_chunk_chars: int = 20
+    token_estimator: TokenEstimator | None = Field(
+        default=None,
+        exclude=True,
+        repr=False,
+    )
+    token_estimator_name: str = "starter_heuristic"
+
+    @field_validator("token_estimator_name")
+    @classmethod
+    def _validate_token_estimator_name(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized:
+            raise ValueError("token_estimator_name must not be blank")
+        return normalized
 
     def model_post_init(self, __context: object) -> None:
         if self.chars_per_token < 1:
@@ -60,6 +80,20 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 code=ErrorCode.INVALID_COMPRESSION_REQUEST,
                 message_args=(ErrorMessage.MIN_CHUNK_CHARS_MUST_BE_AT_LEAST_ONE,),
             )
+        token_estimator_name_was_provided = (
+            "token_estimator_name" in self.model_fields_set
+        )
+        if self.token_estimator is None:
+            if token_estimator_name_was_provided and (
+                self.token_estimator_name != "starter_heuristic"
+            ):
+                raise ContextAtlasError(
+                    code=ErrorCode.INVALID_COMPRESSION_REQUEST,
+                    message_args=("token_estimator_name requires token_estimator",),
+                )
+            return
+        if not token_estimator_name_was_provided:
+            object.__setattr__(self, "token_estimator_name", "external_binding")
 
     def compress_candidates(
         self,
@@ -89,7 +123,10 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 estimated_tokens_saved=0,
                 was_applied=False,
                 source_ids=(),
-                metadata={"outcome": "empty_input"},
+                metadata={
+                    "outcome": "empty_input",
+                    "token_estimator": self.token_estimator_name,
+                },
             )
             trace = ContextTrace(
                 trace_id=trace_id,
@@ -104,6 +141,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 metadata={
                     "compression_strategy": self.strategy.value,
                     "source_count": "0",
+                    "token_estimator": self.token_estimator_name,
                 },
             )
             return CompressionOutcome(compression_result=result, trace=trace)
@@ -112,18 +150,13 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         chunks = [candidate.source.content for candidate in candidate_tuple]
         original_text = "\n\n".join(chunks)
         original_chars = len(original_text)
-        max_chars = max_tokens * _effective_chars_per_token(
+        max_chars = _max_chars_for_token_budget(
             original_text,
-            baseline_chars_per_token=self.chars_per_token,
+            max_tokens=max_tokens,
+            token_estimator=self._estimate_tokens,
         )
 
-        if (
-            estimate_tokens(
-                original_text,
-                chars_per_token=self.chars_per_token,
-            )
-            <= max_tokens
-        ):
+        if self._estimate_tokens(original_text) <= max_tokens:
             result = CompressionResult(
                 text=original_text,
                 strategy_used=self.strategy,
@@ -132,7 +165,10 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 estimated_tokens_saved=0,
                 was_applied=False,
                 source_ids=source_ids,
-                metadata={"outcome": "fits_budget"},
+                metadata={
+                    "outcome": "fits_budget",
+                    "token_estimator": self.token_estimator_name,
+                },
             )
             trace = ContextTrace(
                 trace_id=trace_id,
@@ -148,6 +184,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                     "compression_strategy": self.strategy.value,
                     "source_count": str(len(source_ids)),
                     "max_tokens": str(max_tokens),
+                    "token_estimator": self.token_estimator_name,
                 },
             )
             return CompressionOutcome(compression_result=result, trace=trace)
@@ -171,7 +208,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         compressed_text, budget_trimmed = _fit_text_within_token_budget(
             compressed_text,
             max_tokens=max_tokens,
-            chars_per_token=self.chars_per_token,
+            token_estimator=self._estimate_tokens,
         )
         if budget_trimmed and fallback_used is None:
             fallback_used = CompressionStrategy.TRUNCATE
@@ -179,10 +216,13 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         compressed_chars = len(compressed_text)
         estimated_tokens_saved = max(
             0,
-            estimate_tokens(original_text, chars_per_token=self.chars_per_token)
-            - estimate_tokens(compressed_text, chars_per_token=self.chars_per_token),
+            self._estimate_tokens(original_text)
+            - self._estimate_tokens(compressed_text),
         )
-        metadata = {"outcome": "compressed"}
+        metadata = {
+            "outcome": "compressed",
+            "token_estimator": self.token_estimator_name,
+        }
         if fallback_used is not None:
             metadata["fallback_strategy"] = fallback_used.value
         if not compression_input:
@@ -230,9 +270,19 @@ class StarterCompressionPolicy(CanonicalDomainModel):
                 "source_count": str(len(source_ids)),
                 "max_tokens": str(max_tokens),
                 "estimated_tokens_saved": str(estimated_tokens_saved),
+                "token_estimator": self.token_estimator_name,
             },
         )
         return CompressionOutcome(compression_result=result, trace=trace)
+
+    def _estimate_tokens(self, text: str) -> int:
+        """Estimate token count through the bound seam or the starter heuristic."""
+
+        if not text:
+            return 0
+        if self.token_estimator is not None:
+            return max(0, int(self.token_estimator(text)))
+        return estimate_tokens(text, chars_per_token=self.chars_per_token)
 
     def _compress_chunks(
         self,
@@ -338,11 +388,11 @@ def _fit_text_within_token_budget(
     text: str,
     *,
     max_tokens: int,
-    chars_per_token: int,
+    token_estimator: TokenEstimator,
 ) -> tuple[str, bool]:
     """Trim text until its estimated token count fits the requested budget."""
 
-    if estimate_tokens(text, chars_per_token=chars_per_token) <= max_tokens:
+    if token_estimator(text) <= max_tokens:
         return text, False
 
     low = 0
@@ -351,12 +401,38 @@ def _fit_text_within_token_budget(
     while low <= high:
         midpoint = (low + high) // 2
         candidate = text[:midpoint].strip()
-        if estimate_tokens(candidate, chars_per_token=chars_per_token) <= max_tokens:
+        if token_estimator(candidate) <= max_tokens:
             best = candidate
             low = midpoint + 1
         else:
             high = midpoint - 1
     return best, True
+
+
+def _max_chars_for_token_budget(
+    text: str,
+    *,
+    max_tokens: int,
+    token_estimator: TokenEstimator,
+) -> int:
+    """Return the longest prefix length whose estimated tokens fit the budget."""
+
+    if not text or max_tokens < 1:
+        return 0
+    if token_estimator(text) <= max_tokens:
+        return len(text)
+
+    low = 0
+    high = len(text)
+    best = 0
+    while low <= high:
+        midpoint = (low + high) // 2
+        if token_estimator(text[:midpoint]) <= max_tokens:
+            best = midpoint
+            low = midpoint + 1
+        else:
+            high = midpoint - 1
+    return best
 
 
 def _sentence_preserving(chunks: list[str], *, max_chars: int) -> str:
