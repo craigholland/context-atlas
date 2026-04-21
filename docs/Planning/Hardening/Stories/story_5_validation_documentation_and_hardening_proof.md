@@ -58,6 +58,10 @@ implementation details.
   bar and its reviewed "better than exact full-text" and "better than
   prefix-equality" proof cases rather than renegotiating the duplicate
   baseline during Story 5
+- keep the final regression anchor set easy to find by naming the Story 5
+  baseline tests explicitly across retrieval, ranking, memory, budgeting,
+  service, packet, and trace surfaces rather than duplicating Story-specific
+  coverage in a second proof-only suite
 
 ### Task 2: Reviewable Proof Surfaces
 
@@ -69,6 +73,14 @@ implementation details.
   query regression bundle plus the shared retrieval-completed
   `index_snapshot_state` signal should be extended only if later hardening work
   truly needs more reviewability
+- keep the human-readable proof scope explicit:
+  - retrieval index reuse stays anchored by named regressions plus the shared
+    `index_snapshot_state` signal rather than by a new bundle family
+  - duplicate acceptance-bar behavior stays anchored by the named Story 5
+    ranking and memory regressions rather than by a duplicate-demo artifact
+  - bounded human-readable proof should focus on packet/trace-visible budget,
+    compression, and document-authority behavior where reviewers materially
+    benefit from opening canonical artifacts directly
 
 ### Task 3: Documentation And Example Alignment
 
@@ -78,6 +90,8 @@ implementation details.
   present
 - ensure product-facing docs explain the engine truthfully without forcing
   readers to parse implementation details
+- keep shipped release history distinct from current development-branch
+  hardening guidance so `docs/Release/` does not overclaim unreleased behavior
 - keep the Story 3 documentation baseline explicit:
   - the starter path is shape-aware by default through `starter_heuristic`
   - custom token estimation remains an outward callable seam
@@ -110,7 +124,15 @@ implementation details.
 - inherit the closed acceptance bars from Stories 1 through 4 instead of
   rediscovering them during proof authoring or doc refresh
 - establish regression coverage first
+- use the `test_story_5_hardening_baseline_*` regressions in `tests/` as the
+  explicit review anchor for Stories 1 through 4 rather than inventing a
+  parallel hardening-only harness
 - build bounded proof surfaces next where they add real review value
+- keep the final proof inventory explicit:
+  - bundle-backed human-readable proof: budget/compression tradeoff review and
+    document-authority contrast review through `examples/mvp_proof/`
+  - test-backed proof only: retrieval index reuse and duplicate acceptance-bar
+    behavior through the named `test_story_5_hardening_baseline_*` regressions
 - update guides and examples only after the hardened contracts are stable
 - close out the Epic last with integrated evidence and docs
 
@@ -131,9 +153,87 @@ implementation details.
   behavior is covered by reviewable regression tests
 - any new proof or inspection artifacts derive from the shared packet and trace
   story rather than from bespoke demo logic
+- the final proof story distinguishes clearly between:
+  - bundle-backed human-readable proof surfaces
+  - test-backed proof that does not need a second artifact family
 - product-facing docs and examples describe the hardened semantics truthfully
 - the hardening Epic can close without leaving the original review findings as
   standing caveats about current runtime behavior
+
+## Final Evidence Path
+
+Story 5 closes with one explicit reviewer-facing evidence path rather than a
+set of implied "go read the code" expectations.
+
+`Named regression anchors`
+
+- retrieval indexing and repeated-query proof:
+  - `tests/test_lexical_retrieval.py::test_story_5_hardening_baseline_keeps_repeated_query_proof_bundle_reviewable`
+- duplicate-acceptance bar across ranking and memory:
+  - `tests/test_candidate_ranking.py::test_story_5_hardening_baseline_proves_duplicate_acceptance_bar`
+  - `tests/test_memory_policy.py::test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar`
+- budget, compression, and estimator truthfulness:
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_budget_allocation_truthful`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_compression_fallback_truthful`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_labels_default_estimator_truthfully`
+- service, packet, and trace truthfulness:
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_keeps_canonical_service_budget_summary`
+  - `tests/test_packet_rendering.py::test_story_5_hardening_baseline_highlights_packet_budget_and_compression_state`
+  - `tests/test_trace_rendering.py::test_story_5_hardening_baseline_groups_truthful_trace_metadata`
+
+`Bounded human-readable proof`
+
+- `examples/mvp_proof/README.md`
+- `examples/mvp_proof/inputs/README.md`
+- `examples/mvp_proof/evidence/README.md`
+
+Those bundle-backed surfaces remain intentionally bounded to budget/compression
+tradeoff review and document-authority contrast review through canonical packet
+and trace artifacts. They do not create a second retrieval-demo or
+duplicate-demo artifact family.
+
+`Product-facing closeout surfaces`
+
+- `README.md`
+- `docs/Guides/getting_started.md`
+- workflow guides under `docs/Guides/`
+- example READMEs under `examples/`
+- `docs/Release/README.md`
+
+Those docs should now be read as the outward-facing explanation of the settled
+hardened behavior rather than as workaround narration around MVP-era shortcuts.
+
+`Intentional follow-on work`
+
+- persistent on-disk retrieval indexes
+- embedding-backed or provider-backed semantic duplicate handling
+- provider-specific tokenizer selection or env-backed tokenizer choice
+
+Those follow-ons remain out of scope for this epic, but they are no longer the
+same thing as leaving the original six hardening findings unresolved.
+
+## Current Handoff State
+
+Task 5.4 is the final execution closeout for this Story.
+
+- Tasks 5.1 through 5.4 together now define the settled review path for the
+  hardening Epic:
+  - named `test_story_5_hardening_baseline_*` regressions in `tests/`
+  - bounded human-readable packet/trace proof under `examples/mvp_proof/`
+  - outward-facing guide, example, and release-surface alignment
+  - integrated Epic closeout assessment in
+    `docs/Planning/Hardening/context_assembly_hardening_product_definition.md`
+- Once Task 5.4 merges into the Story 5 branch, Story 5 should be treated as
+  execution-complete and review-pending rather than as an open implementation
+  Story.
+- The remaining work after that point is Story-level review on the Story 5 PR
+  and then the `Story -> Epic` merge.
+- Later hardening follow-on work should begin from this explicit evidence path
+  and its named anchors instead of reopening the original six review findings
+  as the starting problem statement.
 
 ## Definition Of Done
 
