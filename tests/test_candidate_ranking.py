@@ -428,6 +428,141 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
 
+    def test_ranking_duplicate_proof_beats_reviewed_prior_baselines(self) -> None:
+        with self.subTest("front_matter_variants_beat_exact_full_text_baseline"):
+            authoritative_content = (
+                "---\n"
+                "title: Atlas Canon\n"
+                "owners: [core]\n"
+                "---\n"
+                "Atlas duplicate handling should stay traceable after "
+                "front matter normalization."
+            )
+            planning_content = (
+                "---\n"
+                "title: Working Notes\n"
+                "owners: [planning]\n"
+                "---\n"
+                "Atlas duplicate handling should stay traceable after "
+                "front matter normalization."
+            )
+            self.assertFalse(
+                _legacy_exact_full_text_duplicate(
+                    authoritative_content,
+                    planning_content,
+                )
+            )
+            registry = InMemorySourceRegistry(
+                (
+                    ContextSource(
+                        source_id="proof-authoritative-front-matter",
+                        content=authoritative_content,
+                        source_class=ContextSourceClass.AUTHORITATIVE,
+                        authority=ContextSourceAuthority.BINDING,
+                    ),
+                    ContextSource(
+                        source_id="proof-planning-front-matter",
+                        content=planning_content,
+                        source_class=ContextSourceClass.PLANNING,
+                        authority=ContextSourceAuthority.PREFERRED,
+                    ),
+                )
+            )
+            retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+            candidates = retriever.retrieve(
+                "duplicate handling traceable front matter normalization",
+                top_k=2,
+            )
+
+            outcome = StarterCandidateRankingPolicy().rank_candidates(
+                candidates,
+                trace_id="trace-ranking-2h",
+            )
+
+            self.assertEqual(
+                tuple(
+                    candidate.source.source_id
+                    for candidate in outcome.ranked_candidates
+                ),
+                ("proof-authoritative-front-matter",),
+            )
+
+        with self.subTest("shared_headers_reject_prefix_heuristic_false_positive"):
+            shared_prefix = (
+                "---\n"
+                "doc_class: guide\n"
+                "owners: [core]\n"
+                "---\n"
+                "# Context Atlas Hardening\n"
+                "Audience: Internal maintainers\n"
+                "Workflow: Hardening\n"
+                "Status: Reviewed baseline\n"
+                "Review Lens: Duplicate handling\n"
+                "Scope: Shared policy proof\n"
+            )
+            authoritative_content = shared_prefix + (
+                "\n"
+                "Duplicate normalization should strip front matter before "
+                "comparison.\n"
+                "This note focuses on repeated header handling in governed docs."
+            )
+            planning_content = shared_prefix + (
+                "\n"
+                "Token estimation should stay provider-agnostic and query aware.\n"
+                "This note focuses on tokenizer seams rather than duplicate "
+                "handling."
+            )
+            self.assertTrue(
+                _legacy_prefix_heuristic_duplicate(
+                    authoritative_content,
+                    planning_content,
+                    threshold=0.72,
+                )
+            )
+            registry = InMemorySourceRegistry(
+                (
+                    ContextSource(
+                        source_id="proof-authoritative-shared-header",
+                        content=authoritative_content,
+                        source_class=ContextSourceClass.AUTHORITATIVE,
+                        authority=ContextSourceAuthority.BINDING,
+                    ),
+                    ContextSource(
+                        source_id="proof-planning-shared-header",
+                        content=planning_content,
+                        source_class=ContextSourceClass.PLANNING,
+                        authority=ContextSourceAuthority.PREFERRED,
+                    ),
+                )
+            )
+            retriever = LexicalRetriever(registry, mode=LexicalRetrievalMode.KEYWORD)
+            candidates = retriever.retrieve(
+                "context atlas hardening workflow duplicate token estimation",
+                top_k=2,
+            )
+
+            outcome = StarterCandidateRankingPolicy(
+                dedup_threshold=0.72
+            ).rank_candidates(
+                candidates,
+                trace_id="trace-ranking-2i",
+            )
+
+            self.assertCountEqual(
+                tuple(
+                    candidate.source.source_id
+                    for candidate in outcome.ranked_candidates
+                ),
+                (
+                    "proof-authoritative-shared-header",
+                    "proof-planning-shared-header",
+                ),
+            )
+            self.assertEqual(
+                outcome.trace.metadata["deduplicated_candidate_count"],
+                "0",
+            )
+
     def test_ranking_limit_records_excluded_candidates(self) -> None:
         retriever = LexicalRetriever(self.registry, mode=LexicalRetrievalMode.TFIDF)
         candidates = retriever.retrieve(
@@ -496,6 +631,40 @@ class CandidateRankingTests(unittest.TestCase):
             LogMessage.CANDIDATES_DEDUPED,
             "Candidates deduped: trace_id=%s, removed_candidates=%d",
         )
+
+
+def _legacy_exact_full_text_duplicate(content_a: str, content_b: str) -> bool:
+    """Return the old exact full-text duplicate check used before Story 2."""
+
+    return content_a.casefold() == content_b.casefold()
+
+
+def _legacy_prefix_heuristic_duplicate(
+    content_a: str,
+    content_b: str,
+    *,
+    threshold: float,
+) -> bool:
+    """Return the historical prefix-heavy duplicate heuristic for proof tests."""
+
+    normalized_a = content_a.strip().lower()
+    normalized_b = content_b.strip().lower()
+    if not normalized_a or not normalized_b:
+        return False
+    if normalized_a in normalized_b or normalized_b in normalized_a:
+        return True
+
+    half = len(normalized_a) // 2
+    if len(normalized_a) > 10 and len(normalized_b) >= half and half > 0:
+        if normalized_a[:half] == normalized_b[:half]:
+            return True
+
+    tokens_a = set(normalized_a.split())
+    tokens_b = set(normalized_b.split())
+    union_size = len(tokens_a | tokens_b)
+    if union_size == 0:
+        return False
+    return (len(tokens_a & tokens_b) / union_size) >= threshold
 
 
 if __name__ == "__main__":
