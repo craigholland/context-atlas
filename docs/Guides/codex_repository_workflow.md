@@ -103,6 +103,12 @@ The current knobs cover:
 - starter compression defaults
 - starter memory defaults
 
+`CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the baseline control for
+the starter token-estimation heuristic, but the runtime story is no longer "one
+flat ratio for every content shape." The shared engine now tightens that
+estimate automatically for obviously structured code/markup and non-Latin-heavy
+text while staying provider-agnostic.
+
 ## Run The Repository Workflow
 
 The current runnable example is:
@@ -180,6 +186,17 @@ On a successful run, you should see:
 - `=== Codex Context ===`
 - `=== Packet Inspection ===`
 - `=== Trace Inspection ===`
+
+The hardened repository path should also make a few concrete packet/trace
+surfaces easy to review:
+
+- truthful budget state through `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- truthful compression state through `compression_strategy` and optional
+  `configured_compression_strategy`
+- repository-workflow metadata such as `request_workflow`,
+  `request_repo_root`, and `request_docs_root` without hiding the outer
+  workflow boundary in example-only narration
 
 The trace output should make the workflow itself inspectable too. Metadata such as
 `request_workflow`, `request_repo_root`, and `request_docs_root` should remain

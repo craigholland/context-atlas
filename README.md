@@ -25,6 +25,20 @@ product surface truthful, preserving packet-and-trace-centered evidence,
 strengthening configuration and boundary discipline, and widening scenario and
 integration coverage without forking the shared engine path.
 
+That hardening work has now settled a few important outward-facing truths:
+
+- repeated lexical retrieval reuses shared index state instead of rebuilding the
+  full TF-IDF picture on every query
+- ranking and memory share one bounded duplicate-handling baseline for
+  Atlas-owned text rather than relying on exact full-text equality or
+  prefix-only shortcuts
+- starter token estimation is shape-aware by default instead of assuming one
+  global flat ratio for all content
+- packet and trace inspection now prefer truthful budget and compression
+  vocabulary such as `fixed_reserved_tokens`, `unreserved_tokens`,
+  `unallocated_tokens`, `compression_strategy`, and optional
+  `configured_compression_strategy`
+
 The in-repo release-history index now lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
 shipped release summary is
@@ -269,8 +283,8 @@ The current recorded recommendation in that assessment is `MVP Ready`: Atlas
 now looks defensible as a reusable pipeline component with reproducible packet,
 trace, authority, and budget evidence across the current workflow set.
 
-Story 7 hardened the proof story with two focused repository scenarios that are
-now part of the standing evidence set:
+The standing hardening proof set now includes two focused repository scenarios
+that are part of the current human-readable evidence story:
 
 - `codex_repository / repo_budget_pressure_tradeoffs`
 - `codex_repository / repo_document_authority_precedence`
@@ -281,6 +295,12 @@ so packet and trace review can show authoritative documents ahead of lower-
 authority planning and review material for the same repository question. Those
 two bundles close the earlier proof caveats that kept the MVP recommendation at
 `Conditionally Ready`.
+
+Other hardening proofs remain intentionally reviewable through the normal test
+surface rather than through a second artifact family. Retrieval reuse and
+duplicate acceptance are meant to stay anchored by the named Story 5 baseline
+tests, while the bundle-backed proof surfaces remain focused on packet/trace-
+visible budget, compression, and document-authority behavior.
 
 The current proof pass is scoped to the three supported MVP workflows:
 
@@ -455,12 +475,17 @@ For MVP users, packet inspection should emphasize:
 - retained memory entries
 - budget state
 - whether compression was applied
+- truthful surfaced budget/compression fields when they are present, especially
+  `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`,
+  `compression_strategy`, and optional `configured_compression_strategy`
 
 Trace inspection should emphasize:
 
 - inclusion, exclusion, transformation, and deferred decisions
 - why a source was rejected or transformed
 - trace metadata that explains ranking, budgeting, compression, and memory behavior
+- the same truthful top-level budget/compression vocabulary used by packet
+  inspection, rather than older ambiguous aliases such as `remaining_tokens`
 
 Those inspection surfaces should live under `context_atlas.rendering` and remain read-only views over `ContextPacket` and `ContextTrace`.
 

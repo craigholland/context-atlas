@@ -98,6 +98,11 @@ export CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024"
 export CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="8"
 ```
 
+`CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the baseline control for
+the starter token-estimation heuristic here too, but the engine now applies it
+through the same shape-aware default story used by the other workflows rather
+than through one flat global ratio.
+
 ## Atlas Boundary For Records
 
 The current technical-builder path is explicit about ownership:
@@ -200,6 +205,15 @@ On a successful run, you should see:
 - `=== Packet Inspection ===`
 - `=== Trace Highlights ===`
 - `=== Trace Inspection ===`
+
+The hardened mixed-source path should now make it easy to point at:
+
+- truthful budget state through `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- truthful compression state through `compression_strategy` and optional
+  `configured_compression_strategy`
+- workflow metadata such as `request_workflow`, `request_docs_root`,
+  `request_record_batch`, and `request_record_origin`
 
 The trace output should also make the workflow itself inspectable. Metadata such as
 `request_workflow`, `request_docs_root`, `request_record_batch`, and
