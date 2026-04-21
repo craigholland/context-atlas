@@ -372,6 +372,7 @@
 - Memory regressions should also make the shared duplicate-assessment match kind visible in duplicate decisions so the policy cannot drift back to a hidden local duplicate shortcut.
 - Cross-policy Story 2 regressions should keep at least one shared-header-distinct-body case visible in both ranking and memory so the bounded boilerplate rule stays aligned across the two policies.
 - Story 2 proof regressions should also compare the current duplicate outcomes against the rejected exact-full-text and historical prefix-equality baselines explicitly, so the hardening gain stays reviewable without re-reading old implementations.
+- Story 5 hardening closeout should keep extending the named `test_story_5_hardening_baseline_*` anchor set instead of creating a second proof-only regression layer for already-settled engine semantics.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.
