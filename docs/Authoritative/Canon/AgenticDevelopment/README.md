@@ -55,6 +55,7 @@ The initial canon surface is centered on:
 
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [RoleArchetypes/README.md](./RoleArchetypes/README.md)
+- [Skills/README.md](./Skills/README.md)
 - [Agent-Authority-Model.md](./Agent-Authority-Model.md)
 - [Delegation-Model.md](./Delegation-Model.md)
 - [Agent-Composition-Model.md](./Agent-Composition-Model.md)
@@ -66,6 +67,7 @@ The initial canon surface is centered on:
 - [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
 - [Composition-Decision-Model.md](./Composition-Decision-Model.md)
 - [Escalation-Model.md](./Escalation-Model.md)
+- [SpecialistArchetypes/README.md](./SpecialistArchetypes/README.md)
 - [Boundary-Model.md](./Boundary-Model.md)
 - [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
 - [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
@@ -92,19 +94,21 @@ For most readers, the intended order is:
 9. [Runtime-Capacity-Model.md](./Runtime-Capacity-Model.md)
 10. [Parallel-Decomposition-Model.md](./Parallel-Decomposition-Model.md)
 11. [Skill-Contract.md](./Skill-Contract.md)
-12. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-13. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
-14. [Escalation-Model.md](./Escalation-Model.md)
-15. [Boundary-Model.md](./Boundary-Model.md)
-16. [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
-17. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-18. [Template-Model.md](./Template-Model.md)
-19. [Templates/README.md](./Templates/README.md)
-20. [Discovery-Model.md](./Discovery-Model.md)
-21. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
-22. [Drift-Model.md](./Drift-Model.md)
-23. [Validation-Model.md](./Validation-Model.md)
-24. [Change-Management-Model.md](./Change-Management-Model.md)
+12. [Skills/README.md](./Skills/README.md)
+13. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+14. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+15. [Escalation-Model.md](./Escalation-Model.md)
+16. [SpecialistArchetypes/README.md](./SpecialistArchetypes/README.md)
+17. [Boundary-Model.md](./Boundary-Model.md)
+18. [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
+19. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+20. [Template-Model.md](./Template-Model.md)
+21. [Templates/README.md](./Templates/README.md)
+22. [Discovery-Model.md](./Discovery-Model.md)
+23. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
+24. [Drift-Model.md](./Drift-Model.md)
+25. [Validation-Model.md](./Validation-Model.md)
+26. [Change-Management-Model.md](./Change-Management-Model.md)
 
 This ordering is intentional:
 
@@ -112,6 +116,11 @@ This ordering is intentional:
 - the glossary defines the vocabulary
 - the role-archetype catalog provides reusable professional role templates that
   downstream bindings may refine
+- the skill contract defines what a portable skill is allowed to mean before
+  any one project chooses a skill roster
+- the skill catalog then provides reusable atomic capabilities that downstream
+  bindings may adopt and attach without redefining those capabilities from
+  scratch
 - the authority model defines the invariant relationship chain built on that
   vocabulary
 - the delegation and composition docs refine how parent agents and specialists
@@ -122,10 +131,13 @@ This ordering is intentional:
 - the runtime-capacity and parallel-decomposition docs define how bounded
   planning capacity should influence safe decomposition before any project or
   environment binding chooses concrete values
-- the skill docs refine what a skill may contain and how skills attach to
+- the later skill-attachment doc then refines how those skills attach to
   parent agents and specialists without becoming role or protocol surrogates
 - the composition-decision and escalation docs define when work should stay
   parent-owned, become a skill addition, or justify a bounded specialist
+- the specialist-archetype catalog then shows how curated delegated actors may
+  be composed from portable skills without redefining specialist patterns
+  project by project
 - the later supplements refine adjacent concerns without replacing those
   foundations
 - the materialization-boundary and platform-materialization docs then define
