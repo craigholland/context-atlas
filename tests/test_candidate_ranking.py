@@ -516,7 +516,9 @@ class CandidateRankingTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_candidate_count"], "0")
 
-    def test_ranking_duplicate_proof_beats_reviewed_prior_baselines(self) -> None:
+    def test_story_5_hardening_baseline_proves_duplicate_acceptance_bar(
+        self,
+    ) -> None:
         with self.subTest("front_matter_variants_beat_exact_full_text_baseline"):
             authoritative_content = (
                 "---\n"
