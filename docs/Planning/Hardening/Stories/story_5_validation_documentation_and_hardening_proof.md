@@ -87,6 +87,9 @@ implementation details.
   `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`
   should be treated as the preferred surfaced contract, not legacy
   `remaining_tokens` labels
+- inherit the Story 4 compression truth model as well: later proof/docs work
+  should treat `strategy_used` as the effective runtime strategy and only rely
+  on `configured_strategy` when fallback behavior needs to be shown explicitly
 - establish regression coverage first
 - build bounded proof surfaces next where they add real review value
 - update guides and examples only after the hardened contracts are stable

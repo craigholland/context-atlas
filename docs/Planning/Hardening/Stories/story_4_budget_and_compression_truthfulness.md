@@ -88,6 +88,9 @@ secondary metadata keys.
   runtime action was truncation
 - keep fallback visibility in the primary artifact surface rather than hiding it
   only in secondary metadata
+- Task 4.3 should make `strategy_used` truthful for the effective runtime
+  strategy and use a separate configured-strategy surface only where fallback
+  needs to remain visible
 
 ### Task 4: Trace, Renderer, And Service Alignment
 

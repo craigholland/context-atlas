@@ -14,6 +14,7 @@ from context_atlas.adapters import (
 )
 from context_atlas.domain.messages import LogMessage
 from context_atlas.domain.models import (
+    CompressionStrategy,
     ContextBudget,
     ContextBudgetSlot,
     ContextBudgetSlotMode,
@@ -21,6 +22,11 @@ from context_atlas.domain.models import (
     ContextSource,
     ContextSourceAuthority,
     ContextSourceClass,
+)
+from context_atlas.domain.policies import (
+    StarterBudgetAllocationPolicy,
+    StarterCandidateRankingPolicy,
+    StarterMemoryRetentionPolicy,
 )
 from context_atlas.infrastructure.assembly import (
     assemble_with_starter_context_service,
@@ -34,6 +40,7 @@ from context_atlas.infrastructure.config import (
     MemorySettings,
 )
 from context_atlas.rendering import render_packet_context
+from context_atlas.services import ContextAssemblyService
 
 
 class ContextAssemblyServiceTests(unittest.TestCase):
@@ -204,6 +211,156 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         )
         self.assertEqual(packet.trace.metadata["compression_present"], "true")
         self.assertEqual(packet.trace.metadata["compression_applied"], "true")
+
+    def test_zero_document_budget_uses_truthful_effective_compression_strategy(
+        self,
+    ) -> None:
+        service = build_starter_context_assembly_service(
+            retriever=self.retriever,
+            settings=self.settings,
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-budget-sink",
+                source=ContextSource(
+                    source_id="memory-budget-sink-source",
+                    content=(
+                        "Retained memory should consume the fixed memory slot before "
+                        "documents are allocated when the budget is extremely small."
+                    ),
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=100.0,
+                importance=1.0,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=16,
+                slots=(
+                    ContextBudgetSlot(
+                        slot_name="memory",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.FIXED,
+                    ),
+                    ContextBudgetSlot(
+                        slot_name="documents",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+        )
+
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            packet.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_compression_strategy"],
+            "truncate",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_configured_compression_strategy"],
+            "extractive",
+        )
+
+    def test_zero_document_budget_normalizes_string_backed_configured_strategy(
+        self,
+    ) -> None:
+        class _StringStrategyCompressionPolicy:
+            strategy = "extractive"
+
+            def compress_candidates(self, *args: object, **kwargs: object) -> None:
+                raise AssertionError(
+                    "zero-document-budget path should not invoke custom compression"
+                )
+
+        service = ContextAssemblyService(
+            retriever=self.retriever,
+            ranking_policy=StarterCandidateRankingPolicy(
+                minimum_score=self.settings.assembly.ranking_minimum_score,
+            ),
+            budget_policy=StarterBudgetAllocationPolicy(),
+            compression_policy=_StringStrategyCompressionPolicy(),
+            memory_policy=StarterMemoryRetentionPolicy(
+                short_term_count=self.settings.memory.short_term_count,
+                decay_rate=self.settings.memory.decay_rate,
+                dedup_threshold=self.settings.memory.dedup_threshold,
+                min_effective_score=self.settings.memory.min_effective_score,
+                query_boost_weight=self.settings.memory.query_boost_weight,
+            ),
+            default_top_k=self.settings.assembly.default_retrieval_top_k,
+            default_total_budget=self.settings.assembly.default_total_budget,
+            default_memory_budget_fraction=(
+                self.settings.assembly.default_memory_budget_fraction
+            ),
+        )
+        memory_entries = (
+            ContextMemoryEntry(
+                entry_id="memory-budget-sink-string-strategy",
+                source=ContextSource(
+                    source_id="memory-budget-sink-string-strategy-source",
+                    content=(
+                        "Retained memory should still consume the fixed memory slot "
+                        "when the configured strategy is only exposed as a string."
+                    ),
+                    source_class=ContextSourceClass.MEMORY,
+                    authority=ContextSourceAuthority.PREFERRED,
+                ),
+                recorded_at_epoch_seconds=100.0,
+                importance=1.0,
+            ),
+        )
+
+        packet = service.assemble(
+            query="authoritative packet assembly",
+            memory_entries=memory_entries,
+            budget=ContextBudget(
+                total_tokens=16,
+                slots=(
+                    ContextBudgetSlot(
+                        slot_name="memory",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.FIXED,
+                    ),
+                    ContextBudgetSlot(
+                        slot_name="documents",
+                        token_limit=16,
+                        mode=ContextBudgetSlotMode.ELASTIC,
+                        priority=10,
+                    ),
+                ),
+            ),
+        )
+
+        assert packet.compression_result is not None
+        self.assertEqual(
+            packet.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            packet.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_compression_strategy"],
+            "truncate",
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_configured_compression_strategy"],
+            "extractive",
+        )
 
     def test_assemble_includes_memory_entries_in_packet_and_rendered_output(
         self,

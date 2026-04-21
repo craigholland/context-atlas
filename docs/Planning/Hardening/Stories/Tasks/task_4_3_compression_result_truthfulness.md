@@ -29,7 +29,7 @@ trace consumers do not have to infer actual behavior from secondary metadata.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -62,6 +62,13 @@ PLANNED
 - ensure the actual runtime strategy is represented correctly when fallback
   occurs
 - update tests that currently rely on the older behavior
+- current delivered Task 4.3 result:
+  - `CompressionResult.strategy_used` now records the effective runtime
+    strategy rather than the configured fallback candidate
+  - `CompressionResult.configured_strategy` is used only when fallback needs to
+    remain visible as part of the primary result surface
+  - the zero-document-budget service path now reports truncation as the
+    effective strategy instead of re-exporting the configured strategy
 
 #### Expected New Files
 - none expected

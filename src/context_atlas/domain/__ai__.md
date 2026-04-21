@@ -181,6 +181,7 @@
     - `CompressionResult`
   - invariants:
     - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
+    - compression results should distinguish effective runtime strategy from configured fallback intent when fallback occurs rather than hiding that distinction only in metadata
 - `models/memory.py`:
   - responsibility: defines canonical retained-memory entry artifacts
   - defines:
@@ -223,7 +224,7 @@
     - `StarterCompressionPolicy`
     - `estimate_tokens`
   - invariants:
-    - fallback behavior should remain explicit in metadata and trace
+    - fallback behavior should remain explicit in the primary result surface and in trace metadata rather than living only in secondary metadata keys
     - compressed text is a transformation artifact, not the canonical packet itself
     - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
 - `policies/memory.py`:

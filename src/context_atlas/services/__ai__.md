@@ -67,6 +67,8 @@
     - mixed-source trace metadata may expose stable family or collector count summaries when that improves workflow inspection, but it should remain derived from canonical source helpers rather than adapter-specific reach-through
     - service metadata should distinguish transformation presence from transformation application when packet/rendering behavior depends on that semantic difference
     - service-facing budget metadata should surface truthful budget vocabulary (`fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`) rather than re-exporting ambiguous legacy `remaining_tokens` labels as the preferred caller contract
+    - service-owned zero-budget compression outcomes should report the effective runtime strategy truthfully instead of re-exporting the configured compression strategy as if it had actually run
+    - service-owned zero-budget compression outcomes should normalize loosely typed configured strategy values defensively before exposing configured-strategy metadata so custom policy implementations do not fail on plain-string strategy fields
     - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - outer low-code or product wrappers should pass that metadata through shared infrastructure seams instead of teaching this service about presets, wrapper modes, or workflow-specific source toggles
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary
