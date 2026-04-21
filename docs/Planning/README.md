@@ -36,6 +36,7 @@ The current post-MVP hardening planning surface begins under [Hardening](./Harde
 
 - [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
 - [Story docs](./Hardening/Stories/)
+- [Task PR plans](./Hardening/Stories/Tasks/)
 
 Those planning artifacts should derive their portable vocabulary and boundary
 rules from [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
