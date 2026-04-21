@@ -28,7 +28,7 @@ surfaces.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -63,6 +63,15 @@ PLANNED
 - avoid changing allocator behavior unnecessarily where only naming or exposed
   contract truth is at issue
 - update regression coverage for elastic-slot interpretation
+- current delivered Task 4.2 result:
+  - `ContextBudget.reserved_tokens` and `ContextBudget.remaining_tokens` remain
+    temporary legacy aliases, but they now warn and no longer define the
+    preferred caller contract
+  - `BudgetAllocationOutcome` now treats `unallocated_tokens` as the truthful
+    primary surface, with `remaining_tokens` retained only as a legacy alias
+  - budget trace and packet-facing service metadata now surface
+    `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`
+    explicitly instead of leaning on ambiguous `remaining_tokens` keys
 
 #### Expected New Files
 - none expected

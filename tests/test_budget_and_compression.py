@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import unittest
+import warnings
 
 from context_atlas.domain.errors import ContextAtlasError, ErrorCode
 from context_atlas.domain.messages import LogMessage
@@ -105,7 +106,12 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
 
         self.assertEqual(outcome.total_allocated_tokens, 1000)
-        self.assertEqual(outcome.remaining_tokens, 0)
+        self.assertEqual(outcome.unallocated_tokens, 0)
+        with warnings.catch_warnings(record=True) as captured:
+            warnings.simplefilter("always", DeprecationWarning)
+            self.assertEqual(outcome.remaining_tokens, 0)
+        self.assertEqual(len(captured), 1)
+        self.assertIn("unallocated_tokens", str(captured[0].message))
         allocation_by_slot = {
             allocation.slot_name: allocation for allocation in outcome.allocations
         }
@@ -113,7 +119,10 @@ class BudgetAndCompressionTests(unittest.TestCase):
         self.assertEqual(allocation_by_slot["memory"].allocated_tokens, 400)
         self.assertEqual(allocation_by_slot["docs"].allocated_tokens, 180)
         self.assertTrue(allocation_by_slot["docs"].was_reduced)
-        self.assertEqual(outcome.trace.metadata["remaining_tokens"], "0")
+        self.assertEqual(outcome.trace.metadata["fixed_reserved_tokens"], "450")
+        self.assertEqual(outcome.trace.metadata["unreserved_tokens"], "550")
+        self.assertEqual(outcome.trace.metadata["unallocated_tokens"], "0")
+        self.assertNotIn("remaining_tokens", outcome.trace.metadata)
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
             outcome.trace.decisions[-1].reason_codes,
@@ -122,6 +131,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
             outcome.model_dump()["allocations"][0]["slot_name"],
             "system",
         )
+        self.assertEqual(outcome.model_dump()["unallocated_tokens"], 0)
 
     def test_budget_allocation_rejects_unknown_slot_requests(self) -> None:
         budget = ContextBudget(
@@ -199,8 +209,24 @@ class BudgetAndCompressionTests(unittest.TestCase):
 
         self.assertTrue(outcome.compression_result.was_applied)
         self.assertEqual(
+            outcome.compression_result.strategy_used,
+            CompressionStrategy.TRUNCATE,
+        )
+        self.assertEqual(
+            outcome.compression_result.configured_strategy,
+            CompressionStrategy.EXTRACTIVE,
+        )
+        self.assertEqual(
             outcome.compression_result.metadata["fallback_strategy"],
             CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["compression_strategy"],
+            CompressionStrategy.TRUNCATE.value,
+        )
+        self.assertEqual(
+            outcome.trace.metadata["configured_compression_strategy"],
+            CompressionStrategy.EXTRACTIVE.value,
         )
         self.assertIn(
             BudgetPressureReasonCode.ELASTIC_SLOT_REDUCED,
@@ -586,7 +612,7 @@ class BudgetAndCompressionTests(unittest.TestCase):
         )
         self.assertEqual(
             packet.metadata["compression_strategy"],
-            CompressionStrategy.EXTRACTIVE.value,
+            packet.compression_result.strategy_used.value,
         )
 
     def test_render_packet_context_uses_selected_candidates_when_compression_was_not_applied(

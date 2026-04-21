@@ -31,7 +31,7 @@ quietly preserving stale field assumptions.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -118,6 +118,19 @@ PLANNED
 - service traces reflect the settled budget and compression truth
 - renderers consume the clarified canonical surfaces correctly
 - Story 5 inherits stable trace and renderer semantics for later proof/docs work
+
+## Current Delivered Result
+
+- service packet and trace metadata now surface truthful top-level compression
+  strategy fields (`compression_strategy` and optional
+  `configured_compression_strategy`) instead of requiring renderer consumers to
+  infer them only from prefixed stage metadata
+- packet inspection rendering now shows `unallocated_tokens` when the service
+  provides it and distinguishes `effective_strategy` from
+  `configured_strategy`
+- trace highlight and inspection rendering now expose the settled budget and
+  compression semantics directly enough that Story 5 can document those
+  surfaces without referring back to stale field assumptions
 
 ## Related Artifacts
 

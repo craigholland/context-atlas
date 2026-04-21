@@ -14,10 +14,17 @@ def render_trace_highlights(trace: ContextTrace) -> str:
         f"- workflow: {metadata.get('request_workflow', 'unknown')}",
         f"- selected_source_classes: {metadata.get('selected_source_classes', 'none')}",
         f"- selected_source_families: {metadata.get('selected_source_families', 'none')}",
+        f"- budget_fixed_reserved_tokens: {metadata.get('budget_fixed_reserved_tokens', 'unknown')}",
+        f"- budget_unreserved_tokens: {metadata.get('budget_unreserved_tokens', 'unknown')}",
+        f"- budget_unallocated_tokens: {metadata.get('budget_unallocated_tokens', 'unknown')}",
         f"- included_count: {len(trace.included_decisions)}",
         f"- transformed_count: {len(trace.transformed_decisions)}",
         f"- compression_applied: {metadata.get('compression_applied', 'false')}",
     ]
+    if compression_strategy := metadata.get("compression_strategy"):
+        lines.append(f"- compression_strategy: {compression_strategy}")
+    if configured_strategy := metadata.get("configured_compression_strategy"):
+        lines.append(f"- configured_compression_strategy: {configured_strategy}")
 
     if repo_root := metadata.get("request_repo_root"):
         lines.append(f"- repo_root: {repo_root}")
@@ -63,6 +70,18 @@ def _render_trace_summary(trace: ContextTrace) -> str:
         f"- transformed_count: {len(trace.transformed_decisions)}",
         f"- deferred_count: {len(trace.deferred_decisions)}",
     ]
+    if budget_total_tokens := trace.metadata.get("budget_total_tokens"):
+        lines.append(f"- budget_total_tokens: {budget_total_tokens}")
+    if fixed_reserved_tokens := trace.metadata.get("budget_fixed_reserved_tokens"):
+        lines.append(f"- budget_fixed_reserved_tokens: {fixed_reserved_tokens}")
+    if unreserved_tokens := trace.metadata.get("budget_unreserved_tokens"):
+        lines.append(f"- budget_unreserved_tokens: {unreserved_tokens}")
+    if unallocated_tokens := trace.metadata.get("budget_unallocated_tokens"):
+        lines.append(f"- budget_unallocated_tokens: {unallocated_tokens}")
+    if compression_strategy := trace.metadata.get("compression_strategy"):
+        lines.append(f"- compression_strategy: {compression_strategy}")
+    if configured_strategy := trace.metadata.get("configured_compression_strategy"):
+        lines.append(f"- configured_compression_strategy: {configured_strategy}")
     return "\n".join(lines)
 
 

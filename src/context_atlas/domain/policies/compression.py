@@ -118,6 +118,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
             result = CompressionResult(
                 text="",
                 strategy_used=self.strategy,
+                configured_strategy=None,
                 original_chars=0,
                 compressed_chars=0,
                 estimated_tokens_saved=0,
@@ -213,6 +214,7 @@ class StarterCompressionPolicy(CanonicalDomainModel):
         if budget_trimmed and fallback_used is None:
             fallback_used = CompressionStrategy.TRUNCATE
 
+        effective_strategy = self.strategy if fallback_used is None else fallback_used
         compressed_chars = len(compressed_text)
         estimated_tokens_saved = max(
             0,
@@ -230,7 +232,10 @@ class StarterCompressionPolicy(CanonicalDomainModel):
 
         result = CompressionResult(
             text=compressed_text,
-            strategy_used=self.strategy,
+            strategy_used=effective_strategy,
+            configured_strategy=(
+                None if effective_strategy is self.strategy else self.strategy
+            ),
             original_chars=original_chars,
             compressed_chars=compressed_chars,
             estimated_tokens_saved=estimated_tokens_saved,
@@ -266,7 +271,12 @@ class StarterCompressionPolicy(CanonicalDomainModel):
             trace_id=trace_id,
             decisions=tuple(decisions),
             metadata={
-                "compression_strategy": self.strategy.value,
+                "compression_strategy": effective_strategy.value,
+                **(
+                    {}
+                    if effective_strategy is self.strategy
+                    else {"configured_compression_strategy": self.strategy.value}
+                ),
                 "source_count": str(len(source_ids)),
                 "max_tokens": str(max_tokens),
                 "estimated_tokens_saved": str(estimated_tokens_saved),

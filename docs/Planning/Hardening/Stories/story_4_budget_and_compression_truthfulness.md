@@ -68,6 +68,15 @@ secondary metadata keys.
   allocations, and which represent post-allocation remainder
 - resolve the current elastic-slot tension without narrating around misleading
   property names
+- current delivered Task 4.1 result:
+  - `ContextBudget` now distinguishes fixed-slot reservation
+    (`fixed_reserved_tokens`) from pre-allocation unreserved capacity
+    (`unreserved_tokens`)
+  - `BudgetAllocationOutcome` now exposes true post-allocation remainder as
+    `unallocated_tokens`
+  - compatibility aliases remain temporarily in place for
+    `reserved_tokens` and `remaining_tokens` so Task 4.2 can finish the
+    caller-facing contract cleanup without breaking downstream Story work
 
 ### Task 2: Elastic Slot Behavior And Caller Contracts
 
@@ -77,6 +86,9 @@ secondary metadata keys.
   correct
 - change names, properties, or trace semantics where contract truth requires
   it rather than leaving the ambiguity in place
+- Task 4.2 should treat `ContextBudget.reserved_tokens`,
+  `ContextBudget.remaining_tokens`, and outward `remaining_tokens` metadata keys
+  as legacy compatibility surfaces rather than the preferred caller contract
 
 ### Task 3: Compression Result Truthfulness
 
@@ -86,6 +98,9 @@ secondary metadata keys.
   runtime action was truncation
 - keep fallback visibility in the primary artifact surface rather than hiding it
   only in secondary metadata
+- Task 4.3 should make `strategy_used` truthful for the effective runtime
+  strategy and use a separate configured-strategy surface only where fallback
+  needs to remain visible
 
 ### Task 4: Trace, Renderer, And Service Alignment
 
@@ -98,6 +113,13 @@ secondary metadata keys.
   consuming rather than redefining those meanings
 - settle these semantics cleanly enough that Story 5 can validate and document
   them without targeting a moving contract
+- current delivered Task 4.4 result:
+  - service packet and trace metadata now expose truthful top-level
+    compression strategy fields alongside the settled budget vocabulary
+  - packet and trace inspection renderers now surface
+    `unallocated_tokens`, `effective_strategy`, and optional
+    `configured_strategy` directly from canonical artifacts and service
+    metadata
 
 ## Sequencing
 

@@ -95,6 +95,18 @@ implementation details.
 
 - wait for Story 4 to settle the canonical budget and compression semantics
   before treating this Story as implementation-ready
+- inherit the explicit Story 4 budget vocabulary in later proof/docs work:
+  `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`
+  should be treated as the preferred surfaced contract, not legacy
+  `remaining_tokens` labels
+- inherit the Story 4 compression truth model as well: later proof/docs work
+  should treat `strategy_used` as the effective runtime strategy and only rely
+  on `configured_strategy` when fallback behavior needs to be shown explicitly
+- inherit the settled Story 4 service/renderer vocabulary too: later proof/docs
+  work should treat top-level `compression_strategy` and optional
+  `configured_compression_strategy` as the preferred trace-facing compression
+  metadata, and packet/trace inspection examples should show
+  `unallocated_tokens` where service output provides it
 - inherit the closed acceptance bars from Stories 1 through 4 instead of
   rediscovering them during proof authoring or doc refresh
 - establish regression coverage first

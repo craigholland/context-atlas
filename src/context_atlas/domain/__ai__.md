@@ -155,6 +155,8 @@
     - fixed-slot reservations must not silently exceed total budget
     - slot names must stay unique within a single budget
     - budget artifacts should reject invalid state during Pydantic model initialization rather than through later service checks
+    - canonical budget vocabulary should distinguish fixed-slot reservation, pre-allocation unreserved capacity, and post-allocation unallocated remainder explicitly instead of overloading one generic "remaining" term everywhere
+    - legacy compatibility aliases like `reserved_tokens` and `remaining_tokens` should not regain first-class contract status once truthful names exist
 - `models/assembly.py`:
   - responsibility: defines canonical assembly decisions, traces, and packets
   - defines:
@@ -179,6 +181,7 @@
     - `CompressionResult`
   - invariants:
     - compression artifacts should remain structured and packet-attachable rather than collapsing into raw prompt strings
+    - compression results should distinguish effective runtime strategy from configured fallback intent when fallback occurs rather than hiding that distinction only in metadata
 - `models/memory.py`:
   - responsibility: defines canonical retained-memory entry artifacts
   - defines:
@@ -223,6 +226,8 @@
     - slot-allocation reductions should be visible through structured decisions
     - duplicate or unknown slot requests should fail explicitly
     - `StarterBudgetAllocationPolicy` is intentionally a plain behavior class because it currently carries no structured configuration state of its own
+    - allocation outcomes should expose true post-allocation remainder explicitly enough that later caller-facing surfaces do not confuse it with pre-allocation elastic headroom
+    - trace metadata emitted from allocation outcomes should prefer `unallocated_tokens` over ambiguous `remaining_tokens` labels once the truthful field is available
 - `policies/compression.py`:
   - responsibility: compresses candidate content into structured compression results
   - defines:
@@ -231,7 +236,7 @@
     - `StarterCompressionPolicy`
     - `estimate_tokens`
   - invariants:
-    - fallback behavior should remain explicit in metadata and trace
+    - fallback behavior should remain explicit in the primary result surface and in trace metadata rather than living only in secondary metadata keys
     - compressed text is a transformation artifact, not the canonical packet itself
     - candidates that are below the starter compression chunk threshold must not be silently dropped from packet rendering when they still fit the active budget
     - starter token estimation should remain provider-agnostic and bounded to content-shape distinctions such as prose baseline, structured code/markup tightening, and non-Latin-heavy tightening rather than hidden tokenizer tables
