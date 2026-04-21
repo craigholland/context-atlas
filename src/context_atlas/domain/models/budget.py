@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+import warnings
 
 from pydantic import Field
 
@@ -108,6 +109,12 @@ class ContextBudget(CanonicalDomainModel):
     def reserved_tokens(self) -> int:
         """Compatibility alias for fixed-slot reserved tokens."""
 
+        warnings.warn(
+            "ContextBudget.reserved_tokens is a legacy alias for "
+            "ContextBudget.fixed_reserved_tokens.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return self.fixed_reserved_tokens
 
     @property
@@ -120,6 +127,13 @@ class ContextBudget(CanonicalDomainModel):
     def remaining_tokens(self) -> int:
         """Compatibility alias for pre-allocation unreserved tokens."""
 
+        warnings.warn(
+            "ContextBudget.remaining_tokens is a legacy alias for "
+            "ContextBudget.unreserved_tokens and does not represent "
+            "post-allocation remainder.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return self.unreserved_tokens
 
 

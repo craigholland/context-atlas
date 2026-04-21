@@ -76,6 +76,9 @@ secondary metadata keys.
   correct
 - change names, properties, or trace semantics where contract truth requires
   it rather than leaving the ambiguity in place
+- Task 4.2 should treat `ContextBudget.reserved_tokens`,
+  `ContextBudget.remaining_tokens`, and outward `remaining_tokens` metadata keys
+  as legacy compatibility surfaces rather than the preferred caller contract
 
 ### Task 3: Compression Result Truthfulness
 

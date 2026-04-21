@@ -90,6 +90,8 @@ class PacketRenderingTests(unittest.TestCase):
         self.assertIn("Packet", rendered)
         self.assertIn("- packet_id: packet-inspect-1", rendered)
         self.assertIn("- total_tokens: 1200", rendered)
+        self.assertIn("- fixed_reserved_tokens: 300", rendered)
+        self.assertIn("- unreserved_tokens: 900", rendered)
         self.assertIn("Selected Sources", rendered)
         self.assertIn("charter: title=Charter", rendered)
         self.assertIn("Retained Memory", rendered)

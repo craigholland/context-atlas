@@ -39,8 +39,8 @@ def _render_budget_section(packet: ContextPacket) -> str:
     lines = [
         "Budget",
         f"- total_tokens: {packet.budget.total_tokens}",
-        f"- reserved_tokens: {packet.budget.reserved_tokens}",
-        f"- remaining_tokens: {packet.budget.remaining_tokens}",
+        f"- fixed_reserved_tokens: {packet.budget.fixed_reserved_tokens}",
+        f"- unreserved_tokens: {packet.budget.unreserved_tokens}",
     ]
     if packet.budget.slots:
         lines.append("- slots:")

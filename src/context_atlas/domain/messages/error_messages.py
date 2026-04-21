@@ -101,7 +101,7 @@ class ErrorMessage:
     DUPLICATE_BUDGET_REQUESTS_NOT_ALLOWED = (
         "duplicate budget requests for the same slot are not allowed"
     )
-    REMAINING_TOKENS_MUST_BE_NON_NEGATIVE = "remaining_tokens must be >= 0"
+    UNALLOCATED_TOKENS_MUST_BE_NON_NEGATIVE = "unallocated_tokens must be >= 0"
     REQUESTED_TOKENS_MUST_BE_NON_NEGATIVE = "requested_tokens for '%s' must be >= 0"
     UNKNOWN_BUDGET_SLOTS = "unknown budget slots: %s"
     WAS_REDUCED_MUST_MATCH_ALLOCATION_DELTA = (
