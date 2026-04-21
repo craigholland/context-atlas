@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, task, pr-plan, deduplication, scope, proof]
 related:
@@ -28,7 +28,7 @@ semantic-similarity ambitions.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
