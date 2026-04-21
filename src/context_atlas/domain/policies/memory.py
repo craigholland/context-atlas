@@ -346,7 +346,12 @@ def _find_duplicate_entry(
 
 
 def _is_duplicate_content(content_a: str, content_b: str, *, threshold: float) -> bool:
-    """Apply the shared lexical duplicate baseline, not semantic similarity."""
+    """Apply the shared lexical duplicate baseline, not semantic similarity.
+
+    The shared helper now also strips bounded front matter and discounts a
+    bounded shared leading line prefix before fuzzy comparison so repeated
+    Atlas-style headers do not dominate the duplicate result.
+    """
 
     return assess_duplicate_content(
         content_a,
