@@ -126,6 +126,11 @@ implementation details.
   explicit review anchor for Stories 1 through 4 rather than inventing a
   parallel hardening-only harness
 - build bounded proof surfaces next where they add real review value
+- keep the final proof inventory explicit:
+  - bundle-backed human-readable proof: budget/compression tradeoff review and
+    document-authority contrast review through `examples/mvp_proof/`
+  - test-backed proof only: retrieval index reuse and duplicate acceptance-bar
+    behavior through the named `test_story_5_hardening_baseline_*` regressions
 - update guides and examples only after the hardened contracts are stable
 - close out the Epic last with integrated evidence and docs
 
@@ -146,6 +151,9 @@ implementation details.
   behavior is covered by reviewable regression tests
 - any new proof or inspection artifacts derive from the shared packet and trace
   story rather than from bespoke demo logic
+- the final proof story distinguishes clearly between:
+  - bundle-backed human-readable proof surfaces
+  - test-backed proof that does not need a second artifact family
 - product-facing docs and examples describe the hardened semantics truthfully
 - the hardening Epic can close without leaving the original review findings as
   standing caveats about current runtime behavior
