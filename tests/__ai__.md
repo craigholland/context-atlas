@@ -172,7 +172,7 @@
     - tests should prove an outward-bound custom token estimator can tighten compression behavior without introducing provider-specific logic into domain policy tests
     - tests should prove custom token-estimator labels are rejected when no estimator is actually bound and auto-labeled truthfully when a direct policy caller binds a custom estimator without naming it
     - tests should prove the default starter path still reports `starter_heuristic` truthfully through compression metadata rather than forcing reviewers to infer the active estimator from config alone
-    - Story 5 treats the `test_story_5_hardening_baseline_*` regressions in this file as the primary anchor for truthful budget labels, fallback strategy truth, non-monotonic prefix fitting, and default estimator labeling
+    - Story 5 treats `test_story_5_hardening_baseline_keeps_budget_allocation_truthful`, `test_story_5_hardening_baseline_keeps_compression_fallback_truthful`, `test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation`, and `test_story_5_hardening_baseline_labels_default_estimator_truthfully` as the primary budget/compression anchors
 - `test_packet_rendering.py`:
   - responsibility: verifies packet inspection rendering stays derived and product-facing
   - defines:
@@ -239,7 +239,7 @@
     - tests should prove service-owned zero-document-budget compression outcomes still behave correctly when custom compression policies expose configured strategy as a plain string rather than an enum
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
-    - Story 5 treats the `test_story_5_hardening_baseline_*` service regressions in this file as the canonical packet/trace contract anchor for truthful top-level budget, compression, and estimator metadata
+    - Story 5 treats `test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`, `test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`, and `test_story_5_hardening_baseline_keeps_canonical_service_budget_summary` as the canonical service-side hardening anchors for truthful top-level budget, compression, and estimator metadata
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:

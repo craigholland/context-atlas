@@ -24,7 +24,7 @@ from context_atlas.rendering import render_packet_context, render_packet_inspect
 class PacketRenderingTests(unittest.TestCase):
     """Verify the first-class packet inspection surface."""
 
-    def test_packet_inspection_highlights_packet_budget_and_compression_state(
+    def test_story_5_hardening_baseline_highlights_packet_budget_and_compression_state(
         self,
     ) -> None:
         packet = ContextPacket(

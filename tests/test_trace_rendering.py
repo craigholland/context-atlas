@@ -28,7 +28,9 @@ from context_atlas.rendering import (
 class TraceRenderingTests(unittest.TestCase):
     """Verify the first-class trace inspection surface."""
 
-    def test_trace_inspection_groups_decisions_and_metadata(self) -> None:
+    def test_story_5_hardening_baseline_groups_truthful_trace_metadata(
+        self,
+    ) -> None:
         trace = ContextTrace(
             trace_id="trace-render-1",
             decisions=(
