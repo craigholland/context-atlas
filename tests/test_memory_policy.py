@@ -289,6 +289,61 @@ class MemoryPolicyTests(unittest.TestCase):
         )
         self.assertEqual(outcome.trace.metadata["deduplicated_entry_count"], "0")
 
+    def test_memory_policy_keeps_shared_header_entries_with_distinct_bodies(
+        self,
+    ) -> None:
+        shared_prefix = (
+            "---\n"
+            "doc_class: guide\n"
+            "owners: [core]\n"
+            "---\n"
+            "# Context Atlas Hardening\n"
+            "Audience: Internal\n"
+            "Workflow: Hardening\n"
+        )
+        entries = (
+            _memory_entry(
+                "older-shared-header",
+                shared_prefix
+                + (
+                    "\n"
+                    "Duplicate normalization should strip front matter before "
+                    "comparison.\n"
+                    "This note focuses on repeated header handling in governed docs."
+                ),
+                recorded_at=self.now - 550,
+                importance=1.5,
+            ),
+            _memory_entry(
+                "recent-shared-header",
+                shared_prefix
+                + (
+                    "\n"
+                    "Token estimation should stay provider-agnostic and query aware.\n"
+                    "This note focuses on tokenizer seams rather than duplicate "
+                    "handling."
+                ),
+                recorded_at=self.now - 18,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2e",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-shared-header", "older-shared-header"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_entry_count"], "0")
+
     def test_query_relevance_boost_can_rescue_a_decayed_memory_entry(self) -> None:
         entries = (
             _memory_entry(
