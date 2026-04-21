@@ -25,6 +25,9 @@ supersedes: []
 Improve the starter token-estimation heuristic in a bounded, provider-agnostic
 way when Story 3 leads with heuristic hardening, so Atlas stops treating prose,
 code, and markup-heavy content as one global ratio.
+If Task 3.1 instead records a tokenizer-seam-first kickoff decision, this Task
+should become explicitly subordinate follow-on work rather than proceeding as an
+equally active parallel path.
 
 ## Task Status
 
@@ -34,6 +37,7 @@ PLANNED
 
 - [Story 3 - Token Estimation And Tokenizer Seam](../story_3_token_estimation_and_tokenizer_seam.md)
 - Story 3 kickoff decision from Task 3.1
+- recorded Task 3.1 decision showing this heuristic path is active or deferred
 - current compression and estimation behavior under
   `src/context_atlas/domain/policies/compression.py`
 
@@ -44,6 +48,8 @@ PLANNED
 - define the bounded improved starter heuristic for content-shape differences
 - keep the heuristic deterministic and provider-agnostic
 - make it explicit which content distinctions are intentionally in scope
+- proceed only when the Task 3.1 decision keeps heuristic hardening on the
+  active path
 
 #### Expected New Files
 - none expected
@@ -61,6 +67,8 @@ PLANNED
 - preserve the shared packet and compression path while changing the estimation
   behavior underneath it
 - avoid smuggling provider-specific token knowledge inward
+- if Task 3.1 chose tokenizer-seam-first, treat this PR as deferred follow-on
+  work rather than required immediate scope
 
 #### Expected New Files
 - none expected
@@ -79,6 +87,8 @@ PLANNED
   supported content shapes
 - keep the Story explicit about what remains for the tokenizer seam to solve
   later
+- if the heuristic path is deferred, use this slice only to keep Story wording
+  honest about that deferral
 
 #### Expected New Files
 - none expected
@@ -95,6 +105,8 @@ PLANNED
 - define the improved heuristic first
 - integrate it second
 - reinforce validation and Story boundaries last
+- do not treat this Task as active until Task 3.1 records the heuristic-first
+  path in the Story doc
 
 ## Risks And Unknowns
 

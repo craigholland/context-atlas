@@ -80,13 +80,17 @@ PLANNED
   completion as appropriate
 - leave the Hardening planning stack in a state that supports the next Epic or
   follow-up slice without rediscovering these decisions
+- only update the specific Task docs whose status or handoff wording actually
+  changes during closeout; do not treat the full Task directory as a mandatory
+  file-touch list
 
 #### Expected New Files
 - none expected
 
 #### Expected Existing Files Updated
 - `docs/Planning/Hardening/Stories/story_5_validation_documentation_and_hardening_proof.md`
-- `docs/Planning/Hardening/Stories/Tasks/*.md`
+- task docs under `docs/Planning/Hardening/Stories/Tasks/` only where status or
+  final handoff wording actually changes during closeout
 
 #### Update AI files
 - `.`
@@ -115,4 +119,3 @@ PLANNED
 
 - [Story 5 - Validation, Documentation, And Hardening Proof](../story_5_validation_documentation_and_hardening_proof.md)
 - [Context Assembly Hardening Product Definition](../../context_assembly_hardening_product_definition.md)
-

@@ -63,6 +63,9 @@ PLANNED
 
 - align runnable examples and example READMEs with the hardened semantics
 - keep example narration consistent with the actual shared engine behavior
+- the listed example README paths are current tracked repo surfaces; if later
+  restructuring removes one before execution, create the replacement surface or
+  adjust the plan explicitly rather than silently dropping the example layer
 
 #### Expected New Files
 - none expected
@@ -103,6 +106,8 @@ PLANNED
 - Docs can overclaim improvements if they are updated before the final
   implementation semantics are stable.
 - Example READMEs can drift from guides if they are updated independently.
+- Example folder restructuring between planning and execution can invalidate a
+  named README path unless the Task is refreshed deliberately.
 
 ## Exit Criteria
 

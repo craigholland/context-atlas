@@ -25,6 +25,9 @@ supersedes: []
 Define and introduce a provider-agnostic tokenizer contract seam so future
 integrations can bind real tokenizers outward without dragging provider logic
 into the domain layer.
+If Task 3.1 instead records a heuristic-first kickoff decision, this Task
+should stay complementary and bounded rather than expanding into a second
+parallel primary track.
 
 ## Task Status
 
@@ -34,6 +37,8 @@ PLANNED
 
 - [Story 3 - Token Estimation And Tokenizer Seam](../story_3_token_estimation_and_tokenizer_seam.md)
 - Story 3 kickoff decision from Task 3.1
+- recorded Task 3.1 decision showing whether the seam is the lead path or the
+  bounded follow-on path
 - current domain and infrastructure estimation surfaces
 
 ## Proposed Work
@@ -45,6 +50,8 @@ PLANNED
   layers
 - make the seam explicit enough to be reviewable before any real tokenizer is
   bound to it
+- size the seam according to the Task 3.1 decision instead of assuming it is
+  always the lead implementation path
 
 #### Expected New Files
 - none required; if a dedicated contract helper is extracted, it should remain
@@ -64,6 +71,8 @@ PLANNED
 - keep the starter path working even if no external tokenizer is supplied
 - ensure the seam does not imply broader provider integration than the code
   actually supports
+- if heuristic-first was chosen, keep this binding slice deliberately narrow and
+  complementary to that decision
 
 #### Expected New Files
 - none expected
@@ -100,6 +109,8 @@ PLANNED
 - define seam placement and contract shape first
 - wire the outward binding integration second
 - reinforce boundaries and non-goals last
+- let the Task 3.1 kickoff decision determine whether this Task is the lead
+  Story 3 path or the bounded complementary follow-on path
 
 ## Risks And Unknowns
 

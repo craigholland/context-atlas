@@ -48,6 +48,10 @@ PLANNED
 
 #### Expected New Files
 - none expected
+- If Task 1.1 extracts the registry or index ownership surface out of
+  `lexical.py`, reuse work here may instead continue by updating that new file
+  rather than treating "none expected" as a hard prohibition on prior
+  extraction.
 
 #### Expected Existing Files Updated
 - `src/context_atlas/adapters/retrieval/lexical.py`
@@ -98,6 +102,8 @@ PLANNED
 - implement corpus-wide reuse first
 - implement per-document reuse second
 - reinforce with targeted validation third
+- keep the file-touch expectation conditional on the Task 1.1 ownership outcome
+  instead of assuming `lexical.py` remains the only implementation home
 
 ## Risks And Unknowns
 
