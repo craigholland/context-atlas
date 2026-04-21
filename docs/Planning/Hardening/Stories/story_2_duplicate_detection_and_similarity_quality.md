@@ -51,10 +51,17 @@ deterministic, and Atlas-owned.
 - treat the current intended home for that shared surface as `domain/policies/`
   or a directly adjacent inward helper module so contributors do not have to
   infer package placement during Task decomposition
+- treat `domain/policies/deduplication.py` as the baseline inward home once
+  Task 2.1 lands, so later tasks extend one shared helper surface instead of
+  re-inventing duplicate logic inside ranking or memory separately
 - keep the shared semantics inward and reusable rather than letting workflow
   logic fork silently between ranking and memory
 - make the supported baseline explicitly lexical or structural rather than
   leaving room for hidden semantic-similarity assumptions
+- Task 2.1 should close with one explicit baseline only: normalized exact-key
+  matching, normalized containment, and token overlap; later tasks may refine
+  normalization and integration, but they should not silently introduce new
+  comparison families
 
 ### Task 2: Boilerplate And Front-Matter Handling
 
@@ -89,6 +96,8 @@ deterministic, and Atlas-owned.
 - integrate ranking and memory after the bounded semantic surface is explicit
 - lock the Story with regressions that prove the new baseline is better than
   both prior heuristics
+- keep Task 2.1 focused on defining and proving the shared lexical baseline
+  before boilerplate handling or full ranking integration begins
 
 ## Risks And Unknowns
 

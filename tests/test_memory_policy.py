@@ -163,6 +163,132 @@ class MemoryPolicyTests(unittest.TestCase):
             tuple(reason.value for reason in duplicate_decision.reason_codes),
         )
 
+    def test_memory_policy_deduplicates_reordered_token_variants(self) -> None:
+        entries = (
+            _memory_entry(
+                "older-token-overlap",
+                (
+                    "Atlas retains durable planning context in memory when the "
+                    "policy selects long term state."
+                ),
+                recorded_at=self.now - 700,
+                importance=2.0,
+            ),
+            _memory_entry(
+                "recent-token-overlap",
+                (
+                    "Memory policy selects long term state when Atlas retains "
+                    "durable planning context."
+                ),
+                recorded_at=self.now - 15,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2b",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-token-overlap",),
+        )
+        duplicate_decision = next(
+            decision
+            for decision in outcome.trace.decisions
+            if decision.source_id == "older-token-overlap"
+        )
+        self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
+        self.assertIn(
+            "duplicate",
+            tuple(reason.value for reason in duplicate_decision.reason_codes),
+        )
+
+    def test_memory_policy_deduplicates_unicode_token_variants(self) -> None:
+        entries = (
+            _memory_entry(
+                "older-unicode-overlap",
+                (
+                    "Атлас сохраняет долговременный контекст планирования, когда "
+                    "политика выбирает состояние памяти."
+                ),
+                recorded_at=self.now - 650,
+                importance=1.9,
+            ),
+            _memory_entry(
+                "recent-unicode-overlap",
+                (
+                    "Политика выбирает состояние памяти, когда Атлас сохраняет "
+                    "долговременный контекст планирования."
+                ),
+                recorded_at=self.now - 12,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2d",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-unicode-overlap",),
+        )
+        duplicate_decision = next(
+            decision
+            for decision in outcome.trace.decisions
+            if decision.source_id == "older-unicode-overlap"
+        )
+        self.assertEqual(duplicate_decision.action, ContextDecisionAction.EXCLUDED)
+        self.assertIn(
+            "duplicate",
+            tuple(reason.value for reason in duplicate_decision.reason_codes),
+        )
+
+    def test_memory_policy_keeps_lexically_distinct_related_entries(self) -> None:
+        entries = (
+            _memory_entry(
+                "older-related",
+                ("Atlas governs packet assembly under strict traceable budget limits."),
+                recorded_at=self.now - 600,
+                importance=1.6,
+            ),
+            _memory_entry(
+                "recent-related",
+                "Budget-aware packet construction stays visible to users.",
+                recorded_at=self.now - 20,
+                importance=0.8,
+            ),
+        )
+
+        outcome = StarterMemoryRetentionPolicy(
+            short_term_count=1,
+            decay_rate=0.0001,
+            dedup_threshold=0.72,
+        ).select_memory(
+            entries,
+            trace_id="trace-memory-2c",
+            now_epoch_seconds=self.now,
+        )
+
+        self.assertEqual(
+            tuple(entry.entry_id for entry in outcome.selected_entries),
+            ("recent-related", "older-related"),
+        )
+        self.assertEqual(outcome.trace.metadata["deduplicated_entry_count"], "0")
+
     def test_query_relevance_boost_can_rescue_a_decayed_memory_entry(self) -> None:
         entries = (
             _memory_entry(
