@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-20
 last_reviewed: 2026-04-20
 owners: [core]
@@ -29,7 +29,7 @@ instead of drifting apart.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -113,6 +113,9 @@ PLANNED
 - package placement is explicit
 - the bounded lexical or structural baseline is documented tightly enough for
   later Tasks to implement against it
+- the baseline is explicitly limited to normalized exact-key matching,
+  normalized containment, and token overlap so later Tasks inherit one
+  reviewable starting point instead of re-deciding comparison families
 
 ## Related Artifacts
 

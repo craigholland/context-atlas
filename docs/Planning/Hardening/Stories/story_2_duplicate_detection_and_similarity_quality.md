@@ -58,6 +58,10 @@ deterministic, and Atlas-owned.
   logic fork silently between ranking and memory
 - make the supported baseline explicitly lexical or structural rather than
   leaving room for hidden semantic-similarity assumptions
+- Task 2.1 should close with one explicit baseline only: normalized exact-key
+  matching, normalized containment, and token overlap; later tasks may refine
+  normalization and integration, but they should not silently introduce new
+  comparison families
 
 ### Task 2: Boilerplate And Front-Matter Handling
 
@@ -92,6 +96,8 @@ deterministic, and Atlas-owned.
 - integrate ranking and memory after the bounded semantic surface is explicit
 - lock the Story with regressions that prove the new baseline is better than
   both prior heuristics
+- keep Task 2.1 focused on defining and proving the shared lexical baseline
+  before boilerplate handling or full ranking integration begins
 
 ## Risks And Unknowns
 
