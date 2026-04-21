@@ -77,6 +77,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   recomputation for every call
 - keep the lexical retriever consuming canonical sources from the same shared
   registry model rather than bypassing governed source loading
+- make the warm-cache path explicitly re-enter the retrieval flow through one
+  fresh registry source listing per call rather than acting like a second
+  hidden source-loading mode
 - preserve deterministic ranking semantics for the same query/corpus input
 
 ### Task 4: Validation And Performance-Facing Proof
