@@ -11,7 +11,7 @@ import re
 from ...domain.errors import ContextAtlasError, ErrorCode
 from ...domain.messages import ErrorMessage, LogMessage
 from ...domain.models import ContextCandidate, ContextSource
-from .indexing import build_lexical_index_snapshot
+from .indexing import LexicalIndexSnapshot, build_lexical_index_snapshot
 from .registry import InMemorySourceRegistry
 
 logger = logging.getLogger(__name__)
@@ -111,6 +111,7 @@ class LexicalRetriever:
     ) -> None:
         self._registry = registry
         self.mode = mode
+        self._tfidf_index_snapshot: LexicalIndexSnapshot | None = None
 
     def retrieve(self, query: str, *, top_k: int = 5) -> tuple[ContextCandidate, ...]:
         """Return ranked candidates for a query using the configured lexical mode."""
@@ -170,11 +171,7 @@ class LexicalRetriever:
 
         query_tf = _term_frequency(query_tokens)
         sources = self._registry.list_sources()
-        index_snapshot = build_lexical_index_snapshot(
-            sources,
-            registry_revision=self._registry.revision,
-            tokenize=_tokenize,
-        )
+        index_snapshot = self._get_tfidf_index_snapshot(sources)
         document_frequency = Counter(index_snapshot.document_frequency)
         query_vector = {
             term: term_frequency
@@ -207,6 +204,23 @@ class LexicalRetriever:
             scored.append((score, source))
 
         return _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k)
+
+    def _get_tfidf_index_snapshot(
+        self,
+        sources: tuple[ContextSource, ...],
+    ) -> LexicalIndexSnapshot:
+        """Return a registry-revision-aligned index snapshot for TF-IDF work."""
+
+        if (
+            self._tfidf_index_snapshot is None
+            or self._tfidf_index_snapshot.registry_revision != self._registry.revision
+        ):
+            self._tfidf_index_snapshot = build_lexical_index_snapshot(
+                sources,
+                registry_revision=self._registry.revision,
+                tokenize=_tokenize,
+            )
+        return self._tfidf_index_snapshot
 
 
 def _emit_log_message(

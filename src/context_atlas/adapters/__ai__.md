@@ -97,6 +97,7 @@
     - retrieval should return Atlas-native `ContextCandidate` artifacts, not prototype-specific DTOs
     - empty queries should fail soft with no candidates rather than inventing placeholder data
     - lexical retrieval should consume canonical sources through the registry surface rather than owning source registration itself
+    - the retriever may cache one baseline index snapshot, but it should invalidate that cache strictly through the registry revision rather than inventing a second source-tracking mechanism
 - `docs/filesystem.py`:
   - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
   - defines:
@@ -149,6 +150,7 @@
 ## Known Gaps / Future-State Notes
 - This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
 - Lexical retrieval hardening now separates source ownership, index-shape construction, and retrieval behavior, but repeated-query reuse still remains future work until the hardening tasks extend those surfaces.
+- The current retrieval baseline now reuses one registry-revision-aligned index snapshot for TF-IDF work, but per-document TF/vector reuse and deeper steady-state optimization still remain future hardening work.
 - Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
 - If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 
