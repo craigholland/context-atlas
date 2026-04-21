@@ -71,11 +71,10 @@ def _render_candidate_text(
     include_section_headers: bool,
     header: str,
 ) -> str:
-    """Render candidate-facing content from packet state or its transform artifact."""
+    """Render candidate-facing content from packet state or its applied transform."""
 
-    if packet.compression_was_applied:
-        compression_result = packet.compression_result
-        assert compression_result is not None
+    compression_result = packet.compression_result
+    if compression_result is not None and compression_result.was_applied:
         rendered = compression_result.text.strip()
         return _with_header(
             rendered,

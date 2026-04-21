@@ -69,6 +69,7 @@
     - service-facing budget metadata should surface truthful budget vocabulary (`fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`) rather than re-exporting ambiguous legacy `remaining_tokens` labels as the preferred caller contract
     - service-owned zero-budget compression outcomes should report the effective runtime strategy truthfully instead of re-exporting the configured compression strategy as if it had actually run
     - service-owned zero-budget compression outcomes should normalize loosely typed configured strategy values defensively before exposing configured-strategy metadata so custom policy implementations do not fail on plain-string strategy fields
+    - service packet and trace metadata should surface top-level `compression_strategy` plus optional `configured_compression_strategy` when compression is present, so renderers and docs do not have to infer effective strategy truth from prefixed stage metadata alone
     - caller-supplied request metadata should stay opaque outer-workflow context; services may preserve it for inspection but should not interpret it as workflow-specific engine behavior
     - outer low-code or product wrappers should pass that metadata through shared infrastructure seams instead of teaching this service about presets, wrapper modes, or workflow-specific source toggles
     - service defaults should remain thin until real downstream usage proves broader knobs are necessary

@@ -113,8 +113,11 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertEqual(packet.metadata["budget_fixed_reserved_tokens"], "32")
         self.assertEqual(packet.metadata["budget_unreserved_tokens"], "96")
         self.assertEqual(packet.metadata["budget_unallocated_tokens"], "128")
+        self.assertEqual(packet.metadata["compression_present"], "false")
+        self.assertEqual(packet.metadata["compression_applied"], "false")
         self.assertEqual(packet.trace.metadata["service"], "context_assembly_service")
         self.assertEqual(packet.trace.metadata["retrieved_candidate_count"], "0")
+        self.assertEqual(packet.trace.metadata["budget_total_tokens"], "128")
         self.assertEqual(packet.trace.metadata["budget_fixed_reserved_tokens"], "32")
         self.assertEqual(packet.trace.metadata["budget_unreserved_tokens"], "96")
         self.assertEqual(packet.trace.metadata["budget_unallocated_tokens"], "128")
@@ -211,6 +214,16 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         )
         self.assertEqual(packet.trace.metadata["compression_present"], "true")
         self.assertEqual(packet.trace.metadata["compression_applied"], "true")
+        self.assertEqual(packet.metadata["compression_present"], "true")
+        self.assertEqual(packet.metadata["compression_applied"], "true")
+        self.assertEqual(
+            packet.metadata["compression_strategy"],
+            packet.compression_result.strategy_used.value,
+        )
+        self.assertEqual(
+            packet.trace.metadata["compression_strategy"],
+            packet.compression_result.strategy_used.value,
+        )
 
     def test_zero_document_budget_uses_truthful_effective_compression_strategy(
         self,
@@ -272,6 +285,18 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         )
         self.assertEqual(
             packet.trace.metadata["compression_configured_compression_strategy"],
+            "extractive",
+        )
+        self.assertEqual(packet.metadata["compression_present"], "true")
+        self.assertEqual(packet.metadata["compression_applied"], "true")
+        self.assertEqual(packet.metadata["compression_strategy"], "truncate")
+        self.assertEqual(
+            packet.metadata["configured_compression_strategy"],
+            "extractive",
+        )
+        self.assertEqual(packet.trace.metadata["compression_strategy"], "truncate")
+        self.assertEqual(
+            packet.trace.metadata["configured_compression_strategy"],
             "extractive",
         )
 
@@ -359,6 +384,16 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         )
         self.assertEqual(
             packet.trace.metadata["compression_configured_compression_strategy"],
+            "extractive",
+        )
+        self.assertEqual(packet.metadata["compression_strategy"], "truncate")
+        self.assertEqual(
+            packet.metadata["configured_compression_strategy"],
+            "extractive",
+        )
+        self.assertEqual(packet.trace.metadata["compression_strategy"], "truncate")
+        self.assertEqual(
+            packet.trace.metadata["configured_compression_strategy"],
             "extractive",
         )
 
@@ -568,11 +603,13 @@ class ContextAssemblyServiceTests(unittest.TestCase):
         self.assertIn("ranking_ranking_policy", packet.trace.metadata)
         self.assertIn("memory_memory_policy", packet.trace.metadata)
         self.assertIn("budget_budget_total_tokens", packet.trace.metadata)
+        self.assertEqual(packet.trace.metadata["budget_total_tokens"], "128")
         self.assertIn("budget_fixed_reserved_tokens", packet.trace.metadata)
         self.assertIn("budget_unreserved_tokens", packet.trace.metadata)
         self.assertIn("budget_unallocated_tokens", packet.trace.metadata)
         self.assertNotIn("budget_remaining_tokens", packet.trace.metadata)
         self.assertIn("compression_present", packet.trace.metadata)
+        self.assertIn("compression_strategy", packet.trace.metadata)
         self.assertIn("budget:documents", decision_source_ids)
         self.assertIn("compression", decision_source_ids)
         self.assertIn("memory-drop", decision_source_ids)

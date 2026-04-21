@@ -42,6 +42,8 @@ def _render_budget_section(packet: ContextPacket) -> str:
         f"- fixed_reserved_tokens: {packet.budget.fixed_reserved_tokens}",
         f"- unreserved_tokens: {packet.budget.unreserved_tokens}",
     ]
+    if unallocated_tokens := packet.metadata.get("budget_unallocated_tokens"):
+        lines.append(f"- unallocated_tokens: {unallocated_tokens}")
     if packet.budget.slots:
         lines.append("- slots:")
         for slot in packet.budget.slots:
@@ -91,7 +93,7 @@ def _render_compression_section(packet: ContextPacket) -> str:
     result = packet.compression_result
     lines.extend(
         [
-            f"- strategy: {result.strategy_used.value}",
+            f"- effective_strategy: {result.strategy_used.value}",
             f"- was_applied: {_yes_no(result.was_applied)}",
             f"- original_chars: {result.original_chars}",
             f"- compressed_chars: {result.compressed_chars}",
@@ -99,6 +101,8 @@ def _render_compression_section(packet: ContextPacket) -> str:
             f"- estimated_tokens_saved: {result.estimated_tokens_saved}",
         ]
     )
+    if result.configured_strategy is not None:
+        lines.append(f"- configured_strategy: {result.configured_strategy.value}")
     if result.source_ids:
         lines.append(f"- source_ids: {', '.join(result.source_ids)}")
     else:

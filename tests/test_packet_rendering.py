@@ -76,13 +76,15 @@ class PacketRenderingTests(unittest.TestCase):
             ),
             compression_result=CompressionResult(
                 text="Compressed packet view.",
-                strategy_used=CompressionStrategy.EXTRACTIVE,
+                strategy_used=CompressionStrategy.TRUNCATE,
+                configured_strategy=CompressionStrategy.EXTRACTIVE,
                 original_chars=500,
                 compressed_chars=180,
                 estimated_tokens_saved=80,
                 source_ids=("charter",),
             ),
             trace=ContextTrace(trace_id="trace-inspect-1"),
+            metadata={"budget_unallocated_tokens": "612"},
         )
 
         rendered = render_packet_inspection(packet)
@@ -92,12 +94,14 @@ class PacketRenderingTests(unittest.TestCase):
         self.assertIn("- total_tokens: 1200", rendered)
         self.assertIn("- fixed_reserved_tokens: 300", rendered)
         self.assertIn("- unreserved_tokens: 900", rendered)
+        self.assertIn("- unallocated_tokens: 612", rendered)
         self.assertIn("Selected Sources", rendered)
         self.assertIn("charter: title=Charter", rendered)
         self.assertIn("Retained Memory", rendered)
         self.assertIn("memory-1: source_id=session-note", rendered)
         self.assertIn("Compression", rendered)
-        self.assertIn("- strategy: extractive", rendered)
+        self.assertIn("- effective_strategy: truncate", rendered)
+        self.assertIn("- configured_strategy: extractive", rendered)
         self.assertIn("- compression_applied: yes", rendered)
 
     def test_packet_inspection_is_read_only_over_canonical_packet_state(self) -> None:
