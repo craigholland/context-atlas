@@ -1,11 +1,10 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: b426e06579cd10414a3e3b6a7786ff836f6909ba
-- timestamp_utc: 2026-04-17T18:01:00Z
-- verified_by: local
-- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
-
+- commit: fb63d8a1fb704e7d42749b583fb7f8382a8ac3c2
+- timestamp_utc: 2026-04-21T00:14:07Z
+- verified_by: ci
+- notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: scripts
 - included:
@@ -31,6 +30,7 @@
 - Avoid project-runtime imports from `src/context_atlas` unless a script truly needs them; most scripts here should operate on files, git state, and declared contracts.
 - `preflight.py` is the canonical local gate before push or merge; other scripts should support it rather than compete with it.
 - Small private dataclasses are acceptable here when they are local rule/config carriers for the script itself and not part of the package runtime surface.
+- User-facing script help and failure messages should prefer portable command guidance first and may mention Windows-specific launcher variants as secondary notes when helpful.
 
 ## Allowed Dependencies
 - may depend on:
@@ -71,6 +71,7 @@
   - responsibility: runs local Verification Contract steps from owner files
   - invariants:
     - must prefer PowerShell on Windows so repository contracts stay consistent with local desktop execution
+    - must keep Linux/macOS analogs visible whenever owner-file Verification Contract steps rely on Windows-specific launcher or environment syntax
 - `update_last_verified.py`:
   - responsibility: updates `Last Verified (CI)` metadata after successful verification
   - footguns:
@@ -114,10 +115,12 @@
 steps:
   - name: compile_scripts
     run: |
+      # Linux/macOS analog: python3 -m compileall scripts
       py -3 -m compileall scripts
 
   - name: script_help
     run: |
+      # Linux/macOS analog: replace `py -3` with `python3` and `> $null` with `> /dev/null`
       py -3 scripts/validate_ai_docs.py --help > $null
       py -3 scripts/check_ai_docs.py --help > $null
       py -3 scripts/ai_verify_contracts.py --help > $null
@@ -127,5 +130,6 @@ steps:
 
   - name: validate_owner_files
     run: |
+      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
       py -3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
 ```

@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 from collections import Counter
+from collections.abc import Mapping
 from enum import Enum, StrEnum
 import logging
 import math
 import re
-from typing import Iterable
 
 from ...domain.errors import ContextAtlasError, ErrorCode
 from ...domain.messages import ErrorMessage, LogMessage
 from ...domain.models import ContextCandidate, ContextSource
+from .indexing import LexicalIndexSnapshot, build_lexical_index_snapshot
+from .registry import InMemorySourceRegistry
 
 logger = logging.getLogger(__name__)
 
@@ -100,47 +102,6 @@ class LexicalRetrievalMode(StrEnum):
     TFIDF = "tfidf"
 
 
-class InMemorySourceRegistry:
-    """A small in-memory registry for canonical context sources from any family."""
-
-    def __init__(self, sources: Iterable[ContextSource] = ()) -> None:
-        self._sources: dict[str, ContextSource] = {}
-        self.add_sources(sources)
-
-    def add_source(self, source: ContextSource) -> None:
-        """Register a canonical source by its stable identifier."""
-
-        if source.source_id in self._sources:
-            raise ContextAtlasError(
-                code=ErrorCode.DUPLICATE_SOURCE_IDENTIFIER,
-                message_args=(source.source_id,),
-            )
-
-        self._sources[source.source_id] = source
-        _emit_log_message(
-            LogMessage.SOURCE_REGISTERED,
-            source.source_id,
-            len(self._sources),
-            source_id=source.source_id,
-            source_family=source.provenance.source_family,
-            total_sources=len(self._sources),
-        )
-
-    def add_sources(self, sources: Iterable[ContextSource]) -> None:
-        """Bulk-register canonical sources in insertion order."""
-
-        for source in sources:
-            self.add_source(source)
-
-    def list_sources(self) -> tuple[ContextSource, ...]:
-        """Return registered sources in insertion order."""
-
-        return tuple(self._sources.values())
-
-    def __len__(self) -> int:
-        return len(self._sources)
-
-
 class LexicalRetriever:
     """Build Atlas-native candidates from lexical keyword or TF-IDF matching."""
 
@@ -151,6 +112,7 @@ class LexicalRetriever:
     ) -> None:
         self._registry = registry
         self.mode = mode
+        self._tfidf_index_snapshot: LexicalIndexSnapshot | None = None
 
     def retrieve(self, query: str, *, top_k: int = 5) -> tuple[ContextCandidate, ...]:
         """Return ranked candidates for a query using the configured lexical mode."""
@@ -165,10 +127,17 @@ class LexicalRetriever:
         if not query_tokens:
             return ()
 
+        sources = self._registry.list_sources()
+        index_snapshot_state = "not_applicable"
+
         if self.mode is LexicalRetrievalMode.KEYWORD:
-            candidates = self._keyword_retrieve(query_tokens, top_k=top_k)
+            candidates = self._keyword_retrieve(
+                query_tokens, sources=sources, top_k=top_k
+            )
         else:
-            candidates = self._tfidf_retrieve(query_tokens, top_k=top_k)
+            candidates, index_snapshot_state = self._tfidf_retrieve(
+                query_tokens, sources=sources, top_k=top_k
+            )
 
         _emit_log_message(
             LogMessage.RETRIEVAL_COMPLETED,
@@ -178,6 +147,10 @@ class LexicalRetriever:
             mode=self.mode,
             query=query,
             candidate_count=len(candidates),
+            query_token_count=len(query_tokens),
+            source_count=len(sources),
+            registry_revision=self._registry.revision,
+            index_snapshot_state=index_snapshot_state,
         )
         return candidates
 
@@ -185,13 +158,14 @@ class LexicalRetriever:
         self,
         query_tokens: list[str],
         *,
+        sources: tuple[ContextSource, ...],
         top_k: int,
     ) -> tuple[ContextCandidate, ...]:
         """Rank sources by query-token overlap."""
 
         query_token_set = set(query_tokens)
         scored: list[tuple[float, ContextSource]] = []
-        for source in self._registry.list_sources():
+        for source in sources:
             source_token_set = set(_tokenize(source.content))
             overlap = query_token_set & source_token_set
             if not overlap:
@@ -204,48 +178,63 @@ class LexicalRetriever:
         self,
         query_tokens: list[str],
         *,
+        sources: tuple[ContextSource, ...],
         top_k: int,
-    ) -> tuple[ContextCandidate, ...]:
+    ) -> tuple[tuple[ContextCandidate, ...], str]:
         """Rank sources by sparse TF-IDF cosine similarity."""
 
         query_tf = _term_frequency(query_tokens)
-        sources = self._registry.list_sources()
-        source_tokens = {
-            source.source_id: _tokenize(source.content) for source in sources
-        }
-        document_frequency = _document_frequency(source_tokens.values())
-        source_count = len(sources)
+        index_snapshot, index_snapshot_state = self._get_tfidf_index_snapshot(sources)
+        inverse_document_frequency = index_snapshot.inverse_document_frequency
+        missing_term_inverse_document_frequency = (
+            index_snapshot.missing_term_inverse_document_frequency
+        )
         query_vector = {
             term: term_frequency
-            * _inverse_document_frequency(
+            * inverse_document_frequency.get(
                 term,
-                document_frequency=document_frequency,
-                source_count=source_count,
+                missing_term_inverse_document_frequency,
             )
             for term, term_frequency in query_tf.items()
         }
 
         scored: list[tuple[float, ContextSource]] = []
         for source in sources:
-            tokens = source_tokens[source.source_id]
-            if not tokens:
+            source_vector = index_snapshot.source_tfidf_vectors[source.source_id]
+            source_vector_norm = index_snapshot.source_vector_norms[source.source_id]
+            if source_vector_norm == 0.0:
                 continue
-            source_tf = _term_frequency(tokens)
-            source_vector = {
-                term: term_frequency
-                * _inverse_document_frequency(
-                    term,
-                    document_frequency=document_frequency,
-                    source_count=source_count,
-                )
-                for term, term_frequency in source_tf.items()
-            }
-            score = _cosine_similarity(query_vector, source_vector)
+            score = _cosine_similarity(
+                query_vector,
+                source_vector,
+                right_norm=source_vector_norm,
+            )
             if score <= 0.0:
                 continue
             scored.append((score, source))
 
-        return _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k)
+        return (
+            _to_candidates(scored, signal=_SIGNAL_TFIDF_COSINE, top_k=top_k),
+            index_snapshot_state,
+        )
+
+    def _get_tfidf_index_snapshot(
+        self,
+        sources: tuple[ContextSource, ...],
+    ) -> tuple[LexicalIndexSnapshot, str]:
+        """Return a registry-revision-aligned index snapshot for TF-IDF work."""
+
+        if (
+            self._tfidf_index_snapshot is None
+            or self._tfidf_index_snapshot.registry_revision != self._registry.revision
+        ):
+            self._tfidf_index_snapshot = build_lexical_index_snapshot(
+                sources,
+                registry_revision=self._registry.revision,
+                tokenize=_tokenize,
+            )
+            return self._tfidf_index_snapshot, "rebuilt"
+        return self._tfidf_index_snapshot, "warm"
 
 
 def _emit_log_message(
@@ -325,29 +314,11 @@ def _term_frequency(tokens: list[str]) -> dict[str, float]:
     }
 
 
-def _document_frequency(source_tokens: Iterable[list[str]]) -> Counter[str]:
-    """Count how many sources contain each normalized token."""
-
-    frequency: Counter[str] = Counter()
-    for tokens in source_tokens:
-        frequency.update(set(tokens))
-    return frequency
-
-
-def _inverse_document_frequency(
-    term: str,
-    *,
-    document_frequency: Counter[str],
-    source_count: int,
-) -> float:
-    """Compute a smoothed inverse-document-frequency score."""
-
-    return math.log((1 + source_count) / (1 + document_frequency.get(term, 0))) + 1.0
-
-
 def _cosine_similarity(
-    left_vector: dict[str, float],
-    right_vector: dict[str, float],
+    left_vector: Mapping[str, float],
+    right_vector: Mapping[str, float],
+    *,
+    right_norm: float | None = None,
 ) -> float:
     """Compute cosine similarity between two sparse weighted vectors."""
 
@@ -355,7 +326,11 @@ def _cosine_similarity(
         left_vector.get(term, 0.0) * right_vector.get(term, 0.0) for term in left_vector
     )
     left_norm = math.sqrt(sum(weight**2 for weight in left_vector.values()))
-    right_norm = math.sqrt(sum(weight**2 for weight in right_vector.values()))
-    if left_norm == 0.0 or right_norm == 0.0:
+    effective_right_norm = (
+        right_norm
+        if right_norm is not None
+        else math.sqrt(sum(weight**2 for weight in right_vector.values()))
+    )
+    if left_norm == 0.0 or effective_right_norm == 0.0:
         return 0.0
-    return dot_product / (left_norm * right_norm)
+    return dot_product / (left_norm * effective_right_norm)

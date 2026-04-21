@@ -133,7 +133,7 @@ provider-specific bindings, and auditable operational identities.
 - the RepoManagement layer stays distinct from both the portable
   AgenticDevelopment canon and the project-specific runtime-materialization
   docs
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
+- The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that
   same feature branch before human merge

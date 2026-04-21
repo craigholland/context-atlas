@@ -114,7 +114,7 @@ IMPLEMENTED
 - `docs/Authoritative/Identity/` remains the sibling project-binding layer
 - authoritative indexes, owner files, planning docs, examples, and tests all
   reflect the new split
-- `py -3 scripts/preflight.py` passes after the refactor
+- The repository preflight command passes after the refactor
 
 ## Related Artifacts
 

@@ -25,20 +25,20 @@ The example is intentionally honest about scope:
 
 After an editable install:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
 Override the engineering question:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root . --query "What should planning docs be treated as during implementation?"
 ```
 
 When `--docs-root` is relative, it is resolved from the selected `--repo-root`:
 
-```powershell
-python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
+```bash
+python examples/codex_repository_workflow/run.py --repo-root /repos/my-repo --docs-root docs
 ```
 
 The output shows:
@@ -47,14 +47,29 @@ The output shows:
 - packet inspection
 - trace inspection
 
+Read those packet and trace surfaces using the hardened top-level vocabulary:
+
+- packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
+- trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
+  `budget_unallocated_tokens`
+- either view: `compression_strategy`
+- optional `configured_compression_strategy`
+
 That makes the workflow suitable both for local experimentation and for internal MVP review.
+
+The shared hardening story is the same one described in the guides:
+
+- the repository workflow still runs through the shared starter engine
+- the starter estimator is shape-aware by default
+- retrieval reuse and duplicate-acceptance proof remain regression-backed
+  rather than moving into a second demonstration-only artifact family
 
 ## Demo-Focused Trace View
 
 For a more demonstration-oriented output that keeps rendered context plus trace
 visibility front and center:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/show_trace.py --repo-root .
 ```
 

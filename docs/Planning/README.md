@@ -32,6 +32,23 @@ The current agentic-development planning surface lives under [Agentic](./Agentic
 - [Story docs](./Agentic/Stories/)
 - [Task PR plans](./Agentic/Stories/Tasks/)
 
+The current post-MVP hardening planning surface begins under [Hardening](./Hardening/):
+
+- [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
+- [Story docs](./Hardening/Stories/)
+- [Task PR plans](./Hardening/Stories/Tasks/)
+
+The Hardening stack now also has an explicit closeout evidence path:
+
+- the integrated Epic-level resolution map lives in
+  [Context Assembly Hardening Product Definition](./Hardening/context_assembly_hardening_product_definition.md)
+- the Story-level review path and proof split live in
+  [Story 5 - Validation, Documentation, And Hardening Proof](./Hardening/Stories/story_5_validation_documentation_and_hardening_proof.md)
+- the named `test_story_5_hardening_baseline_*` regressions in `tests/` are
+  the primary executable review anchors
+- bounded human-readable proof remains under `examples/mvp_proof/` rather than
+  expanding into a second artifact family for every hardened concern
+
 Those planning artifacts should derive their portable vocabulary and boundary
 rules from [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
 and its neighboring canon docs instead of redefining those concepts at the

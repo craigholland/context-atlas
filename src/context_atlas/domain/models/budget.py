@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+import warnings
 
 from pydantic import Field
 
@@ -95,8 +96,8 @@ class ContextBudget(CanonicalDomainModel):
         object.__setattr__(self, "metadata", self.freeze_metadata(self.metadata))
 
     @property
-    def reserved_tokens(self) -> int:
-        """Total tokens reserved by fixed slots."""
+    def fixed_reserved_tokens(self) -> int:
+        """Total tokens reserved up front by fixed slots."""
 
         return sum(
             slot.token_limit
@@ -105,10 +106,35 @@ class ContextBudget(CanonicalDomainModel):
         )
 
     @property
-    def remaining_tokens(self) -> int:
-        """Tokens not already reserved by fixed slots."""
+    def reserved_tokens(self) -> int:
+        """Compatibility alias for fixed-slot reserved tokens."""
 
-        return self.total_tokens - self.reserved_tokens
+        warnings.warn(
+            "ContextBudget.reserved_tokens is a legacy alias for "
+            "ContextBudget.fixed_reserved_tokens.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.fixed_reserved_tokens
+
+    @property
+    def unreserved_tokens(self) -> int:
+        """Tokens not yet reserved by fixed slots before allocation runs."""
+
+        return self.total_tokens - self.fixed_reserved_tokens
+
+    @property
+    def remaining_tokens(self) -> int:
+        """Compatibility alias for pre-allocation unreserved tokens."""
+
+        warnings.warn(
+            "ContextBudget.remaining_tokens is a legacy alias for "
+            "ContextBudget.unreserved_tokens and does not represent "
+            "post-allocation remainder.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.unreserved_tokens
 
 
 __all__ = ["ContextBudget", "ContextBudgetSlot", "ContextBudgetSlotMode"]

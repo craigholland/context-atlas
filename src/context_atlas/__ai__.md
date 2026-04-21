@@ -1,8 +1,8 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: 7b19c3d128e840c721a22515ff6788dc5b31beb2
-- timestamp_utc: 2026-04-20T22:40:48Z
+- commit: f975a5c5c47481b6d04436d287422d8418d36094
+- timestamp_utc: 2026-04-21T20:10:25Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
@@ -46,6 +46,7 @@
 - `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
 - The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
 - The exported `context_atlas.__version__` surface should stay aligned with the release version in `pyproject.toml` and the current in-repo release history, rather than drifting into a stale package-local constant.
+- Release-prep edits to `__version__` should move in lockstep with `pyproject.toml`, `docs/Release/README.md`, and the current shipped release note rather than being treated as a package-local tweak.
 
 ## Allowed Dependencies
 - may depend on:
@@ -156,18 +157,24 @@
 steps:
   - name: compile
     run: |
+      # Linux/macOS analog: python3 -m compileall src tests
       py -3 -m compileall src tests
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest
       py -3 -m pytest
 
   - name: import_boundaries
     run: |
+      # Linux/macOS analog: python3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
       py -3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure, context_atlas.services"
       $env:PYTHONPATH='src'
       py -3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure, context_atlas.services"
 ```

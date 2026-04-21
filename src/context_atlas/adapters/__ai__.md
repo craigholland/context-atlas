@@ -1,8 +1,8 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: 6ef14c06116e1920b24d556978aaac1dd9080d37
-- timestamp_utc: 2026-04-19T14:50:49Z
+- commit: c9ee71f1d304f7d3ef5bac728a6c32f1fe47a7dc
+- timestamp_utc: 2026-04-21T20:02:32Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
@@ -61,20 +61,47 @@
   - responsibility: exposes the supported starter adapter surface for package-local use and curated public re-export
   - invariants:
     - keep adapter exports deliberate and small
-- `retrieval/lexical.py`:
-  - responsibility: registers canonical sources and produces lexical retrieval candidates
+- `retrieval/registry.py`:
+  - responsibility: owns canonical in-memory source registration plus the revision boundary later retrieval reuse can key from
   - defines:
     - `InMemorySourceRegistry`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+  - invariants:
+    - source registration should preserve stable source identifiers and reject duplicate ids
+    - registry revision should remain a small outward invalidation signal rather than expanding into a second retrieval engine
+- `retrieval/indexing.py`:
+  - responsibility: defines the baseline lexical index shape separate from source ownership
+  - defines:
+    - `LexicalIndexSnapshot`
+    - `build_lexical_index_snapshot`
+  - depends_on:
+    - `context_atlas.domain.models`
+  - invariants:
+    - index snapshots should stay outward adapter helpers rather than new inward domain artifacts
+    - the baseline snapshot should remain the smallest shape needed for later reuse work
+    - corpus-wide document-frequency and inverse-document-frequency state should be computed once per registry revision inside the snapshot rather than rebuilt during each retrieval call
+    - reusable per-document TF-IDF vectors and norms may live in the snapshot when they stay tied to the same registry revision and do not create a parallel retrieval engine surface
+- `retrieval/lexical.py`:
+  - responsibility: produces lexical retrieval candidates from registry-owned sources and retrieval-owned index helpers
+  - defines:
     - `LexicalRetrievalMode`
     - `LexicalRetriever`
   - depends_on:
+    - `context_atlas.adapters.retrieval.indexing`
+    - `context_atlas.adapters.retrieval.registry`
     - `context_atlas.domain.errors`
     - `context_atlas.domain.messages`
     - `context_atlas.domain.models`
   - invariants:
     - retrieval should return Atlas-native `ContextCandidate` artifacts, not prototype-specific DTOs
     - empty queries should fail soft with no candidates rather than inventing placeholder data
-    - source registration should preserve stable source identifiers and reject duplicate ids
+    - lexical retrieval should consume canonical sources through the registry surface rather than owning source registration itself
+    - the retriever may cache one baseline index snapshot, but it should invalidate that cache strictly through the registry revision rather than inventing a second source-tracking mechanism
+    - repeated-query retrieval should still enter through one fresh registry source listing per call even when the index snapshot is warm, so cache reuse cannot become a hidden second source-loading path
+    - retrieval-completed logging may expose a small bounded proof surface such as `index_snapshot_state`, but that proof should remain attached to the shared adapter path rather than creating benchmark-only or demo-only retrieval instrumentation
 - `docs/filesystem.py`:
   - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
   - defines:
@@ -126,6 +153,8 @@
 
 ## Known Gaps / Future-State Notes
 - This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
+- Lexical retrieval hardening now separates source ownership, index-shape construction, and retrieval behavior, and the repeated-query TF-IDF path stays on one registry-driven retrieval surface instead of creating a second warm-cache engine mode.
+- The current retrieval baseline now caches corpus-wide IDF state plus source-side TF-IDF vector state inside one registry-revision-aligned snapshot while still taking one fresh registry source listing per retrieval call; the bounded proof surface is now the shared retrieval-completed log signal plus regression coverage rather than timing-based benchmark output, while broader retrieval backends still remain future work.
 - Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
 - If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 
@@ -145,14 +174,19 @@
 steps:
   - name: compile_adapters
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/adapters
       py -3 -m compileall src/context_atlas/adapters
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py tests/test_record_adapter_shape.py
       py -3 -m pytest tests/test_lexical_retrieval.py tests/test_filesystem_document_adapter.py tests/test_record_source_adapter.py tests/test_record_adapter_shape.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter; from context_atlas.adapters.records import StructuredRecordPayload"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.adapters import FilesystemDocumentSourceAdapter, InMemorySourceRegistry, LexicalRetrievalMode, LexicalRetriever, StructuredRecordInput, StructuredRecordRowMapper, StructuredRecordSourceAdapter; from context_atlas.adapters.records import StructuredRecordPayload"
 ```

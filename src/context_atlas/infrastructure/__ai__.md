@@ -1,8 +1,8 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: e27504eb8ee3693420e8fa26702d62e024303de4
-- timestamp_utc: 2026-04-19T22:31:06Z
+- commit: c9ee71f1d304f7d3ef5bac728a6c32f1fe47a7dc
+- timestamp_utc: 2026-04-21T20:02:32Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
@@ -89,6 +89,7 @@
     - the starter memory-budget split is now part of that operator-facing assembly surface and should stay mirrored across validated settings, `.env.example`, and starter assembly wiring
     - low-code settings should stay declarative and small; they may choose sources and presets, but they should not redefine packet, trace, or domain semantics
     - validated override helpers should reuse model validation rather than `model_copy(update=...)` when changing user-facing assembly defaults such as total budget
+    - outward tokenizer-binding defaults may be named here for composition clarity, but they must not become a provider-selection or SDK-binding surface unless the supported runtime contract expands first
 - `config/environment.py`:
   - responsibility: loads settings from environment variables through a Pydantic Settings model
   - defines:
@@ -155,6 +156,8 @@
     - low-code convenience here may choose a supported preset, docs root, and payload file, but it should still cross into the same registry/retriever/service path rather than creating alternate packet semantics
     - low-code wrappers should prefer `ContextAtlasSettings.with_low_code_overrides(...)`, `build_low_code_workflow_plan(...)`, and `assemble_with_starter_sources(...)` over wrapper-local setting merges or metadata packing
     - proof-artifact writing should stay on one shared outer helper here rather than being duplicated across runnable workflow examples
+    - tokenizer seams bound here must stay provider-agnostic at the function signature level and must default cleanly to the starter heuristic when no external estimator is supplied
+    - custom tokenizer-estimator labels passed through starter assembly helpers must require a real estimator binding so trace and compression metadata cannot misreport which estimator actually ran
 
 ## Known Gaps / Future-State Notes
 - Infrastructure still focuses on config, logging, and shared assembly helpers; persistence, audit sinks, memory stores, and broader integration infrastructure remain future work.
@@ -174,14 +177,19 @@
 steps:
   - name: compile_infrastructure
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/infrastructure
       py -3 -m compileall src/context_atlas/infrastructure
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
       py -3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```

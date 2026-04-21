@@ -32,6 +32,7 @@
 - When a proof scenario is explicitly marked as budget-constrained, capture should also verify that the packaged artifacts show visible budget-pressure evidence rather than only narrative claims.
 - When a proof scenario is explicitly marked as authority-focused, capture should also verify that the packaged packet shows authoritative repository documents alongside lower-authority document material in the expected packet order.
 - That authority-focused validation should key off the canonical `source.authority` values in the packet artifacts, not only document classes, so front-matter authority overrides remain visible in proof review.
+- Story 5 hardening proof should keep this folder bounded to the existing packet/trace/rendered-context plus evidence-package bundle family; retrieval-reuse and duplicate-acceptance proof should remain primarily regression-backed rather than creating new proof-only bundle types here.
 
 ## Allowed Dependencies
 - may depend on:
@@ -69,6 +70,7 @@
 
 ## Cross-Folder Contracts
 - `examples/`: example-facing proof docs may show how to invoke these scripts, but should not replace them with copy-paste shell fragments.
+- `examples/mvp_proof/`: proof docs there may name which hardening scenarios deserve bundle-backed human-readable review, but they should keep that inventory bounded to the canonical packet/trace bundle story rather than inventing new artifact families that this folder does not produce.
 - `docs/Reviews/`: review artifacts may depend on the evidence packages produced here, but should remain human-readable assessments rather than script outputs.
 - `scripts/`: the parent folder should keep this proof-specific tooling visible in repo governance and freshness checks.
 
@@ -77,9 +79,11 @@
 steps:
   - name: compile_mvp_proof_scripts
     run: |
+      # Linux/macOS analog: python3 -m compileall scripts/mvp_proof
       py -3 -m compileall scripts/mvp_proof
 
   - name: help_output
     run: |
+      # Linux/macOS analog: python3 scripts/mvp_proof/capture_evidence.py --help > /dev/null
       py -3 scripts/mvp_proof/capture_evidence.py --help > $null
 ```

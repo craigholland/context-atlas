@@ -61,9 +61,19 @@ This workflow does not yet:
 
 From the repository root:
 
+PowerShell:
+
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+Bash:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 ```
 
@@ -87,11 +97,19 @@ file.
 
 If you want a visible local reference file:
 
+PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-If you want to set a few values explicitly in PowerShell:
+bash:
+
+```bash
+cp .env.example .env
+```
+
+Set a few values explicitly if you want to override defaults:
 
 ```powershell
 $env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
@@ -99,6 +117,25 @@ $env:CONTEXT_ATLAS_LOW_CODE_PRESET = "chatbot_docs_records"
 $env:CONTEXT_ATLAS_LOW_CODE_DOCS_ROOT = "docs/Guides"
 $env:CONTEXT_ATLAS_LOW_CODE_RECORDS_FILE = "examples/docs_database_workflow/sample_records.json"
 ```
+
+```bash
+export CONTEXT_ATLAS_LOG_LEVEL="INFO"
+export CONTEXT_ATLAS_LOW_CODE_PRESET="chatbot_docs_records"
+export CONTEXT_ATLAS_LOW_CODE_DOCS_ROOT="docs/Guides"
+export CONTEXT_ATLAS_LOW_CODE_RECORDS_FILE="examples/docs_database_workflow/sample_records.json"
+```
+
+The same hardening semantics from the shared starter engine still apply here:
+
+- `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` is a baseline control for the
+  shape-aware starter estimator, not a promise of one flat ratio everywhere
+- packet and trace views should prefer truthful budget/compression labels
+- packet budget state should surface `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state should surface `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
+- compression state should surface `compression_strategy` and optional
+  `configured_compression_strategy`
 
 ## Run The Low-Code Workflow
 
@@ -123,39 +160,39 @@ broader no-code platform.
 The current single supported preset is also the workflow default, so `--preset`
 is optional but supported when you want the invocation to be explicit:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --preset chatbot_docs_records
 ```
 
 From the repository root:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py
 ```
 
 Override the query:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --query "How should a low-code builder validate Atlas output?"
 ```
 
 Override the docs root or records file relative to `--repo-root`:
 
-```powershell
-python examples/low_code_workflow/run.py --repo-root C:\repos\my-app --docs-root docs\Guides --records-file data\support_rows.json
+```bash
+python examples/low_code_workflow/run.py --repo-root /repos/my-app --docs-root docs/Guides --records-file data/support_rows.json
 ```
 
 Inspect one source family in isolation:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --no-documents
 python examples/low_code_workflow/run.py --no-records
 ```
 
 If you want the standard proof artifacts for the same run:
 
-```powershell
-python examples/low_code_workflow/run.py --proof-artifacts-dir tmp\mvp_proof\low_code_demo
+```bash
+python examples/low_code_workflow/run.py --proof-artifacts-dir tmp/mvp_proof/low_code_demo
 ```
 
 ## What The Workflow Does
@@ -188,6 +225,17 @@ On a successful run, you should see:
 - `=== Packet Inspection ===`
 - `=== Trace Highlights ===`
 - `=== Trace Inspection ===`
+
+The hardened low-code path should now make it easy to point at:
+
+- packet budget state through `fixed_reserved_tokens`,
+  `unreserved_tokens`, and `unallocated_tokens`
+- trace budget state through `budget_fixed_reserved_tokens`,
+  `budget_unreserved_tokens`, and `budget_unallocated_tokens`
+- truthful compression state through `compression_strategy` and optional
+  `configured_compression_strategy`
+- low-code workflow metadata such as `request_workflow`,
+  `request_low_code_preset`, `request_docs_root`, and `request_records_file`
 
 The trace output should also make the workflow itself inspectable. Metadata such
 as `request_workflow`, `request_low_code_preset`, `request_docs_root`, and

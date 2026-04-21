@@ -369,8 +369,9 @@ class LowCodeWorkflowTests(unittest.TestCase):
                         "ticket_id": "support-302",
                         "title": "Preflight note",
                         "body": (
-                            "Run py -3 scripts/preflight.py before push and keep "
-                            "the relevant __ai__.md owner files updated."
+                            "Run python scripts/preflight.py before push (or py "
+                            "-3 scripts/preflight.py on Windows) and keep the "
+                            "relevant __ai__.md owner files updated."
                         ),
                         "uri": "records://support/support-302",
                         "uses": ["support", "troubleshooting"],

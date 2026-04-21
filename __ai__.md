@@ -1,14 +1,15 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: 7b19c3d128e840c721a22515ff6788dc5b31beb2
-- timestamp_utc: 2026-04-20T22:40:48Z
+- commit: f975a5c5c47481b6d04436d287422d8418d36094
+- timestamp_utc: 2026-04-21T20:10:25Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: .
 - included:
   - "README.md"
+  - "CONTRIBUTING.md"
   - "pyproject.toml"
   - ".gitignore"
   - ".env.example"
@@ -34,6 +35,7 @@
 - Treats runtime config dependencies as part of the visible package contract when infrastructure moves from ad hoc parsing to validated libraries like Pydantic.
 - Treats canonical domain artifacts as part of the visible package contract when the domain model standard shifts from starter dataclasses to frozen Pydantic models.
 - Treats public policy request/result/configuration objects as part of the same modeling contract so the repo does not drift back to mixed boundary styles.
+- Provides the contributor on-ramp for using the ontology system correctly when adding new project documents.
 
 ## Architectural Rules
 - Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
@@ -53,6 +55,47 @@
 - MVP planning work should now be expected to decompose from Epic to Stories to Tasks to PR plans, and those PR plans should identify expected new files, expected updated files, and relevant `__ai__.md` updates.
 - Agentic-development planning should follow that same decomposition model, with product intent centered at the Epic layer, architectural bindings and boundaries centered at the Story layer, implementation-ready sequencing centered at the Task layer, and concrete file-touch guidance centered at the PR-plan layer.
 - The current agentic-development planning surface now includes an Epic doc, Story docs, and Task PR plans under `docs/Planning/Agentic/`; contributors should keep those layers aligned rather than treating the Task docs as a separate planning system.
+- The current post-MVP hardening planning surface now begins under `docs/Planning/Hardening/`; contributors should use that area for core assembly-engine performance, duplicate-handling, token-estimation, and budget/compression hardening rather than burying those increments inside MVP-ready status docs or release notes.
+- The current hardening Epic is now specifically the context-assembly hardening surface under `docs/Planning/Hardening/context_assembly_hardening_product_definition.md`; later Story and Task decomposition there should keep retrieval-index reuse, duplicate-detection quality, token-estimation decisions, and budget/compression truthfulness grouped as one shared engine-hardening program rather than scattering them across unrelated docs.
+- The current hardening planning surface now also includes Story docs under `docs/Planning/Hardening/Stories/`; contributors should use those Story docs to carry architectural hardening boundaries and task-shaping guidance before opening Task-level decomposition.
+- The current hardening planning surface now also includes Task PR plans under `docs/Planning/Hardening/Stories/Tasks/`; those Task docs should carry implementation sequencing, expected file-touch guidance, and PR-slice shape without reopening Story-level scope ceilings or decision gates.
+- Hardening Task feature branches should mark the task PR-plan document `IMPLEMENTED` when the integrated Task branch is ready for its review gate, and that closeout should refresh this root owner file so repo-level freshness checks stay honest.
+- Hardening Story 5 should keep its regression closeout explicit: the named `test_story_5_hardening_baseline_*` tests in `tests/` are the intended anchor set for hardened engine semantics, and later closeout work should extend that named set before inventing a second proof-only regression layer.
+- Hardening Task 5.2 should keep human-readable proof bounded to the canonical packet/trace bundle story under `examples/mvp_proof/`; retrieval reuse and duplicate acceptance should remain primarily test-anchored, while budget/compression and document-authority proof may use reviewable packet/trace bundles where that adds real reviewer value.
+- Hardening Task 5.2 should also keep the proof-facing example docs under `examples/mvp_proof/inputs/README.md` and `examples/mvp_proof/evidence/README.md` aligned with that same boundary: they may name the budget-pressure and document-authority bundle targets explicitly, but they should not imply a second retrieval-demo, duplicate-demo, or hardening-summary artifact family.
+- Hardening Task 5.2 closes with one explicit proof split: `examples/mvp_proof/` carries the bounded human-readable packet/trace bundle story for budget/compression and document-authority review, while retrieval reuse and duplicate acceptance remain intentionally anchored by the named Story 5 baseline tests until broader guide refresh work in Task 5.3.
+- Hardening Task 5.3 should keep the outward-facing product story explicit across `README.md`, `docs/Guides/`, and example READMEs: the shared engine now uses a shape-aware starter estimator by default, packet/trace inspection should prefer truthful budget and compression vocabulary, and those truths should be explained in user-facing docs without leaking internal planning-story jargon into the primary workflow guides.
+- Hardening Task 5.3 should keep the example layer aligned with the guide layer rather than treating `examples/README.md` and workflow-specific example READMEs as looser secondary notes; if guides now name truthful budget/compression fields or the shape-aware estimator story, the runnable example docs should echo that same user-facing language.
+- Hardening Task 5.3 should also distinguish packet and trace budget labels accurately: packet inspection uses `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`, while trace rendering currently uses `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`, and `budget_unallocated_tokens`; user-facing docs should not blur those two surfaces together.
+- Hardening Task 5.3 should keep `docs/Release/README.md` honest about shipped history versus current development-branch guidance; release-history docs should not imply that unreleased hardening work is already part of the current shipped tag.
+- Release-prep slices that move the shipped package version forward should keep `README.md`, `pyproject.toml`, `context_atlas.__version__`, `tests/test_cli.py`, and the current note under `docs/Release/` aligned to the same version rather than advancing only one surface.
+- Hardening Task 5.4 should close the Epic with one explicit evidence map from the original six findings to the named Story 5 baseline tests and bounded proof surfaces; closeout docs should not force later reviewers to reconstruct that lineage from merged PR history alone.
+- Hardening Task 5.4 should also keep `docs/Planning/README.md` aligned with that final evidence path so contributors can discover the integrated Epic summary, the Story 5 proof split, the named `test_story_5_hardening_baseline_*` anchors, and the bounded `examples/mvp_proof/` surface from the planning index itself.
+- Hardening Task 5.4 should leave Story 5 execution-complete but review-pending on its Story branch: final closeout edits should mark the Task plan `IMPLEMENTED`, make the Story-level handoff explicit, and direct any later follow-on work to start from the integrated evidence path rather than from the original six findings as if they were still open defects.
+- The current hardening execution model now uses one Epic branch off `development`, one Story branch per Story off that Epic branch, one Task feature branch per Task off its Story branch, and PR-slice branches off the Task feature branch; review is expected at the Task feature PR rather than waiting for the full Story PR.
+- Hardening Task 2.1 now treats `src/context_atlas/domain/policies/deduplication.py` as the intended inward home for the shared duplicate-detection surface; later Story 2 work should extend that helper instead of re-forking normalization and comparison rules inside ranking or memory.
+- Hardening Task 2.1 also locks the initial duplicate baseline to normalized exact-key matching, normalized containment, and token overlap; later Story 2 work may refine normalization and policy integration, but it should not silently widen the comparison family without updating the Story boundary first.
+- Hardening Task 2.2 now bounds boilerplate handling to top-of-file front matter and bounded shared leading prefixes; later Story 2 work should refine integration around that rule instead of inventing format-specific stripping paths or mid-document boilerplate removal.
+- Hardening Story 2 review fixes should keep that front-matter boundary precise: only column-zero fences should terminate bounded top-of-file front matter, and metadata-only front-matter documents should remain distinct unless their normalized keys match exactly.
+- Hardening Task 2.3 now treats ranking and memory as sharing one bounded duplicate semantics surface: ranking remains source-family-aware while memory duplicate decisions expose the shared match kind directly, and later Story 2 work should tighten coverage rather than re-forking policy-local duplicate gates.
+- Hardening Task 2.4 closes Story 2 with one explicit duplicate-handling acceptance bar: case/whitespace variants, bounded front-matter variants, normalized containment, and reordered-token near duplicates may collapse, while shared-header distinct bodies, metadata-only front matter, and cross-source-family ranking inputs must stay distinct.
+- Story 2 should now also treat exact full-text equality and the historical prefix-equality shortcut as rejected duplicate baselines, not as acceptable fallback strategies waiting to reappear in later hardening work.
+- Story 5 validation and documentation work should inherit Story 2's explicit duplicate-handling acceptance bar and proof cases instead of renegotiating duplicate success criteria during later closeout work.
+- Hardening Task 4.1 should establish explicit budget vocabulary before wider caller-contract cleanup: fixed-slot reservation, pre-allocation unreserved capacity, and post-allocation unallocated remainder should each have truthful canonical names instead of sharing one generic "remaining" label.
+- Hardening Task 4.2 should preserve allocator behavior while moving caller-facing budget contracts onto the truthful vocabulary from Task 4.1; legacy `reserved_tokens` and `remaining_tokens` surfaces may remain temporarily, but packet/trace/service-facing metadata should prefer `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`.
+- Hardening Task 4.3 should make compression truth primary: effective runtime strategy belongs on the canonical result surface, while configured strategy should appear separately only when fallback or service-owned truncation would otherwise be hidden.
+- Hardening Task 4.4 should keep service metadata and renderers aligned with that truth: top-level packet/trace compression strategy fields should be truthful, and packet/trace inspection should surface `unallocated_tokens` plus effective-versus-configured compression strategy without relying on stale alias names or duplicated prefixed metadata.
+- Hardening Task PR plans should keep front-matter `related` links navigable from the Task directory itself; repo-root targets like `src/`, `examples/`, and sibling docs surfaces should use the full repo-root-relative path depth instead of assuming the Story directory level.
+- Hardening Task PR plans should also make upstream conditionality explicit when a prior Task can change downstream file expectations or activation state; do not let "none expected" or parallel-looking Task wording hide a real decision gate or extraction-dependent file path.
+- Hardening Story docs should make file-placement expectations, kickoff decision-record locations, and known ripple surfaces explicit at the Story layer whenever later Tasks would otherwise have to infer them from the existing codebase.
+- Hardening Story 3 now records an explicit `heuristic-first` kickoff decision; Task 3.2 is the lead path for improving starter token estimation, while Task 3.3 remains bounded complementary seam work unless the Story boundary is reopened deliberately.
+- Hardening Task 3.2 and Task 3.3 should now say that same thing at the Task layer: 3.2 is the active implementation track, and 3.3 is complementary seam work that must not masquerade as a second primary Story 3 path.
+- Hardening Task 3.2 should keep starter token-estimation improvement bounded to provider-agnostic content-shape distinctions such as prose baseline, code/markup tightening, and non-Latin-heavy tightening; it should not introduce hidden tokenizer tables or provider-specific counting rules.
+- Hardening Task 3.2 is now the delivered lead-path baseline for Story 3: starter estimation is content-shape-aware for prose, structured code/markup, and non-Latin-heavy text, while tokenizer-specific integration remains intentionally deferred to the bounded seam work.
+- Hardening Task 3.3 should now keep the complementary tokenizer seam narrow: a generic callable token-estimation contract may be bound outward through infrastructure composition, but provider-specific tokenizer selection, SDK ownership, and broader provider integration must remain out of scope.
+- Hardening Task 3.4 should keep the Story 3 runtime surface truthful: `CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the baseline control for the shape-aware starter heuristic, while any custom token estimator remains an outward callable seam rather than an env-backed tokenizer selector.
+- Story 3 review fixes should keep compression-prefix budgeting correctness-first: once token estimation becomes shape-aware or outward-callable, longest-fitting-prefix helpers must not rely on binary-search monotonicity assumptions.
+- Hardening Story 4 should now inherit that Story 3 lead-path decision explicitly: budget and compression truthfulness work should assume the starter heuristic correction lands before any tokenizer seam grows into more than bounded outward support work.
 - The new `docs/Authoritative/Canon/AgenticDevelopment/` surface is the portable, environment-agnostic canon for agentic-development concepts; application-specific bindings and environment-specific materialization details should not be authored there unless the authoritative boundary model changes first.
 - The `docs/Authoritative/Canon/AgenticDevelopment/` canon should remain readable from its directory-level README so contributors do not have to reverse-engineer later project bindings or runtime assets just to understand the portable layer.
 - The `docs/Authoritative/Canon/AgenticDevelopment/` canon now also carries the portable drift, validation, and change-management models; later planning, binding, and runtime surfaces should inherit those models instead of inventing parallel governance vocabularies.
@@ -114,8 +157,10 @@
 - Product-facing docs should not imply that `.env.example` or a copied `.env` file is loaded automatically; the current runtime settings loader reads the live process environment only.
 - Product-facing docs should keep the supported env-backed surface intentionally narrow and should not imply that every starter constant in `domain/policies/` or `services/` is automatically a public runtime knob.
 - Product-facing setup guidance should point users to `docs/Guides/` first; runnable artifacts under `examples/` are companion material and should not become the primary setup surface.
+- Product-facing guides and runnable example READMEs should avoid Windows-only operator assumptions; if PowerShell-specific activation or environment syntax is shown, the same surface should also give at least one bash/Linux/macOS analog.
 - Shipped release summaries should now live in `docs/Release/` as in-repo `releases`-class artifacts instead of existing only as GitHub release text or ad hoc status notes.
 - The release-history surface should stay discoverable through `docs/Release/README.md`, and the current shipped release note should move forward deliberately rather than leaving the root README pinned to an older release forever.
+- The root `CONTRIBUTING.md` file should stay aligned with the ontology and directory model so a new contributor can get from "I want to add a document" to the correct class, template, and destination without reverse-engineering the doc system.
 - The guides under `docs/Guides/` should stay aligned with the actual runnable example boundaries, including which workflows support one-shot budget overrides or proof-artifact emission and which ones do not.
 - The technical-builder documents-plus-database workflow is now a first-class product-facing guide path alongside the starter and repository workflows; repo-facing docs should keep its already-fetched-record boundary and shared runtime-knob story aligned across README, examples, and guide docs.
 - The starter inspection story should surface packet and trace views as derived renderers under `context_atlas.rendering`, not as alternate canonical models or prompt-first strings.
@@ -133,6 +178,8 @@
 ## Public API / Key Exports
 - `pyproject.toml`:
   - project metadata, author info, Python floor, dev-tool declarations, and installable starter script
+- `CONTRIBUTING.md`:
+  - root contributor on-ramp for choosing the right document class, template, and destination
 - `__ai__.template.md`:
   - baseline authoring template for local contract files
 - `.env.example`:
@@ -148,6 +195,11 @@
   - invariants:
     - Python floor here should match active CI and local preflight assumptions
     - runtime validation libraries added here should correspond to real package behavior, not speculative future plans
+- `CONTRIBUTING.md`:
+  - responsibility: gives contributors one clear path into the ontology/template system before they author new repo documents
+  - invariants:
+    - should point to the current ontology canon rather than restating a parallel document-class system
+    - should keep Canon versus Identity placement guidance explicit for contributors adding authoritative docs
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:
@@ -187,6 +239,7 @@
 - `docs/Authoritative/Canon/AgenticDevelopment/`: roles, protocols, runtime-capacity semantics, materialization rules, drift vocabulary, validation expectations, and governed change paths should stay portable here and flow downward into project bindings rather than being restated in planning or runtime docs.
 - `docs/Authoritative/Canon/RepoManagement/`: repository-principal, authorization, operation-family, branch-target, and audit-identity semantics should stay portable here and flow downward into project bindings rather than being restated in runtime docs.
 - `docs/Authoritative/Canon/AgenticDevelopment/__ai__.md` and `docs/Authoritative/Canon/RepoManagement/__ai__.md`: the nearest owner files for those canon surfaces should stay aligned when Story-level governance or validation expectations change.
+- `docs/Planning/Hardening/`: core assembly-engine hardening work should decompose here once it moves beyond one-off review notes, and later Story/Task docs in that surface should stay aligned with the same Craig-style planning depth used by the MVP and Agentic stacks.
 - `src/context_atlas/`: preflight should prove repo readiness without redefining package-layer rules that belong to nearer owner files.
 - `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
 - `src/context_atlas/infrastructure/`: assembly and memory default settings plus structured observability helpers should not grow new env knobs without updating the repo root surface.

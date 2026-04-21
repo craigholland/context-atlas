@@ -1,8 +1,8 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: ea76ae1a4caa11de942b8cfd3ccc5c3a099a17bc
-- timestamp_utc: 2026-04-19T14:00:16Z
+- commit: c9ee71f1d304f7d3ef5bac728a6c32f1fe47a7dc
+- timestamp_utc: 2026-04-21T20:02:32Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
@@ -63,13 +63,17 @@
   - responsibility: renders packet inspection sections for product-facing debugging and demos
   - invariants:
     - emphasize canonical packet state such as selected sources, memory, budget, and compression
+    - budget inspection should prefer truthful budget vocabulary like `fixed_reserved_tokens` and `unreserved_tokens` instead of re-exporting legacy alias names as the primary display contract
+    - packet inspection should show `unallocated_tokens` when the service provides that post-allocation remainder explicitly
     - reflect actual compression application state rather than just the presence of a `CompressionResult`
+    - compression inspection should distinguish effective runtime strategy from optional configured strategy when fallback changed the actual behavior
     - remain a read-only formatter over canonical packet artifacts
 - `trace.py`:
   - responsibility: renders ordered trace-decision and metadata sections for product-facing debugging and demos
   - invariants:
     - emphasize included, excluded, transformed, and deferred decisions plus trace metadata
     - concise highlight views should stay derived from canonical trace metadata and counts rather than introducing a second summary model
+    - trace-facing summaries should prefer the settled top-level service metadata keys for budget and compression semantics instead of forcing readers through duplicated prefixed stage metadata
     - remain a read-only formatter over canonical trace artifacts
 
 ## Known Gaps / Future-State Notes
@@ -85,14 +89,19 @@
 steps:
   - name: compile_rendering
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/rendering
       py -3 -m compileall src/context_atlas/rendering
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
       py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
 ```

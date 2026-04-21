@@ -24,6 +24,7 @@
 - Project-specific GitHub bot names, merge rights, and review-trigger policies belong under `docs/Authoritative/Identity/RepoManagement/`, not here.
 - Repo-management docs should remain compatible with the neighboring AgenticDevelopment canon instead of duplicating role, mode, or protocol definitions.
 - Meaningful changes to this folder should also review metadata, planning indexes, and neighboring bindings so the repo-management surface remains discoverable and bounded.
+- When planning or closeout docs mention repository-facing review or merge evidence, they should continue to treat this canon as the upstream home for repo-principal and permission meaning rather than restating repo-management policy as planning-only folklore.
 
 ## Allowed Dependencies
 - may depend on:
@@ -85,14 +86,17 @@
 steps:
   - name: validate_owner_file
     run: |
+      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/RepoManagement/__ai__.md __ai__.md
       py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/RepoManagement/__ai__.md __ai__.md
 
   - name: validate_related_owner_files
     run: |
+      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/RepoManagement/__ai__.md docs/Authoritative/Canon/AgenticDevelopment/__ai__.md __ai__.md
       py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/RepoManagement/__ai__.md docs/Authoritative/Canon/AgenticDevelopment/__ai__.md __ai__.md
 
   - name: freshness
     run: |
+      # Linux/macOS analog: python3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/Canon/AgenticDevelopment --governed-root docs/Authoritative/Canon/RepoManagement --suffix .md
       py -3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/Canon/AgenticDevelopment --governed-root docs/Authoritative/Canon/RepoManagement --suffix .md
 ```
 

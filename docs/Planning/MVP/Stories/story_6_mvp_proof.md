@@ -82,7 +82,7 @@ Produce grounded evidence that Context Atlas has moved from a core engine to an 
 - the Story's scoped Tasks are either completed or intentionally deferred with the reason documented
 - all merged PR slices for the Story update the relevant local `__ai__.md` files in the same slice
 - the supported docs, examples, and runtime knobs stay aligned with the implemented surface
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
+- The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives `@codex review`, and any review findings are resolved on that same feature branch before human merge
 - any deviations from Craig Architecture boundaries are documented explicitly rather than left implicit
 

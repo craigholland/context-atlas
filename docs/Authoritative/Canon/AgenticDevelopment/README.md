@@ -13,6 +13,17 @@ The portable canon ends where binding-layer documents begin. This directory
 defines portable terms and invariants, not an application's chosen role
 roster, workflow gates, capacity values, or environment-specific layouts.
 
+## Why This Matters Here
+
+Context Atlas is already a context-governance engine: it tries to make source
+selection, authority handling, budgeting, and packet assembly explicit,
+reviewable, and reproducible rather than leaving them as prompt folklore.
+
+This canon applies that same philosophy to AI collaboration itself. Instead of
+treating agents, roles, review gates, handoffs, and runtime materialization as
+tool-specific prompt habits, this layer makes them portable governed concepts
+that can be reviewed before any one project or runtime binds them concretely.
+
 ## Start Here
 
 If you are new to the agentic-development model, start with this README before
