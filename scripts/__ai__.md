@@ -1,11 +1,10 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: b426e06579cd10414a3e3b6a7786ff836f6909ba
-- timestamp_utc: 2026-04-17T18:01:00Z
-- verified_by: local
-- notes: Verified means "the commands in Verification Contract passed locally" (not a human review and not yet a dedicated CI workflow).
-
+- commit: fb63d8a1fb704e7d42749b583fb7f8382a8ac3c2
+- timestamp_utc: 2026-04-21T00:14:07Z
+- verified_by: ci
+- notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: scripts
 - included:
