@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, deduplication, ranking, memory, similarity]
 related:
@@ -98,6 +98,17 @@ deterministic, and Atlas-owned.
   or provider-similarity initiative
 - add regressions that prove the new shared surface is better than both prior
   approaches on the targeted failure cases
+- Task 2.4 should close with one explicit acceptance bar: Atlas should
+  collapse near-duplicate text when the meaningful body differs only by
+  case/whitespace normalization, bounded top-of-file front matter,
+  normalized containment, or reordered lexical tokens within the configured
+  threshold
+- the same acceptance bar should preserve distinct text when the apparent
+  similarity is driven mostly by shared boilerplate/header material,
+  metadata-only front matter, or cross-source-family provenance in ranking
+- exact full-text equality and the former prefix-equality shortcut are now
+  historical failure baselines, not acceptable standing duplicate strategies
+  or fallback modes
 
 ## Sequencing
 
@@ -127,6 +138,8 @@ deterministic, and Atlas-owned.
   than the current fragile prefix heuristic on the reviewed failure modes
 - boilerplate or front-matter prefixes alone no longer dominate duplicate
   decisions
+- the Story leaves one explicit acceptance bar naming what should collapse and
+  what must remain distinct, so later work does not reopen Story 2 implicitly
 - the Story remains bounded to one lexical or structural near-duplicate
   baseline rather than drifting into a broader semantic-similarity initiative
 
@@ -138,6 +151,9 @@ deterministic, and Atlas-owned.
   files in the same slice
 - duplicate-detection semantics stay shared and inward rather than being
   re-forked by ranking versus memory behavior
+- Story 5 should inherit this Story's explicit duplicate-handling acceptance
+  bar and reviewed proof cases instead of renegotiating the duplicate baseline
+  during later validation or documentation work
 - The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that

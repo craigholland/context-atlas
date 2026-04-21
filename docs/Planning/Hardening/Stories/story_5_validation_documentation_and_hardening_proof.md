@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [hardening, story, validation, docs, proof, regression]
 related:
@@ -54,6 +54,10 @@ implementation details.
 - keep validation centered on the shared engine path rather than creating a
   proof-only or benchmark-only path
 - ensure the hardened behavior is reviewable through normal repository testing
+- for duplicate handling specifically, inherit Story 2's explicit acceptance
+  bar and its reviewed "better than exact full-text" and "better than
+  prefix-equality" proof cases rather than renegotiating the duplicate
+  baseline during Story 5
 
 ### Task 2: Reviewable Proof Surfaces
 
@@ -83,6 +87,8 @@ implementation details.
 
 - wait for Story 4 to settle the canonical budget and compression semantics
   before treating this Story as implementation-ready
+- inherit the closed acceptance bars from Stories 1 through 4 instead of
+  rediscovering them during proof authoring or doc refresh
 - establish regression coverage first
 - build bounded proof surfaces next where they add real review value
 - update guides and examples only after the hardened contracts are stable
