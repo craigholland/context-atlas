@@ -48,6 +48,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   lexical retrieval
 - make it explicit which reusable state belongs to the retriever versus the
   source registry versus a dedicated helper object
+- keep canonical source ownership in the registry surface while letting the
+  baseline lexical index shape live in a dedicated outward retrieval helper
+  instead of hiding both concerns in one file
 - treat today's `InMemorySourceRegistry` location in `lexical.py` as the
   current baseline; if a separate registry helper file is introduced during
   implementation, that file should be treated as a new outward adapter surface

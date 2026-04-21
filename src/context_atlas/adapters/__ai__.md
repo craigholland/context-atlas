@@ -61,20 +61,42 @@
   - responsibility: exposes the supported starter adapter surface for package-local use and curated public re-export
   - invariants:
     - keep adapter exports deliberate and small
-- `retrieval/lexical.py`:
-  - responsibility: registers canonical sources and produces lexical retrieval candidates
+- `retrieval/registry.py`:
+  - responsibility: owns canonical in-memory source registration plus the revision boundary later retrieval reuse can key from
   - defines:
     - `InMemorySourceRegistry`
+  - depends_on:
+    - `context_atlas.domain.errors`
+    - `context_atlas.domain.messages`
+    - `context_atlas.domain.models`
+  - invariants:
+    - source registration should preserve stable source identifiers and reject duplicate ids
+    - registry revision should remain a small outward invalidation signal rather than expanding into a second retrieval engine
+- `retrieval/indexing.py`:
+  - responsibility: defines the baseline lexical index shape separate from source ownership
+  - defines:
+    - `LexicalIndexSnapshot`
+    - `build_lexical_index_snapshot`
+  - depends_on:
+    - `context_atlas.domain.models`
+  - invariants:
+    - index snapshots should stay outward adapter helpers rather than new inward domain artifacts
+    - the baseline snapshot should remain the smallest shape needed for later reuse work
+- `retrieval/lexical.py`:
+  - responsibility: produces lexical retrieval candidates from registry-owned sources and retrieval-owned index helpers
+  - defines:
     - `LexicalRetrievalMode`
     - `LexicalRetriever`
   - depends_on:
+    - `context_atlas.adapters.retrieval.indexing`
+    - `context_atlas.adapters.retrieval.registry`
     - `context_atlas.domain.errors`
     - `context_atlas.domain.messages`
     - `context_atlas.domain.models`
   - invariants:
     - retrieval should return Atlas-native `ContextCandidate` artifacts, not prototype-specific DTOs
     - empty queries should fail soft with no candidates rather than inventing placeholder data
-    - source registration should preserve stable source identifiers and reject duplicate ids
+    - lexical retrieval should consume canonical sources through the registry surface rather than owning source registration itself
 - `docs/filesystem.py`:
   - responsibility: turns filesystem markdown documents into ontology-aware canonical sources
   - defines:
@@ -126,6 +148,7 @@
 
 ## Known Gaps / Future-State Notes
 - This package currently covers filesystem documents, structured records, and in-memory lexical retrieval; provider-backed retrieval, embeddings, and broader live connector integration remain future work.
+- Lexical retrieval hardening now separates source ownership, index-shape construction, and retrieval behavior, but repeated-query reuse still remains future work until the hardening tasks extend those surfaces.
 - Structured-record adapters still assume already-fetched payloads and do not own query execution, sessions, vector-store clients, or connector lifecycles.
 - If source-family coverage expands materially, this folder may need deeper package splits or nested owner files to stay governable.
 
