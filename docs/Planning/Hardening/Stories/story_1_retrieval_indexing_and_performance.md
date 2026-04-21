@@ -18,6 +18,8 @@ related:
   - ../../../Authoritative/Canon/Architecture/Craig-Architecture.md
   - ../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md
   - ../../../../src/context_atlas/adapters/retrieval/lexical.py
+  - ../../../../src/context_atlas/adapters/retrieval/registry.py
+  - ../../../../src/context_atlas/adapters/retrieval/indexing.py
 supersedes: []
 ---
 
@@ -37,7 +39,8 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
 - [Craig Architecture - Planning And Decomposition](../../../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md)
-- current lexical retrieval and registry code under `src/context_atlas/adapters/retrieval/`
+- current lexical retrieval, registry, and index-shape code under
+  `src/context_atlas/adapters/retrieval/`
 - current lexical retrieval regression coverage in `tests/test_lexical_retrieval.py`
 
 ## Proposed Tasks
@@ -48,10 +51,12 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   lexical retrieval
 - make it explicit which reusable state belongs to the retriever versus the
   source registry versus a dedicated helper object
-- treat today's `InMemorySourceRegistry` location in `lexical.py` as the
-  current baseline; if a separate registry helper file is introduced during
-  implementation, that file should be treated as a new outward adapter surface
-  rather than assumed to exist already
+- keep canonical source ownership in the registry surface while letting the
+  baseline lexical index shape live in a dedicated outward retrieval helper
+  instead of hiding both concerns in one file
+- treat the current `registry.py` plus `indexing.py` split as the baseline
+  outward adapter surface established by Task 1.1, with `lexical.py`
+  remaining the consumer/orchestrator rather than reclaiming both concerns
 - keep the index outward in the adapter layer rather than inventing a new
   inward domain artifact for retrieval mechanics
 
@@ -62,6 +67,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - prevent a partial fix that caches the IDF table but still rebuilds
   per-document TF/vector state on every query
 - keep invalidation or rebuild rules explicit and small
+- treat the supported steady-state reuse shape as one registry-revision-aligned
+  lexical snapshot carrying corpus-wide IDF plus source-side TF-IDF vectors and
+  norms, rather than parallel caches split across multiple adapter surfaces
 
 ### Task 3: Repeated-Query Behavior And Boundaries
 
@@ -69,6 +77,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   recomputation for every call
 - keep the lexical retriever consuming canonical sources from the same shared
   registry model rather than bypassing governed source loading
+- make the warm-cache path explicitly re-enter the retrieval flow through one
+  fresh registry source listing per call rather than acting like a second
+  hidden source-loading mode
 - preserve deterministic ranking semantics for the same query/corpus input
 
 ### Task 4: Validation And Performance-Facing Proof
@@ -76,6 +87,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - update regression coverage so the indexed path is visible and reviewable
 - add bounded proof or instrumentation surfaces that show reuse behavior
   without turning this Story into a benchmark framework initiative
+- treat the shared retrieval-completed event plus regression coverage as the
+  preferred bounded proof surface, so reviewers can see `rebuilt` versus
+  `warm` snapshot behavior without a second retrieval or proof-only path
 - refresh the nearest docs or owner files if retrieval ownership boundaries or
   expectations change
 
@@ -95,6 +109,8 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   frequency while still rebuilding most of the expensive per-document work.
 - Performance-oriented proof can drift into benchmark theater unless it stays
   focused on index reuse and architectural trustworthiness.
+- Proof surfaces can become noisy if they expose too many adapter internals
+  instead of one small human-readable reuse signal on the shared path.
 
 ## Exit Criteria
 
@@ -106,6 +122,9 @@ Context Atlas on one shared retrieval path rather than introducing a separate
   second engine path
 - tests and review surfaces make the indexed behavior visible enough to verify
   it without relying on implementation folklore
+- the Story 1 proof baseline is explicit and bounded: one repeated-query
+  regression bundle plus the shared retrieval-completed `index_snapshot_state`
+  signal showing `rebuilt` versus `warm` behavior on the canonical adapter path
 
 ## Definition Of Done
 
@@ -125,3 +144,5 @@ Context Atlas on one shared retrieval path rather than introducing a separate
 - [Context Assembly Hardening Product Definition](../context_assembly_hardening_product_definition.md)
 - [Context Atlas System Model](../../../Authoritative/Identity/Context-Atlas-System-Model.md)
 - [Craig Architecture](../../../Authoritative/Canon/Architecture/Craig-Architecture.md)
+- `src/context_atlas/adapters/retrieval/registry.py`
+- `src/context_atlas/adapters/retrieval/indexing.py`

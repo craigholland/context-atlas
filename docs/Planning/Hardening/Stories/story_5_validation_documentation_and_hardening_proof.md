@@ -61,6 +61,10 @@ implementation details.
   materially benefits from human-readable evidence
 - keep proof surfaces tied to the canonical packet and trace model
 - avoid introducing a second artifact model just for hardening demonstrations
+- inherit Story 1's retrieval proof baseline as already settled: the repeated-
+  query regression bundle plus the shared retrieval-completed
+  `index_snapshot_state` signal should be extended only if later hardening work
+  truly needs more reviewability
 
 ### Task 3: Documentation And Example Alignment
 
@@ -94,6 +98,8 @@ implementation details.
   semantics from Stories 1 through 4 are actually stable.
 - Proof surfaces can drift from the shared engine path if they are optimized
   only for demonstration.
+- Retrieval-index proof can drift back into benchmark theater if Story 5
+  reopens Story 1 instead of inheriting the bounded `rebuilt`/`warm` baseline.
 - Documentation refresh can accidentally preserve old caveats if contributors
   update wording without checking the final packet and trace behavior.
 
