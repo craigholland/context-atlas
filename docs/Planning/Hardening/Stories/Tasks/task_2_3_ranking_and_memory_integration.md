@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-20
 last_reviewed: 2026-04-20
 owners: [core]
@@ -27,7 +27,7 @@ prefix-heavy logic in the other.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -112,6 +112,10 @@ PLANNED
 - exact full-text matching and prefix-heavy shortcuts are no longer the
   standing duplicate gates
 - tests make cross-policy consistency visible enough to review
+- ranking duplicate handling remains source-family-aware even while using the
+  shared duplicate assessment
+- memory duplicate decisions expose the shared match kind instead of hiding a
+  local duplicate shortcut
 
 ## Related Artifacts
 

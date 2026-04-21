@@ -335,6 +335,16 @@
 - The suite is strong for the current local MVP workflows, but it is still centered on tracked local examples and sample artifacts rather than broader external-service or production-style integration coverage.
 - The current workflow tests prove supported boundaries and artifact shapes, but they do not yet represent load, concurrency, or long-running operational behavior.
 - As test volume grows further, this folder may need more granular owner files or sub-suites so one local contract does not become too broad to govern well.
+- Story 2 duplicate-handling regressions should stay centered on the bounded lexical baseline: normalized exact matches, containment, token overlap, and clearly non-duplicate related text.
+- Those duplicate-handling regressions should include at least one non-ASCII token-overlap case so Unicode text stays covered by the shared helper.
+- Those same regressions should also include Atlas-style front-matter and shared-header cases so boilerplate normalization stays reviewable instead of drifting behind generic text fixtures.
+- Those same regressions should also cover metadata-only front-matter sources so ranking does not silently deduplicate unrelated documents through an empty normalized key.
+- Those same regressions should also cover metadata-only title variants so fuzzy overlap does not collapse distinct metadata-only sources when exact-key equality is absent.
+- Those same regressions should also cover indented fence-like lines inside YAML front matter so only column-zero fences terminate the bounded metadata block.
+- Ranking regressions should also prove at least one near-duplicate token-overlap case now flows through the shared assessment path rather than exact-key-only dedupe.
+- Memory regressions should also make the shared duplicate-assessment match kind visible in duplicate decisions so the policy cannot drift back to a hidden local duplicate shortcut.
+- Cross-policy Story 2 regressions should keep at least one shared-header-distinct-body case visible in both ranking and memory so the bounded boilerplate rule stays aligned across the two policies.
+- Story 2 proof regressions should also compare the current duplicate outcomes against the rejected exact-full-text and historical prefix-equality baselines explicitly, so the hardening gain stays reviewable without re-reading old implementations.
 
 ## Cross-Folder Contracts
 - `src/context_atlas/`: tests exercise internal modules directly, but the package layout should remain understandable without depending on tests to explain it.
