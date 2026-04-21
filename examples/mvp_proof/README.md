@@ -61,18 +61,18 @@ packet and Atlas trace still look like one canonical workflow run:
 
 Example:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_docs_refactor `
-  --query "Refactor the settings loader to remove duplicated validation logic." `
-  --input-summary "repo_root=sample_repo; docs_root=sample_repo/docs" `
-  --baseline-rendered tmp\baseline.txt `
-  --atlas-packet tmp\packet.json `
-  --atlas-trace tmp\trace.json `
-  --atlas-rendered tmp\atlas_rendered.txt `
-  --note "Baseline included duplicate planning notes." `
-  --output tmp\evidence\repo_docs_refactor.json
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_docs_refactor \
+  --query "Refactor the settings loader to remove duplicated validation logic." \
+  --input-summary "repo_root=sample_repo; docs_root=sample_repo/docs" \
+  --baseline-rendered tmp/baseline.txt \
+  --atlas-packet tmp/packet.json \
+  --atlas-trace tmp/trace.json \
+  --atlas-rendered tmp/atlas_rendered.txt \
+  --note "Baseline included duplicate planning notes." \
+  --output tmp/evidence/repo_docs_refactor.json
 ```
 
 The resulting JSON package is meant to be review-friendly and reproducible. It

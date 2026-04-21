@@ -49,15 +49,15 @@ That layout keeps two review surfaces together:
 After running one workflow and preparing one naive baseline rendered-context
 artifact:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_governed_docs_update `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --input-summary "repo_root=.; docs_root=docs/Guides" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_governed_docs_update \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --input-summary "repo_root=.; docs_root=docs/Guides" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
 
@@ -132,16 +132,16 @@ tmp/mvp_proof/evidence/codex_repository/repo_budget_pressure_tradeoffs/
 Package it with the constrained repository command from
 [../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md) and:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_budget_pressure_tradeoffs `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
-  --expect-budget-pressure `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_budget_pressure_tradeoffs \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository_budget_pressure.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository_budget_pressure \
+  --expect-budget-pressure \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
 
@@ -159,16 +159,16 @@ tmp/mvp_proof/evidence/codex_repository/repo_document_authority_precedence/
 Package it with the authority-rich repository command from
 [../inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md) and:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_document_authority_precedence `
-  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
-  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
-  --expect-document-authority-contrast `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_document_authority_precedence \
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" \
+  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository_authority.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository_authority \
+  --expect-document-authority-contrast \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
 

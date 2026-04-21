@@ -156,18 +156,24 @@
 steps:
   - name: compile
     run: |
+      # Linux/macOS analog: python3 -m compileall src tests
       py -3 -m compileall src tests
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest
       py -3 -m pytest
 
   - name: import_boundaries
     run: |
+      # Linux/macOS analog: python3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
       py -3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure, context_atlas.services"
       $env:PYTHONPATH='src'
       py -3 -c "import context_atlas, context_atlas.domain, context_atlas.infrastructure, context_atlas.services"
 ```

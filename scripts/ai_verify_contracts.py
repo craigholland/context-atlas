@@ -173,10 +173,11 @@ def _shell_command_prefix() -> list[str]:
     """
     Choose a shell runner.
 
-    Context Atlas local owner files currently express their Verification Contract
-    steps in PowerShell-friendly syntax. Prefer PowerShell on Windows so local
-    contracts stay consistent between desktop use and CI, and prefer bash on
-    non-Windows platforms.
+    Context Atlas local owner files may keep Windows-friendly launcher and
+    environment syntax in their executable Verification Contract steps, while
+    documenting Linux/macOS analogs in adjacent comments. Prefer PowerShell on
+    Windows so local contract execution stays consistent with desktop use, and
+    prefer bash on non-Windows platforms.
     """
     if os.name == "nt":
         if shutil.which("pwsh"):

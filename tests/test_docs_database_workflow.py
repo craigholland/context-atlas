@@ -340,8 +340,9 @@ class DocsDatabaseWorkflowTests(unittest.TestCase):
                         "ticket_id": "support-202",
                         "title": "Preflight note",
                         "body": (
-                            "Run py -3 scripts/preflight.py before push and keep "
-                            "the relevant __ai__.md files updated."
+                            "Run python scripts/preflight.py before push (or py "
+                            "-3 scripts/preflight.py on Windows) and keep the "
+                            "relevant __ai__.md files updated."
                         ),
                         "uri": "records://support/support-202",
                         "uses": ["support", "troubleshooting"],

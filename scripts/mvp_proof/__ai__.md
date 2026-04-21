@@ -77,9 +77,11 @@
 steps:
   - name: compile_mvp_proof_scripts
     run: |
+      # Linux/macOS analog: python3 -m compileall scripts/mvp_proof
       py -3 -m compileall scripts/mvp_proof
 
   - name: help_output
     run: |
+      # Linux/macOS analog: python3 scripts/mvp_proof/capture_evidence.py --help > /dev/null
       py -3 scripts/mvp_proof/capture_evidence.py --help > $null
 ```

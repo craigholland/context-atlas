@@ -61,9 +61,19 @@ This workflow does not yet:
 
 From the repository root:
 
+PowerShell:
+
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+Bash:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 ```
 
@@ -87,17 +97,32 @@ file.
 
 If you want a visible local reference file:
 
+PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-If you want to set a few values explicitly in PowerShell:
+bash:
+
+```bash
+cp .env.example .env
+```
+
+Set a few values explicitly if you want to override defaults:
 
 ```powershell
 $env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
 $env:CONTEXT_ATLAS_LOW_CODE_PRESET = "chatbot_docs_records"
 $env:CONTEXT_ATLAS_LOW_CODE_DOCS_ROOT = "docs/Guides"
 $env:CONTEXT_ATLAS_LOW_CODE_RECORDS_FILE = "examples/docs_database_workflow/sample_records.json"
+```
+
+```bash
+export CONTEXT_ATLAS_LOG_LEVEL="INFO"
+export CONTEXT_ATLAS_LOW_CODE_PRESET="chatbot_docs_records"
+export CONTEXT_ATLAS_LOW_CODE_DOCS_ROOT="docs/Guides"
+export CONTEXT_ATLAS_LOW_CODE_RECORDS_FILE="examples/docs_database_workflow/sample_records.json"
 ```
 
 ## Run The Low-Code Workflow
@@ -123,39 +148,39 @@ broader no-code platform.
 The current single supported preset is also the workflow default, so `--preset`
 is optional but supported when you want the invocation to be explicit:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --preset chatbot_docs_records
 ```
 
 From the repository root:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py
 ```
 
 Override the query:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --query "How should a low-code builder validate Atlas output?"
 ```
 
 Override the docs root or records file relative to `--repo-root`:
 
-```powershell
-python examples/low_code_workflow/run.py --repo-root C:\repos\my-app --docs-root docs\Guides --records-file data\support_rows.json
+```bash
+python examples/low_code_workflow/run.py --repo-root /repos/my-app --docs-root docs/Guides --records-file data/support_rows.json
 ```
 
 Inspect one source family in isolation:
 
-```powershell
+```bash
 python examples/low_code_workflow/run.py --no-documents
 python examples/low_code_workflow/run.py --no-records
 ```
 
 If you want the standard proof artifacts for the same run:
 
-```powershell
-python examples/low_code_workflow/run.py --proof-artifacts-dir tmp\mvp_proof\low_code_demo
+```bash
+python examples/low_code_workflow/run.py --proof-artifacts-dir tmp/mvp_proof/low_code_demo
 ```
 
 ## What The Workflow Does

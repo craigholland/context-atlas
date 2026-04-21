@@ -44,9 +44,19 @@ This workflow does not yet:
 
 From the repository root:
 
+PowerShell:
+
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+Bash:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 ```
 
@@ -60,16 +70,30 @@ reference surface for supported settings, not an automatically loaded dotenv fil
 
 If you want a visible local reference file:
 
+PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
-If you want to set a few values explicitly in PowerShell:
+bash:
+
+```bash
+cp .env.example .env
+```
+
+Set a few values explicitly if you want to override defaults:
 
 ```powershell
 $env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
 $env:CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET = "1024"
 $env:CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K = "6"
+```
+
+```bash
+export CONTEXT_ATLAS_LOG_LEVEL="INFO"
+export CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024"
+export CONTEXT_ATLAS_DEFAULT_RETRIEVAL_TOP_K="6"
 ```
 
 The current knobs cover:
@@ -87,34 +111,34 @@ The current runnable example is:
 
 From the repository root:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
 Override the engineering question:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root . --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?"
 ```
 
 If you want to point at an explicit docs directory, use `--docs-root`. Relative
 values are resolved from the selected repository root:
 
-```powershell
-python examples/codex_repository_workflow/run.py --repo-root C:\repos\my-repo --docs-root docs
+```bash
+python examples/codex_repository_workflow/run.py --repo-root /repos/my-repo --docs-root docs
 ```
 
 If you want one run to make budget tradeoffs more obvious, the workflow also
 supports a one-shot total-budget override:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/run.py --repo-root . --total-budget 128
 ```
 
 If you want the standard proof artifacts for the same run:
 
-```powershell
-python examples/codex_repository_workflow/run.py --repo-root . --proof-artifacts-dir tmp\mvp_proof\codex_repository_demo
+```bash
+python examples/codex_repository_workflow/run.py --repo-root . --proof-artifacts-dir tmp/mvp_proof/codex_repository_demo
 ```
 
 ## Minimal Repository Layout
@@ -173,7 +197,7 @@ If you want a more review-oriented output than the main runnable example, use:
 
 Run it from the repository root:
 
-```powershell
+```bash
 python examples/codex_repository_workflow/show_trace.py --repo-root .
 ```
 

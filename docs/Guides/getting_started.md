@@ -26,9 +26,19 @@ You will:
 
 From the repository root:
 
+PowerShell:
+
 ```powershell
 py -3.12 -m venv .venv
 .\\.venv\\Scripts\\Activate.ps1
+python -m pip install -e .[dev]
+```
+
+Bash:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 ```
 
@@ -40,17 +50,30 @@ Context Atlas uses validated defaults, so you can run the starter example withou
 
 If you want a visible local reference file:
 
+PowerShell:
+
 ```powershell
 Copy-Item .env.example .env
 ```
 
+bash:
+
+```bash
+cp .env.example .env
+```
+
 The supported starter knobs are documented in [`.env.example`](../../.env.example). That file is the canonical example surface for supported settings, but `load_settings_from_env()` reads the live process environment, not `.env` files automatically.
 
-In PowerShell, you can set variables explicitly before running the example:
+Set variables explicitly before running the example if you want to override defaults.
 
 ```powershell
 $env:CONTEXT_ATLAS_LOG_LEVEL = "INFO"
 $env:CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET = "1024"
+```
+
+```bash
+export CONTEXT_ATLAS_LOG_LEVEL="INFO"
+export CONTEXT_ATLAS_DEFAULT_TOTAL_BUDGET="1024"
 ```
 
 Those environment-backed settings currently cover:
@@ -77,7 +100,7 @@ public config. That knob is exposed as
 
 The current installable starter command is:
 
-```powershell
+```bash
 context-atlas-starter docs --query "How should planning docs be treated?"
 ```
 
@@ -94,7 +117,7 @@ example is:
 
 Run it from the repository root:
 
-```powershell
+```bash
 python examples/starter_context_flow.py
 ```
 
@@ -103,10 +126,15 @@ That command uses the example defaults:
 - `docs/` as the input directory
 - `How should planning docs be treated?` as the starter query
 
-If you want the repo-local no-install path instead:
+If you want the repo-local no-install path instead, set `PYTHONPATH` explicitly:
 
 ```powershell
 $env:PYTHONPATH = "src"
+python examples/starter_context_flow.py docs "How should planning docs be treated?"
+```
+
+```bash
+export PYTHONPATH=src
 python examples/starter_context_flow.py docs "How should planning docs be treated?"
 ```
 

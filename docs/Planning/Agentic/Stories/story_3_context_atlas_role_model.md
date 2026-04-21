@@ -153,7 +153,7 @@ of review passes rather than relying on ad hoc review-trigger comments.
   files in the same slice
 - the role model stays project-specific without absorbing runtime-specific file
   conventions
-- `py -3 scripts/preflight.py` passes on the Story feature branch before review
+- The repository preflight command passes on the Story feature branch before review
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that
   same feature branch before human merge

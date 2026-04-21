@@ -85,14 +85,19 @@
 steps:
   - name: compile_rendering
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/rendering
       py -3 -m compileall src/context_atlas/rendering
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
       py -3 -m pytest tests/test_budget_and_compression.py tests/test_context_assembly_service.py tests/test_packet_rendering.py tests/test_trace_rendering.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.rendering import render_packet_context, render_packet_inspection, render_trace_inspection"
 ```

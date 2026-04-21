@@ -68,12 +68,12 @@ relying on whatever files were already present in the previous review pass.
 
 Scenario: `repo_governed_docs_update`
 
-```powershell
-python examples/codex_repository_workflow/run.py `
-  --repo-root . `
-  --docs-root docs/Guides `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --proof-artifacts-dir tmp\mvp_proof\codex_repository
+```bash
+python examples/codex_repository_workflow/run.py \
+  --repo-root . \
+  --docs-root docs/Guides \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --proof-artifacts-dir tmp/mvp_proof/codex_repository
 ```
 
 For the current proof pass, the repository workflow intentionally points at
@@ -84,10 +84,10 @@ within the currently supported governed-doc classes of the flagship workflow.
 
 Scenario: `builder_support_troubleshooting`
 
-```powershell
-python examples/docs_database_workflow/run.py `
-  --query "How should a builder configure Context Atlas and troubleshoot preflight or environment-loading issues in a chatbot pipeline?" `
-  --proof-artifacts-dir tmp\mvp_proof\docs_database_builder
+```bash
+python examples/docs_database_workflow/run.py \
+  --query "How should a builder configure Context Atlas and troubleshoot preflight or environment-loading issues in a chatbot pipeline?" \
+  --proof-artifacts-dir tmp/mvp_proof/docs_database_builder
 ```
 
 The default command intentionally uses the tracked sample records payload from
@@ -98,11 +98,11 @@ depend on unpublished setup.
 
 Scenario: `low_code_validation`
 
-```powershell
-python examples/low_code_workflow/run.py `
-  --repo-root . `
-  --query "How should a low-code builder configure Context Atlas and troubleshoot environment or preflight issues in a chatbot workflow?" `
-  --proof-artifacts-dir tmp\mvp_proof\low_code_chatbot
+```bash
+python examples/low_code_workflow/run.py \
+  --repo-root . \
+  --query "How should a low-code builder configure Context Atlas and troubleshoot environment or preflight issues in a chatbot workflow?" \
+  --proof-artifacts-dir tmp/mvp_proof/low_code_chatbot
 ```
 
 The current low-code proof path intentionally stays on the tracked default
@@ -113,15 +113,15 @@ preset and tracked sample record payload so the workflow remains reproducible.
 After a workflow run has produced the standard Atlas artifacts, package that run
 with one naive baseline rendered-context artifact:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_governed_docs_update `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --input-summary "repo_root=.; docs_root=docs/Guides" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_governed_docs_update \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --input-summary "repo_root=.; docs_root=docs/Guides" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
 
@@ -149,27 +149,27 @@ The constrained repository scenario for Story 7 should use this supported run:
   - the evidence package should make the sacrificed or transformed context
     visible enough to compare against the naive baseline
 
-```powershell
-python examples/codex_repository_workflow/run.py `
-  --repo-root . `
-  --docs-root docs/Guides `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --total-budget 64 `
-  --proof-artifacts-dir tmp\mvp_proof\codex_repository_budget_pressure
+```bash
+python examples/codex_repository_workflow/run.py \
+  --repo-root . \
+  --docs-root docs/Guides \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --total-budget 64 \
+  --proof-artifacts-dir tmp/mvp_proof/codex_repository_budget_pressure
 ```
 
 Package that constrained run with:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_budget_pressure_tradeoffs `
-  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" `
-  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_budget_pressure.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository_budget_pressure `
-  --expect-budget-pressure `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_budget_pressure_tradeoffs \
+  --query "What guidance should an engineer follow when updating repository planning docs or architecture guidance?" \
+  --input-summary "repo_root=.; docs_root=docs/Guides; total_budget=64" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository_budget_pressure.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository_budget_pressure \
+  --expect-budget-pressure \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```
 
@@ -191,24 +191,24 @@ run:
   - a reviewer should be able to explain the authority contrast through packet
     and trace evidence rather than relying only on the folder names
 
-```powershell
-python examples/codex_repository_workflow/run.py `
-  --repo-root examples/codex_repository_workflow/sample_repo `
-  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
-  --proof-artifacts-dir tmp\mvp_proof\codex_repository_authority
+```bash
+python examples/codex_repository_workflow/run.py \
+  --repo-root examples/codex_repository_workflow/sample_repo \
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" \
+  --proof-artifacts-dir tmp/mvp_proof/codex_repository_authority
 ```
 
 Package that authority-rich run with:
 
-```powershell
-python scripts/mvp_proof/capture_evidence.py `
-  --workflow codex_repository `
-  --scenario repo_document_authority_precedence `
-  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" `
-  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" `
-  --baseline-rendered tmp\mvp_proof\baselines\codex_repository_authority.txt `
-  --atlas-artifact-dir tmp\mvp_proof\codex_repository_authority `
-  --expect-document-authority-contrast `
-  --bundle-root tmp\mvp_proof\evidence `
+```bash
+python scripts/mvp_proof/capture_evidence.py \
+  --workflow codex_repository \
+  --scenario repo_document_authority_precedence \
+  --query "When authoritative architecture guidance and planning docs both discuss repository process, which guidance should an engineer follow and how should planning docs be updated?" \
+  --input-summary "repo_root=examples/codex_repository_workflow/sample_repo; docs_root=examples/codex_repository_workflow/sample_repo/docs" \
+  --baseline-rendered tmp/mvp_proof/baselines/codex_repository_authority.txt \
+  --atlas-artifact-dir tmp/mvp_proof/codex_repository_authority \
+  --expect-document-authority-contrast \
+  --bundle-root tmp/mvp_proof/evidence \
   --refresh-bundle
 ```

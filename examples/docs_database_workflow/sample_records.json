@@ -12,7 +12,7 @@
   {
     "ticket_id": "support-102",
     "title": "Preflight failure guidance",
-    "body": "Support escalation guidance says to run py -3 scripts/preflight.py before pushing and to update the relevant __ai__.md owner files when governed code or docs change.",
+    "body": "Support escalation guidance says to run python scripts/preflight.py before pushing (or py -3 scripts/preflight.py on Windows) and to update the relevant __ai__.md owner files when governed code or docs change.",
     "uri": "records://support/support-102",
     "uses": ["support", "troubleshooting"],
     "team": "developer-experience",

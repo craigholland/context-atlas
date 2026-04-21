@@ -50,7 +50,8 @@ def _ensure_tooling() -> None:
     joined = ", ".join(missing)
     raise SystemExit(
         "[preflight] Missing required dev tools: "
-        f"{joined}. Install them with `py -3 -m pip install -e .[dev]`."
+        f"{joined}. Install them with `python -m pip install -e .[dev]` "
+        "(or `py -3 -m pip install -e .[dev]` on Windows)."
     )
 
 

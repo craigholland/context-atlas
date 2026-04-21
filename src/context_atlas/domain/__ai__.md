@@ -257,14 +257,19 @@
 steps:
   - name: compile_domain
     run: |
+      # Linux/macOS analog: python3 -m compileall src/context_atlas/domain
       py -3 -m compileall src/context_atlas/domain
 
   - name: unit_tests
     run: |
+      # Linux/macOS analog: python3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py tests/test_memory_policy.py
       py -3 -m pytest tests/test_bootstrap_layers.py tests/test_budget_and_compression.py tests/test_candidate_ranking.py tests/test_domain_models.py tests/test_memory_policy.py
 
   - name: import_sanity
     run: |
+      # Linux/macOS analog:
+      # export PYTHONPATH=src
+      # python3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.messages import ErrorMessage, LogMessage; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
       $env:PYTHONPATH='src'
       py -3 -c "from context_atlas.domain.errors import ErrorCode, ContextAtlasError; from context_atlas.domain.messages import ErrorMessage, LogMessage; from context_atlas.domain.models import CompressionResult, CompressionStrategy, ContextMemoryEntry, ContextSource, ContextBudget, ContextPacket; from context_atlas.domain.policies import StarterBudgetAllocationPolicy, StarterCandidateRankingPolicy, StarterCompressionPolicy, StarterMemoryRetentionPolicy"
 ```

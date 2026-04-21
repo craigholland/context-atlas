@@ -95,14 +95,17 @@
 steps:
   - name: validate_owner_file
     run: |
+      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md __ai__.md
       py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md __ai__.md
 
   - name: validate_related_owner_files
     run: |
+      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md docs/Authoritative/Canon/RepoManagement/__ai__.md __ai__.md
       py -3 scripts/validate_ai_docs.py --repo-root . --files docs/Authoritative/Canon/AgenticDevelopment/__ai__.md docs/Authoritative/Canon/RepoManagement/__ai__.md __ai__.md
 
   - name: freshness
     run: |
+      # Linux/macOS analog: python3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/Canon/AgenticDevelopment --governed-root docs/Authoritative/Canon/RepoManagement --suffix .md
       py -3 scripts/check_ai_docs.py --repo-root . --base HEAD^ --head HEAD --governed-root docs/Authoritative/Canon/AgenticDevelopment --governed-root docs/Authoritative/Canon/RepoManagement --suffix .md
 ```
 
