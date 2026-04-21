@@ -18,7 +18,7 @@ from ..models import (
     ExclusionReasonCode,
     InclusionReasonCode,
 )
-from .deduplication import assess_duplicate_content
+from .deduplication import DuplicateContentAssessment, assess_duplicate_content
 
 _DEFAULT_MINIMUM_EFFECTIVE_SCORE = 0.1
 _DEFAULT_QUERY_BOOST_WEIGHT = 0.35
@@ -207,7 +207,8 @@ class StarterMemoryRetentionPolicy(CanonicalDomainModel):
                         reason_codes=(ExclusionReasonCode.DUPLICATE,),
                         explanation=(
                             f"Memory entry duplicated retained entry "
-                            f"'{duplicate_of.entry_id}'."
+                            f"'{duplicate_of.entry.entry_id}' via "
+                            f"{duplicate_of.assessment.match_kind or 'duplicate_match'}."
                         ),
                         candidate_score=scored_entry.effective_score,
                     )
@@ -328,7 +329,7 @@ def _find_duplicate_entry(
     retained_entries: Iterable[ContextMemoryEntry],
     *,
     threshold: float,
-) -> ContextMemoryEntry | None:
+) -> "_DuplicateMemoryMatch | None":
     """Return the retained winner if the candidate duplicates prior memory."""
 
     candidate_content = candidate.source.content
@@ -336,28 +337,17 @@ def _find_duplicate_entry(
         return None
 
     for retained_entry in retained_entries:
-        if _is_duplicate_content(
+        assessment = assess_duplicate_content(
             candidate_content,
             retained_entry.source.content,
             threshold=threshold,
-        ):
-            return retained_entry
+        )
+        if assessment.is_duplicate:
+            return _DuplicateMemoryMatch(
+                entry=retained_entry,
+                assessment=assessment,
+            )
     return None
-
-
-def _is_duplicate_content(content_a: str, content_b: str, *, threshold: float) -> bool:
-    """Apply the shared lexical duplicate baseline, not semantic similarity.
-
-    The shared helper now also strips bounded front matter and discounts a
-    bounded shared leading line prefix before fuzzy comparison so repeated
-    Atlas-style headers do not dominate the duplicate result.
-    """
-
-    return assess_duplicate_content(
-        content_a,
-        content_b,
-        threshold=threshold,
-    ).is_duplicate
 
 
 def _relevance_boost(query: str, content: str, *, weight: float) -> float:
@@ -368,6 +358,14 @@ def _relevance_boost(query: str, content: str, *, weight: float) -> float:
     if not query_tokens or not content_tokens:
         return 0.0
     return (len(query_tokens & content_tokens) / len(query_tokens)) * weight
+
+
+@dataclass(frozen=True, slots=True)
+class _DuplicateMemoryMatch:
+    """Internal helper describing which retained memory entry won and why."""
+
+    entry: ContextMemoryEntry
+    assessment: DuplicateContentAssessment
 
 
 __all__ = [
