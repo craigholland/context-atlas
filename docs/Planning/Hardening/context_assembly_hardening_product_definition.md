@@ -354,6 +354,91 @@ This epic should ultimately produce:
   does not deliver a half-improved heuristic and a half-formed seam in the same
   increment.
 
+## Integrated Closeout Assessment
+
+The original six hardening findings should now be treated as resolved
+implementation history rather than as standing caveats about current Atlas
+behavior.
+
+`1. TF-IDF retrieval recomputed corpus state on every query`
+
+- resolved through Story 1's extracted retrieval registry/index boundary and
+  revision-aligned lexical snapshot reuse
+- the repeated-query path now reuses both corpus-wide weighting state and
+  per-document TF-IDF/vector work instead of rebuilding the full source-side
+  picture on every query
+- review anchor:
+  `tests/test_lexical_retrieval.py::test_story_5_hardening_baseline_keeps_repeated_query_proof_bundle_reviewable`
+
+`2. Ranking duplicate handling was exact full-text only`
+
+- resolved through Story 2's shared duplicate-detection surface used by both
+  ranking and memory
+- the accepted baseline is now one bounded lexical/structural near-duplicate
+  model rather than exact full-text equality on one side and a separate local
+  heuristic on the other
+- review anchors:
+  - `tests/test_candidate_ranking.py::test_story_5_hardening_baseline_proves_duplicate_acceptance_bar`
+  - `tests/test_memory_policy.py::test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar`
+
+`3. chars_per_token = 4 was too blunt`
+
+- resolved through Story 3's shape-aware `starter_heuristic` default plus a
+  bounded outward callable token-estimation seam
+- Atlas no longer treats prose, code/markup, and non-Latin-heavy text as one
+  flat token-shape category, while still avoiding provider-specific logic in
+  the domain layer
+- review anchors:
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_labels_default_estimator_truthfully`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`
+
+`4. remaining_tokens semantics were misleading with elastic slots`
+
+- resolved through Story 4's truthful split between fixed reservation,
+  pre-allocation unreserved capacity, and post-allocation unallocated remainder
+- packet, trace, and service surfaces now distinguish those concepts directly
+  instead of asking callers to infer meaning from one generic "remaining"
+  label
+- review anchors:
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_budget_allocation_truthful`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_keeps_canonical_service_budget_summary`
+  - `tests/test_packet_rendering.py::test_story_5_hardening_baseline_highlights_packet_budget_and_compression_state`
+  - `tests/test_trace_rendering.py::test_story_5_hardening_baseline_groups_truthful_trace_metadata`
+
+`5. EXTRACTIVE fallback could misreport actual behavior`
+
+- resolved through Story 4's explicit split between configured compression
+  intent and effective runtime compression strategy
+- packet/trace/service consumers can now tell when extractive intent actually
+  fell back to truncation instead of reading "extractive" as a silent success
+- review anchors:
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_compression_fallback_truthful`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`
+
+`6. Memory dedup used a fragile prefix heuristic`
+
+- resolved as part of Story 2's shared duplicate baseline and bounded
+  front-matter/boilerplate handling
+- the old prefix-only shortcut is now treated as a rejected baseline rather
+  than an acceptable standing strategy
+- review anchors:
+  - `tests/test_candidate_ranking.py::test_story_5_hardening_baseline_proves_duplicate_acceptance_bar`
+  - `tests/test_memory_policy.py::test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar`
+
+The intentionally deferred follow-on work is now narrower and should not be
+confused with unresolved versions of the original six findings:
+
+- persistent on-disk retrieval indexes or retrieval services remain out of
+  scope for this epic
+- embedding-backed or provider-backed semantic duplicate detection remains out
+  of scope for this epic
+- provider-specific tokenizer selection or an env-backed tokenizer selector
+  remains out of scope for this epic
+
+Those are future capability decisions, not standing evidence that the reviewed
+hardening concerns remain open.
+
 ## Exit Criteria
 
 - repeated lexical TF-IDF retrieval over a static registry no longer recomputes

@@ -160,6 +160,61 @@ implementation details.
 - the hardening Epic can close without leaving the original review findings as
   standing caveats about current runtime behavior
 
+## Final Evidence Path
+
+Story 5 closes with one explicit reviewer-facing evidence path rather than a
+set of implied "go read the code" expectations.
+
+`Named regression anchors`
+
+- retrieval indexing and repeated-query proof:
+  - `tests/test_lexical_retrieval.py::test_story_5_hardening_baseline_keeps_repeated_query_proof_bundle_reviewable`
+- duplicate-acceptance bar across ranking and memory:
+  - `tests/test_candidate_ranking.py::test_story_5_hardening_baseline_proves_duplicate_acceptance_bar`
+  - `tests/test_memory_policy.py::test_story_5_hardening_baseline_proves_memory_duplicate_acceptance_bar`
+- budget, compression, and estimator truthfulness:
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_budget_allocation_truthful`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_keeps_compression_fallback_truthful`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_handles_non_monotonic_prefix_estimation`
+  - `tests/test_budget_and_compression.py::test_story_5_hardening_baseline_labels_default_estimator_truthfully`
+- service, packet, and trace truthfulness:
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`
+  - `tests/test_context_assembly_service.py::test_story_5_hardening_baseline_keeps_canonical_service_budget_summary`
+  - `tests/test_packet_rendering.py::test_story_5_hardening_baseline_highlights_packet_budget_and_compression_state`
+  - `tests/test_trace_rendering.py::test_story_5_hardening_baseline_groups_truthful_trace_metadata`
+
+`Bounded human-readable proof`
+
+- `examples/mvp_proof/README.md`
+- `examples/mvp_proof/inputs/README.md`
+- `examples/mvp_proof/evidence/README.md`
+
+Those bundle-backed surfaces remain intentionally bounded to budget/compression
+tradeoff review and document-authority contrast review through canonical packet
+and trace artifacts. They do not create a second retrieval-demo or
+duplicate-demo artifact family.
+
+`Product-facing closeout surfaces`
+
+- `README.md`
+- `docs/Guides/getting_started.md`
+- workflow guides under `docs/Guides/`
+- example READMEs under `examples/`
+- `docs/Release/README.md`
+
+Those docs should now be read as the outward-facing explanation of the settled
+hardened behavior rather than as workaround narration around MVP-era shortcuts.
+
+`Intentional follow-on work`
+
+- persistent on-disk retrieval indexes
+- embedding-backed or provider-backed semantic duplicate handling
+- provider-specific tokenizer selection or env-backed tokenizer choice
+
+Those follow-ons remain out of scope for this epic, but they are no longer the
+same thing as leaving the original six hardening findings unresolved.
+
 ## Definition Of Done
 
 - the Story's scoped Tasks are either completed or intentionally deferred with

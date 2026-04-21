@@ -26,6 +26,7 @@
 - Protocol, role-archetype, materialization, and governance supplements should remain separate enough that later validators and reviewers can reason about one concern without reconstructing the whole system.
 - Meaningful updates to this folder should also review root governance, metadata, and neighboring planning indexes so the canon remains discoverable and trustworthy.
 - The README should explain why the agentic canon matters to Context Atlas's broader governance model, not only provide a reading order over the documents.
+- When hardening or other planning closeout docs summarize evidence paths, they should point back to this canon for shared governance vocabulary rather than recreating a second portable validation or change-management model in planning prose.
 
 ## Allowed Dependencies
 - may depend on:
