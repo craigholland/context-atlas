@@ -53,15 +53,8 @@ shipped release summary is
 
 ## Start Here
 
-Project Context Atlas is actively evolving on several fronts:
-
-- the Context Atlas product itself
-- the derived AgenticDevelopment components
-- the Canon / Identity / operationalization architecture
-- the `__ai__.md` architectural governance and enforcement system
-
-That makes this a cognitively-dense repo. Pick the path that matches what you
-care about most right now:
+Project Context Atlas is actually efforting a few different fronts -- all of which are evolving -- which has resulted in a cognitively-dense repo. Since there are a few different reasons why you may be here, pick the path that matches
+what you care about most right now:
 
 1. **The Context Atlas product itself**
 
