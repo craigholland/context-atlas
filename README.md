@@ -1,6 +1,7 @@
 # Context Atlas
 
-Context Atlas is a standalone context-governance and context-assembly engine for Codex-powered systems and other provider-agnostic applications.
+Context Atlas is a standalone context-governance and context-assembly engine
+for Codex-powered systems and other provider-agnostic applications.
 
 It exists to answer questions such as:
 
@@ -10,53 +11,149 @@ It exists to answer questions such as:
 - What should be retained, compressed, transformed, or excluded?
 - How should inclusion decisions remain auditable and reproducible?
 
+## Mental Model
+
+Context Atlas takes one or more governed source inputs, applies authority,
+retrieval, ranking, memory, budgeting, compression, and assembly rules, and
+produces:
+
+- a `ContextPacket`
+- a `ContextTrace`
+- derived rendered views over those artifacts
+
+The goal is not just retrieval. The goal is governed, reproducible,
+inspectable context decisions.
+
 ## Status
 
 This repository has completed its initial architecture and governance bootstrap
 and now carries an explicit `MVP Ready` recommendation in
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
-Context Atlas currently includes a runnable, evidence-backed MVP for canonical
-source modeling, retrieval, ranking, budgeting, compression, memory retention,
-packet assembly, ontology-aware filesystem document ingestion, structured-record
-ingestion, and three supported workflow surfaces.
 
-The `0.1.2` release now packages the first full context-assembly hardening
-pass. The current focus is the next post-hardening expansion phase: preserving
-those truthful packet, trace, retrieval, and compression contracts while
-widening scenario and integration coverage without forking the shared engine
-path.
+The `0.1.2` release packages the first full context-assembly hardening pass.
+The current focus is the next post-hardening expansion phase: widening scenario
+and integration coverage without losing the truthful packet, trace, retrieval,
+budget, and compression contracts that were hardened in that release.
 
-That hardening work has now settled a few important outward-facing truths:
+Important outward-facing truths that are now settled:
 
-- repeated lexical retrieval reuses shared index state instead of rebuilding the
-  full TF-IDF picture on every query
-- ranking and memory share one bounded duplicate-handling baseline for
-  Atlas-owned text rather than relying on exact full-text equality or
-  prefix-only shortcuts
+- repeated lexical retrieval reuses shared index state instead of rebuilding
+  the whole TF-IDF picture on every query
+- ranking and memory now share one bounded duplicate-handling baseline for
+  Atlas-owned text
 - starter token estimation is shape-aware by default instead of assuming one
-  global flat ratio for all content
-- packet inspection now prefers truthful budget vocabulary such as
-  `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens`,
-  while trace inspection surfaces the matching `budget_fixed_reserved_tokens`,
-  `budget_unreserved_tokens`, and `budget_unallocated_tokens` metadata keys
-- packet and trace inspection both surface truthful compression vocabulary such
-  as `compression_strategy` and optional `configured_compression_strategy`
+  flat ratio for all content
+- packet and trace inspection now prefer truthful budget and compression
+  vocabulary
 
-The in-repo release-history index now lives at
+The in-repo release-history index lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
 shipped release summary is
 [docs/Release/release_0_1_2.md](/context-atlas/docs/Release/release_0_1_2.md).
 
 ## Start Here
 
-If you are trying to evaluate or set up Context Atlas, start with:
+Project Context Atlas is actively evolving on several fronts:
 
-- [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
-- [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+- the Context Atlas product itself
+- the derived AgenticDevelopment components
+- the Canon / Identity / operationalization architecture
+- the `__ai__.md` architectural governance and enforcement system
 
-Those guides are the primary user-facing help surface. The `examples/`
-directory contains runnable companion artifacts, sample payloads, and proof
-inputs that support the guides rather than replacing them.
+That makes this a cognitively-dense repo. Pick the path that matches what you
+care about most right now:
+
+1. **The Context Atlas product itself**
+
+   Start with:
+   - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
+   - [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+   - [docs/Guides/context_atlas_tour.md](/context-atlas/docs/Guides/context_atlas_tour.md)
+   - [docs/Release/README.md](/context-atlas/docs/Release/README.md)
+
+2. **The derived AgenticDevelopment components**
+
+   Start with:
+   - [docs/Authoritative/Canon/AgenticDevelopment/README.md](/context-atlas/docs/Authoritative/Canon/AgenticDevelopment/README.md)
+   - [docs/Authoritative/Identity/AgenticDevelopment/](/context-atlas/docs/Authoritative/Identity/AgenticDevelopment/)
+   - [`.codex/`](/context-atlas/.codex/)
+   - [`.agents/skills/`](/context-atlas/.agents/skills/)
+
+3. **The Canon / Identity / operationalization architecture**
+
+   Start with:
+   - [docs/README.md](/context-atlas/docs/README.md)
+   - [docs/Authoritative/Canon/README.md](/context-atlas/docs/Authoritative/Canon/README.md)
+   - [docs/Authoritative/Identity/](/context-atlas/docs/Authoritative/Identity/)
+   - [Context Atlas Agentic Development Profile](/context-atlas/docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
+
+4. **The `__ai__.md` architectural governance and enforcement system**
+
+   Start with:
+   - [`__ai__.md`](/context-atlas/__ai__.md)
+   - [`__ai__.template.md`](/context-atlas/__ai__.template.md)
+   - [`scripts/validate_ai_docs.py`](/context-atlas/scripts/validate_ai_docs.py)
+   - [`scripts/check_ai_docs.py`](/context-atlas/scripts/check_ai_docs.py)
+   - [`scripts/ai_verify_contracts.py`](/context-atlas/scripts/ai_verify_contracts.py)
+   - [`.github/workflows/`](/context-atlas/.github/workflows/)
+
+5. **I recently gave you a code review and you've come to rain down fiery vengeance upon me**
+
+   Start with the area you disagree with most, then ask your AI client for the
+   strongest honest critique it can make.
+
+### AI-Assisted Review
+
+If you want an AI client to help you review this repo honestly, use:
+
+- the [latest GitHub release](https://github.com/craigholland/context-atlas/releases/latest)
+  if you want to critique shipped behavior rather than in-progress branch work
+- your current checkout of `development` if you want to critique the latest
+  evolving product, canon, runtime, or governance work
+
+Then point the AI at the specific surface you care about instead of asking it
+to summarize the whole repository at once.
+
+Suggested prompts:
+
+- **Product**
+  ```text
+  Review this repository as a product evaluator. Focus on the user-facing setup path,
+  guides, examples, and release notes. Be critical and honest. Tell me what is clear,
+  what is confusing, and what would block adoption.
+  ```
+- **AgenticDevelopment**
+  ```text
+  Review the agentic-development layer in this repository. Focus on roles, modes,
+  protocols, skills, specialists, manifest-driven materialization, and generated
+  Codex runtime assets. Be critical and tell me where the model is strong,
+  under-specified, or over-engineered.
+  ```
+- **Canon / Identity / operationalization**
+  ```text
+  Review how this repository separates portable canon, Context Atlas-specific
+  identity bindings, and runtime operationalization/materialization. Be skeptical
+  and tell me where the boundaries are clean versus where they still leak.
+  ```
+- **`__ai__` governance**
+  ```text
+  Review the `__ai__.md` governance system in this repository. Focus on owner-file
+  scope, freshness checks, verification contracts, and CI enforcement. Be honest
+  about whether it improves governance or creates unnecessary process overhead.
+  ```
+- **Fiery vengeance**
+  ```text
+  My own project got a critically-poignant review from this repo's author. Do
+  a full, brutally honest audit and highlight any areas that are misguided,
+  brittle, overstated, incomplete or evidence that this guy is a complete
+  fraud.
+  ```
+
+## Guides And Contributing
+
+The guides remain the primary user-facing help surface for product evaluation.
+The `examples/` directory contains runnable companion artifacts, sample
+payloads, and proof inputs that support the guides rather than replacing them.
 
 If you are contributing documentation or authoritative canon, start with
 [CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
@@ -76,469 +173,67 @@ Identity bindings, refresh the generated runtime surface with
 
 ## Initial Repository Layout
 
-- `docs/` for project documentation, product-facing guides, and documentation ontology
+- `docs/` for project documentation, product-facing guides, and documentation
+  ontology
 - `src/context_atlas/` for the package source
 - `tests/` for automated tests
-- `examples/` for runnable companion artifacts, sample payloads, and demonstrations
+- `examples/` for runnable companion artifacts, sample payloads, and
+  demonstrations
 
-## Starter Source Families
+## Current Product Surface
 
-The shared engine is no longer intended to be docs-only. The current source-family direction is:
+The current product-facing surface is intentionally narrow and explicit:
 
-- filesystem documents as the first mature source family
-- structured records as the next adapter-facing input family
-- one canonical `ContextSource` model regardless of ingestion path
+- a package-facing starter path through
+  `context-atlas-starter` and
+  [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+- two currently supported source families:
+  - governed filesystem documents
+  - already-fetched structured records
+- three supported workflow surfaces:
+  - [Codex Repository Workflow](/context-atlas/docs/Guides/codex_repository_workflow.md)
+  - [Documents Plus Database Workflow](/context-atlas/docs/Guides/docs_database_workflow.md)
+  - [Low-Code Workflow](/context-atlas/docs/Guides/low_code_workflow.md)
+- canonical outputs:
+  - `ContextPacket`
+  - `ContextTrace`
+  - rendered context, packet inspection, and trace inspection views
 
-For structured records, the current minimum adapter contract is `context_atlas.adapters.StructuredRecordInput`. It stays intentionally small so outer integrations can adapt database rows, vector-search payloads, or already-fetched record objects into one validated record shape before translating them into canonical sources.
+## Atlas Boundaries
 
-The current translation surface for those inputs is `context_atlas.adapters.StructuredRecordSourceAdapter`. It accepts:
+Atlas currently owns:
 
-- validated `StructuredRecordInput` objects
-- mapping-shaped row payloads that outer integration code already fetched
+- canonical source shaping and translation into `ContextSource`
+- retrieval, ranking, budgeting, compression, and memory policies
+- packet assembly and trace production
+- derived inspection views over canonical packet and trace artifacts
 
-It does not own query execution, database clients, ORM sessions, or vector-store client lifecycles. Those stay outside Atlas and should hand Atlas a normalized record-shaped payload only after data access has already happened.
+Atlas currently does **not** own:
 
-Within that boundary, the adapter preserves provenance and intended-use metadata and emits the same canonical `ContextSource` artifacts the rest of the engine already understands.
+- database connections, queries, vector-store clients, or ORM sessions
+- general-purpose connectors or connector lifecycle management
+- git history ingestion, issue-system integration, or broad code crawling
+- a visual builder or broad no-code orchestration surface
 
-When application rows need field remapping before translation, the current MVP pattern is to use `context_atlas.adapters.StructuredRecordRowMapper`:
+Those boundaries are part of the product truth, not temporary hand-waving.
 
-```python
-from context_atlas.adapters import (
-    StructuredRecordRowMapper,
-    StructuredRecordSourceAdapter,
-)
+## Tour And Workflow Guides
 
-rows = fetch_rows_somewhere_outside_atlas()
+This README is the map. If you want the tour, start with:
 
-mapper = StructuredRecordRowMapper(
-    record_id_field="ticket_id",
-    content_field="summary",
-    title_field="title",
-    metadata_fields=("team", "table"),
-    provenance_fields=("database",),
-    source_class="reviews",
-    fixed_intended_uses=("triage",),
-)
+- [Context Atlas Tour](/context-atlas/docs/Guides/context_atlas_tour.md)
 
-sources = StructuredRecordSourceAdapter().load_mapped_sources(
-    rows,
-    row_mapper=mapper,
-)
-```
+Then drop into the workflow guide that matches the path you care about:
 
-That keeps Atlas responsible for shaping and canonical translation, while outer
-integration code remains responsible for database access, vector-store access,
-or API calls. The mapper names the outer row shape, and the adapter remains the
-canonical crossing into `ContextSource` artifacts.
+- [Getting Started](/context-atlas/docs/Guides/getting_started.md)
+- [Codex Repository Workflow](/context-atlas/docs/Guides/codex_repository_workflow.md)
+- [Documents Plus Database Workflow](/context-atlas/docs/Guides/docs_database_workflow.md)
+- [Low-Code Workflow](/context-atlas/docs/Guides/low_code_workflow.md)
 
-Future adapter work should preserve the same guardrails:
+For proof and review surfaces, start with:
 
-- Atlas adapters may validate and reshape already-fetched payloads
-- Atlas adapters should translate payloads into canonical `ContextSource` artifacts
-- Atlas adapters should not own connections, sessions, queries, or client lifecycles
-- Atlas adapters should not become a general-purpose connector or ORM facade
-- outer integration code should remain responsible for fetching rows, vectors, or API responses before Atlas sees them
-
-See [examples/mixed_source_registry.py](/context-atlas/examples/mixed_source_registry.py) for the current mixed-source example that assembles filesystem documents and structured records through one shared registry and packet flow.
-
-## Documents Plus Database Workflow Shape
-
-The current Story 4 technical-builder scenario is intentionally specific: a builder wants to assemble chatbot context from governed documentation plus already-fetched support-style records such as tickets, policy rows, or product facts.
-
-That workflow should currently look like this:
-
-1. outer application code chooses the governed docs root
-2. outer application code fetches rows or record payloads from its own database, vector store, or API client
-3. `FilesystemDocumentSourceAdapter` translates the docs into canonical `ContextSource` artifacts
-4. `StructuredRecordRowMapper` or validated `StructuredRecordInput` objects normalize the fetched record payloads into Atlas-ready record shapes
-5. `StructuredRecordSourceAdapter` performs the canonical crossing into the same `ContextSource` model used by documents, including the one-step `load_mapped_sources(...)` path for already-fetched rows
-6. one shared registry, retriever, assembly service, packet, and trace path operates over both source families together
-
-That means Atlas is demonstrating a real pipeline-component role here:
-
-- Atlas governs mixed-source context assembly
-- Atlas does not own the database query surface
-- Atlas does not own the vector-store client surface
-- Atlas does not create a second packet path just because record-backed inputs are present
-
-The current runnable example for that path lives at [examples/docs_database_workflow/README.md](/context-atlas/examples/docs_database_workflow/README.md).
-
-The product-facing setup guide for that path now lives at [docs/Guides/docs_database_workflow.md](/context-atlas/docs/Guides/docs_database_workflow.md).
-
-The runnable path now also includes a tracked sample record payload so a technical builder can evaluate the mixed-source packet and trace flow without first wiring a real database client.
-
-## Low-Code Workflow Shape
-
-The current low-code workflow is intentionally small. Its configuration surface
-should let a less-technical builder declare:
-
-- one preset name
-- whether documents and/or structured records are enabled
-- a docs root
-- a record payload file
-
-That means the low-code path is still a wrapper around the same engine:
-
-- presets remain outer configuration, not domain truth
-- low-code settings choose supported source inputs and starter defaults
-- packet and trace artifacts remain canonical and shared with every other workflow
-- low-code override merging should happen through validated infrastructure settings,
-  not ad hoc example-script dictionaries
-- low-code wrappers should build a resolved outer workflow plan and then hand
-  canonical sources into the shared starter assembly seam rather than packing a
-  second orchestration path
-
-The current runtime surface for that path now lives in [`.env.example`](/context-atlas/.env.example)
-under the `CONTEXT_ATLAS_LOW_CODE_*` keys. The broader assembly, compression,
-and memory knobs remain available too, but the low-code path should prefer
-presets plus a very small declarative source surface before exposing deeper
-runtime tuning.
-
-The first supported wrapper for that path now lives at
-[examples/low_code_workflow/run.py](/context-atlas/examples/low_code_workflow/run.py).
-It currently supports one preset, `chatbot_docs_records`, which keeps the
-workflow intentionally concrete:
-
-- governed guide docs
-- a tracked JSON payload of already-fetched support-style records
-- one shared `ContextPacket` and `ContextTrace` path after preset-driven source selection
-
-That means the low-code path is still a real Atlas component integration, not a
-forked engine mode. The preset chooses source-shaping defaults, but packet
-assembly, budgeting, compression, and trace inspection still run through the
-same shared starter engine path used by the other workflows.
-
-The current low-code boundary is now intentionally explicit:
-
-- `ContextAtlasSettings.with_low_code_overrides(...)` owns validated override
-  merging for the wrapper path
-- `build_low_code_workflow_plan(...)` owns preset resolution, repo-relative path
-  resolution, and workflow-facing metadata assembly
-- `assemble_with_starter_sources(...)` remains the shared starter seam from
-  canonical sources into packet assembly
-- low-code examples should not hand-pack packet metadata, re-merge runtime
-  settings, or invent alternate packet/trace behavior for convenience
-
-Run the current low-code example from the repository root:
-
-```bash
-python examples/low_code_workflow/run.py
-```
-
-To inspect one source family in isolation, disable one side of the preset-driven
-input surface:
-
-```bash
-python examples/low_code_workflow/run.py --no-documents
-python examples/low_code_workflow/run.py --no-records
-```
-
-Relative `--docs-root` and `--records-file` overrides are resolved from
-`--repo-root`, so the wrapper stays explicit about its outer workflow boundary
-instead of hiding source resolution inside the engine.
-
-The product-facing guide for that path now lives at
-[docs/Guides/low_code_workflow.md](/context-atlas/docs/Guides/low_code_workflow.md).
-
-The example-oriented README for that path now lives at
-[examples/low_code_workflow/README.md](/context-atlas/examples/low_code_workflow/README.md).
-
-Tracked reference artifacts for the current low-code story now also live at:
-
-- [examples/low_code_workflow/config.example.toml](/context-atlas/examples/low_code_workflow/config.example.toml)
-- [examples/low_code_workflow/presets/basic.toml](/context-atlas/examples/low_code_workflow/presets/basic.toml)
-
-If you are evaluating the low-code path for the first time, the recommended
-order is:
-
-1. `config.example.toml`
-2. `presets/basic.toml`
-3. `examples/low_code_workflow/README.md`
-4. `examples/low_code_workflow/run.py`
-
-That order is intentional. The tracked TOML files are reference surfaces for
-the current MVP story, not hidden config loaders or a broader no-code platform.
-
-## MVP Proof Direction
-
-The current MVP proof work now has an explicit review rubric at
-[docs/Reviews/MVP/mvp_evaluation_rubric.md](/context-atlas/docs/Reviews/MVP/mvp_evaluation_rubric.md).
-
-That rubric is intentionally centered on:
-
-- packet quality against a naive baseline
-- trace legibility
-- authority handling
-- budget behavior
-- workflow reproducibility
-
-The proof story should stay packet-and-trace-centered. Atlas should not claim
-MVP readiness based only on narrative impressions or polished screenshots.
-
-The proof harness should also stay honest about where its evidence comes from:
-the current capture path is expected to package canonical packet, trace, and
-rendered-context artifacts emitted by one supported workflow run, not
-handcrafted proof-only JSON.
-
-The first reproducible packaging path for those artifacts now lives at
-[examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md) and
-[scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py).
-
-The canonical human-readable review record for that proof work now lives at
-[docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
-
-The current recorded recommendation in that assessment is `MVP Ready`: Atlas
-now looks defensible as a reusable pipeline component with reproducible packet,
-trace, authority, and budget evidence across the current workflow set.
-
-The standing hardening proof set now includes two focused repository scenarios
-that are part of the current human-readable evidence story:
-
-- `codex_repository / repo_budget_pressure_tradeoffs`
-- `codex_repository / repo_document_authority_precedence`
-
-The first makes budget pressure and compression tradeoffs explicit under a
-constrained starter budget. The second uses a tracked authority-rich sample repo
-so packet and trace review can show authoritative documents ahead of lower-
-authority planning and review material for the same repository question. Those
-two bundles close the earlier proof caveats that kept the MVP recommendation at
-`Conditionally Ready`.
-
-Other hardening proofs remain intentionally reviewable through the normal test
-surface rather than through a second artifact family. Retrieval reuse and
-duplicate acceptance are meant to stay anchored by the named Story 5 baseline
-tests, while the bundle-backed proof surfaces remain focused on packet/trace-
-visible budget, compression, and document-authority behavior.
-
-The current proof pass is scoped to the three supported MVP workflows:
-
-- `codex_repository` with the `repo_governed_docs_update` scenario
-- `docs_database_builder` with the `builder_support_troubleshooting` scenario
-- `low_code_chatbot` with the `low_code_validation` scenario
-
-Those workflows are included because they already have runnable local paths,
-packet and trace inspection, and reproducible tracked inputs. Workflows that
-need live external services or unpublished setup steps should not be counted in
-the current MVP proof pass.
-
-Each selected workflow can now also emit the same standard Atlas proof
-artifacts from its runnable example boundary when `--proof-artifacts-dir` is
-supplied:
-
-- `atlas_rendered_context.txt`
-- `atlas_packet.json`
-- `atlas_trace.json`
-
-Those artifacts now come from one shared infrastructure helper used by the
-supported runnable workflows, so the proof path stays aligned with the real
-shared engine instead of drifting into per-example proof-only writers.
-
-That shared artifact shape is what allows
-[scripts/mvp_proof/capture_evidence.py](/context-atlas/scripts/mvp_proof/capture_evidence.py)
-to package proof scenarios without workflow-specific file wiring. See
-[examples/mvp_proof/inputs/README.md](/context-atlas/examples/mvp_proof/inputs/README.md)
-for the current proof commands and scenario inputs,
-[examples/mvp_proof/evidence/README.md](/context-atlas/examples/mvp_proof/evidence/README.md)
-for the current reviewable bundle layout, and
-[docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md)
-for the review record that should summarize the captured findings.
-
-## Canonical Source Semantics
-
-Source families are outer ingestion concerns. Inside the Atlas domain, source meaning should converge into one canonical semantic model.
-
-That means source class owns the default semantic posture for:
-
-- authority
-- durability
-- intended uses
-
-Adapters may still supply explicit overrides when the outer system knows better, but the shared defaults should remain domain-owned so filesystem documents, structured records, and future source families do not invent parallel semantic rules.
-
-## Mixed-Source Boundary Model
-
-The current mixed-source architecture should follow one explicit boundary:
-
-- adapters own source-family-specific parsing, shaping, and provenance capture
-- adapters resolve source meaning through domain-owned semantic profiles
-- adapters cross into canonical sources through `ContextSource.from_semantics(...)`
-- canonical source meaning then lives on `ContextSource` itself, not in adapter-local tags or source metadata echoes
-- services and renderers should consume mixed-source identity through canonical source helpers and trace metadata rather than reaching back into provenance structure throughout the codebase
-
-In practice, that means filesystem adapters may keep document-specific mechanics in provenance metadata, structured-record adapters may keep record-specific mechanics in validated inputs and provenance, and the rest of the engine should still work over one canonical `ContextSource` model.
-
-## Supported MVP Entry Surface
-
-The current supported MVP starter path is intentionally explicit.
-
-The starter surface is available in two forms:
-
-- installable command-line entrypoint:
-
-```bash
-context-atlas-starter docs --query "How should planning docs be treated?"
-```
-
-- curated Python imports:
-
-Prefer imports like:
-
-```python
-from context_atlas.api import (
-    FilesystemDocumentSourceAdapter,
-    InMemorySourceRegistry,
-    LexicalRetriever,
-    build_starter_context_assembly_service,
-    load_settings_from_env,
-    render_packet_context,
-)
-```
-
-The package root currently remains intentionally thin. User-facing docs and examples should prefer `context_atlas.api` for the starter flow, and only reach for stable subpackage imports when they are intentionally teaching the architecture.
-
-That split is part of the supported architecture:
-
-- `context_atlas.api` is the curated starter namespace for ingestion, settings, and assembly wiring
-- `context_atlas.rendering` is the supported home of derived packet and trace views
-- the package root should not become a broad convenience barrel that hides those distinctions
-
-The recommended setup path is the guide index at
-[docs/Guides/README.md](/context-atlas/docs/Guides/README.md), followed by the
-starter walkthrough in
-[docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
-
-The installable starter command, `context-atlas-starter`, is the smallest
-package-facing entrypoint. The runnable companion example
-[examples/starter_context_flow.py](/context-atlas/examples/starter_context_flow.py)
-remains useful when working from a repository checkout, and
-[examples/starter_api_smoke.py](/context-atlas/examples/starter_api_smoke.py)
-remains a smaller smoke surface rather than the primary onboarding path.
-
-See [examples/README.md](/context-atlas/examples/README.md) for the companion
-runnable artifact index.
-
-## MVP Golden Path
-
-The current MVP onboarding story should read as one clear sequence:
-
-1. install Context Atlas into a Python environment
-2. configure supported runtime knobs through environment settings
-3. ingest governed repository documents
-4. assemble a `ContextPacket` through the supported starter service
-5. render packet context and inspect packet/trace output
-
-This repository does not yet present every future workflow. The current user-facing guidance should stay centered on that starter path so a new evaluator can get from installation to a first packet without inferring the product shape from internal modules.
-
-The current starter walkthrough lives in [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md).
-
-## Codex Repository Workflow Shape
-
-The flagship Codex repository workflow should currently be understood as a thin reference composition path over the same shared Atlas engine, not as a separate engine mode.
-
-The current supported repository inputs are intentionally narrow:
-
-- a repository root
-- governed repository documents rooted at `<repo_root>/docs`
-- an engineering question or task query
-
-The current supported composition path is:
-
-1. outer workflow code resolves the governed docs root from the repository
-2. `FilesystemDocumentSourceAdapter` translates those docs into canonical `ContextSource` artifacts
-3. `InMemorySourceRegistry` and `LexicalRetriever` produce the candidate flow
-4. `assemble_with_starter_context_service(...)` or `build_starter_context_assembly_service(...).assemble(...)` wires the same shared policies and settings into the canonical assembly service path
-5. the workflow renders Codex-facing context from the resulting `ContextPacket` and keeps packet/trace inspection visible
-
-The outer workflow metadata that defines that path should remain inspectable too. If
-workflow code supplies metadata such as `workflow`, `repo_root`, or `docs_root`,
-the shared assembly service should preserve it in trace metadata rather than hiding
-that context inside example-only print logic.
-
-That means the current Codex repository story is repo-aware, but still honest about scope:
-
-- it is governed-doc aware
-- it is packet-and-trace aware
-- it is not yet a general code crawler
-- it does not yet own git history, issue systems, or arbitrary repository connectors
-
-Those broader repository inputs can come later, but they should extend the same engine path rather than replacing it with Codex-specific orchestration.
-
-Within `examples/codex_repository_workflow/`, `run.py` is now the authoritative outer workflow composition path. `show_trace.py` should stay a derived demonstration over that same parser and packet-assembly path rather than growing a second copy of repository workflow composition.
-
-The product-facing setup guide for that path now lives at [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
-
-The runnable reference example for that path now lives at [examples/codex_repository_workflow/README.md](/context-atlas/examples/codex_repository_workflow/README.md).
-
-The minimal repository-shape reference for that path now lives at [examples/codex_repository_workflow/sample_repo/README.md](/context-atlas/examples/codex_repository_workflow/sample_repo/README.md).
-
-## Packet And Trace Inspection Contract
-
-Context Atlas inspection surfaces are derived views over canonical artifacts, not replacements for them.
-
-An attached transformation artifact does not replace canonical packet content unless the transformation was actually applied. If compression metadata is present but `was_applied` is false, starter rendering should continue to derive candidate content from the canonical selected candidates.
-
-For MVP users, packet inspection should emphasize:
-
-- selected source candidates
-- retained memory entries
-- budget state
-- whether compression was applied
-- truthful surfaced budget/compression fields when they are present, especially
-  packet-facing `fixed_reserved_tokens`, `unreserved_tokens`,
-  `unallocated_tokens`, trace-facing `budget_fixed_reserved_tokens`,
-  `budget_unreserved_tokens`, `budget_unallocated_tokens`,
-  `compression_strategy`, and optional `configured_compression_strategy`
-
-Trace inspection should emphasize:
-
-- inclusion, exclusion, transformation, and deferred decisions
-- why a source was rejected or transformed
-- trace metadata that explains ranking, budgeting, compression, and memory behavior
-- truthful budget/compression vocabulary, including `budget_...` budget keys
-  and the top-level `compression_strategy` surface, rather than older
-  ambiguous aliases such as `remaining_tokens`
-
-Those inspection surfaces should live under `context_atlas.rendering` and remain read-only views over `ContextPacket` and `ContextTrace`.
-
-Workflow-facing labels such as `Repository Context` should remain caller-supplied presentation at the example or app boundary. Generic renderers should default to generic labels rather than baking one workflow's vocabulary into canonical rendering behavior.
-
-Current packet inspection lives at:
-
-```python
-from context_atlas.rendering import render_packet_inspection
-```
-
-Current trace inspection lives at:
-
-```python
-from context_atlas.rendering import render_trace_inspection
-```
-
-## Runtime Knobs
-
-The tracked [`.env.example`](/context-atlas/.env.example) file is the canonical example surface for supported environment-backed runtime settings. For the current MVP path, those knobs should help a new user understand logging, assembly defaults, compression behavior, and memory behavior without reading internal implementation modules first.
-
-`load_settings_from_env()` reads the live process environment. The example file is a reference surface for supported settings, not an automatically loaded dotenv path.
-
-As Context Atlas grows, new top-level environment knobs should be added there deliberately rather than appearing ad hoc in code or local-only setup.
-
-The current supported-surface decision is intentionally narrow:
-
-- logging, starter assembly defaults, starter memory defaults, and low-code wrapper inputs are supported environment-backed knobs
-- ranking authority tables, ranking signal names, memory-scoring semantics, and canonical slot identifiers remain internal implementation constants
-- the starter memory-budget split is now the supported starter budget-allocation knob through `CONTEXT_ATLAS_DEFAULT_MEMORY_BUDGET_FRACTION`
-
-That keeps [`.env.example`](/context-atlas/.env.example) as a truthful product surface rather than turning every starter constant into a public tuning key.
-
-`CONTEXT_ATLAS_COMPRESSION_CHARS_PER_TOKEN` remains the supported baseline
-control for the starter token-estimation heuristic, not a promise that Atlas
-uses one global flat estimate for every content shape. The default starter
-path now tightens estimates automatically for obviously structured code/markup
-and non-Latin-heavy text while staying provider-agnostic. Atlas still does not
-expose a provider-specific tokenizer selector as an env-backed runtime knob.
-Advanced Python integrations may bind a custom callable token estimator through
-the starter assembly helpers, but that seam remains an outward composition
-surface rather than part of the product-facing env contract.
+- [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md)
+- [examples/mvp_proof/README.md](/context-atlas/examples/mvp_proof/README.md)
 
 ## License
 

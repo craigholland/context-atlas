@@ -6,21 +6,22 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
 tags: [planning, task, readme, docs, onboarding, information-architecture]
 related:
-  - ./README.md
-  - ../../README.md
-  - ../Guides/README.md
-  - ../Guides/getting_started.md
-  - ../Guides/docs_database_workflow.md
-  - ../Guides/low_code_workflow.md
-  - ../Release/README.md
-  - ../Reviews/MVP/mvp_readiness_assessment.md
-  - ../../__ai__.md
+  - ../README.md
+  - ../../../README.md
+  - ../../Guides/README.md
+  - ../../Guides/context_atlas_tour.md
+  - ../../Guides/getting_started.md
+  - ../../Guides/docs_database_workflow.md
+  - ../../Guides/low_code_workflow.md
+  - ../../Release/README.md
+  - ../../Reviews/MVP/mvp_readiness_assessment.md
+  - ../../../__ai__.md
 supersedes: []
 ---
 
@@ -28,8 +29,8 @@ supersedes: []
 
 ## Objective
 
-Reframe the repo-level [README](../../README.md) so it behaves more clearly as
-the repository's map:
+Reframe the repo-level [README](../../../README.md) so it behaves more clearly
+as the repository's map:
 
 - keep the high-level product framing
 - keep the `Start Here` section and audience routing
@@ -38,25 +39,26 @@ the repository's map:
 - reduce the amount of deep workflow, adapter, and operational-tour content
   that a new reader is implicitly asked to digest before they know where to go
 
-This Task is not a request to gut the README. The goal is to preserve its
+This Task was not a request to gut the README. The goal was to preserve its
 strong voice, honesty, and differentiated framing while layering the material
 more intentionally.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
-- the current repo-level [README](../../README.md)
-- the current product-facing guide entrypoint at [docs/Guides/README.md](../Guides/README.md)
-- the current getting-started path at [docs/Guides/getting_started.md](../Guides/getting_started.md)
+- the repo-level [README](../../../README.md)
+- the product-facing guide entrypoint at [docs/Guides/README.md](../../Guides/README.md)
+- the starter path at [docs/Guides/getting_started.md](../../Guides/getting_started.md)
+- the system tour at [docs/Guides/context_atlas_tour.md](../../Guides/context_atlas_tour.md)
 - the current mixed-source and low-code guides:
-  - [docs_database_workflow.md](../Guides/docs_database_workflow.md)
-  - [low_code_workflow.md](../Guides/low_code_workflow.md)
-- the current release-history surface at [docs/Release/README.md](../Release/README.md)
-- the current MVP review anchor at [mvp_readiness_assessment.md](../Reviews/MVP/mvp_readiness_assessment.md)
-- the repo-level owner contract at [__ai__.md](../../__ai__.md)
+  - [docs_database_workflow.md](../../Guides/docs_database_workflow.md)
+  - [low_code_workflow.md](../../Guides/low_code_workflow.md)
+- the release-history surface at [docs/Release/README.md](../../Release/README.md)
+- the MVP review anchor at [mvp_readiness_assessment.md](../../Reviews/MVP/mvp_readiness_assessment.md)
+- the repo-level owner contract at [__ai__.md](../../../__ai__.md)
 
 ## Proposed Work
 
@@ -105,19 +107,13 @@ PLANNED
 
 #### Expected New Files
 
-- `docs/Guides/context_atlas_tour.md` only if one consolidated tour document is
-  needed instead of expanding existing guides
+- `docs/Guides/context_atlas_tour.md`
 
 #### Expected Existing Files Updated
 
 - `README.md`
 - `docs/Guides/README.md`
-- `docs/Guides/getting_started.md` only if link routing or overlap cleanup is
-  needed
-- `docs/Guides/docs_database_workflow.md` only if README-owned mixed-source
-  explanation is pushed down there
-- `docs/Guides/low_code_workflow.md` only if README-owned low-code explanation
-  is pushed down there
+- `docs/Guides/getting_started.md`
 - `__ai__.md`
 
 #### Update AI files
@@ -136,8 +132,8 @@ PLANNED
 
 - Over-compression could make the README cleaner but less truthful if too much
   current-state detail is stripped away from the top-level surface.
-- Tour extraction can create duplication drift if the moved content is copied
-  into guides without a clear ownership split.
+- Tour extraction can create duplication drift if moved content is copied into
+  guides without a clear ownership split.
 - A new tour guide can become a dumping ground if it is not kept focused on
   product/system walkthrough material rather than every architectural detail in
   the repo.
@@ -159,20 +155,20 @@ PLANNED
 
 ## Final Handoff State
 
-- completing this Task should leave the repo README acting more clearly as the
-  map and truth-framing surface for Context Atlas
-- guide material under `docs/Guides/` should own more of the walkthrough load
+- the repo README now acts more clearly as the map and truth-framing surface
+  for Context Atlas
+- guide material under `docs/Guides/` now owns more of the walkthrough load
   without losing discoverability from the root
-- future README growth should be easier to resist because the map-versus-tour
-  boundary is now explicit
+- future README growth now has an explicit map-versus-tour boundary to protect
 
 ## Related Artifacts
 
-- [Planning README](./README.md)
-- [Repo README](../../README.md)
-- [Guides README](../Guides/README.md)
-- [Getting Started Guide](../Guides/getting_started.md)
-- [Docs + Database Workflow Guide](../Guides/docs_database_workflow.md)
-- [Low-Code Workflow Guide](../Guides/low_code_workflow.md)
-- [Release README](../Release/README.md)
-- [MVP Readiness Assessment](../Reviews/MVP/mvp_readiness_assessment.md)
+- [Completed Planning README](../README.md)
+- [Repo README](../../../README.md)
+- [Guides README](../../Guides/README.md)
+- [Context Atlas Tour](../../Guides/context_atlas_tour.md)
+- [Getting Started Guide](../../Guides/getting_started.md)
+- [Docs + Database Workflow Guide](../../Guides/docs_database_workflow.md)
+- [Low-Code Workflow Guide](../../Guides/low_code_workflow.md)
+- [Release README](../../Release/README.md)
+- [MVP Readiness Assessment](../../Reviews/MVP/mvp_readiness_assessment.md)
