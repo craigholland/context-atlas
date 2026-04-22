@@ -129,6 +129,7 @@
 - The current MVP proof set is evidence-backed and sufficient for the `MVP Ready` recommendation, but it is still limited to the tracked local scenarios under the three supported workflows rather than a broader external-service or production-style evaluation matrix.
 - Product-facing docs must continue to stay synchronized across the root README, `docs/Guides/`, `examples/README.md`, and `.env.example`; drift between those surfaces remains an ongoing maintainability risk.
 - Release-history documentation now has an in-repo home, but the repo still does not have a fuller release-process canon for branching, cutover, publication cadence, or post-release follow-up.
+- The README should not become the full walkthrough for every workflow and subsystem;
 
 ## Cross-Folder Contracts
 - `scripts/`: root policy delegates actual enforcement logic to repo-owned scripts; changing script entrypoints should update this contract.
