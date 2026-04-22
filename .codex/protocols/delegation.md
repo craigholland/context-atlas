@@ -6,14 +6,13 @@
 
 ## Purpose
 
-Materialize the workflow path used when a Context Atlas boundary delegates a
-bounded sub-scope to a narrower actor without transferring accountability.
+Materialize the workflow path used when a broader authority boundary delegates bounded work to a narrower one without transferring accountability.
 
 ## Trigger / Enter Conditions
 
 - the current boundary identifies a bounded sub-scope that should be performed
   elsewhere
-- delegation is safer than widening the current scope
+- delegation is structurally preferable to widening current scope
 
 ## Participating Roles And Modes
 
@@ -34,8 +33,8 @@ bounded sub-scope to a narrower actor without transferring accountability.
 
 ## Exit Criteria
 
-- the delegated actor can begin without guessing the scope
-- the delegating actor's retained accountability is still clear
+- the delegated boundary can begin work without guessing the bounded scope
+- the delegating boundary's retained accountability remains explicit
 
 ## Traceability
 

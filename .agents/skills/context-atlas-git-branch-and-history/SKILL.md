@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to inspect and prepare Git branch and commit history in a way
-that remains readable, attributable, and reviewable.
+Use this skill for managing Git history and branch state in support of reviewable collaboration.
 
 ## Parent Boundary
 
@@ -15,29 +14,29 @@ that remains readable, attributable, and reviewable.
   - `parent-backend`
   - `parent-devops`
   - `specialist-delivery-recovery`
-- This skill supports branch and history handling. It does not grant merge
-  authority on its own.
+- Does not by itself grant merge authority
 
 ## Workflow
 
-1. Inspect branch topology, divergence, and intended integration target.
-2. Choose the smallest safe branch or history action that preserves audit
-   clarity.
-3. Keep unrelated work separated and unusual history actions explicit.
-4. Return the resulting branch state and any conflict-resolution rationale.
+1. Inspect current branch and history state
+2. Identify the intended integration target
+3. Choose the smallest safe history or branch action
+4. Confirm the resulting state is reviewable and attributable
 
 ## Escalation Conditions
 
-- The required history surgery would rewrite or obscure collaborators' work.
-- The integration path conflicts with branch-governance rules.
-- Conflict resolution requires product or implementation clarification.
+- Multiple collaborators' work would be rewritten or obscured
+- The required integration path conflicts with branch governance rules
+- Conflict resolution cannot be done safely without product or implementation
+  clarification
+- The work appears to need provider-specific authority not owned by the actor
 
 ## Return Contract
 
 - branch-status summary
-- commit and history preparation notes
-- conflict or integration rationale when needed
-- explicit note if unusual history operations were required
+- commit preparation
+- history or integration notes
+- bounded conflict-resolution rationale
 
 ## Traceability
 
@@ -47,5 +46,4 @@ that remains readable, attributable, and reviewable.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

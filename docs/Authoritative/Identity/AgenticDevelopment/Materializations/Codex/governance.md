@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-21
+last_reviewed: 2026-04-22
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, governance]
 related:
@@ -86,11 +86,15 @@ That separation helps reviewers find the real source of drift.
 Codex assets should continue to declare:
 
 - the upstream sources they depend on
-- the maintenance mode that governs whether they are hand-maintained,
+- the maintenance mode that governs whether they are human-managed,
   generated, or mixed
 
 Review should treat missing or contradictory provenance as a governance issue,
 not as a cosmetic omission.
+
+That maintenance mode should come from
+`docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`,
+not from a local runtime edit inside `.codex/` or `.agents/skills/`.
 
 ### 5. Codex Assets Should Refresh After Meaningful Upstream Changes
 
@@ -116,6 +120,7 @@ For the Codex surface, drift includes at least:
 - adapted content that now changes meaning instead of presentation
 - missing or stale traceability declarations
 - missing or stale maintenance-mode declarations
+- maintenance-mode declarations that contradict the upstream manifest
 - generated-surface notices that no longer match the real upstream
   source-of-truth model
 - Codex assets that no longer follow the creation guidance or folder-layout
@@ -133,6 +138,16 @@ belongs upstream in:
 
 - the portable canon for reusable or global meaning
 - the Identity layer for Context Atlas-specific meaning
+
+If a surface truly needs to stop being generator-owned, the lasting change is
+to update the manifest-level `maintenance_mode`, not to flip a local toggle in
+the generated runtime file.
+
+### 8. `mixed` Must Not Be Treated As Magic Preservation
+
+Until the Codex binding defines an explicit manual-block format and the
+generator validates it, `mixed` should be treated as a declared future mode,
+not as permission for ambiguous freeform preservation behavior.
 
 ## Review Checklist
 

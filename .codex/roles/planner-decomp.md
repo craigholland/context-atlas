@@ -6,14 +6,15 @@
 
 ## Purpose
 
-Materialize the Context Atlas `Planner/Decomp` role as a Codex-facing
-accountability surface for decomposition quality, sequencing coherence, and
-planning-layer integrity across Epics, Stories, Tasks, and PR slices.
+Materialize the Context Atlas `Planner/Decomp` role as a Codex-facing accountability surface for decomposition quality, sequencing coherence, and planning-layer integrity across Epics, Stories, Tasks, and PR slices.
 
 ## Direct Ownership
 
 - planning artifacts under `docs/Planning/`
-- decomposition updates that keep Epic, Story, Task, and PR-plan layers aligned
+- decomposition updates that keep Epic, Story, Task, and PR-plan layers
+  aligned
+- planning readmes or orientation notes that govern how decomposition should
+  be consumed
 - decisions about work breakdown, dependency shape, and sequencing clarity
 
 ## Parent-Agent Binding

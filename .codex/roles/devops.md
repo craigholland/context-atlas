@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Materialize the Context Atlas `DevOps` role as the accountable surface for
-merge, release, workflow, versioning, and other operational-delivery actions
-that should remain distinct from ordinary implementation.
+Materialize the Context Atlas `DevOps` role as the accountable surface for merge, release, workflow, versioning, and other operational-delivery actions that should remain distinct from ordinary implementation.
 
 ## Direct Ownership
 

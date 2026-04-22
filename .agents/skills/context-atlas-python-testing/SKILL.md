@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to produce and interpret bounded Python validation evidence for
-behavior, regressions, and robustness.
+Use this skill for using Python tests as bounded validation and evidence surfaces.
 
 ## Parent Boundary
 
@@ -17,30 +16,29 @@ behavior, regressions, and robustness.
   - `specialist-review-readiness`
 - Conditional for:
   - `parent-backend`
-- This skill should include negative-path and boundary-breaking tests when
-  robustness matters. It does not equate a green run with full acceptance.
+- Does not equate a green test run with total acceptance
 
 ## Workflow
 
-1. Identify the contract or behavior that needs proof.
-2. Choose the narrowest useful test boundary.
-3. Run existing tests first when possible, then add or refine focused tests.
-4. Include invalid, missing, extreme, or unexpected inputs when resilience is
-   part of the claim.
-5. Return what passed, what failed, and what remains outside evidence.
+1. Identify the contract or behavior that needs proof
+2. Choose the right testing level
+3. Run existing tests first when possible
+4. Add or refine tests if the current evidence is insufficient
+5. Include negative-path or boundary-breaking cases when robustness is part of the contract being tested
+6. Interpret the resulting pass/fail signal in context
 
 ## Escalation Conditions
 
-- Required evidence depends on unavailable environments, services, or data.
-- The correct test boundary is blocked by unresolved architecture decisions.
-- Tests are too unstable or slow to provide trustworthy evidence.
+- The required evidence depends on unavailable environments, data, or services
+- The correct testing boundary is blocked by unresolved architecture decisions
+- Tests are too unstable or slow to provide trustworthy evidence
+- The issue appears to be in review interpretation rather than test coverage
 
 ## Return Contract
 
-- test execution summary
+- test execution result summary
 - focused test additions or updates
-- negative-path and robustness notes when relevant
-- explicit statement of what was and was not validated
+- evidence notes tied to observed behavior
 
 ## Traceability
 
@@ -50,5 +48,4 @@ behavior, regressions, and robustness.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

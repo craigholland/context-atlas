@@ -6,22 +6,20 @@
 
 ## Purpose
 
-Materialize the Context Atlas `Documentation/UAT` role as the accountable
-surface for user-facing guides, example experience, evaluator workflows, and
-user-acceptance-oriented product walkthroughs.
+Materialize the Context Atlas `Documentation/UAT` role as the accountable surface for user-facing guides, runnable examples, evaluator workflows, and documentation/UAT-owned rework.
 
 ## Direct Ownership
 
-- user-facing guides under `docs/Guides/`
+- user-facing guides and onboarding surfaces under `docs/Guides/`
 - runnable example experience under `examples/`
-- evaluator-facing and walkthrough-oriented product surfaces
-- structured completion handoffs for QA review of documentation/UAT work
+- documentation or example flows that shape how a technical evaluator
+  understands and validates the product
+- CLI-facing experience when the concern is user-facing evaluation or clarity
+  rather than backend execution logic
 
 ## Parent-Agent Binding
 
 - Materialized by `.codex/agents/parent-documentation-uat.toml`
-- No initial specialist roster is attached beneath this parent in the current
-  manifest
 
 ## Mode Participation
 
@@ -36,7 +34,7 @@ user-acceptance-oriented product walkthroughs.
 
 - Owns:
   - `execution-slice`
-  - `rework` for documentation/UAT-owned returned work
+  - `rework`
 - Participates in:
   - `planning`
   - `review`

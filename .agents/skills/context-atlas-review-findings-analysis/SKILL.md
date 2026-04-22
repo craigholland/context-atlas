@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to turn evidence into explicit findings, risk statements, and
-review outcomes that other actors can actually respond to.
+Use this skill for turning evidence into explicit findings, risk statements, and review outcomes.
 
 ## Parent Boundary
 
@@ -15,28 +14,27 @@ review outcomes that other actors can actually respond to.
   - `parent-documentation-uat`
   - `parent-qa`
   - `specialist-review-readiness`
-- This skill frames review observations. It does not replace the evidence-
-  producing skills or turn review into implementation ownership.
+- Does not replace the underlying evidence-producing skills
 
 ## Workflow
 
-1. Inspect the available evidence and governing expectations.
-2. Distinguish observation, finding, risk, severity, and confidence clearly.
-3. Write findings specific enough for rework or follow-up.
-4. Return an explicit acceptance, hold, or escalation recommendation.
+1. Inspect the available evidence
+2. Compare it to expected behavior or governing constraints
+3. Classify the concern by kind, severity, and confidence
+4. State the outcome or follow-up path explicitly
 
 ## Escalation Conditions
 
-- Available evidence is too weak for a responsible judgment.
-- The concern crosses into unsettled architecture, security, or product policy.
-- The remedy exceeds the current review pass or role authority.
+- Available evidence is too weak to support a responsible judgment
+- The concern crosses into unsettled architecture, security, or product policy
+- The required remedy would exceed the current review pass or role authority
 
 ## Return Contract
 
 - findings summary
-- severity and confidence framing
 - acceptance or risk statement
-- rework or escalation recommendation
+- escalation or rework recommendation
+- severity and confidence framing
 
 ## Traceability
 
@@ -46,5 +44,4 @@ review outcomes that other actors can actually respond to.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Materialize the workflow path used when Context Atlas work must be decomposed,
-sequenced, clarified, or reshaped before safe deliverable creation can
-proceed.
+Materialize the workflow path used when work must be decomposed, sequenced, or clarified before safe deliverable creation can proceed.
 
 ## Trigger / Enter Conditions
 
@@ -30,14 +28,16 @@ proceed.
 
 - consumes a planning-intake contract or other structured statement of scope
 - may use `delegation` for bounded planning analysis
-- should emit a structured planning-output handoff when downstream work is ready
-- should use `escalation` when ownership or safe next-step shape remains unclear
+- should emit a structured planning-output handoff when downstream work is
+  ready
+- should use `escalation` when ownership or safe next-step shape remains
+  unclear
 
 ## Exit Criteria
 
 - the work has a governed next shape
-- dependencies, risks, and blocked conditions are explicit
-- downstream intake can begin without reconstructing scope from prose alone
+- the downstream boundary and recommended next action are explicit
+- unresolved risks and unknowns are surfaced rather than hidden
 
 ## Traceability
 

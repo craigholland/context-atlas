@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to diagnose blocked, unstable, or drifted states and choose a
-bounded recovery direction.
+Use this skill for diagnosing blocked, unstable, or drifted states and choosing a bounded recovery direction.
 
 ## Parent Boundary
 
@@ -15,22 +14,21 @@ bounded recovery direction.
   - `parent-planner-decomp`
   - `parent-devops`
   - `specialist-delivery-recovery`
-- This skill triages recovery. It does not replace incident command or hide the
-  need for escalation when authority is insufficient.
+- Does not replace full incident-command or operational-governance structures
 
 ## Workflow
 
-1. Summarize the unstable or blocked state and the recent evidence around it.
-2. Classify the likely failure as local, workflow-level, or systemic.
-3. Identify the smallest safe next step: retry, rollback, hold, repair, or
-   escalate.
-4. Return the chosen recovery path with explicit rationale and follow-up risk.
+1. Summarize the current unstable or blocked state
+2. Classify likely cause categories
+3. Identify the smallest safe next action
+4. State whether the path is retry, rollback, hold, repair, or escalate
 
 ## Escalation Conditions
 
-- No bounded safe recovery action is visible.
-- The issue appears systemic rather than local.
-- Recovery would require destructive or high-authority operations.
+- No bounded safe recovery action is visible
+- The issue appears systemic rather than local
+- Recovery would require destructive or high-authority operations
+- The known-good state is uncertain or disputed
 
 ## Return Contract
 
@@ -47,5 +45,4 @@ bounded recovery direction.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

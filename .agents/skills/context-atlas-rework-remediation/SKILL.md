@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to translate accepted findings or clarified defects into bounded
-corrective work with traceable intent.
+Use this skill for translating findings or clarified defects into bounded corrective changes.
 
 ## Parent Boundary
 
@@ -15,28 +14,28 @@ corrective work with traceable intent.
   - `parent-backend`
   - `parent-documentation-uat`
   - `specialist-python-implementation`
-- This skill answers returned findings. It does not dismiss them on its own
-  authority or turn rework into a stealth redesign.
+- Does not dismiss findings on its own authority
 
 ## Workflow
 
-1. Restate the finding in corrective terms.
-2. Choose the narrowest responsible fix or rationale response.
-3. Implement or document the correction and gather bounded evidence.
-4. Return a response that maps the original finding to the resulting action.
+1. Restate the finding in corrective terms
+2. Identify the minimum responsible change
+3. Implement or document the correction
+4. Gather bounded verification evidence
+5. Respond back through the relevant handoff or review surface
 
 ## Escalation Conditions
 
-- The finding implies redesign beyond the actor's allowed scope.
-- The evidence needed to defend or fix the finding is unavailable.
-- Multiple findings conflict and cannot be satisfied inside one bounded change.
+- The finding implies broader redesign than the current actor may perform
+- The evidence needed to defend or fix the finding is unavailable
+- Multiple findings conflict and cannot be satisfied within one bounded change
 
 ## Return Contract
 
-- targeted corrective diff or rationale response
-- mapping from finding to correction
+- targeted corrective diff
+- response-to-finding notes
 - bounded verification summary
-- explicit note of what was corrected or defended
+- explicit statement of what was corrected or defended
 
 ## Traceability
 
@@ -46,5 +45,4 @@ corrective work with traceable intent.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

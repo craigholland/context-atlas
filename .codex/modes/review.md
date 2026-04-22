@@ -6,18 +6,19 @@
 
 ## Purpose
 
-Materialize the Context Atlas `review` mode as the Codex-facing execution state
-for governed assessment, findings production, and acceptance analysis.
+Materialize the Context Atlas `review` mode as the Codex-facing execution state for governed assessment, findings production, and acceptance analysis.
 
 ## Entry Conditions
 
-- a valid structured review-intake contract exists
-- the current work is assessment rather than primary feature delivery
+- only when a valid structured review-intake contract exists
+- when the current work is governed assessment, findings, or acceptance
+  analysis rather than primary feature delivery
 
 ## Exit Conditions
 
-- a structured review-outcome contract is emitted
-- review routes work to `rework`, `operational-delivery`, or `recovery`
+- when a structured review-outcome contract is emitted
+- when the review outcome routes work to rework, operational delivery, or
+  recovery
 
 ## Allowed Mutations
 
@@ -30,7 +31,7 @@ for governed assessment, findings production, and acceptance analysis.
 Not allowed by default:
 
 - primary product implementation
-- merge or release execution
+- merge/release execution
 - unrelated scope expansion
 
 ## Role And Protocol Participation

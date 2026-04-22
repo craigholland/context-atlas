@@ -39,7 +39,7 @@ two implementation PRs:
 
 ## Task Status
 
-PLANNED
+WORKING
 
 ## Inputs
 
@@ -75,6 +75,7 @@ PLANNED
 #### Expected New Files
 
 - `scripts/materialize_codex_runtime.py`
+- `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/config.template.toml`
 
 #### Expected Existing Files Updated
 

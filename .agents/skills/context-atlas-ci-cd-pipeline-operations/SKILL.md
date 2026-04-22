@@ -6,36 +6,33 @@
 
 ## Purpose
 
-Use this skill to interpret build, validation, and delivery pipeline state as a
-bounded operational surface.
+Use this skill for reasoning about build, validation, and delivery pipelines as bounded operational systems.
 
 ## Parent Boundary
 
 - Conditional for:
   - `parent-devops`
   - `specialist-delivery-recovery`
-- This skill interprets pipeline state and proposes bounded next actions. It
-  does not by itself grant privileged infrastructure authority.
+- Does not automatically grant infrastructure-administration authority
 
 ## Workflow
 
-1. Inspect the failing or blocked pipeline stage, logs, and artifacts.
-2. Classify the failure as deterministic, flaky, environmental, or permission
-   related.
-3. Choose the smallest responsible next step: rerun, fix, hold, rollback, or
-   escalate.
-4. Return a readiness-impact statement with enough audit context for follow-up.
+1. Inspect failing or blocked pipeline state
+2. Classify the failure type
+3. Identify the smallest responsible operational response
+4. State whether the next step is rerun, fix, hold, rollback, or escalate
 
 ## Escalation Conditions
 
-- Remediation requires privileged infrastructure or production access.
-- The failure cannot be classified from available logs and artifacts.
-- Retrying would create unacceptable uncertainty or risk.
+- Remediation requires privileged infrastructure or production access
+- The failure cannot be classified from available logs and artifacts
+- The pipeline is signaling a broader release or environment problem
+- Retrying would create unacceptable uncertainty or risk
 
 ## Return Contract
 
 - pipeline status summary
-- failure interpretation
+- failure interpretation notes
 - bounded remediation or escalation recommendation
 - readiness impact statement
 
@@ -47,5 +44,4 @@ bounded operational surface.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

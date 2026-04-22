@@ -6,20 +6,20 @@
 
 ## Purpose
 
-Materialize the Context Atlas `QA` role as the accountable surface for governed
-review, findings quality, acceptance analysis, and rework feedback loops.
+Materialize the Context Atlas `QA` role as the accountable surface for governed review, findings quality, acceptance analysis, and structured rework feedback.
 
 ## Direct Ownership
 
-- structured review intake and outcome artifacts
-- findings, acceptance judgments, and proof summaries
-- QA-owned validation additions and review-facing evidence surfaces
-- readiness framing for governed workflow gates
+- review findings and acceptance artifacts
+- structured review-intake, handoff, and review-outcome artifacts
+- test-oriented verification additions that exist to validate behavior rather
+  than to own the primary implementation direction
+- review or proof surfaces that summarize validation outcomes
 
 ## Parent-Agent Binding
 
 - Materialized by `.codex/agents/parent-qa.toml`
-- Delegated review support may return through
+- Delegated specialist support may return through
   `.codex/agents/specialist-review-readiness.toml`
 
 ## Mode Participation
@@ -40,10 +40,6 @@ review, findings quality, acceptance analysis, and rework feedback loops.
   - `delegation`
   - `handoff`
   - `escalation`
-- Gate review defaults:
-  - `Task -> Story`: `code`
-  - `Story -> Epic`: `architecture`, `security`
-  - `Epic -> development`: `product`
 
 ## Traceability
 
@@ -55,5 +51,4 @@ review, findings quality, acceptance analysis, and rework feedback loops.
   - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md`
   - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md`
   - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md`
-  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md`
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`

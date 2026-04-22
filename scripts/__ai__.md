@@ -31,6 +31,7 @@
 - `preflight.py` is the canonical local gate before push or merge; other scripts should support it rather than compete with it.
 - Small private dataclasses are acceptable here when they are local rule/config carriers for the script itself and not part of the package runtime surface.
 - User-facing script help and failure messages should prefer portable command guidance first and may mention Windows-specific launcher variants as secondary notes when helpful.
+- Repo-owned Codex runtime materialization should stay manifest-driven and deterministic here rather than being hidden in ad hoc prompt steps or one-off shell refresh commands.
 
 ## Allowed Dependencies
 - may depend on:
@@ -53,6 +54,9 @@
   - `main`: enforces AST-based Python import-boundary rules from TOML config
 - `preflight.py`:
   - `main`: runs the repo-wide push/merge preflight
+- `materialize_codex_runtime.py`:
+  - `build_materialization_plan`: renders the declared Codex runtime surfaces from manifest and authoritative docs
+  - `main`: writes or checks the generated `.codex/` and `.agents/skills/` surfaces
 - `install_git_hooks.py`:
   - `main`: points local git hook execution at the tracked `.githooks` directory
 
@@ -92,6 +96,12 @@
     - `ai_verify_contracts.py`
   - invariants:
     - should stay as close as practical to the remote `verify-ai-contracts` and `ci` workflow behavior
+- `materialize_codex_runtime.py`:
+  - responsibility: deterministically materializes the Codex runtime surface from the authoritative manifest, bindings, and canon docs
+  - invariants:
+    - `maintenance_mode` must remain upstream-owned by `materialization_manifest.yaml`
+    - `mixed` must fail loudly until an explicit manual-block preservation format exists
+    - generated runtime files must be reproducible from repo state alone without hidden local prompts
 - `install_git_hooks.py`:
   - responsibility: configures `git` to use the tracked `.githooks` directory
 - `import_boundary_rules.toml`:
@@ -126,6 +136,7 @@ steps:
       py -3 scripts/ai_verify_contracts.py --help > $null
       py -3 scripts/update_last_verified.py --help > $null
       py -3 scripts/check_import_boundaries.py --help > $null
+      py -3 scripts/materialize_codex_runtime.py --help > $null
       py -3 scripts/preflight.py --help > $null
 
   - name: validate_owner_files

@@ -6,30 +6,30 @@
 
 ## Purpose
 
-Materialize the Context Atlas `implementation` mode as the Codex-facing
-execution state for role-owned deliverable creation and bounded first-pass
-work on owned surfaces.
+Materialize the Context Atlas `implementation` mode as the Codex-facing execution state for role-owned deliverable creation and bounded first-pass work on owned surfaces.
 
 ## Entry Conditions
 
-- a role owns a bounded deliverable slice and is actively producing it
-- recovery resolves into fresh deliverable work rather than planning or review
+- when a role owns a bounded deliverable slice and the current work is
+  producing that slice
+- when recovery resolves into fresh deliverable work rather than continued
+  planning or review
 
 ## Exit Conditions
 
-- a structured completion handoff is emitted for review or another downstream
-  protocol
-- the work becomes blocked badly enough to require `recovery`
+- when a structured completion handoff is emitted for downstream review or the
+  next protocol-defined step
+- when the work is blocked badly enough to require recovery
 
 ## Allowed Mutations
 
-- role-owned deliverable artifacts
-- directly necessary validation or explanation updates
+- role-owned deliverable artifacts plus directly necessary validation or
+  explanation updates
 
 Not allowed by default:
 
 - self-acceptance findings
-- merge or release actions
+- merge/release actions
 - broad recovery reshaping
 
 ## Role And Protocol Participation

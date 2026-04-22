@@ -6,31 +6,28 @@
 
 ## Purpose
 
-Materialize the Context Atlas `rework` mode as the Codex-facing execution
-state for returned work that must answer findings, required changes, or
-clarification requests.
+Materialize the Context Atlas `rework` mode as the Codex-facing execution state for returned work that is being corrected or clarified under an explicit review or recovery outcome.
 
 ## Entry Conditions
 
-- a valid return contract requests changes on already-delivered work
-- the current work is correction or clarification rather than first-pass
+- when a valid return contract requests changes on already-delivered work
+- when clarification or correction is the current work rather than first-pass
   delivery
 
 ## Exit Conditions
 
-- a renewed structured completion handoff is emitted
-- structural ambiguity or blockage requires `recovery`
+- when a renewed structured completion handoff is emitted
+- when the work becomes blocked or ambiguous enough to require recovery
 
 ## Allowed Mutations
 
-- previously returned owned work
-- directly necessary validation updates
+- previously returned owned work plus directly necessary validation updates
 
 Not allowed by default:
 
 - unrelated new scope
 - approval actions
-- open-ended exploratory change
+- open-ended exploratory changes
 
 ## Role And Protocol Participation
 
@@ -43,8 +40,10 @@ Not allowed by default:
   - `DevOps`
 - Primary protocol:
   - `rework`
-- Typical next step:
-  - return to `review`
+- Cross-cutting contract protocols may appear at the edges:
+  - `delegation`
+  - `handoff`
+  - `escalation`
 
 ## Traceability
 

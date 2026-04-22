@@ -18,7 +18,6 @@ binding_sources = [
   "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md",
   "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md",
   "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md",
-  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md",
   "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md",
 ]
 template_source = "docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/agent.template.toml"

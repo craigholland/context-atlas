@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Use this skill to evaluate backend changes against separation of concerns,
-dependency direction, and inward boundary expectations associated with
-CLEAN-style architecture.
+Use this skill for evaluating backend work against separation of concerns, dependency direction, and inward architectural boundaries associated with CLEAN-style design.
 
 ## Parent Boundary
 
@@ -18,23 +16,23 @@ CLEAN-style architecture.
 - Conditional for:
   - `specialist-python-implementation`
   - `specialist-review-readiness`
-- This skill performs bounded conformance analysis. It does not replace the
-  full architecture canon or decide release readiness.
+- Does not replace the complete architecture canon
 
 ## Workflow
 
-1. Inspect where the relevant behavior lives today.
-2. Identify the current layer, dependency direction, and boundary crossings.
-3. Test the placement against domain, service, adapter, and infrastructure
-   expectations.
-4. Return conformance notes and narrow remediation guidance.
+1. Inspect where the behavior lives today
+2. Identify the relevant boundary and dependency directions
+3. Test the placement against the intended layer responsibilities
+4. Surface conformance notes or targeted remediation guidance
 
 ## Escalation Conditions
 
-- The local architecture profile is unclear or contradictory.
-- Remediation would require broader system restructuring.
-- The issue is really about ownership or workflow design rather than code
-  placement.
+- The architecture profile itself is unclear or contradictory
+- The proposed remediation would require broader system restructuring
+- Multiple layers already share responsibility in a way that cannot be
+  resolved locally
+- The issue is really about protocol or role ownership rather than code
+  placement
 
 ## Return Contract
 
@@ -50,5 +48,4 @@ CLEAN-style architecture.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

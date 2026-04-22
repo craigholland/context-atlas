@@ -6,20 +6,18 @@
 
 ## Purpose
 
-Materialize the Context Atlas `recovery` mode as the Codex-facing execution
-state for restoring workable workflow clarity when ownership, state, or
-contract integrity is broken or unclear.
+Materialize the Context Atlas `recovery` mode as the Codex-facing execution state for restoring a safe workflow path when ownership, contracts, or state are broken or ambiguous.
 
 ## Entry Conditions
 
-- workflow state is broken, ambiguous, invalid, or materially blocked
-- a contract is missing, malformed, contradictory, or insufficient for safe
-  continuation
+- when workflow state is broken, ambiguous, invalid, or materially blocked
+- when a contract is missing, malformed, contradictory, or insufficient for
+  safe continuation
 
 ## Exit Conditions
 
-- a structured recovery outcome routes work back into another stable mode
-- broader escalation explicitly takes over the blocked condition
+- only through a structured recovery outcome that explicitly routes work into
+  another mode
 
 ## Allowed Mutations
 
@@ -43,11 +41,10 @@ Not allowed by default:
   - `DevOps`
 - Primary protocol:
   - `recovery`
-- Common follow-on protocols:
-  - `planning`
-  - `execution-slice`
-  - `review`
-  - `rework`
+- Cross-cutting contract protocols may appear at the edges:
+  - `delegation`
+  - `handoff`
+  - `escalation`
 
 ## Traceability
 

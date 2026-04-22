@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to treat the GitHub pull-request surface as a structured handoff,
-findings, and response channel.
+Use this skill for using pull-request review surfaces as structured handoff and findings channels.
 
 ## Parent Boundary
 
@@ -18,27 +17,29 @@ findings, and response channel.
   - `specialist-delivery-recovery`
 - Conditional for:
   - `parent-qa`
-- This skill uses the PR surface well. It does not imply approval or merge
-  authority by itself.
+- Does not replace provider-specific authority rules
 
 ## Workflow
 
-1. Inspect the PR, checks, target branch, and current review state.
-2. Prepare a structured summary, finding, or response tied to the active diff.
-3. Keep observation, rationale, requested action, and open state explicit.
-4. Leave the PR in a clearer review or handoff state than it started.
+1. Inspect the PR, checks, and current review state
+2. Prepare a structured review or handoff comment
+3. Respond to findings or questions with explicit rationale or corrective action
+4. Leave the PR in a clearer review state than it started
 
 ## Escalation Conditions
 
-- Required PR actions exceed the actor's provider permissions.
-- Review state, authority state, and readiness state conflict materially.
-- Findings imply architectural or product decisions beyond the current scope.
+- Required review actions exceed the actor's provider permissions
+- The PR contains unresolved conflicts between authority, readiness, and
+  review state
+- Findings imply architectural or product decisions beyond the current review
+  scope
 
 ## Return Contract
 
-- PR review or handoff summary
+- PR review summary
 - inline findings or responses
-- explicit statement of what remains open, blocked, or accepted
+- handoff commentary tied to the review surface
+- explicit statement of what remains open or accepted
 
 ## Traceability
 
@@ -48,5 +49,4 @@ findings, and response channel.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

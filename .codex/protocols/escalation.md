@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Materialize the workflow path used when a Context Atlas boundary cannot proceed
-safely within its current authority and must return blocked or higher-judgment
-state upward.
+Materialize the workflow path used when a boundary cannot proceed safely within its authority and must return blocked or higher-judgment state upward.
 
 ## Trigger / Enter Conditions
 
@@ -18,11 +16,9 @@ state upward.
 ## Participating Roles And Modes
 
 - no permanent owning top-level role
-- used by the currently accountable boundary when authority or safe next action
-  must move upward
+- used by the currently accountable boundary when authority or safe next action must move upward
 - mode-spanning contract protocol:
-  - commonly appears at blocked edges of planning, execution, review, rework,
-    or recovery
+  - commonly appears at blocked edges of planning, execution, review, rework, or recovery
 
 ## Structured Contract Expectations
 
@@ -32,8 +28,8 @@ state upward.
   - unresolved items
   - broader target boundary
   - recommended next action
-- escalation stays distinct from ordinary completion handoff and ordinary review
-  findings
+- escalation stays distinct from ordinary completion handoff and ordinary
+  review findings
 
 ## Exit Criteria
 

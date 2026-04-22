@@ -6,26 +6,38 @@
 
 ## Purpose
 
-Materialize the Context Atlas `operational_delivery` mode as the Codex-facing
-execution state for merge, release, workflow, versioning, and similar
-delivery-oriented operational actions.
+Materialize the Context Atlas `operational_delivery` mode as the Codex-facing execution state for merge, release, workflow, versioning, and similar delivery-oriented operational actions.
 
 ## Entry Conditions
 
-- upstream readiness conditions are satisfied and the current work is merge,
-  release, workflow, versioning, or similar operational action
-- an accepted review outcome or recovery outcome routes work to an operational
-  next step
+- when upstream readiness conditions are satisfied and the current work is
+  merge, release, workflow, versioning, or similar operational action
+- when an accepted review outcome or recovery outcome routes work to an
+  operational next step
 
 ## Exit Conditions
 
-- an operational outcome contract is emitted
-- an operational artifact is handed back to `review`
-- the operational path becomes blocked badly enough to require `recovery`
+- when an operational outcome contract is emitted
+- when an operational artifact is handed to review
+- when the operational path becomes blocked badly enough to require recovery
+- Mode rules should remain legible without turning into full protocol docs.
+- Entry and exit rules should rely on structured state changes rather than
+  conversational implication.
+- Recovery should stay explicit instead of becoming a vague catch-all for work
+  that simply lacks a clean handoff.
+- Define the detailed shape of every handoff contract.
+- Define full role applicability or mutation authority.
+- Replace the later protocol model.
+- [Context Atlas Mode Model](./Mode-Model.md)
+- [Mode Transition Graph](./Mode-Transition-Graph.md)
+- [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
+- [Context Atlas Role-Mode Matrix](../Roles/Role-Mode-Matrix.md)
+- [Context Atlas Agentic Development
+  Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
 
 ## Allowed Mutations
 
-- merge and release artifacts
+- merge/release artifacts
 - workflow definitions
 - versioning surfaces
 - release summaries
@@ -35,7 +47,7 @@ Not allowed by default:
 
 - ordinary feature implementation
 - self-acceptance findings
-- broad planning rewrites
+- broad planning/decomposition rewrites
 
 ## Role And Protocol Participation
 

@@ -6,39 +6,41 @@
 
 ## Purpose
 
-Use this skill to reproduce, isolate, and explain bounded Python faults with
-disciplined evidence instead of speculative fix attempts.
+Use this skill for reproducing, isolating, and explaining Python faults or unexpected behavior.
 
 ## Parent Boundary
 
+- Baseline for:
+  - `specialist-python-implementation`
 - Conditional for:
   - `parent-backend`
   - `parent-qa`
   - `specialist-review-readiness`
-- Baseline for:
-  - `specialist-python-implementation`
-- This skill isolates faults. It does not automatically approve the remedy or
-  widen implementation ownership.
+- Does not replace implementation ownership
 
 ## Workflow
 
-1. Establish a reproducible symptom or tightly bounded failing condition.
-2. Narrow the failing surface to code, data, environment, or contract drift.
-3. State confirmed cause, likely cause, and open questions separately.
-4. Return a bounded remediation direction with evidence and confidence level.
+1. Establish a reproducible symptom
+2. Narrow the failing surface to a smaller scope
+3. Inspect state, inputs, and recent change surfaces
+4. State the likely cause and candidate remediation direction
+5. Hand back a bounded explanation and evidence trail
 
 ## Escalation Conditions
 
-- The issue cannot be reproduced with available inputs or environments.
-- The likely cause depends on unavailable operational or data state.
-- The issue is really architectural or ownership-level rather than local.
+- The bug cannot be reproduced with available inputs or environments
+- The likely cause depends on unavailable operational, data, or infrastructure
+  state
+- The issue appears to stem from architecture or workflow design rather than a
+  bounded implementation fault
+- The required remediation would cross major ownership boundaries
 
 ## Return Contract
 
 - reproduction notes
 - fault-isolation summary
-- candidate remediation direction
-- explicit confidence statement
+- candidate fix direction
+- explicit confidence level on the suspected root cause
 
 ## Traceability
 
@@ -48,5 +50,4 @@ disciplined evidence instead of speculative fix attempts.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

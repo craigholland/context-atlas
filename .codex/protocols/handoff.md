@@ -6,13 +6,12 @@
 
 ## Purpose
 
-Materialize the workflow path used when completed or clarified Context Atlas
-state moves from one boundary to another.
+Materialize the workflow path used when completed work or clarified workflow state moves from one authority boundary to another.
 
 ## Trigger / Enter Conditions
 
-- a source boundary has completed a bounded slice
-- or a source boundary has produced clarified next-step state for downstream
+- the source boundary has completed a bounded slice
+- or the source boundary has produced valid clarified state for downstream
   work
 
 ## Participating Roles And Modes
@@ -36,7 +35,8 @@ state moves from one boundary to another.
 
 ## Exit Criteria
 
-- downstream intake can begin without reconstructing upstream state from prose
+- downstream intake can begin without reconstructing the upstream state from
+  prose
 - the next workflow step is explicit
 
 ## Traceability

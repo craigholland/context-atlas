@@ -6,36 +6,35 @@
 
 ## Purpose
 
-Use this skill to judge whether a bounded work unit appears ready to move into
-delivery-oriented operational handling.
+Use this skill for deciding whether a bounded work unit appears ready to enter delivery-oriented operational handling.
 
 ## Parent Boundary
 
 - Baseline for:
   - `parent-devops`
   - `specialist-delivery-recovery`
-- This skill produces a readiness judgment. It does not replace release
-  authority or override gate policy.
+- Does not replace release authority
 
 ## Workflow
 
-1. Inspect the current branch, PR, review, evidence, and release-facing state.
-2. Compare the current state against the expected gate inputs.
-3. Identify blockers, missing artifacts, and remaining operational risks.
-4. Return a proceed or hold recommendation with explicit missing evidence.
+1. Inspect the current evidence and handoff state
+2. Compare it against the expected gate inputs
+3. Identify blockers, risks, or missing artifacts
+4. State whether the work appears ready, blocked, or uncertain
 
 ## Escalation Conditions
 
-- Delivery readiness depends on authority outside the current actor.
-- Gate policy is ambiguous or contradictory.
-- Review, testing, or release evidence conflicts materially.
+- Delivery readiness depends on authority outside the current actor
+- Gate policy is ambiguous or contradictory
+- Evidence from review, testing, or release surfaces conflicts materially
+- Moving forward would create unclear rollback or recovery posture
 
 ## Return Contract
 
 - readiness summary
-- blocker and missing-evidence list
-- proceed or hold recommendation
-- explicit remaining-risk note
+- blocker list
+- proceed / hold recommendation
+- missing-evidence list when relevant
 
 ## Traceability
 
@@ -45,5 +44,4 @@ delivery-oriented operational handling.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

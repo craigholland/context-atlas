@@ -6,21 +6,20 @@
 
 ## Purpose
 
-Materialize the Context Atlas `Backend` role as the accountable surface for
-engine, domain, service, adapter, infrastructure, rendering, and backend test
-work that defines how Context Atlas behaves as a system.
+Materialize the Context Atlas `Backend` role as the accountable surface for engine, domain, service, adapter, infrastructure, rendering, and backend test work that defines how Context Atlas behaves as a system.
 
 ## Direct Ownership
 
-- product-engine implementation under `src/context_atlas/`
+- engine and package code under `src/context_atlas/`
 - backend-oriented tests under `tests/`
-- implementation-facing technical surfaces that move with backend behavior
-- bounded completion handoffs for downstream QA review
+- technical implementation docs when they need to move with code or product
+  behavior
+- implementation-facing scripts that support product behavior or verification
 
 ## Parent-Agent Binding
 
 - Materialized by `.codex/agents/parent-backend.toml`
-- Delegated implementation support may return through
+- Delegated specialist support may return through
   `.codex/agents/specialist-python-implementation.toml`
 
 ## Mode Participation
@@ -36,7 +35,7 @@ work that defines how Context Atlas behaves as a system.
 
 - Owns:
   - `execution-slice`
-  - `rework` for backend-owned returned work
+  - `rework`
 - Participates in:
   - `planning`
   - `review`

@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to evaluate backend design for cohesion, responsibility sizing,
-interface quality, substitution safety, and useful dependency inversion.
+Use this skill for reasoning about backend design through cohesion, responsibility, substitution, interface, and dependency-inversion concerns commonly associated with SOLID analysis.
 
 ## Parent Boundary
 
@@ -16,21 +15,20 @@ interface quality, substitution safety, and useful dependency inversion.
   - `parent-qa`
   - `specialist-python-implementation`
   - `specialist-review-readiness`
-- This skill is a design-quality lens. It should stay tied to concrete design
-  concerns rather than turning every change into an abstraction exercise.
+- Does not replace full system-architecture reasoning
 
 ## Workflow
 
-1. Inspect the current responsibility and dependency shape.
-2. Test whether abstractions match real seams and change pressure.
-3. Identify cohesion, interface size, substitution, or inversion risks.
-4. Return the narrowest design improvement that addresses the observed risk.
+1. Inspect the current responsibility and dependency shape
+2. Test whether the abstraction surface matches real change and substitution pressure
+3. Surface findings about cohesion, interface size, and inversion strategy
+4. Propose the narrowest design improvement that addresses the risk
 
 ## Escalation Conditions
 
-- The issue is really a higher-level architecture or ownership problem.
-- Remediation would require broad public-interface change.
-- The surrounding codebase lacks a stable design direction to anchor analysis.
+- The design issue is really a higher-level architecture or ownership issue
+- Remediation would require broad public-interface changes
+- The current codebase lacks a stable design direction to anchor the analysis
 
 ## Return Contract
 
@@ -46,5 +44,4 @@ interface quality, substitution safety, and useful dependency inversion.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

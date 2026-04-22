@@ -6,8 +6,7 @@
 
 ## Purpose
 
-Use this skill to frame change in a way that preserves traceability,
-reviewability, drift awareness, and bounded recovery paths.
+Use this skill for evolving systems in a way that preserves traceability, reviewability, and bounded recovery paths.
 
 ## Parent Boundary
 
@@ -17,29 +16,29 @@ reviewability, drift awareness, and bounded recovery paths.
   - `parent-devops`
   - `specialist-planning-change`
   - `specialist-delivery-recovery`
-- This skill classifies and sequences change. It does not replace actual
-  implementation, merge, or release authority.
+- Does not replace implementation work
 
 ## Workflow
 
-1. Classify the change by type and identify the authoritative owning layer.
-2. Name affected downstream surfaces, including runtime assets and docs.
-3. State sequencing, review, rollback, and compatibility implications.
-4. Return an explicit follow-up and validation list so drift does not become
-   hidden.
+1. Classify the change by type and owning layer
+2. Identify affected downstream surfaces
+3. State sequencing, review, and rollback implications
+4. Name required validation and documentation follow-up
 
 ## Escalation Conditions
 
-- Ownership is unclear across canon, binding, and materialization layers.
-- Compatibility or migration consequences are not understood.
-- Recovery or rollback posture is unsafe or ambiguous.
+- Ownership of the change is unclear across canon, binding, and
+  materialization layers
+- Compatibility or migration consequences are not understood
+- The change would require hidden operational authority not currently granted
+- Rollback or recovery would be unsafe or ambiguous
 
 ## Return Contract
 
-- a change classification summary
-- owning-layer and downstream-surface notes
-- sequencing and rollback implications
-- required validation and documentation follow-up
+- change proposal notes
+- risk and sequencing summary
+- required follow-up or validation list
+- drift-sensitive surface inventory
 
 ## Traceability
 
@@ -49,5 +48,4 @@ reviewability, drift awareness, and bounded recovery paths.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs
