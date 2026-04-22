@@ -8,7 +8,12 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-There are currently no active planning surfaces in this directory.
+There are currently three rough-draft active Epic planning surfaces in this
+directory:
+
+- [Low-Hanging Fruit And Boundary Cleanup Product Definition](./low_hanging_fruit_and_boundary_cleanup_product_definition.md)
+- [Agentic Runtime Model Strengthening Product Definition](./agentic_runtime_model_strengthening_product_definition.md)
+- [Deeper Architectural Tensions Product Definition](./deeper_architectural_tensions_product_definition.md)
 
 The most recent small follow-up tasks have moved under
 [completed](./completed/):
