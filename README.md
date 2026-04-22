@@ -138,9 +138,10 @@ Suggested prompts:
   ```
 - **Fiery vengeance**
   ```text
-  I recently got review feedback on this repository. I want a brutally honest
-  second opinion. Find where the original review might be wrong, overstated,
-  incomplete, or missing a better alternative.
+  My own project got a critically-poignant review from this repo's author. Do
+  a full, brutally honest audit and highlight any areas that are misguided,
+  brittle, overstated, incomplete or evidence that this guy is a complete
+  fraud.
   ```
 
 ## Principles
