@@ -8,6 +8,15 @@ rather than redefining them.
 
 ## Required Sections
 
+### Generated Surface Notice
+
+- state that the file is generated or regenerated from the authoritative Canon
+  and Identity docs
+- warn that local edits may be overwritten by later regeneration
+- direct lasting semantic changes upstream to:
+  - `docs/Authoritative/Canon/` for reusable or global meaning
+  - `docs/Authoritative/Identity/` for Context Atlas-specific meaning
+
 ### Purpose
 
 - explain that the file is the runtime-facing orientation surface for Context
@@ -51,4 +60,6 @@ rather than redefining them.
 
 - do not collapse all definitions into this file
 - do not redefine portable canon or Identity-layer meaning here
+- keep the generated-surface warning visible enough that readers do not mistake
+  this file for the durable source of truth
 - prefer links and short summaries over copied authoritative prose

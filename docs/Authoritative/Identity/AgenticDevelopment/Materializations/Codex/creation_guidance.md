@@ -79,6 +79,22 @@ Use the matching Codex template surface when it exists:
 If a surface has no dedicated file template yet, derive it from the
 folder-layout and binding docs rather than improvising a new concept shape.
 
+### 4. Treat Runtime Assets As Regenerable Outputs
+
+When creating or refreshing `.codex/` or `.agents/skills/` assets, treat those
+files as derived runtime outputs rather than as the lasting source of truth.
+
+That means:
+
+- local edits to generated runtime assets may be useful temporarily
+- those edits may be overwritten by later regeneration
+- durable semantic changes should be made upstream in authoritative docs first
+
+Use `docs/Authoritative/Canon/` when the change is meant to be portable or
+reusable.
+
+Use `docs/Authoritative/Identity/` when the change is Context Atlas-specific.
+
 ## Copied, Adapted, And Derived Content
 
 ### Copied
@@ -177,6 +193,7 @@ Derived data should clarify provenance, not invent new semantics.
 - check that ids and filenames follow the Codex folder layout naming rules
 - check that the runtime surface still points back to upstream authoritative
   sources
+- check that the generated-surface notice remains accurate
 - check that the maintenance mode is explicit
 - check that Codex wording does not silently redefine portable or Identity-layer
   semantics

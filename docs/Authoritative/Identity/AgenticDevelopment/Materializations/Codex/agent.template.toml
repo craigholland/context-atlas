@@ -1,4 +1,10 @@
 # Agent Descriptor Template
+# This file should be generated or regenerated from the authoritative Canon and
+# Identity docs rather than treated as the lasting source of truth.
+# Local edits may be overwritten by later regeneration.
+# Durable semantic changes belong upstream in:
+# - docs/Authoritative/Canon/ for reusable or global meaning
+# - docs/Authoritative/Identity/ for Context Atlas-specific meaning
 
 # Use this template when materializing:
 # - `.codex/agents/parent-<role-id>.toml`
