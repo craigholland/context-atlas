@@ -1,0 +1,54 @@
+# This file is generated or regenerated from the authoritative Canon and
+# Identity docs rather than treated as the lasting source of truth.
+# Local edits may be overwritten by later regeneration.
+# Durable semantic changes belong upstream in:
+# - docs/Authoritative/Canon/ for reusable or global meaning
+# - docs/Authoritative/Identity/ for Context Atlas-specific meaning
+
+id = "parent-qa"
+title = "QA Parent Agent"
+summary = "Materialized parent agent for Context Atlas governed review, findings analysis, review-pass execution, and readiness framing."
+agent_kind = "parent"
+maintenance_mode = "generated"
+
+[traceability]
+project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"
+binding_sources = [
+  "docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Gate-Review-Pass-Matrix.md",
+]
+template_source = "docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/agent.template.toml"
+
+[role_binding]
+role_id = "qa"
+authority_scope = "Owns governed review, requested review-pass execution, findings publication, and readiness framing, but does not merge, release, or silently absorb implementation ownership."
+
+[skill_attachment]
+baseline = ["review-findings-analysis", "python-testing", "backend-architecture-clean"]
+conditional = ["python-debugging", "backend-architecture-solid", "github-pr-review-and-handoff"]
+
+[mode_participation]
+primary = ["review"]
+conditional = ["rework", "recovery"]
+
+[protocol_participation]
+owns = ["review"]
+participates_in = ["rework", "recovery", "delegation", "handoff", "escalation"]
+
+[delegation]
+delegates_to = ["specialist-review-readiness"]
+returns_to = "parent-qa"
+
+[notes]
+constraints = [
+  "Publishes GitHub review findings through the QA principal when GitHub is the active review surface.",
+  "Executes the gate-bound review-pass map: code at Task -> Story, architecture and security at Story -> Epic, product at Epic -> development.",
+]
+non_goals = [
+  "Approve merges or releases.",
+  "Rewrite primary product surfaces as a substitute for returning findings.",
+]

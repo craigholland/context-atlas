@@ -1,0 +1,40 @@
+# Context Atlas Codex runtime configuration
+# This file is generated or regenerated from the authoritative Canon and
+# Identity docs rather than treated as the lasting source of truth.
+# Local edits may be overwritten by later regeneration.
+# Durable semantic changes belong upstream in:
+# - docs/Authoritative/Canon/ for reusable or global meaning
+# - docs/Authoritative/Identity/ for Context Atlas-specific meaning
+
+project_id = "context-atlas"
+platform = "Codex"
+maintenance_mode = "generated"
+orientation_surface = ".codex/AGENTS.md"
+
+[traceability]
+materialization_manifest = "docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml"
+project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"
+runtime_capacity = "docs/Authoritative/Identity/AgenticDevelopment/runtime_capacity.yaml"
+codex_binding_root = "docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/"
+
+[layout]
+roles_root = ".codex/roles"
+agents_root = ".codex/agents"
+modes_root = ".codex/modes"
+protocols_root = ".codex/protocols"
+skills_root = ".agents/skills"
+
+[capacity]
+total_runtimes = 3
+usable_runtimes = 3
+max_parallel_story_lanes = 3
+max_parallel_task_lanes = 3
+require_base_work_first = true
+
+[materialization]
+roles = 5
+parent_agents = 5
+specialists = 4
+modes = 6
+protocols = 8
+skills = 15

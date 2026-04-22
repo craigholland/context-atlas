@@ -1,0 +1,57 @@
+# Rework Mode
+
+> Generated surface notice
+> This file is generated or regenerated from the authoritative Canon and Identity docs.
+> Local edits may be overwritten by later regeneration. Durable semantic changes belong upstream in `docs/Authoritative/Canon/` or `docs/Authoritative/Identity/`.
+
+## Purpose
+
+Materialize the Context Atlas `rework` mode as the Codex-facing execution
+state for returned work that must answer findings, required changes, or
+clarification requests.
+
+## Entry Conditions
+
+- a valid return contract requests changes on already-delivered work
+- the current work is correction or clarification rather than first-pass
+  delivery
+
+## Exit Conditions
+
+- a renewed structured completion handoff is emitted
+- structural ambiguity or blockage requires `recovery`
+
+## Allowed Mutations
+
+- previously returned owned work
+- directly necessary validation updates
+
+Not allowed by default:
+
+- unrelated new scope
+- approval actions
+- open-ended exploratory change
+
+## Role And Protocol Participation
+
+- Primary roles:
+  - `Planner/Decomp`
+  - `Backend`
+  - `Documentation/UAT`
+- Conditional roles:
+  - `QA`
+  - `DevOps`
+- Primary protocol:
+  - `rework`
+- Typical next step:
+  - return to `review`
+
+## Traceability
+
+- Maintenance mode: `generated`
+- Upstream sources:
+  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Model.md`
+  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
+  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Mutation-Matrix.md`
+  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Mode-Matrix.md`
+  - `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Mode-Bindings.md`
