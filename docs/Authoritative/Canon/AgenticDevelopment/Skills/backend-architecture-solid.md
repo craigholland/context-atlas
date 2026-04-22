@@ -26,6 +26,16 @@ Define the portable skill for reasoning about backend design through cohesion,
 responsibility, substitution, interface, and dependency-inversion concerns
 commonly associated with SOLID analysis.
 
+## Knowledge Scope
+
+This skill should cover:
+
+- responsibility sizing at the class, module, and service level
+- when interfaces are helpful versus when they add needless indirection
+- how substitution and inheritance assumptions can create fragility
+- how oversized interfaces and leaky abstractions degrade maintainability
+- how dependency inversion should improve boundaries rather than obscure them
+
 ## Common Mode Affinity
 
 - implementation
@@ -37,17 +47,52 @@ commonly associated with SOLID analysis.
 - Backend Staff Engineer
 - Quality Assurance Engineer
 
-## Bounded Capability
+## Common Inputs
 
-- assess whether responsibilities are well-bounded
-- identify brittle abstractions or oversized interfaces
-- surface object and module design issues before they become architectural drift
+- the design or implementation under review
+- surrounding abstractions and interface patterns
+- local architectural conventions
+- current or expected extension points
 
-## Common Outputs
+## Decision Heuristics
+
+- prefer one clear responsibility per module or class-sized unit
+- introduce abstractions when they protect a real seam, not merely to satisfy a
+  stylistic preference
+- keep interfaces as small as the consuming contracts allow
+- treat dependency inversion as a boundary tool, not a universal requirement
+- flag abstraction layers that increase indirection without increasing clarity
+
+## Execution Pattern
+
+- inspect the current responsibility and dependency shape
+- test whether the abstraction surface matches real change and substitution
+  pressure
+- surface findings about cohesion, interface size, and inversion strategy
+- propose the narrowest design improvement that addresses the risk
+
+## Expected Outputs
 
 - design-quality notes
 - abstraction or cohesion findings
 - focused refactoring guidance
+
+## Verification And Evidence
+
+A well-used instance of this skill should make it possible to explain:
+
+- why the current design is cohesive or fragmented
+- whether an abstraction is earning its complexity
+- how the proposed structure improves maintainability without unnecessary
+  indirection
+
+## Escalation Conditions
+
+Escalate when:
+
+- the design issue is really a higher-level architecture or ownership issue
+- remediation would require broad public-interface changes
+- the current codebase lacks a stable design direction to anchor the analysis
 
 ## Guardrails
 

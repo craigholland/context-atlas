@@ -25,6 +25,17 @@ supersedes: []
 Define the portable skill for diagnosing blocked, unstable, or drifted states
 and choosing a bounded recovery direction.
 
+## Knowledge Scope
+
+This skill should cover:
+
+- common recovery scenarios such as branch drift, failed rollout, blocked
+  pipeline, broken validation surface, and incomplete handoff state
+- how to separate recoverable local failures from broader systemic issues
+- how to identify a last-known-good or safer fallback position
+- how rollback, retry, hold, and escalation differ
+- how to preserve reviewability while recovering
+
 ## Common Mode Affinity
 
 - recovery
@@ -35,17 +46,52 @@ and choosing a bounded recovery direction.
 - Planning/Decomposition Lead
 - Backend Staff Engineer
 
-## Bounded Capability
+## Common Inputs
 
-- assess what is broken, blocked, or drifted
-- separate reversible issues from deeper structural failures
-- propose bounded next steps for stabilization or escalation
+- the current failure or blocked state
+- recent change history and evidence surfaces
+- pipeline, branch, review, or runtime signals
+- known recovery constraints and authority limits
 
-## Common Outputs
+## Decision Heuristics
+
+- stabilize before optimizing
+- prefer reversible recovery steps when uncertainty remains
+- identify whether the failure is local, workflow-level, or systemic
+- separate symptom suppression from real recovery
+- escalate when recovery would require authority or system knowledge not
+  currently available
+
+## Execution Pattern
+
+- summarize the current unstable or blocked state
+- classify likely cause categories
+- identify the smallest safe next action
+- state whether the path is retry, rollback, hold, repair, or escalate
+
+## Expected Outputs
 
 - recovery-state summary
 - likely cause categories
 - immediate next-step recommendation
+- recovery-risk note
+
+## Verification And Evidence
+
+A well-used instance of this skill should usually leave behind:
+
+- a clear statement of what recovery is trying to restore
+- explicit rationale for the chosen next step
+- an understandable path for follow-up if the first recovery action fails
+
+## Escalation Conditions
+
+Escalate when:
+
+- no bounded safe recovery action is visible
+- the issue appears systemic rather than local
+- recovery would require destructive or high-authority operations
+- the known-good state is uncertain or disputed
 
 ## Guardrails
 

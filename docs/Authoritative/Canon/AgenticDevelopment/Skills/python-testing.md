@@ -1,7 +1,7 @@
 ---
 id: craig-skill-python-testing
 title: Python Testing
-summary: Defines the portable skill for executing, extending, and interpreting Python test surfaces in support of reviewable evidence.
+summary: Defines the portable skill for executing, extending, and interpreting Python test surfaces as bounded validation evidence.
 doc_class: authoritative
 template_refs:
   metadata: base_metadata@1.0.0
@@ -25,6 +25,18 @@ supersedes: []
 Define the portable skill for using Python tests as bounded validation and
 evidence surfaces.
 
+## Knowledge Scope
+
+This skill should cover:
+
+- unit, integration, and regression testing patterns in Python `3.12-3.14`
+- `pytest` and `unittest` style execution, fixtures, parametrization, and
+  mocking patterns
+- how to decide whether a behavior belongs in unit, service, adapter, or
+  end-to-end evidence
+- how framework and library choices can change the right testing boundary
+- how to interpret green and failing tests without overstating certainty
+
 ## Common Mode Affinity
 
 - review
@@ -36,17 +48,53 @@ evidence surfaces.
 - Quality Assurance Engineer
 - Backend Staff Engineer
 
-## Bounded Capability
+## Common Inputs
 
-- run targeted or broader Python test suites
-- interpret failures and pass conditions in context
-- add or refine tests when bounded evidence is missing
+- the behavior or regression under examination
+- existing tests and surrounding implementation
+- local test tooling and execution commands
+- findings, bug reports, or changed code paths needing evidence
 
-## Common Outputs
+## Decision Heuristics
+
+- add the narrowest test that proves the behavior in question
+- prefer regression tests close to the failing contract or surface
+- do not use a broad integration test when a smaller deterministic test would
+  prove the same point
+- do not assume coverage percentage equals correctness
+- escalate when meaningful evidence depends on unavailable external systems or
+  unresolved product expectations
+
+## Execution Pattern
+
+- identify the contract or behavior that needs proof
+- choose the right testing level
+- run existing tests first when possible
+- add or refine tests if the current evidence is insufficient
+- interpret the resulting pass/fail signal in context
+
+## Expected Outputs
 
 - test execution result summary
 - focused test additions or updates
 - evidence notes tied to observed behavior
+
+## Verification And Evidence
+
+A well-used instance of this skill should usually leave behind:
+
+- explicit proof for the changed or questioned behavior
+- a clear statement of what was and was not validated
+- test surfaces that remain understandable and maintainable
+
+## Escalation Conditions
+
+Escalate when:
+
+- the required evidence depends on unavailable environments, data, or services
+- the correct testing boundary is blocked by unresolved architecture decisions
+- tests are too unstable or slow to provide trustworthy evidence
+- the issue appears to be in review interpretation rather than test coverage
 
 ## Guardrails
 

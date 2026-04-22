@@ -34,8 +34,11 @@ specialists. They are portable skills, not one application's active skill map.
 The skill catalog describes things like:
 
 - what capability a skill is meant to provide
+- what knowledge and ecosystem surface the skill is expected to cover
 - which modes the skill commonly supports
 - which role families commonly use the skill
+- what inputs and decision heuristics shape use of the skill
+- what evidence a well-used skill should usually produce
 - what bounded outputs the skill is expected to produce
 - what constraints keep the skill from expanding into a specialist or role
 
@@ -47,6 +50,26 @@ It does not define:
 - which skills are mandatory for any particular implementation environment
 
 Those choices belong in the downstream identity and materialization layers.
+
+## Expected Shape Of A Skill Definition
+
+Each skill document in this directory should be substantial enough to act as a
+real reusable capability definition, not merely a label.
+
+At minimum, a portable skill definition should make the following concerns
+explicit:
+
+- purpose
+- knowledge scope and any relevant version or ecosystem assumptions
+- common mode affinity
+- common role affinity
+- common inputs
+- decision heuristics
+- execution pattern
+- expected outputs
+- verification and evidence expectations
+- escalation conditions
+- guardrails
 
 ## Current Skill Families
 

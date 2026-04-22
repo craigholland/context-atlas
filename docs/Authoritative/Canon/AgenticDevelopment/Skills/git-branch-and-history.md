@@ -1,7 +1,7 @@
 ---
 id: craig-skill-git-branch-and-history
 title: Git Branch And History
-summary: Defines the portable skill for preparing, inspecting, and maintaining Git branch and commit history in a reviewable way.
+summary: Defines the portable skill for preparing, inspecting, and maintaining Git branch and commit history in a reviewable and low-drift way.
 doc_class: authoritative
 template_refs:
   metadata: base_metadata@1.0.0
@@ -25,6 +25,16 @@ supersedes: []
 Define the portable skill for managing Git history and branch state in support
 of reviewable collaboration.
 
+## Knowledge Scope
+
+This skill should cover:
+
+- branch state, ancestry, divergence, and integration readiness
+- commit hygiene, commit grouping, and history readability
+- merge, rebase, cherry-pick, and revert tradeoffs
+- conflict handling and branch-stack maintenance
+- tags and release-facing history interpretation
+
 ## Common Mode Affinity
 
 - implementation
@@ -36,17 +46,55 @@ of reviewable collaboration.
 - DevOps Engineer
 - Backend Staff Engineer
 
-## Bounded Capability
+## Common Inputs
 
-- inspect branch state, commit history, and divergence
-- prepare commits and branch structure for review or integration
-- preserve readable, attributable history
+- current branch topology and commit state
+- target integration or release path
+- repository branch policy and review model
+- any unresolved conflicts or divergence
 
-## Common Outputs
+## Decision Heuristics
+
+- preserve readable, attributable history over cleverness
+- prefer non-destructive history operations unless a cleaner history is
+  explicitly required and safe
+- keep unrelated work separated into distinct commits or branches
+- use reverts and explicit recovery when auditability matters more than a
+  perfectly linear story
+- escalate when the required history surgery could erase or obscure important
+  collaboration context
+
+## Execution Pattern
+
+- inspect current branch and history state
+- identify the intended integration target
+- choose the smallest safe history or branch action
+- confirm the resulting state is reviewable and attributable
+
+## Expected Outputs
 
 - branch-status summary
 - commit preparation
 - history or integration notes
+- bounded conflict-resolution rationale
+
+## Verification And Evidence
+
+A well-used instance of this skill should usually leave behind:
+
+- branch state that matches the intended review or integration path
+- commit history that is understandable without hidden context
+- explicit notes when unusual history operations were necessary
+
+## Escalation Conditions
+
+Escalate when:
+
+- multiple collaborators' work would be rewritten or obscured
+- the required integration path conflicts with branch governance rules
+- conflict resolution cannot be done safely without product or implementation
+  clarification
+- the work appears to need provider-specific authority not owned by the actor
 
 ## Guardrails
 

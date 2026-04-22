@@ -26,6 +26,19 @@ supersedes: []
 Define the portable skill for turning evidence into explicit findings, risk
 statements, and review outcomes.
 
+## Knowledge Scope
+
+This skill should cover:
+
+- the difference between evidence, observation, finding, risk, and acceptance
+  judgment
+- how to frame findings with reproducibility, expected behavior, and impact
+- how review lenses can differ across code, architecture, security, and product
+  concerns
+- how to distinguish blocker-level issues from questions, clarifications, and
+  low-severity advice
+- how to express confidence honestly when evidence is partial
+
 ## Common Mode Affinity
 
 - review
@@ -35,17 +48,50 @@ statements, and review outcomes.
 - Quality Assurance Engineer
 - User Acceptance Tester
 
-## Bounded Capability
+## Common Inputs
 
-- interpret evidence from tests, diffs, traces, or review surfaces
-- frame concerns as explicit findings instead of vague discomfort
-- state whether work appears acceptable, blocked, risky, or unclear
+- code diffs, tests, traces, docs, or review-surface evidence
+- expected behavior or governing contracts
+- prior findings or known risk context
+- current gate or review-pass purpose
 
-## Common Outputs
+## Decision Heuristics
+
+- state the evidence first, then the finding derived from it
+- distinguish severity from confidence
+- write findings that a rework actor can act on concretely
+- do not promote vague discomfort to a blocker without supporting rationale
+- keep “needs clarification” distinct from “changes required”
+
+## Execution Pattern
+
+- inspect the available evidence
+- compare it to expected behavior or governing constraints
+- classify the concern by kind, severity, and confidence
+- state the outcome or follow-up path explicitly
+
+## Expected Outputs
 
 - findings summary
 - acceptance or risk statement
 - escalation or rework recommendation
+- severity and confidence framing
+
+## Verification And Evidence
+
+A well-used instance of this skill should usually leave behind:
+
+- findings that are specific enough to verify or remediate
+- clear evidence for why the finding exists
+- explicit separation between confirmed defects and open questions
+
+## Escalation Conditions
+
+Escalate when:
+
+- available evidence is too weak to support a responsible judgment
+- the concern crosses into unsettled architecture, security, or product policy
+- the required remedy would exceed the current review pass or role authority
 
 ## Guardrails
 
