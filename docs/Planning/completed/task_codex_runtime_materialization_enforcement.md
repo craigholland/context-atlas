@@ -44,10 +44,10 @@ WORKING
 ## Inputs
 
 - the current generated runtime surface under `.codex/` and `.agents/skills/`
-- [Context Atlas Materialization Manifest](../Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml)
-- [Context Atlas Codex Binding](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
-- [Context Atlas Codex Creation Guidance](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)
-- [Context Atlas Codex Governance](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md)
+- [Context Atlas Materialization Manifest](../../Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml)
+- [Context Atlas Codex Binding](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- [Context Atlas Codex Creation Guidance](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)
+- [Context Atlas Codex Governance](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md)
 
 ## Proposed Work
 
@@ -163,8 +163,8 @@ WORKING
 
 ## Related Artifacts
 
-- [Planning README](./README.md)
-- [Context Atlas Materialization Manifest](../Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml)
-- [Context Atlas Codex Binding](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
-- [Context Atlas Codex Creation Guidance](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)
-- [Context Atlas Codex Governance](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md)
+- [Planning README](../README.md)
+- [Context Atlas Materialization Manifest](../../Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml)
+- [Context Atlas Codex Binding](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- [Context Atlas Codex Creation Guidance](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md)
+- [Context Atlas Codex Governance](../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md)

@@ -10,7 +10,7 @@ historical execution intent at a glance.
 
 The current active planning surfaces are:
 
-- [Task - Codex Runtime Materialization Enforcement PR Plan](./task_codex_runtime_materialization_enforcement.md)
+- [Task - Codex Runtime Materialization Enforcement PR Plan](completed/task_codex_runtime_materialization_enforcement.md)
   This is the small follow-up task for turning the first generated Codex
   runtime surface into a deterministic, drift-checked, preflight-enforced
   pipeline.
