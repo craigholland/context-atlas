@@ -10,8 +10,10 @@ published.
 
 Start with the latest shipped release:
 
+- [Release 0.1.3](./release_0_1_3.md)
+  - entry-surface refinement and Codex runtime-governance release
 - [Release 0.1.2](./release_0_1_2.md)
-  - current context-assembly hardening release
+  - context-assembly hardening release
 
 Earlier release history:
 

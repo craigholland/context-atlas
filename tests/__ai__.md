@@ -33,6 +33,7 @@
 - Test helpers should not reimplement production semantics when assertions can exercise the real code directly.
 - Release-facing tests should keep the exported package version aligned with `pyproject.toml` and the current shipped release note rather than freezing a stale version expectation.
 - When the shipped release version moves forward, `StarterCliTests` should advance with that same shipped release note instead of lagging one tag behind the package metadata.
+- Release-prep changes that touch `tests/test_cli.py` should also refresh the nearest owner-file contract when the asserted shipped version changes, so version-surface edits do not look like an ungoverned one-off test tweak.
 - Cross-platform path-safety tests should cover both Windows-style and POSIX-style traversal inputs when the production code is expected to guard against either form.
 
 ## Allowed Dependencies
@@ -99,6 +100,7 @@
   - invariants:
     - tests should prove the installable starter CLI can assemble a packet from a docs directory without relying on repository-only helper scripts
     - tests should prove the package version surface stays aligned with the current MVP release contract
+    - tests should treat the asserted CLI version as part of the shipped release surface shared with `pyproject.toml`, `src/context_atlas/__init__.py`, and `docs/Release/`
 - `test_domain_models.py`:
   - responsibility: verifies canonical domain artifacts and their starter invariants
   - defines:

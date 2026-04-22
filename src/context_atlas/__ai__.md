@@ -47,6 +47,7 @@
 - The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
 - The exported `context_atlas.__version__` surface should stay aligned with the release version in `pyproject.toml` and the current in-repo release history, rather than drifting into a stale package-local constant.
 - Release-prep edits to `__version__` should move in lockstep with `pyproject.toml`, `docs/Release/README.md`, and the current shipped release note rather than being treated as a package-local tweak.
+- Release-prep edits that touch `__init__.py` should also keep the package-facing CLI version expectation in `tests/test_cli.py` aligned, because the installable starter surface and package version are reviewed together as one shipped contract.
 
 ## Allowed Dependencies
 - may depend on:
@@ -89,6 +90,7 @@
     - keep the package root lightweight
     - do not turn `__init__.py` into a service locator or broad re-export barrel
     - prefer curating starter exports through `api.py` rather than widening the package root directly
+    - when `__version__` changes for a shipped release, keep that string synchronized with `pyproject.toml`, `tests/test_cli.py`, and the current active release note rather than treating the package root as the only source that matters
 - `api.py`:
   - responsibility: curates the supported starter import surface without flattening the entire layer structure
   - used_by:

@@ -6,12 +6,13 @@ doc_class: releases
 template_refs:
   metadata: base_metadata@1.0.0
   content: general_content@1.0.0
-status: active
+status: superseded
 created: 2026-04-21
-last_reviewed: 2026-04-21
+last_reviewed: 2026-04-22
 owners: [core]
 tags: [releases, hardening, version-0-1-2, context-assembly, product-surface]
 related:
+  - ./release_0_1_3.md
   - ./release_0_1_1.md
   - ../Planning/completed/Hardening/context_assembly_hardening_product_definition.md
   - ../Guides/README.md

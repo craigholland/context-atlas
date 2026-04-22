@@ -86,6 +86,7 @@
     - should route deeper walkthrough readers into guide material instead of carrying every tour-level section in full
     - should distinguish shipped-release review from evolving-branch review when suggesting AI-assisted critique paths
     - any playful review prompt should remain clearly secondary to the serious route guidance and should still ask for substantive criticism
+    - its `Status` section should stay aligned with the current shipped release note and should describe the top-level product story without collapsing back into a second system tour
 - `pyproject.toml`:
   - responsibility: defines package metadata and repo-local developer tool dependencies
   - invariants:
