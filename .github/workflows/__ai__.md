@@ -25,6 +25,7 @@
 - These workflows are architecture-adjacent enforcement, not proof of semantic correctness.
 - Keep runner and shell choices aligned with the repository's declared Verification Contract commands.
 - The folder-contract workflow should enforce owner-file freshness, not just structural validity.
+- CI should fail when Codex runtime assets drift from their manifest-driven plan, even if the rest of the Python package still compiles and tests cleanly.
 
 ## Allowed Dependencies
 - may depend on:
@@ -36,7 +37,7 @@
 
 ## Public API / Key Exports
 - `ci.yml`:
-  - baseline repo preflight for code and architecture checks
+  - baseline repo preflight for code, architecture, and Codex runtime-materialization checks
 - `ai-verify-folder-contracts.yml`:
   - validates `__ai__.md` structure, freshness, and local verification contracts
 - `ai-last-verified.yml`:
@@ -47,6 +48,9 @@
   - responsibility: installs dev tooling and runs the repo preflight
   - depends_on:
     - `scripts/preflight.py`
+    - `scripts/check_codex_materialization.py`
+  - invariants:
+    - workflow path filters should include authoritative Codex materialization inputs and the generated runtime surface so drift checks run when those files move
 - `ai-verify-folder-contracts.yml`:
   - responsibility: validates and exercises local owner-file contracts
   - depends_on:

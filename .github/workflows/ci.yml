@@ -8,6 +8,10 @@ on:
       - "src/**"
       - "tests/**"
       - "scripts/**"
+      - "docs/Authoritative/**"
+      - ".codex/**"
+      - ".agents/skills/**"
+      - "README.md"
       - "pyproject.toml"
       - ".github/workflows/ci.yml"
   pull_request:
@@ -15,6 +19,10 @@ on:
       - "src/**"
       - "tests/**"
       - "scripts/**"
+      - "docs/Authoritative/**"
+      - ".codex/**"
+      - ".agents/skills/**"
+      - "README.md"
       - "pyproject.toml"
       - ".github/workflows/ci.yml"
 
@@ -40,6 +48,11 @@ jobs:
         shell: pwsh
         run: |
           py -3 -m pip install -e .[dev]
+
+      - name: Check Codex runtime materialization
+        shell: pwsh
+        run: |
+          py -3 scripts/check_codex_materialization.py
 
       - name: Run preflight
         shell: pwsh

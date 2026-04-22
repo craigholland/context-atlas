@@ -12,6 +12,7 @@ import unittest
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
 _SCRIPT_PATH = _REPO_ROOT / "scripts" / "materialize_codex_runtime.py"
+_CHECK_SCRIPT_PATH = _REPO_ROOT / "scripts" / "check_codex_materialization.py"
 _MODULE_SPEC = importlib.util.spec_from_file_location(
     "materialize_codex_runtime",
     _SCRIPT_PATH,
@@ -59,8 +60,7 @@ class CodexRuntimeMaterializationTests(unittest.TestCase):
         result = subprocess.run(
             [
                 sys.executable,
-                str(_SCRIPT_PATH),
-                "--check",
+                str(_CHECK_SCRIPT_PATH),
                 "--surface",
                 "roles",
                 "--surface",
@@ -74,7 +74,7 @@ class CodexRuntimeMaterializationTests(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn(
-            "All selected generated Codex surfaces are in sync.",
+            "Verified",
             result.stdout,
         )
 
@@ -221,6 +221,58 @@ class CodexRuntimeMaterializationTests(unittest.TestCase):
                 "`.codex-alt/agents/parent-backend.toml`",
                 backend_role_surface.content,
             )
+
+    def test_materialization_check_script_passes_for_current_repo(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(_CHECK_SCRIPT_PATH)],
+            cwd=_REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("[check_codex_materialization] Verified", result.stdout)
+
+    def test_materialization_check_script_fails_when_generated_surface_drifts(
+        self,
+    ) -> None:
+        with TemporaryDirectory() as temp_dir:
+            repo_copy = Path(temp_dir) / "repo"
+            shutil.copytree(
+                _REPO_ROOT,
+                repo_copy,
+                ignore=shutil.ignore_patterns(
+                    ".git",
+                    ".pytest_cache",
+                    ".mypy_cache",
+                    ".ruff_cache",
+                    "__pycache__",
+                    "*.pyc",
+                ),
+            )
+            orientation_path = repo_copy / ".codex" / "AGENTS.md"
+            orientation_path.write_text(
+                orientation_path.read_text(encoding="utf-8")
+                + "\n<!-- local drift -->\n",
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(_CHECK_SCRIPT_PATH),
+                    "--repo-root",
+                    str(repo_copy),
+                ],
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn(".codex/AGENTS.md", result.stderr)
 
 
 if __name__ == "__main__":

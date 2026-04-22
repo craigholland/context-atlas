@@ -145,6 +145,7 @@
 - The first real generated runtime surface now exists under `.codex/` and `.agents/skills/`; refresh work should keep those derived assets aligned with `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`, the Identity-layer bindings, and the Codex creation-guidance/template docs rather than patching one runtime file family in isolation.
 - That generated runtime surface now explicitly includes `.codex/AGENTS.md`, `.codex/roles/`, `.codex/agents/`, `.codex/modes/`, `.codex/protocols/`, `.codex/config.toml`, and namespaced `.agents/skills/context-atlas-*/SKILL.md` assets; later roster changes should regenerate or refresh the affected surfaces coherently instead of treating one file as the hidden durable source of truth.
 - The repo-owned generator at `scripts/materialize_codex_runtime.py` is now the preferred refresh path for Codex surfaces declared `generated` by the manifest; contributors should change Canon or Identity first, then regenerate, rather than hand-editing derived runtime files as the durable source of truth.
+- Repo-level preflight and CI should now also fail when `.codex/` or `.agents/skills/` drift from the manifest-driven Codex materialization plan; contributors changing those authoritative inputs should regenerate and re-check before push.
 - Repo-level and layer-level owner files should stay curated current-state contracts rather than append-only summaries of completed work; detailed historical execution memory belongs in planning archives, release notes, or nearer authoritative docs instead of accumulating indefinitely inside `Architectural Rules`.
  The Context Atlas Codex governance surface should anchor drift and refresh expectations to the portable `Drift Model` and the Story 10 validation/governance closeout, not to stale earlier Story numbers that can change as the planning stack evolves.
 - Broader doc indexes such as `docs/README.md`, `docs/Authoritative/Canon/Architecture/README.md`, and `docs/Planning/README.md` should surface the AgenticDevelopment canon explicitly so contributors can discover it before writing application-specific bindings or materialized assets.
@@ -254,6 +255,7 @@
 - `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
 - `src/context_atlas/infrastructure/`: assembly and memory default settings plus structured observability helpers should not grow new env knobs without updating the repo root surface.
 - `.github/workflows/`: CI should mirror the local preflight closely enough that GitHub failures are usually reproducible before push.
+- `.codex/` and `.agents/skills/`: generated Codex runtime assets should remain both regenerable through `scripts/materialize_codex_runtime.py` and drift-checkable through `scripts/check_codex_materialization.py`.
 
 ## Verification Contract
 ```yaml

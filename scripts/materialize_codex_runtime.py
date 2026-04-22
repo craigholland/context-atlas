@@ -65,6 +65,7 @@ _SUPPORTED_SURFACES = {
 }
 _SUPPORTED_MAINTENANCE_MODES = {"generated", "human", "mixed"}
 _DOC_TEXT_CACHE: dict[tuple[Path, int, int], str] = {}
+SUPPORTED_SURFACES = frozenset(_SUPPORTED_SURFACES)
 
 _ROLE_PURPOSE_OVERRIDES: dict[str, str] = {
     "planner-decomp": (
@@ -2591,6 +2592,15 @@ def _check_plan(repo_root: Path, plan: MaterializationPlan) -> list[str]:
     return problems
 
 
+def check_materialization_plan(
+    repo_root: Path, selected_surfaces: set[str] | None = None
+) -> tuple[MaterializationPlan, list[str]]:
+    """Build and validate the selected materialization surfaces."""
+
+    plan = build_materialization_plan(repo_root, selected_surfaces)
+    return plan, _check_plan(repo_root, plan)
+
+
 def _write_plan(repo_root: Path, plan: MaterializationPlan) -> tuple[int, list[str]]:
     written = 0
     issues: list[str] = []
@@ -2642,11 +2652,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
     repo_root = Path(args.repo_root).resolve()
-    selected_surfaces = set(args.surface) if args.surface else set(_SUPPORTED_SURFACES)
+    selected_surfaces = set(args.surface) if args.surface else set(SUPPORTED_SURFACES)
     plan = build_materialization_plan(repo_root, selected_surfaces)
 
     if args.check:
-        problems = _check_plan(repo_root, plan)
+        _, problems = check_materialization_plan(repo_root, selected_surfaces)
         if problems:
             for problem in problems:
                 print(problem, file=sys.stderr)

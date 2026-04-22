@@ -63,7 +63,7 @@
 - `test_context_assembly_service.py`:
   - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
 - `test_codex_materialization.py`:
-  - `CodexRuntimeMaterializationTests`: verifies the manifest-driven Codex runtime generator reproduces the committed `.codex/` and `.agents/skills/` surface
+  - `CodexRuntimeMaterializationTests`: verifies the manifest-driven Codex runtime generator and drift checker reproduce and validate the committed `.codex/` and `.agents/skills/` surface
 - `test_filesystem_document_adapter.py`:
   - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
 - `test_record_source_adapter.py`:
@@ -244,7 +244,7 @@
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
     - Story 5 treats `test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`, `test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`, and `test_story_5_hardening_baseline_keeps_canonical_service_budget_summary` as the canonical service-side hardening anchors for truthful top-level budget, compression, and estimator metadata
 - `test_codex_materialization.py`:
-  - responsibility: verifies the repo-owned Codex runtime generator remains deterministic against the committed runtime surface
+  - responsibility: verifies the repo-owned Codex runtime generator and drift checker remain deterministic against the committed runtime surface
   - defines:
     - `CodexRuntimeMaterializationTests`: Codex runtime materialization test suite
   - depends_on:
@@ -252,6 +252,7 @@
   - invariants:
     - tests should prove `build_materialization_plan` reproduces the committed `.codex/` and `.agents/skills/` assets exactly
     - tests should prove `scripts/materialize_codex_runtime.py --check` succeeds from repo state alone
+    - tests should prove `scripts/check_codex_materialization.py` succeeds from repo state alone and fails when a committed generated surface drifts
     - tests should prove `maintenance_mode = mixed` still fails loudly until an explicit manual-block preservation format exists
     - tests should prove generator document-cache reuse stays scoped by repository root and current file state rather than leaking content across temp repos or stale edits
     - tests should prove manifest-declared runtime roots propagate into planned output paths and runtime-facing generated references instead of assuming fixed `.codex` / `.agents` locations
