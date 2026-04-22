@@ -27,6 +27,7 @@
 - Protocol, role-archetype, materialization, and governance supplements should remain separate enough that later validators and reviewers can reason about one concern without reconstructing the whole system.
 - Skill docs should stay atomic reusable capability units, while specialist-archetype docs should stay delegated composition patterns built from curated skills rather than project-specific runtime actors.
 - Skill docs in this folder should be materially rich enough to define real capability expectations, including knowledge scope, common inputs, decision heuristics, outputs, evidence, and escalation conditions.
+- Testing-oriented skill docs should explicitly cover negative-path and robustness reasoning when "trying to break" methods, classes, or contracts is part of proving resilience.
 - Meaningful updates to this folder should also review root governance, metadata, and neighboring planning indexes so the canon remains discoverable and trustworthy.
 - The README should explain why the agentic canon matters to Context Atlas's broader governance model, not only provide a reading order over the documents.
 - When hardening or other planning closeout docs summarize evidence paths, they should point back to this canon for shared governance vocabulary rather than recreating a second portable validation or change-management model in planning prose.
