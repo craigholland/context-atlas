@@ -59,6 +59,7 @@ parent_agents:
     type: parent
     direct_skills:
       baseline:
+        - planning-decomposition
         - python-authoring
         - backend-architecture-clean
         - git-branch-and-history

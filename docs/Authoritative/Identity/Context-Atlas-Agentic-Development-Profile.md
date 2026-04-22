@@ -220,6 +220,13 @@ That manifest should make explicit:
 - which specialists each parent agent may delegate to
 - which skills each specialist carries inside its bounded delegated scope
 
+That may include bounded planning skill on an implementation parent when that
+skill is only being used to decompose an already-assigned Task into PR-sized
+execution slices.
+
+That does not reassign Planner/Decomp ownership of Epic, Story, or Task-level
+planning artifacts, sequencing, or broader decomposition quality.
+
 ### 17. Environment Bindings Must Consume This Profile Explicitly
 
 When Context Atlas binds its agentic-development model into a concrete runtime
