@@ -3,7 +3,7 @@
 ## Last Verified (CI)
 - commit: 0ae3b5caff02ecd8ce0477f10d00a0058bc7cf72
 - timestamp_utc: 2026-04-20T22:22:38Z
-- verified_by: ci
+- verified_by: human
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: docs/Authoritative/Canon/RepoManagement
