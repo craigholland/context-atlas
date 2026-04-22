@@ -45,6 +45,7 @@
 - The repo's public policy-surface standard is now also validated Pydantic models; the remaining dataclasses should be explicitly justified as private helpers or script-local records.
 - The current authoritative split is stable: `docs/Authoritative/Canon/` holds portable cross-project canon, and `docs/Authoritative/Identity/` holds Context Atlas-specific bindings.
 - Active planning work belongs under `docs/Planning/`, completed planning stacks belong under `docs/Planning/completed/`, and implementation work should honor the planning canon's task-level feature-PR review gate unless an explicit parallelization decision says otherwise.
+- Small follow-up planning tasks may live directly under `docs/Planning/` when they are shaping a bounded documentation, governance, or workflow refactor without needing a full Epic/Story stack.
 - The curated product-facing package surface is `context_atlas.api`; root docs and examples should prefer that starter namespace unless they are deliberately teaching internal architecture.
 - Product-facing docs, guides, example READMEs, and `.env.example` should stay aligned around one truthful onboarding story, should not imply automatic `.env` loading, and should not introduce Windows-only operator guidance without a Linux/macOS analog.
 - Release-prep changes should keep `README.md`, `pyproject.toml`, `src/context_atlas/__init__.py`, `tests/test_cli.py`, and the current note under `docs/Release/` aligned to the same version.
@@ -125,7 +126,7 @@
 - `docs/Exploratory/`: speculative investigations and pickup notes may live here, but they must stay explicitly non-binding and must not become backdoor authority over Canon, Identity, or Planning surfaces.
 - `docs/Authoritative/Canon/AgenticDevelopment/__ai__.md` and `docs/Authoritative/Canon/RepoManagement/__ai__.md`: the nearest owner files for those canon surfaces should stay aligned when Story-level governance or validation expectations change.
 - `.codex/` and `.agents/skills/`: the generated runtime surface should stay downstream of the materialization manifest and Codex binding docs; changes there should be treated as derived refresh work, not as the authoritative place to redefine roster, mode, protocol, or skill meaning.
-- `docs/Planning/`: active future-planning work should live here until it is complete, and `docs/Planning/completed/` should hold the historical MVP, Agentic, and Hardening stacks once they are no longer the active future-planning surface.
+- `docs/Planning/`: active future-planning work should live here until it is complete, and `docs/Planning/completed/` should hold the historical MVP, Agentic, and Hardening stacks once they are no longer the active future-planning surface. Small active task plans may also live at the top level here when they are intentionally narrower than a full Epic/Story decomposition.
 - `src/context_atlas/`: preflight should prove repo readiness without redefining package-layer rules that belong to nearer owner files.
 - `src/context_atlas/infrastructure/`: supported environment variable keys in config loaders should stay mirrored in `.env.example`.
 - `src/context_atlas/infrastructure/`: assembly and memory default settings plus structured observability helpers should not grow new env knobs without updating the repo root surface.
