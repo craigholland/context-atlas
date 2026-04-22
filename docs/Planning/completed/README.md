@@ -17,3 +17,9 @@ The current completed stacks are:
 - [MVP](./MVP/)
 - [Agentic](./Agentic/)
 - [Hardening](./Hardening/)
+
+Standalone completed follow-up tasks also live here when they are not part of
+a larger Epic/Story archive:
+
+- [Task - Codex Runtime Materialization Enforcement PR Plan](./task_codex_runtime_materialization_enforcement.md)
+- [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./task_ai_owner_file_compaction_and_hygiene.md)

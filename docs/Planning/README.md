@@ -8,12 +8,13 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-The current active planning surfaces is:
+There are currently no active planning surfaces in this directory.
 
-- [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./task_ai_owner_file_compaction_and_hygiene.md)
-  This is the small follow-up task for reducing cognitive load in repo-level
-  and layer-level `__ai__.md` files whose `Architectural Rules` sections have
-  started to drift toward append-only historical summaries.
+The most recent small follow-up tasks have moved under
+[completed](./completed/):
+
+- [Task - Codex Runtime Materialization Enforcement PR Plan](./completed/task_codex_runtime_materialization_enforcement.md)
+- [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./completed/task_ai_owner_file_compaction_and_hygiene.md)
 
 Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
 
