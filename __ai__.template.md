@@ -20,6 +20,8 @@
 - <what this folder is allowed to do>
 - <what this folder must not do>
 - <important runtime / import-safety / layering rules>
+- <keep this section to durable current-state rules, not an append-only changelog of completed slices>
+- <move file-specific nuance to File Index, boundary assumptions to Cross-Folder Contracts, and future caveats to Known Gaps / Future-State Notes>
 - <for documentation/governance surfaces, how metadata review and authoritative-source lineage should stay explicit>
 
 ## Allowed Dependencies
@@ -50,7 +52,7 @@
 - <intentional simplification in current implementation>
 - <future direction that is relevant to reading current code>
 - <areas where current scope is still narrower than the long-term architecture>
-- <do not use this section as a changelog of completed work>
+- <use this for current limitations or future-state caveats, not as a changelog of completed work>
 
 ## Cross-Folder Contracts
 - <folder or module>: <assumption this folder relies on>

@@ -25,6 +25,7 @@
 - Repo-management docs should remain compatible with the neighboring AgenticDevelopment canon instead of duplicating role, mode, or protocol definitions.
 - Meaningful changes to this folder should also review metadata, planning indexes, and neighboring bindings so the repo-management surface remains discoverable and bounded.
 - When planning or closeout docs mention repository-facing review or merge evidence, they should continue to treat this canon as the upstream home for repo-principal and permission meaning rather than restating repo-management policy as planning-only folklore.
+- This owner file should stay a concise current-state boundary contract; provider catalog details belong in `File Index`, and future provider expansion notes belong in `Known Gaps / Future-State Notes` instead of accumulating as an append-only rule list.
 
 ## Allowed Dependencies
 - may depend on:

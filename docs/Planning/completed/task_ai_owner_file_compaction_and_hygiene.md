@@ -6,21 +6,21 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
 tags: [planning, task, ai-docs, owner-files, governance, hygiene]
 related:
   - ./README.md
-  - ../../__ai__.md
-  - ../../__ai__.template.md
-  - ../../.github/workflows/__ai__.md
-  - ../Authoritative/Canon/AgenticDevelopment/__ai__.md
-  - ../Authoritative/Canon/RepoManagement/__ai__.md
-  - ../../scripts/validate_ai_docs.py
-  - ../../scripts/check_ai_docs.py
-  - ../../scripts/ai_verify_contracts.py
+  - ../../../__ai__.md
+  - ../../../__ai__.template.md
+  - ../../../.github/workflows/__ai__.md
+  - ../../Authoritative/Canon/AgenticDevelopment/__ai__.md
+  - ../../Authoritative/Canon/RepoManagement/__ai__.md
+  - ../../../scripts/validate_ai_docs.py
+  - ../../../scripts/check_ai_docs.py
+  - ../../../scripts/ai_verify_contracts.py
 supersedes: []
 ---
 
@@ -43,20 +43,20 @@ easier for contributors to tell:
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
-- the current repo-level owner file at [__ai__.md](../../__ai__.md)
+- the current repo-level owner file at [__ai__.md](../../../__ai__.md)
 - layer-level owner files with higher cognitive load, especially:
-  - [.github/workflows/__ai__.md](../../.github/workflows/__ai__.md)
-  - [docs/Authoritative/Canon/AgenticDevelopment/__ai__.md](../Authoritative/Canon/AgenticDevelopment/__ai__.md)
-  - [docs/Authoritative/Canon/RepoManagement/__ai__.md](../Authoritative/Canon/RepoManagement/__ai__.md)
-- the reusable owner-file template at [__ai__.template.md](../../__ai__.template.md)
+  - [.github/workflows/__ai__.md](../../../.github/workflows/__ai__.md)
+  - [docs/Authoritative/Canon/AgenticDevelopment/__ai__.md](../../Authoritative/Canon/AgenticDevelopment/__ai__.md)
+  - [docs/Authoritative/Canon/RepoManagement/__ai__.md](../../Authoritative/Canon/RepoManagement/__ai__.md)
+- the reusable owner-file template at [__ai__.template.md](../../../__ai__.template.md)
 - the current owner-file validation and freshness scripts:
-  - [validate_ai_docs.py](../../scripts/validate_ai_docs.py)
-  - [check_ai_docs.py](../../scripts/check_ai_docs.py)
-  - [ai_verify_contracts.py](../../scripts/ai_verify_contracts.py)
+  - [validate_ai_docs.py](../../../scripts/validate_ai_docs.py)
+  - [check_ai_docs.py](../../../scripts/check_ai_docs.py)
+  - [ai_verify_contracts.py](../../../scripts/ai_verify_contracts.py)
 
 ## Proposed Work
 
@@ -153,12 +153,15 @@ PLANNED
 - later owner-file updates should add new rules more selectively and should
   prefer updating the right section over appending another historical note to
   the root contract
+- the root and layer-level owner files should now read as shorter curated
+  current-state contracts, with historical execution detail left in planning
+  archives, release notes, or nearer authoritative docs
 
 ## Related Artifacts
 
-- [Planning README](./README.md)
-- [Repo-Level Owner File](../../__ai__.md)
-- [Owner-File Template](../../__ai__.template.md)
-- [Workflows Owner File](../../.github/workflows/__ai__.md)
-- [Agentic Canon Owner File](../Authoritative/Canon/AgenticDevelopment/__ai__.md)
-- [RepoManagement Canon Owner File](../Authoritative/Canon/RepoManagement/__ai__.md)
+- [Completed Planning README](./README.md)
+- [Repo-Level Owner File](../../../__ai__.md)
+- [Owner-File Template](../../../__ai__.template.md)
+- [Workflows Owner File](../../../.github/workflows/__ai__.md)
+- [Agentic Canon Owner File](../../Authoritative/Canon/AgenticDevelopment/__ai__.md)
+- [RepoManagement Canon Owner File](../../Authoritative/Canon/RepoManagement/__ai__.md)

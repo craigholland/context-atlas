@@ -26,6 +26,7 @@
 - Keep runner and shell choices aligned with the repository's declared Verification Contract commands.
 - The folder-contract workflow should enforce owner-file freshness, not just structural validity.
 - CI should fail when Codex runtime assets drift from their manifest-driven plan, even if the rest of the Python package still compiles and tests cleanly.
+- This owner file should stay focused on stable workflow orchestration boundaries; historical examples of individual checks belong in repo scripts, planning archives, or release notes rather than accumulating here.
 
 ## Allowed Dependencies
 - may depend on:
