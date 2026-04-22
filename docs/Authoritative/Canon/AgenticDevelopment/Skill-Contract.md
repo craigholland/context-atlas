@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [agentic-development, skills, canon, capability]
 related:
@@ -50,8 +50,13 @@ environment-specific skill file format.
   into more than one agent or workflow path.
 - A portable skill contract should make the following concerns explicit:
   - intended purpose
-  - entry assumptions
+  - knowledge scope and any bounded version or ecosystem assumptions
+  - common role and mode affinity without turning the skill into a role or mode
+  - common inputs or preconditions
+  - decision heuristics that shape how the skill should be applied
+  - execution pattern or working method
   - bounded outputs or return shape
+  - verification or evidence expectations when the skill is used
   - constraints and guardrails
   - escalation conditions when the skill is insufficient on its own
 
@@ -62,6 +67,9 @@ environment-specific skill file format.
 - Skills must not silently expand into disguised specialists or parent agents.
 - Skill definitions should not depend on one actor's identity in order to make
   sense as reusable capability units.
+- Skill definitions should be materially descriptive enough that a downstream
+  binding or materialization layer does not have to invent the skill's actual
+  meaning from a one-line title alone.
 - Portable skill semantics must remain valid even when a downstream
   environment materializes them through different file layouts or discovery
   mechanisms.

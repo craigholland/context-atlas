@@ -8,13 +8,14 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [agentic-development, roles, archetypes, canon, portability]
 related:
   - ../Agentic-Development-Glossary.md
   - ../Agent-Authority-Model.md
   - ../Agent-Composition-Model.md
+  - ../Skills/README.md
 supersedes: []
 ---
 
@@ -63,7 +64,9 @@ The intended layering is:
 
 1. read the portable glossary so the role/archetype distinction is clear
 2. read the relevant role archetype documents in this directory
-3. move to the application-binding layer to see which archetypes a project
+3. read the portable skill catalog when you need reusable capabilities that
+   often attach to those role families
+4. move to the application-binding layer to see which archetypes a project
    refines and how it refines them
 
 Applications should treat these archetypes as reusable starting points, not as
@@ -74,3 +77,4 @@ mandatory one-to-one role names.
 - [Agentic Development Glossary](../Agentic-Development-Glossary.md)
 - [Agent Authority Model](../Agent-Authority-Model.md)
 - [Agent Composition Model](../Agent-Composition-Model.md)
+- [Skills](../Skills/README.md)
