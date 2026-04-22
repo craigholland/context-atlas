@@ -3,7 +3,7 @@
 ## Last Verified (CI)
 - commit: 1cd36070ddd5b129060eebef7d3107d77900d885
 - timestamp_utc: 2026-04-22T15:51:45Z
-- verified_by: ci
+- verified_by: craig
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
 - folder: .
@@ -144,12 +144,9 @@
 - The current active planning follow-up for Codex runtime actualization now lives in `docs/Planning/task_codex_runtime_materialization_enforcement.md`; contributors working on that surface should keep the sequence explicit: first deterministic generation plus upstream `maintenance_mode` policy in `materialization_manifest.yaml`, then drift checking plus preflight/CI enforcement.
 - The first real generated runtime surface now exists under `.codex/` and `.agents/skills/`; refresh work should keep those derived assets aligned with `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`, the Identity-layer bindings, and the Codex creation-guidance/template docs rather than patching one runtime file family in isolation.
 - That generated runtime surface now explicitly includes `.codex/AGENTS.md`, `.codex/roles/`, `.codex/agents/`, `.codex/modes/`, `.codex/protocols/`, `.codex/config.toml`, and namespaced `.agents/skills/context-atlas-*/SKILL.md` assets; later roster changes should regenerate or refresh the affected surfaces coherently instead of treating one file as the hidden durable source of truth.
-<<<<<<< feature/codex-runtime-materialization-enforcement
 - The repo-owned generator at `scripts/materialize_codex_runtime.py` is now the preferred refresh path for Codex surfaces declared `generated` by the manifest; contributors should change Canon or Identity first, then regenerate, rather than hand-editing derived runtime files as the durable source of truth.
-=======
 - Repo-level and layer-level owner files should stay curated current-state contracts rather than append-only summaries of completed work; detailed historical execution memory belongs in planning archives, release notes, or nearer authoritative docs instead of accumulating indefinitely inside `Architectural Rules`.
->>>>>>> development
-- The Context Atlas Codex governance surface should anchor drift and refresh expectations to the portable `Drift Model` and the Story 10 validation/governance closeout, not to stale earlier Story numbers that can change as the planning stack evolves.
+ The Context Atlas Codex governance surface should anchor drift and refresh expectations to the portable `Drift Model` and the Story 10 validation/governance closeout, not to stale earlier Story numbers that can change as the planning stack evolves.
 - Broader doc indexes such as `docs/README.md`, `docs/Authoritative/Canon/Architecture/README.md`, and `docs/Planning/README.md` should surface the AgenticDevelopment canon explicitly so contributors can discover it before writing application-specific bindings or materialized assets.
 - Broader doc indexes should now also surface the RepoManagement canon explicitly so contributors working on repository principals, review surfaces, or branch policy can start from the portable layer before writing project-specific GitHub bindings.
 - The `docs/Authoritative/Canon/AgenticDevelopment/README.md` file should remain the portable entrypoint for human readers; later Story docs should inherit that orientation instead of compensating for a weak canon index.
