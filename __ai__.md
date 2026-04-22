@@ -47,6 +47,7 @@
 - Active planning work belongs under `docs/Planning/`, completed planning stacks belong under `docs/Planning/completed/`, and implementation work should honor the planning canon's task-level feature-PR review gate unless an explicit parallelization decision says otherwise.
 - The curated product-facing package surface is `context_atlas.api`; root docs and examples should prefer that starter namespace unless they are deliberately teaching internal architecture.
 - The root README may route different audiences toward product, AgenticDevelopment, Canon/Identity architecture, and `__ai__` governance entrypoints, but it should keep the product-evaluator path explicit and should not force new readers to digest every repo subsystem at once.
+- The root README's AI-assisted review prompts may include a light voice for the optional "fiery vengeance" path, but they should still steer readers toward honest evidence-seeking critique rather than empty hype or repo-wide summary sludge.
 - Product-facing docs, guides, example READMEs, and `.env.example` should stay aligned around one truthful onboarding story, should not imply automatic `.env` loading, and should not introduce Windows-only operator guidance without a Linux/macOS analog.
 - Release-prep changes should keep `README.md`, `pyproject.toml`, `src/context_atlas/__init__.py`, `tests/test_cli.py`, and the current note under `docs/Release/` aligned to the same version.
 - Generated Codex runtime assets under `.codex/` and `.agents/skills/` are downstream of the manifest, bindings, templates, and repo-owned generator; durable semantic edits belong upstream first, then the runtime surface should be regenerated.
@@ -87,6 +88,7 @@
   - invariants:
     - should keep the primary product-evaluator path explicit
     - should distinguish shipped-release review from evolving-branch review when suggesting AI-assisted critique paths
+    - optional playful review prompts should remain clearly secondary to the serious route guidance and should still ask for substantive criticism
 - `CONTRIBUTING.md`:
   - responsibility: gives contributors one clear path into the ontology/template system before they author new repo documents
   - invariants:
