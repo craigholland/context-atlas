@@ -95,6 +95,36 @@ proof-of-concept, it needs:
 - clearer placement of reusable platform-binding guidance
 - better validation of generated runtime fidelity
 
+Story 1 in this Epic should make that derived-configuration stance explicit in
+the Canon entry surface itself, rather than assuming readers will infer it from
+the manifest, generator, and drift-check tooling alone.
+
+The intended shape is a short section near the top of
+[AgenticDevelopment Canon README](../Authoritative/Canon/AgenticDevelopment/README.md)
+called `Why Derived Configuration`, using guidance close to this:
+
+> Many agentic development setups are built from static runtime files: a flat
+> `AGENTS.md`, a handful of per-agent configs, or a small rules folder. Those
+> surfaces are fast to write and immediately legible, but they have an inherent
+> correctness problem: there is no upstream source of truth to compare them
+> against, so drift is difficult to detect and cross-agent consistency is often
+> maintained only by discipline.
+>
+> This canon prefers a derived model instead. Portable canon defines terms,
+> invariants, and reusable structures. A project-specific Identity layer binds
+> those structures to a real project. A machine-readable manifest expresses the
+> binding decisions. Runtime-facing agent assets are then generated downstream
+> from that upstream source of truth.
+>
+> This is the same broad architectural pattern used by systems such as
+> protobuf, OpenAPI, and dbt: the artifact used at runtime is not the thing
+> edited by hand. Semantic changes happen upstream; downstream assets are
+> derived and validation checks that the derivation remains faithful.
+
+That wording should stay portable in Canon. The concrete Context Atlas and
+Codex runtime details should still live one layer down in Identity and the
+generated runtime surface.
+
 ### Product Shape
 
 This Epic should strengthen the current four-layer shape:
@@ -187,8 +217,8 @@ placement decision is part of the runtime-model problem, not a side note.
 
 This Epic should ultimately produce:
 
-- a clearer explanation of derived runtime configuration in the
-  AgenticDevelopment Canon entry surface
+- a `Why Derived Configuration` section in the AgenticDevelopment Canon entry
+  surface that explains the upstream-then-derived model in portable terms
 - reusable platform-binding canon for Codex and a portable sibling path for
   Claude guidance
 - a sharper Identity materialization layer that clearly reads as Context
