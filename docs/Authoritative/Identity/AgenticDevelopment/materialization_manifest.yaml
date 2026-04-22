@@ -52,6 +52,21 @@ parent_agents:
       conditional:
         - change-management
         - recovery-triage
+    mode_participation:
+      primary:
+        - planning
+        - rework
+      conditional:
+        - recovery
+    protocol_participation:
+      owns:
+        - planning
+        - rework
+      participates_in:
+        - recovery
+        - delegation
+        - handoff
+        - escalation
     delegated_specialists:
       - specialist-planning-change
   - id: parent-backend
@@ -68,6 +83,24 @@ parent_agents:
         - python-testing
         - backend-architecture-solid
         - rework-remediation
+    mode_participation:
+      primary:
+        - implementation
+        - rework
+      conditional:
+        - planning
+        - recovery
+    protocol_participation:
+      owns:
+        - execution-slice
+        - rework
+      participates_in:
+        - planning
+        - review
+        - recovery
+        - delegation
+        - handoff
+        - escalation
     delegated_specialists:
       - specialist-python-implementation
   - id: parent-documentation-uat
@@ -80,6 +113,24 @@ parent_agents:
       conditional:
         - change-management
         - rework-remediation
+    mode_participation:
+      primary:
+        - implementation
+        - rework
+      conditional:
+        - planning
+        - recovery
+    protocol_participation:
+      owns:
+        - execution-slice
+        - rework
+      participates_in:
+        - planning
+        - review
+        - recovery
+        - delegation
+        - handoff
+        - escalation
     delegated_specialists: []
   - id: parent-qa
     role_id: qa
@@ -93,6 +144,21 @@ parent_agents:
         - python-debugging
         - backend-architecture-solid
         - github-pr-review-and-handoff
+    mode_participation:
+      primary:
+        - review
+      conditional:
+        - rework
+        - recovery
+    protocol_participation:
+      owns:
+        - review
+      participates_in:
+        - rework
+        - recovery
+        - delegation
+        - handoff
+        - escalation
     delegated_specialists:
       - specialist-review-readiness
   - id: parent-devops
@@ -107,6 +173,21 @@ parent_agents:
         - ci-cd-pipeline-operations
         - change-management
         - recovery-triage
+    mode_participation:
+      primary:
+        - operational-delivery
+      conditional:
+        - rework
+        - recovery
+    protocol_participation:
+      owns: []
+      participates_in:
+        - review
+        - rework
+        - recovery
+        - delegation
+        - handoff
+        - escalation
     delegated_specialists:
       - specialist-delivery-recovery
 
@@ -135,6 +216,12 @@ protocols:
     source_name: rework
   - id: recovery
     source_name: recovery
+  - id: delegation
+    source_name: delegation
+  - id: handoff
+    source_name: handoff
+  - id: escalation
+    source_name: escalation
 
 specialists:
   - id: specialist-planning-change
@@ -146,6 +233,18 @@ specialists:
         - composition-and-integration-planning
       conditional:
         - change-management
+    mode_participation:
+      primary:
+        - planning
+      conditional:
+        - recovery
+    protocol_participation:
+      participates_in:
+        - planning
+        - recovery
+        - delegation
+        - handoff
+        - escalation
   - id: specialist-python-implementation
     archetype_id: python-implementation-specialist
     canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/python-implementation-specialist.md
@@ -158,6 +257,20 @@ specialists:
         - backend-architecture-clean
         - backend-architecture-solid
         - rework-remediation
+    mode_participation:
+      primary:
+        - implementation
+        - rework
+      conditional:
+        - review
+    protocol_participation:
+      participates_in:
+        - execution-slice
+        - rework
+        - review
+        - delegation
+        - handoff
+        - escalation
   - id: specialist-review-readiness
     archetype_id: review-and-readiness-specialist
     canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/review-and-readiness-specialist.md
@@ -170,6 +283,18 @@ specialists:
         - python-debugging
         - backend-architecture-clean
         - backend-architecture-solid
+    mode_participation:
+      primary:
+        - review
+      conditional:
+        - rework
+    protocol_participation:
+      participates_in:
+        - review
+        - rework
+        - delegation
+        - handoff
+        - escalation
   - id: specialist-delivery-recovery
     archetype_id: delivery-and-recovery-specialist
     canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/delivery-and-recovery-specialist.md
@@ -182,6 +307,17 @@ specialists:
         - ci-cd-pipeline-operations
         - recovery-triage
         - change-management
+    mode_participation:
+      primary:
+        - recovery
+      conditional:
+        - operational-delivery
+    protocol_participation:
+      participates_in:
+        - recovery
+        - delegation
+        - handoff
+        - escalation
 
 skills:
   - id: planning-decomposition

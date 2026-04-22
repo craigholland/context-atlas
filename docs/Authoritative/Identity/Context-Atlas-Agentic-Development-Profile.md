@@ -217,8 +217,12 @@ That manifest should make explicit:
 
 - which parent agents currently exist
 - which direct baseline and conditional skills each parent agent carries
+- which modes each parent agent primarily or conditionally participates in
+- which protocols each parent agent owns or participates in
 - which specialists each parent agent may delegate to
 - which skills each specialist carries inside its bounded delegated scope
+- which modes each specialist primarily or conditionally participates in
+- which protocols each specialist participates in
 
 That may include bounded planning skill on an implementation parent when that
 skill is only being used to decompose an already-assigned Task into PR-sized

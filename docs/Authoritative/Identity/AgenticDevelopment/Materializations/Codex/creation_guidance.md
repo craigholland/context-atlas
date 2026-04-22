@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, creation-guidance]
 related:
@@ -137,6 +137,7 @@ Derived data should clarify provenance, not invent new semantics.
 ### Agent Descriptors
 
 - derive from:
+  - `materialization_manifest.yaml`
   - `Context-Atlas-Agentic-Development-Profile.md`
   - `Role-Agent-Binding-Model.md`
   - attached skill, mode, and protocol bindings
