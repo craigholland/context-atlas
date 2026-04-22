@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, materialization]
 related:
@@ -181,12 +181,30 @@ or audit identity.
 
 Those concerns remain defined by the Context Atlas RepoManagement binding.
 
+### 12. Runtime Assets Are Derived And Regenerable
+
+The `.codex/` and `.agents/skills/` assets should be treated as derived
+runtime surfaces downstream of the authoritative Canon and Identity docs.
+
+Contributors may edit those runtime files locally when experimenting,
+inspecting, or testing, but those edits should be assumed overwriteable by
+later regeneration.
+
+If a contributor wants a durable semantic change, the lasting edit belongs
+upstream:
+
+- in `docs/Authoritative/Canon/` when the change is portable or reusable
+- in `docs/Authoritative/Identity/` when the change is Context Atlas-specific
+
 ## Constraints
 
 - Codex-specific wording should stay in the Codex binding layer instead of
   leaking upward into the portable canon.
 - The Codex binding should cite its upstream sources explicitly rather than
   relying on implicit project memory.
+- Codex runtime files should continue to warn readers that they are generated
+  or regenerated derived surfaces rather than the lasting durable source of
+  truth.
 - The Codex binding should stay compatible with the Story 7 materialization
   rules around boundary, template, discovery, traceability, and regeneration.
 - The Codex binding should remain readable as a downstream consumer of the

@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, governance]
 related:
@@ -116,8 +116,23 @@ For the Codex surface, drift includes at least:
 - adapted content that now changes meaning instead of presentation
 - missing or stale traceability declarations
 - missing or stale maintenance-mode declarations
+- generated-surface notices that no longer match the real upstream
+  source-of-truth model
 - Codex assets that no longer follow the creation guidance or folder-layout
   rules
+
+### 7. Local Runtime Edits Must Not Be Mistaken For Durable Upstream Change
+
+Contributors may edit generated `.codex/` or `.agents/skills/` assets locally
+while exploring or testing, but those files should still be treated as derived
+surfaces that may be overwritten by regeneration.
+
+If a reviewer sees a desired lasting change expressed only in a runtime asset,
+that should be treated as incomplete governance. The durable source update
+belongs upstream in:
+
+- the portable canon for reusable or global meaning
+- the Identity layer for Context Atlas-specific meaning
 
 ## Review Checklist
 
@@ -126,6 +141,8 @@ When Codex-binding assets change, reviewers should check:
 - the file still lives at the correct Codex-bound path
 - ids and names follow the Codex naming conventions
 - the concept family is still clear from the file and its metadata
+- the file still tells readers that it is a generated or regenerated derived
+  surface when that notice is expected
 - upstream sources are still cited accurately
 - copied/adapted/derived content still follows the creation guidance
 - the asset does not redefine portable or Identity-layer semantics locally
