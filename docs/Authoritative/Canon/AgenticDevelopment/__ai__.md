@@ -18,6 +18,7 @@
 - Keeps the canon readable from its own README before downstream bindings or runtime materializations are consulted.
 - Defines how drift, validation, and change-management should be reasoned about for this canon and the neighboring repo-management surface.
 - Keeps the README strong enough to explain why this canon exists in a context-governance engine, not only how to traverse the file set.
+- Keeps a short quick-mental-model primer available so new readers can learn the core entities before diving into the denser glossary and model docs.
 - Keeps the portable skill catalog and specialist-archetype catalog distinct from both role archetypes and downstream project bindings.
 
 ## Architectural Rules
@@ -30,6 +31,7 @@
 - Testing-oriented skill docs should explicitly cover negative-path and robustness reasoning when "trying to break" methods, classes, or contracts is part of proving resilience.
 - Meaningful updates to this folder should also review root governance, metadata, and neighboring planning indexes so the canon remains discoverable and trustworthy.
 - The README should explain why the agentic canon matters to Context Atlas's broader governance model, not only provide a reading order over the documents.
+- The README and neighboring primer docs should give new readers a short human-readable path into the core entities so they do not have to reconstruct the mental model from the deeper authority, composition, and protocol texts alone.
 - When hardening or other planning closeout docs summarize evidence paths, they should point back to this canon for shared governance vocabulary rather than recreating a second portable validation or change-management model in planning prose.
 
 ## Allowed Dependencies
@@ -47,6 +49,11 @@
   - entrypoint: defines the portable reading order and boundary of the canon.
   - invariants:
     - should explain why the canon exists in a context-governance engine, not only list documents
+- Quick-Mental-Model.md:
+  - primer: gives a short human-readable explanation of the core entities and how they fit together.
+  - invariants:
+    - should stay portable and introductory rather than turning into a second full glossary
+    - should distinguish role, parent agent, skill, specialist, mode, and protocol clearly
 - Agentic-Development-Glossary.md:
   - glossary: defines the portable vocabulary for the agentic model.
 - Skills/README.md:
@@ -67,6 +74,11 @@
   - responsibility: anchors the portable reading order and scope boundary.
   - invariants:
     - must remain readable without consulting project-specific bindings first
+- Quick-Mental-Model.md:
+  - responsibility: offers the shortest durable entrypoint into the main entity relationships for new readers.
+  - invariants:
+    - should stay concise, human-readable, and upstream of project-specific bindings
+    - should point readers to deeper canon docs instead of trying to replace them
 - RoleArchetypes/README.md:
   - responsibility: indexes the reusable role-archetype catalog.
   - invariants:

@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, structural-binding, profile]
 related:
@@ -212,6 +212,24 @@ It should remain:
 - human-editable
 - project-specific
 - separate from platform-specific template bodies and generated runtime assets
+
+That manifest should make explicit:
+
+- which parent agents currently exist
+- which direct baseline and conditional skills each parent agent carries
+- which modes each parent agent primarily or conditionally participates in
+- which protocols each parent agent owns or participates in
+- which specialists each parent agent may delegate to
+- which skills each specialist carries inside its bounded delegated scope
+- which modes each specialist primarily or conditionally participates in
+- which protocols each specialist participates in
+
+That may include bounded planning skill on an implementation parent when that
+skill is only being used to decompose an already-assigned Task into PR-sized
+execution slices.
+
+That does not reassign Planner/Decomp ownership of Epic, Story, or Task-level
+planning artifacts, sequencing, or broader decomposition quality.
 
 ### 17. Environment Bindings Must Consume This Profile Explicitly
 

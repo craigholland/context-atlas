@@ -20,13 +20,16 @@ role_id = "replace-me-or-none"
 authority_scope = "Summarize the role-bound authority this agent carries."
 
 [skill_attachment]
-skills = []
-
-[protocol_participation]
-protocols = []
+baseline = []
+conditional = []
 
 [mode_participation]
-modes = []
+primary = []
+conditional = []
+
+[protocol_participation]
+owns = [] # parent agents normally use this; specialists should usually leave it empty
+participates_in = []
 
 [delegation]
 delegates_to = []

@@ -32,9 +32,14 @@ reading the individual canon documents.
 The intended progression is:
 
 1. understand what this directory is responsible for
-2. learn the portable vocabulary
-3. learn the invariant relationship and boundary rules
-4. only then move into downstream binding or materialization guidance
+2. build a quick mental picture of the main entities
+3. learn the portable vocabulary
+4. learn the invariant relationship and boundary rules
+5. only then move into downstream binding or materialization guidance
+
+If you want the shortest "Agentic Entities for Dummies" version first, read
+[Quick-Mental-Model.md](./Quick-Mental-Model.md) before the glossary and the
+deeper model docs.
 
 ## What Lives Here
 
@@ -53,6 +58,7 @@ This surface should define portable concepts and invariant rules such as:
 
 The initial canon surface is centered on:
 
+- [Quick-Mental-Model.md](./Quick-Mental-Model.md)
 - [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
 - [RoleArchetypes/README.md](./RoleArchetypes/README.md)
 - [Skills/README.md](./Skills/README.md)
@@ -84,35 +90,38 @@ The initial canon surface is centered on:
 For most readers, the intended order is:
 
 1. this README
-2. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
-3. [RoleArchetypes/README.md](./RoleArchetypes/README.md)
-4. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
-5. [Delegation-Model.md](./Delegation-Model.md)
-6. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
-7. [Mode-Model.md](./Mode-Model.md)
-8. [Protocols/README.md](./Protocols/README.md)
-9. [Runtime-Capacity-Model.md](./Runtime-Capacity-Model.md)
-10. [Parallel-Decomposition-Model.md](./Parallel-Decomposition-Model.md)
-11. [Skill-Contract.md](./Skill-Contract.md)
-12. [Skills/README.md](./Skills/README.md)
-13. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
-14. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
-15. [Escalation-Model.md](./Escalation-Model.md)
-16. [SpecialistArchetypes/README.md](./SpecialistArchetypes/README.md)
-17. [Boundary-Model.md](./Boundary-Model.md)
-18. [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
-19. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
-20. [Template-Model.md](./Template-Model.md)
-21. [Templates/README.md](./Templates/README.md)
-22. [Discovery-Model.md](./Discovery-Model.md)
-23. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
-24. [Drift-Model.md](./Drift-Model.md)
-25. [Validation-Model.md](./Validation-Model.md)
-26. [Change-Management-Model.md](./Change-Management-Model.md)
+2. [Quick-Mental-Model.md](./Quick-Mental-Model.md)
+3. [Agentic-Development-Glossary.md](./Agentic-Development-Glossary.md)
+4. [RoleArchetypes/README.md](./RoleArchetypes/README.md)
+5. [Agent-Authority-Model.md](./Agent-Authority-Model.md)
+6. [Delegation-Model.md](./Delegation-Model.md)
+7. [Agent-Composition-Model.md](./Agent-Composition-Model.md)
+8. [Mode-Model.md](./Mode-Model.md)
+9. [Protocols/README.md](./Protocols/README.md)
+10. [Runtime-Capacity-Model.md](./Runtime-Capacity-Model.md)
+11. [Parallel-Decomposition-Model.md](./Parallel-Decomposition-Model.md)
+12. [Skill-Contract.md](./Skill-Contract.md)
+13. [Skills/README.md](./Skills/README.md)
+14. [Skill-Attachment-Model.md](./Skill-Attachment-Model.md)
+15. [Composition-Decision-Model.md](./Composition-Decision-Model.md)
+16. [Escalation-Model.md](./Escalation-Model.md)
+17. [SpecialistArchetypes/README.md](./SpecialistArchetypes/README.md)
+18. [Boundary-Model.md](./Boundary-Model.md)
+19. [Materialization-Boundary-Model.md](./Materialization-Boundary-Model.md)
+20. [Platform-Materialization-Model.md](./Platform-Materialization-Model.md)
+21. [Template-Model.md](./Template-Model.md)
+22. [Templates/README.md](./Templates/README.md)
+23. [Discovery-Model.md](./Discovery-Model.md)
+24. [Materialization-Traceability-Model.md](./Materialization-Traceability-Model.md)
+25. [Drift-Model.md](./Drift-Model.md)
+26. [Validation-Model.md](./Validation-Model.md)
+27. [Change-Management-Model.md](./Change-Management-Model.md)
 
 This ordering is intentional:
 
 - the README explains the purpose and scope of the canon surface
+- the quick mental model gives new readers a short human-readable picture of
+  the main entities before the deeper vocabulary and invariants begin
 - the glossary defines the vocabulary
 - the role-archetype catalog provides reusable professional role templates that
   downstream bindings may refine

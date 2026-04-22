@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, protocols, roles]
 related:
@@ -48,6 +48,10 @@ semantics.
 
 `Backend` and `Documentation/UAT` may participate in bounded planning work
 through explicit delegation, but they do not become planning owners by default.
+
+`Backend` may also carry a bounded decomposition skill for turning an
+already-assigned Task into PR-sized implementation slices, but that does not
+make `Backend` the owner of broader Epic, Story, or Task planning.
 
 ### 2. Execution Slice Protocol Is Deliverable-Owner-Owned
 
