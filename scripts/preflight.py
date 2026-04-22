@@ -72,6 +72,11 @@ def main() -> int:
         [sys.executable, "-m", "compileall", "src", "tests", "scripts"],
         cwd=repo_root,
     )
+    _run_step(
+        "check-codex-materialization",
+        [sys.executable, "scripts/check_codex_materialization.py", "--repo-root", "."],
+        cwd=repo_root,
+    )
     _run_step("ruff-check", [sys.executable, "-m", "ruff", "check", "."], cwd=repo_root)
     _run_step(
         "ruff-format-check",

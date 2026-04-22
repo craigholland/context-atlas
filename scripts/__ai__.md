@@ -54,8 +54,11 @@
   - `main`: enforces AST-based Python import-boundary rules from TOML config
 - `preflight.py`:
   - `main`: runs the repo-wide push/merge preflight
+- `check_codex_materialization.py`:
+  - `main`: verifies that committed `.codex/` and `.agents/skills/` assets still match the manifest-driven runtime plan
 - `materialize_codex_runtime.py`:
   - `build_materialization_plan`: renders the declared Codex runtime surfaces from manifest and authoritative docs
+  - `check_materialization_plan`: validates generated and human-managed Codex surfaces against the current manifest-driven plan
   - `main`: writes or checks the generated `.codex/` and `.agents/skills/` surfaces
 - `install_git_hooks.py`:
   - `main`: points local git hook execution at the tracked `.githooks` directory
@@ -92,10 +95,18 @@
     - dev tools declared in `pyproject.toml`
     - `validate_ai_docs.py`
     - `check_ai_docs.py`
+    - `check_codex_materialization.py`
     - `check_import_boundaries.py`
     - `ai_verify_contracts.py`
   - invariants:
     - should stay as close as practical to the remote `verify-ai-contracts` and `ci` workflow behavior
+- `check_codex_materialization.py`:
+  - responsibility: performs the dedicated manifest-versus-runtime drift check for Codex materialization
+  - depends_on:
+    - `materialize_codex_runtime.py`
+  - invariants:
+    - should verify both generated and declared-human surfaces through the shared manifest-driven plan rather than reimplementing Codex layout assumptions
+    - should stay cheap enough to run inside local preflight and CI on every relevant branch push
 - `materialize_codex_runtime.py`:
   - responsibility: deterministically materializes the Codex runtime surface from the authoritative manifest, bindings, and canon docs
   - invariants:
@@ -138,6 +149,7 @@ steps:
       py -3 scripts/ai_verify_contracts.py --help > $null
       py -3 scripts/update_last_verified.py --help > $null
       py -3 scripts/check_import_boundaries.py --help > $null
+      py -3 scripts/check_codex_materialization.py --help > $null
       py -3 scripts/materialize_codex_runtime.py --help > $null
       py -3 scripts/preflight.py --help > $null
 

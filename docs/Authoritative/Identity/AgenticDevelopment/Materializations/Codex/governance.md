@@ -149,6 +149,20 @@ Until the Codex binding defines an explicit manual-block format and the
 generator validates it, `mixed` should be treated as a declared future mode,
 not as permission for ambiguous freeform preservation behavior.
 
+### 9. Generated Codex Surfaces Must Stay Mechanically Checkable
+
+The generated Codex runtime surface should remain checkable through repo-owned
+automation rather than visual inspection alone.
+
+That means:
+
+- `scripts/materialize_codex_runtime.py` is the authoritative regeneration path
+  for generated Codex surfaces
+- `scripts/check_codex_materialization.py` is the authoritative drift check for
+  generated and declared-human Codex surfaces
+- local `scripts/preflight.py` and CI should fail when the committed runtime
+  surface drifts from the authoritative manifest-driven plan
+
 ## Review Checklist
 
 When Codex-binding assets change, reviewers should check:
@@ -168,6 +182,9 @@ When Codex-binding assets change, reviewers should check:
 - refresh the affected Codex assets when the Codex folder layout, templates, or
   creation guidance changes in a way that invalidates current files
 - do not refresh unrelated Codex assets only to create artificial churn
+- after meaningful upstream changes, regenerate generator-owned surfaces and run
+  `scripts/check_codex_materialization.py` before asking review to trust the
+  updated runtime surface
 
 ## Constraints
 
