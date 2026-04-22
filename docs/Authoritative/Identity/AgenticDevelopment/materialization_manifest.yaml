@@ -45,18 +45,69 @@ parent_agents:
   - id: parent-planner-decomp
     role_id: planner-decomp
     type: parent
+    direct_skills:
+      baseline:
+        - planning-decomposition
+        - composition-and-integration-planning
+      conditional:
+        - change-management
+        - recovery-triage
+    delegated_specialists:
+      - specialist-planning-change
   - id: parent-backend
     role_id: backend
     type: parent
+    direct_skills:
+      baseline:
+        - python-authoring
+        - backend-architecture-clean
+        - git-branch-and-history
+      conditional:
+        - python-debugging
+        - python-testing
+        - backend-architecture-solid
+        - rework-remediation
+    delegated_specialists:
+      - specialist-python-implementation
   - id: parent-documentation-uat
     role_id: documentation-uat
     type: parent
+    direct_skills:
+      baseline:
+        - review-findings-analysis
+        - github-pr-review-and-handoff
+      conditional:
+        - change-management
+        - rework-remediation
+    delegated_specialists: []
   - id: parent-qa
     role_id: qa
     type: parent
+    direct_skills:
+      baseline:
+        - review-findings-analysis
+        - python-testing
+        - backend-architecture-clean
+      conditional:
+        - python-debugging
+        - backend-architecture-solid
+        - github-pr-review-and-handoff
+    delegated_specialists:
+      - specialist-review-readiness
   - id: parent-devops
     role_id: devops
     type: parent
+    direct_skills:
+      baseline:
+        - git-branch-and-history
+        - github-pr-review-and-handoff
+        - operational-delivery-readiness
+      conditional:
+        - ci-cd-pipeline-operations
+        - change-management
+        - recovery-triage
+    delegated_specialists:
+      - specialist-delivery-recovery
 
 modes:
   - id: planning
@@ -84,10 +135,86 @@ protocols:
   - id: recovery
     source_name: recovery
 
-specialists: []
-skills: []
+specialists:
+  - id: specialist-planning-change
+    archetype_id: planning-and-change-specialist
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/planning-and-change-specialist.md
+    attached_skills:
+      baseline:
+        - planning-decomposition
+        - composition-and-integration-planning
+      conditional:
+        - change-management
+  - id: specialist-python-implementation
+    archetype_id: python-implementation-specialist
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/python-implementation-specialist.md
+    attached_skills:
+      baseline:
+        - python-authoring
+        - python-debugging
+        - python-testing
+      conditional:
+        - backend-architecture-clean
+        - backend-architecture-solid
+        - rework-remediation
+  - id: specialist-review-readiness
+    archetype_id: review-and-readiness-specialist
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/review-and-readiness-specialist.md
+    attached_skills:
+      baseline:
+        - review-findings-analysis
+        - python-testing
+        - github-pr-review-and-handoff
+      conditional:
+        - python-debugging
+        - backend-architecture-clean
+        - backend-architecture-solid
+  - id: specialist-delivery-recovery
+    archetype_id: delivery-and-recovery-specialist
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/SpecialistArchetypes/delivery-and-recovery-specialist.md
+    attached_skills:
+      baseline:
+        - git-branch-and-history
+        - github-pr-review-and-handoff
+        - operational-delivery-readiness
+      conditional:
+        - ci-cd-pipeline-operations
+        - recovery-triage
+        - change-management
+
+skills:
+  - id: planning-decomposition
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/planning-decomposition.md
+  - id: composition-and-integration-planning
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/composition-and-integration-planning.md
+  - id: change-management
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/change-management.md
+  - id: python-authoring
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/python-authoring.md
+  - id: python-debugging
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/python-debugging.md
+  - id: python-testing
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/python-testing.md
+  - id: backend-architecture-clean
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/backend-architecture-clean.md
+  - id: backend-architecture-solid
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/backend-architecture-solid.md
+  - id: git-branch-and-history
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/git-branch-and-history.md
+  - id: github-pr-review-and-handoff
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/github-pr-review-and-handoff.md
+  - id: ci-cd-pipeline-operations
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/ci-cd-pipeline-operations.md
+  - id: operational-delivery-readiness
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/operational-delivery-readiness.md
+  - id: review-findings-analysis
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/review-findings-analysis.md
+  - id: rework-remediation
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/rework-remediation.md
+  - id: recovery-triage
+    canon_ref: docs/Authoritative/Canon/AgenticDevelopment/Skills/recovery-triage.md
 
 materialization_rules:
-  initial_specialist_policy: none-until-explicitly-bound
-  initial_skill_policy: none-until-explicitly-bound
+  initial_specialist_policy: manifest-governed
+  initial_skill_policy: manifest-governed
   derive_paths_from_binding_docs: true

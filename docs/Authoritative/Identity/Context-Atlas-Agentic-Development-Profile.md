@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-20
+last_reviewed: 2026-04-21
 owners: [core]
 tags: [context-atlas, agentic-development, identity, structural-binding, profile]
 related:
@@ -212,6 +212,13 @@ It should remain:
 - human-editable
 - project-specific
 - separate from platform-specific template bodies and generated runtime assets
+
+That manifest should make explicit:
+
+- which parent agents currently exist
+- which direct baseline and conditional skills each parent agent carries
+- which specialists each parent agent may delegate to
+- which skills each specialist carries inside its bounded delegated scope
 
 ### 17. Environment Bindings Must Consume This Profile Explicitly
 
