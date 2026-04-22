@@ -253,6 +253,8 @@
     - tests should prove `build_materialization_plan` reproduces the committed `.codex/` and `.agents/skills/` assets exactly
     - tests should prove `scripts/materialize_codex_runtime.py --check` succeeds from repo state alone
     - tests should prove `maintenance_mode = mixed` still fails loudly until an explicit manual-block preservation format exists
+    - tests should prove generator document-cache reuse stays scoped by repository root and current file state rather than leaking content across temp repos or stale edits
+    - tests should prove manifest-declared runtime roots propagate into planned output paths and runtime-facing generated references instead of assuming fixed `.codex` / `.agents` locations
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:

@@ -64,7 +64,7 @@ _SUPPORTED_SURFACES = {
     "skills",
 }
 _SUPPORTED_MAINTENANCE_MODES = {"generated", "human", "mixed"}
-_DOC_TEXT_CACHE: dict[Path, str] = {}
+_DOC_TEXT_CACHE: dict[tuple[Path, int, int], str] = {}
 
 _ROLE_PURPOSE_OVERRIDES: dict[str, str] = {
     "planner-decomp": (
@@ -384,18 +384,62 @@ class MaterializationPlan:
 
 
 @dataclass(frozen=True)
+class _RuntimeLayout:
+    """Materialized runtime roots derived from the manifest."""
+
+    runtime_root: Path
+    skills_root: Path
+    orientation_surface: Path
+    config_surface: Path
+
+    @property
+    def roles_root(self) -> Path:
+        return self.runtime_root / "roles"
+
+    @property
+    def agents_root(self) -> Path:
+        return self.runtime_root / "agents"
+
+    @property
+    def modes_root(self) -> Path:
+        return self.runtime_root / "modes"
+
+    @property
+    def protocols_root(self) -> Path:
+        return self.runtime_root / "protocols"
+
+    def role_path(self, role_id: str) -> Path:
+        return self.roles_root / f"{role_id}.md"
+
+    def agent_path(self, agent_id: str) -> Path:
+        return self.agents_root / f"{agent_id}.toml"
+
+    def mode_path(self, mode_id: str) -> Path:
+        return self.modes_root / f"{mode_id}.md"
+
+    def protocol_path(self, protocol_id: str) -> Path:
+        return self.protocols_root / f"{protocol_id}.md"
+
+    def skill_path(self, skill_id: str) -> Path:
+        return self.skills_root / f"context-atlas-{skill_id}" / "SKILL.md"
+
+
+@dataclass(frozen=True)
 class _YamlLine:
     indent: int
     text: str
 
 
 def _read_text(repo_root: Path, relative_path: Path) -> str:
-    cached = _DOC_TEXT_CACHE.get(relative_path)
+    absolute_path = (repo_root / relative_path).resolve()
+    stat_result = absolute_path.stat()
+    cache_key = (absolute_path, stat_result.st_mtime_ns, stat_result.st_size)
+    cached = _DOC_TEXT_CACHE.get(cache_key)
     if cached is not None:
         return cached
 
-    text = (repo_root / relative_path).read_text(encoding="utf-8")
-    _DOC_TEXT_CACHE[relative_path] = text
+    text = absolute_path.read_text(encoding="utf-8")
+    _DOC_TEXT_CACHE[cache_key] = text
     return text
 
 
@@ -1092,8 +1136,31 @@ def _surface_from_render(
     )
 
 
+def _runtime_layout(codex_materialization: dict[str, object]) -> _RuntimeLayout:
+    orientation_surface = _require_mapping(
+        codex_materialization["orientation_surface"], "orientation_surface"
+    )
+    config_surface = _require_mapping(
+        codex_materialization["config_surface"], "config_surface"
+    )
+    return _RuntimeLayout(
+        runtime_root=Path(
+            _require_string(codex_materialization["runtime_root"], "runtime_root")
+        ),
+        skills_root=Path(
+            _require_string(codex_materialization["skills_root"], "skills_root")
+        ),
+        orientation_surface=Path(
+            _require_string(orientation_surface["path"], "orientation path")
+        ),
+        config_surface=Path(_require_string(config_surface["path"], "config path")),
+    )
+
+
 def _render_agents_md(
-    manifest: dict[str, object], codex_materialization: dict[str, object]
+    manifest: dict[str, object],
+    codex_materialization: dict[str, object],
+    runtime_layout: _RuntimeLayout,
 ) -> str:
     role_entries = [
         _require_mapping(role, "role entry")
@@ -1130,12 +1197,12 @@ def _render_agents_md(
             "## Read Order",
             "",
             "1. Read this file for the current runtime surface and concept boundaries.",
-            "2. Read the relevant role projection under `.codex/roles/`.",
-            "3. Read the parent-agent descriptor in `.codex/agents/` for the accountable actor bound to that role.",
-            "4. If work is delegated, read the relevant specialist descriptor in `.codex/agents/`.",
-            "5. Read the active mode under `.codex/modes/` and the governing workflow under `.codex/protocols/`.",
-            "6. Read only the attached skills needed for the current bounded work under `.agents/skills/`.",
-            "7. Use `.codex/config.toml` for runtime roots, manifest traceability, and planning-capacity defaults.",
+            f"2. Read the relevant role projection under `{runtime_layout.roles_root.as_posix()}/`.",
+            f"3. Read the parent-agent descriptor in `{runtime_layout.agents_root.as_posix()}/` for the accountable actor bound to that role.",
+            f"4. If work is delegated, read the relevant specialist descriptor in `{runtime_layout.agents_root.as_posix()}/`.",
+            f"5. Read the active mode under `{runtime_layout.modes_root.as_posix()}/` and the governing workflow under `{runtime_layout.protocols_root.as_posix()}/`.",
+            f"6. Read only the attached skills needed for the current bounded work under `{runtime_layout.skills_root.as_posix()}/`.",
+            f"7. Use `{runtime_layout.config_surface.as_posix()}` for runtime roots, manifest traceability, and planning-capacity defaults.",
             "",
             "## Runtime Surface Index",
             "",
@@ -1145,7 +1212,9 @@ def _render_agents_md(
     lines.extend(
         _markdown_bullets(
             [
-                f".codex/roles/{_require_string(role['id'], 'role id')}.md"
+                runtime_layout.role_path(
+                    _require_string(role["id"], "role id")
+                ).as_posix()
                 for role in role_entries
             ],
             indent="  ",
@@ -1155,7 +1224,9 @@ def _render_agents_md(
     lines.extend(
         _markdown_bullets(
             [
-                f".codex/agents/{_require_string(agent['id'], 'agent id')}.toml"
+                runtime_layout.agent_path(
+                    _require_string(agent["id"], "agent id")
+                ).as_posix()
                 for agent in [*parent_entries, *specialist_entries]
             ],
             indent="  ",
@@ -1165,7 +1236,9 @@ def _render_agents_md(
     lines.extend(
         _markdown_bullets(
             [
-                f".codex/modes/{_require_string(mode['id'], 'mode id')}.md"
+                runtime_layout.mode_path(
+                    _require_string(mode["id"], "mode id")
+                ).as_posix()
                 for mode in mode_entries
             ],
             indent="  ",
@@ -1175,7 +1248,9 @@ def _render_agents_md(
     lines.extend(
         _markdown_bullets(
             [
-                f".codex/protocols/{_require_string(protocol['id'], 'protocol id')}.md"
+                runtime_layout.protocol_path(
+                    _require_string(protocol["id"], "protocol id")
+                ).as_posix()
                 for protocol in protocol_entries
             ],
             indent="  ",
@@ -1184,9 +1259,9 @@ def _render_agents_md(
     lines.extend(
         [
             "- Skills:",
-            "  - `.agents/skills/context-atlas-*/SKILL.md`",
+            f"  - `{runtime_layout.skills_root.as_posix()}/context-atlas-*/SKILL.md`",
             "- Runtime config:",
-            "  - `.codex/config.toml`",
+            f"  - `{runtime_layout.config_surface.as_posix()}`",
             "",
             "## Boundary Notes",
             "",
@@ -1244,6 +1319,7 @@ def _render_config_toml(
     manifest: dict[str, object],
     capacity: dict[str, object],
     codex_materialization: dict[str, object],
+    runtime_layout: _RuntimeLayout,
 ) -> str:
     planning_capacity = _require_mapping(
         capacity["planning_capacity"], "planning_capacity"
@@ -1252,9 +1328,6 @@ def _render_config_toml(
         capacity["decomposition_policy"], "decomposition_policy"
     )
     materialization_entry = codex_materialization
-    orientation_surface = _require_mapping(
-        materialization_entry["orientation_surface"], "orientation_surface"
-    )
     config_surface = _require_mapping(
         materialization_entry["config_surface"], "config_surface"
     )
@@ -1271,7 +1344,7 @@ def _render_config_toml(
         f"project_id = {_toml_string('context-atlas')}",
         f"platform = {_toml_string(_require_string(materialization_entry['platform'], 'platform'))}",
         f"maintenance_mode = {_toml_string(_require_string(config_surface['maintenance_mode'], 'config maintenance_mode'))}",
-        f"orientation_surface = {_toml_string(_require_string(orientation_surface['path'], 'orientation path'))}",
+        f"orientation_surface = {_toml_string(runtime_layout.orientation_surface.as_posix())}",
         "",
         "[traceability]",
         f"materialization_manifest = {_toml_string(_MANIFEST_PATH.as_posix())}",
@@ -1280,11 +1353,11 @@ def _render_config_toml(
         f"codex_binding_root = {_toml_string(_CODEX_BINDING_ROOT.as_posix() + '/')}",
         "",
         "[layout]",
-        'roles_root = ".codex/roles"',
-        'agents_root = ".codex/agents"',
-        'modes_root = ".codex/modes"',
-        'protocols_root = ".codex/protocols"',
-        'skills_root = ".agents/skills"',
+        f"roles_root = {_toml_string(runtime_layout.roles_root.as_posix())}",
+        f"agents_root = {_toml_string(runtime_layout.agents_root.as_posix())}",
+        f"modes_root = {_toml_string(runtime_layout.modes_root.as_posix())}",
+        f"protocols_root = {_toml_string(runtime_layout.protocols_root.as_posix())}",
+        f"skills_root = {_toml_string(runtime_layout.skills_root.as_posix())}",
         "",
         "[capacity]",
         f"total_runtimes = {planning_capacity['total_runtimes']}",
@@ -1395,17 +1468,19 @@ def _role_protocol_note(role_id: str) -> str | None:
     return None
 
 
-def _parent_binding_line(parent_id: str) -> str:
-    return f"Materialized by `.codex/agents/{parent_id}.toml`"
+def _parent_binding_line(parent_id: str, runtime_layout: _RuntimeLayout) -> str:
+    return f"Materialized by `{runtime_layout.agent_path(parent_id).as_posix()}`"
 
 
-def _delegated_specialist_line(role_id: str, specialist_id: str) -> str:
+def _delegated_specialist_line(
+    role_id: str, specialist_id: str, runtime_layout: _RuntimeLayout
+) -> str:
     label = "Delegated specialist support may return through"
     if role_id == "planner-decomp":
         label = "Delegated planning support may return through"
     elif role_id == "devops":
         label = "Delegated delivery and recovery support may return through"
-    return f"{label} `.codex/agents/{specialist_id}.toml`"
+    return f"{label} `{runtime_layout.agent_path(specialist_id).as_posix()}`"
 
 
 def _render_role_projection(
@@ -1413,6 +1488,7 @@ def _render_role_projection(
     manifest: dict[str, object],
     role: dict[str, object],
     parent_agent: dict[str, object],
+    runtime_layout: _RuntimeLayout,
 ) -> str:
     role_id = _require_string(role["id"], "role id")
     role_display_name = _require_string(role["source_name"], "role source_name")
@@ -1477,10 +1553,12 @@ def _render_role_projection(
     lines.extend(_markdown_bullets(ownership_lines))
     lines.extend(["", "## Parent-Agent Binding", ""])
     binding_lines = [
-        _parent_binding_line(_require_string(parent_agent["id"], "parent agent id"))
+        _parent_binding_line(
+            _require_string(parent_agent["id"], "parent agent id"), runtime_layout
+        )
     ]
     binding_lines.extend(
-        _delegated_specialist_line(role_id, specialist_id)
+        _delegated_specialist_line(role_id, specialist_id, runtime_layout)
         for specialist_id in delegated_specialists
     )
     lines.extend(_markdown_bullets(binding_lines))
@@ -2305,6 +2383,7 @@ def build_materialization_plan(
             break
     if codex_materialization is None:
         raise ValueError("No enabled Codex materialization found in the manifest")
+    runtime_layout = _runtime_layout(codex_materialization)
 
     role_display_names = _role_display_map(manifest)
     roles = [
@@ -2358,7 +2437,9 @@ def build_materialization_plan(
                 maintenance_mode=_maintenance_mode_for_entry(
                     codex_materialization, "orientation", orientation_surface
                 ),
-                render=lambda: _render_agents_md(manifest, codex_materialization),
+                render=lambda: _render_agents_md(
+                    manifest, codex_materialization, runtime_layout
+                ),
             )
         )
 
@@ -2374,7 +2455,7 @@ def build_materialization_plan(
                     codex_materialization, "config", config_surface
                 ),
                 render=lambda: _render_config_toml(
-                    manifest, capacity, codex_materialization
+                    manifest, capacity, codex_materialization, runtime_layout
                 ),
             )
         )
@@ -2385,13 +2466,19 @@ def build_materialization_plan(
             parent_agent = parent_by_role[role_id]
             add_surface(
                 _surface_from_render(
-                    relative_path=f".codex/roles/{role_id}.md",
+                    relative_path=runtime_layout.role_path(role_id).as_posix(),
                     concept_family="roles",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "roles", role
                     ),
                     render=lambda role=role, parent_agent=parent_agent: (
-                        _render_role_projection(repo_root, manifest, role, parent_agent)
+                        _render_role_projection(
+                            repo_root,
+                            manifest,
+                            role,
+                            parent_agent,
+                            runtime_layout,
+                        )
                     ),
                 )
             )
@@ -2401,7 +2488,7 @@ def build_materialization_plan(
             agent_id = _require_string(agent["id"], "parent agent id")
             add_surface(
                 _surface_from_render(
-                    relative_path=f".codex/agents/{agent_id}.toml",
+                    relative_path=runtime_layout.agent_path(agent_id).as_posix(),
                     concept_family="agents",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "parent_agents", agent
@@ -2415,7 +2502,7 @@ def build_materialization_plan(
             specialist_id = _require_string(specialist["id"], "specialist id")
             add_surface(
                 _surface_from_render(
-                    relative_path=f".codex/agents/{specialist_id}.toml",
+                    relative_path=runtime_layout.agent_path(specialist_id).as_posix(),
                     concept_family="agents",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "specialists", specialist
@@ -2431,7 +2518,7 @@ def build_materialization_plan(
             mode_id = _require_string(mode["id"], "mode id")
             add_surface(
                 _surface_from_render(
-                    relative_path=f".codex/modes/{mode_id}.md",
+                    relative_path=runtime_layout.mode_path(mode_id).as_posix(),
                     concept_family="modes",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "modes", mode
@@ -2447,7 +2534,7 @@ def build_materialization_plan(
             protocol_id = _require_string(protocol["id"], "protocol id")
             add_surface(
                 _surface_from_render(
-                    relative_path=f".codex/protocols/{protocol_id}.md",
+                    relative_path=runtime_layout.protocol_path(protocol_id).as_posix(),
                     concept_family="protocols",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "protocols", protocol
@@ -2463,7 +2550,7 @@ def build_materialization_plan(
             skill_id = _require_string(skill["id"], "skill id")
             add_surface(
                 _surface_from_render(
-                    relative_path=f".agents/skills/context-atlas-{skill_id}/SKILL.md",
+                    relative_path=runtime_layout.skill_path(skill_id).as_posix(),
                     concept_family="skills",
                     maintenance_mode=_maintenance_mode_for_entry(
                         codex_materialization, "skills", skill
