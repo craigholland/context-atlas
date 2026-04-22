@@ -8,7 +8,9 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-There are currently no active planning surfaces in this directory.
+Current active planning surfaces:
+
+- [Task - README Map And Tour Separation PR Plan](./task_readme_map_and_tour_split.md)
 
 The most recent small follow-up tasks have moved under
 [completed](./completed/):
