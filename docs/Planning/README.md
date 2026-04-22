@@ -8,6 +8,13 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
+The current active planning surface is:
+
+- [Task - Codex Runtime Materialization Enforcement PR Plan](./task_codex_runtime_materialization_enforcement.md)
+  This is the small follow-up task for turning the first generated Codex
+  runtime surface into a deterministic, drift-checked, preflight-enforced
+  pipeline.
+
 Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
 
 The expected planning stack is:
