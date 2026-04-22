@@ -4,7 +4,7 @@
 # materialization docs under docs/Authoritative/Identity/AgenticDevelopment/.
 
 version: 1
-last_reviewed: 2026-04-21
+last_reviewed: 2026-04-22
 
 project:
   id: context-atlas
@@ -21,8 +21,19 @@ materializations:
     enabled: true
     runtime_root: .codex
     skills_root: .agents/skills
-    orientation_surface: .codex/AGENTS.md
-    config_surface: .codex/config.toml
+    orientation_surface:
+      path: .codex/AGENTS.md
+      maintenance_mode: generated
+    config_surface:
+      path: .codex/config.toml
+      maintenance_mode: generated
+    surface_maintenance_defaults:
+      roles: generated
+      parent_agents: generated
+      specialists: generated
+      modes: generated
+      protocols: generated
+      skills: generated
 
 roles:
   - id: planner-decomp

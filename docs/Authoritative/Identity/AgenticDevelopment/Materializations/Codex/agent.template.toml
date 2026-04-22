@@ -14,7 +14,7 @@ id = "replace-me"
 title = "Replace Me"
 summary = "Describe the materialized actor briefly."
 agent_kind = "parent" # parent | specialist
-maintenance_mode = "hand-maintained" # hand-maintained | generated | mixed
+maintenance_mode = "human" # human | generated | mixed
 
 [traceability]
 project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"

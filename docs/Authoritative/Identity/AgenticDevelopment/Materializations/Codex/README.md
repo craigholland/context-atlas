@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-21
+last_reviewed: 2026-04-22
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, materialization]
 related:
@@ -154,6 +154,7 @@ instructions for the runtime-facing assets it expects contributors to create.
 The initial template set should cover:
 
 - `.codex/AGENTS.md`
+- `.codex/config.toml`
 - `.codex/roles/*.md`
 - `.codex/agents/*.toml`
 - `.codex/modes/*.md`

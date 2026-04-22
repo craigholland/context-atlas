@@ -6,12 +6,11 @@
 
 ## Purpose
 
-Materialize the workflow path used when previously delivered Context Atlas work
-is returned with findings, required changes, or clarification requests.
+Materialize the workflow path used when previously delivered work has been returned with findings, required changes, or clarifications.
 
 ## Trigger / Enter Conditions
 
-- a structured review outcome or recovery contract returns work for correction
+- a structured review-outcome or recovery contract returns work for correction
   or clarification
 
 ## Participating Roles And Modes
@@ -34,9 +33,8 @@ is returned with findings, required changes, or clarification requests.
 
 ## Exit Criteria
 
-- the returned scope has been addressed or explicitly escalated
-- downstream review can see what changed and why without reconstructing the
-  rework path
+- the returned-work scope has been addressed or explicitly escalated
+- downstream review or next-step intake can see what was changed and why
 
 ## Traceability
 

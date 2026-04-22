@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Materialize the workflow path used when a Context Atlas producing role creates
-or updates an owned deliverable surface as a bounded first-pass execution
-slice.
+Materialize the workflow path used when an accountable boundary creates or updates owned deliverable surfaces as a bounded execution slice.
 
 ## Trigger / Enter Conditions
 
@@ -34,9 +32,9 @@ slice.
 
 ## Exit Criteria
 
-- the bounded slice is complete enough for governed downstream intake
-- review or next-step consumers do not have to guess what changed or what was
-  verified
+- the producing boundary has finished its bounded slice
+- downstream review or next-step intake can proceed without guessing what was
+  changed or what was verified
 
 ## Traceability
 

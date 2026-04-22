@@ -6,40 +6,39 @@
 
 ## Purpose
 
-Use this skill to create or modify bounded Python implementation surfaces in a
-way that preserves local conventions, architecture, and reviewability.
+Use this skill for authoring and modifying Python implementation surfaces in a bounded, reviewable way.
 
 ## Parent Boundary
 
 - Baseline for:
   - `parent-backend`
   - `specialist-python-implementation`
-- This skill assumes working familiarity with Python `3.12-3.14` plus common
-  framework and library families when they are already present locally. It
-  does not settle architecture or acceptance on its own.
+- Does not replace debugging, testing, or review skills
 
 ## Workflow
 
-1. Inspect the local Python, framework, and architectural context before
-   editing.
-2. Choose the smallest coherent change that satisfies the requested behavior.
-3. Preserve local typing, boundary, and framework idioms rather than imposing a
-   generic style.
-4. Return the focused diff, supporting test changes, and concise verification
-   notes.
+1. Inspect the local code context before editing
+2. Identify the relevant Python, framework, and architectural surfaces
+3. Make the bounded implementation change
+4. Update tests or supporting evidence surfaces as needed
+5. Summarize what changed and how it was verified
 
 ## Escalation Conditions
 
-- Required framework or library semantics exceed the evidence available locally.
-- The requested change crosses major architecture boundaries.
-- Correctness depends on unavailable runtime, data, or infrastructure state.
+- The work requires deep framework or library knowledge not evidenced locally
+- The requested change crosses architecture boundaries rather than staying in
+  a bounded Python surface
+- Multiple incompatible implementation patterns already exist and no governing
+  rule is clear
+- Correctness depends on data, infrastructure, or runtime state not available
+  to the current actor
 
 ## Return Contract
 
-- focused Python code changes
-- nearby test or evidence updates when behavior changes
-- concise implementation rationale when needed
-- verification notes tied to the changed behavior
+- focused Python diffs
+- supporting test adjustments
+- concise verification notes
+- framework-aware implementation rationale when needed
 
 ## Traceability
 
@@ -49,5 +48,4 @@ way that preserves local conventions, architecture, and reviewability.
 - Identity binding source:
   - `docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`
 - Adaptation note:
-  - workflow and return contract are adapted from the canon skill's execution
-    pattern and expected outputs
+  - workflow and return contract are adapted from the canon skill's execution pattern and expected outputs

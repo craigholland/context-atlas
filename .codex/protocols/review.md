@@ -6,9 +6,7 @@
 
 ## Purpose
 
-Materialize the workflow path used when Context Atlas QA assesses a structured
-review-intake contract and produces findings, readiness framing, and a
-structured review outcome.
+Materialize the workflow path used when a structured review-intake contract is assessed and review outcomes are produced.
 
 ## Trigger / Enter Conditions
 
@@ -43,9 +41,9 @@ structured review outcome.
 
 ## Exit Criteria
 
-- requested review work is complete enough that the next action is explicit
-- findings, acceptance state, and blocked conditions are structured rather than
-  implied
+- the requested review work is complete enough that downstream action can
+  begin without guessing the reviewer outcome
+- any findings or blocked state are explicit
 
 ## Traceability
 

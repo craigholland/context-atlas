@@ -62,6 +62,8 @@
   - `MemoryPolicyTests`: verifies canonical memory entries, starter retention behavior, and trace visibility
 - `test_context_assembly_service.py`:
   - `ContextAssemblyServiceTests`: verifies end-to-end assembly orchestration, packet output, and trace completeness
+- `test_codex_materialization.py`:
+  - `CodexRuntimeMaterializationTests`: verifies the manifest-driven Codex runtime generator reproduces the committed `.codex/` and `.agents/skills/` surface
 - `test_filesystem_document_adapter.py`:
   - `FilesystemDocumentSourceAdapterTests`: verifies ontology-aware filesystem document classification and integration
 - `test_record_source_adapter.py`:
@@ -241,6 +243,18 @@
     - tests should prove the configured starter memory-budget split affects both default budget creation and custom-budget memory-slot augmentation
     - tests should prove caller-supplied workflow metadata remains opaque passthrough context rather than workflow-specific service behavior
     - Story 5 treats `test_story_5_hardening_baseline_uses_truthful_effective_compression_strategy`, `test_story_5_hardening_baseline_uses_starter_heuristic_label_by_default`, and `test_story_5_hardening_baseline_keeps_canonical_service_budget_summary` as the canonical service-side hardening anchors for truthful top-level budget, compression, and estimator metadata
+- `test_codex_materialization.py`:
+  - responsibility: verifies the repo-owned Codex runtime generator remains deterministic against the committed runtime surface
+  - defines:
+    - `CodexRuntimeMaterializationTests`: Codex runtime materialization test suite
+  - depends_on:
+    - Python standard library
+  - invariants:
+    - tests should prove `build_materialization_plan` reproduces the committed `.codex/` and `.agents/skills/` assets exactly
+    - tests should prove `scripts/materialize_codex_runtime.py --check` succeeds from repo state alone
+    - tests should prove `maintenance_mode = mixed` still fails loudly until an explicit manual-block preservation format exists
+    - tests should prove generator document-cache reuse stays scoped by repository root and current file state rather than leaking content across temp repos or stale edits
+    - tests should prove manifest-declared runtime roots propagate into planned output paths and runtime-facing generated references instead of assuming fixed `.codex` / `.agents` locations
 - `test_filesystem_document_adapter.py`:
   - responsibility: verifies ontology-aware filesystem document ingestion, classification, and downstream ranking impact
   - defines:
@@ -396,7 +410,7 @@ steps:
     run: |
       # Linux/macOS analog:
       # export PYTHONPATH=src
-      # python3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
+      # python3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_materialization, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
       $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
+      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_materialization, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```

@@ -6,15 +6,13 @@
 
 ## Purpose
 
-Materialize the workflow path used when ordinary Context Atlas planning,
-execution, review, or rework cannot proceed safely because workflow state,
-ownership, or contract integrity is broken or unclear.
+Materialize the workflow path used when ordinary workflow progression cannot continue safely because state, ownership, or contract integrity is broken or unclear.
 
 ## Trigger / Enter Conditions
 
 - structured workflow state is missing, contradictory, or invalid
 - ownership or allowed mutation scope is unclear
-- ordinary protocol progression would require guesswork
+- ordinary protocol progression would require guesswork to continue
 
 ## Participating Roles And Modes
 
@@ -35,7 +33,7 @@ ownership, or contract integrity is broken or unclear.
 ## Exit Criteria
 
 - workflow can re-enter another protocol without guesswork
-- or the broken condition has been escalated explicitly to a broader boundary
+- or the broken state has been escalated explicitly to a broader boundary
 
 ## Traceability
 

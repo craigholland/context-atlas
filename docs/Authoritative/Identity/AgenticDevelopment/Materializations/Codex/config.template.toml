@@ -1,0 +1,28 @@
+# Codex Config Template
+# This file should be generated or regenerated from the authoritative Canon and
+# Identity docs rather than treated as the lasting source of truth.
+# Local edits may be overwritten by later regeneration.
+# Durable semantic changes belong upstream in:
+# - docs/Authoritative/Canon/ for reusable or global meaning
+# - docs/Authoritative/Identity/ for Context Atlas-specific meaning
+
+# Use this template when materializing `.codex/config.toml`.
+
+# Required top-level fields:
+# - `project_id`
+# - `platform`
+# - `maintenance_mode`
+# - `orientation_surface`
+
+# Required tables:
+# - `[traceability]`
+# - `[layout]`
+# - `[capacity]`
+# - `[materialization]`
+
+# Authoring rules:
+# - keep this file focused on runtime roots, traceability, and bounded
+#   materialization coordination state
+# - do not redefine roles, protocols, or skills here
+# - keep maintenance mode aligned with the upstream manifest rather than
+#   editing the runtime file to self-protect from regeneration

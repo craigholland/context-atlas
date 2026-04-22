@@ -8,13 +8,14 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-21
+last_reviewed: 2026-04-22
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, creation-guidance]
 related:
   - ./README.md
   - ./folder_layout.md
   - ./AGENTS.template.md
+  - ./config.template.toml
   - ./agent.template.toml
   - ./role.template.md
   - ./mode.template.md
@@ -51,6 +52,15 @@ When creating or refreshing a Codex asset, begin with:
 Existing runtime-facing assets may help confirm current layout or wording, but
 they should not become the primary source of truth.
 
+### 1a. Prefer The Repo-Owned Generator When The Surface Is Declared Generated
+
+For the current Codex binding, contributors should prefer the repo-owned
+generator at `scripts/materialize_codex_runtime.py` whenever the upstream
+manifest declares that a runtime surface is `generated`.
+
+Manual refresh is still a useful review aid, but it should not become a shadow
+generation path once the repo owns a deterministic materialization script.
+
 ### 2. Choose The Correct Codex Surface First
 
 Select the runtime-facing surface that matches the concept being materialized:
@@ -70,6 +80,7 @@ Do not choose a surface based only on convenience.
 Use the matching Codex template surface when it exists:
 
 - `AGENTS.template.md`
+- `config.template.toml`
 - `role.template.md`
 - `agent.template.toml`
 - `mode.template.md`
@@ -94,6 +105,22 @@ Use `docs/Authoritative/Canon/` when the change is meant to be portable or
 reusable.
 
 Use `docs/Authoritative/Identity/` when the change is Context Atlas-specific.
+
+### 4a. Maintenance Mode Comes From The Manifest, Not The Runtime File
+
+The authoritative `maintenance_mode` for a Codex runtime surface lives in
+`docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml`.
+
+The generator may echo that value into the runtime file, but the runtime file
+must not become the place that decides whether it may be overwritten.
+
+The current maintenance semantics are:
+
+- `generated`: the generator fully owns and rewrites the surface
+- `human`: the generator does not rewrite the surface, but the surface remains
+  declared and reviewable
+- `mixed`: reserved for future explicit manual-block preservation; do not
+  assume ambiguous freeform preservation behavior
 
 ## Copied, Adapted, And Derived Content
 
@@ -195,6 +222,8 @@ Derived data should clarify provenance, not invent new semantics.
   sources
 - check that the generated-surface notice remains accurate
 - check that the maintenance mode is explicit
+- check that `maintenance_mode` still matches the upstream manifest rather than
+  a local runtime edit
 - check that Codex wording does not silently redefine portable or Identity-layer
   semantics
 
@@ -203,6 +232,9 @@ Derived data should clarify provenance, not invent new semantics.
 Refresh or re-review an affected Codex asset when:
 
 - one of its cited upstream authoritative sources changes meaning
+- the repo-owned generator changes the derived output shape
+- the upstream manifest changes `maintenance_mode`, roster membership, or
+  runtime-surface participation
 - the Codex folder layout or naming rules change
 - the Codex templates change in a way that invalidates the current asset
 - the creation guidance changes how copied, adapted, or derived content should
