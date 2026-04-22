@@ -49,31 +49,35 @@ shipped release summary is
 
 ## Start Here
 
-There are a few different reasons you may be here. Pick the path that matches
+Project Context Atlas is actually efforting a few different fronts -- all of which are evolving -- which has resulted in a cognitively-dense repo. Since there are a few different reasons you may be here, pick the path that matches
 what you care about most right now:
 
 1. **The Context Atlas product itself**
-   Start with:
+
+Start with:
    - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
    - [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
    - [docs/Release/README.md](/context-atlas/docs/Release/README.md)
 
 2. **The derived AgenticDevelopment components**
-   Start with:
+   
+Start with:
    - [docs/Authoritative/Canon/AgenticDevelopment/README.md](/context-atlas/docs/Authoritative/Canon/AgenticDevelopment/README.md)
    - [docs/Authoritative/Identity/AgenticDevelopment/](/context-atlas/docs/Authoritative/Identity/AgenticDevelopment/)
    - [`.codex/`](/context-atlas/.codex/)
    - [`.agents/skills/`](/context-atlas/.agents/skills/)
 
 3. **The Canon / Identity / operationalization architecture**
-   Start with:
+   
+Start with:
    - [docs/README.md](/context-atlas/docs/README.md)
    - [docs/Authoritative/Canon/README.md](/context-atlas/docs/Authoritative/Canon/README.md)
    - [docs/Authoritative/Identity/](/context-atlas/docs/Authoritative/Identity/)
    - [Context Atlas Agentic Development Profile](/context-atlas/docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 
-4. **The `__ai__.md` governance and enforcement system**
-   Start with:
+4. **The `__ai__.md` architectural governance and enforcement system**
+   
+Start with:
    - [`__ai__.md`](/context-atlas/__ai__.md)
    - [`__ai__.template.md`](/context-atlas/__ai__.template.md)
    - [`scripts/validate_ai_docs.py`](/context-atlas/scripts/validate_ai_docs.py)
@@ -82,24 +86,14 @@ what you care about most right now:
    - [`.github/workflows/`](/context-atlas/.github/workflows/)
 
 5. **I recently gave you a code review and you've come to rain down fiery vengeance upon me**
-   Start with the area you disagree with most, then ask your AI client for the
+   
+Start with the area you disagree with most, then ask your AI client for the
    strongest honest critique it can make.
 
-The guides remain the primary user-facing help surface for product evaluation.
-The `examples/` directory contains runnable companion artifacts, sample
-payloads, and proof inputs that support the guides rather than replacing them.
-
-If you are contributing documentation or authoritative canon, start with
-[CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
-
-If you change Codex materialization inputs under the authoritative canon or
-Identity bindings, refresh the generated runtime surface with
-`py -3 scripts/materialize_codex_runtime.py --write` and verify it with
-`py -3 scripts/check_codex_materialization.py` before pushing.
 
 ### AI-Assisted Review
 
-If you want an AI client to help you review this repo honestly, use:
+To help focus your analysis on a key area, it's suggested to start with a AI review targeting a specific facet before doing a full repo-level review.  If you want an AI client to help you review this repo honestly, use:
 
 - the [latest GitHub release](https://github.com/craigholland/context-atlas/releases/latest)
   if you want to critique shipped behavior rather than in-progress branch work
@@ -143,6 +137,18 @@ Suggested prompts:
   brittle, overstated, incomplete or evidence that this guy is a complete
   fraud.
   ```
+### Guides and Contributing
+The guides remain the primary user-facing help surface for product evaluation.
+The `examples/` directory contains runnable companion artifacts, sample
+payloads, and proof inputs that support the guides rather than replacing them.
+
+If you are contributing documentation or authoritative canon, start with
+[CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
+
+If you change Codex materialization inputs under the authoritative canon or
+Identity bindings, refresh the generated runtime surface with
+`py -3 scripts/materialize_codex_runtime.py --write` and verify it with
+`py -3 scripts/check_codex_materialization.py` before pushing.
 
 ## Principles
 
