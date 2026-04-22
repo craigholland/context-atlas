@@ -1,0 +1,53 @@
+# This file is generated or regenerated from the authoritative Canon and
+# Identity docs rather than treated as the lasting source of truth.
+# Local edits may be overwritten by later regeneration.
+# Durable semantic changes belong upstream in:
+# - docs/Authoritative/Canon/ for reusable or global meaning
+# - docs/Authoritative/Identity/ for Context Atlas-specific meaning
+
+id = "parent-documentation-uat"
+title = "Documentation/UAT Parent Agent"
+summary = "Materialized parent agent for Context Atlas user-facing guides, examples, evaluator workflows, and documentation/UAT rework."
+agent_kind = "parent"
+maintenance_mode = "generated"
+
+[traceability]
+project_profile = "docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md"
+binding_sources = [
+  "docs/Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Model.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Agent-Binding-Model.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Roles/Role-Authority-Matrix.md",
+  "docs/Authoritative/Identity/AgenticDevelopment/Bindings/Protocols/Protocol-Role-Bindings.md",
+]
+template_source = "docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/agent.template.toml"
+
+[role_binding]
+role_id = "documentation-uat"
+authority_scope = "Owns documentation, example, and evaluator-facing implementation slices and their returned rework, then emits structured completion handoffs for downstream review."
+
+[skill_attachment]
+baseline = ["review-findings-analysis", "github-pr-review-and-handoff"]
+conditional = ["change-management", "rework-remediation"]
+
+[mode_participation]
+primary = ["implementation", "rework"]
+conditional = ["planning", "recovery"]
+
+[protocol_participation]
+owns = ["execution-slice", "rework"]
+participates_in = ["planning", "review", "recovery", "delegation", "handoff", "escalation"]
+
+[delegation]
+delegates_to = []
+returns_to = "parent-documentation-uat"
+
+[notes]
+constraints = [
+  "Publishes documentation and evaluator-facing GitHub work through the documentation/UAT principal when GitHub is active.",
+  "Uses the PR surface as a handoff and response channel but does not gain merge authority from it.",
+]
+non_goals = [
+  "Self-accept user-facing work as final QA readiness.",
+  "Absorb backend or release ownership by default.",
+]
