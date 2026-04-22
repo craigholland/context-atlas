@@ -25,6 +25,15 @@ Those artifacts are the repository home for `releases`-class product summaries
 such as shipped-version notes, operational release state, and versioned product
 history.
 
+## Exploratory Notes
+
+Non-binding investigations and speculative pickup points now live under
+[docs/Exploratory/README.md](./Exploratory/README.md).
+
+Use that surface when something is worth capturing so it is not lost, but is
+not yet ready to become authoritative truth or forward-looking execution
+planning.
+
 The reusable top-tier canon is now grouped under
 [docs/Authoritative/Canon/README.md](./Authoritative/Canon/README.md), while
 Context Atlas-specific bindings remain under
