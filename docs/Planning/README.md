@@ -8,12 +8,8 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-The current active planning surfaces are:
+The current active planning surfaces is:
 
-- [Task - Codex Runtime Materialization Enforcement PR Plan](completed/task_codex_runtime_materialization_enforcement.md)
-  This is the small follow-up task for turning the first generated Codex
-  runtime surface into a deterministic, drift-checked, preflight-enforced
-  pipeline.
 - [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./task_ai_owner_file_compaction_and_hygiene.md)
   This is the small follow-up task for reducing cognitive load in repo-level
   and layer-level `__ai__.md` files whose `Architectural Rules` sections have
