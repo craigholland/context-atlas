@@ -15,6 +15,7 @@ The most recent small follow-up tasks have moved under
 
 - [Task - Codex Runtime Materialization Enforcement PR Plan](./completed/task_codex_runtime_materialization_enforcement.md)
 - [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./completed/task_ai_owner_file_compaction_and_hygiene.md)
+- [Task - README Map And Tour Separation PR Plan](./completed/task_readme_map_and_tour_split.md)
 
 Planning artifacts here should derive their decomposition model from [Craig Architecture - Planning And Decomposition](../Authoritative/Canon/Architecture/Craig-Architecture-Planning-And-Decomposition.md).
 

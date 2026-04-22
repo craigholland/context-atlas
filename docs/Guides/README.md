@@ -5,10 +5,16 @@ This directory is the primary user-facing help surface for Context Atlas.
 If you are evaluating, installing, or wiring Context Atlas into a workflow,
 start here before dropping into `examples/` or deeper architecture docs.
 
+If you want the repo-level map first, start with the root
+[README](../../README.md).
+
 ## Start Here
 
 - [Getting Started](./getting_started.md)
   - first-run installation, starter configuration, and the installable starter CLI
+- [Context Atlas Tour](./context_atlas_tour.md)
+  - system-level walkthrough of current source families, workflow shapes,
+    boundaries, packet/trace inspection, and proof surfaces
 
 ## Workflow Guides
 

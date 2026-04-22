@@ -23,3 +23,4 @@ a larger Epic/Story archive:
 
 - [Task - Codex Runtime Materialization Enforcement PR Plan](./task_codex_runtime_materialization_enforcement.md)
 - [Task - __ai__ Owner-File Compaction And Hygiene PR Plan](./task_ai_owner_file_compaction_and_hygiene.md)
+- [Task - README Map And Tour Separation PR Plan](./task_readme_map_and_tour_split.md)

@@ -7,6 +7,9 @@ The goal is to get from a local checkout to a first assembled packet using the s
 If you want the broader user-help index first, start with
 [Guides/README.md](./README.md).
 
+If you want the broader system walkthrough before running the starter path,
+start with [Context Atlas Tour](./context_atlas_tour.md).
+
 ## What You Will Do
 
 You will:
