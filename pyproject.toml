@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "context-atlas"
-version = "0.1.2"
+version = "0.1.3"
 description = "A standalone context-governance engine for Codex-powered systems that classifies, ranks, budgets, and assembles context into auditable packets."
 readme = "README.md"
 license = { file = "LICENSE" }

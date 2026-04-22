@@ -30,10 +30,11 @@ This repository has completed its initial architecture and governance bootstrap
 and now carries an explicit `MVP Ready` recommendation in
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
 
-The `0.1.2` release packages the first full context-assembly hardening pass.
-The current focus is the next post-hardening expansion phase: widening scenario
-and integration coverage without losing the truthful packet, trace, retrieval,
-budget, and compression contracts that were hardened in that release.
+The `0.1.3` release packages the first post-hardening documentation and
+runtime-governance refinement pass. It keeps the hardened shared-engine
+contracts introduced in `0.1.2`, but makes the repository easier to approach
+by separating the repo README's map from the deeper product tour and by
+strengthening the manifest-driven Codex runtime materialization loop.
 
 Important outward-facing truths that are now settled:
 
@@ -45,11 +46,15 @@ Important outward-facing truths that are now settled:
   flat ratio for all content
 - packet and trace inspection now prefer truthful budget and compression
   vocabulary
+- the root README is now a layered entry surface, while the deeper walkthrough
+  lives under `docs/Guides/context_atlas_tour.md`
+- generated Codex runtime assets are now manifest-driven, regenerable, and
+  drift-checked through preflight and CI
 
 The in-repo release-history index lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
 shipped release summary is
-[docs/Release/release_0_1_2.md](/context-atlas/docs/Release/release_0_1_2.md).
+[docs/Release/release_0_1_3.md](/context-atlas/docs/Release/release_0_1_3.md).
 
 ## Start Here
 
