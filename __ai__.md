@@ -1,8 +1,8 @@
 # __ai__.md - Folder Summary
 
 ## Last Verified (CI)
-- commit: 69082a5c35c26c5128375771397d761366ecc7a5
-- timestamp_utc: 2026-04-22T01:43:26Z
+- commit: d9af7d299c145f5924540a7f43018b012cf18273
+- timestamp_utc: 2026-04-22T12:51:42Z
 - verified_by: ci
 - notes: Verified means "all commands in Verification Contract passed" (not a human review).
 ## Scope
