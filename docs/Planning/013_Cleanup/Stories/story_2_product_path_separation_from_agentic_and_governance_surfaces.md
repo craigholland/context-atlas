@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, story, routing, product-path, agentic, governance]
 related:
@@ -121,6 +121,18 @@ bleeding back into the product path as hidden setup steps.
   expanding the product route
 
 ### Task 4: Contributor-Path Containment
+
+Task 4 now settles the contributor-path containment rule for the Story:
+
+- product-facing repo-edge docs should not carry detailed Codex refresh or
+  governance-operation commands inline
+- contributor refresh and drift-check workflow for generated runtime assets
+  should live in the owning
+  `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/`
+  surfaces
+- product and docs-index routes may still point contributors there, but they
+  should do so as intentional contributor/governance routes rather than as
+  hidden product prerequisites
 
 - ensure contributor and governance instructions live where they belong instead
   of bleeding back into product-facing docs

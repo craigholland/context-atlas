@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, contributors, governance, containment]
 related:
@@ -30,7 +30,7 @@ remain explicit and discoverable.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -107,6 +107,23 @@ PLANNED
 - audit bleed-through first
 - clean up the owning contributor/governance surfaces second
 - reinforce Story and Epic language third
+
+## Completed Outcome
+
+Task 2.4 now settles the contributor-path containment boundary for Story 2:
+
+- product-facing routing surfaces no longer carry detailed Codex refresh or
+  drift-check commands inline
+- contributor refresh workflow for generated Codex runtime assets now lives in
+  the owning
+  `docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/`
+  surfaces
+- repo-edge routes still keep those contributor/governance paths discoverable,
+  but they now point readers to the owning docs instead of blending product
+  onboarding with operational refresh detail
+
+This leaves later consumer-packaging and AI-governance work free to refine the
+contributor experience without first undoing Story 2's routing boundary.
 
 ## Risks And Unknowns
 
