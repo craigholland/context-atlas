@@ -58,10 +58,21 @@ shipped release summary is
 
 ## Start Here
 
-Project Context Atlas is actually efforting a few different fronts -- all of which are evolving -- which has resulted in a cognitively-dense repo. Since there are a few different reasons why you may be here, pick the path that matches
-what you care about most right now:
+Project Context Atlas is evolving along a few different fronts, which makes
+this repository denser than a typical library repo. You do not need to absorb
+all of them at once. Pick the path that matches what you care about most right
+now:
+
+This file is the repo map. If you want the documentation-only route splitter,
+use [docs/README.md](/context-atlas/docs/README.md). If you already know you
+want the product guide hub, use
+[docs/Guides/README.md](/context-atlas/docs/Guides/README.md).
 
 1. **The Context Atlas product itself**
+
+   Use this route if you are here to evaluate Atlas as a library or try the
+   current starter product path. You do not need `.codex/`,
+   `.agents/skills/`, or `__ai__.md` to follow this route.
 
    Start with:
    - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
@@ -71,6 +82,9 @@ what you care about most right now:
 
 2. **The derived AgenticDevelopment components**
 
+   Use this route if you want to inspect the repo's generated runtime surface
+   and the upstream bindings that produce it.
+
    Start with:
    - [docs/Authoritative/Canon/AgenticDevelopment/README.md](/context-atlas/docs/Authoritative/Canon/AgenticDevelopment/README.md)
    - [docs/Authoritative/Identity/AgenticDevelopment/](/context-atlas/docs/Authoritative/Identity/AgenticDevelopment/)
@@ -79,6 +93,9 @@ what you care about most right now:
 
 3. **The Canon / Identity / operationalization architecture**
 
+   Use this route if you want the project architecture and binding model rather
+   than the product setup path.
+
    Start with:
    - [docs/README.md](/context-atlas/docs/README.md)
    - [docs/Authoritative/Canon/README.md](/context-atlas/docs/Authoritative/Canon/README.md)
@@ -86,6 +103,9 @@ what you care about most right now:
    - [Context Atlas Agentic Development Profile](/context-atlas/docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 
 4. **The `__ai__.md` architectural governance and enforcement system**
+
+   Use this route if you are here to understand or change the repo's
+   contribution-governance model.
 
    Start with:
    - [`__ai__.md`](/context-atlas/__ai__.md)
@@ -153,13 +173,18 @@ The guides remain the primary user-facing help surface for product evaluation.
 The `examples/` directory contains runnable companion artifacts, sample
 payloads, and proof inputs that support the guides rather than replacing them.
 
+If you are evaluating Atlas as a product or library, you can stop at the guide
+and example surfaces. The generated Codex runtime and the repo's `__ai__.md`
+governance model are contributor-facing layers, not prerequisites for the
+product path.
+
 If you are contributing documentation or authoritative canon, start with
 [CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
 
-If you change Codex materialization inputs under the authoritative canon or
-Identity bindings, refresh the generated runtime surface with
-`py -3 scripts/materialize_codex_runtime.py --write` and verify it with
-`py -3 scripts/check_codex_materialization.py` before pushing.
+If you are intentionally changing generated runtime or governance surfaces, use
+the contributor/architecture routes rather than this product-facing entry
+section. Those owning surfaces carry the detailed refresh and verification
+steps.
 
 ## Principles
 
