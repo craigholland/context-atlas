@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -30,7 +30,7 @@ than a mix of execution leftovers.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -110,6 +110,22 @@ PLANNED
   real onboarding job.
 - Tightening the guide flow can accidentally hide legitimate workflow
   differences if over-compressed.
+
+## Completed Outcome
+
+Task 1.3 now settles the guide-path cleanup around one explicit reading order:
+
+- [Getting Started](../../../../../docs/Guides/getting_started.md) owns the
+  shared first-run setup and first packet/trace baseline
+- [Context Atlas Tour](../../../../../docs/Guides/context_atlas_tour.md) is the
+  next system-layer guide after that baseline is clear
+- workflow-specific guides are treated as downstream variations on the same
+  shared starter engine rather than alternate first-run entrypoints
+
+The product-facing guides also no longer use Story-number residue or
+implementation-history shorthand to explain the current product path. The root
+owner contract now reinforces that guide order directly so the layered route
+stays durable as the repo evolves.
 
 ## Exit Criteria
 
