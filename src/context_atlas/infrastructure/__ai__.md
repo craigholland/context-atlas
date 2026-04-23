@@ -177,19 +177,13 @@
 steps:
   - name: compile_infrastructure
     run: |
-      # Linux/macOS analog: python3 -m compileall src/context_atlas/infrastructure
-      py -3 -m compileall src/context_atlas/infrastructure
+      python -m compileall src/context_atlas/infrastructure
 
   - name: unit_tests
     run: |
-      # Linux/macOS analog: python3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
-      py -3 -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
+      python -m pytest tests/test_bootstrap_layers.py tests/test_config_observability.py tests/test_context_assembly_service.py
 
   - name: import_sanity
     run: |
-      # Linux/macOS analog:
-      # export PYTHONPATH=src
-      # python3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
-      $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
+      python -c "import sys; sys.path.insert(0, 'src'); from context_atlas.infrastructure import build_starter_context_assembly_service, write_standard_proof_artifacts; from context_atlas.infrastructure.assembly import assemble_with_low_code_workflow; from context_atlas.infrastructure.config import AssemblySettings, CompressionStrategy, LowCodeWorkflowSettings, MemorySettings, get_low_code_workflow_preset, load_settings_from_env, list_low_code_workflow_presets; from context_atlas.infrastructure.logging import configure_logger, log_assembly_stage_message, log_message"
 ```

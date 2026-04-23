@@ -401,19 +401,13 @@
 steps:
   - name: compile_tests
     run: |
-      # Linux/macOS analog: python3 -m compileall tests
-      py -3 -m compileall tests
+      python -m compileall tests
 
   - name: unit_tests
     run: |
-      # Linux/macOS analog: python3 -m pytest
-      py -3 -m pytest
+      python -m pytest
 
   - name: import_sanity
     run: |
-      # Linux/macOS analog:
-      # export PYTHONPATH=src
-      # python3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_materialization, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
-      $env:PYTHONPATH='src'
-      py -3 -c "import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_materialization, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
+      python -c "import sys; sys.path.insert(0, 'src'); import tests.test_bootstrap_layers, tests.test_budget_and_compression, tests.test_candidate_ranking, tests.test_codex_materialization, tests.test_codex_repository_workflow, tests.test_config_observability, tests.test_context_assembly_service, tests.test_docs_database_workflow, tests.test_domain_models, tests.test_filesystem_document_adapter, tests.test_lexical_retrieval, tests.test_low_code_workflow, tests.test_memory_policy, tests.test_record_adapter_shape, tests.test_record_source_adapter, tests.test_source_semantics"
 ```
