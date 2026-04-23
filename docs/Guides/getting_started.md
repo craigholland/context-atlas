@@ -4,11 +4,18 @@ This guide walks through the current MVP starter path for Context Atlas.
 
 The goal is to get from a local checkout to a first assembled packet using the supported starter surface, not to showcase every future workflow.
 
+The current starter path requires Python `3.12+` and a local checkout of this
+repository.
+
 If you want the broader user-help index first, start with
 [Guides/README.md](./README.md).
 
 If you want the broader system walkthrough before running the starter path,
 start with [Context Atlas Tour](./context_atlas_tour.md).
+
+If this is your first pass through the product docs, stay on this guide until
+you have produced one packet and one trace. The tour and workflow-specific
+guides are easier to use after that shared starter baseline is concrete.
 
 ## What You Will Do
 
@@ -89,10 +96,13 @@ Those environment-backed settings currently cover:
 The current supported configuration surface is intentionally smaller than the
 full set of starter constants in code:
 
-- ranking authority tables and trace-signal constants stay internal
-- memory retention semantics stay internal unless they are already exposed
-  through documented env-backed defaults
-- canonical slot identifiers stay internal
+- ranking authority tables and trace-signal constants are not part of the
+  supported operator-facing runtime surface
+- memory retention semantics are not part of the supported operator-facing
+  runtime surface unless they are already exposed through documented
+  env-backed defaults
+- canonical slot identifiers are not part of the supported operator-facing
+  runtime surface
 
 The starter memory-budget split is now the supported way to change the default
 documents-vs-memory balance without turning canonical slot identifiers into
@@ -109,8 +119,8 @@ callable estimator through `build_starter_context_assembly_service(...)` or
 `assemble_with_starter_context_service(...)`, but that stays an outward
 composition seam rather than a starter operator setting.
 
-When you inspect packet and trace output after a run, prefer the settled
-Story 4 vocabulary:
+When you inspect packet and trace output after a run, prefer the current
+truthful vocabulary:
 
 - packet budget state should surface `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
@@ -125,14 +135,24 @@ Story 4 vocabulary:
 The current installable starter command is:
 
 ```bash
-context-atlas-starter docs --query "How should planning docs be treated?"
+context-atlas-starter examples/codex_repository_workflow/sample_repo/docs --query "How should planning docs be treated?"
 ```
 
 That command works after an editable install and does not require you to run a
 repository-local example script directly.
 
-If you are not working from this repository, replace `docs` with the path to
-your own governed documentation directory.
+It uses the checked-in sample repository docs under
+`examples/codex_repository_workflow/sample_repo/docs` so the starter path stays
+reproducible from a fresh checkout.
+
+If you are not working from this repository, replace
+`examples/codex_repository_workflow/sample_repo/docs` with the path to your own
+governed documentation directory.
+
+If you are working from this repository, do not treat the repo root `docs/`
+tree as the starter sample corpus. That broader docs tree includes planning,
+review, and architecture surfaces that are useful for the repo itself but are
+not the bounded first-run product example.
 
 If you are working from a repository checkout, the supported runnable companion
 example is:
@@ -147,19 +167,19 @@ python examples/starter_context_flow.py
 
 That command uses the example defaults:
 
-- `docs/` as the input directory
+- `examples/codex_repository_workflow/sample_repo/docs` as the input directory
 - `How should planning docs be treated?` as the starter query
 
 If you want the repo-local no-install path instead, set `PYTHONPATH` explicitly:
 
 ```powershell
 $env:PYTHONPATH = "src"
-python examples/starter_context_flow.py docs "How should planning docs be treated?"
+python examples/starter_context_flow.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 ```bash
 export PYTHONPATH=src
-python examples/starter_context_flow.py docs "How should planning docs be treated?"
+python examples/starter_context_flow.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 For readability, the example defaults logging to `WARNING` unless you explicitly set `CONTEXT_ATLAS_LOG_LEVEL` yourself.
@@ -167,13 +187,43 @@ For readability, the example defaults logging to `WARNING` unless you explicitly
 The example will:
 
 - load validated settings from the environment
-- ingest markdown docs from `docs/`
+- ingest markdown docs from the checked-in sample repository docs tree
 - retrieve candidates with the starter lexical retriever
 - assemble a packet through the starter assembly service
 - render:
   - packet context
   - packet inspection
   - trace inspection
+
+## Starter Output Preview
+
+If you want to see one bounded successful run before executing it yourself, see
+[starter_context_flow_sample_output.md](../../examples/starter_context_flow_sample_output.md).
+That sample comes from the same starter command and the same checked-in sample
+repository docs described above.
+
+The full sample file includes the rendered context plus the complete packet and
+trace inspection views. The preview below shows the shape of the outcome you
+should expect:
+
+```text
+=== Packet Inspection ===
+Packet
+- query: How should planning docs be treated?
+- selected_candidates: 3
+- compression_applied: no
+
+Budget
+- fixed_reserved_tokens: 512
+- unreserved_tokens: 1536
+- unallocated_tokens: 1572
+
+=== Trace Inspection ===
+Trace
+- included_count: 5
+- deferred_count: 1
+- compression_strategy: extractive
+```
 
 ## Supported Imports
 
@@ -209,7 +259,7 @@ On a successful run, you should see:
 - a trace summary that shows why sources were included, excluded, or
   transformed
 
-More concretely, the hardened starter path should now make it easy to point at:
+More concretely, the current starter path should make it easy to point at:
 
 - `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens` in the
   packet view when budgeting matters
@@ -227,4 +277,16 @@ more guidance.
 The smaller [examples/starter_api_smoke.py](../../examples/starter_api_smoke.py)
 script is still useful for smoke validation, but `starter_context_flow.py` is
 the recommended repository-local companion example. The installable starter
-command remains the smallest package-facing onboarding path.
+command remains the smallest package-facing onboarding path, and the checked-in
+[starter output sample](../../examples/starter_context_flow_sample_output.md)
+shows the bounded packet/trace shape that path should produce.
+
+## Where To Go Next
+
+- if you want the broader system walkthrough: [Context Atlas Tour](./context_atlas_tour.md)
+- if you want the repo-aware workflow after the starter baseline:
+  [Codex Repository Workflow](./codex_repository_workflow.md)
+- if you want mixed-source docs plus records after the starter baseline:
+  [Documents Plus Database Workflow](./docs_database_workflow.md)
+- if you want the preset-driven wrapper after the starter baseline:
+  [Low-Code Workflow](./low_code_workflow.md)

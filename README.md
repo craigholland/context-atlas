@@ -1,7 +1,10 @@
 # Context Atlas
 
 Context Atlas is a standalone context-governance and context-assembly engine
-for Codex-powered systems and other provider-agnostic applications.
+for provider-agnostic applications.
+
+This repository also carries a derived Codex runtime surface for contributor
+workflows, but the Atlas engine itself is not Codex-only.
 
 It exists to answer questions such as:
 
@@ -24,32 +27,36 @@ produces:
 The goal is not just retrieval. The goal is governed, reproducible,
 inspectable context decisions.
 
+## First-Run Reality
+
+- the current installable starter path requires Python `3.12+`
+- if you want the product route first, start with
+  [docs/Guides/README.md](/context-atlas/docs/Guides/README.md) and
+  [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+- if you want one bounded successful output preview before running Atlas
+  yourself, start with
+  [examples/starter_context_flow_sample_output.md](/context-atlas/examples/starter_context_flow_sample_output.md)
+- if you see `Codex` elsewhere in this repo, treat it as this repository's
+  current contributor/runtime binding rather than as a requirement to use Atlas
+
 ## Status
 
 This repository has completed its initial architecture and governance bootstrap
 and now carries an explicit `MVP Ready` recommendation in
 [docs/Reviews/MVP/mvp_readiness_assessment.md](/context-atlas/docs/Reviews/MVP/mvp_readiness_assessment.md).
 
-The `0.1.3` release packages the first post-hardening documentation and
-runtime-governance refinement pass. It keeps the hardened shared-engine
+The current shipped line is `0.1.3`. It keeps the hardened shared-engine
 contracts introduced in `0.1.2`, but makes the repository easier to approach
-by separating the repo README's map from the deeper product tour and by
-strengthening the manifest-driven Codex runtime materialization loop.
+by:
 
-Important outward-facing truths that are now settled:
+- separating the root README's map from the deeper product tour
+- keeping the installable starter path, runnable companions, and release index
+  easier to tell apart
+- strengthening the manifest-driven Codex runtime materialization loop
 
-- repeated lexical retrieval reuses shared index state instead of rebuilding
-  the whole TF-IDF picture on every query
-- ranking and memory now share one bounded duplicate-handling baseline for
-  Atlas-owned text
-- starter token estimation is shape-aware by default instead of assuming one
-  flat ratio for all content
-- packet and trace inspection now prefer truthful budget and compression
-  vocabulary
-- the root README is now a layered entry surface, while the deeper walkthrough
-  lives under `docs/Guides/context_atlas_tour.md`
-- generated Codex runtime assets are now manifest-driven, regenerable, and
-  drift-checked through preflight and CI
+For current onboarding and runnable evaluation, prefer the guides and example
+surfaces over the release-history index. The release notes are shipped-history
+artifacts, not the main first-run help path.
 
 The in-repo release-history index lives at
 [docs/Release/README.md](/context-atlas/docs/Release/README.md). The current
@@ -67,6 +74,7 @@ what you care about most right now:
    - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
    - [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
    - [docs/Guides/context_atlas_tour.md](/context-atlas/docs/Guides/context_atlas_tour.md)
+   - [examples/README.md](/context-atlas/examples/README.md)
    - [docs/Release/README.md](/context-atlas/docs/Release/README.md)
 
 2. **The derived AgenticDevelopment components**

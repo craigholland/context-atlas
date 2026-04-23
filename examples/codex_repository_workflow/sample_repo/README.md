@@ -34,7 +34,7 @@ The current workflow is most useful when the governed docs include:
 - plain markdown content with normal headings and prose
 - tracked markdown files under `sample_repo/docs/` so the example can be run directly for proof work
 
-For the Story 7 authority-hardening pass, the sample shape should make the
+For an authority-sensitive evaluation, the sample shape should make the
 document-side authority contrast explicit:
 
 - `Authoritative/Canon/Architecture/Repo-Guidance.md`
@@ -67,7 +67,7 @@ python examples/codex_repository_workflow/run.py --repo-root /repos/my-repo
 If the docs live somewhere other than `<repo_root>/docs`, pass `--docs-root`.
 Relative `--docs-root` values are resolved from `--repo-root`.
 
-For the authority-hardening proof scenario, the supported repository workflow
+For an authority-sensitive proof scenario, the supported repository workflow
 should point at an authority-rich docs tree, typically the full `docs/` root,
 instead of only one advisory subfolder.
 
