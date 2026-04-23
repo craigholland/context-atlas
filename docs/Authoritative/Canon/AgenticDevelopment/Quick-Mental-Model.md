@@ -155,19 +155,19 @@ Read that as:
 
 Here is a simple mental picture:
 
-- `Backend` is the `role`
-- `parent-backend` is the `parent agent`
-- `python-authoring` is a direct `skill`
-- `specialist-python-implementation` is a delegated `specialist`
+- `Delivery` is the `role`
+- `parent-delivery` is the `parent agent`
+- `language-authoring` is a direct `skill`
+- `implementation-specialist` is a delegated `specialist`
 - `implementation` is the current `mode`
 - `execution-slice` is the active `protocol`
 
 That means:
 
-- Backend is accountable
-- the backend parent agent is carrying that accountability
+- Delivery is accountable
+- the delivery parent agent is carrying that accountability
 - it may code directly with its own skills
-- or delegate a bounded slice to a Python specialist
+- or delegate a bounded slice to an implementation specialist
 - while the work is in implementation
 - and the workflow path is execution-slice
 

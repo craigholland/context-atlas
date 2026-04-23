@@ -15,14 +15,14 @@ roster, workflow gates, capacity values, or environment-specific layouts.
 
 ## Why This Matters Here
 
-Context Atlas is already a context-governance engine: it tries to make source
-selection, authority handling, budgeting, and packet assembly explicit,
-reviewable, and reproducible rather than leaving them as prompt folklore.
+Projects that care about governed AI collaboration eventually run into the same
+question: should roles, review gates, handoffs, and runtime-facing agent assets
+be treated as ad hoc tool habits, or as concepts that can be defined and
+reviewed upstream first?
 
-This canon applies that same philosophy to AI collaboration itself. Instead of
-treating agents, roles, review gates, handoffs, and runtime materialization as
-tool-specific prompt habits, this layer makes them portable governed concepts
-that can be reviewed before any one project or runtime binds them concretely.
+This canon takes the second approach. Instead of treating those behaviors as
+tool-specific prompt folklore, it makes them portable governed concepts that
+can be reviewed before any one project or runtime binds them concretely.
 
 ## Start Here
 
