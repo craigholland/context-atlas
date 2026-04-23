@@ -2,28 +2,36 @@
 
 This directory holds the canonical project documentation for Context Atlas.
 
+## Pick Your Route
+
+If you are here to evaluate or set up Context Atlas as a product, start with
+the product route first.
+
+If you are here to contribute docs, inspect the Canon/Identity layers, or
+understand the repo's runtime/governance model, use the contributor and
+architecture routes further down this page.
+
+## Product Route
+
+User-facing setup and workflow help lives under
+[docs/Guides/README.md](./Guides/README.md).
+
+If you are trying to evaluate or wire Context Atlas into a workflow, start
+there before reading deeper planning, canon, identity, or governance docs.
+
+## Release Notes
+
+In-repo release summaries live under [docs/Release/README.md](./Release/README.md).
+
+Those artifacts are the repository home for `releases`-class product summaries
+such as shipped-version notes, operational release state, and versioned product
+history. They are shipped-history context, not the main current setup route.
+
 ## Contributing Docs
 
 If you are trying to add or update a document correctly, start with
 [CONTRIBUTING.md](../CONTRIBUTING.md) and then continue into the ontology docs
 linked below.
-
-## Guides
-
-User-facing setup and workflow help now lives under
-[docs/Guides/README.md](./Guides/README.md).
-
-If you are trying to evaluate or set up Context Atlas as a product, start there
-before reading `examples/` or the deeper architecture/planning canon.
-
-## Release Notes
-
-In-repo release summaries now live under
-[docs/Release/README.md](./Release/README.md).
-
-Those artifacts are the repository home for `releases`-class product summaries
-such as shipped-version notes, operational release state, and versioned product
-history.
 
 ## Exploratory Notes
 
@@ -38,6 +46,8 @@ The reusable top-tier canon is now grouped under
 [docs/Authoritative/Canon/README.md](./Authoritative/Canon/README.md), while
 Context Atlas-specific bindings remain under
 [docs/Authoritative/Identity/](./Authoritative/Identity/).
+
+## Contributor And Architecture Routes
 
 Before creating or editing project documents, start with [docs/Authoritative/Canon/Ontology/README.md](./Authoritative/Canon/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
 
@@ -78,6 +88,10 @@ The intended documentation ontology is:
 - `Exploratory` for speculative investigation and prototypes
 - `Releases` for operational and release-history context
 
-This file exists to orient contributors toward the ontology and template canon
-before they author new project artifacts.
+This file exists to separate the main documentation routes cleanly:
+
+- product-facing setup and workflow help
+- contributor-facing document authoring help
+- Canon and Identity architecture reading
+- exploratory, planning, and release-history support surfaces
 
