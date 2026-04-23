@@ -222,6 +222,21 @@ class CodexRuntimeMaterializationTests(unittest.TestCase):
                 backend_role_surface.content,
             )
 
+    def test_mode_transition_data_stops_at_next_higher_heading(self) -> None:
+        transitions = _MATERIALIZE_MODULE._mode_transition_data(
+            _REPO_ROOT,
+            "Operational Delivery",
+        )
+
+        self.assertEqual(
+            transitions["exit"],
+            [
+                "when an operational outcome contract is emitted",
+                "when an operational artifact is handed to review",
+                "when the operational path becomes blocked badly enough to require recovery",
+            ],
+        )
+
     def test_materialization_check_script_passes_for_current_repo(self) -> None:
         result = subprocess.run(
             [sys.executable, str(_CHECK_SCRIPT_PATH)],
