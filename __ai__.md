@@ -50,6 +50,7 @@
 - `docs/Planning/013_Cleanup/Stories/` and `docs/Planning/013_Cleanup/Stories/Tasks/`: may land incrementally on Story branches while the Cleanup Epic PR is still open, but those downstream docs should still be treated as one stacked planning surface rather than as independent planning horizons.
 - The curated product-facing package surface is `context_atlas.api`; root docs and examples should prefer that starter namespace unless they are deliberately teaching internal architecture.
 - The root README should act as the repo's map and multi-audience routing surface; deeper product walkthrough and workflow-tour content should usually live in linked guides under `docs/Guides/` rather than continuing to accumulate in the root file.
+- The root README should surface the real Python/runtime floor early enough for product evaluators to see it before they drop into setup detail or workflow-specific docs.
 - Product-facing docs, guides, example READMEs, and `.env.example` should stay aligned around one truthful onboarding story, should not imply automatic `.env` loading, and should not introduce Windows-only operator guidance without a Linux/macOS analog.
 - Release-prep changes should keep `README.md`, `pyproject.toml`, `src/context_atlas/__init__.py`, `tests/test_cli.py`, and the current note under `docs/Release/` aligned to the same version.
 - Generated Codex runtime assets under `.codex/` and `.agents/skills/` are downstream of the manifest, bindings, templates, and repo-owned generator; durable semantic edits belong upstream first, then the runtime surface should be regenerated.
@@ -85,7 +86,9 @@
   - invariants:
     - should keep the primary product-evaluator path explicit
     - should preserve a short mental-model anchor near the top
+    - should surface the real Python/runtime floor early enough that a first-time evaluator can see the prerequisite before opening the deeper guide path
     - should route deeper walkthrough readers into guide material instead of carrying every tour-level section in full
+    - should explain Codex mentions briefly and outsider-friendly when they still appear on the product path
     - should distinguish shipped-release review from evolving-branch review when suggesting AI-assisted critique paths
     - any playful review prompt should remain clearly secondary to the serious route guidance and should still ask for substantive criticism
     - its `Status` section should stay aligned with the current shipped release note and should describe the top-level product story without collapsing back into a second system tour

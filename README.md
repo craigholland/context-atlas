@@ -1,7 +1,10 @@
 # Context Atlas
 
 Context Atlas is a standalone context-governance and context-assembly engine
-for Codex-powered systems and other provider-agnostic applications.
+for provider-agnostic applications.
+
+This repository also carries a derived Codex runtime surface for contributor
+workflows, but the Atlas engine itself is not Codex-only.
 
 It exists to answer questions such as:
 
@@ -23,6 +26,15 @@ produces:
 
 The goal is not just retrieval. The goal is governed, reproducible,
 inspectable context decisions.
+
+## First-Run Reality
+
+- the current installable starter path requires Python `3.12+`
+- if you want the product route first, start with
+  [docs/Guides/README.md](/context-atlas/docs/Guides/README.md) and
+  [docs/Guides/getting_started.md](/context-atlas/docs/Guides/getting_started.md)
+- if you see `Codex` elsewhere in this repo, treat it as this repository's
+  current contributor/runtime binding rather than as a requirement to use Atlas
 
 ## Status
 
