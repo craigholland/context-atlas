@@ -10,11 +10,15 @@ from tempfile import TemporaryDirectory
 import unittest
 
 from context_atlas import __version__
-from context_atlas.cli import main
+from context_atlas.cli import DEFAULT_DOCS_ROOT, build_starter_parser, main
 
 
 class StarterCliTests(unittest.TestCase):
     """Keep the installable starter CLI aligned with the MVP docs surface."""
+
+    def test_starter_cli_defaults_to_the_checked_in_sample_docs(self) -> None:
+        parsed = build_starter_parser().parse_args([])
+        self.assertEqual(parsed.docs_root, DEFAULT_DOCS_ROOT)
 
     def test_starter_cli_runs_against_a_docs_directory(self) -> None:
         with TemporaryDirectory() as temp_dir:

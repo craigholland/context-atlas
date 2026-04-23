@@ -128,14 +128,24 @@ Story 4 vocabulary:
 The current installable starter command is:
 
 ```bash
-context-atlas-starter docs --query "How should planning docs be treated?"
+context-atlas-starter examples/codex_repository_workflow/sample_repo/docs --query "How should planning docs be treated?"
 ```
 
 That command works after an editable install and does not require you to run a
 repository-local example script directly.
 
-If you are not working from this repository, replace `docs` with the path to
-your own governed documentation directory.
+It uses the checked-in sample repository docs under
+`examples/codex_repository_workflow/sample_repo/docs` so the starter path stays
+reproducible from a fresh checkout.
+
+If you are not working from this repository, replace
+`examples/codex_repository_workflow/sample_repo/docs` with the path to your own
+governed documentation directory.
+
+If you are working from this repository, do not treat the repo root `docs/`
+tree as the starter sample corpus. That broader docs tree includes planning,
+review, and architecture surfaces that are useful for the repo itself but are
+not the bounded first-run product example.
 
 If you are working from a repository checkout, the supported runnable companion
 example is:
@@ -150,19 +160,19 @@ python examples/starter_context_flow.py
 
 That command uses the example defaults:
 
-- `docs/` as the input directory
+- `examples/codex_repository_workflow/sample_repo/docs` as the input directory
 - `How should planning docs be treated?` as the starter query
 
 If you want the repo-local no-install path instead, set `PYTHONPATH` explicitly:
 
 ```powershell
 $env:PYTHONPATH = "src"
-python examples/starter_context_flow.py docs "How should planning docs be treated?"
+python examples/starter_context_flow.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 ```bash
 export PYTHONPATH=src
-python examples/starter_context_flow.py docs "How should planning docs be treated?"
+python examples/starter_context_flow.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 For readability, the example defaults logging to `WARNING` unless you explicitly set `CONTEXT_ATLAS_LOG_LEVEL` yourself.
@@ -170,7 +180,7 @@ For readability, the example defaults logging to `WARNING` unless you explicitly
 The example will:
 
 - load validated settings from the environment
-- ingest markdown docs from `docs/`
+- ingest markdown docs from the checked-in sample repository docs tree
 - retrieve candidates with the starter lexical retriever
 - assemble a packet through the starter assembly service
 - render:
