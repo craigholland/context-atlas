@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-23
 owners: [core]
@@ -29,7 +29,7 @@ rewriting the broader governance model.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -129,6 +129,21 @@ Task 5.2 should normalize those portable command surfaces toward:
 - portable executable contract commands no longer imply a Windows-only baseline
 - intentional platform-specific commands remain explicitly justified
 - Story 5 reflects the normalization boundary clearly
+
+## Completed Outcome
+
+Task 5.2 is complete. The executable Verification Contract surface now uses
+portable `python ...` command shapes across the affected owner files, and the
+remaining PowerShell-only `workflow_presence` check in
+`.github/workflows/__ai__.md` was replaced with a Python-based filesystem check
+so the command meaning stays shell-neutral.
+
+Because local PowerShell environments do not always expose a bare `python`
+launcher, `scripts/ai_verify_contracts.py` now rewrites leading portable
+`python ...` commands to the active interpreter path before executing the step.
+That preserves the portable owner-file contract shape without regressing local
+Windows execution, and the regression is covered in
+`tests/test_ai_verify_contracts.py`.
 
 ## Related Artifacts
 
