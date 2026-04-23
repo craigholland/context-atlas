@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, ci, linux, workflows]
 related:
@@ -25,11 +25,13 @@ supersedes: []
 ## Objective
 
 Move the active CI and owner-file verification workflows to a Linux-first
-runner and shell shape where the current scripts already support it.
+runner and shell shape where the current scripts already support it, while
+leaving local executable owner-file command normalization to the later Story 5
+tasks.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -89,6 +91,7 @@ PLANNED
 #### Expected Existing Files Updated
 
 - `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`
+- `docs/Planning/013_Cleanup/Stories/Tasks/task_5_1_active_workflow_runner_alignment.md`
 
 #### Update AI files
 
@@ -112,6 +115,27 @@ PLANNED
 - the active workflows run with a Linux-first baseline
 - the current truth path remains intact after the conversion
 - Story 5 reflects the settled workflow baseline clearly
+
+## Completed Outcome
+
+Task 5.1 is complete.
+
+The active GitHub workflow surface now uses `ubuntu-latest` plus bash-compatible
+command forms across:
+
+- `.github/workflows/ci.yml`
+- `.github/workflows/ai-verify-folder-contracts.yml`
+- `.github/workflows/ai-last-verified.yml`
+
+The `.github/workflows/__ai__.md` owner file now records the intended
+separation between:
+
+- the Linux-first GitHub workflow baseline already in place
+- the still-pending local executable owner-file command normalization that
+  belongs to Task 5.2 and Task 5.3
+
+The repository preflight path remained green after the workflow conversion on
+the Task branch.
 
 ## Related Artifacts
 

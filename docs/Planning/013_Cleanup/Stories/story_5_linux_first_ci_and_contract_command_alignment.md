@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, story, ci, linux, contracts, contributor-trust]
 related:
@@ -59,7 +59,8 @@ initiative across every local workflow in the repo.
 ### Task 2: Executable Contract Command Normalization
 
 - normalize executable owner-file contract commands toward Linux/macOS-friendly
-  forms where the command is intended to be portable
+  forms where the command is intended to be portable now that the active
+  GitHub workflow baseline is already Ubuntu/bash
 - avoid overstating portability where a command is still genuinely
   platform-specific
 - preserve the distinction between executable truth checks and nearby human
@@ -87,6 +88,22 @@ initiative across every local workflow in the repo.
 - [Task 5.1 - Active Workflow Runner Alignment](./Tasks/task_5_1_active_workflow_runner_alignment.md)
 - [Task 5.2 - Executable Contract Command Normalization](./Tasks/task_5_2_executable_contract_command_normalization.md)
 - [Task 5.3 - Script And Contributor-Surface Compatibility](./Tasks/task_5_3_script_and_contributor_surface_compatibility.md)
+
+## Current Progress Snapshot
+
+Task 5.1 is complete. The active GitHub workflow surface now uses an
+Ubuntu/bash baseline across the main CI, owner-file verification, and
+Last-Verified update workflows.
+
+The remaining Windows-first implication in this Story is now concentrated in:
+
+- local executable owner-file verification commands that still use Windows
+  launcher and shell forms
+- contributor-facing docs that still present Windows command examples as the
+  primary truth path
+
+Those remaining seams stay intentionally scoped to Task 5.2 and Task 5.3
+rather than reopening the workflow conversion.
 
 ## Sequencing
 

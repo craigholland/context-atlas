@@ -23,7 +23,8 @@
 - Workflows in this folder should prefer calling repo-owned scripts over duplicating validation logic inline in YAML.
 - Fetch full git history when diff-based owner-file checks need commit range information.
 - These workflows are architecture-adjacent enforcement, not proof of semantic correctness.
-- Keep runner and shell choices aligned with the repository's declared Verification Contract commands.
+- Active GitHub workflows should prefer a Linux-first runner and bash-compatible command shape when the repo-owned scripts already support it.
+- Local Verification Contract commands are a related but separate contributor surface and should be normalized intentionally rather than treated as implicitly identical to CI YAML.
 - The folder-contract workflow should enforce owner-file freshness, not just structural validity.
 - CI should fail when Codex runtime assets drift from their manifest-driven plan, even if the rest of the Python package still compiles and tests cleanly.
 - This owner file should stay focused on stable workflow orchestration boundaries; historical examples of individual checks belong in repo scripts, planning archives, or release notes rather than accumulating here.
@@ -51,6 +52,7 @@
     - `scripts/preflight.py`
     - `scripts/check_codex_materialization.py`
   - invariants:
+    - active CI should treat Ubuntu/bash as the primary runner baseline unless a repo-owned script still requires otherwise
     - workflow path filters should include authoritative Codex materialization inputs and the generated runtime surface so drift checks run when those files move
 - `ai-verify-folder-contracts.yml`:
   - responsibility: validates and exercises local owner-file contracts
@@ -59,6 +61,7 @@
     - `scripts/check_ai_docs.py`
     - `scripts/ai_verify_contracts.py`
   - invariants:
+    - active governance workflows should share the same Ubuntu/bash baseline as main CI unless a repo-owned script proves that assumption wrong
     - should stay aligned with the local preflight freshness and contract-execution path
 - `ai-last-verified.yml`:
   - responsibility: rewrites `Last Verified (CI)` metadata after successful verification
@@ -66,6 +69,7 @@
     - `scripts/update_last_verified.py`
   - invariants:
     - branch targeting here should match the repo's active integration branch
+    - write-back automation should keep using explicit git diff checks and bot identity setup rather than relying on runner-specific defaults
 
 ## Known Gaps / Future-State Notes
 - Workflow coverage is intentionally minimal and focused on the contract system plus bootstrap code checks.
