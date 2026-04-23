@@ -20,20 +20,6 @@ Materialize the Context Atlas `operational_delivery` mode as the Codex-facing ex
 - when an operational outcome contract is emitted
 - when an operational artifact is handed to review
 - when the operational path becomes blocked badly enough to require recovery
-- Mode rules should remain legible without turning into full protocol docs.
-- Entry and exit rules should rely on structured state changes rather than
-  conversational implication.
-- Recovery should stay explicit instead of becoming a vague catch-all for work
-  that simply lacks a clean handoff.
-- Define the detailed shape of every handoff contract.
-- Define full role applicability or mutation authority.
-- Replace the later protocol model.
-- [Context Atlas Mode Model](./Mode-Model.md)
-- [Mode Transition Graph](./Mode-Transition-Graph.md)
-- [Mode Mutation Matrix](./Mode-Mutation-Matrix.md)
-- [Context Atlas Role-Mode Matrix](../Roles/Role-Mode-Matrix.md)
-- [Context Atlas Agentic Development
-  Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
 
 ## Allowed Mutations
 
