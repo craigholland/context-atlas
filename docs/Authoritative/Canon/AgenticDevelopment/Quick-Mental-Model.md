@@ -221,7 +221,9 @@ Use the deeper canon documents for that.
 - if you need this repository's concrete bound roster and runtime target rather
   than more portable canon, continue with the
   [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
-  and then the
+  then the relevant binding docs and
+  [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml),
+  and only then the
   [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Agent Composition Model](./Agent-Composition-Model.md)
