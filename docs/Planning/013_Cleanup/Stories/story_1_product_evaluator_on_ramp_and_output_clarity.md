@@ -72,6 +72,14 @@ use the checked-in sample repository docs under
 `examples/codex_repository_workflow/sample_repo/docs` rather than the repo root
 `docs/` tree as the reproducible first-run corpus.
 
+Task 2 is now settled around one visible product-facing sample too: the bounded
+starter output artifact lives at
+`examples/starter_context_flow_sample_output.md`, and both
+[Getting Started](../../../Guides/getting_started.md) and
+[Context Atlas Tour](../../../Guides/context_atlas_tour.md) point at that same
+canonical starter sample instead of inventing a second packet/trace demo
+surface.
+
 - choose the product-facing place where a first packet/trace-shaped output
   sample should live
 - make the sample concrete enough that readers can understand what Atlas
