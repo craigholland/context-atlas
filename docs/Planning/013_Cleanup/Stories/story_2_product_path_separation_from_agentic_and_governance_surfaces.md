@@ -76,6 +76,20 @@ all readers need the same path.
 
 ### Task 2: Optionality And Dependency Truth
 
+Task 2 now settles the dependency-truth boundary for the Story:
+
+- `.codex/`, `.agents/skills/`, and `__ai__.md` remain important repo layers
+- those layers are contributor/runtime/governance surfaces rather than product
+  prerequisites
+- evaluators following the product route should be pointed first toward
+  guides/examples instead of being told to absorb the full repo operating
+  model
+
+That contract now appears consistently across the root
+[README](../../../../README.md), [docs/README.md](../../../../docs/README.md),
+[docs/Guides/README.md](../../../Guides/README.md), and the project-specific
+[Codex materialization binding](../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md).
+
 - make it explicit where `.codex/`, `.agents/skills/`, and `__ai__.md` are
   downstream or contributor-facing surfaces rather than product prerequisites
 - ensure the shared engine can be evaluated without implying that a reader must

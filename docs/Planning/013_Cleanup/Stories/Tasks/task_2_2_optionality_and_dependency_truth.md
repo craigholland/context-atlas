@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -30,7 +30,7 @@ describing honestly when those surfaces matter.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -111,6 +111,26 @@ PLANNED
   governance or runtime surfaces for contributors.
 - It is easy to over-correct and make product use sound entirely separate from
   the repo when the product still lives here.
+
+## Completed Outcome
+
+Task 2.2 now settles the dependency-truth statement for the repo edge:
+
+- `.codex/`, `.agents/skills/`, and `__ai__.md` remain real repo layers
+- those layers matter for contributors, architecture readers, and runtime
+  inspection
+- they are not prerequisites for evaluating Atlas as a library or following
+  the current product guides
+
+The root [README](../../../../../README.md),
+[docs/Guides/README.md](../../../../../docs/Guides/README.md), and
+[docs/README.md](../../../../../docs/README.md) now state that optionality
+plainly, while the project-specific
+[Codex materialization binding](../../../../../docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+explicitly presents itself as a contributor/runtime layer rather than a hidden
+setup prerequisite. Story 2 can now keep cleaning the routing and cross-link
+surfaces without re-litigating whether product use requires the full repo
+governance and runtime-materialization stack.
 
 ## Exit Criteria
 
