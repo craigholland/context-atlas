@@ -54,6 +54,19 @@ agentic or governance layers do not exist.
 
 ### Task 1: Audience Routing And Boundary Statement
 
+Task 1 now settles the repo-edge audience statement around four distinct
+reader jobs:
+
+- product evaluation and use
+- generated-runtime inspection
+- Canon/Identity architecture reading
+- `__ai__.md` governance participation
+
+That split now appears consistently across the root
+[README](../../../../README.md), [docs/README.md](../../../../docs/README.md),
+and [docs/Guides/README.md](../../../Guides/README.md) without pretending that
+all readers need the same path.
+
 - define the shortest truthful statement of what a product evaluator does and
   does not need to care about
 - route readers toward product, contributor, and agentic/governance surfaces
