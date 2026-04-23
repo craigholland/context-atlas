@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -108,6 +108,14 @@ or hardening-era residue to explain that route.
 
 ### Task 4: Product-Facing Surface Alignment
 
+Task 4 now settles the outward-facing evaluator map too: the
+[README](../../../../README.md) stays the repo map, the guide layer under
+[docs/Guides/](../../../Guides/) owns the current onboarding and walkthrough
+load, the examples under `examples/` act as runnable companions and bounded
+output evidence, and the release index/history under
+[docs/Release/](../../../../docs/Release/README.md) stays clearly secondary to
+current onboarding.
+
 - align the root README, guides, examples, and release-facing docs around the
   same basic evaluator story
 - keep the README as the map and move deeper walkthrough detail to guides or
@@ -161,6 +169,25 @@ or hardening-era residue to explain that route.
 - the Story feature PR receives the QA Architecture Pass and Security Pass
   required for the `Story -> Epic` gate, and any findings are resolved on that
   same feature branch before human merge
+
+## Current Settled Outcome
+
+Story 1 now establishes the cleanup Epic's product-evaluator baseline:
+
+- the real Python `3.12+` starter floor is surfaced early
+- one bounded starter packet/trace sample points at a real checked-in starter
+  corpus
+- the guide layer preserves one explicit order:
+  [Getting Started](../../../Guides/getting_started.md) first,
+  [Context Atlas Tour](../../../Guides/context_atlas_tour.md) second, then
+  workflow-specific guides
+- the product-facing surfaces now align around one map-versus-tour split:
+  README as map, guides as walkthrough, examples as runnable companions, and
+  release docs as shipped-history context
+
+Later Stories in this Epic should preserve that settled evaluator route rather
+than reopening it indirectly while they clean up product-path separation,
+portable canon leaks, generated surfaces, or CI alignment.
 
 ## Related Artifacts
 
