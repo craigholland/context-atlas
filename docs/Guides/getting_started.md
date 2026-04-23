@@ -188,6 +188,36 @@ The example will:
   - packet inspection
   - trace inspection
 
+## Starter Output Preview
+
+If you want to see one bounded successful run before executing it yourself, see
+[starter_context_flow_sample_output.md](../../examples/starter_context_flow_sample_output.md).
+That sample comes from the same starter command and the same checked-in sample
+repository docs described above.
+
+The full sample file includes the rendered context plus the complete packet and
+trace inspection views. The preview below shows the shape of the outcome you
+should expect:
+
+```text
+=== Packet Inspection ===
+Packet
+- query: How should planning docs be treated?
+- selected_candidates: 3
+- compression_applied: no
+
+Budget
+- fixed_reserved_tokens: 512
+- unreserved_tokens: 1536
+- unallocated_tokens: 1572
+
+=== Trace Inspection ===
+Trace
+- included_count: 5
+- deferred_count: 1
+- compression_strategy: extractive
+```
+
 ## Supported Imports
 
 For the starter flow, prefer:
@@ -240,4 +270,6 @@ more guidance.
 The smaller [examples/starter_api_smoke.py](../../examples/starter_api_smoke.py)
 script is still useful for smoke validation, but `starter_context_flow.py` is
 the recommended repository-local companion example. The installable starter
-command remains the smallest package-facing onboarding path.
+command remains the smallest package-facing onboarding path, and the checked-in
+[starter output sample](../../examples/starter_context_flow_sample_output.md)
+shows the bounded packet/trace shape that path should produce.
