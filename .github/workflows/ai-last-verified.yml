@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   update-last-verified:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -21,33 +21,32 @@ jobs:
 
       - name: Set diff range
         id: diff
-        shell: pwsh
+        shell: bash
         run: |
-          if ("${{ github.event_name }}" -eq "push") {
-            $base = "${{ github.event.before }}"
-            $head = "${{ github.sha }}"
-          }
-          else {
-            $head = (git rev-parse HEAD).Trim()
-            try {
-              $base = (git rev-parse "HEAD^").Trim()
-            }
-            catch {
-              $base = $head
-            }
-          }
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            base="${{ github.event.before }}"
+            head="${{ github.sha }}"
+          else
+            head="$(git rev-parse HEAD)"
+            if base_candidate="$(git rev-parse "HEAD^" 2>/dev/null)"; then
+              base="$base_candidate"
+            else
+              base="$head"
+            fi
+          fi
 
-          if ([string]::IsNullOrWhiteSpace($base) -or $base -eq "0000000000000000000000000000000000000000") {
-            try {
-              $base = (git rev-parse "$head^").Trim()
-            }
-            catch {
-              $base = $head
-            }
-          }
+          if [[ -z "$base" || "$base" == "0000000000000000000000000000000000000000" ]]; then
+            if base_candidate="$(git rev-parse "${head}^" 2>/dev/null)"; then
+              base="$base_candidate"
+            else
+              base="$head"
+            fi
+          fi
 
-          "base_sha=$base" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-          "head_sha=$head" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          {
+            echo "base_sha=$base"
+            echo "head_sha=$head"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -55,21 +54,21 @@ jobs:
           python-version: "3.14"
 
       - name: Update Last Verified metadata
-        shell: pwsh
+        shell: bash
         run: |
-          python scripts/update_last_verified.py `
-            --repo-root . `
-            --base "${{ steps.diff.outputs.base_sha }}" `
-            --head "${{ steps.diff.outputs.head_sha }}" `
+          python scripts/update_last_verified.py \
+            --repo-root . \
+            --base "${{ steps.diff.outputs.base_sha }}" \
+            --head "${{ steps.diff.outputs.head_sha }}" \
             --owner-file "__ai__.md"
 
       - name: Commit and push changes
-        shell: pwsh
+        shell: bash
         run: |
-          if (-not (git diff --quiet)) {
+          if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add .
             git commit -m "chore(ai): update Last Verified metadata"
             git push origin HEAD:development
-          }
+          fi

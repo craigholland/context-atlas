@@ -61,6 +61,7 @@
     - `scripts/check_ai_docs.py`
     - `scripts/ai_verify_contracts.py`
   - invariants:
+    - active governance workflows should share the same Ubuntu/bash baseline as main CI unless a repo-owned script proves that assumption wrong
     - should stay aligned with the local preflight freshness and contract-execution path
 - `ai-last-verified.yml`:
   - responsibility: rewrites `Last Verified (CI)` metadata after successful verification
@@ -68,6 +69,7 @@
     - `scripts/update_last_verified.py`
   - invariants:
     - branch targeting here should match the repo's active integration branch
+    - write-back automation should keep using explicit git diff checks and bot identity setup rather than relying on runner-specific defaults
 
 ## Known Gaps / Future-State Notes
 - Workflow coverage is intentionally minimal and focused on the contract system plus bootstrap code checks.
