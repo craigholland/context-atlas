@@ -1,6 +1,6 @@
 # Examples
 
-This directory holds runnable companion artifacts for the supported MVP
+This directory holds runnable companion artifacts for the supported product
 surfaces.
 
 If you are looking for setup or workflow help, start with
@@ -54,7 +54,7 @@ export PYTHONPATH=src
 python examples/starter_api_smoke.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
-The smoke example demonstrates the supported MVP path:
+The smoke example demonstrates the supported starter path:
 
 - load validated settings from the environment
 - ingest markdown docs with `FilesystemDocumentSourceAdapter`
@@ -71,7 +71,7 @@ guides index. If examples start requiring extra hidden setup or deep internal
 imports, the example surface should be corrected before more product-facing
 guidance is added.
 
-The shared hardening story now applies here too:
+The same shared-engine truths apply here too:
 
 - the starter engine uses a shape-aware token-estimation heuristic by default
   rather than one flat chars-per-token assumption
@@ -83,13 +83,13 @@ The shared hardening story now applies here too:
 - packet and trace inspection should also prefer the truthful compression
   vocabulary `compression_strategy` and optional
   `configured_compression_strategy`
-- retrieval index reuse and duplicate-acceptance review stay anchored by the
-  named Story 5 baseline regressions rather than by a second proof-only example
-  family
+- retrieval index reuse and duplicate handling remain regression-backed rather
+  than moving into a separate example-only proof path
 
 ## Codex Repository Workflow Shape
 
-The flagship Codex repository workflow currently uses the same shared starter engine, but with a repository-oriented outer composition boundary:
+The current Codex repository workflow uses the same shared starter engine, but
+with a repository-oriented outer composition boundary:
 
 - start from a repository root
 - point Atlas at the repository's governed docs under `<repo_root>/docs`
@@ -102,7 +102,8 @@ At this stage, the repository workflow should stay explicit about what it is not
 - it is not reading git history or issue trackers automatically
 - it is not introducing a Codex-specific engine path separate from the shared assembly service
 
-The dedicated runnable example for that workflow lands in the Story 3 task slices under `examples/codex_repository_workflow/`.
+The runnable companion for that workflow lives under
+[examples/codex_repository_workflow/](./codex_repository_workflow/).
 
 Run the repository-oriented example directly:
 
@@ -110,8 +111,8 @@ Run the repository-oriented example directly:
 python examples/codex_repository_workflow/run.py --repo-root .
 ```
 
-When reviewing packet and trace output for this workflow, prefer the truthful
-top-level budget and compression fields introduced by the hardening pass:
+When reviewing packet and trace output for this workflow, prefer the current
+truthful top-level budget and compression fields:
 
 - packet: `fixed_reserved_tokens`, `unreserved_tokens`, `unallocated_tokens`
 - trace: `budget_fixed_reserved_tokens`, `budget_unreserved_tokens`,
@@ -135,7 +136,8 @@ This example demonstrates that filesystem documents and structured records can c
 
 For structured records, the example boundary should stay narrow: outer application code fetches rows or payloads using its own database, vector-store, or API client, then hands Atlas either a validated `StructuredRecordInput` or a mapping-shaped record payload for translation into canonical sources. Atlas should not become the query framework in these examples.
 
-The current Story 4 technical-builder scenario builds on that same boundary. It treats the mixed-source workflow as a chatbot-oriented path over:
+The current mixed-source technical-builder workflow builds on that same
+boundary. It treats the mixed-source path as a chatbot-oriented flow over:
 
 - governed filesystem documents
 - already-fetched support-style records such as tickets, product facts, or policy rows

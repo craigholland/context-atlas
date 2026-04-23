@@ -11,7 +11,7 @@ Current supported shape:
 - one supported preset: `chatbot_docs_records`
 - governed guide docs plus an already-fetched record payload file
 - one shared packet and trace path through the same starter engine used by the
-  other MVP workflows
+  other supported workflows
 
 The example is intentionally honest about scope:
 
@@ -82,13 +82,13 @@ Tracked reference artifacts for this path also live here:
 - [config.example.toml](./config.example.toml)
 - [presets/basic.toml](./presets/basic.toml)
 
-Those files are reference surfaces for the current MVP story. They are not
+Those files are reference surfaces for the current product path. They are not
 auto-loaded by Atlas today.
 
-That makes the workflow suitable both for product-facing MVP evaluation and for
-internal review of how the preset wrapper still delegates to the shared engine.
+That makes the workflow suitable for both product evaluation and review of how
+the preset wrapper still delegates to the shared engine.
 
-The low-code wrapper also inherits the same shared-engine hardening truths:
+The low-code wrapper also inherits the same shared-engine truths:
 
 - the starter estimator is shape-aware by default
 - the wrapper does not introduce a second budgeting or compression model

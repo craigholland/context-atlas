@@ -8,6 +8,11 @@ hardening behavior before the next tag is cut, but those changes should not be
 described here as part of a release until a matching release note is actually
 published.
 
+If you want the current setup path or runnable workflow guidance, start with
+[docs/Guides/README.md](../Guides/README.md) and
+[examples/README.md](../../examples/README.md) first. This directory is the
+shipped-history companion to those surfaces, not a replacement for them.
+
 Start with the latest shipped release:
 
 - [Release 0.1.3](./release_0_1_3.md)
