@@ -50,6 +50,10 @@ evidence should come from.
 
 ## Proposed Tasks
 
+Task 1 is now settled around one entry-surface contract: the root README and
+the guide entry path both surface the real Python `3.12+` starter floor early,
+and the root repo map keeps `Codex` mentions brief and outsider-friendly.
+
 ### Task 1: Product Entry Surface And Runtime-Floor Visibility
 
 - keep the root README focused on the product mental model and routing
