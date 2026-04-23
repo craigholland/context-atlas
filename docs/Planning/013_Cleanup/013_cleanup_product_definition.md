@@ -197,6 +197,13 @@ Within this Epic, Story 3 should classify findings explicitly as
 cleanup stays reviewable and does not silently become a broader canon
 admission-policy rewrite.
 
+When Story 3 uses `reroute downstream`, the expected descent path is:
+
+- portable canon first
+- then the project-specific structural profile and binding surfaces
+- only then the current runtime-binding README for the repository's chosen
+  materialization target
+
 ### Story 4: Immediate Generated-Surface Defects
 
 Owns the visible cleanup of runtime-materialization defects in the generated
