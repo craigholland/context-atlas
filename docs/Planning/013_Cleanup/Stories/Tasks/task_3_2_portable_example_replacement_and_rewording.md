@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, canon, examples, wording]
 related:
@@ -30,7 +30,7 @@ project-neutral wording.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -101,6 +101,18 @@ PLANNED
 - clean the AgenticDevelopment canon surfaces first
 - clean the Architecture canon surfaces second
 - reinforce Story language third
+
+## Completed Outcome
+
+Task 3.2 now settles the first actual replacement pass for Story 3:
+
+- the portable AgenticDevelopment entry surfaces no longer depend on Context
+  Atlas-specific framing or runtime-roster-flavored example names to explain
+  the canon
+- the portable Architecture canon no longer uses `.codex/`, `Codex guidance`,
+  or `@codex review` as if they were universal Craig-style defaults
+- Story 3 now explicitly records that Ontology-branded examples remain a
+  separate classified decision rather than a silent spillover from this task
 
 ## Risks And Unknowns
 
