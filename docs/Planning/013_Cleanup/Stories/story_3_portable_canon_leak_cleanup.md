@@ -76,6 +76,17 @@ Task 2 now settles the first concrete replacement pass for the Story:
 
 ### Task 3: Boundary Cross-Link Reinforcement
 
+Task 3 now settles the intended descent path once portable examples are
+generalized:
+
+- Canon entry surfaces may point readers to the current repository's Identity
+  landing surfaces when concrete local detail is actually needed
+- the first downstream stop is the Context Atlas Agentic Development Profile
+  rather than a runtime-binding README
+- the Codex binding README now explicitly declares itself downstream of the
+  profile, manifest, and binding docs instead of acting like an alternate
+  starting point for project structure
+
 - ensure the Canon surfaces point readers toward the correct downstream
   Identity/materialization layer when a project-specific example is still
   needed
@@ -158,6 +169,16 @@ The current expected classification is:
 - Ontology branding/examples: either `generalize in Canon` where the wording is
   only convenient branding, or `keep intentionally` where the text is
   explicitly describing the current project's proving-ground ontology
+
+The current downstream-routing expectation is:
+
+- Canon entry surfaces may link readers toward project-specific binding
+  entrypoints when the portable explanation is no longer enough
+- the Context Atlas Agentic Development Profile is the first project-specific
+  landing surface after canon
+- role, mode, protocol, and manifest bindings refine that profile
+- the Codex binding README is downstream of that profile/binding layer rather
+  than a substitute starting point
 
 ## Planned Task Decomposition
 

@@ -13,6 +13,10 @@ The portable canon ends where binding-layer documents begin. This directory
 defines portable terms and invariants, not an application's chosen role
 roster, workflow gates, capacity values, or environment-specific layouts.
 
+If you need the current repository's concrete application binding or runtime
+target after learning the portable model, descend into the downstream Identity
+layer rather than trying to infer those choices from the canon.
+
 ## Why This Matters Here
 
 Projects that care about governed AI collaboration eventually run into the same
@@ -192,6 +196,28 @@ This directory should not be used for:
 Those concerns belong in downstream binding-layer docs and
 environment-specific materialization guidance, not in the portable canon.
 
+## When To Leave Canon
+
+Stay in this directory while you are still learning portable concepts such as
+roles, parent agents, specialists, skills, modes, protocols, and
+materialization boundaries.
+
+Leave this directory when you need to answer project-specific questions such
+as:
+
+- which role roster a project actually chose
+- which parent agents and specialists currently exist
+- which modes and protocols that project bound
+- which runtime environment the project currently materializes first
+
+In this repository, the normal downstream path is:
+
+1. [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+2. [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
+
+That path keeps the canon portable while still giving readers a clear route to
+the current repository's concrete choices.
+
 ## Neighboring Canon
 
 The most relevant adjacent authoritative surfaces are:
@@ -205,5 +231,9 @@ When deciding where to read next:
 
 - stay in this directory if you are still learning the portable concepts
 - move to a binding layer only when you need concrete application choices
+- in this repository, start that descent with the
+  [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+  before reading the current
+  [Codex binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - move to planning only after the portable canon is clear enough that planning
   docs do not have to redefine it

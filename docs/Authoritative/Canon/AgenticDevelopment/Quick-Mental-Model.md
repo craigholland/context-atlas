@@ -218,6 +218,11 @@ Use the deeper canon documents for that.
 
 - [Agentic Development README](./README.md)
 - [Agentic Development Glossary](./Agentic-Development-Glossary.md)
+- if you need this repository's concrete bound roster and runtime target rather
+  than more portable canon, continue with the
+  [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+  and then the
+  [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Agent Composition Model](./Agent-Composition-Model.md)
 - [Mode Model](./Mode-Model.md)
