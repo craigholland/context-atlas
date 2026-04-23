@@ -91,6 +91,7 @@
     - should distinguish shipped-release review from evolving-branch review when suggesting AI-assisted critique paths
     - any playful review prompt should remain clearly secondary to the serious route guidance and should still ask for substantive criticism
     - its `Status` section should stay aligned with the current shipped release note and should describe the top-level product story without collapsing back into a second system tour
+    - contributor-facing examples for repo-owned Python scripts should prefer portable `python ...` command forms first, with Windows launcher variants treated only as local analogs
 - `pyproject.toml`:
   - responsibility: defines package metadata and repo-local developer tool dependencies
   - invariants:
@@ -101,6 +102,7 @@
   - invariants:
     - should point to the current ontology canon rather than restating a parallel document-class system
     - should keep Canon versus Identity placement guidance explicit for contributors adding authoritative docs
+    - should keep repo-owned Python script examples portable by default and avoid presenting Windows launcher forms as the only first-class truth path
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:
