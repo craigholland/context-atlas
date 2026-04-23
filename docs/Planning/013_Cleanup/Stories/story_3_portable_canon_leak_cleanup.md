@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, story, canon, portability, examples, boundaries]
 related:
@@ -82,6 +82,72 @@ or the full platform-binding architecture for future runtimes.
   harder to learn from
 - keep the final Canon shape useful as a case-study-derived canon rather than
   pretending it emerged from a second project that does not exist yet
+
+## Current Bounded Leak Set
+
+The current Story is intentionally bounded to the clearest review-backed leak
+set rather than every project-local noun that appears anywhere in Canon.
+
+The inventory currently in scope is:
+
+- [AgenticDevelopment README](../../../Authoritative/Canon/AgenticDevelopment/README.md):
+  the `Why This Matters Here` framing still talks directly about Context Atlas
+  as the governed engine, which makes a portable canon entry surface read more
+  project-local than necessary.
+- [Quick Mental Model](../../../Authoritative/Canon/AgenticDevelopment/Quick-Mental-Model.md):
+  the worked example uses runtime-facing names such as `parent-backend` and
+  `specialist-python-implementation`, which are useful but currently read more
+  like one project's materialized roster than a portable primer.
+- [Craig Architecture - Python](../../../Authoritative/Canon/Architecture/Craig-Architecture-Python.md):
+  the repository-shape examples still include `.codex/`, and one repository
+  responsibility bullet still names `Codex guidance` directly rather than
+  describing a generic runtime/governance surface.
+- [Craig Architecture - AI Guidance](../../../Authoritative/Canon/Architecture/Craig-Architecture-AI-Guidance.md):
+  the task-review-gate guidance still names `@codex review` directly instead of
+  describing a portable automated review request pattern.
+- [Documentation Ontology](../../../Authoritative/Canon/Ontology/Documentation-Ontology.md),
+  [Ontology README](../../../Authoritative/Canon/Ontology/README.md), and
+  [base_metadata.md](../../../Authoritative/Canon/Ontology/base_metadata.md):
+  these surfaces still brand the ontology and metadata examples as Context
+  Atlas-specific even where the surrounding guidance is otherwise reusable.
+
+The inventory explicitly excludes:
+
+- canonical Craig-style `__ai__.md` guidance, which is a portable Craig
+  Architecture concept rather than a Context Atlas runtime leak
+- downstream Identity and materialization docs, which belong to later tasks
+  only when Canon needs a clearer place to point concrete project detail
+
+## Classification Model
+
+Story 3 should classify each inventory item into one of three dispositions:
+
+1. `Generalize in Canon`
+   Use when the current example is carrying a project-local or platform-local
+   name but the surrounding concept is still portable. The preferred response
+   is to replace the example with project-neutral wording, a generic runtime
+   placeholder, or a broader case-study-safe example.
+2. `Reroute downstream`
+   Use when the portable canon should keep the concept but a concrete project
+   binding or materialization detail still needs a home. The preferred response
+   is to keep Canon conceptual and point readers toward the appropriate
+   Identity or materialization entry surface.
+3. `Keep intentionally`
+   Use when the local example is still serving a real case-study purpose and
+   its presence does not redefine a project-local runtime detail as universal
+   law. If this disposition is chosen, the example should read as an explicit
+   current proving-ground illustration rather than accidental residue.
+
+The current expected classification is:
+
+- AgenticDevelopment README framing: `generalize in Canon`
+- Quick Mental Model runtime-facing roster example: `generalize in Canon`
+- Craig Architecture - Python `.codex/` and `Codex guidance` examples:
+  `generalize in Canon`
+- Craig Architecture - AI Guidance `@codex review` example: `generalize in Canon`
+- Ontology branding/examples: either `generalize in Canon` where the wording is
+  only convenient branding, or `keep intentionally` where the text is
+  explicitly describing the current project's proving-ground ontology
 
 ## Planned Task Decomposition
 
