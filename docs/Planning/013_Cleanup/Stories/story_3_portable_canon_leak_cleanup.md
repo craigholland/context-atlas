@@ -58,6 +58,16 @@ or the full platform-binding architecture for future runtimes.
 
 ### Task 2: Portable Example Replacement And Rewording
 
+Task 2 now settles the first concrete replacement pass for the Story:
+
+- the portable AgenticDevelopment canon no longer relies on Context
+  Atlas-specific framing or runtime-roster-flavored examples to teach the core
+  model
+- the portable Architecture canon no longer presents `.codex/`, `Codex
+  guidance`, or `@codex review` as if they were universal Craig-style defaults
+- Ontology branding examples remain explicitly classified work, not an implicit
+  spillover from this task
+
 - replace `.codex/`, `@codex review`, Context Atlas runtime IDs, and similar
   local examples where the surface is meant to describe a portable concept
 - prefer project-neutral placeholders, generic platform language, or explicit
