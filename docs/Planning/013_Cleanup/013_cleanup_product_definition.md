@@ -195,8 +195,14 @@ runtime Epic.
 ### Story 4: Immediate Generated-Surface Defects
 
 Owns the visible cleanup of runtime-materialization defects in the generated
-surface, including template residue and stale related links, while stopping
-short of a broader materialization-model redesign.
+surface, including the now-confirmed section-boundary bleed defect in generated
+mode output, while stopping short of a broader materialization-model redesign.
+
+The intended finish state for this Story is:
+
+- one upstream extractor/materializer correction
+- one bounded generated-surface refresh if the drift checker requires it
+- one cheap regression protecting the same defect class
 
 ### Story 5: Linux-First CI And Contract Command Alignment
 
