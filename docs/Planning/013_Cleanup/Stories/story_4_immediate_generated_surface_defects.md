@@ -36,6 +36,12 @@ This Story is intentionally small and defect-oriented. It should stop after the
 visible cleanup and the narrowest cheap regression/guardrail that protects the
 same defect class if such a guardrail is straightforward.
 
+The currently settled defect class is now:
+
+- section-boundary bleed during runtime-materialization extraction, where a
+  generated mode section can absorb later upstream constraints, non-goals, or
+  related-artifact bullets into reader-facing operational sections
+
 ## Inputs
 
 - [013 Cleanup Product Definition](../013_cleanup_product_definition.md)
@@ -82,10 +88,15 @@ The current reproduction is:
 - prefer template or generator fixes over hand-editing generated runtime
   artifacts
 - keep any change faithful to the existing manifest-driven generation model
+- if the active drift checker would otherwise reject the branch, allow the
+  single affected generated file to refresh in the same bounded correction pass
+  rather than deferring that mechanical refresh to a later PR
 
 ### Task 3: Regeneration And Surface Refresh
 
-- regenerate the affected runtime surfaces after the upstream fix
+- confirm the affected runtime surfaces are regenerated after the upstream fix,
+  even if the narrowest truthful implementation already refreshed the single
+  affected file in Task 2
 - verify that generated notices, related links, and content sections are fully
   materialized for a reader
 - ensure the refresh does not introduce new drift against the manifest-driven
@@ -132,6 +143,8 @@ The current reproduction is:
   checks
 - if a new guardrail is added, it stays narrow and directly related to this
   defect class
+- the Story remains explicitly bounded to section-boundary bleed rather than
+  widening into a semantic review of every generated runtime surface
 
 ## Definition Of Done
 

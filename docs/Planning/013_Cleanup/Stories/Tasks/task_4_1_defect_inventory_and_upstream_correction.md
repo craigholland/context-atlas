@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, generated-runtime, defects, generator]
 related:
@@ -29,7 +29,7 @@ template, or related authoritative binding.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -65,6 +65,10 @@ PLANNED
   causes it
 - prefer generator or template fixes over patching generated output by hand
 - keep the fix faithful to the current manifest-driven model
+- because the materialization and drift checks are active on every push, the
+  affected generated runtime file may be refreshed in the same bounded slice as
+  the upstream fix when that refresh is the narrowest way to keep the repo
+  green and truthful
 
 #### Expected New Files
 
@@ -115,6 +119,19 @@ PLANNED
 - the current residue defect class is inventoried and reproduced
 - the fix lands upstream of the generated output
 - Story 4 reflects the bounded defect scope clearly
+
+## Completed Outcome
+
+- The current bounded residue class was confirmed in
+  `.codex/modes/operational-delivery.md` only.
+- The authoritative source was identified as heading-boundary bleed in
+  `scripts/materialize_codex_runtime.py` when extracting the final nested mode
+  transition section.
+- The fix landed upstream in the materializer, and the single affected mode
+  surface was refreshed in the same slice so the manifest-driven drift check
+  remained green on push.
+- Story 4 now records this as a section-boundary extraction defect rather than
+  a broad generated-surface quality audit.
 
 ## Related Artifacts
 
