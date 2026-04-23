@@ -66,7 +66,8 @@ now:
 1. **The Context Atlas product itself**
 
    Use this route if you are here to evaluate Atlas as a library or try the
-   current starter product path.
+   current starter product path. You do not need `.codex/`,
+   `.agents/skills/`, or `__ai__.md` to follow this route.
 
    Start with:
    - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
@@ -166,6 +167,11 @@ Suggested prompts:
 The guides remain the primary user-facing help surface for product evaluation.
 The `examples/` directory contains runnable companion artifacts, sample
 payloads, and proof inputs that support the guides rather than replacing them.
+
+If you are evaluating Atlas as a product or library, you can stop at the guide
+and example surfaces. The generated Codex runtime and the repo's `__ai__.md`
+governance model are contributor-facing layers, not prerequisites for the
+product path.
 
 If you are contributing documentation or authoritative canon, start with
 [CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.

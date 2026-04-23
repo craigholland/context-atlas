@@ -40,6 +40,10 @@ Define Codex as the first concrete runtime materialization target for Context
 Atlas and establish the project-specific binding surface that later Codex
 folder, template, and governance docs should extend.
 
+This is a contributor-facing and architecture-facing binding surface. It is not
+part of the required product path for evaluating or using Context Atlas as a
+library.
+
 ## Scope
 
 This document governs the decision to support Codex first, the upstream
@@ -48,6 +52,10 @@ boundary between Codex-specific artifacts and the portable canon.
 
 It does not redefine the portable concepts themselves, and it does not replace
 later Codex layout, template, or governance docs.
+
+It also does not redefine the product onboarding path. Readers following the
+Atlas product route should start with the guides under `docs/Guides/` instead
+of treating this binding layer as a prerequisite.
 
 ## Binding Decisions
 
@@ -186,6 +194,10 @@ Those concerns remain defined by the Context Atlas RepoManagement binding.
 
 The `.codex/` and `.agents/skills/` assets should be treated as derived
 runtime surfaces downstream of the authoritative Canon and Identity docs.
+
+Those runtime assets are contributor/runtime-materialization surfaces. They are
+important for contributors and architecture readers, but they are not required
+to evaluate Atlas as a library or follow the current product guides.
 
 Contributors may edit those runtime files locally when experimenting,
 inspecting, or testing, but those edits should be assumed overwriteable by
