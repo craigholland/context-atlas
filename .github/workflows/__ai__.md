@@ -23,7 +23,8 @@
 - Workflows in this folder should prefer calling repo-owned scripts over duplicating validation logic inline in YAML.
 - Fetch full git history when diff-based owner-file checks need commit range information.
 - These workflows are architecture-adjacent enforcement, not proof of semantic correctness.
-- Keep runner and shell choices aligned with the repository's declared Verification Contract commands.
+- Active GitHub workflows should prefer a Linux-first runner and bash-compatible command shape when the repo-owned scripts already support it.
+- Local Verification Contract commands are a related but separate contributor surface and should be normalized intentionally rather than treated as implicitly identical to CI YAML.
 - The folder-contract workflow should enforce owner-file freshness, not just structural validity.
 - CI should fail when Codex runtime assets drift from their manifest-driven plan, even if the rest of the Python package still compiles and tests cleanly.
 - This owner file should stay focused on stable workflow orchestration boundaries; historical examples of individual checks belong in repo scripts, planning archives, or release notes rather than accumulating here.
@@ -51,6 +52,7 @@
     - `scripts/preflight.py`
     - `scripts/check_codex_materialization.py`
   - invariants:
+    - active CI should treat Ubuntu/bash as the primary runner baseline unless a repo-owned script still requires otherwise
     - workflow path filters should include authoritative Codex materialization inputs and the generated runtime surface so drift checks run when those files move
 - `ai-verify-folder-contracts.yml`:
   - responsibility: validates and exercises local owner-file contracts
