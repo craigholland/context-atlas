@@ -8,7 +8,18 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-There are currently no active planning surfaces in this directory.
+There is currently one active planning surface in this directory:
+
+- [013 Cleanup Product Definition](./013_Cleanup/013_cleanup_product_definition.md)
+
+This numbered Epic now holds the active cleanup horizon for fast-ROI
+review-response work around:
+
+- product-evaluator onboarding clarity
+- product-path separation from contributor and governance surfaces
+- portable Canon leak cleanup
+- immediate generated-surface defect cleanup
+- Linux-first CI and executable contract-command alignment
 
 The most recent small follow-up tasks have moved under
 [completed](./completed/):
