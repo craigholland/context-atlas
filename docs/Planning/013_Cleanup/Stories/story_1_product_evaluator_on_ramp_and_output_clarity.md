@@ -66,6 +66,12 @@ and the root repo map keeps `Codex` mentions brief and outsider-friendly.
 
 ### Task 2: Concrete Output Sample Surface
 
+Task 2's first slice now settles the bounded sample-source decision: the
+product-facing starter command and repository-local starter companion should
+use the checked-in sample repository docs under
+`examples/codex_repository_workflow/sample_repo/docs` rather than the repo root
+`docs/` tree as the reproducible first-run corpus.
+
 - choose the product-facing place where a first packet/trace-shaped output
   sample should live
 - make the sample concrete enough that readers can understand what Atlas
