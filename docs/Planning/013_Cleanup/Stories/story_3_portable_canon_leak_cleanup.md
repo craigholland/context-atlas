@@ -118,6 +118,37 @@ The inventory explicitly excludes:
 - downstream Identity and materialization docs, which belong to later tasks
   only when Canon needs a clearer place to point concrete project detail
 
+## Classification Model
+
+Story 3 should classify each inventory item into one of three dispositions:
+
+1. `Generalize in Canon`
+   Use when the current example is carrying a project-local or platform-local
+   name but the surrounding concept is still portable. The preferred response
+   is to replace the example with project-neutral wording, a generic runtime
+   placeholder, or a broader case-study-safe example.
+2. `Reroute downstream`
+   Use when the portable canon should keep the concept but a concrete project
+   binding or materialization detail still needs a home. The preferred response
+   is to keep Canon conceptual and point readers toward the appropriate
+   Identity or materialization entry surface.
+3. `Keep intentionally`
+   Use when the local example is still serving a real case-study purpose and
+   its presence does not redefine a project-local runtime detail as universal
+   law. If this disposition is chosen, the example should read as an explicit
+   current proving-ground illustration rather than accidental residue.
+
+The current expected classification is:
+
+- AgenticDevelopment README framing: `generalize in Canon`
+- Quick Mental Model runtime-facing roster example: `generalize in Canon`
+- Craig Architecture - Python `.codex/` and `Codex guidance` examples:
+  `generalize in Canon`
+- Craig Architecture - AI Guidance `@codex review` example: `generalize in Canon`
+- Ontology branding/examples: either `generalize in Canon` where the wording is
+  only convenient branding, or `keep intentionally` where the text is
+  explicitly describing the current project's proving-ground ontology
+
 ## Planned Task Decomposition
 
 - [Task 3.1 - Leak Inventory And Classification](./Tasks/task_3_1_leak_inventory_and_classification.md)

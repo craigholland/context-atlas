@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, canon, inventory, portability]
 related:
@@ -30,7 +30,7 @@ from scratch.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -83,6 +83,23 @@ PLANNED
 
 - inventory first
 - classify and reinforce the Story second
+
+## Completed Outcome
+
+Task 3.1 now settles the bounded leak inventory and classification model for
+Story 3.
+
+The Story now names a concrete leak set across AgenticDevelopment,
+Architecture, and Ontology canon surfaces, and it classifies each finding into
+one of three dispositions:
+
+- `generalize in Canon`
+- `reroute to downstream Identity/materialization`
+- `keep intentionally as a case-study-derived example`
+
+That gives later Story 3 tasks a shared operating model for cleanup without
+re-litigating whether every project-local noun in the broader canon is in scope
+for this Epic.
 
 ## Risks And Unknowns
 
