@@ -46,6 +46,24 @@ same defect class if such a guardrail is straightforward.
 - [Codex Materialization Tests](../../../../tests/test_codex_materialization.py)
 - current generated runtime surface under `.codex/` and `.agents/skills/`
 
+## Current Inventory Snapshot
+
+As of the current Story start, the bounded visible residue class is confirmed in
+the generated mode surface for:
+
+- `.codex/modes/operational-delivery.md`
+
+The current reproduction is:
+
+- the final `#### Exit` block in
+  `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
+  is parsed too broadly by the materializer
+- that parser bleed causes later `## Constraints`, `## Non-Goals`, and
+  `## Related Artifacts` bullets to appear as if they were part of the
+  generated `Exit Conditions` section
+- the issue is therefore an upstream extraction/generation defect rather than a
+  downstream hand-edit or stale generated file
+
 ## Proposed Tasks
 
 ### Task 1: Defect Inventory And Reproduction
@@ -101,6 +119,10 @@ same defect class if such a guardrail is straightforward.
   authoritative source of the defect is not identified first.
 - Even a small guardrail can expand beyond the Epic's intent if it starts
   validating semantic quality rather than this known residue class.
+- The current inventory may reveal additional files of the same defect class
+  once regeneration is rerun, but Story 4 should still stay limited to the same
+  section-boundary bleed behavior rather than widening into a general runtime
+  content audit.
 
 ## Exit Criteria
 
