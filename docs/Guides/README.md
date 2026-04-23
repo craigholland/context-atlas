@@ -5,6 +5,9 @@ This directory is the primary user-facing help surface for Context Atlas.
 If you are evaluating, installing, or wiring Context Atlas into a workflow,
 start here before dropping into `examples/` or deeper architecture docs.
 
+The current starter path requires Python `3.12+` and a local checkout of this
+repository.
+
 If you want the repo-level map first, start with the root
 [README](../../README.md).
 
