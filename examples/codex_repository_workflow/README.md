@@ -1,6 +1,7 @@
 # Codex Repository Workflow Example
 
-This example demonstrates the current flagship repository workflow for Context Atlas.
+This example demonstrates the current repository-oriented workflow for Context
+Atlas.
 
 For product-facing setup guidance, start with
 [docs/Guides/codex_repository_workflow.md](/context-atlas/docs/Guides/codex_repository_workflow.md).
@@ -55,14 +56,14 @@ Read those packet and trace surfaces using the hardened top-level vocabulary:
 - either view: `compression_strategy`
 - optional `configured_compression_strategy`
 
-That makes the workflow suitable both for local experimentation and for internal MVP review.
+That makes the workflow suitable for both local experimentation and review.
 
-The shared hardening story is the same one described in the guides:
+The shared engine behavior here is the same one described in the guides:
 
 - the repository workflow still runs through the shared starter engine
 - the starter estimator is shape-aware by default
-- retrieval reuse and duplicate-acceptance proof remain regression-backed
-  rather than moving into a second demonstration-only artifact family
+- retrieval reuse and duplicate handling remain regression-backed rather than
+  moving into a second demonstration-only artifact family
 
 ## Demo-Focused Trace View
 
