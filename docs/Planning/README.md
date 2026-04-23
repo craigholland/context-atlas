@@ -8,7 +8,52 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-There are currently no active planning surfaces in this directory.
+There are currently five active review-response Epic planning surfaces in or
+under this directory:
+
+- [013 Cleanup Product Definition](./013_Cleanup/013_cleanup_product_definition.md)
+- [Agentic Runtime Model Strengthening Product Definition](./agentic_runtime_model_strengthening_product_definition.md)
+- [Deeper Architectural Tensions Product Definition](./deeper_architectural_tensions_product_definition.md)
+- [Consumer Packaging And Distribution Product Definition](./consumer_packaging_and_distribution_product_definition.md)
+- [AI Governance System Evolution Product Definition](./ai_governance_system_evolution_product_definition.md)
+
+The first horizon has now graduated from a top-level rough draft into a
+numbered Epic/Story stack under [013_Cleanup](./013_Cleanup/). The remaining
+four still live as top-level rough-draft Epic product definitions while their
+Story/Task decomposition is being pressure-tested.
+
+Suggested working sequence for the current review-response Epic set:
+
+1. [013 Cleanup](./013_Cleanup/013_cleanup_product_definition.md)
+   Start here because it carries the highest-ROI trust and clarity fixes:
+   output visibility, user-facing wording cleanup, Canon leak cleanup,
+   generated residue cleanup, and Linux-first CI alignment.
+2. [Agentic Runtime Model Strengthening](./agentic_runtime_model_strengthening_product_definition.md)
+   Follow next because it resolves the runtime-policy and materialization-model
+   questions that are currently most likely to spread drift if left vague:
+   platform-binding placement, runtime policy in Canon, namespacing,
+   specialist coverage, regeneration expectations, and protocol/skill
+   completeness.
+3. [Deeper Architectural Tensions](./deeper_architectural_tensions_product_definition.md)
+   Take on third because it is more decision-heavy and code-shape-specific.
+   It should benefit from the boundary cleanup and agentic/runtime clarifications
+   landing first, while still staying focused on `src/context_atlas/`.
+4. [AI Governance System Evolution](./ai_governance_system_evolution_product_definition.md)
+   Work fourth because it is cross-cutting and easiest to evolve once the
+   sharper runtime and architecture boundaries are already settled enough to
+   govern honestly.
+5. [Consumer Packaging And Distribution](./consumer_packaging_and_distribution_product_definition.md)
+   Work fifth unless external product pressure changes the priority. It depends
+   more than the others on having a clearer view of the stable public surface,
+   which should improve after the earlier four horizons are better defined.
+
+This sequence is a recommendation, not a lockstep rule. It is acceptable to
+pull a later Epic forward if:
+
+- a release or adoption opportunity depends on it
+- a deeper Epic is blocked on information that another Epic can cheaply settle
+- or a bounded low-risk Story clearly fits in parallel without muddying the
+  authority boundaries between the five planning horizons
 
 The most recent small follow-up tasks have moved under
 [completed](./completed/):
@@ -25,6 +70,15 @@ The expected planning stack is:
 - `Story` documents for architectural increments inside an Epic
 - `Task` documents for implementation-ready decomposition of a Story, including a basic `Task Status` field (`PLANNED`, `WORKING`, or `IMPLEMENTED`)
 - task-level PR-plan documents for bounded reviewable slices
+
+When an Epic graduates from rough-draft shaping into active Story
+decomposition, prefer a numbered folder such as `docs/Planning/013_Cleanup/`
+that holds:
+
+- the Epic product-definition doc
+- a `Stories/` directory with the active Story plans
+- and later, a `Stories/Tasks/` directory once the implementation-ready task
+  stack is created
 
 The expected execution loop for a Task is:
 
