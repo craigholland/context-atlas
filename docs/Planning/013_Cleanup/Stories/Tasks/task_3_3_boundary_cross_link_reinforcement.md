@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, canon, identity, cross-links]
 related:
@@ -29,7 +29,7 @@ readers still know where concrete project-binding detail actually lives.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -116,6 +116,24 @@ PLANNED
   layer when needed
 - Identity entry surfaces are strong enough to receive that redirected detail
 - Story 3 reflects the final boundary model clearly
+
+## Completed Outcome
+
+Task 3.3 now settles the Canon-to-Identity descent path for the bounded Story 3
+cleanup surface:
+
+- the portable AgenticDevelopment README and Quick Mental Model now tell
+  readers when to leave canon and where the current repository's concrete
+  binding path begins
+- the Context Atlas Agentic Development Profile now acts as the first
+  repository-specific landing surface after canon, rather than as one more
+  local document a reader has to discover ad hoc
+- the Codex binding README now declares itself downstream of the profile,
+  manifest, and binding docs, so readers do not mistake it for the first
+  project-specific explanation surface
+
+This keeps Story 3 bounded to boundary repair rather than a broader runtime
+placement redesign.
 
 ## Related Artifacts
 
