@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, commands, contracts, portability]
 related:
@@ -106,6 +106,23 @@ PLANNED
   treated as syntax cleanup only.
 - The task can drift into prose-correctness redesign if contributors start
   revisiting owner-file narrative rather than executable commands.
+
+## Current Inventory Snapshot
+
+The remaining Windows-first executable contract residue is now concentrated in
+three narrow forms:
+
+- `py -3` as the default Python launcher in owner-file Verification Contracts
+- PowerShell-only null redirection such as `> $null`
+- one remaining PowerShell-specific `workflow_presence` snippet in
+  `.github/workflows/__ai__.md`
+
+Task 5.2 should normalize those portable command surfaces toward:
+
+- `python` as the first-class launcher
+- shell-neutral command lines where practical
+- Python-based checks instead of PowerShell-only inline filesystem logic when a
+  command must run under both local PowerShell and Linux/bash CI
 
 ## Exit Criteria
 

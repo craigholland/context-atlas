@@ -32,6 +32,7 @@
 - Small private dataclasses are acceptable here when they are local rule/config carriers for the script itself and not part of the package runtime surface.
 - User-facing script help and failure messages should prefer portable command guidance first and may mention Windows-specific launcher variants as secondary notes when helpful.
 - Repo-owned Codex runtime materialization should stay manifest-driven and deterministic here rather than being hidden in ad hoc prompt steps or one-off shell refresh commands.
+- Owner-file Verification Contract commands that target these scripts should prefer `python` plus shell-neutral forms first; `py -3`, `> $null`, and other PowerShell-only affordances should be treated as secondary local analogs rather than the default contract shape.
 
 ## Allowed Dependencies
 - may depend on:
@@ -78,7 +79,7 @@
   - responsibility: runs local Verification Contract steps from owner files
   - invariants:
     - must prefer PowerShell on Windows so repository contracts stay consistent with local desktop execution
-    - must keep Linux/macOS analogs visible whenever owner-file Verification Contract steps rely on Windows-specific launcher or environment syntax
+    - should encourage shell-neutral owner-file commands first so local PowerShell execution and Linux/bash CI can share one executable truth path where practical
 - `update_last_verified.py`:
   - responsibility: updates `Last Verified (CI)` metadata after successful verification
   - footguns:
