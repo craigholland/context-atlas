@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, governance]
 related:
@@ -185,6 +185,9 @@ When Codex-binding assets change, reviewers should check:
 - after meaningful upstream changes, regenerate generator-owned surfaces and run
   `scripts/check_codex_materialization.py` before asking review to trust the
   updated runtime surface
+- when contributor-facing docs show the regeneration or drift-check path, they
+  should prefer portable `python ...` command examples first and treat Windows
+  launcher variants only as local analogs
 
 ## Constraints
 

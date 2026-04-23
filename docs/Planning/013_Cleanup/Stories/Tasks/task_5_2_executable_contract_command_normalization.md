@@ -1,0 +1,152 @@
+---
+id: context-atlas-013-cleanup-task-5-2-executable-contract-command-normalization
+title: Task 5.2 - Executable Contract Command Normalization PR Plan
+summary: Defines the PR sequence for normalizing executable owner-file verification commands toward Linux/macOS-friendly forms where portability is intended.
+doc_class: planning
+template_refs:
+  metadata: base_metadata@1.0.0
+  content: planning_content@1.0.0
+status: implemented
+created: 2026-04-22
+last_reviewed: 2026-04-23
+owners: [core]
+tags: [cleanup, task, pr-plan, commands, contracts, portability]
+related:
+  - ../story_5_linux_first_ci_and_contract_command_alignment.md
+  - ../../013_cleanup_product_definition.md
+  - ../../../../../__ai__.md
+  - ../../../../../scripts/ai_verify_contracts.py
+supersedes: []
+---
+
+# Task 5.2 - Executable Contract Command Normalization PR Plan
+
+## Objective
+
+Normalize executable owner-file verification commands toward Linux/macOS-
+friendly forms where the commands are intended to be portable, without
+rewriting the broader governance model.
+
+## Task Status
+
+IMPLEMENTED
+
+## Inputs
+
+- [Story 5 - Linux-First CI And Contract Command Alignment](../story_5_linux_first_ci_and_contract_command_alignment.md)
+- executable verification-contract blocks in current owner files
+- current contract-runner behavior in `scripts/ai_verify_contracts.py`
+
+## Proposed Work
+
+### PR - A: Contract Command Inventory And Normalization Rules
+
+- inventory the executable contract commands that still imply Windows-first
+  operation
+- define the smallest normalization rule set for portable commands
+- keep platform-specific commands explicit where they truly must remain local
+
+#### Expected New Files
+
+- none expected
+
+#### Expected Existing Files Updated
+
+- `__ai__.md`
+- touched owner files that carry executable contract commands
+
+#### Update AI files
+
+- `.`
+
+### PR - B: Owner-File Command Normalization
+
+- update the affected owner-file commands toward Linux/macOS-friendly forms
+- preserve the distinction between executable truth checks and nearby prose
+- keep Windows analog guidance only where it still adds local operator value
+
+#### Expected New Files
+
+- none expected
+
+#### Expected Existing Files Updated
+
+- touched `__ai__.md` files across the repo
+
+#### Update AI files
+
+- affected owner-file directories
+
+### PR - C: Story Reinforcement
+
+- align Story 5 with the actual contract-command normalization boundary
+- document any remaining platform-specific commands as intentional exceptions
+
+#### Expected New Files
+
+- none expected
+
+#### Expected Existing Files Updated
+
+- `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`
+
+#### Update AI files
+
+- `.`
+
+## Sequencing
+
+- inventory and define normalization rules first
+- normalize the touched owner-file commands second
+- reinforce Story language third
+
+## Risks And Unknowns
+
+- Command translation can silently change the meaning of a truth check if it is
+  treated as syntax cleanup only.
+- The task can drift into prose-correctness redesign if contributors start
+  revisiting owner-file narrative rather than executable commands.
+
+## Current Inventory Snapshot
+
+The remaining Windows-first executable contract residue is now concentrated in
+three narrow forms:
+
+- `py -3` as the default Python launcher in owner-file Verification Contracts
+- PowerShell-only null redirection such as `> $null`
+- one remaining PowerShell-specific `workflow_presence` snippet in
+  `.github/workflows/__ai__.md`
+
+Task 5.2 should normalize those portable command surfaces toward:
+
+- `python` as the first-class launcher
+- shell-neutral command lines where practical
+- Python-based checks instead of PowerShell-only inline filesystem logic when a
+  command must run under both local PowerShell and Linux/bash CI
+
+## Exit Criteria
+
+- portable executable contract commands no longer imply a Windows-only baseline
+- intentional platform-specific commands remain explicitly justified
+- Story 5 reflects the normalization boundary clearly
+
+## Completed Outcome
+
+Task 5.2 is complete. The executable Verification Contract surface now uses
+portable `python ...` command shapes across the affected owner files, and the
+remaining PowerShell-only `workflow_presence` check in
+`.github/workflows/__ai__.md` was replaced with a Python-based filesystem check
+so the command meaning stays shell-neutral.
+
+Because local PowerShell environments do not always expose a bare `python`
+launcher, `scripts/ai_verify_contracts.py` now rewrites leading portable
+`python ...` commands to the active interpreter path before executing the step.
+That preserves the portable owner-file contract shape without regressing local
+Windows execution, and the regression is covered in
+`tests/test_ai_verify_contracts.py`.
+
+## Related Artifacts
+
+- [Story 5 - Linux-First CI And Contract Command Alignment](../story_5_linux_first_ci_and_contract_command_alignment.md)
+- [Root Owner File](../../../../../__ai__.md)
+

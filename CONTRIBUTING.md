@@ -98,6 +98,13 @@ If you show PowerShell-specific launcher or environment syntax, add a nearby
 Bash/Linux/macOS analog so the docs do not force contributors into Windows-only
 workflows.
 
+For repo-owned Python scripts such as `scripts/preflight.py`,
+`scripts/materialize_codex_runtime.py`, or
+`scripts/check_codex_materialization.py`, prefer `python ...` as the primary
+documented command shape. Windows launcher variants such as `py -3` may still
+be shown as local analogs when they add operator value, but they should not be
+the repo's first-class truth-path examples.
+
 ## Common Pitfalls
 
 - Do not put Context Atlas-specific choices into `docs/Authoritative/Canon/`.
@@ -106,6 +113,8 @@ workflows.
 - Do not leave stale metadata after changing a document's meaning.
 - Do not create a new document class ad hoc when an existing class already fits.
 - Do not publish Windows-only command guidance without a Linux/macOS analog when shell syntax differs.
+- Do not present `py -3` as the primary repo-wide command shape for repo-owned
+  Python scripts when a portable `python ...` example would work.
 
 ## If You Are Unsure
 

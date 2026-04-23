@@ -13,8 +13,10 @@ not as an untrusted general-purpose workflow engine.
 import argparse
 import os
 import re
+import shlex
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 DEFAULT_OWNER_FILENAME = "__ai__.md"
@@ -173,11 +175,10 @@ def _shell_command_prefix() -> list[str]:
     """
     Choose a shell runner.
 
-    Context Atlas local owner files may keep Windows-friendly launcher and
-    environment syntax in their executable Verification Contract steps, while
-    documenting Linux/macOS analogs in adjacent comments. Prefer PowerShell on
-    Windows so local contract execution stays consistent with desktop use, and
-    prefer bash on non-Windows platforms.
+    Context Atlas owner files now prefer portable `python ...` command shapes in
+    their executable Verification Contract steps. Prefer PowerShell on Windows
+    so local contract execution stays consistent with desktop use, and prefer
+    bash on non-Windows platforms.
     """
     if os.name == "nt":
         if shutil.which("pwsh"):
@@ -198,6 +199,47 @@ def _shell_command_prefix() -> list[str]:
     )
 
 
+def _shell_kind(shell_prefix: list[str]) -> str:
+    if shell_prefix and shell_prefix[0] == "bash":
+        return "bash"
+    return "powershell"
+
+
+def _quote_executable_for_shell(executable: str, shell_kind: str) -> str:
+    if shell_kind == "bash":
+        return shlex.quote(executable)
+    escaped = executable.replace("`", "``").replace('"', '`"')
+    return f'"{escaped}"'
+
+
+def _normalize_portable_python_commands(
+    shell_cmd: str,
+    *,
+    shell_prefix: list[str],
+    python_executable: str | None = None,
+) -> str:
+    """
+    Rewrite leading `python ...` lines to the current interpreter path.
+
+    This keeps owner-file contracts shell-neutral while still allowing local
+    PowerShell execution on Windows machines where `python` is not a guaranteed
+    launcher on PATH.
+    """
+
+    shell_kind = _shell_kind(shell_prefix)
+    executable = _quote_executable_for_shell(
+        python_executable or sys.executable,
+        shell_kind,
+    )
+    launcher = f"& {executable}" if shell_kind == "powershell" else executable
+
+    return re.sub(
+        r"(?m)^(?P<indent>\s*)python(?P<rest>(?:\s|$).*)$",
+        lambda match: f"{match.group('indent')}{launcher}{match.group('rest')}",
+        shell_cmd,
+    )
+
+
 def _verify_owner_file(repo_root: Path, owner_rel: Path) -> list[tuple[str, int]]:
     owner_abs = repo_root / owner_rel
     steps = _extract_verification_steps(owner_abs)
@@ -213,7 +255,11 @@ def _verify_owner_file(repo_root: Path, owner_rel: Path) -> list[tuple[str, int]
 
     for step_name, shell_cmd in steps:
         print(f"\n=== [ai_verify_contracts] step: {step_name} ===\n")
-        result = _run(shell_prefix + [shell_cmd], cwd=repo_root)
+        normalized_shell_cmd = _normalize_portable_python_commands(
+            shell_cmd,
+            shell_prefix=shell_prefix,
+        )
+        result = _run(shell_prefix + [normalized_shell_cmd], cwd=repo_root)
         if result.stdout:
             print(result.stdout, end="")
         if result.stderr:
