@@ -9,6 +9,11 @@ which boundaries are intentional, and where to go for a deeper workflow guide.
 If you want installation and first-run setup first, start with
 [Getting Started](./getting_started.md).
 
+Treat this guide as the second step in the product path, not as a replacement
+for the starter setup. It assumes you either already know the first-run
+prerequisites or can return to [Getting Started](./getting_started.md) when you
+are ready to run Atlas yourself.
+
 ## Mental Model
 
 Context Atlas is a context-governance and context-assembly engine.
@@ -95,7 +100,7 @@ Context Atlas currently supports three real workflow surfaces.
 
 ### Starter Path
 
-The supported MVP starter path is the smallest package-facing surface:
+The supported starter path is the smallest package-facing surface:
 
 - install or check out the repo
 - ingest a governed docs directory
@@ -109,7 +114,7 @@ The current starter entry surfaces are:
 
 Treat that starter route as the baseline onboarding path. The workflow guides
 below build on the same shared engine, but they are not the place to learn the
-first-run setup story.
+first-run setup story from scratch.
 
 ### Codex Repository Workflow
 

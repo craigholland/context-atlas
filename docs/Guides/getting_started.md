@@ -13,6 +13,10 @@ If you want the broader user-help index first, start with
 If you want the broader system walkthrough before running the starter path,
 start with [Context Atlas Tour](./context_atlas_tour.md).
 
+If this is your first pass through the product docs, stay on this guide until
+you have produced one packet and one trace. The tour and workflow-specific
+guides are easier to use after that shared starter baseline is concrete.
+
 ## What You Will Do
 
 You will:
@@ -276,3 +280,13 @@ the recommended repository-local companion example. The installable starter
 command remains the smallest package-facing onboarding path, and the checked-in
 [starter output sample](../../examples/starter_context_flow_sample_output.md)
 shows the bounded packet/trace shape that path should produce.
+
+## Where To Go Next
+
+- if you want the broader system walkthrough: [Context Atlas Tour](./context_atlas_tour.md)
+- if you want the repo-aware workflow after the starter baseline:
+  [Codex Repository Workflow](./codex_repository_workflow.md)
+- if you want mixed-source docs plus records after the starter baseline:
+  [Documents Plus Database Workflow](./docs_database_workflow.md)
+- if you want the preset-driven wrapper after the starter baseline:
+  [Low-Code Workflow](./low_code_workflow.md)

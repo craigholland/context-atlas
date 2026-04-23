@@ -13,12 +13,12 @@ If you want the repo-level map first, start with the root
 
 Treat this directory as one layered product path:
 
-- start with [Getting Started](./getting_started.md) for the shared first-run
-  baseline
-- use [Context Atlas Tour](./context_atlas_tour.md) when you want the system
-  mental model and current workflow shapes
-- drop into the workflow-specific guides only after the starter path makes
-  sense
+1. start with [Getting Started](./getting_started.md) for the shared first-run
+   baseline
+2. use [Context Atlas Tour](./context_atlas_tour.md) when you want the system
+   mental model and current workflow shapes after that baseline is clear
+3. drop into the workflow-specific guides only when you already know how the
+   shared starter path behaves
 
 ## Start Here
 
@@ -29,6 +29,9 @@ Treat this directory as one layered product path:
     boundaries, packet/trace inspection, and proof surfaces
 
 ## Workflow Guides
+
+These guides are workflow-specific variations on the same shared engine. They
+are not the recommended place to learn the first-run setup story from scratch.
 
 - [Codex Repository Workflow](./codex_repository_workflow.md)
   - repo-aware workflow over governed repository docs
