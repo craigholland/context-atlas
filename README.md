@@ -63,6 +63,11 @@ this repository denser than a typical library repo. You do not need to absorb
 all of them at once. Pick the path that matches what you care about most right
 now:
 
+This file is the repo map. If you want the documentation-only route splitter,
+use [docs/README.md](/context-atlas/docs/README.md). If you already know you
+want the product guide hub, use
+[docs/Guides/README.md](/context-atlas/docs/Guides/README.md).
+
 1. **The Context Atlas product itself**
 
    Use this route if you are here to evaluate Atlas as a library or try the
