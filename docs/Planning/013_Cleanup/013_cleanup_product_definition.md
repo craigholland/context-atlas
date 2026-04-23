@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [planning, epic, cleanup, documentation, onboarding, canon, ci, review-response]
 related:
@@ -294,6 +294,6 @@ This Epic should ultimately produce:
 - Should the generated-surface defect story add only the narrowest regression
   that protects against the current residue class, or should that wait for the
   later runtime-model Epic if even the narrow fix starts to broaden?
-- Should Linux-first CI alignment stop at the active workflows and executable
-  contract commands, or should nearby contributor docs also be updated in the
-  same Story when those docs still imply Windows-first operation?
+- The Linux-first contributor-alignment question is now resolved for this Epic:
+  nearby contributor docs should be updated in the same Story when they still
+  imply a Windows-first truth path for repo-owned scripts.

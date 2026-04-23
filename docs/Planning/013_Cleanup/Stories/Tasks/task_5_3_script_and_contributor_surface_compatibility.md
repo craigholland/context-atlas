@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, scripts, contributors, validation]
 related:
@@ -30,7 +30,7 @@ integrated truth path end to end.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -117,6 +117,19 @@ PLANNED
 - contributor-facing docs no longer imply Windows as the primary truth path
 - Story 5 and the Epic describe the final bounded CI/command alignment
   honestly
+
+## Completed Outcome
+
+Task 5.3 is complete. The remaining contributor-facing surfaces now present
+portable `python ...` commands as the primary repo-wide truth path for
+repo-owned scripts, while still allowing Windows launcher variants to remain
+secondary local analogs where they help operators.
+
+No further support-script change was needed in this Task because the necessary
+contract-runner compatibility adjustment already landed during Task 5.2 in
+`scripts/ai_verify_contracts.py`. Task 5.3 therefore focused on contributor
+docs plus final Story/Epic closeout reinforcement, then revalidated the full
+truth path through repository preflight.
 
 ## Related Artifacts
 
