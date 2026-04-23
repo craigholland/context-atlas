@@ -4,6 +4,9 @@ This guide walks through the current MVP starter path for Context Atlas.
 
 The goal is to get from a local checkout to a first assembled packet using the supported starter surface, not to showcase every future workflow.
 
+The current starter path requires Python `3.12+` and a local checkout of this
+repository.
+
 If you want the broader user-help index first, start with
 [Guides/README.md](./README.md).
 
