@@ -47,3 +47,10 @@ The `examples/` directory now holds runnable companion artifacts:
 
 Use Guides as the authoritative setup and workflow-help surface. Use
 `examples/` when you want the runnable companion artifact for a guide.
+
+## Need A Different Route?
+
+- Repo map: [README.md](../../README.md)
+- Docs route splitter: [docs/README.md](../README.md)
+- Portable agentic canon: [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
+- Project-specific Codex binding: [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)

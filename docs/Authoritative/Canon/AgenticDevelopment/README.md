@@ -41,6 +41,10 @@ If you want the shortest "Agentic Entities for Dummies" version first, read
 [Quick-Mental-Model.md](./Quick-Mental-Model.md) before the glossary and the
 deeper model docs.
 
+If you are here by accident while trying to use Atlas as a library, return to
+the product route under [docs/Guides/README.md](../../../Guides/README.md)
+instead of treating this canon as required onboarding.
+
 ## What Lives Here
 
 This surface should define portable concepts and invariant rules such as:
@@ -207,3 +211,14 @@ When deciding where to read next:
 - move to a binding layer only when you need concrete application choices
 - move to planning only after the portable canon is clear enough that planning
   docs do not have to redefine it
+
+## Downstream Routes
+
+When you are ready to leave the portable canon:
+
+- for the project-specific agentic binding choices, continue to
+  [docs/Authoritative/Identity/AgenticDevelopment/](../../Identity/AgenticDevelopment/)
+- for the current Codex materialization binding, continue to
+  [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- for the Atlas product route instead of the agentic architecture route,
+  return to [docs/Guides/README.md](../../../Guides/README.md)
