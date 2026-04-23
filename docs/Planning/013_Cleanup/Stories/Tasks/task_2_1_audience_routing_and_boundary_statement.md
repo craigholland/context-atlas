@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -29,7 +29,7 @@ surface, or understand its governance model.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -108,6 +108,23 @@ PLANNED
   surfaces readers will actually open.
 - Over-optimizing for product evaluators can make contributor surfaces harder to
   discover if the boundary is not balanced carefully.
+
+## Completed Outcome
+
+Task 2.1 now settles the repo-edge audience statement around four distinct
+reader jobs:
+
+- evaluating or using Context Atlas as a product/library
+- inspecting the derived agentic runtime surface
+- reading the Canon/Identity architecture and binding model
+- understanding the repo's `__ai__.md` governance system
+
+The root [README](../../../../../README.md) now labels those routes more
+plainly, while [docs/README.md](../../../../../docs/README.md) and
+[docs/Guides/README.md](../../../../../docs/Guides/README.md) inherit the same
+split instead of competing as blended "start here" surfaces. The route split
+is now explicit enough that later Story 2 tasks can focus on optionality and
+containment rather than re-litigating who the repo edge is for.
 
 ## Exit Criteria
 
