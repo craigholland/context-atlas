@@ -76,7 +76,6 @@ project_name/
   tests/
   examples/
   scripts/
-  .codex/
   .github/
   pyproject.toml
   .gitignore
@@ -111,7 +110,6 @@ project_name/
       Dockerfile
       pyproject.toml
   scripts/
-  .codex/
   .github/
   .gitignore
   docker-compose.yml
@@ -119,7 +117,7 @@ project_name/
 
 In either model:
 
-- the repository root owns shared project concerns such as documentation, scripts, CI, Codex guidance, and packaging metadata appropriate to the repository shape
+- the repository root owns shared project concerns such as documentation, scripts, CI, packaging metadata, and any repository-level AI-collaboration or runtime-binding guidance appropriate to the repository shape
 - the layer packages live inside a `src/` tree rather than directly at the repository root
 - the package structure should make layer boundaries and dependency direction easier to see
 

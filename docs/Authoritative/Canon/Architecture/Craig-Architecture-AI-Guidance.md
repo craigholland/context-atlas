@@ -450,12 +450,17 @@ Relevant template anchors:
 
 #### Task Feature PR Missing A Review Gate
 
-If a Task is being executed through multiple PR slices but there is no task-level feature PR, no `@codex review` request, or no pause before the next Task starts, contributors can lose the intended review boundary and drift into unsupervised multi-task accumulation.
+If a Task is being executed through multiple PR slices but there is no
+task-level feature PR, no request for the repository's standard automated
+review pass, or no pause before the next Task starts, contributors can lose
+the intended review boundary and drift into unsupervised multi-task
+accumulation.
 
 Possible action:
 
 - open or update the task-level feature PR
-- request `@codex review` once the Task's planned slices are complete
+- request the repository's standard automated review pass once the Task's
+  planned slices are complete
 - resolve review findings on the same feature branch before recommending human merge
 - avoid moving to the next Task until the current Task has been reviewed and handed off, unless explicit parallelization was chosen
 
