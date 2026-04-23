@@ -99,13 +99,15 @@ Windows-first launcher or shell forms.
 
 The remaining Linux-first alignment work in this Story is now concentrated in:
 
-- support-script and contributor-facing docs that still imply Windows as the
-  primary truth path
-- final Story-level validation and wording reinforcement after that contributor
-  path is cleaned up
+- final Story-level review and merge once the now-complete task stack is
+  approved
 
-Those remaining seams stay intentionally scoped to Task 5.3 rather than
-reopening the workflow conversion or command normalization work.
+All three scoped Tasks are now complete on this Story branch:
+
+- Task 5.1 settled the active Ubuntu/bash GitHub workflow baseline
+- Task 5.2 settled the portable executable Verification Contract command shape
+- Task 5.3 aligned contributor-facing docs and confirmed the integrated truth
+  path still passes
 
 ## Sequencing
 
@@ -131,6 +133,18 @@ reopening the workflow conversion or command normalization work.
   only first-class contributor environment where portability is intended
 - the repo's main truth path still passes through preflight and CI after the
   change
+
+## Story Status Snapshot
+
+Story 5 implementation is complete on this branch and is now at the
+Story-level review gate. The bounded Linux-first alignment outcome is:
+
+- active GitHub workflows run on `ubuntu-latest` with bash-compatible commands
+- executable owner-file Verification Contracts prefer portable `python ...`
+  forms while the contract runner resolves that shape safely in local
+  PowerShell
+- contributor-facing repo docs now present those portable commands as the
+  primary truth-path examples
 
 ## Definition Of Done
 
