@@ -89,6 +89,13 @@ evidence should come from.
 - ensure the product path stays coherent even if the repo continues to evolve
   its internal architecture and contributor tooling
 
+## Planned Task Decomposition
+
+- [Task 1.1 - Product Entry Surface And Runtime-Floor Visibility](./Tasks/task_1_1_product_entry_surface_and_runtime_floor_visibility.md)
+- [Task 1.2 - Concrete Output Sample Surface](./Tasks/task_1_2_concrete_output_sample_surface.md)
+- [Task 1.3 - Guide Path Cleanup And Wording Normalization](./Tasks/task_1_3_guide_path_cleanup_and_wording_normalization.md)
+- [Task 1.4 - Product-Facing Surface Alignment](./Tasks/task_1_4_product_facing_surface_alignment.md)
+
 ## Sequencing
 
 - establish the product entry shape and runtime-floor visibility first
@@ -136,4 +143,4 @@ evidence should come from.
 - [Getting Started Guide](../../../Guides/getting_started.md)
 - [Context Atlas Tour](../../../Guides/context_atlas_tour.md)
 - [Guides README](../../../Guides/README.md)
-
+- [Task docs](./Tasks/)

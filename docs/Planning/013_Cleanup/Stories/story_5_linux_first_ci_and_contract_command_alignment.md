@@ -82,6 +82,12 @@ initiative across every local workflow in the repo.
   new baseline
 - leave later governance-evolution work to the dedicated AI governance Epic
 
+## Planned Task Decomposition
+
+- [Task 5.1 - Active Workflow Runner Alignment](./Tasks/task_5_1_active_workflow_runner_alignment.md)
+- [Task 5.2 - Executable Contract Command Normalization](./Tasks/task_5_2_executable_contract_command_normalization.md)
+- [Task 5.3 - Script And Contributor-Surface Compatibility](./Tasks/task_5_3_script_and_contributor_surface_compatibility.md)
+
 ## Sequencing
 
 - align the active CI runners and shell shape first
@@ -127,4 +133,4 @@ initiative across every local workflow in the repo.
 - [AI Contract Verification Workflow](../../../../.github/workflows/ai-verify-folder-contracts.yml)
 - [Last Verified Update Workflow](../../../../.github/workflows/ai-last-verified.yml)
 - [Preflight Script](../../../../scripts/preflight.py)
-
+- [Task docs](./Tasks/)

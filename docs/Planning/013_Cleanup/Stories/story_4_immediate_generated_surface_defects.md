@@ -81,6 +81,11 @@ same defect class if such a guardrail is straightforward.
 - avoid broadening this Story into a whole new semantic validator for generated
   content
 
+## Planned Task Decomposition
+
+- [Task 4.1 - Defect Inventory And Upstream Correction](./Tasks/task_4_1_defect_inventory_and_upstream_correction.md)
+- [Task 4.2 - Regeneration, Surface Refresh, And Guardrail](./Tasks/task_4_2_regeneration_surface_refresh_and_guardrail.md)
+
 ## Sequencing
 
 - inventory and reproduce the defect first
@@ -125,4 +130,4 @@ same defect class if such a guardrail is straightforward.
 - [Codex Runtime Materializer](../../../../scripts/materialize_codex_runtime.py)
 - [Codex Drift Checker](../../../../scripts/check_codex_materialization.py)
 - [Codex Materialization Tests](../../../../tests/test_codex_materialization.py)
-
+- [Task docs](./Tasks/)

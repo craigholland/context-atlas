@@ -268,6 +268,8 @@ This Epic should ultimately produce:
 
 - a numbered Epic stack under `docs/Planning/013_Cleanup/`
 - five Story docs under `docs/Planning/013_Cleanup/Stories/`
+- implementation-ready Task PR plans under
+  `docs/Planning/013_Cleanup/Stories/Tasks/`
 - a cleaner product-evaluator route through `README.md` and guide surfaces
 - at least one visible packet/trace output sample in the product-facing guide
   path
@@ -300,4 +302,3 @@ This Epic should ultimately produce:
 - Should Linux-first CI alignment stop at the active workflows and executable
   contract commands, or should nearby contributor docs also be updated in the
   same Story when those docs still imply Windows-first operation?
-

@@ -83,6 +83,13 @@ or the full platform-binding architecture for future runtimes.
 - keep the final Canon shape useful as a case-study-derived canon rather than
   pretending it emerged from a second project that does not exist yet
 
+## Planned Task Decomposition
+
+- [Task 3.1 - Leak Inventory And Classification](./Tasks/task_3_1_leak_inventory_and_classification.md)
+- [Task 3.2 - Portable Example Replacement And Rewording](./Tasks/task_3_2_portable_example_replacement_and_rewording.md)
+- [Task 3.3 - Boundary Cross-Link Reinforcement](./Tasks/task_3_3_boundary_cross_link_reinforcement.md)
+- [Task 3.4 - Canon Readability And Reuse Check](./Tasks/task_3_4_canon_readability_and_reuse_check.md)
+
 ## Sequencing
 
 - inventory and classify the leaks first
@@ -126,4 +133,4 @@ or the full platform-binding architecture for future runtimes.
 - [AgenticDevelopment Canon README](../../../Authoritative/Canon/AgenticDevelopment/README.md)
 - [Craig Architecture - Python](../../../Authoritative/Canon/Architecture/Craig-Architecture-Python.md)
 - [Craig Architecture - AI Guidance](../../../Authoritative/Canon/Architecture/Craig-Architecture-AI-Guidance.md)
-
+- [Task docs](./Tasks/)

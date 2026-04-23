@@ -87,6 +87,13 @@ agentic or governance layers do not exist.
 - leave a structure that later packaging or contributor-experience work can
   refine without having to first undo this Story's routing decisions
 
+## Planned Task Decomposition
+
+- [Task 2.1 - Audience Routing And Boundary Statement](./Tasks/task_2_1_audience_routing_and_boundary_statement.md)
+- [Task 2.2 - Optionality And Dependency Truth](./Tasks/task_2_2_optionality_and_dependency_truth.md)
+- [Task 2.3 - Docs Index And Cross-Link Alignment](./Tasks/task_2_3_docs_index_and_cross_link_alignment.md)
+- [Task 2.4 - Contributor-Path Containment](./Tasks/task_2_4_contributor_path_containment.md)
+
 ## Sequencing
 
 - define the intended audience split first
@@ -131,4 +138,4 @@ agentic or governance layers do not exist.
 - [Docs README](../../../../docs/README.md)
 - [Root Owner File](../../../../__ai__.md)
 - [Materialization Manifest](../../../Authoritative/Identity/AgenticDevelopment/materialization_manifest.yaml)
-
+- [Task docs](./Tasks/)
