@@ -99,6 +99,20 @@ That contract now appears consistently across the root
 
 ### Task 3: Docs Index And Cross-Link Alignment
 
+Task 3 now settles the index hierarchy and cross-link model for the Story:
+
+- `README.md` is the repo map
+- `docs/README.md` is the documentation route splitter
+- `docs/Guides/README.md` is the product guide hub
+
+Those surfaces now express the same audience split while keeping their jobs
+distinct. Deeper links into the portable
+[AgenticDevelopment canon](../../../Authoritative/Canon/AgenticDevelopment/README.md)
+and the project-specific
+[Codex binding](../../../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+are now labeled as intentional architecture/runtime routes instead of
+bleeding back into the product path as hidden setup steps.
+
 - align the root README, `docs/README.md`, and guide index so the same audience
   split is visible at each routing layer
 - remove accidental path competition where product, governance, and runtime

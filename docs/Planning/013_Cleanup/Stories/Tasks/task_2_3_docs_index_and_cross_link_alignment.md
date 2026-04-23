@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -30,7 +30,7 @@ parallel "start here" claims.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -112,6 +112,25 @@ PLANNED
   split is not already settled.
 - It is easy to over-minimize cross-links and make non-product routes feel
   buried.
+
+## Completed Outcome
+
+Task 2.3 now settles the routing hierarchy across the main documentation entry
+surfaces:
+
+- `README.md` is the repo map
+- `docs/README.md` is the documentation route splitter
+- `docs/Guides/README.md` is the product guide hub
+
+Those surfaces now say that hierarchy explicitly instead of competing as
+parallel "start here" claims. Their deeper cross-links are also labeled by
+audience and purpose, so readers can move from the product path into the
+portable agentic canon or project-specific Codex binding intentionally rather
+than by accidental bleed-through. The portable
+[AgenticDevelopment README](../../../../../docs/Authoritative/Canon/AgenticDevelopment/README.md)
+now points readers downstream toward product guides or project bindings as
+labeled next steps, which keeps the route split readable on both sides of the
+Canon/Identity boundary.
 
 ## Exit Criteria
 

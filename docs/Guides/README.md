@@ -2,6 +2,12 @@
 
 This directory is the primary user-facing help surface for Context Atlas.
 
+Use the entry surfaces intentionally:
+
+- the root [README](../../README.md) is the repo-wide map
+- [docs/README.md](../README.md) is the documentation route splitter
+- this file is the product guide hub
+
 If you are evaluating, installing, or wiring Context Atlas into a workflow,
 start here before dropping into `examples/` or deeper architecture docs.
 
@@ -13,9 +19,6 @@ If you are here for contributor governance, generated runtime inspection, or
 Canon/Identity binding work, return to the root [README](../../README.md) or
 [docs/README.md](../README.md). This directory is intentionally the product
 route, not the repo-governance or runtime-materialization index.
-
-If you want the repo-level map first, start with the root
-[README](../../README.md).
 
 ## Start Here
 
@@ -44,3 +47,10 @@ The `examples/` directory now holds runnable companion artifacts:
 
 Use Guides as the authoritative setup and workflow-help surface. Use
 `examples/` when you want the runnable companion artifact for a guide.
+
+## Need A Different Route?
+
+- Repo map: [README.md](../../README.md)
+- Docs route splitter: [docs/README.md](../README.md)
+- Portable agentic canon: [docs/Authoritative/Canon/AgenticDevelopment/README.md](../Authoritative/Canon/AgenticDevelopment/README.md)
+- Project-specific Codex binding: [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](../Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)

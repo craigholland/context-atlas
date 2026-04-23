@@ -2,6 +2,12 @@
 
 This directory holds the canonical project documentation for Context Atlas.
 
+Use the entry surfaces intentionally:
+
+- the root [README](../README.md) is the repo-wide map
+- this file is the documentation route splitter
+- [docs/Guides/README.md](./Guides/README.md) is the product guide hub
+
 ## Pick Your Route
 
 If you are here to evaluate or set up Context Atlas as a product, start with
@@ -18,6 +24,11 @@ User-facing setup and workflow help lives under
 
 If you are trying to evaluate or wire Context Atlas into a workflow, start
 there before reading deeper planning, canon, identity, or governance docs.
+Use the root [README](../README.md) instead if you want the full repo map
+before choosing a documentation route.
+
+If you want runnable companion artifacts after the guide path, continue to
+[examples/README.md](../examples/README.md).
 
 ## Release Notes
 
@@ -53,6 +64,12 @@ If you are trying to inspect the repo's generated runtime surface or the
 project-specific Codex binding, treat that as a contributor/architecture route
 too. Those materials explain how this repository operationalizes its agentic
 model; they are not required to evaluate Atlas as a library.
+
+Use these links intentionally:
+
+- portable agentic canon: [docs/Authoritative/Canon/AgenticDevelopment/README.md](./Authoritative/Canon/AgenticDevelopment/README.md)
+- project-specific Codex binding: [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](./Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- repo-governance entry surface: [README.md](../README.md) and [__ai__.md](../__ai__.md)
 
 Before creating or editing project documents, start with [docs/Authoritative/Canon/Ontology/README.md](./Authoritative/Canon/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
 
