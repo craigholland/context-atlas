@@ -91,6 +91,14 @@ surface.
 
 ### Task 3: Guide Path Cleanup And Wording Normalization
 
+Task 3 is now settled around one explicit guide order: product-facing docs tell
+readers to learn the first-run setup in
+[Getting Started](../../../Guides/getting_started.md), use
+[Context Atlas Tour](../../../Guides/context_atlas_tour.md) as the second
+system-layer step, and drop into workflow-specific guides only after that
+shared starter baseline is clear. The product path no longer uses Story-number
+or hardening-era residue to explain that route.
+
 - remove internal planning residue such as Story-number vocabulary from
   product-facing guides
 - tighten the golden-path setup flow so shared setup steps are not buried under
