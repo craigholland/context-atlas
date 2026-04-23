@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, commands, contracts, portability]
 related:
@@ -29,7 +29,7 @@ rewriting the broader governance model.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -107,11 +107,43 @@ PLANNED
 - The task can drift into prose-correctness redesign if contributors start
   revisiting owner-file narrative rather than executable commands.
 
+## Current Inventory Snapshot
+
+The remaining Windows-first executable contract residue is now concentrated in
+three narrow forms:
+
+- `py -3` as the default Python launcher in owner-file Verification Contracts
+- PowerShell-only null redirection such as `> $null`
+- one remaining PowerShell-specific `workflow_presence` snippet in
+  `.github/workflows/__ai__.md`
+
+Task 5.2 should normalize those portable command surfaces toward:
+
+- `python` as the first-class launcher
+- shell-neutral command lines where practical
+- Python-based checks instead of PowerShell-only inline filesystem logic when a
+  command must run under both local PowerShell and Linux/bash CI
+
 ## Exit Criteria
 
 - portable executable contract commands no longer imply a Windows-only baseline
 - intentional platform-specific commands remain explicitly justified
 - Story 5 reflects the normalization boundary clearly
+
+## Completed Outcome
+
+Task 5.2 is complete. The executable Verification Contract surface now uses
+portable `python ...` command shapes across the affected owner files, and the
+remaining PowerShell-only `workflow_presence` check in
+`.github/workflows/__ai__.md` was replaced with a Python-based filesystem check
+so the command meaning stays shell-neutral.
+
+Because local PowerShell environments do not always expose a bare `python`
+launcher, `scripts/ai_verify_contracts.py` now rewrites leading portable
+`python ...` commands to the active interpreter path before executing the step.
+That preserves the portable owner-file contract shape without regressing local
+Windows execution, and the regression is covered in
+`tests/test_ai_verify_contracts.py`.
 
 ## Related Artifacts
 

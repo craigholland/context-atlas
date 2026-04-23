@@ -91,19 +91,21 @@ initiative across every local workflow in the repo.
 
 ## Current Progress Snapshot
 
-Task 5.1 is complete. The active GitHub workflow surface now uses an
+Tasks 5.1 and 5.2 are complete. The active GitHub workflow surface now uses an
 Ubuntu/bash baseline across the main CI, owner-file verification, and
-Last-Verified update workflows.
+Last-Verified update workflows, and the executable owner-file Verification
+Contract surface now prefers portable `python ...` commands instead of
+Windows-first launcher or shell forms.
 
-The remaining Windows-first implication in this Story is now concentrated in:
+The remaining Linux-first alignment work in this Story is now concentrated in:
 
-- local executable owner-file verification commands that still use Windows
-  launcher and shell forms
-- contributor-facing docs that still present Windows command examples as the
+- support-script and contributor-facing docs that still imply Windows as the
   primary truth path
+- final Story-level validation and wording reinforcement after that contributor
+  path is cleaned up
 
-Those remaining seams stay intentionally scoped to Task 5.2 and Task 5.3
-rather than reopening the workflow conversion.
+Those remaining seams stay intentionally scoped to Task 5.3 rather than
+reopening the workflow conversion or command normalization work.
 
 ## Sequencing
 

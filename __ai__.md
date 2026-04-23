@@ -35,7 +35,7 @@
 - Provides the contributor on-ramp for using the ontology system correctly when adding new project documents.
 
 ## Architectural Rules
-- Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
+- Before recommending a push or merge, contributors should run `python scripts/preflight.py`.
 - The tracked pre-push hook under `.githooks/pre-push` is the preferred enforcement mechanism for local pushes.
 - Repo-root policy should stay thin: package/runtime behavior belongs in `src/`, enforcement logic in `scripts/`, and reusable architecture canon in `docs/`.
 - The root owner file should express repo-wide operational rules and delegate folder-specific rules to nearer `__ai__.md` files rather than duplicating them.
@@ -48,7 +48,8 @@
 - Small follow-up planning tasks may live directly under `docs/Planning/` when they are shaping a bounded documentation, governance, or workflow refactor without needing a full Epic/Story stack.
 - `docs/Planning/013_Cleanup/`: is the current active cleanup Epic surface, and future cleanup planning should extend that numbered stack rather than reintroducing a second top-level cleanup product definition; as the Epic is decomposed, its downstream `Stories/` and `Stories/Tasks/` surfaces should be treated as part of that same live stack.
 - `docs/Planning/013_Cleanup/Stories/` and `docs/Planning/013_Cleanup/Stories/Tasks/`: may land incrementally on Story branches while the Cleanup Epic PR is still open, but those downstream docs should still be treated as one stacked planning surface rather than as independent planning horizons.
-- `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`: Task 5.1 now represents the settled workflow baseline, so active GitHub automation should be treated as Ubuntu/bash-first while the remaining Story 5 work focuses on local executable contract commands and contributor-facing wording.
+- `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`: Tasks 5.1 and 5.2 now represent the settled workflow and executable-contract baseline, so active GitHub automation should be treated as Ubuntu/bash-first and portable owner-file Verification Contract commands should stay in the normalized `python ...` shape while the remaining Story 5 work focuses on contributor-facing wording and final compatibility reinforcement.
+- Executable Verification Contract commands that are meant to be portable should prefer `python` and shell-neutral command forms first; Windows launcher or shell-specific variants should appear only as explicit secondary analogs or justified exceptions.
 - The curated product-facing package surface is `context_atlas.api`; root docs and examples should prefer that starter namespace unless they are deliberately teaching internal architecture.
 - The root README should act as the repo's map and multi-audience routing surface; deeper product walkthrough and workflow-tour content should usually live in linked guides under `docs/Guides/` rather than continuing to accumulate in the root file.
 - Product-facing docs, guides, example READMEs, and `.env.example` should stay aligned around one truthful onboarding story, should not imply automatic `.env` loading, and should not introduce Windows-only operator guidance without a Linux/macOS analog.
@@ -155,17 +156,17 @@
 steps:
   - name: validate_root_owner
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md
+      python scripts/validate_ai_docs.py --repo-root . --files __ai__.md
 
   - name: import_boundaries
     run: |
-      py -3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
+      python scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
 
   - name: test_and_typecheck
     run: |
-      py -3 -m ruff check .
-      py -3 -m ruff format --check .
-      py -3 -m mypy src
-      py -3 -m pytest
+      python -m ruff check .
+      python -m ruff format --check .
+      python -m mypy src
+      python -m pytest
 ```
 
