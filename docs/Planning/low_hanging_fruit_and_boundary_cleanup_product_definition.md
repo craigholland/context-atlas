@@ -15,6 +15,7 @@ related:
   - ../Reviews/context-atlas-product-review.md
   - ../Reviews/context-atlas-agentic-review.md
   - ../Reviews/context-atlas-architecture-review.md
+  - ../Reviews/context-atlas-ai-governance-review.md
   - ../Guides/getting_started.md
   - ../Guides/context_atlas_tour.md
   - ../Authoritative/Canon/AgenticDevelopment/README.md
@@ -22,6 +23,10 @@ related:
   - ../Authoritative/Canon/Architecture/Craig-Architecture-AI-Guidance.md
   - ../Authoritative/Canon/Ontology/Documentation-Ontology.md
   - ../../README.md
+  - ../../.github/workflows/ci.yml
+  - ../../.github/workflows/ai-verify-folder-contracts.yml
+  - ../../.github/workflows/ai-last-verified.yml
+  - ../../scripts/preflight.py
 supersedes: []
 ---
 
@@ -50,6 +55,7 @@ enough to improve trust immediately.
 - [Context Atlas Product Review](../Reviews/context-atlas-product-review.md)
 - [Context Atlas Agentic Review](../Reviews/context-atlas-agentic-review.md)
 - [Context Atlas Architecture Review](../Reviews/context-atlas-architecture-review.md)
+- [Context Atlas AI Governance Review](../Reviews/context-atlas-ai-governance-review.md)
 - [README](../../README.md)
 - [Getting Started Guide](../Guides/getting_started.md)
 - [Context Atlas Tour](../Guides/context_atlas_tour.md)
@@ -57,6 +63,10 @@ enough to improve trust immediately.
 - [Craig Architecture - Python](../Authoritative/Canon/Architecture/Craig-Architecture-Python.md)
 - [Craig Architecture - AI Guidance](../Authoritative/Canon/Architecture/Craig-Architecture-AI-Guidance.md)
 - [Documentation Ontology](../Authoritative/Canon/Ontology/Documentation-Ontology.md)
+- [CI Workflow](../../.github/workflows/ci.yml)
+- [AI Contract Verification Workflow](../../.github/workflows/ai-verify-folder-contracts.yml)
+- [Last Verified Update Workflow](../../.github/workflows/ai-last-verified.yml)
+- [Preflight Script](../../scripts/preflight.py)
 - generated runtime surface under `.codex/` and `.agents/skills/`
 
 Recent review findings that motivate this Epic include:
@@ -71,6 +81,8 @@ Recent review findings that motivate this Epic include:
   Context Atlas-specific references that should be generalized
 - at least one generated runtime file still contains template residue that a
   runtime reader should never see
+- active CI and executable contract checks currently present a Windows-first
+  runner shape that does not match the likely Linux/macOS contributor baseline
 
 ## Proposed Work
 
@@ -98,6 +110,21 @@ This Epic should establish or strengthen these product-facing quick wins:
   on the product path
 - tighter separation between setup steps shared across workflows and the
   workflow-specific differences that actually matter
+
+### Contributor-Path Quick Wins
+
+This Epic should also include the smallest high-value contributor trust fixes
+that do not require a deeper governance redesign:
+
+- align active GitHub workflows to a Linux-first runner shape so CI more
+  closely matches the likely local environment of many contributors
+- convert workflow shell snippets away from PowerShell-specific forms where a
+  portable or bash-oriented equivalent is straightforward
+- normalize executable owner-file verification commands toward
+  Linux/macOS-friendly forms while still documenting Windows analogs for local
+  use
+- keep this scope bounded to workflow and command-shape alignment rather than
+  expanding it into a broader rethink of the `__ai__.md` governance system
 
 ### Canon Purity Quick Wins
 
@@ -139,6 +166,7 @@ The current draft Story shape is:
 - Story 2: Product Path Separation From Agentic/Governance Surfaces
 - Story 3: Portable Canon Leak Cleanup
 - Story 4: Immediate Generated-Surface Defects
+- Story 5: Linux-First CI And Contract Command Alignment
 
 The draft decomposition is intentionally shallow. The point of this Epic is to
 capture the obvious high-ROI work first, then decide whether any Story needs a
@@ -167,6 +195,14 @@ deeper follow-on Epic afterward.
 - Value from this Epic: avoids obvious template-residue defects that weaken
   trust in the materialized surface
 
+`4. Contributor using Linux or macOS`
+
+- Primary job: trust that local expectations and CI behavior roughly match the
+  environment they are most likely to use
+- Value from this Epic: sees CI and contract examples that no longer imply a
+  Windows-first contributor workflow unless Windows-specific behavior is truly
+  required
+
 ## Deliverables
 
 This Epic should ultimately produce:
@@ -180,6 +216,8 @@ This Epic should ultimately produce:
   Context Atlas-specific leaks removed
 - corrected generated runtime files where materialization residue is visibly
   wrong today
+- a Linux-first CI and executable-contract surface that better matches likely
+  contributor environments without dropping Windows analog guidance
 
 ## Non-Goals For This Epic
 
@@ -190,6 +228,9 @@ This Epic should ultimately produce:
   Pydantic-in-domain, or infrastructure/composition boundaries
 - replacing the current generated-runtime validator with a much broader
   section-level semantic validator
+- redesigning the whole `__ai__.md` governance system or introducing governed
+  dirt / prose-correctness features that belong in the dedicated AI governance
+  Epic
 
 ## Open Questions
 
@@ -200,3 +241,6 @@ This Epic should ultimately produce:
 - Should the generated-surface cleanup stop at fixing known residue, or should
   this Epic also add the smallest possible guardrail that would catch the same
   residue class in future generation runs?
+- Should Linux-first CI alignment stop at the active GitHub workflows and
+  executable contract commands, or should this Epic also update nearby docs and
+  examples to make the new baseline more visible to contributors?
