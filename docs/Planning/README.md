@@ -8,18 +8,23 @@ longer the active future-planning surface, move that stack under
 `docs/Planning/completed/` so contributors can distinguish upcoming work from
 historical execution intent at a glance.
 
-There are currently five rough-draft active Epic planning surfaces in this
-directory:
+There are currently five active review-response Epic planning surfaces in or
+under this directory:
 
-- [Low-Hanging Fruit And Boundary Cleanup Product Definition](./low_hanging_fruit_and_boundary_cleanup_product_definition.md)
+- [013 Cleanup Product Definition](./013_Cleanup/013_cleanup_product_definition.md)
 - [Agentic Runtime Model Strengthening Product Definition](./agentic_runtime_model_strengthening_product_definition.md)
 - [Deeper Architectural Tensions Product Definition](./deeper_architectural_tensions_product_definition.md)
 - [Consumer Packaging And Distribution Product Definition](./consumer_packaging_and_distribution_product_definition.md)
 - [AI Governance System Evolution Product Definition](./ai_governance_system_evolution_product_definition.md)
 
+The first horizon has now graduated from a top-level rough draft into a
+numbered Epic/Story stack under [013_Cleanup](./013_Cleanup/). The remaining
+four still live as top-level rough-draft Epic product definitions while their
+Story/Task decomposition is being pressure-tested.
+
 Suggested working sequence for the current review-response Epic set:
 
-1. [Low-Hanging Fruit And Boundary Cleanup](./low_hanging_fruit_and_boundary_cleanup_product_definition.md)
+1. [013 Cleanup](./013_Cleanup/013_cleanup_product_definition.md)
    Start here because it carries the highest-ROI trust and clarity fixes:
    output visibility, user-facing wording cleanup, Canon leak cleanup,
    generated residue cleanup, and Linux-first CI alignment.
@@ -65,6 +70,15 @@ The expected planning stack is:
 - `Story` documents for architectural increments inside an Epic
 - `Task` documents for implementation-ready decomposition of a Story, including a basic `Task Status` field (`PLANNED`, `WORKING`, or `IMPLEMENTED`)
 - task-level PR-plan documents for bounded reviewable slices
+
+When an Epic graduates from rough-draft shaping into active Story
+decomposition, prefer a numbered folder such as `docs/Planning/013_Cleanup/`
+that holds:
+
+- the Epic product-definition doc
+- a `Stories/` directory with the active Story plans
+- and later, a `Stories/Tasks/` directory once the implementation-ready task
+  stack is created
 
 The expected execution loop for a Task is:
 

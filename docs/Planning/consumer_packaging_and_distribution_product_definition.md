@@ -20,7 +20,7 @@ related:
   - ../Release/README.md
   - ../Authoritative/Identity/Context-Atlas-Charter.md
   - ../Authoritative/Identity/Context-Atlas-System-Model.md
-  - ./low_hanging_fruit_and_boundary_cleanup_product_definition.md
+  - ./013_Cleanup/013_cleanup_product_definition.md
   - ./deeper_architectural_tensions_product_definition.md
 supersedes: []
 ---
