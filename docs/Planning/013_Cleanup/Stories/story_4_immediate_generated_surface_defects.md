@@ -36,6 +36,12 @@ This Story is intentionally small and defect-oriented. It should stop after the
 visible cleanup and the narrowest cheap regression/guardrail that protects the
 same defect class if such a guardrail is straightforward.
 
+The currently settled defect class is now:
+
+- section-boundary bleed during runtime-materialization extraction, where a
+  generated mode section can absorb later upstream constraints, non-goals, or
+  related-artifact bullets into reader-facing operational sections
+
 ## Inputs
 
 - [013 Cleanup Product Definition](../013_cleanup_product_definition.md)
@@ -45,6 +51,24 @@ same defect class if such a guardrail is straightforward.
 - [Codex Drift Checker](../../../../scripts/check_codex_materialization.py)
 - [Codex Materialization Tests](../../../../tests/test_codex_materialization.py)
 - current generated runtime surface under `.codex/` and `.agents/skills/`
+
+## Current Inventory Snapshot
+
+As of the current Story start, the bounded visible residue class is confirmed in
+the generated mode surface for:
+
+- `.codex/modes/operational-delivery.md`
+
+The current reproduction is:
+
+- the final `#### Exit` block in
+  `docs/Authoritative/Identity/AgenticDevelopment/Bindings/Modes/Mode-Transition-Rules.md`
+  is parsed too broadly by the materializer
+- that parser bleed causes later `## Constraints`, `## Non-Goals`, and
+  `## Related Artifacts` bullets to appear as if they were part of the
+  generated `Exit Conditions` section
+- the issue is therefore an upstream extraction/generation defect rather than a
+  downstream hand-edit or stale generated file
 
 ## Proposed Tasks
 
@@ -64,10 +88,15 @@ same defect class if such a guardrail is straightforward.
 - prefer template or generator fixes over hand-editing generated runtime
   artifacts
 - keep any change faithful to the existing manifest-driven generation model
+- if the active drift checker would otherwise reject the branch, allow the
+  single affected generated file to refresh in the same bounded correction pass
+  rather than deferring that mechanical refresh to a later PR
 
 ### Task 3: Regeneration And Surface Refresh
 
-- regenerate the affected runtime surfaces after the upstream fix
+- confirm the affected runtime surfaces are regenerated after the upstream fix,
+  even if the narrowest truthful implementation already refreshed the single
+  affected file in Task 2
 - verify that generated notices, related links, and content sections are fully
   materialized for a reader
 - ensure the refresh does not introduce new drift against the manifest-driven
@@ -101,6 +130,10 @@ same defect class if such a guardrail is straightforward.
   authoritative source of the defect is not identified first.
 - Even a small guardrail can expand beyond the Epic's intent if it starts
   validating semantic quality rather than this known residue class.
+- The current inventory may reveal additional files of the same defect class
+  once regeneration is rerun, but Story 4 should still stay limited to the same
+  section-boundary bleed behavior rather than widening into a general runtime
+  content audit.
 
 ## Exit Criteria
 
@@ -110,6 +143,8 @@ same defect class if such a guardrail is straightforward.
   checks
 - if a new guardrail is added, it stays narrow and directly related to this
   defect class
+- the Story remains explicitly bounded to section-boundary bleed rather than
+  widening into a semantic review of every generated runtime surface
 
 ## Definition Of Done
 
