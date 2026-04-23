@@ -24,6 +24,7 @@
 ## Architectural Rules
 - This folder must stay portable: do not define project-specific role rosters, provider choices, or runtime folder layouts here unless the relevant portable boundary model explicitly authorizes them.
 - Portable docs here may reference project bindings or runtime assets only as downstream categories, not as named source-of-truth implementations.
+- Entry surfaces and primers in this folder should avoid project-local roster names when a generic portable example can teach the same concept.
 - Drift, validation, and change-management docs in this folder should define stable models and expectations, not platform-specific scripts or operator folklore.
 - Protocol, role-archetype, materialization, and governance supplements should remain separate enough that later validators and reviewers can reason about one concern without reconstructing the whole system.
 - Skill docs should stay atomic reusable capability units, while specialist-archetype docs should stay delegated composition patterns built from curated skills rather than project-specific runtime actors.
