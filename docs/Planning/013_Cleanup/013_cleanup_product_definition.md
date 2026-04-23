@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [planning, epic, cleanup, documentation, onboarding, canon, ci, review-response]
 related:
@@ -181,6 +181,10 @@ Owns the audience-routing boundary between:
 
 so product evaluators do not treat `.codex/`, `.agents/skills/`, or
 `__ai__.md` as prerequisites for simply using Atlas.
+
+Story completion should leave contributor refresh and governance-operation
+detail in the owning contributor surfaces rather than carrying those commands
+inline on product-facing repo-edge docs.
 
 ### Story 3: Portable Canon Leak Cleanup
 
