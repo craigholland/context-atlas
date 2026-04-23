@@ -198,6 +198,13 @@ The current truthful inspection vocabulary matters:
 Those views should remain read-only derived renderings over `ContextPacket` and
 `ContextTrace`.
 
+For one concrete starter-facing example, see
+[starter_context_flow_sample_output.md](../../examples/starter_context_flow_sample_output.md).
+That checked-in sample uses the same bounded corpus as the current
+[Getting Started](./getting_started.md) path and shows rendered context,
+packet inspection, and trace inspection together without introducing a second
+demo vocabulary.
+
 ## Runtime Knobs
 
 The tracked [`.env.example`](../../.env.example) file is the canonical example

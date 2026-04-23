@@ -21,6 +21,7 @@ from context_atlas.rendering import (
 
 DEFAULT_QUERY = "How should planning docs be treated?"
 DEFAULT_LOG_LEVEL = "WARNING"
+DEFAULT_DOCS_ROOT = "examples/codex_repository_workflow/sample_repo/docs"
 
 
 def main() -> None:
@@ -30,8 +31,11 @@ def main() -> None:
     parser.add_argument(
         "docs_root",
         nargs="?",
-        default="docs",
-        help="Path to the documentation root to ingest. Defaults to ./docs.",
+        default=DEFAULT_DOCS_ROOT,
+        help=(
+            "Path to the documentation root to ingest. "
+            f"Defaults to {DEFAULT_DOCS_ROOT}."
+        ),
     )
     parser.add_argument(
         "query",

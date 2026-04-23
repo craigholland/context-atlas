@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -29,7 +29,7 @@ sample anchored to the canonical packet/trace story.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -118,6 +118,28 @@ PLANNED
 - a bounded packet/trace-shaped output sample exists on the product path
 - the sample is anchored to the real packet/trace story
 - Story 1 reflects the chosen sample surface clearly
+
+## Completed Outcome
+
+Task 1.2 now settles the starter sample surface around one reproducible source
+and one bounded visible artifact:
+
+- the installable starter command and repository-local starter companion both
+  use `examples/codex_repository_workflow/sample_repo/docs` as the checked-in
+  first-run corpus
+- the product-facing visible sample now lives at
+  `examples/starter_context_flow_sample_output.md`
+- [Getting Started](../../../../../docs/Guides/getting_started.md) now links to
+  that full sample and carries a short preview rather than trying to inline the
+  entire output
+- [Context Atlas Tour](../../../../../docs/Guides/context_atlas_tour.md) now
+  points packet/trace readers at the same bounded starter sample instead of
+  inventing a second demo vocabulary
+
+The current shipped release note was intentionally left unchanged. The release
+index already says `docs/Release/` is for shipped history only, so this
+development-branch sample work should flow into the next release cut rather
+than being back-written into `release_0_1_3.md`.
 
 ## Related Artifacts
 

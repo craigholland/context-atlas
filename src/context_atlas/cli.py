@@ -19,6 +19,7 @@ from .rendering import render_packet_inspection, render_trace_inspection
 
 DEFAULT_QUERY = "How should planning docs be treated?"
 DEFAULT_LOG_LEVEL = "WARNING"
+DEFAULT_DOCS_ROOT = "examples/codex_repository_workflow/sample_repo/docs"
 
 
 def build_starter_parser() -> argparse.ArgumentParser:
@@ -39,10 +40,11 @@ def build_starter_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "docs_root",
         nargs="?",
-        default="docs",
+        default=DEFAULT_DOCS_ROOT,
         help=(
-            "Path to the documentation root to ingest. Defaults to ./docs so a "
-            "local repository checkout still works out of the box."
+            "Path to the documentation root to ingest. Defaults to the "
+            "checked-in sample repository docs so a local repository checkout "
+            "can reproduce the starter flow out of the box."
         ),
     )
     parser.add_argument(

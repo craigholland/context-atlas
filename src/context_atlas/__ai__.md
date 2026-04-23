@@ -45,6 +45,7 @@
 - Product-facing guides and examples should treat `context_atlas.api` as the starter import surface and `context_atlas.rendering` as the supported home of derived packet/trace inspection renderers.
 - `context_atlas.rendering` remains the supported home of derived context and inspection output; contributors should not widen `__init__.py` or `infrastructure/` into a presentation barrel for convenience.
 - The installable starter CLI should remain a thin outer wrapper over the curated starter API and should not grow workflow-specific orchestration branches.
+- The installable starter CLI and the repository-local starter companion should stay aligned around the same checked-in first-run sample corpus unless a project-level product decision explicitly changes that starter story.
 - The exported `context_atlas.__version__` surface should stay aligned with the release version in `pyproject.toml` and the current in-repo release history, rather than drifting into a stale package-local constant.
 - Release-prep edits to `__version__` should move in lockstep with `pyproject.toml`, `docs/Release/README.md`, and the current shipped release note rather than being treated as a package-local tweak.
 - Release-prep edits that touch `__init__.py` should also keep the package-facing CLI version expectation in `tests/test_cli.py` aligned, because the installable starter surface and package version are reviewed together as one shipped contract.
@@ -107,6 +108,7 @@
   - invariants:
     - should stay a thin outer wrapper over the starter flow
     - should not become a second workflow engine or a dumping ground for example-only behavior
+    - its default docs-root story should stay aligned with the product-facing starter docs and companion example rather than silently drifting back to a different repo-local corpus
 - `domain/`:
   - responsibility: holds semantic core contracts and canonical domain artifacts
   - used_by:

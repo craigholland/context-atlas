@@ -31,8 +31,10 @@ It demonstrates:
 - trace inspection output
 
 This is the intended runnable companion after an editable install. It defaults
-to the repository `docs/` directory and a starter query, and it keeps logs
-quieter unless you explicitly raise `CONTEXT_ATLAS_LOG_LEVEL`.
+to the checked-in sample repository docs under
+`examples/codex_repository_workflow/sample_repo/docs` and a starter query, and
+it keeps logs quieter unless you explicitly raise
+`CONTEXT_ATLAS_LOG_LEVEL`.
 
 ## Smoke Flow
 
@@ -42,14 +44,14 @@ PowerShell:
 
 ```powershell
 $env:PYTHONPATH = "src"
-py -3 examples/starter_api_smoke.py docs "How should planning docs be treated?"
+py -3 examples/starter_api_smoke.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 bash:
 
 ```bash
 export PYTHONPATH=src
-python examples/starter_api_smoke.py docs "How should planning docs be treated?"
+python examples/starter_api_smoke.py examples/codex_repository_workflow/sample_repo/docs "How should planning docs be treated?"
 ```
 
 The smoke example demonstrates the supported MVP path:
@@ -59,6 +61,10 @@ The smoke example demonstrates the supported MVP path:
 - retrieve candidates with the starter lexical retriever
 - assemble a `ContextPacket` through `build_starter_context_assembly_service`
 - render packet context and inspect the resulting packet/trace surfaces
+
+For the repo-local product path, prefer the checked-in sample repository docs
+as the first-run corpus. The repo root `docs/` tree is broader than the
+starter sample and should not be treated as the default smoke/evaluator input.
 
 This sequence should stay aligned with the root `README.md` golden path and the
 guides index. If examples start requiring extra hidden setup or deep internal
