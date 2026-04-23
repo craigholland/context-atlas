@@ -186,6 +186,23 @@ When Codex-binding assets change, reviewers should check:
   `scripts/check_codex_materialization.py` before asking review to trust the
   updated runtime surface
 
+## Contributor Refresh Path
+
+If you are intentionally changing the generated Codex runtime surface through
+upstream Canon, Identity, or manifest edits, use this review path:
+
+1. regenerate generator-owned Codex assets:
+   `py -3 scripts/materialize_codex_runtime.py --write`
+2. run the focused runtime drift check:
+   `py -3 scripts/check_codex_materialization.py`
+3. run the full repo gate before push:
+   `py -3 scripts/preflight.py`
+
+The companion [creation guidance](./creation_guidance.md) explains how to
+derive the affected assets. This governance doc explains when review should
+trust the refreshed runtime surface. Product-facing README and guide surfaces
+should route contributors here rather than carrying these commands inline.
+
 ## Constraints
 
 - Codex governance should stay downstream of the generic drift-control model.
