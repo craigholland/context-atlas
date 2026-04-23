@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, story, canon, portability, examples, boundaries]
 related:
@@ -82,6 +82,41 @@ or the full platform-binding architecture for future runtimes.
   harder to learn from
 - keep the final Canon shape useful as a case-study-derived canon rather than
   pretending it emerged from a second project that does not exist yet
+
+## Current Bounded Leak Set
+
+The current Story is intentionally bounded to the clearest review-backed leak
+set rather than every project-local noun that appears anywhere in Canon.
+
+The inventory currently in scope is:
+
+- [AgenticDevelopment README](../../../Authoritative/Canon/AgenticDevelopment/README.md):
+  the `Why This Matters Here` framing still talks directly about Context Atlas
+  as the governed engine, which makes a portable canon entry surface read more
+  project-local than necessary.
+- [Quick Mental Model](../../../Authoritative/Canon/AgenticDevelopment/Quick-Mental-Model.md):
+  the worked example uses runtime-facing names such as `parent-backend` and
+  `specialist-python-implementation`, which are useful but currently read more
+  like one project's materialized roster than a portable primer.
+- [Craig Architecture - Python](../../../Authoritative/Canon/Architecture/Craig-Architecture-Python.md):
+  the repository-shape examples still include `.codex/`, and one repository
+  responsibility bullet still names `Codex guidance` directly rather than
+  describing a generic runtime/governance surface.
+- [Craig Architecture - AI Guidance](../../../Authoritative/Canon/Architecture/Craig-Architecture-AI-Guidance.md):
+  the task-review-gate guidance still names `@codex review` directly instead of
+  describing a portable automated review request pattern.
+- [Documentation Ontology](../../../Authoritative/Canon/Ontology/Documentation-Ontology.md),
+  [Ontology README](../../../Authoritative/Canon/Ontology/README.md), and
+  [base_metadata.md](../../../Authoritative/Canon/Ontology/base_metadata.md):
+  these surfaces still brand the ontology and metadata examples as Context
+  Atlas-specific even where the surrounding guidance is otherwise reusable.
+
+The inventory explicitly excludes:
+
+- canonical Craig-style `__ai__.md` guidance, which is a portable Craig
+  Architecture concept rather than a Context Atlas runtime leak
+- downstream Identity and materialization docs, which belong to later tasks
+  only when Canon needs a clearer place to point concrete project detail
 
 ## Planned Task Decomposition
 
