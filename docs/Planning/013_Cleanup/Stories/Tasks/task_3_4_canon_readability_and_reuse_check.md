@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, canon, readability, reuse]
 related:
@@ -29,7 +29,7 @@ portability and readability.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -94,6 +94,23 @@ PLANNED
 - the cleaned Canon entry surfaces remain readable to a newcomer
 - any remaining local examples are explicitly intentional
 - Story 3 and the Epic describe the final cleanup honestly
+
+## Completed Outcome
+
+Task 3.4 now closes the bounded Story 3 cleanup by re-reading the touched
+Canon entry surfaces as portable entrypoints rather than as local project
+notes.
+
+The final readability pass now makes the intended descent path explicit:
+
+- stay in canon while learning portable concepts
+- move to the project profile and binding layer when concrete local choices are
+  needed
+- only then move to the current runtime-binding README
+
+With that pass complete, Story 3 now leaves only intentionally classified
+ontology-branded examples and later runtime-placement questions for downstream
+Epics rather than as accidental residue inside the portable entry surfaces.
 
 ## Related Artifacts
 

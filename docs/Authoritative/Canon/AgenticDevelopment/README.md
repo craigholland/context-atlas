@@ -213,7 +213,9 @@ as:
 In this repository, the normal downstream path is:
 
 1. [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
-2. [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
+2. the relevant Context Atlas binding docs and
+   [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml)
+3. [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 
 That path keeps the canon portable while still giving readers a clear route to
 the current repository's concrete choices.
@@ -233,6 +235,8 @@ When deciding where to read next:
 - move to a binding layer only when you need concrete application choices
 - in this repository, start that descent with the
   [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+  then use the relevant binding docs and
+  [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml)
   before reading the current
   [Codex binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - move to planning only after the portable canon is clear enough that planning
