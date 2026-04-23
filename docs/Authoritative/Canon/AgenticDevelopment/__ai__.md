@@ -32,6 +32,7 @@
 - Meaningful updates to this folder should also review root governance, metadata, and neighboring planning indexes so the canon remains discoverable and trustworthy.
 - The README should explain why the agentic canon matters to Context Atlas's broader governance model, not only provide a reading order over the documents.
 - The README and neighboring primer docs should give new readers a short human-readable path into the core entities so they do not have to reconstruct the mental model from the deeper authority, composition, and protocol texts alone.
+- The README may point readers downstream toward project bindings or product guides, but those cross-links should be labeled by audience and purpose so the portable canon does not quietly become a required product-onboarding step.
 - When hardening or other planning closeout docs summarize evidence paths, they should point back to this canon for shared governance vocabulary rather than recreating a second portable validation or change-management model in planning prose.
 - This owner file should stay a concise portable-boundary contract; file-by-file catalog nuance belongs in `File Index`, and future expansion notes belong in `Known Gaps / Future-State Notes` instead of turning these rules into a portable changelog.
 
