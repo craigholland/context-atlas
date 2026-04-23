@@ -69,6 +69,7 @@ Use these links intentionally:
 
 - portable agentic canon: [docs/Authoritative/Canon/AgenticDevelopment/README.md](./Authoritative/Canon/AgenticDevelopment/README.md)
 - project-specific Codex binding: [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](./Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
+- Codex refresh and drift-check workflow: [creation_guidance.md](./Authoritative/Identity/AgenticDevelopment/Materializations/Codex/creation_guidance.md) and [governance.md](./Authoritative/Identity/AgenticDevelopment/Materializations/Codex/governance.md)
 - repo-governance entry surface: [README.md](../README.md) and [__ai__.md](../__ai__.md)
 
 If you are changing generated Codex runtime inputs or the repo's governance

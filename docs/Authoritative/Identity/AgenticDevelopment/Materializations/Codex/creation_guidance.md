@@ -39,6 +39,11 @@ assets from upstream sources.
 
 It does not replace the upstream canon or the Codex template surfaces.
 
+If you were routed here from a repo-edge contributor path, use this document
+for the derivation workflow and use
+[governance.md](./governance.md) for the matching refresh and drift-check
+expectations.
+
 ## Creation Workflow
 
 ### 1. Start From Upstream Sources, Not Existing Runtime Files
@@ -239,6 +244,22 @@ Refresh or re-review an affected Codex asset when:
 - the Codex templates change in a way that invalidates the current asset
 - the creation guidance changes how copied, adapted, or derived content should
   be expressed
+
+## Contributor Refresh Path
+
+When a contributor intentionally changes Canon, Identity, or manifest inputs
+that feed the generated Codex runtime surface, the normal refresh path is:
+
+1. make the durable semantic change upstream first
+2. regenerate generator-owned Codex assets:
+   `py -3 scripts/materialize_codex_runtime.py --write`
+3. verify drift and declared-human surfaces:
+   `py -3 scripts/check_codex_materialization.py`
+4. run full repo preflight before push:
+   `py -3 scripts/preflight.py`
+
+Those commands belong here and in the companion governance doc, not in the
+repo's product-facing onboarding path.
 
 ## Non-Goals
 
