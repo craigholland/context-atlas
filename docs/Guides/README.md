@@ -5,6 +5,10 @@ This directory is the primary user-facing help surface for Context Atlas.
 If you are evaluating, installing, or wiring Context Atlas into a workflow,
 start here before dropping into `examples/` or deeper architecture docs.
 
+You do not need the generated Codex runtime assets under `.codex/` or
+`.agents/skills/`, and you do not need to learn the repo's `__ai__.md`
+governance model, to follow the product route in this directory.
+
 If you are here for contributor governance, generated runtime inspection, or
 Canon/Identity binding work, return to the root [README](../../README.md) or
 [docs/README.md](../README.md). This directory is intentionally the product
