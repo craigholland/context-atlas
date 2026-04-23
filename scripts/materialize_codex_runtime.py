@@ -641,14 +641,20 @@ def _normalize_label(value: str) -> str:
 
 def _heading_blocks(text: str, level: int) -> list[tuple[str, str]]:
     body = _strip_front_matter(text)
-    pattern = re.compile(rf"^{re.escape('#' * level)}\s+(.+?)\s*$", re.MULTILINE)
+    pattern = re.compile(r"^(#{1,6})\s+(.+?)\s*$", re.MULTILINE)
     matches = list(pattern.finditer(body))
     blocks: list[tuple[str, str]] = []
 
     for index, match in enumerate(matches):
+        if len(match.group(1)) != level:
+            continue
         start = match.end()
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(body)
-        blocks.append((match.group(1).strip(), body[start:end].strip()))
+        end = len(body)
+        for later_match in matches[index + 1 :]:
+            if len(later_match.group(1)) <= level:
+                end = later_match.start()
+                break
+        blocks.append((match.group(2).strip(), body[start:end].strip()))
 
     return blocks
 

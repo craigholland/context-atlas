@@ -115,6 +115,7 @@
     - generated runtime files must be reproducible from repo state alone without hidden local prompts
     - document-cache reuse must stay scoped by repository root and current file state so repeated runs cannot bleed content across repos or stale edits
     - generated and checked runtime paths must derive from manifest-declared `runtime_root`, `skills_root`, and surface paths instead of assuming fixed `.codex` or `.agents` locations
+    - heading-block extraction must stop nested sections at the next heading of the same or higher level so generated mode and protocol surfaces cannot absorb later constraints or non-goal bullets into runtime-facing sections
 - `install_git_hooks.py`:
   - responsibility: configures `git` to use the tracked `.githooks` directory
 - `import_boundary_rules.toml`:
