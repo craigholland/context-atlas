@@ -204,6 +204,10 @@ When Story 3 uses `reroute downstream`, the expected descent path is:
 - only then the current runtime-binding README for the repository's chosen
   materialization target
 
+The Story is also allowed to leave a small explicitly classified remainder
+when removing it would require a broader ontology, runtime-policy, or
+platform-binding redesign that does not belong in this cleanup Epic.
+
 ### Story 4: Immediate Generated-Surface Defects
 
 Owns the visible cleanup of runtime-materialization defects in the generated

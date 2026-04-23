@@ -97,6 +97,15 @@ generalized:
 
 ### Task 4: Canon Readability And Reuse Check
 
+Task 4 now settles the final readability boundary for Story 3:
+
+- the portable AgenticDevelopment entry surfaces still read as learnable canon
+  after the leak cleanup
+- the reroute path now reads as canon first, then profile/binding detail, then
+  current runtime binding
+- the remaining ontology-branded examples are left only where they are
+  intentionally classified or reserved for later Epics
+
 - re-read the touched Canon entry surfaces as a newcomer who is not using
   Context Atlas specifically
 - ensure the cleanup improves portability without making the prose vague or
@@ -210,6 +219,10 @@ The current downstream-routing expectation is:
 - portable Canon surfaces still read clearly to a human reader
 - project-specific examples that remain in Canon are intentionally justified
   rather than left as accidental residue
+
+Story 3 is allowed to end with a small remainder only when that remainder is
+explicitly classified and does not silently redefine project-local details as
+portable defaults.
 
 ## Definition Of Done
 
