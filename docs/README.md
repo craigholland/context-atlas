@@ -71,6 +71,10 @@ Use these links intentionally:
 - project-specific Codex binding: [docs/Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md](./Authoritative/Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - repo-governance entry surface: [README.md](../README.md) and [__ai__.md](../__ai__.md)
 
+If you are changing generated Codex runtime inputs or the repo's governance
+model, start from these contributor-owned surfaces instead of the product
+guides or the root README's product route.
+
 Before creating or editing project documents, start with [docs/Authoritative/Canon/Ontology/README.md](./Authoritative/Canon/Ontology/README.md). It contains the current guidance for how project documents should be structured, including the shared metadata template and the class-specific content templates.
 
 The canonical semantic definitions for the document classes now live in [docs/Authoritative/Canon/Ontology/Documentation-Ontology.md](./Authoritative/Canon/Ontology/Documentation-Ontology.md). That document defines what `Authoritative`, `Planning`, `Reviews`, `Exploratory`, and `Releases` actually mean, what they are safe to use for, and how they should interact when they disagree.
