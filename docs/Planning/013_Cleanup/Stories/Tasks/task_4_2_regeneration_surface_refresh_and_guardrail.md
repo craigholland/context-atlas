@@ -6,9 +6,9 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [cleanup, task, pr-plan, regeneration, tests, generated-runtime]
 related:
@@ -27,9 +27,13 @@ Regenerate the affected runtime surfaces after the upstream fix, verify that
 the visible defect class is gone, and add the smallest cheap guardrail that
 would catch recurrence.
 
+Because the single affected generated file was already refreshed in Task 4.1 to
+keep the manifest-driven drift path green, this Task's real work is to confirm
+that clean refresh state and add the narrow recurrence guardrail.
+
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -41,7 +45,8 @@ PLANNED
 
 ### PR - A: Runtime Surface Regeneration And Refresh
 
-- regenerate the affected runtime surfaces from the fixed upstream source
+- confirm the affected runtime surfaces are still clean after the upstream fix
+  and the already-applied bounded refresh from Task 4.1
 - confirm that related links, generated notices, and content sections are fully
   materialized for a reader
 - keep the refresh downstream and mechanical
@@ -116,6 +121,16 @@ PLANNED
 - the affected runtime surfaces are refreshed and visibly clean
 - a narrow recurrence guardrail exists if it can be added cheaply
 - Story 4 and the Epic describe the final fix boundary honestly
+
+## Completed Outcome
+
+- The affected generated mode surface remained clean after the Task 4.1 parser
+  fix and bounded downstream refresh.
+- A focused regression now proves `Operational Delivery` mode-transition
+  extraction stops at the next same-or-higher heading rather than swallowing
+  later constraints or non-goals.
+- Story 4 can therefore close as a bounded section-boundary bleed cleanup
+  rather than a broader generated-runtime audit.
 
 ## Related Artifacts
 

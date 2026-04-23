@@ -146,6 +146,17 @@ The current reproduction is:
 - the Story remains explicitly bounded to section-boundary bleed rather than
   widening into a semantic review of every generated runtime surface
 
+## Completed Outcome
+
+- The only confirmed visible residue defect in the current runtime surface was
+  removed from `.codex/modes/operational-delivery.md`.
+- The authoritative fix landed in the materializer's heading-boundary
+  extraction logic rather than in a hand-maintained generated file patch.
+- The runtime surface stayed green under the active drift checker by refreshing
+  the single affected generated file together with the upstream fix.
+- `tests/test_codex_materialization.py` now carries a focused regression for
+  the same section-boundary bleed class.
+
 ## Definition Of Done
 
 - the Story's scoped Tasks are either completed or intentionally deferred with
