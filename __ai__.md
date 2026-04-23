@@ -48,7 +48,7 @@
 - Small follow-up planning tasks may live directly under `docs/Planning/` when they are shaping a bounded documentation, governance, or workflow refactor without needing a full Epic/Story stack.
 - `docs/Planning/013_Cleanup/`: is the current active cleanup Epic surface, and future cleanup planning should extend that numbered stack rather than reintroducing a second top-level cleanup product definition; as the Epic is decomposed, its downstream `Stories/` and `Stories/Tasks/` surfaces should be treated as part of that same live stack.
 - `docs/Planning/013_Cleanup/Stories/` and `docs/Planning/013_Cleanup/Stories/Tasks/`: may land incrementally on Story branches while the Cleanup Epic PR is still open, but those downstream docs should still be treated as one stacked planning surface rather than as independent planning horizons.
-- `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`: Tasks 5.1 and 5.2 now represent the settled workflow and executable-contract baseline, so active GitHub automation should be treated as Ubuntu/bash-first and portable owner-file Verification Contract commands should stay in the normalized `python ...` shape while the remaining Story 5 work focuses on contributor-facing wording and final compatibility reinforcement.
+- `docs/Planning/013_Cleanup/Stories/story_5_linux_first_ci_and_contract_command_alignment.md`: Story 5 now represents the settled Linux-first contributor baseline for this Cleanup Epic, so active GitHub automation should stay Ubuntu/bash-first, portable owner-file Verification Contract commands should stay in the normalized `python ...` shape, and contributor-facing repo docs should present those portable commands as the primary truth-path examples.
 - Executable Verification Contract commands that are meant to be portable should prefer `python` and shell-neutral command forms first; Windows launcher or shell-specific variants should appear only as explicit secondary analogs or justified exceptions.
 - The curated product-facing package surface is `context_atlas.api`; root docs and examples should prefer that starter namespace unless they are deliberately teaching internal architecture.
 - The root README should act as the repo's map and multi-audience routing surface; deeper product walkthrough and workflow-tour content should usually live in linked guides under `docs/Guides/` rather than continuing to accumulate in the root file.
@@ -91,6 +91,7 @@
     - should distinguish shipped-release review from evolving-branch review when suggesting AI-assisted critique paths
     - any playful review prompt should remain clearly secondary to the serious route guidance and should still ask for substantive criticism
     - its `Status` section should stay aligned with the current shipped release note and should describe the top-level product story without collapsing back into a second system tour
+    - contributor-facing examples for repo-owned Python scripts should prefer portable `python ...` command forms first, with Windows launcher variants treated only as local analogs
 - `pyproject.toml`:
   - responsibility: defines package metadata and repo-local developer tool dependencies
   - invariants:
@@ -101,6 +102,7 @@
   - invariants:
     - should point to the current ontology canon rather than restating a parallel document-class system
     - should keep Canon versus Identity placement guidance explicit for contributors adding authoritative docs
+    - should keep repo-owned Python script examples portable by default and avoid presenting Windows launcher forms as the only first-class truth path
 - `__ai__.template.md`:
   - responsibility: provides the reusable authoring shape for local owner files
   - footguns:

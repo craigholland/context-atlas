@@ -8,7 +8,7 @@ template_refs:
   content: authoritative_content@1.0.0
 status: active
 created: 2026-04-20
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [context-atlas, agentic-development, identity, codex, creation-guidance]
 related:
@@ -60,6 +60,15 @@ manifest declares that a runtime surface is `generated`.
 
 Manual refresh is still a useful review aid, but it should not become a shadow
 generation path once the repo owns a deterministic materialization script.
+
+When contributor-facing docs show that regeneration path, they should prefer
+the portable command shape:
+
+- `python scripts/materialize_codex_runtime.py --write`
+- `python scripts/check_codex_materialization.py`
+
+Windows launcher variants such as `py -3` remain useful local analogs, but
+they should not be the primary repo-wide truth-path example.
 
 ### 2. Choose The Correct Codex Surface First
 

@@ -158,8 +158,10 @@ If you are contributing documentation or authoritative canon, start with
 
 If you change Codex materialization inputs under the authoritative canon or
 Identity bindings, refresh the generated runtime surface with
-`py -3 scripts/materialize_codex_runtime.py --write` and verify it with
-`py -3 scripts/check_codex_materialization.py` before pushing.
+`python scripts/materialize_codex_runtime.py --write` and verify it with
+`python scripts/check_codex_materialization.py` before pushing. If your local
+Windows environment prefers `py -3`, treat that as a local launcher analog
+rather than the primary repo-wide command shape.
 
 ## Principles
 
