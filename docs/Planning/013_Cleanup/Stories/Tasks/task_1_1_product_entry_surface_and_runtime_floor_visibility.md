@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -29,7 +29,7 @@ setup failure or contributor-only detail.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -115,6 +115,15 @@ PLANNED
 - the root product route states the real runtime floor clearly
 - the guide entry path matches that same prerequisite story
 - Story 1 reflects the final entry-surface contract
+
+## Completed Outcome
+
+- the root README now frames Atlas as provider-agnostic first, explains
+  `Codex` briefly as a repository/runtime binding, and surfaces the current
+  Python `3.12+` starter floor near the top of the repo map
+- the guide entry surface now repeats that same Python `3.12+` prerequisite
+  early in both the guides index and the getting-started path so evaluators do
+  not learn it only after dropping into setup detail
 
 ## Related Artifacts
 
