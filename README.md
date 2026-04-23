@@ -181,10 +181,10 @@ product path.
 If you are contributing documentation or authoritative canon, start with
 [CONTRIBUTING.md](/context-atlas/CONTRIBUTING.md) before authoring a new file.
 
-If you change Codex materialization inputs under the authoritative canon or
-Identity bindings, refresh the generated runtime surface with
-`py -3 scripts/materialize_codex_runtime.py --write` and verify it with
-`py -3 scripts/check_codex_materialization.py` before pushing.
+If you are intentionally changing generated runtime or governance surfaces, use
+the contributor/architecture routes rather than this product-facing entry
+section. Those owning surfaces carry the detailed refresh and verification
+steps.
 
 ## Principles
 
