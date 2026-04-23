@@ -13,16 +13,20 @@ The portable canon ends where binding-layer documents begin. This directory
 defines portable terms and invariants, not an application's chosen role
 roster, workflow gates, capacity values, or environment-specific layouts.
 
+If you need the current repository's concrete application binding or runtime
+target after learning the portable model, descend into the downstream Identity
+layer rather than trying to infer those choices from the canon.
+
 ## Why This Matters Here
 
-Context Atlas is already a context-governance engine: it tries to make source
-selection, authority handling, budgeting, and packet assembly explicit,
-reviewable, and reproducible rather than leaving them as prompt folklore.
+Projects that care about governed AI collaboration eventually run into the same
+question: should roles, review gates, handoffs, and runtime-facing agent assets
+be treated as ad hoc tool habits, or as concepts that can be defined and
+reviewed upstream first?
 
-This canon applies that same philosophy to AI collaboration itself. Instead of
-treating agents, roles, review gates, handoffs, and runtime materialization as
-tool-specific prompt habits, this layer makes them portable governed concepts
-that can be reviewed before any one project or runtime binds them concretely.
+This canon takes the second approach. Instead of treating those behaviors as
+tool-specific prompt folklore, it makes them portable governed concepts that
+can be reviewed before any one project or runtime binds them concretely.
 
 ## Start Here
 
@@ -192,6 +196,30 @@ This directory should not be used for:
 Those concerns belong in downstream binding-layer docs and
 environment-specific materialization guidance, not in the portable canon.
 
+## When To Leave Canon
+
+Stay in this directory while you are still learning portable concepts such as
+roles, parent agents, specialists, skills, modes, protocols, and
+materialization boundaries.
+
+Leave this directory when you need to answer project-specific questions such
+as:
+
+- which role roster a project actually chose
+- which parent agents and specialists currently exist
+- which modes and protocols that project bound
+- which runtime environment the project currently materializes first
+
+In this repository, the normal downstream path is:
+
+1. [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+2. the relevant Context Atlas binding docs and
+   [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml)
+3. [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
+
+That path keeps the canon portable while still giving readers a clear route to
+the current repository's concrete choices.
+
 ## Neighboring Canon
 
 The most relevant adjacent authoritative surfaces are:
@@ -205,5 +233,11 @@ When deciding where to read next:
 
 - stay in this directory if you are still learning the portable concepts
 - move to a binding layer only when you need concrete application choices
+- in this repository, start that descent with the
+  [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+  then use the relevant binding docs and
+  [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml)
+  before reading the current
+  [Codex binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - move to planning only after the portable canon is clear enough that planning
   docs do not have to redefine it

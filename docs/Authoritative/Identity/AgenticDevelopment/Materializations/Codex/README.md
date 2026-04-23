@@ -49,6 +49,29 @@ boundary between Codex-specific artifacts and the portable canon.
 It does not redefine the portable concepts themselves, and it does not replace
 later Codex layout, template, or governance docs.
 
+## Reading Position
+
+This document is not the first Context Atlas-specific agentic doc a reader
+should reach for.
+
+Read it after:
+
+1. the portable [AgenticDevelopment canon README](../../../../Canon/AgenticDevelopment/README.md)
+2. the [Context Atlas Agentic Development Profile](../../../Context-Atlas-Agentic-Development-Profile.md)
+3. the relevant role, mode, protocol, and manifest bindings when you need the
+   project's current chosen roster
+
+Use this document when the question becomes:
+
+- why Context Atlas chose Codex as the first runtime target
+- which upstream project bindings Codex materialization must consume
+- where Codex-specific layout, template, and governance docs fit in the
+  overall boundary model
+
+If the question is still about project structure or the chosen roster, this
+document is downstream too early; return to the profile and manifest layer
+first.
+
 ## Binding Decisions
 
 ### 1. Context Atlas Supports Codex As Its First Runtime Materialization Target

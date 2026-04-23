@@ -8,7 +8,7 @@ template_refs:
   content: planning_content@1.0.0
 status: active
 created: 2026-04-22
-last_reviewed: 2026-04-22
+last_reviewed: 2026-04-23
 owners: [core]
 tags: [planning, epic, cleanup, documentation, onboarding, canon, ci, review-response]
 related:
@@ -191,6 +191,22 @@ portable and reusable.
 This Story is bounded to obvious leak cleanup. It does not absorb the broader
 runtime-policy and platform-binding redesign that belongs in the later agentic
 runtime Epic.
+
+Within this Epic, Story 3 should classify findings explicitly as
+`generalize in Canon`, `reroute downstream`, or `keep intentionally` so the
+cleanup stays reviewable and does not silently become a broader canon
+admission-policy rewrite.
+
+When Story 3 uses `reroute downstream`, the expected descent path is:
+
+- portable canon first
+- then the project-specific structural profile and binding surfaces
+- only then the current runtime-binding README for the repository's chosen
+  materialization target
+
+The Story is also allowed to leave a small explicitly classified remainder
+when removing it would require a broader ontology, runtime-policy, or
+platform-binding redesign that does not belong in this cleanup Epic.
 
 ### Story 4: Immediate Generated-Surface Defects
 

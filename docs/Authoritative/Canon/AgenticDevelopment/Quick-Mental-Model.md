@@ -155,19 +155,19 @@ Read that as:
 
 Here is a simple mental picture:
 
-- `Backend` is the `role`
-- `parent-backend` is the `parent agent`
-- `python-authoring` is a direct `skill`
-- `specialist-python-implementation` is a delegated `specialist`
+- `Delivery` is the `role`
+- `parent-delivery` is the `parent agent`
+- `language-authoring` is a direct `skill`
+- `implementation-specialist` is a delegated `specialist`
 - `implementation` is the current `mode`
 - `execution-slice` is the active `protocol`
 
 That means:
 
-- Backend is accountable
-- the backend parent agent is carrying that accountability
+- Delivery is accountable
+- the delivery parent agent is carrying that accountability
 - it may code directly with its own skills
-- or delegate a bounded slice to a Python specialist
+- or delegate a bounded slice to an implementation specialist
 - while the work is in implementation
 - and the workflow path is execution-slice
 
@@ -218,6 +218,13 @@ Use the deeper canon documents for that.
 
 - [Agentic Development README](./README.md)
 - [Agentic Development Glossary](./Agentic-Development-Glossary.md)
+- if you need this repository's concrete bound roster and runtime target rather
+  than more portable canon, continue with the
+  [Context Atlas Agentic Development Profile](../../Identity/Context-Atlas-Agentic-Development-Profile.md)
+  then the relevant binding docs and
+  [`materialization_manifest.yaml`](../../Identity/AgenticDevelopment/materialization_manifest.yaml),
+  and only then the
+  [Context Atlas Codex Binding](../../Identity/AgenticDevelopment/Materializations/Codex/README.md)
 - [Agent Authority Model](./Agent-Authority-Model.md)
 - [Agent Composition Model](./Agent-Composition-Model.md)
 - [Mode Model](./Mode-Model.md)
