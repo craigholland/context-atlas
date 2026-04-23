@@ -96,19 +96,13 @@
 steps:
   - name: compile_services
     run: |
-      # Linux/macOS analog: python3 -m compileall src/context_atlas/services
-      py -3 -m compileall src/context_atlas/services
+      python -m compileall src/context_atlas/services
 
   - name: unit_tests
     run: |
-      # Linux/macOS analog: python3 -m pytest tests/test_context_assembly_service.py
-      py -3 -m pytest tests/test_context_assembly_service.py
+      python -m pytest tests/test_context_assembly_service.py
 
   - name: import_sanity
     run: |
-      # Linux/macOS analog:
-      # export PYTHONPATH=src
-      # python3 -c "from context_atlas.services import CandidateRetriever, ContextAssemblyService"
-      $env:PYTHONPATH='src'
-      py -3 -c "from context_atlas.services import CandidateRetriever, ContextAssemblyService"
+      python -c "import sys; sys.path.insert(0, 'src'); from context_atlas.services import CandidateRetriever, ContextAssemblyService"
 ```

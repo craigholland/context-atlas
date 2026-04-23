@@ -88,17 +88,13 @@
 steps:
   - name: validate_owner_file
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files .github/workflows/__ai__.md
+      python scripts/validate_ai_docs.py --repo-root . --files .github/workflows/__ai__.md
 
   - name: workflow_presence
     run: |
-      @('ci.yml', 'ai-verify-folder-contracts.yml', 'ai-last-verified.yml') | ForEach-Object {
-        if (-not (Test-Path (Join-Path '.github/workflows' $_))) {
-          throw "Missing workflow file: $_"
-        }
-      }
+      python -c "from pathlib import Path; import sys; required=['ci.yml', 'ai-verify-folder-contracts.yml', 'ai-last-verified.yml']; missing=[name for name in required if not (Path('.github/workflows') / name).exists()]; sys.exit(0 if not missing else 'Missing workflow file(s): ' + ', '.join(missing))"
 
   - name: validate_related_owner_files
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
+      python scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
 ```

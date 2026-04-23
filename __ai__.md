@@ -35,7 +35,7 @@
 - Provides the contributor on-ramp for using the ontology system correctly when adding new project documents.
 
 ## Architectural Rules
-- Before recommending a push or merge, contributors should run `py -3 scripts/preflight.py`.
+- Before recommending a push or merge, contributors should run `python scripts/preflight.py`.
 - The tracked pre-push hook under `.githooks/pre-push` is the preferred enforcement mechanism for local pushes.
 - Repo-root policy should stay thin: package/runtime behavior belongs in `src/`, enforcement logic in `scripts/`, and reusable architecture canon in `docs/`.
 - The root owner file should express repo-wide operational rules and delegate folder-specific rules to nearer `__ai__.md` files rather than duplicating them.
@@ -156,17 +156,17 @@
 steps:
   - name: validate_root_owner
     run: |
-      py -3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md
+      python scripts/validate_ai_docs.py --repo-root . --files __ai__.md
 
   - name: import_boundaries
     run: |
-      py -3 scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
+      python scripts/check_import_boundaries.py --repo-root . --config scripts/import_boundary_rules.toml
 
   - name: test_and_typecheck
     run: |
-      py -3 -m ruff check .
-      py -3 -m ruff format --check .
-      py -3 -m mypy src
-      py -3 -m pytest
+      python -m ruff check .
+      python -m ruff format --check .
+      python -m mypy src
+      python -m pytest
 ```
 

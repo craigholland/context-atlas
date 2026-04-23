@@ -139,23 +139,20 @@
 steps:
   - name: compile_scripts
     run: |
-      # Linux/macOS analog: python3 -m compileall scripts
-      py -3 -m compileall scripts
+      python -m compileall scripts
 
   - name: script_help
     run: |
-      # Linux/macOS analog: replace `py -3` with `python3` and `> $null` with `> /dev/null`
-      py -3 scripts/validate_ai_docs.py --help > $null
-      py -3 scripts/check_ai_docs.py --help > $null
-      py -3 scripts/ai_verify_contracts.py --help > $null
-      py -3 scripts/update_last_verified.py --help > $null
-      py -3 scripts/check_import_boundaries.py --help > $null
-      py -3 scripts/check_codex_materialization.py --help > $null
-      py -3 scripts/materialize_codex_runtime.py --help > $null
-      py -3 scripts/preflight.py --help > $null
+      python scripts/validate_ai_docs.py --help
+      python scripts/check_ai_docs.py --help
+      python scripts/ai_verify_contracts.py --help
+      python scripts/update_last_verified.py --help
+      python scripts/check_import_boundaries.py --help
+      python scripts/check_codex_materialization.py --help
+      python scripts/materialize_codex_runtime.py --help
+      python scripts/preflight.py --help
 
   - name: validate_owner_files
     run: |
-      # Linux/macOS analog: python3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
-      py -3 scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
+      python scripts/validate_ai_docs.py --repo-root . --files __ai__.md scripts/__ai__.md src/context_atlas/__ai__.md src/context_atlas/domain/__ai__.md src/context_atlas/infrastructure/__ai__.md tests/__ai__.md .github/workflows/__ai__.md
 ```
