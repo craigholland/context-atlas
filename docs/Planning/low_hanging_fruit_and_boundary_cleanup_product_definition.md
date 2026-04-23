@@ -75,6 +75,8 @@ Recent review findings that motivate this Epic include:
   concrete payoff
 - user-facing guides still contain internal planning-language residue such as
   `Story 4 vocabulary`
+- the Python `3.12+` requirement is easy to miss even though it is a real
+  adoption gate for many evaluators
 - product-evaluator guidance is improved but still competes with the repo's
   richer agentic and governance story
 - portable Canon docs still contain a small set of Codex-specific or
@@ -105,6 +107,8 @@ This Epic should establish or strengthen these product-facing quick wins:
   engine as a library
 - at least one concrete packet/trace output sample in the product-facing guide
   path so new readers can see what success looks like before they run the code
+- a more prominent Python runtime-floor callout on the product path so readers
+  do not fail setup before they understand why
 - removal of internal planning-language residue from user-facing guides
 - a short outsider-friendly definition of `Codex` wherever that term is needed
   on the product path
@@ -209,6 +213,8 @@ This Epic should ultimately produce:
 
 - a more concrete product-facing onboarding path with at least one visible
   packet/trace output example
+- a clearer and earlier statement of the real Python/runtime prerequisites for
+  trying Atlas locally
 - cleaner user-facing docs without internal Story-number vocabulary
 - a crisper statement that Atlas the product can be evaluated separately from
   the repo's Codex/agentic governance system

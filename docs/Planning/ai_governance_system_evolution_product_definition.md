@@ -13,6 +13,7 @@ owners: [core]
 tags: [planning, ai-governance, owner-files, freshness, verification, ergonomics]
 related:
   - ../Reviews/context-atlas-ai-governance-review.md
+  - ../Reviews/context-atlas-agentic-review.md
   - ../../__ai__.md
   - ../../__ai__.template.md
   - ../../scripts/check_ai_docs.py
@@ -58,6 +59,7 @@ before the right boundary is fully understood.
 ## Inputs
 
 - [AI Governance Review](../Reviews/context-atlas-ai-governance-review.md)
+- [Context Atlas Agentic Review](../Reviews/context-atlas-agentic-review.md)
 - [Root __ai__.md](../../__ai__.md)
 - [__ai__.template.md](../../__ai__.template.md)
 - [check_ai_docs.py](../../scripts/check_ai_docs.py)
@@ -80,6 +82,12 @@ The review and follow-up discussion currently point at these high-value gaps:
   but weak at managing intentional temporary exceptions
 - there is no sanctioned `dirty in a good way` mechanism comparable to a
   governed waiver path
+- the system is still too implicit about its authority relationship to the
+  generated agent runtime layer
+- scope globs are useful declarations, but the repo still lacks stronger
+  confidence that owner-file coverage assertions stay complete as surfaces grow
+- freshness detection and contract execution are complementary, but their
+  trigger semantics are not yet as tightly aligned as they could be
 - owner files risk drifting toward long-form explanation or append-only history
   unless their authoring shape stays disciplined
 - CI writeback and owner-file refresh behavior are effective but can add
@@ -112,6 +120,14 @@ This Epic should preserve the current shape of the governance system:
 - verification contracts are executable
 - CI and local preflight remain the primary enforcement paths
 
+It should also make one authority rule explicit:
+
+- `__ai__.md` governance is authoritative for repo-local contribution behavior
+- generated agent runtime assets may specialize role/mode/protocol behavior for
+  that repo context
+- but generated runtime assets must never weaken, bypass, or reinterpret
+  nearest owner-file governance as optional
+
 But the next version of that system should add or strengthen:
 
 - clearer truth-status signaling for owner-file claims
@@ -126,15 +142,22 @@ This Epic should establish or strengthen these capability areas:
 
 - a clearer claim discipline for owner files so prose stays closer to
   structured contract and farther from essay-like summary
+- a clearer boundary statement between owner-file governance and the generated
+  runtime layer so contributors and future agent bindings know which layer has
+  repo-local authority
 - lightweight prose-correctness support for the highest-value claim types:
   paths, scripts, exports, environment keys, public API names, and other
   assertions that can actually be checked
+- stronger scope-confidence support so owner-file coverage is less dependent on
+  human memory alone when folder structure evolves
 - clearer visual and textual language around `Last Verified (CI)` so it
   remains obvious that command success is not the same thing as human review
 - a governed dirt model built around lightweight code annotations such as
   `# ai-dirt: <reason>` and richer owner-file-side rationale
 - a queryable register or equivalent governed surface for intentional
   violations so dirt can be managed rather than hidden
+- clearer contract-trigger semantics so contributors can tell what contract
+  execution a changed governed file will actually cause
 - verification and refresh ergonomics that keep the system useful without
   making exploratory boundary work disproportionately expensive
 - continued owner-file compaction so repo-level and layer-level owner files
@@ -190,8 +213,12 @@ This Epic should ultimately produce:
 
 - a clearer owner-file claim model with better distinction between checked
   facts, durable human contracts, and future-state notes
+- an explicit repo-local authority rule that keeps owner-file governance above
+  generated runtime specialization for contribution behavior
 - stronger support for checking the highest-value prose claims rather than only
   detecting freshness
+- better scope-confidence and contract-trigger clarity so governance behavior
+  is easier to predict and trust
 - a governed-dirt mechanism with lightweight code annotation and richer
   owner-file-side rationale
 - clearer semantics around what `Last Verified (CI)` means and does not mean
@@ -214,6 +241,8 @@ This Epic should ultimately produce:
   report, or in both with one as the authoritative source?
 - Should `# ai-dirt: <reason>` support only import-boundary exceptions first,
   or should it be designed from day one for broader governance violations?
+- How should scope-confidence checks balance stronger coverage assertions
+  against the cost of keeping those assertions current as the repo grows?
 - How much owner-file prose should be converted into more structured claim
   shapes before the system becomes harder to author than it is worth?
 - Is the current `Last Verified (CI)` auto-stamping workflow the right trust
