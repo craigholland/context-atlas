@@ -52,6 +52,28 @@ environment-specific materialization layers.
 It does not replace the later role roster, mode model, protocol catalog, or
 any environment-specific file layout.
 
+## Reading Position
+
+This document is the normal first stop after a reader leaves the portable
+AgenticDevelopment canon and needs Context Atlas-specific choices instead of
+portable concepts.
+
+Use this profile to answer structural questions such as:
+
+- which kinds of accountable actors Context Atlas uses
+- how parent agents and specialists are meant to relate
+- where project-specific role, mode, protocol, and materialization bindings
+  should attach
+
+After this profile:
+
+1. move into the role, mode, and protocol binding docs when you need the
+   project's chosen roster and workflow bindings
+2. move into `materialization_manifest.yaml` when you need the currently bound
+   parent agents, specialists, skills, modes, and protocol participation
+3. move into the Codex binding README when you need to see how those chosen
+   bindings descend into the current runtime target
+
 ## Binding Decisions
 
 ### 1. Context Atlas Uses A Parent-Agent Plus Specialist Structure
@@ -294,4 +316,5 @@ assets become the de facto source of repository authority.
 - [Agent Composition Model](../Canon/AgenticDevelopment/Agent-Composition-Model.md)
 - [Composition Decision Model](../Canon/AgenticDevelopment/Composition-Decision-Model.md)
 - [Boundary Model](../Canon/AgenticDevelopment/Boundary-Model.md)
+- [Agentic Development Canon README](../Canon/AgenticDevelopment/README.md)
 
