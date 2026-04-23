@@ -92,10 +92,13 @@ Those environment-backed settings currently cover:
 The current supported configuration surface is intentionally smaller than the
 full set of starter constants in code:
 
-- ranking authority tables and trace-signal constants stay internal
-- memory retention semantics stay internal unless they are already exposed
-  through documented env-backed defaults
-- canonical slot identifiers stay internal
+- ranking authority tables and trace-signal constants are not part of the
+  supported operator-facing runtime surface
+- memory retention semantics are not part of the supported operator-facing
+  runtime surface unless they are already exposed through documented
+  env-backed defaults
+- canonical slot identifiers are not part of the supported operator-facing
+  runtime surface
 
 The starter memory-budget split is now the supported way to change the default
 documents-vs-memory balance without turning canonical slot identifiers into
@@ -112,8 +115,8 @@ callable estimator through `build_starter_context_assembly_service(...)` or
 `assemble_with_starter_context_service(...)`, but that stays an outward
 composition seam rather than a starter operator setting.
 
-When you inspect packet and trace output after a run, prefer the settled
-Story 4 vocabulary:
+When you inspect packet and trace output after a run, prefer the current
+truthful vocabulary:
 
 - packet budget state should surface `fixed_reserved_tokens`,
   `unreserved_tokens`, and `unallocated_tokens`
@@ -252,7 +255,7 @@ On a successful run, you should see:
 - a trace summary that shows why sources were included, excluded, or
   transformed
 
-More concretely, the hardened starter path should now make it easy to point at:
+More concretely, the current starter path should make it easy to point at:
 
 - `fixed_reserved_tokens`, `unreserved_tokens`, and `unallocated_tokens` in the
   packet view when budgeting matters
