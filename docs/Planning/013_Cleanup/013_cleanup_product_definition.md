@@ -171,6 +171,13 @@ new reader can see:
 
 without first learning the repo's internal execution history.
 
+Story 1 now defines the cleanup Epic's settled evaluator baseline:
+
+- README as the repo map and routing surface
+- guides as the current onboarding and walkthrough layer
+- examples as runnable companions and bounded output evidence
+- release docs as shipped-history context rather than first-run help
+
 ### Story 2: Product Path Separation From Agentic And Governance Surfaces
 
 Owns the audience-routing boundary between:
@@ -232,6 +239,9 @@ The reasoning is:
   the generated runtime surface is easier to judge as a downstream artifact.
 - Story 5 is bounded contributor-trust work that can run late without changing
   the meaning of the first four Stories.
+
+Later Stories should preserve Story 1's settled evaluator surface unless a
+change is explicitly routed through that same product-path contract.
 
 Acceptable bounded parallelism:
 

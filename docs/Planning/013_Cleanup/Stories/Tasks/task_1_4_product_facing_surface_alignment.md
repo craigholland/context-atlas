@@ -6,7 +6,7 @@ doc_class: planning
 template_refs:
   metadata: base_metadata@1.0.0
   content: planning_content@1.0.0
-status: active
+status: implemented
 created: 2026-04-22
 last_reviewed: 2026-04-22
 owners: [core]
@@ -30,7 +30,7 @@ cleanup tasks settle.
 
 ## Task Status
 
-PLANNED
+IMPLEMENTED
 
 ## Inputs
 
@@ -112,6 +112,26 @@ PLANNED
   without one canonical evaluator story.
 - Release-facing docs can overclaim if shipped versus development guidance is
   not kept explicit.
+
+## Completed Outcome
+
+Task 1.4 settles the last product-facing surface alignment around one coherent
+evaluator story:
+
+- [README](../../../../../README.md) remains the repo map and truth-framing
+  entry surface
+- [docs/Guides/](../../../../../docs/Guides/) remains the current onboarding
+  and walkthrough layer
+- [examples/](../../../../../examples/) remains the runnable companion and
+  bounded-output evidence layer
+- [docs/Release/](../../../../../docs/Release/) remains shipped-history context
+  rather than the main first-run help surface
+
+The example READMEs now describe current runnable workflow behavior in
+present-tense product language, and the release-facing docs now explicitly
+point evaluators back toward the guides and examples for current onboarding.
+The active `0.1.3` release note was intentionally left as shipped history
+rather than rewritten into a second current-state guide.
 
 ## Exit Criteria
 
