@@ -58,10 +58,15 @@ shipped release summary is
 
 ## Start Here
 
-Project Context Atlas is actually efforting a few different fronts -- all of which are evolving -- which has resulted in a cognitively-dense repo. Since there are a few different reasons why you may be here, pick the path that matches
-what you care about most right now:
+Project Context Atlas is evolving along a few different fronts, which makes
+this repository denser than a typical library repo. You do not need to absorb
+all of them at once. Pick the path that matches what you care about most right
+now:
 
 1. **The Context Atlas product itself**
+
+   Use this route if you are here to evaluate Atlas as a library or try the
+   current starter product path.
 
    Start with:
    - [docs/Guides/README.md](/context-atlas/docs/Guides/README.md)
@@ -71,6 +76,9 @@ what you care about most right now:
 
 2. **The derived AgenticDevelopment components**
 
+   Use this route if you want to inspect the repo's generated runtime surface
+   and the upstream bindings that produce it.
+
    Start with:
    - [docs/Authoritative/Canon/AgenticDevelopment/README.md](/context-atlas/docs/Authoritative/Canon/AgenticDevelopment/README.md)
    - [docs/Authoritative/Identity/AgenticDevelopment/](/context-atlas/docs/Authoritative/Identity/AgenticDevelopment/)
@@ -79,6 +87,9 @@ what you care about most right now:
 
 3. **The Canon / Identity / operationalization architecture**
 
+   Use this route if you want the project architecture and binding model rather
+   than the product setup path.
+
    Start with:
    - [docs/README.md](/context-atlas/docs/README.md)
    - [docs/Authoritative/Canon/README.md](/context-atlas/docs/Authoritative/Canon/README.md)
@@ -86,6 +97,9 @@ what you care about most right now:
    - [Context Atlas Agentic Development Profile](/context-atlas/docs/Authoritative/Identity/Context-Atlas-Agentic-Development-Profile.md)
 
 4. **The `__ai__.md` architectural governance and enforcement system**
+
+   Use this route if you are here to understand or change the repo's
+   contribution-governance model.
 
    Start with:
    - [`__ai__.md`](/context-atlas/__ai__.md)
