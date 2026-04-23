@@ -107,6 +107,10 @@ The current starter entry surfaces are:
 - `context-atlas-starter`
 - [Getting Started](./getting_started.md)
 
+Treat that starter route as the baseline onboarding path. The workflow guides
+below build on the same shared engine, but they are not the place to learn the
+first-run setup story.
+
 ### Codex Repository Workflow
 
 The flagship repository workflow is currently a thin composition path over the
@@ -218,8 +222,8 @@ The supported surface is intentionally narrow:
 - starter memory defaults
 - low-code wrapper inputs
 
-Some important things remain internal implementation detail rather than public
-runtime knobs:
+Some important things are intentionally not part of the supported public
+runtime-knob surface yet:
 
 - ranking authority tables and ranking signal names
 - memory-scoring semantics

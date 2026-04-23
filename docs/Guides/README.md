@@ -11,6 +11,15 @@ repository.
 If you want the repo-level map first, start with the root
 [README](../../README.md).
 
+Treat this directory as one layered product path:
+
+- start with [Getting Started](./getting_started.md) for the shared first-run
+  baseline
+- use [Context Atlas Tour](./context_atlas_tour.md) when you want the system
+  mental model and current workflow shapes
+- drop into the workflow-specific guides only after the starter path makes
+  sense
+
 ## Start Here
 
 - [Getting Started](./getting_started.md)
