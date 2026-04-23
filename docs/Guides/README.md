@@ -2,6 +2,12 @@
 
 This directory is the primary user-facing help surface for Context Atlas.
 
+Use the entry surfaces intentionally:
+
+- the root [README](../../README.md) is the repo-wide map
+- [docs/README.md](../README.md) is the documentation route splitter
+- this file is the product guide hub
+
 If you are evaluating, installing, or wiring Context Atlas into a workflow,
 start here before dropping into `examples/` or deeper architecture docs.
 
@@ -13,9 +19,6 @@ If you are here for contributor governance, generated runtime inspection, or
 Canon/Identity binding work, return to the root [README](../../README.md) or
 [docs/README.md](../README.md). This directory is intentionally the product
 route, not the repo-governance or runtime-materialization index.
-
-If you want the repo-level map first, start with the root
-[README](../../README.md).
 
 ## Start Here
 

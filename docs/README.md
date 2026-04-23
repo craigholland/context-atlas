@@ -2,6 +2,12 @@
 
 This directory holds the canonical project documentation for Context Atlas.
 
+Use the entry surfaces intentionally:
+
+- the root [README](../README.md) is the repo-wide map
+- this file is the documentation route splitter
+- [docs/Guides/README.md](./Guides/README.md) is the product guide hub
+
 ## Pick Your Route
 
 If you are here to evaluate or set up Context Atlas as a product, start with
@@ -18,6 +24,8 @@ User-facing setup and workflow help lives under
 
 If you are trying to evaluate or wire Context Atlas into a workflow, start
 there before reading deeper planning, canon, identity, or governance docs.
+Use the root [README](../README.md) instead if you want the full repo map
+before choosing a documentation route.
 
 ## Release Notes
 
